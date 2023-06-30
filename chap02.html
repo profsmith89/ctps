@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 2: Grab the Dialogue &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Chapter 1: Read a Children’s Book" href="chap01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    A Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap02.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 2: Grab the Dialogue</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-grab-the-dialogue">
+<h1>Chapter 2: Grab the Dialogue<a class="headerlink" href="#chapter-2-grab-the-dialogue" title="Permalink to this heading">#</a></h1>
+<p>Did you try running other text files through the script we developed together in the last chapter? If you haven’t, please do try it. Curiosity and experimentation are attitudes to nurture for they will make you a better problem solver.</p>
+<p>Trying this will also solidify in your mind the difference between: (1) solving a particular instance of a problem; and (2) the construction of a script that solves many similar problems.</p>
+<p>Recall that the last chapter started with the goal of reading a <em>particular</em> book. But partway through the design, we realized that our script could continually loop until there were no more lines to read. This change made our script independent of the input book’s length. We also changed our script to use the Python <code class="docutils literal notranslate"><span class="pre">input</span></code> statement, which allowed us to ask the user what book they wanted read. With these two changes, we built a <em>general</em> solution that could read <em>any</em> book of <em>any</em> length.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">The Art in Writing General Scripts</p>
+<p>There is real art in writing scripts that solve any instance of a general problem. To go from a script that read <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> to one capable of reading any plain-text file, we added a few new statements and changed a few existing ones. There weren’t a lot of changes, but some.</p>
+<p>An difficult question to answer is: <em>When does the work to make a script solve a larger collection of problems become not worth the extra effort</em>?</p>
+<p>There’s no easy answer to this question. Throughout this book, we will write scripts that solve more than a single instance of a problem, and this will give you a good feel for the kinds of generality you should almost always add to the scripts you write. On the other hand, we will not add every new “feature” we can imagine to any individual script. Computer programs, as you have undoubtedly experienced in your life, can become large, buggy, and hard to use as they grow more “featuresome.” Do what seems reasonable and then move on to a new problem and a new script. If you later discover you missed an important feature, you can always go back and modify your old scripts.</p>
+</aside>
+<p><strong>The script is the solution.</strong> Writing scripts like this—so that they are useful in a range of situations—is what computer scientists strive to do. When we follow this approach, <em>the solution to our problem is not just the output of our script, but also the script itself</em>. The script is a solution because we can use it to easily solve lots of instances of our problem. You simply need to run the script, feed it the input appropriate for the current instance of the problem, and voila, the computer follows the script and computes your desired answer!</p>
+<p>In this chapter, we’ll again start with a script that solves a specific type of problem and then expand it to solve any instance of the problem.</p>
+<p><strong>What do you want done when?</strong> But there will be a new twist. We began in the last chapter with a problem that required us to work straight through a file’s contents and print what we found. The active-learning exercises then asked you to do more. They had you <em>compute a piece of information</em> using the file’s contents (i.e., its length) and use this information to add to the printed content. Finally, the chapter’s problem set had you <em>compute several pieces of information</em> and <em>make two passes</em> over the content.</p>
+<p>Now think about why the last script made two separate passes over the file. It was because each pass had a different goal, which required a correspondingly different set of actions.</p>
+<p>This chapter will not only lead you to solve the general instance of a problem, but it will also introduce a general method for organizing your scripts so that they can process an input for which you have not one, but several goals.</p>
+<div class="admonition-learning-outcomes admonition">
+<p class="admonition-title">Learning Outcomes</p>
+<p>In this chapter, you will experience all 8-steps in our problem-solving process, and by the end of it, you will be able to:</p>
+<ul class="simple">
+<li><p>Describe the importance of recognizing similarities and differences between problems when considering which past scripts might help you start writing a new script [design];</p></li>
+<li><p>Use finite-state-machine (FSM) diagrams as a widely-useful method for identifying and ordering the tasks your script must perform while processing its input [design and CS concepts];</p></li>
+<li><p>Convert FSM diagrams into pseudocode [design];</p></li>
+<li><p>Think about strings as a sequence (i.e., an ordered collection of characters), understand the power of this sequence abstraction, and use several common operations on sequences [CS concepts and programming skills];</p></li>
+<li><p>Perform string concatenation and understand operator overloading [CS concepts and programming skills];</p></li>
+<li><p>Write for-loops that iterate over the items in a sequence [programming skills];</p></li>
+<li><p>Become comfortable with all variations of if-statements [programming skills];</p></li>
+<li><p>Develop test inputs, and recognize and employ a common design pattern for error handling [programming skills];</p></li>
+<li><p>Explain off-by-one errors and recognize where this type of error often occur [CS concepts and programming skills];</p></li>
+<li><p>Structure your script development so that you interleave testing and coding, to surface hidden assumptions and never go too long without an understanding of what works and doesn’t [design and programming skills];</p></li>
+<li><p>Interpret the two ways of performing function composition in Python [programming skills].</p></li>
+</ul>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Note</p>
+<p>There’s one other actor in the story—the narrator’s sister, Sally—but she never speaks.</p>
+</aside>
+<p><strong>A new problem.</strong> Instead of decorating our input story around its edges, let’s have the textual output of our script look quite different than its input. In particular, let’s turn <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> into a theatrical script that a couple of actors — playing the narrator, the Cat, the Fish, Things One and Two, and the Mother — could perform.</p>
+<p>What would be the problem specification? It could be something as seemingly simple as: find the dialogue in the story and print it after the name of the character who says it.</p>
+<p><strong>Splitting the problem into smaller pieces.</strong> One of the keys to successfully writing a computational script is to break a large problem into smaller pieces and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.</p>
+<p>What are the primary pieces in our problem specification? Well, we have to:</p>
+<ol class="arabic simple">
+<li><p>find the dialogue in this story;</p></li>
+<li><p>identify which character says which lines; and</p></li>
+<li><p>ideally transform some of the story into stage directions around this dialogue.</p></li>
+</ol>
+<p>Of these three things, let’s focus on finding the dialogue. Since each line of dialogue is enclosed in easily identifiable double quotes, we can precisely specify what we need to do. As incomplete solutions for the other two problem pieces, we will label the extracted dialogue with “ACTOR:” and skip adding any stage directions.</p>
+<p>With these decisions, <a class="reference internal" href="#c02-fig1-ref"><span class="std std-numref">Figure 5</span></a> shows how our script should print the first two pieces of dialogue from <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>.</p>
+<figure class="align-default" id="c02-fig1-ref">
+<img alt="_images/c02_fig1.png" src="_images/c02_fig1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The start of our script’s output given <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> as the its input.</span><a class="headerlink" href="#c02-fig1-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Reuse.</strong> We just practiced the first four steps of our problem-solving process: specify-imagine-decompose-decide. Step 5 asks if we can jumpstart the writing of our script by reusing anything from a previously written script. To do this well, we have to think about the <em>similarities and differences</em> between our previous problems and this current problem.</p>
+<p>Let’s begin with our script that reads a text file, which I’ve reproduced below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/read32.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">10</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p>This code queries the user for a book, opens the book, and reads each line from it. Will we need to do similar work in our current problem? Yes. If we are going to find each piece of dialogue in the story, we’ll need to read each line in it. Let’s then keep the first five lines from <code class="docutils literal notranslate"><span class="pre">read32.py</span></code>. Of course, we will also need to know when we’ve reached the end of the story and then close the open file, which the if-statement and with-as-statement do for us. Overall, we just need to adjust the <code class="docutils literal notranslate"><span class="pre">input</span></code> prompt and delete the printing of <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, since the output of our new problem isn’t every line in the story. After doing all this, we’re left with the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/script1.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like as a script? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 7</span>        
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">10</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>            <span class="k">break</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="c1"># new pseudocode goes here</span>
+</pre></div>
+</div>
+<p><strong>Switching between goals.</strong> I put the comment about new pseudocode at the bottom of the while-loop because we need to do something with <code class="docutils literal notranslate"><span class="pre">the_line</span></code> before we loop back. One way to figure out what we want this pseudocode to do is to think about what our script should be doing when it first starts reading the story. In other words, what is our script’s initial goal?</p>
+<p>As we begin, our initial goal is to find the start of the first piece of dialogue. Once we find the start of this dialogue, our script switches to a new goal: scan to the end of this dialogue and print out what was scanned.</p>
+<p>What happens then? We begin again searching to find the start of the next piece of dialogue, and this pattern repeats until the story ends.</p>
+<p><strong>Finite State Machines.</strong> What we just described is formally called a <em>finite state machine (FSM)</em>. Each of our goals is a <em>state</em>, which consists of some work we want done while in that state. To move between states, our script looks for <em>events</em>. We start in some initial (or <em>start</em>) state, and we are done when the script enters one or possibly several <em>final</em> states.</p>
+<p><a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> is a diagram of our finite state machine, where the states are represented as labeled circles (also called <em>nodes</em>) and <em>transitions between states</em> as directed arrows. Each arrow is labeled with the event that cause the transition. The start state is identified by the special transition labeled <code class="docutils literal notranslate"><span class="pre">Start</span></code>.</p>
+<figure class="align-default" id="c02-fig2-ref">
+<img alt="_images/c02_fig2.png" src="_images/c02_fig2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A complete FSM diagram for finding dialogue.</span><a class="headerlink" href="#c02-fig2-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s take a moment and make sure we understand this diagram for it will be the template we use to write our script. The script needs to find each line of dialogue in our input file, and we know that dialogue is surrounded by double quotes. As our script begins, it starts (as indicated by the start arrow) in a state <code class="docutils literal notranslate"><span class="pre">S0</span></code>, which specifies that it should be searching the line it read for a double-quote character. If the line doesn’t contain a double-quote character, it should just move to the next line in the story. When the script finds a double-quote character, it has found the start of a line of dialogue, and this event causes a transition to the state labeled <code class="docutils literal notranslate"><span class="pre">S1</span></code>.</p>
+<p>State <code class="docutils literal notranslate"><span class="pre">S1</span></code> has our script do a different task: it collects the characters after the double quote, which it will later print as a piece of dialogue. It continues to read lines and collect characters until it finds the next double-quote character in the story. This character indicates the end of the current piece of dialogue, and this event causes another state transition.</p>
+<p>The transition out of state <code class="docutils literal notranslate"><span class="pre">S1</span></code> takes us back to <code class="docutils literal notranslate"><span class="pre">S0</span></code>, since we need to begin searching for the start of the next piece of dialogue. Our script will keep ping-ponging back and forth between these two states, collecting and printing dialogue, until what happens? Is there any other event to which our script should react?</p>
+<p>Yes! Our input story eventually ends (i.e., our script reads EOF, or end of file). <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> shows that we expect this event to happen while the script is in state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. Why? What assumption are we making about the input story when this event is a transition from <code class="docutils literal notranslate"><span class="pre">S0</span></code> to the FSM’s designated end state (labeled <code class="docutils literal notranslate"><span class="pre">DONE</span></code>)?</p>
+<p>While you think about this, I’ll tell you that the FSM in <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> is what is formally called a <em>deterministic finite state machine</em>. By deterministic, we mean that there is at most a single transition out of a state for each possible event. State <code class="docutils literal notranslate"><span class="pre">S1</span></code> has two transitions out, but they are labeled with different events. There are also <em>nondeterministic</em> FSMs, and these allow a single event to label multiple transitions out of a state. You’ll encounter them if you continue to study computer science.</p>
+<p>Both deterministic and nondeterministic FSMs are mathematical models of computation. They are defined by the quintuple of an input alphabet of events, a set of all states, a start state, a transition function, and a set of (possibly empty) final sets. The start state and final states are included in (i.e., are a subset of) the set of all states.</p>
+<p><strong>Error handling in FSMs.</strong> Hopefully by now you have realized that the FSM in <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> assumes that the input story is <em>well-formed</em>, and by this we mean that every piece of dialogue in it starts and ends with a double-quote character. It doesn’t have a transition from <code class="docutils literal notranslate"><span class="pre">S1</span></code> on encountering <code class="docutils literal notranslate"><span class="pre">EOF</span></code> because we don’t expect our story to end while we are in the middle of a line of dialogue.</p>
+<p>A FSM’s transition function maps states and input events to states. For example, the transition function <code class="docutils literal notranslate"><span class="pre">f</span></code> for our FSM in <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> would return <code class="docutils literal notranslate"><span class="pre">S1</span></code> when called with <code class="docutils literal notranslate"><span class="pre">f(S0,'&quot;')</span></code>. A transition function does not have to be defined for all combinations of input symbols and states. If the transition function is not defined for some pairs of current state and input event, the implementation of the FSM should probably raise an error when such pairs occur. In other words, a script corresponding to our FSM might raise an error if it finds <code class="docutils literal notranslate"><span class="pre">EOF</span></code> while in state <code class="docutils literal notranslate"><span class="pre">S1</span></code>.</p>
+<p>We have just dipped our toes into the deep topic of FSMs. You will find that they are a great representation for modeling lots of mechanical, biological, and linguistic systems. But enough about the representation, let’s see how we can use the diagram we’ve drawn to help us think about the code we want to write.</p>
+<p><strong>Encoding the state information.</strong> The first thing to note about the FSM in <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> is that it contains only three states, where the third state (<code class="docutils literal notranslate"><span class="pre">DONE</span></code>) represents the termination of our script. This means that our script has only to keep track of which of the first two states (<code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">S1</span></code>) it is in at any point in time, which we can do with a single <em>Boolean</em> variable.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>A Boolean variable may contain only one of two values, which are called <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> in Python.</p>
+</div>
+<p>Let’s call this variable <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, and define its behavior so that it is <code class="docutils literal notranslate"><span class="pre">True</span></code> when the script is in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> when the script is in <code class="docutils literal notranslate"><span class="pre">S1</span></code>. With this decided and the frame from <code class="docutils literal notranslate"><span class="pre">script1.py</span></code>, we can start writing some code, with pseudocode notes for where pseudocode doesn’t cover all possible cases.</p>
+<p>We begin by initializing our state information (i.e., setting <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>) and then using that variable to separate the work in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> from that in <code class="docutils literal notranslate"><span class="pre">S1</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### Start of chap02/script2.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like as a script? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
+<span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 9</span>       <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">10</span>        
+<span class="linenos">11</span>       <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">13</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="k">break</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>        <span class="c1"># new pseudocode goes here</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>        <span class="c1">#     do some work</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in s1</span>
+<span class="linenos">20</span>        <span class="c1">#     do other work</span>
+</pre></div>
+</div>
+<p>Notice that we’ve pulled the processing that every state does (i.e., reading a line of characters from the input file) out of each state’s work. We could have duplicated that code in each state, but that was unnecessary when we had already done it. We will talk more, in the next chapter, about the benefits of collecting commonly executed code together in one place.</p>
+<p><strong>This or that.</strong> You’ll also notice a new syntactic structure for the Python if-statement at the end of the code block. Earlier in the block, we used an if-statement to check for our infinite while-loop’s exit condition, and we either hit this condition or continued on with the loop’s work. We were checking for something exceptional, and the if-block and its controlling condition was all the structure we needed.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before continuing on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple <code class="docutils literal notranslate"><span class="pre">else</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Why is an if-else-block better than two if-statements in this situation? Because the condition we’re checking is either true or false. When it’s not one, it must be the other. If you write two if-statements, you’ll have to correctly write a condition and its complement. The if-else construct removes this unnecessary work (and potential error in logic or typing waiting to happen).</p>
+</div>
+<p><strong>Fill in each state.</strong> Let’s expand our pseudocode for state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. What does it need to do? For one thing, it can ignore any line that does not contain a double-quote character. But if the line contains a double-quote character, we know that the line, at least, is the beginning piece of a line of dialogue. I say “at least” because the dialogue that starts on this line may end on this line or extend to one or more following lines.</p>
+<p>I want to pause here and highlight the fact that we are using the word “line” in two different contexts that we must keep straight. A line from the file, which is completely contained in the object called <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, and a line of dialogue from the story, which can start anywhere in a file line and continue to an arbitrary point in that or a later file line.</p>
+<p>For example, the first line of dialogue in <em>The Cat in the Hat</em> starts in the middle of the eighth file line and continues to the end of the ninth file line.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT runnable
+8 And I said, &quot;How I wish
+9 We had something to do!&quot;
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Incomplete Code</p>
+<p>As our scripts grow longer, I won’t always include the entire script in the code block. A clue to this happening is that the line numbering doesn’t start at 1, as you see here. We’re modifying the last code block at line 17, and we’re focused only on what is taking place at that point in the script.</p>
+</aside>
+<p>Ok, let’s put these ideas into pseudocode and deal with the transition while in state <code class="docutils literal notranslate"><span class="pre">s0</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>        <span class="c1">#     do some work</span>
+<span class="linenos">19</span>        <span class="c1">#     if found opening double quote</span>
+<span class="linenos">20</span>        <span class="c1">#         move to s1</span>
+<span class="linenos">21</span>        <span class="c1">#     else</span>
+<span class="linenos">22</span>        <span class="c1">#         stay in s0</span>
+</pre></div>
+</div>
+<p>Notice that this pseudocode uses an if-statement to check for the event that causes the transition from <code class="docutils literal notranslate"><span class="pre">S0</span></code> to <code class="docutils literal notranslate"><span class="pre">S1</span></code>. This event is the presence of a double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code>. So, how do we check for a double-quote character in the string object named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>?</p>
+<p><strong>Strings as a sequence of characters.</strong> To this point, I’ve been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the terminal. Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object.</p>
+<p>Short answer: it does. A string in Python is a <em>sequence</em> of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we would like to manipulate in our scripts. The abstraction you should have in your mind for a sequence is <em>an ordered collection of items</em>.</p>
+<p>It doesn’t matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the <code class="docutils literal notranslate"><span class="pre">list</span></code> datatype in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> containing a stuffed animal, a picture of my kids, this course’s textbook, an old CD, and then some other books.</p>
+<p><strong>Membership test.</strong> What makes a sequence a very useful abstraction is that there are commonly used operations that we can perform on any Python sequence. For example, Python sequences permit us to easily test whether an item is a member of a given sequence, and a membership test is exactly what we need to answer the question of whether the string named <code class="docutils literal notranslate"><span class="pre">the_line</span></code> contains a double-quote character!</p>
+<p>With this knowledge, let’s turn our pseudocode if-statement into Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="c1"># do some work</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">the_line</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="c1"># move to s1</span>
+<span class="linenos">21</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">22</span>                <span class="c1"># stay in s0</span>
+</pre></div>
+</div>
+<p>If I wanted to know that there was no double quote in <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, I could have written the expression: <code class="docutils literal notranslate"><span class="pre">'&quot;'</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">the_line</span></code>.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> are binary infix operators that test whether the object to its left is a member of the one to its right. The result is <code class="docutils literal notranslate"><span class="pre">True</span></code> when this membership check succeeds, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<p><strong>Coding a transition.</strong> To transition from state <code class="docutils literal notranslate"><span class="pre">S0</span></code> to state <code class="docutils literal notranslate"><span class="pre">S1</span></code>, we simply need to set our state variable appropriately, which in this case means setting <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Staying in <code class="docutils literal notranslate"><span class="pre">S0</span></code> is even easier: <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> stays <code class="docutils literal notranslate"><span class="pre">True</span></code>, and this means we can delete the entire <code class="docutils literal notranslate"><span class="pre">else</span></code> clause since there’s no work to be done (i.e., it is already <code class="docutils literal notranslate"><span class="pre">True</span></code> in this code block!).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="c1"># do some work</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">the_line</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>Indexing and slicing.</strong> I left the comment “do some work” in the pseudocode because transitioning on seeing a double quote is not all the work we need to do. To capture and print each line of dialogue from the story, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this easy with a couple other common operations on sequences.</p>
+<p>Specifically, all Python sequence types permit us to identify a sequence item by its index and to slice a subsequence from a larger sequence by using two indices. Let’s look at this using line 8 of the file <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>, which reads ‘<code class="docutils literal notranslate"><span class="pre">And</span> <span class="pre">I</span> <span class="pre">said,</span> <span class="pre">&quot;How</span> <span class="pre">I</span> <span class="pre">wish</span></code>’.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT runnable
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
+  | A | n | d |   | I |   | s | a | i | d | , |   | &quot; | H | ... | s | h | \n |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
+  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14    21  22  23   24
+-24 -23 -22 -21 -20 -19 -18 -17 -16 -14 -13 -12 -11 -10  -9    -3  -2  -1
+</pre></div>
+</div>
+<p>Python, like many program languages, starts numbering at 0. If I want to know the first item in a Python sequence, I use square brackets and specify index 0. For instance, <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code> returns ‘<code class="docutils literal notranslate"><span class="pre">A</span></code>’.</p>
+<p>I can also ask for the length of any sequence object with the Python built-in function <code class="docutils literal notranslate"><span class="pre">len</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">len(the_line)</span></code> returns <code class="docutils literal notranslate"><span class="pre">24</span></code>. Notice that we count the letters, spaces, punctuation, and the special carriage return character at the end of this string. They are all items in the string currently named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;And I said, &quot;How I wish</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">4</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While counting from the front of a string is often what you need, sometimes you might find it easier to count backwards from the end of the string. This is possible in Python by using negative indices. The last character in our <code class="docutils literal notranslate"><span class="pre">the_line</span></code> example is accessed by writing <code class="docutils literal notranslate"><span class="pre">the_line[-1]</span></code>, and the initial capital <code class="docutils literal notranslate"><span class="pre">'A'</span></code> is <code class="docutils literal notranslate"><span class="pre">the_line[-24]</span></code> or <code class="docutils literal notranslate"><span class="pre">the_line[-len(the_line)]</span></code>. You will get an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if the index you use for a given string <code class="docutils literal notranslate"><span class="pre">s</span></code> is less than <code class="docutils literal notranslate"><span class="pre">-len(s)</span></code> or greater than or equal to <code class="docutils literal notranslate"><span class="pre">len(s)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;And I said, &quot;How I wish</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="o">-</span><span class="mi">24</span><span class="p">])</span>             <span class="c1"># prints the first character</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)])</span>  <span class="c1"># also prints the first character</span>
+<span class="linenos">5</span><span class="n">the_line</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)]</span>          <span class="c1"># index out of bounds!</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Go ahead, and experiment with the code blocks above. Try to access other characters in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> to make sure you understand how indexing works.</p>
+</div>
+<p>Indexing is helpful, but what our problem needs is the ability to grab a sequence of characters. To do this, we can use Python’s <em>slicing</em> facility, which allows us to grab any subsequence of items within a sequence object. For example, <code class="docutils literal notranslate"><span class="pre">the_line[6:10]</span></code> would return the string <code class="docutils literal notranslate"><span class="pre">'said'</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;And I said, &quot;How I wish</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Notice that the first index in this expression (i.e., the one before the colon) is the index of the first character of the slice we want, but the second index in this expression is <em>one greater</em> than the index of the last item in our slice. Defining the slicing operation in this manner allows us to write <code class="docutils literal notranslate"><span class="pre">the_line[0:len(the_line)]</span></code> to create a copy of the string object named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>. Since a programmer will often find herself writing <code class="docutils literal notranslate"><span class="pre">0</span></code> as the first index and <code class="docutils literal notranslate"><span class="pre">len(s)</span></code> as the second index in a slice, where <code class="docutils literal notranslate"><span class="pre">s</span></code> is a name for some string object, Python will assume you mean <code class="docutils literal notranslate"><span class="pre">0</span></code> as the first index if you elide it and <code class="docutils literal notranslate"><span class="pre">len(s)</span></code> as the second index if you elide it. To copy a string <code class="docutils literal notranslate"><span class="pre">s</span></code>, you can simply type <code class="docutils literal notranslate"><span class="pre">s[:]</span></code>.</p>
+<p>I tell you all this because we want the slice <code class="docutils literal notranslate"><span class="pre">the_line[12:]</span></code> as the start of our dialogue line.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;And I said, &quot;How I wish</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="mi">12</span><span class="p">:])</span>
+</pre></div>
+</div>
+<p>But how do we know that the double quote sits at index 12 in this current string object? All that the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator told us was that a double-quote character existed in <code class="docutils literal notranslate"><span class="pre">the_line</span></code>.</p>
+<p><strong>For loops.</strong> Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I’m going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem in a programming language like C. This will introduce to you the other major looping construct in Python (and many other languages): the <em>for-loop</em>. More importantly, this introduction will help you to understand what takes place behind the scenes in the Python abstraction that we will eventually use.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Fun!</p>
+<p>Here is <a class="reference external" href="https://www.wired.com/story/why-you-hate-media-technically-speaking/">a fun article</a> on the difference between dialogue and dialog.</p>
+</aside>
+<p>The following code block fills in more of the work we need done in state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. In particular, it uses a for-loop to find the location of the first double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> and then begins capturing the dialogue.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Complete Script</p>
+<p>You can see the entire script including this code by in the file <code class="docutils literal notranslate"><span class="pre">chap02/script2.py.</span></code></p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="c1"># do some work; some of it follows</span>
+<span class="linenos">19</span>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)):</span>
+<span class="linenos">20</span>                <span class="k">if</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span>
+<span class="linenos">21</span>                    <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                    <span class="k">break</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>            <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">the_line</span><span class="p">:</span>
+<span class="linenos">25</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> statement iterates over the items in a sequence. The <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword here plays a similar membership role as we saw earlier, but as part of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement, we are asking <code class="docutils literal notranslate"><span class="pre">i</span></code> to name each item in the specified sequence in order, and for each of those values, execute an iteration of the indented block of statements.</p>
+<p>To see this for-loop in action, we need to know what the sequence is in this particular case. We already know what value is produced by <code class="docutils literal notranslate"><span class="pre">len(the_line)</span></code>, and we pass the integer value computed by <code class="docutils literal notranslate"><span class="pre">len</span></code> to another Python built-in function called <code class="docutils literal notranslate"><span class="pre">range</span></code>. This built-in is quite interesting, but for now we simply need to think of it as computing a sequence object containing the integers from <code class="docutils literal notranslate"><span class="pre">0</span></code> to one less than the integer value passed to <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
+<p>Let’s now look at the body of the for-loop in the code block above. It asks whether the character at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is a double quote. When it is, the body of the if-statement names the slice of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> from <code class="docutils literal notranslate"><span class="pre">i</span></code> to the end of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> with the variable <code class="docutils literal notranslate"><span class="pre">dialog</span></code>. We end the if-statement body with a <code class="docutils literal notranslate"><span class="pre">break</span></code> because we don’t need the for-loop to continue checking the rest of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> once we’ve found a double quote. (Actually, there are other cases we need to handle, but not for our example from line 8 of <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>.)</p>
+<p>Our original if-statement that checked for a double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is now performing redundant work when the for-loop finds a double quote. We can rewrite the work in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> to integrate the transition work into the for-loop.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="c1"># do some work; some of it follows</span>
+<span class="linenos">19</span>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)):</span>
+<span class="linenos">20</span>                <span class="k">if</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span>
+<span class="linenos">21</span>                    <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">23</span>                    <span class="k">break</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Make sure you understand why the logic in the code block above and the one before it are equivalent. Then write a simple for-loop that prints the integers from 0 to 10.</p>
+</div>
+<p><strong>String find.</strong> As promised, Python makes it easy for us to find the index of the first occurrence of a character in a string using the <code class="docutils literal notranslate"><span class="pre">str.find</span></code> method. In particular, much of the work of the above for-loop becomes: <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">the_line.find('&quot;')</span></code>.</p>
+<p>I say “much” because you might ask what the method returns if the character we seek isn’t in the current string, and the answer to this question is integer value <code class="docutils literal notranslate"><span class="pre">-1</span></code>. In other words, given a string <code class="docutils literal notranslate"><span class="pre">s</span></code> and a substring <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">s.find(c)</span></code> returns an integer between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">len(s)-1</span></code> if <code class="docutils literal notranslate"><span class="pre">c</span></code> occurs within <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">-1</span></code> if not.</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">find</span></code> makes our life much easier, it doesn’t replace the need for an if-statement in our new solution. Here’s what our script looks like when we replace our previous for-loop solution with this “find+if” solution. I’ve also updated our comments to explain what we have and haven’t yet accomplished.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="c1"># Found an open quote</span>
+<span class="linenos">21</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">23</span>                <span class="c1"># FIXME! Need to handle short dialogue.</span>
+</pre></div>
+</div>
+<p><strong>Design patterns for error handling.</strong> When you been programming long enough, like any practiced skill, you’ll start to see repeated patterns. This is one for error handling. A command, function, or method carves out one or more values in the range of its return value and distinguishes those values as error conditions. In our current example, <code class="docutils literal notranslate"><span class="pre">find</span></code> needs only the integers in the range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">len(s)-1</span></code> to fully accomplish its stated functionality. The person who wrote the implementation of <code class="docutils literal notranslate"><span class="pre">find</span></code> was free to pick any value outside this range of valid results as an error condition. She might have picked several such values to indicate a number of different error conditions.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Example Situation</p>
+<p>You might know that the error condition is impossible because of some processing you did immediately prior.</p>
+</aside>
+<p>One of the things you’ll learn as your programming skill grows is that you should always check and handle the error conditions that might occur in the commands, functions, and methods you use. The only reason not to do this is because you have carefully reasoned out why the error condition cannot occur.</p>
+<p>Unfortunately, just because a design pattern is commonly used doesn’t mean it isn’t without headaches. This pattern requires us to add the statement <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">i</span> <span class="pre">!=</span> <span class="pre">-1:</span></code> to our script, which we are supposed to read as “if <code class="docutils literal notranslate"><span class="pre">find</span></code> returned a valid index into <code class="docutils literal notranslate"><span class="pre">the_line</span></code> then we found an opening double-quote character at index <code class="docutils literal notranslate"><span class="pre">i</span></code>.” Yea, it doesn’t look much like that to me either and that’s why I stuck in the comment at the start of the body of our inner if-statement.</p>
+<p>While not an issue with the structure of the logic in our current script, many programmers also dislike this design pattern because it can break up your script’s flow with lots of checks for uncommon error conditions. When you are constantly distracted by infrequently-true error checks, it can make it very hard for you and others reading your script to understand how the script performs its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.</p>
+<p><strong>Never go too long without testing.</strong> We’ve made some great progress on our script, and now we have a choice of how to proceed. On the one hand, we can continue to write code to handle all the cases that might occur in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> (e.g., the case we’ve flagged in our “FIXME!” comment). Our minds are focused on state <code class="docutils literal notranslate"><span class="pre">S0</span></code>, and it may be enticing to continue working on it until we’ve handled every case we can imagine. On the other hand, we could switch and start writing some code for state <code class="docutils literal notranslate"><span class="pre">S1</span></code>. In particular, we could write <code class="docutils literal notranslate"><span class="pre">S1</span></code> code that complements the code we just finished in <code class="docutils literal notranslate"><span class="pre">S0</span></code>. The benefit of this approach is that it would allow us to see if we can get our script to run on some subset of the possible inputs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you have the opportunity to test what you’ve written, take it. It’s a good practice to build your script in pieces that you can regularly test. I like the feeling of accomplishment when I get another small piece of my larger problem to work. Plus, it is often efficient from an overall time perspective if you don’t spend a lot of time coding a design that was doomed to failure based on one of your early design decisions. Regular testing will keep you from wasting a lot of time on doomed designs. The exercises and problem sets that come with this book are structured to encourage you to follow this approach.</p>
+</div>
+<p>So what do we need to write for state <code class="docutils literal notranslate"><span class="pre">S1</span></code> that integrates with what we just finished writing for <code class="docutils literal notranslate"><span class="pre">S0</span></code>? When our script is in state <code class="docutils literal notranslate"><span class="pre">S1</span></code>, it is looking for the close quote matching the open quote seen in state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. This sounds a lot like the work we just finished.</p>
+<p>In both states, we use the <code class="docutils literal notranslate"><span class="pre">find</span></code> method on strings to determine whether <code class="docutils literal notranslate"><span class="pre">the_line</span></code> contains a double-quote character, and if it does, we either start capturing (state <code class="docutils literal notranslate"><span class="pre">S0</span></code>) or finish capturing (state <code class="docutils literal notranslate"><span class="pre">S1</span></code>) the <code class="docutils literal notranslate"><span class="pre">dialog</span></code>. We also include a FSM transition in each case, which involves setting <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> appropriately. Finally, we will need to print in state <code class="docutils literal notranslate"><span class="pre">S1</span></code> the dialogue we captured, as the specification required us to do. Here’s that code for states <code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">S1</span></code>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Complete Script</p>
+<p>You can see the entire script including this code by in the file <code class="docutils literal notranslate"><span class="pre">chap02/script3.py.</span></code></p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="c1"># Found an open quote</span>
+<span class="linenos">21</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">23</span>                <span class="c1"># FIXME! Need to handle short dialogue.</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in s1</span>
+<span class="linenos">26</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">27</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">28</span>                <span class="c1"># Found a close quote</span>
+<span class="linenos">29</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">30</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ACTOR:&quot;</span><span class="p">,</span> <span class="n">dialog</span><span class="p">)</span>
+<span class="linenos">31</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">32</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">33</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span>
+<span class="linenos">34</span>            <span class="c1"># FIXME! Is this all the work in state S1?</span>
+</pre></div>
+</div>
+<p><strong>Concatenation, overloading, and shorthands.</strong> There are a number of interesting new things in the code for state <code class="docutils literal notranslate"><span class="pre">S1</span></code> (i.e., the else-block).</p>
+<p>The first is that this code, unlike the code for state <code class="docutils literal notranslate"><span class="pre">S0</span></code>, does something for both the case of finding a double quote in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> and not finding one. When the script finds a closing double quote, it adds the characters from the start of the line until that point to the variable <code class="docutils literal notranslate"><span class="pre">dialog</span></code>. By add, I of course mean concatenate. As we learned in Chapter 1’s exercises, the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator concatenates when its operands are strings and adds when its operands are numbers. This is called <em>overloading</em>: the operation of the operator depends on the type of its operands.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">S1</span></code> code also adds all the characters in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> when it doesn’t find a double-quote character. This is because everything in the current file line is part of the running dialogue.</p>
+<p>But wait, these two concatenation operations don’t look quite like what we saw in the last chapter. What is the meaning of this <code class="docutils literal notranslate"><span class="pre">+=</span></code> operator where we expect the concatenation we just discussed to occur? Well, <code class="docutils literal notranslate"><span class="pre">+=</span></code> just a shorthand for a concatenation that is really an append. In other words, the statement <code class="docutils literal notranslate"><span class="pre">dialog</span> <span class="pre">+=</span> <span class="pre">the_line</span></code> is equivalent to the statement: <code class="docutils literal notranslate"><span class="pre">dialog</span> <span class="pre">=</span> <span class="pre">dialog</span> <span class="pre">+</span> <span class="pre">the_line</span></code>.</p>
+<p><strong>Off-by-one and other potential errors.</strong> Now look carefully at what we append to <code class="docutils literal notranslate"><span class="pre">dialog</span></code> when the script finds a double-quote character. Do you fully understand why <code class="docutils literal notranslate"><span class="pre">the_line[:i+1]</span></code> includes the ending double quote? If not, you may wish to read the documentation about the string method <code class="docutils literal notranslate"><span class="pre">find</span></code> and review how the indices in slicing work. If you left off the <code class="docutils literal notranslate"><span class="pre">+1</span></code> in <code class="docutils literal notranslate"><span class="pre">the_line[:i+1]</span></code>, this would be an example of what’s called <em>an off-by-one error</em>. They are quite common in programming, and you should train yourself to be alert to situations where they can occur.</p>
+<p>I added a comment at the end of the code for state <code class="docutils literal notranslate"><span class="pre">S1</span></code> to remind myself that we haven’t carefully considered all the cases that can occur when looking for dialogue. We might have, but we have neither tested on a lot of different examples nor carefully thought through the cases we might encounter. But that’s ok for now, since we simply want to see if we can get the script to work for the cases we think we have covered!</p>
+<p><strong>Testing.</strong> Typically, you start testing with small inputs that exercise your script in a limited number of ways. This is a great method for incrementally learning what works and clearly seeing what doesn’t. Being methodical may not be your style, but it makes testing and debugging less of a nightmare.</p>
+<p>Here’s the full script we’ve developed to this point:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/script3.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like as a script? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
+<span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">13</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="k">break</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>        <span class="c1"># new pseudocode goes here</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="c1"># Found an open quote</span>
+<span class="linenos">21</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">23</span>                <span class="c1"># FIXME! Need to handle short dialogue.</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in s1</span>
+<span class="linenos">26</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">27</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">28</span>                <span class="c1"># Found a close quote</span>
+<span class="linenos">29</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">30</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ACTOR:&quot;</span><span class="p">,</span> <span class="n">dialog</span><span class="p">)</span>
+<span class="linenos">31</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">32</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">33</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span>
+<span class="linenos">34</span>            <span class="c1"># FIXME! Is this all the work in state S1?</span>
+</pre></div>
+</div>
+<p>Our first test input is <code class="docutils literal notranslate"><span class="pre">Talkative1.txt</span></code>, which contains two paragraphs from the Indian fairy tale titled <em>The Talkative Tortoise</em>. When you run <code class="docutils literal notranslate"><span class="pre">script3.py</span></code> and tell it to read <code class="docutils literal notranslate"><span class="pre">Talkative1.txt</span></code>, it should work as we expect: The single line of dialogue (across multiple file lines) is printed. That’s not what will probably happen on most of your first test runs, but one can always hope!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When testing a script that repetitively does something, first test with an input that requires only one iteration of your repetitive action. This is what <code class="docutils literal notranslate"><span class="pre">Talkative1.txt</span></code> did; it caused our script to visit state <code class="docutils literal notranslate"><span class="pre">S0</span></code>, then state <code class="docutils literal notranslate"><span class="pre">S1</span></code>, and then exit. Once one iteration works, try an input that causes two iterations. Proceeding like this separates the testing of the work within an iteration from the work a script does to move from one iteration to the next.</p>
+</div>
+<p>Let’s now try our script on a test input file containing two lines of dialogue. Run <code class="docutils literal notranslate"><span class="pre">script3.py</span></code> on <code class="docutils literal notranslate"><span class="pre">Talkative2.txt</span></code>. Success again!</p>
+<p>So far so good, but I said we had skipped the case of a story with a line of dialogue fully contained on one line of the input file. The file <code class="docutils literal notranslate"><span class="pre">HomeView3.txt</span></code> contains this case, which is a paragraph from the first chapter of <em>Five Little Peppers</em> by Margaret Sidney (a pseudonym for Harriett Lothrop). Run <code class="docutils literal notranslate"><span class="pre">script3.py</span></code> on this input and let’s see if we really need extra code to handle this case.</p>
+<p>Hmmm, I guess we do. This test run failed to do what we expected; it prints a bunch of text that isn’t dialogue and ends at the start of the second quote in the input file.</p>
+<p><strong>Beware of hidden assumptions.</strong> Our script is short enough that we can probably analyze our problem with <code class="docutils literal notranslate"><span class="pre">HomeView3.txt</span></code> by thinking through the script’s operation. This will not always be the case, and we will soon learn how to use print statements to help us understand the state of our script at any point in its execution.</p>
+<p>Consider what happens when our script grabs line 1 of <code class="docutils literal notranslate"><span class="pre">HomeView3.txt</span></code>, i.e., the variable <code class="docutils literal notranslate"><span class="pre">the_line</span></code> holds the string: <code class="docutils literal notranslate"><span class="pre">'&quot;Oh</span> <span class="pre">dear!&quot;</span> <span class="pre">exclaimed</span> <span class="pre">Polly</span> <span class="pre">as</span> <span class="pre">she</span> <span class="pre">sat</span> <span class="pre">over</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">corner</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">window\n'</span></code>. Since the script just started, it is <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, and it finds one at index <code class="docutils literal notranslate"><span class="pre">0</span></code> of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> (i.e., the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>). Because <code class="docutils literal notranslate"><span class="pre">0</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">-1</span></code>, the script then sets the variable <code class="docutils literal notranslate"><span class="pre">dialog</span></code> to the contents of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> (since <code class="docutils literal notranslate"><span class="pre">the_line[0:]</span></code> makes a copy the entire string). It also sets <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>, indicating a transition to state <code class="docutils literal notranslate"><span class="pre">S1</span></code>, and proceeds to the next iteration of the while-loop not realizing that it missed the close quote. While in state <code class="docutils literal notranslate"><span class="pre">S1</span></code>, it mistakenly recognizes the double quote on file line 3 as the missing close quote, and it thus prints much more than the actual first piece of dialogue. It then switches back to state <code class="docutils literal notranslate"><span class="pre">S0</span></code>, in which it finds the last double quote in the input file, but it prints nothing more because it finds the end of the file before any other double quotes.</p>
+<p>The design issue here is a subtle one. Our FSM diagram from earlier says that we should transition from state <code class="docutils literal notranslate"><span class="pre">S0</span></code> to state <code class="docutils literal notranslate"><span class="pre">S1</span></code> on seeing a double-quote character, but this FSM also assumes that events come <em>one at a time</em> during our processing. In <code class="docutils literal notranslate"><span class="pre">HomeView3.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">the_line</span></code> contained <em>two</em> events. We cannot blithely consider that we are done with the processing of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> once we’ve found <em>a</em> double-quote character since that’s not what our FSM diagram says to do. It says to start processing the input in state <code class="docutils literal notranslate"><span class="pre">S1</span></code> on the character immediately following an opening double quote. It doesn’t say to not check the characters in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> beyond the opening double quote for one or more other double-quote characters.</p>
+<p>Now that we know what we did wrong, we can fix this problem in at least two different ways. We could faithfully adhere to our FSM diagram and write some code that enters state <code class="docutils literal notranslate"><span class="pre">S1</span></code> using what remains in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> after an open quote, or we could check in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> for short lines of dialogue and skip the transition to <code class="docutils literal notranslate"><span class="pre">S1</span></code> in these cases.</p>
+<p>Sometimes one choice is better than the other, but in this case, there’s probably not much difference. Let’s maintain our current loop structure that processes file lines and decide to no longer adhere to our (initially helpful) FSM diagram.</p>
+<p>Yes, this is a choice! The FSM diagram was meant to help us think about the problem. It was not meant to constrain our implementation.</p>
+<p><strong>Function composition.</strong> Once we have thought through the problem and outlined a sensible solution, implementing it is fairly straightforward.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/script4.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like as a script? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
+<span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">13</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="k">break</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>        <span class="c1"># new pseudocode goes here</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in s0</span>
+<span class="linenos">18</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">20</span>                <span class="c1"># Found an open quote</span>
+<span class="linenos">21</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+<span class="linenos">22</span>                <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dialog</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="linenos">23</span>                    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">24</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">25</span>                    <span class="c1"># Grab entire dialog from this line ...</span>
+<span class="linenos">26</span>                    <span class="n">short_dialog</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">27</span>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ACTOR: &quot;</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">short_dialog</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">28</span>                    <span class="c1"># ... and stay in state S0</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in s1</span>
+<span class="linenos">31</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">32</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">33</span>                <span class="c1"># Found a close quote</span>
+<span class="linenos">34</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">35</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ACTOR:&quot;</span><span class="p">,</span> <span class="n">dialog</span><span class="p">)</span>
+<span class="linenos">36</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">37</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">38</span>                <span class="n">dialog</span> <span class="o">+=</span> <span class="n">the_line</span>
+<span class="linenos">39</span>            <span class="c1"># FIXME! Is this all the work in state S1?</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">script4.py</span></code>, we protect the transition to state <code class="docutils literal notranslate"><span class="pre">S1</span></code> (within the <code class="docutils literal notranslate"><span class="pre">S0</span></code> work) with an if-statement that makes sure that the rest of the file line (i.e., <code class="docutils literal notranslate"><span class="pre">dialog[1:]</span></code>) does not contain a double-quote character. If it does, we slice out the short line of dialogue, print it, and stay in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> looking for the next open quote (i.e., the body of the new <code class="docutils literal notranslate"><span class="pre">else</span></code> within the <code class="docutils literal notranslate"><span class="pre">S0</span></code> work).</p>
+<p>The syntax on the righthand side of the <code class="docutils literal notranslate"><span class="pre">=</span></code> operator where we set <code class="docutils literal notranslate"><span class="pre">short_dialog</span></code> is a bit intimidating, and let’s take a moment and make sure we understand exactly what it does. The key to understanding is to remember that <em>the Python order of computations takes place left to right</em>.</p>
+<p>With that in mind, we can read <code class="docutils literal notranslate"><span class="pre">dialog[1:].split('&quot;')[0]</span></code> as saying: Take the object named <code class="docutils literal notranslate"><span class="pre">dialog</span></code> and treat it as a sequence. We want every item in this sequence except the first (i.e., the 0th item), as specified by the slice <code class="docutils literal notranslate"><span class="pre">dialog[1:]</span></code>. Next, split this result into a list of subsequences using the double-quote character as the splitting points, as specified by <code class="docutils literal notranslate"><span class="pre">.split('&quot;')</span></code>. The double-quote character is not included in the resulting subsequences, and the list returned by <code class="docutils literal notranslate"><span class="pre">split</span></code> is itself a sequence. We index into this list to grab the first item (i.e., at index <code class="docutils literal notranslate"><span class="pre">0</span></code>), which turns out to be everything in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> between the opening double quote and the ending double quote! And this explains why the subsequent <code class="docutils literal notranslate"><span class="pre">print</span></code> concatenates opening and closing double-quote characters back onto the <code class="docutils literal notranslate"><span class="pre">short_dialog</span></code> as we print it.</p>
+<p>The righthand side of the <code class="docutils literal notranslate"><span class="pre">short_dialog</span></code> assignment statement is an example of <em>function composition</em>, and we will see it used often. In fact, we saw an earlier example in our for-loop code (i.e., <code class="docutils literal notranslate"><span class="pre">range(len(the_line))</span></code>). This example looks a lot like function composition in mathematics, where you evaluate the stuff in the innermost pair of parentheses first and then work your way out to the outermost parentheses. Overall, try not to let either of these different forms of function composition overwhelm or intimidate you. When you come across them, just take them a step at a time. You’ll eventually come to appreciate that</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">dialog</span> <span class="o">=</span> <span class="s1">&#39;&quot;At least I</span><span class="se">\&#39;</span><span class="s1">ll try.&quot;&#39;</span> 
+<span class="linenos">3</span><span class="n">short_dialog</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">short_dialog</span>
+</pre></div>
+</div>
+<p>is easier to read <em>and comprehend</em> than</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
+<span class="linenos">2</span><span class="n">dialog</span> <span class="o">=</span> <span class="s1">&#39;&quot;At least I</span><span class="se">\&#39;</span><span class="s1">ll try.&quot;&#39;</span> 
+<span class="linenos">3</span><span class="n">dialog_and_other_stuff</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="linenos">4</span><span class="n">list_of_dialog_and_other_stuff</span> <span class="o">=</span> <span class="n">dialog_and_other_stuff</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="n">short_dialog</span> <span class="o">=</span> <span class="n">list_of_dialog_and_other_stuff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">6</span><span class="n">short_dialog</span>
+</pre></div>
+</div>
+<p>Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which necessary for the computation but not really important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.</p>
+<p><strong>Abstraction as information hiding.</strong> As another example where we hid details to help with human understanding, recall how we replaced a for-loop and its associated code with an invocation of the <code class="docutils literal notranslate"><span class="pre">find</span></code> method on a string. Both computed a similar result, but we preferred the <code class="docutils literal notranslate"><span class="pre">find</span></code> string method over the for-loop implementation because it was both more concise and more expressive of what this step in our script was doing. In the next chapter, we will see how we can create our own compact representations—abstract away the details—so that each line of our script more closely resembles each step in the pseudocode we are trying to implement.</p>
+<p><strong>There is no character.</strong> Before we go, I want to correct something you may have come to believe. While I have used the term “character” to describe single items in the sequence known as a Python string, there is no distinguished thing that is a character in Python. What we think of as a character is just a Python string of length 1. In other words, when I earlier wrote that <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'A'</span></code>, I was careful to write the result as a Python string. Go ahead and see what <code class="docutils literal notranslate"><span class="pre">type(the_line[0])</span></code> tells you about the type of the object returned from the string index method. We will talk more about types when we reach Act II.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted statements in the interactive interpreter
+<span class="hll">&gt; the_line = &#39;And said, &quot;At least I\&#39;ll try.&quot;&#39; 
+</span><span class="hll">&gt; type(the_line[0])
+</span>&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<p>[Version 20230630]</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Read a Children’s Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glossary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Glossary</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
