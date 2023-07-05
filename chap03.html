@@ -1,0 +1,986 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 3: Replace Text With Emoji &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap03';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Chapter 2: Grab the Dialogue" href="chap02.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    A Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap03.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 3: Replace Text With Emoji</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3-replace-text-with-emoji">
+<h1>Chapter 3: Replace Text With Emoji<a class="headerlink" href="#chapter-3-replace-text-with-emoji" title="Permalink to this heading">#</a></h1>
+<p>To this point, we have written scripts using the core of the Python language. These scripts were for us. We adorned them with comments and variable names indicative of the code’s purpose, but we didn’t expect anyone else to read them. And while we have learned how to direct a computer like an actor, the world for which we programmed was small: our dramatic stage limited to the machine in front of us. This is a proven way to get started, but also terribly dull and constraining.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">A World-wide Community</p>
+<p>A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this <a class="reference external" href="https://www.youtube.com/watch?v=WGCaK-N2dsA">short video</a> to learn more.</p>
+</aside>
+<p>Modern machines are connected through networks to an interesting and diverse world, if we learn how to access it, and our problems will be much easier to solve if we learn to leverage the libraries of code shared by the world-wide community of programmers and data scientists. This is where the real fun happens.</p>
+<div class="admonition-learning-outcomes admonition">
+<p class="admonition-title">Learning Outcomes</p>
+<p>In this chapter, you will learn about character sets and functional abstraction by adding emojis to the stories we read. It is our first step toward engaging with the world around us, and by the end of the chapter, you will be able to:</p>
+<ul class="simple">
+<li><p>Understand the importance of the internationalization of software and what it means to localize it [design];</p></li>
+<li><p>Describe the purpose and importance of standards [design];</p></li>
+<li><p>Use Unicode and recognize different encoding standards [CS concepts and programming skills];</p></li>
+<li><p>Employ decomposition to stage the design and implementation work you do as you incrementally build toward a problem’s full solution [design];</p></li>
+<li><p>Explain the difference between and work with mutable and immutable objects [CS concepts and programming skills];</p></li>
+<li><p>Design and implement functions as well as enumerate their software engineering benefits [CS concepts and programming skills];</p></li>
+<li><p>Understand the operation of functions and the basic runtime difference between functions and methods [CS concepts and programming skills];</p></li>
+<li><p>Use docstrings and think about what a function assumes and what it guarantees [programming skills];</p></li>
+<li><p>Discuss what makes functions and scripts well-specified [programming skills];</p></li>
+<li><p>Articulate the design tie between abstraction and decomposition and describe what it means to adhere to an abstraction barrier [design];</p></li>
+<li><p>Recognize the use of functional abstraction and the basics of data abstraction [CS concepts];</p></li>
+<li><p>Create and use Python lists [programming skills];</p></li>
+<li><p>Begin to use Python modules in your coding projects [programming skills].</p></li>
+</ul>
+</div>
+<p><strong>Internationalization.</strong> I ended the last chapter with a disclosure: What we think of as an individual character is simply a Python string of length 1. This is a beautiful simplification that makes it easy to write a script that processes characters and strings. But you might wonder, “Strings in whose native tongue?” To create programs that solve the world’s problems, our computers and the software that runs on them must handle the character sets of the world’s many human languages.</p>
+<p>The software community uses the term <em>internationalization</em> when it describes the process of building programs and systems that adapt to the multitude of human languages and dialects. You will also hear the software community talk about the process of <em>localization</em>, which takes internationalized software and configures it for a specific language and locale.</p>
+<p>This might be a bit abstract, and so let’s take a specific example. I’m writing this book on a MacBook Pro running MacOS Mojave. Does Apple sell this laptop and operating system around the world? You bet it does. Does every person purchasing a MacBook Pro speak English like me, or want to interact with it in English? Definitely not. MacOS Mojave is internationalized so that Apple can sell its laptops around the world. A particular laptop is then localized when sold to a particular customer, like me. We can see this by looking at the “Language &amp; Region” controls in the “System Preferences.” Mine says that English is my preferred language, but I could change it to one of many other options.</p>
+<p>In this chapter, we are going to focus on just one piece of this large and complex problem of internationalization: computing with the multitude of characters in the world’s many human languages. Lucky for us, much of the complexity in even this well-defined problem is hidden from you as a programmer. While we don’t have to understand everything about <em>the problem of encoding</em> every character in every human language, we also can’t be ignorant of it.</p>
+<p><strong>Encoding standards.</strong> Let’s begin with a demonstration of this encoding problem, using our now familiar <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>. We’ll feed a small excerpt from <em>The Cat in the Hat</em>, written not in English (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptE.txt</span></code>) but in Spanish (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptS.txt</span></code>) to this script. Notice that the Spanish version uses punctuation marks that appear in Spanish but not English. It also correctly includes accents that help readers distinguish the Spanish word <em>el</em> (meaning ‘the’) from the different word <em>él</em> (meaning ‘he’).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### A portion of the excerpt files</span>
+<span class="linenos">2</span><span class="n">lines_in_English</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Cat in the Hat!</span>
+<span class="linenos">3</span><span class="s1">And he said to us,</span>
+<span class="linenos">4</span><span class="s1">&quot;Why do you sit there like that?&quot;&#39;&#39;&#39;</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">lines_in_Spanish</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;¡El gato en el sombrero!</span>
+<span class="linenos">7</span><span class="s1">Y él nos dijo:</span>
+<span class="linenos">8</span><span class="s1">&quot;¿Por qué te sientas así?&quot;&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>What happens when you feed the Spanish excerpt to <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>?</p>
+</div>
+<p>The script works with both inputs, but why?</p>
+<p>The short answer is that we were lucky. The program I used to translate the English excerpt into Spanish used the same character encoding scheme that Python uses as its default when reading files as plaintext. If the translation program’s character encoding scheme and Python’s default were different, our script would have thought each character was one thing when in fact it was something very different.</p>
+<p>It might help you to relate this idea to the concept of false friends in English and Spanish. False friends are words in Spanish that look a great deal like English words, but the Spanish words mean something different than their English doppelgängers. An example false friend is the Spanish word <em>largo</em>, which means long but looks like the English word large. Same encoding, different meanings.</p>
+<p>Back in the world of Python, we can specify what encoding the built-in function <code class="docutils literal notranslate"><span class="pre">open</span></code> should expect when reading a file. We do this by setting the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> input parameter. Python’s default value for this parameter is <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>. If we set this parameter to <code class="docutils literal notranslate"><span class="pre">latin-1</span></code>, we’ll get some garbage in the dialogue that’s printed. In telling Python to use the wrong encoding for the file, I’ve done something like telling you that <code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptS.txt</span></code> is written in English. You’d be confused when trying to interpret the Spanish text as English, and so is Python when I tell it to read a utf-8-encoded file as a latin-1-encoded one.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Go ahead and try this by alternatively using each one of the three different with-as-statements included in <code class="docutils literal notranslate"><span class="pre">chap03/script32.py</span></code>.</p>
+</div>
+<p><strong>Standards.</strong> <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> and <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> are two of a large number of different encoding <em>standards</em>. You’ll find standards all throughout our physical and virtual worlds. A standard is simply a documented and widely agreed-upon method for doing something.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">References</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Road_surface_marking">https://en.wikipedia.org/wiki/Road_surface_marking</a></p>
+<p><a class="reference external" href="https://www.icstriping.com/a-brief-history-of-road-surface-marking-and-striping/">https://www.icstriping.com/a-brief-history-of-road-surface-marking-and-striping/</a></p>
+</aside>
+<p>We like to think that well-crafted standards are the way we have always done things, but more often than not the path to a standard was filled with conflict and heated disagreement. Take the painted lines on our roads and highways. I’m old enough to remember when the standard color of the centerline that separates traffic traveling in different directions was changed (in the early 1970s) from white to yellow. Perhaps Oregon felt some vindication for it was the last U.S. state in 1954 to stop using yellow painted lines on its roads and join the other 47 states in adopting white as the standard color for the country’s new interstate highway system. And this earlier standard traces its roots to a painted centerline along Trenton’s River Road in Wayne County, Michigan. Edward N. Hines, the chairman of the Wayne County’s Board of Roads, insisted on the painting of a white line after seeing a milk wagon leave a white trail on the road in front of him.</p>
+<p>While the individual states eventually agreed upon today’s standard, this U.S. standard is not the standard you find in many other countries. Despite the headaches these different international standards can cause drivers, there is an even greater need for an agreed-upon standard way of encoding characters on the Internet. Have you ever visited a website and seen garbage appear on your screen? If you have, you’ve probably encountered a character-encoding problem.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">References</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Unicode">https://en.wikipedia.org/wiki/Unicode</a></p>
+</aside>
+<p>By the way, if you’re interested, you can begin an exploration of the checkered history of encoding standards by reading about Unicode, the standard we use and explore next.</p>
+<p><strong>Unicode.</strong> The Unicode standard maps each language character to a unique <em>code point</em> in a <em>codespace</em>. This approach attempts to take every character in every language in the world and maps them into a rigorously defined space of values. For example, the code point for the capital letter “A” is <code class="docutils literal notranslate"><span class="pre">U+0041</span></code>, while the code point for the division sign “÷” is <code class="docutils literal notranslate"><span class="pre">U+00F7</span></code>. The four digits at the end of each of these two code points represent a hexadecimal number, which we will learn more about in a later chapter. For now, we simply need to know the code point number for each character we want to specify.</p>
+<p>You should notice a couple of things here. First, code points simply tell you the character. A code point does not tell you what font to use for that character. Nor does it tell you whether the character should be displayed in bold or italics, or even in what color. What sounds simple — display a capital “A” please — is actually a complex system of standards and interacting systems, each with their own special purpose and function. While we will later discuss some of this, let’s stick for the time being with the goal of how to specify different characters.</p>
+<p><strong>A new problem.</strong> The other interesting thing about Unicode is that it includes not only letters, but symbols. In fact, the concept of a character is quite liberal, encompassing even emoji. For instance, the cat-with-wry-smile emoji (😼) is codepoint <code class="docutils literal notranslate"><span class="pre">U+1F63C</span></code>. Let’s use that to make the stories our scripts read a bit more fanciful.</p>
+<p>In particular, let’s start our work with the script from Chapter 1 (slightly improved and listed just below), which reads a specified children’s book.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace0.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">12</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p>What we eventually want this script to do is to <em>replace</em> some of the words with emoji characters as it prints out the book’s text. Which words? Let’s replace every instance of “Cat” with 😼 and “Hat” with 🎩.</p>
+<p><strong>Decomposition to reduce the problem’s complexity.</strong> Before we try to solve this entire challenge in one go, let’s ask if we can break it into simpler pieces. What do you think?</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Break It Down</p>
+<p>Remember! Decompose complex problems in a sequence of simple steps and you’ll solve your challenges every time!</p>
+</aside>
+<p>Of course we can. Forgetting about emojis for a moment, we might start by asking how we replace <em>one word with another</em> in a Python string. If we can accomplish this, then we can move to replacing <em>one word with an emoji</em>, which involves understanding how to print code points in a Unicode string. From there, we can move to replacing <em>every instance of a word in a line</em>, and ultimately <em>every instance of multiple different words</em>. Then bam, we’ve solved our problem!</p>
+<p><strong>Strings as immutable sequences.</strong> We’ll begin by learning how to replace one word with another. We could code this functionality ourselves, but we have already seen that Python provides a number of useful methods that operate on sequences and Python strings are sequences. Before reading on, skim at the <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Python documentation</a> that lists the pre-programmed operations for sequences.</p>
+<p>We have used a number of these operations in our previous scripts, but nothing in this list helps us replace part of a sequence with another sequence.</p>
+<p>Scroll down to <a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#mutable-sequence-types">the table of operations on <em>mutable</em> sequence types</a>. Mutable means that we can change an object’s pieces, and with a mutable sequence, we can replace the sequence’s items. The first example in this list of operations does exactly this using syntax familiar to us: <code class="docutils literal notranslate"><span class="pre">s[i]</span> <span class="pre">=</span> <span class="pre">x</span></code> where <code class="docutils literal notranslate"><span class="pre">s</span></code> is a mutable sequence and <code class="docutils literal notranslate"><span class="pre">x</span></code> is some object that should replace the current object in <code class="docutils literal notranslate"><span class="pre">s</span></code> at index <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<p>If we think back to the bookshelf example from the last chapter, this is like replacing this course’s textbook with a different one (e.g., a new version of it). I haven’t made a new copy of my bookshelf; I simply replaced one item in it with another. In code as in life, the old version of my bookshelf no longer exists.</p>
+<p>This could be the basis of replacing a word in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> with a different word, but first we should test out this method with a simple example in the interactive Python interpreter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;just me&quot;</span>
+<span class="linenos">2</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</pre></div>
+</div>
+<p>Oops, this produces an error. The interpreter reports that a <code class="docutils literal notranslate"><span class="pre">str</span></code> object doesn’t support item assignment. What it is trying to tell us is that, while a <code class="docutils literal notranslate"><span class="pre">str</span></code> is a sequence, it is not a mutable sequence. Python strings are <em>immutable</em> sequences, and thus we cannot use any of the methods for mutable sequence types. Once you create a string object, you cannot change the contents of that string. However, string processing is a common operation in programming and Python does provide <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#string-methods">a whole set of methods we can apply to strings</a>. And in this list we find <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str.replace"><code class="docutils literal notranslate"><span class="pre">replace</span></code></a>!</p>
+<p>Because Python strings are immutable, the <code class="docutils literal notranslate"><span class="pre">replace</span></code> method states that it creates and returns a new string object with the old subsequences replaced with the new subsequence. Make sure that you understand that <code class="docutils literal notranslate"><span class="pre">replace</span></code> left the original string object untouched when it created a new string object of the form we desired. We’ll talk in a later chapter about why Python chose to make strings immutable, but for now we know enough to solve the first step in our challenge.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace1.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;Gato&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">16</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">17</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Garbage Collection</p>
+<p>You might wonder what happens to this now unnamed, original bookshelf sequence object. Great question! Briefly, there’s a process that periodically finds all unnamed objects and recycles their storage. This is appropriately called <em>garbage collection</em> in the computer science literature.</p>
+</aside>
+<p>Line 10 of the script above applies the <code class="docutils literal notranslate"><span class="pre">replace</span></code> method to the object named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, and we take the object <code class="docutils literal notranslate"><span class="pre">replace</span></code> returns and update the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code> to refer to it. Notice that we no longer have a way to access the string object that we read from <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code>. That’s ok, since we don’t need that object any longer.</p>
+<p>Notice also that replacement is:</p>
+<ul class="simple">
+<li><p>Case sensitive. The letter ‘c’ is not the same as the letter ‘C’. ‘c’ is Unicode code point <code class="docutils literal notranslate"><span class="pre">U+0063</span></code> and ‘C’ is <code class="docutils literal notranslate"><span class="pre">U+0043</span></code>.</p></li>
+<li><p>Not limited to the length of the replaced text. <code class="docutils literal notranslate"><span class="pre">'Gato'</span></code> was longer than <code class="docutils literal notranslate"><span class="pre">'Cat'</span></code>.</p></li>
+</ul>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Try other substitutions starting with this code block. What else did you learn about how <code class="docutils literal notranslate"><span class="pre">replace</span></code> works from this example?</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Just me. Just me. Just me.&#39;</span>
+<span class="linenos">2</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;me&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Encode an emoji in Unicode.</strong> Onto the second step, which has us substitute the string <code class="docutils literal notranslate"><span class="pre">'Gato'</span></code> with the Unicode code point for the cat-with-wry-smile emoji. You’ve already done something like this when we talked about how to express a carriage return. We used the special character sequence <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> where the <code class="docutils literal notranslate"><span class="pre">'\'</span></code> told the Python interpreter that the next character wasn’t a simple <code class="docutils literal notranslate"><span class="pre">'n'</span></code> but an encoding of something we couldn’t express in a single printable character. We will do the same thing here.</p>
+<p>Python provides two ways to specify Unicode code points: We can use ‘<code class="docutils literal notranslate"><span class="pre">\u</span></code>’ followed by four hexadecimal characters, if the character we want is at the start of the Unicode code space, like the letter ‘G’.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\u0047</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For Unicode code points with encodings requiring more than four hexadecimal digits, like the cat-with-wry-smile emoji, which is codepoint <code class="docutils literal notranslate"><span class="pre">U+1F63C</span></code>, we must use the ‘<code class="docutils literal notranslate"><span class="pre">\U</span></code>’ escape. It tells the Python interpreter to expect eight hexadecimal characters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\U00000047</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\U0001F63C</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Most of us don’t find it easy to remember hexadecimal digits, and so there’s one other escape sequence you might find useful.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Be careful not to confuse <code class="docutils literal notranslate"><span class="pre">\n</span></code> and <code class="docutils literal notranslate"><span class="pre">\N{emoji_name}</span></code>.</p>
+</div>
+<p>If you want to learn more about Unicode and play with different emojis in your programs, please see Python’s <a class="reference external" href="https:/docs.python.org/3/howto/unicode.html">Unicode HOWTO</a> page, the homepage for <a class="reference external" href="http://unicode.org">unicode.org</a>, and info about the <a class="reference external" href="https://emojipedia.org/emoji/%F0%9F%98%BC/">cat-with-wry-smile emoji</a>.</p>
+<p>Using all this new knowledge, we can code a solution for steps 2 and 3:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace23.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">16</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">17</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p><strong>Multiple different replacements.</strong> Let’s now extend our script so that it makes replacements for “Cat” and “Hat”. This task is fairly straightforward because the two substitutions are independent, and by that I mean that one substitution doesn’t insert something that the other is expected to replace. As such, we simply need to run every replacement on every line we read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace4.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">16</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">17</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p><strong>Feeling overwhelmed?</strong> While you should feel a real sense of accomplishment for all that you’ve learned, you might also be feeling a bit overwhelmed. How do you know if a programming language provides you with a piece of functionality like <code class="docutils literal notranslate"><span class="pre">replace</span></code>? And even if you know that it does, how do you know the name the language designer chose for that functionality?</p>
+<p>The simple answer is, you don’t. Python provides us with a pretty decent set of documentation pages, and we are fortunate to live in a world where sensible questions fed to a search engine or chatbot will often produce a great start on a set of possibly helpful answers.</p>
+<p>Of course, if you don’t realize that the functionality you need already exists, you can always build the functionality yourself. Let’s see how this is done.</p>
+<p><strong>Functions.</strong> Let’s pretend that there is no string-replace method built into Python. How would we write a script that does what <code class="docutils literal notranslate"><span class="pre">replace4.py</span></code> does? Without access to Python’s <code class="docutils literal notranslate"><span class="pre">replace</span></code> method, we would probably write some pseudocode that looks as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace5.py</span>
+<span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">10</span>        <span class="c1"># my code to replace &#39;Cat&#39; with &#39;\N{cat face with wry smile}&#39;</span>
+<span class="linenos">11</span>        <span class="c1"># my code to replace &#39;Hat&#39; with &#39;\N{top hat}&#39;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">16</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">17</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p>If we needed this functionality only once in our program, we might write code right where we have these lines of pseudocode. We, however, need the functionality twice, not once. Would we want to write out this code twice?</p>
+<p>Probably not. Think about what happens if you find a mistake. You’d have to fix that mistake everywhere you copied the code. That is a bookkeeping nightmare. Furthermore, as the form of the pseudocode comments above illustrate, there is probably a lot of similarity in the two pieces of code. Both replace a specified substring in a string with a second substring. The only difference between the two pieces of code is the existing and new substrings specified. Wouldn’t it be nice to write the code for our <code class="docutils literal notranslate"><span class="pre">replace</span></code> operation once and invoke that code whenever we needed it?</p>
+<p>Yes it would. Programming language support for <em>functions</em> (also called <em>procedures</em> and <em>methods</em>) provides us with exactly this ability. By separating the implementation of a function from the possibly many places where you invoke it, you make it easy to fix a function’s implementation if it contains a mistake or if you find some aspect of its behavior (e.g., how fast it runs, as we’ll discuss in later chapters) is not what you hoped it would be.</p>
+<p><strong>Function definitions.</strong> We are ready to expand our pseudocode to include the concept of a function definition. When you define a function, you should think about creating two important pieces: a <em>public interface</em> and a <em>hidden implementation</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace6.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># specify the interface for my_replace</span>
+<span class="linenos"> 4</span><span class="c1">#     specify the implementation of my_replace</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos">10</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">14</span>        <span class="c1"># call my_replace on the_line, specifying &#39;Cat&#39; is replaced by &#39;\N{cat face with wry smile}&#39;</span>
+<span class="linenos">15</span>        <span class="c1"># call my_replace on the_line, specifying &#39;Hat&#39; is replaced by &#39;\N{top hat}&#39;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">21</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">22</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">An Optional Count</p>
+<p>The actual string <code class="docutils literal notranslate"><span class="pre">replace</span></code> method takes an optional <code class="docutils literal notranslate"><span class="pre">count</span></code> parameter. I leave it out of our discussion since we haven’t used this optional functionality in our examples nor does it affect the point about interfaces abstracting away the details of the implementation.</p>
+</aside>
+<p>The interface is an abstract way of thinking about the function’s operation. We had no idea, for example, how Python’s string-replace method worked when we used it in our earlier script.  We simply knew that the documentation said <code class="docutils literal notranslate"><span class="pre">str.replace(old,</span> <span class="pre">new)</span></code> returned “a copy of the string <code class="docutils literal notranslate"><span class="pre">str</span></code> with all occurrences of substring <code class="docutils literal notranslate"><span class="pre">old</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">new</span></code>.” This was sufficient knowledge for us to use the method. Similarly, the interface we specify for our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function should be sufficient for others to know how to use it.</p>
+<p>The rest of the function definition is its concrete implementation. An implementation is simply a set of Python statements just like the ones we have been writing, but with one twist: We need to learn how to send data to our function and return any results the function computes.</p>
+<p>In general, you can think of a function as a script that performs a specific action using data you send it. And just as we have been running our scripts numerous times, you can run this new function numerous times with different data and get back possibly different results.</p>
+<p><strong>The actual function definition and its invocations.</strong> Let’s now fill in our pseudocode with actual Python code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace7.py</span>
+<span class="linenos"> 2</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 4</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 5</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">10</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos">22</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">23</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>        <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">26</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">27</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">32</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">33</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">34</span>            <span class="k">break</span>
+</pre></div>
+</div>
+<p>In Python, function definitions begin with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>. We follow this keyword with the name we would like to use for our new function, which is <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in this example.</p>
+<p>What is this name exactly? We previously talked about variable names, which permit us to give names to the values our script computes and manipulates. Function names serve a similar purpose, except that the value they name is a list of code statements that we need executed at one or more points in our script. For our problem, this need occurs on lines 26 and 27 of the previous code block.</p>
+<p>After the function’s name in the function definition, we write inside parentheses a list of what are called the <em>formal parameters of the function</em>. In our example, we want our function to take three strings, which we name <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">old</span></code>, and <code class="docutils literal notranslate"><span class="pre">new</span></code>. <code class="docutils literal notranslate"><span class="pre">s</span></code> is the string in which we want to make replacements. <code class="docutils literal notranslate"><span class="pre">old</span></code> is the substring we want to replaced, and <code class="docutils literal notranslate"><span class="pre">new</span></code> is the substring that should replace <code class="docutils literal notranslate"><span class="pre">old</span></code> wherever it is found in <code class="docutils literal notranslate"><span class="pre">s</span></code>. In general, the formal parameters specify the input values needed for the function to perform its work.</p>
+<p>To complete the function interface definition in Python, we end this line with a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>), as is done with any compound Python statement. The indented lines that follow are the function’s implementation. In the example above, the implementation, which is also called <em>the body of the function</em>, comprises lines 3-15. The body is the set of statements the Python interpreter will remember as named <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
+<p>A function’s interface tells the Python interpreter, as well as humans reading the definition, how to invoke the function. To <em>invoke</em> (or <em>call</em>) a function, we use its name and specify what input values will be mapped to each of the function’s formal parameters. These input values are called the <em>actual parameters</em>. Lines 26 and 27 illustrate two such calls with their parenthesized lists of actual parameters.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Other Binding Mechanisms</p>
+<p>Python supports other binding mechanisms, but we ignore these alternatives for now. If you really want to know the details at this point, I suggest you read <a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">this section in the Python tutorial</a>.</p>
+</aside>
+<p>When a function call is executed by the Python interpreter, each actual parameter is bound to its corresponding formal parameter. In the simplest case, this binding is done, as it is done here, in list order: the first actual parameter is bound to the first formal parameter; the second to the second; and so forth.</p>
+<p>In plain English, what does this binding mean? It means that we give another name to each object in the actual parameter list. For example, <code class="docutils literal notranslate"><span class="pre">the_line</span></code> names a string object, and as part of the invocation of the <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function when the Python interpreter executes line 26, that string object will also be given the name <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<p><strong>Function execution.</strong> It’s important to realize that we have switched from talking about writing a function to a discussion of what happens when it executes. It might be helpful to state all together what happens when we tell the Python interpreter to execute <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, which includes a function call.</p>
+<p>We start at the beginning of our script’s execution, i.e., immediately after we have typed <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">replace7.py</span></code> and hit return. Like a script reading a plaintext file, the Python interpreter starts reading from line 1. Our script’s first line is a comment, and the interpreter moves to line 2. The statement on line 2 is a function definition, and like a new variable definition, it causes the Python interpreter to add the name <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> to the currently active namespace and associate this new name with the list of statements in the function’s body. To be clear, none of the statements in the function’s body are themselves executed at this point.</p>
+<p>When the Python interpreter is done with this work, it moves on to line 18, where it asks the user for a filename. It opens that named file on line 21 and adds <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> into the current namespace. Line 22 then tells the interpreter that the indented statements below it are the body of an infinite loop. The interpreter continues sequentially, reading the statement on line 23, where it proceeds to create a string object containing the first line of the input file and associating the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code> with this string object. Because this is the first time we have encountered the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, the interpreter also adds this name to the current namespace. The interpreter ignores line 25, which contains only a comment, and finally we are at line 26, the first of the two calls of our function <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
+<p>In executing line 26, the interpreter looks up what it knows about <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in its namespaces and finds the definition it processed earlier. It binds the actual parameters on line 26 to the formal parameter names in the function’s definition, and it begins the execution of this function by next processing line 3.</p>
+<p>Execution inside the function proceeds as you would expect. Because the formal parameter names are in the current namespace and they have had values bound to them, when line 4 is executed, the Python interpreter knows that it should assign the value <code class="docutils literal notranslate"><span class="pre">3</span></code> (i.e., the length of the string <code class="docutils literal notranslate"><span class="pre">'Cat'</span></code>) to the name <code class="docutils literal notranslate"><span class="pre">j</span></code>.</p>
+<p>We won’t step through every statement in the body of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, but we should note that the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop in this body eventually terminates because <code class="docutils literal notranslate"><span class="pre">s</span></code> (i.e., the first line read from the input file) has a finite length and this <code class="docutils literal notranslate"><span class="pre">while</span></code> loop increments <code class="docutils literal notranslate"><span class="pre">i</span></code> on every execution of its body (i.e., technically on every possible execution path through the loop’s body). This means that the Python interpreter eventually reaches line 15, which is a new type of statement for us.</p>
+<p>Line 15 tells the interpreter that we are done with the function’s execution and that processing should return to the statement that began this particular instance of the function’s execution. For us at this time, this is line 26.</p>
+<p>Return-statements in Python may include an expression, and the value of this expression is the value that the Python interpreter uses as the result of the function call. Looked at from the perspective of the function call (on line 26), a function call in Python acts like an expression, and like any expression, its execution produces a value.</p>
+<p>Continuing our example, the function call on line 26 returns a new string object that is a copy of <code class="docutils literal notranslate"><span class="pre">s</span></code> with its <code class="docutils literal notranslate"><span class="pre">old</span></code> subsequences (i.e., <code class="docutils literal notranslate"><span class="pre">'Cat'</span></code>) replaced by <code class="docutils literal notranslate"><span class="pre">new</span></code> subsequences (i.e., <code class="docutils literal notranslate"><span class="pre">'\N{cat</span> <span class="pre">face</span> <span class="pre">with</span> <span class="pre">wry</span> <span class="pre">smile}'</span></code>). Line 26 assigns that returned string object to the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code> so that we can then on line 27 replace any <code class="docutils literal notranslate"><span class="pre">'Hat'</span></code> substrings in it with the Top Hat emoji.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A function returns if the interpreter reaches the end of the function body without encountering a return-statement. The result returned is the special object <code class="docutils literal notranslate"><span class="pre">None</span></code>, which is also the result when a return-statement has no expression.</p>
+</div>
+<p><strong>Abstraction, decomposition, and algorithms.</strong> Let’s pause for a moment and rise above the details of building a function and learning how it executes. Our goal was to print a story from a file to our terminal screen while replacing occurrences of some words with some funny emoji. This short description pretty well sums up what our script does. It describes <em>the script’s purpose</em>.</p>
+<p>While writing the Python code, we learned a couple of different ways to replace a portion of a string with another string, with the last version of our script implementing our own string replace. Notice that the script’s purpose doesn’t include this level of detail. The Python interpreter needs these details (i.e., how it should replace words in a string), but in solving the problem, we don’t particularly care if the interpreter uses <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> or Python’s built-in <code class="docutils literal notranslate"><span class="pre">str.replace</span></code> method.</p>
+<p>This is <em>abstraction</em> at work, and it is one of the benefits of using functions. With them, we can hide necessary but unimportant-to-the-script’s-main-purpose details. In fact, even though the implementation of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> was sitting there in lines 3-15 of <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, did you take the time to read and understand exactly how it works? Be honest. Probably not many readers did, and that, my friend, is abstraction at its finest! We used <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>. We talked about it. You (hopefully) understood its interface and could use it yourself, but you didn’t ever bother to worry about how it exactly did what you abstractly thought about it doing.</p>
+<p>Abstraction is a big idea in computer science, but don’t let that frighten you. It is something that each of us does all the time in life. As you gain experience in problem solving, you’ll find that abstraction goes hand-in-hand with <em>decomposition</em>, i.e., the breaking down of a large, complex problem into simpler steps, as we did to solve this chapter’s problem. We began by abstractly thinking about replacing a part of a string with a different string, and we weren’t initially concerned with how we would accomplish this replacement. Only later did we ask whether this replacement was something we had to write for ourselves or was a piece of functionality someone else had already written for us.</p>
+<p>The result of all this abstraction and decomposition is an <em>algorithm</em>. An algorithm is simply a sequence of well-specified steps that when executed allow a computer (or us acting like a computer) to solve a problem. Lines 3-15 are an algorithm for replacing all occurrences of the <code class="docutils literal notranslate"><span class="pre">old</span></code> substring in string <code class="docutils literal notranslate"><span class="pre">s</span></code> with the <code class="docutils literal notranslate"><span class="pre">new</span></code> substring. Lines 18-34 are an algorithm for reading a story from a file, replacing each occurrence of <code class="docutils literal notranslate"><span class="pre">'Cat'</span></code> and <code class="docutils literal notranslate"><span class="pre">'Hat'</span></code> with some fun emoji and printing the modified story to the terminal screen.</p>
+<p><strong>Definition before use.</strong> I said, “a sequence of well-specified steps” when defining an algorithm, and by “well-specified” I mean that the Python interpreter (or a computer in general) needs to know how to execute each specified statement it encounters. In <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, the interpreter knows how to execute line 23, for example, because <code class="docutils literal notranslate"><span class="pre">readline</span></code> is a piece of built-in functionality. It knows how to execute line 26 because the Python interpreter had earlier encountered the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
+<p>What would happen if we placed the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> (lines 2-15) at the end of our script instead of at its beginning? In this case, the interpreter would encounter the name <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> before seeing its definition, and it would exit with the message: <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'my_replace'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>. “But it is!” you would say. “But it isn’t when I read the script from start (top) to end (bottom),” the interpreter would reply.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Computer programs are not mystery novels. Computers do not like ambiguity and do not understand suspense. Make sure you give definitions to the names you use before you use them.</p>
+</div>
+<p><strong>Python’s special variables.</strong> A design pattern that we will frequently use to avoid this sort of problem is illustrated in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> below. Pay particular attention to the two statements I appended to the very end of the script, and what I did to the statements that described the main action of the script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace32.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">12</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">13</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">15</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">21</span>    <span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos">25</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">26</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>            <span class="c1"># Having some fun with text substitution</span>
+<span class="linenos">29</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">30</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>            <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>            <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos">35</span>                <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos">36</span>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">37</span>                <span class="k">break</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">40</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>At the end of the script, I used one of those special names we saw in Chapter 1, when we looked at  Python’s built-in <code class="docutils literal notranslate"><span class="pre">dir</span></code> command and discussed namespaces. The if-statement asks whether the special variable <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is equal to the string <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>.  The Python interpreter sets <code class="docutils literal notranslate"><span class="pre">__name__</span></code> to this string if it is reading a script on which it was invoked. In other words, is this script the main thing it is being asked to do? Using our theater imagery, is it the start of the show? If it is, <code class="docutils literal notranslate"><span class="pre">__name__</span></code> has the value <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>. We’ll see in a moment why the interpreter might give this special variable another value, but for now, this if-statement protects the invocation of a function called <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>In addition, I wrapped the “main” part of our script (formally lines 18-34 of <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>) in a function definition called <code class="docutils literal notranslate"><span class="pre">main</span></code>. So, instead of the Python interpreter starting execution with the input-statement, it simply remembers that statement as part of the function definition of <code class="docutils literal notranslate"><span class="pre">main</span></code>. By putting lines 39-40 as the last statements in our script, we can list <code class="docutils literal notranslate"><span class="pre">main</span></code> before <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> or <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> before <code class="docutils literal notranslate"><span class="pre">main</span></code>. Either way, both definitions will exist in the namespace before the interpreter gets to the computational work in our script.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use this design pattern of wrapping your script’s “main” work in a function called <code class="docutils literal notranslate"><span class="pre">main</span></code>, and protect its invocation with: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code>. You can then place <code class="docutils literal notranslate"><span class="pre">main</span></code> anywhere in your script. Some people like to start their Python scripts with the <code class="docutils literal notranslate"><span class="pre">main</span></code> routine, as everything after it are just details!</p>
+</div>
+<p><strong>Docstrings.</strong> We added one other new line to <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, and that is the funny-looking string on line 4. This is called a <em>docstring</em>, and it is simply a string literal that, as <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> states, “occurs as the first statement in a module, function, class, or method definition.” Its purpose is to explain what the function’s interface leaves unsaid that is important in order for you or someone else to use this function in their code.</p>
+<p>For example, the interface to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> indicates that we need to call it with three input parameters, but it provides no clues as to what value will be returned from the function’s execution. A docstring should tell us what’s returned. We might also use the docstring to say a bit more than the function’s name tells us about its purpose.</p>
+<p>More generally, a docstring does not have to be a single line in length. You should think of the docstring as its formal specification. It outlines the contract between the person who wrote the function and the many people who will use it. John Guttag in his book on Python helpfully describes a function specification as having two primary pieces: (1) a description of the <em>assumptions</em> that the function makes about, for instance, its input parameters; and (2) the <em>guarantees</em> that the function provides if the assumptions are met.</p>
+<p><strong>Getting a feel for abstraction.</strong> Functions provide us with a particularly useful abstraction. With experience, you’ll gain an intuitive sense for what makes a good procedure, i.e., a useful procedural abstraction. Let’s start you on this experiential journey.</p>
+<p>Some software engineers argue that a function should have a single, well-defined job. Our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function is a good example of this. As we develop programs that solve more complex problems than the ones we have seen to date, we will begin to understand why these engineers say that if a script performs a number of distinct tasks in sequence, you should create a procedure for each of those tasks. Of course, in programs that solve quite complex tasks, you may sensibly choose to gather a sequence of procedure calls into the body of a procedure that itself describes a coarser-grained action. This, again, is decomposition at work.</p>
+<p>However, these same engineers will tell you that your functions should be as general as possible. Are these not conflicting pieces of advice?</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Python’s Power Operator</p>
+<p>Put aside for a moment the fact that both these operations are concisely expressed in Python using its power operator **, which by the way illustrates that the designers of Python thought about this exact issue when deciding what operators to define!</p>
+</aside>
+<p>Consider the following: If the problem we were trying to solve required us to compute both the square and cube of a number, should we create two separate functions, one to compute a number’s square and another to compute its cube? Or instead, should we create a single function called power that can compute both answers? While our hypothetical square and cube functions would take only a single input parameter, our power function would take two parameters: a base and an exponent.</p>
+<p>Do you feel that writing <code class="docutils literal notranslate"><span class="pre">square(6)</span></code> and <code class="docutils literal notranslate"><span class="pre">cube(5)</span></code> throughout your script is better than <code class="docutils literal notranslate"><span class="pre">power(6,</span> <span class="pre">2)</span></code> and <code class="docutils literal notranslate"><span class="pre">power(5,</span> <span class="pre">3)</span></code>? Or does it bother you that the implementation of the <code class="docutils literal notranslate"><span class="pre">square</span></code> and <code class="docutils literal notranslate"><span class="pre">cube</span></code> functions are nearly identical? Different people give different answers.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Abstraction and decomposition are more art than science. You should take anyone’s rules about what you should do around functional abstraction as guidelines, not absolutes.</p>
+</div>
+<p>On top of considerations of readability, understanding, and maintainability to which we have alluded, the particular abstractions employed by software designers are sometimes also influenced by other considerations, like performance and security. Take the Python built-in function <code class="docutils literal notranslate"><span class="pre">pow</span></code> that takes three formal parameters: a base, an exponent, and an optional modulus. It’s not obvious to first-time programmers why <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp,</span> <span class="pre">mod)</span></code> is a useful abstraction. Well, this abstraction exists because the computer will be quicker to compute <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp,</span> <span class="pre">mod)</span></code> than the semantically equivalent <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp)</span> <span class="pre">%</span> <span class="pre">mod</span></code> expression, based on some tricks hidden in Python’s implementation of <code class="docutils literal notranslate"><span class="pre">pow</span></code>.</p>
+<p><strong>Another kind of abstraction.</strong> Let’s return to our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function and think about it in terms of these abstraction and decomposition guidelines. As mentioned earlier, <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> has a single, well-defined job: it makes a copy of the input string <code class="docutils literal notranslate"><span class="pre">s</span></code>, finds all occurrences of <code class="docutils literal notranslate"><span class="pre">old</span></code> substring in this copy, replaces these occurrences with the <code class="docutils literal notranslate"><span class="pre">new</span></code> substring, and returns the modified copy.</p>
+<p>Now let’s ask, does <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> work only on string objects? Our docstring says so, but that’s just documentation. What we want to know, in the words of the second principle mentioned above, is it more general?  In other words, will it execute successfully with any sequence object, which strings are simply one particular kind? For example, we discussed my office bookshelf as another example of a sequence object. Can we use <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> to replace a subsequence in a bookshelf object?</p>
+<p>Notice that we’re talking about two kinds of abstraction here. In this chapter, we have been discussing <em>functional abstraction</em>, which allows us to think about the effect of some block of statements (i.e., a function’s body) on the state of our program without having to have detailed knowledge of the function’s body. Our new question talks about <em>data abstraction</em>. This type of abstraction has us think about a specific object as an instance of a more general object. In our example, a string is a specific type of the more general sequence object. When thinking about a specific string object as a general sequence object, we ignore the characteristics of the object that makes it a string, and we focus only on those characteristics that are true of every sequence object.</p>
+<p>Strings and bookshelves are both a kind of sequence, and as such, we can ask for their first elements. In fact, every (non-empty) sequence object has a first element, and thus we can ask that question of any sequence object. On the other hand, not every valid question about a string object makes sense for some hypothetical bookshelf object. I can ask if a string is capitalized, but it’s nonsensical to ask if a bookshelf is capitalized.</p>
+<p>Data abstraction allows us to think about a piece of data without having to have detailed knowledge of all its characteristics. What’s particularly powerful about this is that it allows us to write functions that operate on both strings and bookshelves.</p>
+<p>Is <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> one such function? Does it operate not on string objects per se, but any sequence object? Is its single, well-defined job to make a copy of the input sequence <code class="docutils literal notranslate"><span class="pre">s</span></code>, find all occurrences of the <code class="docutils literal notranslate"><span class="pre">old</span></code> subsequence in this copy, replace these occurrences with the <code class="docutils literal notranslate"><span class="pre">new</span></code> subsequence, and return the modified copy? There’s one way to find out. Let’s try it!</p>
+<p><strong>Lists are sequence objects.</strong> I’ve copied our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function into <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code>. The first block of code in <code class="docutils literal notranslate"><span class="pre">main</span></code> (lines 21-25) uses <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> as a function that processes string objects, as we did in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>. Unsurprisingly, this call to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> should work, and we include it simply to reassure ourselves that no slight-of-hand is taking place.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf1.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">12</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">13</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">15</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">21</span>    <span class="c1"># Create a string object with a line from The Cat in the Hat</span>
+<span class="linenos">22</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat!&#39;</span>
+<span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">24</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
+<span class="linenos">28</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
+<span class="linenos">29</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
+<span class="linenos">30</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
+<span class="linenos">31</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
+<span class="linenos">32</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
+<span class="linenos">35</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
+<span class="linenos">36</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
+<span class="linenos">39</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
+<span class="linenos">40</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">43</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>More interestingly, the rest of <code class="docutils literal notranslate"><span class="pre">main</span></code> invokes <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> on a Python list, a different kind of Python sequence object. Unlike Python strings, Python lists are mutable sequence objects. Python lists are also a more general kind of sequence object than strings in that you can use lists to group together lots of different types of Python objects. While I’ve created a representation of my office bookshelf using a list of Python strings (lines 27-32), we could easily insert an integer into this list, and the Python interpreter would have happily accepted it. Lists are a powerful data structure that we’ll use often.</p>
+<p>The simplest way to create a new Python list is to enclose a list of Python objects in square brackets, as we have done on line 35. The second and third parameters in the call to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> on line 39 are also Python lists, albeit with only a single item in each of the constructed lists. What this call does then is invoke <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with three Python list objects. During the call, the formal parameter <code class="docutils literal notranslate"><span class="pre">s</span></code> provides another name for the Python list object named <code class="docutils literal notranslate"><span class="pre">shelf</span></code>, and <code class="docutils literal notranslate"><span class="pre">old</span></code> and <code class="docutils literal notranslate"><span class="pre">new</span></code> name the previously unnamed Python lists <code class="docutils literal notranslate"><span class="pre">[textbook]</span></code> and <code class="docutils literal notranslate"><span class="pre">['\N{open</span> <span class="pre">book}']</span></code>.</p>
+<p>If everything goes well, <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> will operate on these formal parameters (i.e., these Python lists) using only their sequence object abstractions. And it will return to line 39 a new Python list object that looks a lot like the original <code class="docutils literal notranslate"><span class="pre">shelf</span></code>, but with an open book emoji replacing the name of the file in which I’m writing this textbook.</p>
+<p>We are now ready to run our little experiment.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted command in the Shell
+<span class="hll">&gt; python3 bookshelf1.py 
+</span>The Cat in the Hat!
+The Cat in the 🎩!
+[&#39;🦁&#39;, &#39;kids.jpg&#39;, &#39;cs32.scriv&#39;, &#39;BornToRun.mp3&#39;, &#39;CatInTheHat.txt&#39;]
+[&#39;🦁&#39;, &#39;kids.jpg&#39;, &#39;📖&#39;, &#39;BornToRun.mp3&#39;, &#39;CatInTheHat.txt&#39;]
+&gt;
+</pre></div>
+</div>
+<p>It worked! Our docstring and comments are misleading. We should replace the word “string” in them with the word “sequence”.</p>
+<p><strong>Abstraction barriers.</strong> We’ll expand our discussion of abstraction, its beauty, and its power in Act II, but before leaving this topic, I want to put in a word of warning about building abstractions. Of all the statements in <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, the one that’s easiest to get “wrong” is: <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">=</span> <span class="pre">s[0:0]</span></code>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Exposing What’s Behind the Curtain</p>
+<p>See <a class="reference external" href="https://www.youtube.com/watch?v=YWyCCJ6B2WE">https://www.youtube.com/watch?v=YWyCCJ6B2WE</a>.</p>
+</aside>
+<p>What do I mean by wrong? I mean we write something that looks like it should be correct, but it breaks what’s called the <em>abstraction barrier</em>. The interesting thing about abstraction barriers is that there is no real barrier. Nothing stops us, when we write statements inside a function like <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, from reaching behind the abstraction we’re trying to create and using operations that do not adhere to the abstraction. It’s what Toto did in <em>The Wizard of Oz</em> when he pulled back the green curtain and exposed the man behind the Great and Powerful Oz. Let’s think about what we don’t want the Toto in each of us to expose in this statement.</p>
+<p>The statement begins the creation process for the new sequence object that we eventually return. Why do we create a new sequence object? Because sequence objects can be either mutable or immutable, and we need to code <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> so that it works in both cases. If we reached behind the abstraction and used our knowledge that Python lists are mutable, we could write a simpler set of statements in the body of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, but this version of our function would no longer work for strings. In this case, Toto shouldn’t expose the mutability characteristic of the actual object passed as the first parameter to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
+<p>But historically, we started thinking of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> as a function for replacing substrings of strings, which are immutable sequences. A routine that is written to work for immutable sequence objects also works without change for mutable sequence objects. Yet even starting from this direction, it is still easy for our inner Toto to miscode the statement and break the abstraction. Consider an implementation of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> that codes this statement as: <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">=</span> <span class="pre">''</span></code>. This initializes <code class="docutils literal notranslate"><span class="pre">new_s</span></code> not as <em>any kind</em> of sequence object, but <em>one particular kind</em> of sequence object. At no point in the body of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> can we assume that <code class="docutils literal notranslate"><span class="pre">new_s</span></code> is one specific kind of sequence object.</p>
+<p>Yet yet! We also cannot have <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> return just any kind of sequence object on any particular call. If the first parameter of a particular call to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is a string, our function had better return a string. If it is a list, it had better return a list. This is what makes <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">=</span> <span class="pre">s[0:0]</span></code> the “right” statement to use. <code class="docutils literal notranslate"><span class="pre">s[0:0]</span></code> is a valid operation on any sequence object, and it makes a copy of the specific object referenced. If our sequence object is actually a string, <code class="docutils literal notranslate"><span class="pre">s[0:0]</span></code> returns a new string object. If it is a list, it returns a new list object. The fact that the start and end indices of the slice operation are the same simply says that we want a copy of the specified sequence object, but without any of the items currently in it. That, my friends, is a well-behaved Toto.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Abstraction is a very powerful technique, but it is harder to build and abide by an abstraction than you might at first think.</p>
+</div>
+<p><strong>Methods.</strong> You may have wondered as we went through this exercise why the statement that used the built-in string-replace method looked like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the statement that used our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function looked like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or why I refer to the first as a <em>method</em> and the other as a <em>function</em>.</p>
+<p>Let’s start with how the two are the same. When executed, a method invocation is transformed into a function call. In particular, <code class="docutils literal notranslate"><span class="pre">the_line</span></code> in <code class="docutils literal notranslate"><span class="pre">the_line.replace</span></code> becomes the first actual parameter in the eventual function call. As such, I was telling the truth when I explained that both method and function do mean: go do something complex based possibly on some input data I provide and return to me the result of your computation.</p>
+<p>However, the two representations do not use the same syntax because the abstraction barrier in each representation is different. Function calls may make, as we have discussed at length, some assumptions about kind of objects being passed as parameters, but we only know about these assumptions through the generous description provided in the function’s docstring or by carefully analyzing the statements in the function’s body. In other words, little can be gleaned from the syntax of the function invocation about its abstraction barrier.</p>
+<p>The syntax of a method call, on the other hand, tells us something quite specific about its abstraction barrier. Using our example, we are not calling any replacement routine, but one written specifically to work with the kind of object that comes before the name of the method. The replacement routine may not take advantage of all the specific characteristics of this object (e.g., it may treat a string object like a more general sequence object), but we know the specific routine invoked is allowed to do so.</p>
+<p>We will peel back more of this magic in Act II, when we talk about object-oriented programming. For now, just mentally translate the first syntax into the second if you’re ever confused about what is happening in a particular Python statement.</p>
+<p><strong>Modules.</strong> When we wrote our short <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> script, we used our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function from <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>. To do this, we copied the function definition (including its body) and pasted it into <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code>. Yet, we just finished talking about invoking the function numerous times while defining it only once. Why can’t we use that single definition from <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> in <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> instead of making another copy of it, continuing our desire to avoid the problems of maintaining multiple copies of the same operation?</p>
+<p>Well, we can! Python allows you to reference definitions contained in other <code class="docutils literal notranslate"><span class="pre">.py</span></code> files using what it calls <em>modules</em>. Since a module is nothing more than a file just like the scripts we have been writing, the script we should have written that doesn’t duplicate the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf2.py</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">replace32</span> <span class="kn">import</span> <span class="n">my_replace</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="c1"># Create a string object with a line from The Cat in the Hat</span>
+<span class="linenos"> 6</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat!&#39;</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
+<span class="linenos">12</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
+<span class="linenos">13</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
+<span class="linenos">14</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
+<span class="linenos">15</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
+<span class="linenos">16</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
+<span class="linenos">19</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
+<span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
+<span class="linenos">23</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
+<span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">27</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Isn’t that easy? The from-statement names a module, which is just a filename with the <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension stripped off. It then lists what definitions we want to import from that module. This particular form of Python’s import-statement places the imported definition names directly into the importing script’s global symbol table, and that is why we did not have to make any changes to the function invocations later in the script.</p>
+<p>This form works well if we want one or just a few definitions from a module. You will also use a form of the import-statement that imports the module name itself into a script’s global symbol table. With this form, you can access any definition in that module by specifying its namespace. Here’s what that looks like using our bookshelf example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf3.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">replace32</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="c1"># Create a string object with a line from The Cat in the Hat</span>
+<span class="linenos"> 6</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat!&#39;</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">replace32</span><span class="o">.</span><span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
+<span class="linenos">12</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
+<span class="linenos">13</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
+<span class="linenos">14</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
+<span class="linenos">15</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
+<span class="linenos">16</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
+<span class="linenos">19</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
+<span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
+<span class="linenos">23</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">replace32</span><span class="o">.</span><span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
+<span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">27</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The syntax of the function invocation should look familiar. Does it remind you of a Python string’s method invocation? It should, and this is on purpose. Both use the dot notation to mean, “Use the specified namespace to find the definition of the attribute after the dot.”</p>
+<p>There are other forms of the import-statement that you can use (and ones you should not). Take a look at the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">Python documentation on modules</a> to learn more about them and when to use (or why not to use) them.</p>
+<p><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code><strong>.</strong> A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you’ll recall, is a statement that starts with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>, as we did when we defined our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function. These definitions are typically what we want to import from a module (i.e., another Python script).</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Top-level Statements</p>
+<p>In a script, the Python interpreter executes each non-indented (i.e., top-level) statement it comes across, in order starting with the ones at the start of the file.</p>
+</aside>
+<p>Did you wonder why we didn’t see any of the work in the <code class="docutils literal notranslate"><span class="pre">main</span></code> function of <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> when running <code class="docutils literal notranslate"><span class="pre">bookshelf3.py</span></code>? We didn’t because there’s only one non-indented, non-definition statement in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, and that’s the funny-looking if-statement we added to the bottom of the file to protect the invocation of <code class="docutils literal notranslate"><span class="pre">main</span></code>. You probably felt that this if-statement was unnecessary work when we discussed it earlier, but now we see its power.</p>
+<p>When the Python interpreter executes the if-statement at the bottom of <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, it is doing it after processing of the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement at the top of <code class="docutils literal notranslate"><span class="pre">bookshelf3.py</span></code>. On of the things that occurred during this processing is that the interpreter set <code class="docutils literal notranslate"><span class="pre">__name__</span></code> to the name of the imported module. As such, <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">False</span></code>, giving us access to just the definitions in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>!</p>
+<p><strong>Pure functions.</strong> Let’s go a little deeper here. We needed only the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in our <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code> scripts, and <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is what computer scientists call a <em>pure function</em>. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.</p>
+<p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
+<p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
+<p>[Version 20230705]</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 2: Grab the Dialogue</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glossary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Glossary</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
