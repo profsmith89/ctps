@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'glossary';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Chapter 3: Replace Text With Emoji" href="chap03.html" />
+    <link rel="prev" title="Chapter 4: Query a Web Resource" href="chap04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,6 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glossary</a></li>
 </ul>
 
@@ -310,60 +311,70 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading">#</a></h1>
-<p><strong>abstraction</strong>: a description of an object where we focus on a coherent set of its characteristics, ignoring the rest of its details. Seemingly different objects (e.g., a string and a list) can share the same abstraction. Abstraction is a fundamental idea in computer science.</p>
+<p><strong>abstraction:</strong> a description of an object where we focus on a coherent set of its characteristics, ignoring the rest of its details. Seemingly different objects (e.g., a string and a list) can share the same abstraction. Abstraction is a fundamental idea in computer science.</p>
 <p><strong>abstraction barrier:</strong> the separation we maintain between operations that adhere to the abstraction we’ve built and operations that violate that abstraction. Abstractions work best when both the client using the abstraction and the implementor of the abstraction adhere to the abstraction barrier.</p>
 <p><strong>actual parameters:</strong> the names we provide as the inputs to a function at a call site. The value of the actual parameters gain new names (i.e., the <strong>formal parameters</strong>) inside the function.</p>
 <p><strong>algorithm (Chapter 3):</strong> a sequence of well-specified steps that a computer can execute.</p>
-<p><strong>aliases</strong>: what we call two names that refer to the same object.</p>
-<p><strong>attributes</strong>: Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.</p>
+<p><strong>aliases:</strong> what we call two names that refer to the same object.</p>
+<p><strong>API:</strong> an application programming interface is the definitions (i.e., variables, constants, classes, and functions) in a module, package, or library that they make available for programmers to use.</p>
+<p><strong>attributes:</strong> Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.</p>
 <p><strong>bind:</strong> the term used when pairing an actual parameter with its formal parameter during a function call.</p>
-<p><strong>class</strong>: see <strong>type</strong> (until Act II).</p>
-<p><strong>command</strong>: common way to direct the Python interpreter to do something, often of the form <code class="docutils literal notranslate"><span class="pre">command(input</span> <span class="pre">parameters)</span></code>.</p>
-<p><strong>comments</strong>: text following a <code class="docutils literal notranslate"><span class="pre">#</span></code> in Python. We use them to capture our pseudocode, and then after we have written some Python statements, we use them to explain what blocks of our code do.</p>
-<p><strong>design pattern</strong>: an approach to solving some programming problem that you’ll see in many pieces of code.</p>
-<p><strong>deterministic</strong>: a process in which an input always produces the same output. See also <strong>non-deterministic</strong>.</p>
+<p><strong>blocking</strong> and <strong>non-blocking calls:</strong> in a blocking call, your script doesn’t continue its execution until the work in the call is complete. This is the type of function call we have learned to build. A non-blocking function call is our introduction to concurrency in computation. The call doesn’t finish its work before returning to the caller. It causes two processes to run concurrently!</p>
+<p><strong>class:</strong> see <strong>type</strong> (until Act II).</p>
+<p><strong>command:</strong> common way to direct the Python interpreter to do something, often of the form <code class="docutils literal notranslate"><span class="pre">command(input</span> <span class="pre">parameters)</span></code>.</p>
+<p><strong>comments:</strong> text following a <code class="docutils literal notranslate"><span class="pre">#</span></code> in Python. We use them to capture our pseudocode, and then after we have written some Python statements, we use them to explain what blocks of our code do.</p>
+<p><strong>design pattern:</strong> an approach to solving some programming problem that you’ll see in many pieces of code.</p>
+<p><strong>deterministic:</strong> a process in which an input always produces the same output. See also <strong>non-deterministic</strong>.</p>
+<p><strong>dictionary:</strong> a data structure that maintains a mapping from keys to values. These data structures are also called associative arrays as they associate a value with a key. As a real-world example, think about the contact list on your cell phone, which associates your friend’s name with their cell phone number.</p>
 <p><strong>docstrings:</strong> strings that we add immediately after a function definition that provide more information about the purpose, inputs, outputs, and assumptions of the function.</p>
 <p><strong>encoding (Chapter 2):</strong> taking a countable number of something and associating a number with each something, typically a dense manner (e.g., if we had 8 things, we would number them 0 to 7).</p>
 <p><strong>encoding (Chapter 3):</strong> taking an abstract concept or complex phenomenon and giving it a specific representation. For example, we might take the concept of the letter <code class="docutils literal notranslate"><span class="pre">'b'</span></code> and write it as a black, 12-point, Courier letter <code class="docutils literal notranslate"><span class="pre">'b'</span></code> or represent its sound in English with the word “bee.” Or as another example, the concept of “long” as a Spanish word (i.e., “largo”). Compare this definition of encoding with the previous one (from Chapter 2). Think about how they are actually the same!</p>
-<p><strong>error messages</strong>: feedback we get from the Python interpreter when we asked it to do something it didn’t understand.</p>
-<p><strong>finite state machine</strong>: a mathematical model for organizing a system that moves through a series of tasks. In these models, there is a finite number of tasks to perform.</p>
-<p><strong>for-loop</strong>: a type of looping statement in Python that works particularly well for iterating over a sequence. Contrast with <strong>while-loop</strong>.</p>
+<p><strong>error messages:</strong> feedback we get from the Python interpreter when we asked it to do something it didn’t understand.</p>
+<p><strong>finite state machine:</strong> a mathematical model for organizing a system that moves through a series of tasks. In these models, there is a finite number of tasks to perform.</p>
+<p><strong>for-loop:</strong> a type of looping statement in Python that works particularly well for iterating over a sequence. Contrast with <strong>while-loop</strong>.</p>
 <p><strong>formal parameters:</strong> the names we give to the input values to a function. These are available in the function body. See <strong>actual parameters</strong>.</p>
-<p><strong>function (Chapter 1)</strong>: other names for commands of the form <code class="docutils literal notranslate"><span class="pre">command(input</span> <span class="pre">parameters)</span></code>. An important set of functions are those that are built into Python (e.g., <code class="docutils literal notranslate"><span class="pre">help</span></code>). See also <strong>method</strong> and <strong>procedure</strong>.</p>
+<p><strong>function (Chapter 1):</strong> other names for commands of the form <code class="docutils literal notranslate"><span class="pre">command(input</span> <span class="pre">parameters)</span></code>. An important set of functions are those that are built into Python (e.g., <code class="docutils literal notranslate"><span class="pre">help</span></code>). See also <strong>method</strong> and <strong>procedure</strong>.</p>
 <p><strong>function (Chapter 3):</strong> with <strong>method</strong> and <strong>procedure</strong>, ways to implement code abstraction, where we hide the implementation of some command behind a carefully designed interface, which tells you what inputs are required and what result will be produced.</p>
-<p><strong>function composition</strong>: every programming language has a set of rules for how it evaluates expressions built from a number of simple functions. Python evaluates nested functions (i.e., ones nested inside parentheses) innermost first, which should feel natural as it mimics what we do in basic algebra. You will also see a string of function applications (typically as method applications), and Python evaluates these in a left-to-right manner.</p>
+<p><strong>function composition:</strong> every programming language has a set of rules for how it evaluates expressions built from a number of simple functions. Python evaluates nested functions (i.e., ones nested inside parentheses) innermost first, which should feel natural as it mimics what we do in basic algebra. You will also see a string of function applications (typically as method applications), and Python evaluates these in a left-to-right manner.</p>
+<p><strong>header:</strong> if we think of the main content of a file or message as the <strong>body</strong>, the header is data about the main content. It might, for example, contain the name of the file or the recipient of the message.</p>
 <p><strong>immutable:</strong> something that you cannot change after it is created (i.e., given its initial value or state). See <strong>mutable</strong>.</p>
-<p><strong>infix operator</strong>: another way to command the interpreter to do something for us, but the command sits <em>between</em> its input parameters, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> where <code class="docutils literal notranslate"><span class="pre">+</span></code> is the command to perform addition.</p>
+<p><strong>infix operator:</strong> another way to command the interpreter to do something for us, but the command sits <em>between</em> its input parameters, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> where <code class="docutils literal notranslate"><span class="pre">+</span></code> is the command to perform addition.</p>
 <p><strong>internationalization:</strong> the process of making a piece of software work with multiple human languages. See <strong>localization</strong>.</p>
-<p><strong>library:</strong> another name for a collection of modules. Programming languages like Python are typically distributed with what is called a <em>standard library</em>, which you can think of as the modules and packages available by default wherever the programming language is installed. <a class="reference external" href="https://docs.python.org/3/library/">The Python standard library</a> includes built-in constants (e.g., <code class="docutils literal notranslate"><span class="pre">True</span></code>), data types (e.g., <code class="docutils literal notranslate"><span class="pre">str</span></code>), and functions (e.g., the file I/O facilities) that we have repeatedly used in our scripts.</p>
-<p><strong>literal object</strong>: what computer scientists call an explicit value that we write into our scripts (e.g., <code class="docutils literal notranslate"><span class="pre">'Cosmo</span> <span class="pre">the</span> <span class="pre">dog'</span></code> is a string object whose value is that string).</p>
+<p><strong>JSON:</strong> another computing standard meant for exchanging structured data. The acronym stands for JavaScript Object Notation, and the data is structured like key-value pairs.</p>
+<p><strong>library:</strong> another name for a collection of modules. Programming languages like Python are typically distributed with what is called a <em>standard library</em>, which you can think of as the modules and packages available by default wherever the programming language is installed.</p>
+<p><strong>literal object:</strong> what computer scientists call an explicit value that we write into our scripts (e.g., <code class="docutils literal notranslate"><span class="pre">'Cosmo</span> <span class="pre">the</span> <span class="pre">dog'</span></code> is a string object whose value is that string).</p>
 <p><strong>localization:</strong> specializing an internationalized piece of software for the user’s native language. See <strong>internationalization</strong>.</p>
-<p><strong>method</strong>: see <strong>function</strong> (until Act II).</p>
+<p><strong>method:</strong> see <strong>function</strong> (until Act II).</p>
 <p><strong>module:</strong> a Python script from which we want to pull some function or other definitions to use in our own script. See <strong>library</strong>.</p>
 <p><strong>mutable:</strong> something that can change its value or state. See <strong>immutable</strong>.</p>
-<p><strong>name</strong>: what the assignment operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>) allows us to do with the object that is the result of a command. We can also use this operator to give another name to an existing object.</p>
-<p><strong>namespace</strong>: a context that helps you keep track of what object a particular name resolves to. A name might have meaning in one namespace, but not another.</p>
-<p><strong>non-deterministic</strong>: a process where an input can produce a number of different outputs. See <strong>deterministic</strong>.</p>
-<p><strong>object</strong>: pretty much everything in Python is an object with which we can interact.</p>
-<p><strong>off-by-1 error</strong>: a very common error in programming, where you think you know where a sequence starts or ends, but you misjudge it by a single step.</p>
-<p><strong>optional parameters</strong>: some commands take lots of input parameters, but you need specify only a few of them and the Python interpreter assumes you meant the default for the other unspecified ones (e.g., <code class="docutils literal notranslate"><span class="pre">open</span></code> assumes you want to open a file for reading).</p>
-<p><strong>overloading</strong>: using the same operator (e.g., <code class="docutils literal notranslate"><span class="pre">+</span></code>) or method name (<code class="docutils literal notranslate"><span class="pre">find</span></code>) for distinctly different operations. The actual operation performed depends upon the type of operands you provide to the operator or method.</p>
+<p><strong>name:</strong> what the assignment operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>) allows us to do with the object that is the result of a command. We can also use this operator to give another name to an existing object.</p>
+<p><strong>namespace:</strong> a context that helps you keep track of what object a particular name resolves to. A name might have meaning in one namespace, but not another.</p>
+<p><strong>non-deterministic:</strong> a process where an input can produce a number of different outputs. See <strong>deterministic</strong>.</p>
+<p><strong>object:</strong> pretty much everything in Python is an object with which we can interact.</p>
+<p><strong>off-by-1 error:</strong> a very common error in programming, where you think you know where a sequence starts or ends, but you misjudge it by a single step.</p>
+<p><strong>optional parameters:</strong> some commands take lots of input parameters, but you need specify only a few of them and the Python interpreter assumes you meant the default for the other unspecified ones (e.g., <code class="docutils literal notranslate"><span class="pre">open</span></code> assumes you want to open a file for reading).</p>
+<p><strong>overloading:</strong> using the same operator (e.g., <code class="docutils literal notranslate"><span class="pre">+</span></code>) or method name (<code class="docutils literal notranslate"><span class="pre">find</span></code>) for distinctly different operations. The actual operation performed depends upon the type of operands you provide to the operator or method.</p>
 <p><strong>package:</strong> a whole set of helpful modules that a Python programmer wishes to distribute all together. There are many packages in Python. The <a class="reference external" href="https://pypi.org/">Python Package Index</a> is an online repository of software for the Python programming language.</p>
-<p><strong>procedure</strong>: another term for <strong>function</strong>.</p>
-<p><strong>result</strong>: every Python function returns a result.</p>
+<p><strong>procedure:</strong> another term for <strong>function</strong>.</p>
+<p><strong>process:</strong> the name we give to a running script, which includes not only its computer code, but also the data it generates.</p>
+<p><strong>protocol:</strong> a fancy way of saying that two processes cannot communicate unless they agree on how they’re going to do it (e.g., you speak first and then we’ll alternate) and what language they’re going to use (e.g., we’ll speak in slang-free English).</p>
+<p><strong>result:</strong> every Python function returns a result.</p>
 <p><strong>return-statement:</strong> the statement that directs a program’s control flow from the current function back to the function that called it (i.e., back to the current call site). A return-statement may include an expression, which becomes the value of the call-site expression. If no expression is provided, Python returns the special value <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p><strong>sequence</strong>: an ordered collection of items.</p>
+<p><strong>sequence:</strong> an ordered collection of items.</p>
 <p><strong>standard:</strong> a documented and widely agreed-upon method for doing something.</p>
-<p><strong>state</strong>: information that describes the current context. A machine keeps state to help it remember what it is doing.</p>
-<p><strong>statement</strong>: you can think of these as sentences in the language of Python. The Python interpreter will read and execute them one at at time.</p>
-<p><strong>stream</strong>: the abstraction we’ll use for an open file (e.g., an open text file is read as a stream of characters).</p>
-<p><strong>syntax</strong>: rules we need to follow when saying something in any programming language.</p>
-<p><strong>type</strong>: what defines the kinds of attributes you’ll find on a Python object.</p>
+<p><strong>state:</strong> information that describes the current context. A machine keeps state to help it remember what it is doing.</p>
+<p><strong>statement:</strong> you can think of these as sentences in the language of Python. The Python interpreter will read and execute them one at at time.</p>
+<p><strong>stream:</strong> the abstraction we’ll use for an open file (e.g., an open text file is read as a stream of characters).</p>
+<p><strong>structured data:</strong> data that are organized and fit into an easily described format. Contrast with <strong>unstructured data</strong>, which has no easily described format. A list of credit card numbers is an example of structured data; a dump of social media posts is an example of unstructured data.</p>
+<p><strong>syntax:</strong> rules we need to follow when saying something in any programming language.</p>
+<p><strong>transaction:</strong> the fundamental operation that takes place when two processes communicate with each other.</p>
+<p><strong>tuple:</strong> one of Python’s built-in data types. It is like a list in that the data in a tuple are ordered, but unlike lists, tuples are immutable. We can create a tuple using parentheses, and the assignment operator can disassemble a tuple.</p>
+<p><strong>type:</strong> what defines the kinds of attributes you’ll find on a Python object.</p>
 <p><strong>Unicode:</strong> a standard that attempts to map every character in every language into a set of numbers.</p>
 <p><strong>utf-8 and latin-1:</strong> two of many character encoding systems, which assign characters to specific bit patterns. See <strong>encoding</strong>.</p>
-<p><strong>variable</strong>: what we call names that refer to (i.e., name) different objects at different points in our script.</p>
-<p><strong>while-loop</strong>: a type of looping statement in Python that works particularly well for iterating until you hit some exit condition. Contrast with <strong>for-loop</strong>.</p>
-<p>[Version 20230706 — through Chapter 3]</p>
+<p><strong>variable:</strong> what we call names that refer to (i.e., name) different objects at different points in our script.</p>
+<p><strong>while-loop:</strong> a type of looping statement in Python that works particularly well for iterating until you hit some exit condition. Contrast with <strong>for-loop</strong>.</p>
+<p>[Version 20230706 — through Chapter 4]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -398,12 +409,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap03.html"
+       href="chap04.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 3: Replace Text With Emoji</p>
+        <p class="prev-next-title">Chapter 4: Query a Web Resource</p>
       </div>
     </a>
 </div></div>
