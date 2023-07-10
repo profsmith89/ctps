@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'glossary';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Chapter 4: Query a Web Resource" href="chap04.html" />
+    <link rel="prev" title="Active-Learning Exercises" href="ales.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -160,6 +160,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glossary</a></li>
 </ul>
 
@@ -318,18 +320,23 @@ document.write(`
 <p><strong>aliases:</strong> what we call two names that refer to the same object.</p>
 <p><strong>API:</strong> an application programming interface is the definitions (i.e., variables, constants, classes, and functions) in a module, package, or library that they make available for programmers to use.</p>
 <p><strong>attributes:</strong> Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.</p>
+<p><strong>background:</strong> when you launch a program through the shell, it can be run in <em>foreground</em> or <em>background</em>. When run in the foreground, the program must terminate before the shell prompt reappears. When run in background, the shell prompt reappears as soon as the program launches. The program’s output and shell’s output will then be interleaved as each executes concurrently. Having the capacity to run a program in background allows us to launch a server in background and then use the shell to run the client.</p>
+<p><strong>binary data:</strong> normally we think of data as representing something, like a string or an integer, but binary data are data that we think of only as what they’re made of: <strong>bits</strong>.</p>
 <p><strong>bind:</strong> the term used when pairing an actual parameter with its formal parameter during a function call.</p>
 <p><strong>blocking</strong> and <strong>non-blocking calls:</strong> in a blocking call, your script doesn’t continue its execution until the work in the call is complete. This is the type of function call we have learned to build. A non-blocking function call is our introduction to concurrency in computation. The call doesn’t finish its work before returning to the caller. It causes two processes to run concurrently!</p>
 <p><strong>class:</strong> see <strong>type</strong> (until Act II).</p>
 <p><strong>command:</strong> common way to direct the Python interpreter to do something, often of the form <code class="docutils literal notranslate"><span class="pre">command(input</span> <span class="pre">parameters)</span></code>.</p>
 <p><strong>comments:</strong> text following a <code class="docutils literal notranslate"><span class="pre">#</span></code> in Python. We use them to capture our pseudocode, and then after we have written some Python statements, we use them to explain what blocks of our code do.</p>
+<p><strong>connection:</strong> the abstraction that allows two software entities to communication. To move data through the connection, it might involve moving data around in a computer’s memory as well as sending data across a communication link like wifi.</p>
 <p><strong>design pattern:</strong> an approach to solving some programming problem that you’ll see in many pieces of code.</p>
-<p><strong>deterministic:</strong> a process in which an input always produces the same output. See also <strong>non-deterministic</strong>.</p>
+<p><strong>deterministic:</strong> a process in which an input always produces the same output. See also <strong>non-deterministic</strong> and <strong>stochastic program</strong>.</p>
 <p><strong>dictionary:</strong> a data structure that maintains a mapping from keys to values. These data structures are also called associative arrays as they associate a value with a key. As a real-world example, think about the contact list on your cell phone, which associates your friend’s name with their cell phone number.</p>
 <p><strong>docstrings:</strong> strings that we add immediately after a function definition that provide more information about the purpose, inputs, outputs, and assumptions of the function.</p>
 <p><strong>encoding (Chapter 2):</strong> taking a countable number of something and associating a number with each something, typically a dense manner (e.g., if we had 8 things, we would number them 0 to 7).</p>
 <p><strong>encoding (Chapter 3):</strong> taking an abstract concept or complex phenomenon and giving it a specific representation. For example, we might take the concept of the letter <code class="docutils literal notranslate"><span class="pre">'b'</span></code> and write it as a black, 12-point, Courier letter <code class="docutils literal notranslate"><span class="pre">'b'</span></code> or represent its sound in English with the word “bee.” Or as another example, the concept of “long” as a Spanish word (i.e., “largo”). Compare this definition of encoding with the previous one (from Chapter 2). Think about how they are actually the same!</p>
 <p><strong>error messages:</strong> feedback we get from the Python interpreter when we asked it to do something it didn’t understand.</p>
+<p><strong>exception handling</strong> or <strong>catching an exception:</strong> an exception occurs when our script tries to do something that isn’t legal Python. Exceptions terminate our scripts unless we write code in our scripts to catch them while our script is running. This is the purpose of the Python try-except-statement. A try-block wraps the code in which an exception might occur, and the except-block specifies which exceptions we want to handle and contains the code that handles those caught exceptions. If no exception occurs in the try-block, the except-block isn’t executed. Catching Python exceptions allows us to avoid writing code that checks for error conditions that the Python interpreter already contains code to check!</p>
+<p><strong>fail gracefully:</strong> including error-checking code and code that catches runtime exceptions creates scripts that fail gracefully. By this, for instance, we mean that poorly structured inputs to our script don’t cause the script to terminate in some hard-to-understand way and that the script doesn’t abruptly terminate because a user mistakenly mistypes some input.</p>
 <p><strong>finite state machine:</strong> a mathematical model for organizing a system that moves through a series of tasks. In these models, there is a finite number of tasks to perform.</p>
 <p><strong>for-loop:</strong> a type of looping statement in Python that works particularly well for iterating over a sequence. Contrast with <strong>while-loop</strong>.</p>
 <p><strong>formal parameters:</strong> the names we give to the input values to a function. These are available in the function body. See <strong>actual parameters</strong>.</p>
@@ -340,15 +347,19 @@ document.write(`
 <p><strong>immutable:</strong> something that you cannot change after it is created (i.e., given its initial value or state). See <strong>mutable</strong>.</p>
 <p><strong>infix operator:</strong> another way to command the interpreter to do something for us, but the command sits <em>between</em> its input parameters, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> where <code class="docutils literal notranslate"><span class="pre">+</span></code> is the command to perform addition.</p>
 <p><strong>internationalization:</strong> the process of making a piece of software work with multiple human languages. See <strong>localization</strong>.</p>
+<p><strong>IP address:</strong> an identifier comprised of four numbers between 0-255 separated by periods. The identifier is part of the IP protocol, and it both identifies a computer connected to the Internet and helps messages get routed to that computer. See <strong>TCP/IP</strong>.</p>
 <p><strong>JSON:</strong> another computing standard meant for exchanging structured data. The acronym stands for JavaScript Object Notation, and the data is structured like key-value pairs.</p>
 <p><strong>library:</strong> another name for a collection of modules. Programming languages like Python are typically distributed with what is called a <em>standard library</em>, which you can think of as the modules and packages available by default wherever the programming language is installed.</p>
 <p><strong>literal object:</strong> what computer scientists call an explicit value that we write into our scripts (e.g., <code class="docutils literal notranslate"><span class="pre">'Cosmo</span> <span class="pre">the</span> <span class="pre">dog'</span></code> is a string object whose value is that string).</p>
+<p><strong>localhost:</strong> the generic name given to the machine on which a program runs.</p>
 <p><strong>localization:</strong> specializing an internationalized piece of software for the user’s native language. See <strong>internationalization</strong>.</p>
+<p><strong>loopback address:</strong> the <strong>IP address</strong> 127.0.0.1 that means the <strong>localhost</strong>.</p>
 <p><strong>method:</strong> see <strong>function</strong> (until Act II).</p>
 <p><strong>module:</strong> a Python script from which we want to pull some function or other definitions to use in our own script. See <strong>library</strong>.</p>
 <p><strong>mutable:</strong> something that can change its value or state. See <strong>immutable</strong>.</p>
 <p><strong>name:</strong> what the assignment operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>) allows us to do with the object that is the result of a command. We can also use this operator to give another name to an existing object.</p>
 <p><strong>namespace:</strong> a context that helps you keep track of what object a particular name resolves to. A name might have meaning in one namespace, but not another.</p>
+<p><strong>network buffer:</strong> pieces of computer memory temporarily used as a holding spot for network data as these data are moved from one network endpoint to another.</p>
 <p><strong>non-deterministic:</strong> a process where an input can produce a number of different outputs. See <strong>deterministic</strong>.</p>
 <p><strong>object:</strong> pretty much everything in Python is an object with which we can interact.</p>
 <p><strong>off-by-1 error:</strong> a very common error in programming, where you think you know where a sequence starts or ends, but you misjudge it by a single step.</p>
@@ -358,23 +369,31 @@ document.write(`
 <p><strong>procedure:</strong> another term for <strong>function</strong>.</p>
 <p><strong>process:</strong> the name we give to a running script, which includes not only its computer code, but also the data it generates.</p>
 <p><strong>protocol:</strong> a fancy way of saying that two processes cannot communicate unless they agree on how they’re going to do it (e.g., you speak first and then we’ll alternate) and what language they’re going to use (e.g., we’ll speak in slang-free English).</p>
+<p><strong>pseudorandom number:</strong> computers use algorithms to produce the “random” numbers. To a human, pseudorandom numbers look random because the next number at any point in the sequence is hard for us to guess, unless you know the algorithm being used and use it to compute the next number. Computer games are fun to play because they use something “random” (e.g., the current time) to <em>seed</em> the pseudorandom number generator. The seed is used to drop you into the pseudorandom sequence at some hard-to-guess point. Of course, if you provide a pseudorandom number generator with the same seed each time, you’ll get the same “random” sequence out.</p>
 <p><strong>result:</strong> every Python function returns a result.</p>
 <p><strong>return-statement:</strong> the statement that directs a program’s control flow from the current function back to the function that called it (i.e., back to the current call site). A return-statement may include an expression, which becomes the value of the call-site expression. If no expression is provided, Python returns the special value <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p><strong>sequence:</strong> an ordered collection of items.</p>
+<p><strong>sequence diagram:</strong> a stylized diagram that helps us imagine the sequences of messages between the client and server necessary for the task before us.</p>
+<p><strong>shim:</strong> a term used for a library that modifies the API of another library for the purposes of simplifying that interface, extending that interface, or translating between APIs.</p>
+<p><strong>socket:</strong> a software representation of a communication endpoint. We bind sockets to a software port number.</p>
 <p><strong>standard:</strong> a documented and widely agreed-upon method for doing something.</p>
 <p><strong>state:</strong> information that describes the current context. A machine keeps state to help it remember what it is doing.</p>
 <p><strong>statement:</strong> you can think of these as sentences in the language of Python. The Python interpreter will read and execute them one at at time.</p>
+<p><strong>stochastic program:</strong> a program that explicitly uses randomness in its execution. Games often employ randomness so that the gameplay varies from one execution to the next, but randomness is employed much more broadly in computer science (e.g., in the design of simulations). A non-stochastic program (i.e., a deterministic program) will produce the same output for a given input on each and every execution.</p>
 <p><strong>stream:</strong> the abstraction we’ll use for an open file (e.g., an open text file is read as a stream of characters).</p>
 <p><strong>structured data:</strong> data that are organized and fit into an easily described format. Contrast with <strong>unstructured data</strong>, which has no easily described format. A list of credit card numbers is an example of structured data; a dump of social media posts is an example of unstructured data.</p>
 <p><strong>syntax:</strong> rules we need to follow when saying something in any programming language.</p>
+<p><strong>TCP/IP:</strong> the protocol suite that underlies the Internet. The TCP acronym stands for Transmission Control Protocol and the IP acronym stands for Internet Protocol (IP).</p>
 <p><strong>transaction:</strong> the fundamental operation that takes place when two processes communicate with each other.</p>
 <p><strong>tuple:</strong> one of Python’s built-in data types. It is like a list in that the data in a tuple are ordered, but unlike lists, tuples are immutable. We can create a tuple using parentheses, and the assignment operator can disassemble a tuple.</p>
-<p><strong>type:</strong> what defines the kinds of attributes you’ll find on a Python object.</p>
+<p><strong>type (Chapter 1):</strong> what defines the kinds of attributes you’ll find on a Python object.</p>
+<p><strong>type information (Chapter 5):</strong> information that tells us (or the Python interpreter) how to interpret the “bag of bits” before us (or it). For example, the quotes around a string in a Python script are not a part of the string, but tell us and the Python interpreter how we should interpret the characters and words in the string (i.e., as a literal string value and not as a variable name or Python reserved word). The quotes are acting like type information.</p>
+<p><strong>type conversion:</strong> it is sometimes possible for us to convert a value stored as one type of object into a conceptually-similar, but different-in-form type of object. The string <code class="docutils literal notranslate"><span class="pre">'42'</span></code> and the integer <code class="docutils literal notranslate"><span class="pre">42</span></code> both represent the number forty-two, but these are different Python objects with different operations you can perform on them.</p>
 <p><strong>Unicode:</strong> a standard that attempts to map every character in every language into a set of numbers.</p>
 <p><strong>utf-8 and latin-1:</strong> two of many character encoding systems, which assign characters to specific bit patterns. See <strong>encoding</strong>.</p>
 <p><strong>variable:</strong> what we call names that refer to (i.e., name) different objects at different points in our script.</p>
 <p><strong>while-loop:</strong> a type of looping statement in Python that works particularly well for iterating until you hit some exit condition. Contrast with <strong>for-loop</strong>.</p>
-<p>[Version 20230706 — through Chapter 4]</p>
+<p>[Version 20230709 — through Chapter 5]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -409,12 +428,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap04.html"
+       href="ales.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 4: Query a Web Resource</p>
+        <p class="prev-next-title">Active-Learning Exercises</p>
       </div>
     </a>
 </div></div>
