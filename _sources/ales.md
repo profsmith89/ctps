@@ -47,7 +47,10 @@ Consider each statement in our previous script and ask whether you need it or no
 
 **Step 6.** When our scripts sees EOF returned from `readline`, it breaks out of the while-loop. Previously, there was nothing after this while-loop, and the script ended. Now, however, we want to test the value computed across the iterations of the while-loop and then print one of two phrases. This sounds like a job for an if-statement. But to this point, we have only used if-statements to *protect* a block of code. In this problem, we want the test in our if-statement to *select* one of two blocks of code. The syntax for this version of an if-statement looks like this:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 if the_test:
     # statements done on a True test outcome
 else:
@@ -62,7 +65,10 @@ Create yourself yet another Python project, and again copy in the entire script 
 
 **Step 1.** A piece of this work involves creating a separate directory for its input files. By putting all the input text files in a subdirectory called `txts`, we'll avoid mistakenly overwriting one of our scripts while performing file operations on the input texts. Look at the changes to the `open` parameter in the second line of the following script:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 my_book = input('What book would you like to read? ')
 my_open_book = open('txts/' + my_book)
 
@@ -81,7 +87,10 @@ Update the script in your editor pane so that it matches the code above. Make su
 
 **Step 2.** Now add a new statement to the end of your script, as illustrated in the following code:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 my_book = input('What book would you like to read? ')
 my_open_book = open('txts/' + my_book)
 
@@ -106,7 +115,10 @@ It's perfectly fine to do this at the end of your script, as I've done here, sin
 
 **Step 3.** What if I wanted to close the file earlier in the script? I could do that, but if I'm making as many changes to the script as we made last time, I might mistakenly move the `close` to some point before I'm actually done reading the file. For example, let's move the `close` statement into the loop and execute the script again.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 my_book = input('What book would you like to read? ')
 my_open_book = open('txts/' + my_book)
 
@@ -127,7 +139,10 @@ Notice that there's very little difference between the first and second pieces o
 
 To avoid such nightmares, Python provides us with a piece of syntactic sugar that lets us automatically include a `close` with each `open`. It accomplishes this by turning the `open` into a `with-as` [compound statement](https://docs.python.org/3/reference/compound_stmts.html).
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 my_book = input('What book would you like to read? ')
 
 with open('txts/' + my_book) as my_open_book:
@@ -167,7 +182,10 @@ The solutions to many problems employ sequence and string processing. We learned
 
 Exercises 1-5 use the following code (`chap02/count32.py`), which runs but doesn't count anything correctly.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 ### chap02/count32.py
 
 # Grab the text blurb to process
@@ -294,7 +312,10 @@ You may be tempted to dive right in and start writing some Python code. You migh
 
 To test your solution, force the variable blurb to each of the following string values by placing an assignment to blurb just before your new code block. These assignments use Python's ability to easily create multiline strings using triple quotes.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 blurb = '''This is a test. A test of what? A test
 with every type of sentence in it!'''
 
@@ -373,7 +394,10 @@ These examples ask you to label the text on either side of a double-quote charac
 
 As a bit of practice, consider what the string-find method looks like behind the scenes:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 def find(the_string, pattern):
     for i in range(len(the_string)):
         if the_string[i] == pattern:
@@ -384,7 +408,10 @@ def find(the_string, pattern):
 
 Let's try it out, i.e., run the next code block.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 a_string = 'Cosmo the dog'
 
 # a_string.find('m')
@@ -397,7 +424,10 @@ Yes, you can put an `else` on a for-loop. It means "do the else-block if you exh
 
 **Step 2.** Complete the last statement in the following code block so that it fails to find a `pattern` of your choosing in `a_string`.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 a_string = 'Cosmo the dog'
 
 # a_string.find(...)
@@ -406,7 +436,10 @@ find( )
 
 **Step 3.** Think about the connection between a for-loop and a while-loop. Can you create rewrite the `find` function we've been using so that it uses a while-loop instead of a for-loop?
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 def find_w(the_string, pattern):
     # Put your code here
 ```
@@ -417,7 +450,10 @@ def find_w(the_string, pattern):
 
 What is that `range` command? We discussed it as a function that produces an integer sequence whose length is its input parameter. Used in a for-loop, the loop can then assign each element of the generated sequence to its loop variable (e.g., variable `i` in the example below) and execute the loop body for each element.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 for i in range(10):
     print(i)
 ```
@@ -435,7 +471,10 @@ Python functions always return a value. Whether you explicitly use a return-stat
 
 Execute the following code block, which illustrates the ways we can end a function's execution.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 def my_f1():
     return None
 
@@ -479,7 +518,10 @@ Go ahead and use the slider to move around in the code and see what happens at d
 
 We've discussed two different types of objects that adhere to the Python sequence abstraction: strings and lists. The following code block defines one of each of these objects.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # Two sequences
 a_string = 'Cosmo the dog'
 a_list = ['Cosmo', 'CatInTheHat.txt', True, 10]
@@ -487,28 +529,40 @@ a_list = ['Cosmo', 'CatInTheHat.txt', True, 10]
 
 **Step 1.** What does this mean that both of these objects adhere to the same abstraction? Here are a few examples that might help you come up with an answer to this question:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # What is the length of a sequence?
 c1 = len(a_string)
 c2 = len(a_list)
 print(c1, c2)
 ```
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # Getting an element in a sequence
 e1 = a_string[3]
 e2 = a_list[2]
 print(e1, e2)
 ```
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # Slice out a piece of the sequence
 s1 = a_string[6:9]
 s2 = a_list[:2]
 print(s1, s2)
 ```
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # Test if an object is a member of the sequence
 print('m' in a_string)
 print(0 in a_list)
@@ -516,12 +570,18 @@ print(0 in a_list)
 
 **Step 2.** But strings are not lists and lists are not strings. In addition to sharing an abstraction, strings and lists have their own methods. We've used the string-find method, and we can see that it doesn't work on lists.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 i = a_string.find('m')
 print(i)
 ```
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 i = a_list.find(10)
 print(i)
 ```
@@ -532,7 +592,10 @@ What is the equivalent to string-find with a list? Search the online documentati
 
 Modules are a powerful way of building off code that others have written and published. However, it often isn't obvious what the `if __name__ == '__main__'` design pattern is doing for us. To better understand this pattern, consider these two silly scripts:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 ### chap03/module32.py
 print("module32.py: At start of script")
 
@@ -551,7 +614,10 @@ if __name__ == '__main__':
     main()
 ```
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 ### chap03/import.py
 print("import.py: At start of script")
 
@@ -616,7 +682,10 @@ Computer scientists talk *scope rules* when they explain how the interpreter kno
 
 When we started writing our scripts, we wrote statements without enclosing them in a function, as illustrated with this short script from Chapter 1:
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 # Open the book so we can read it
 my_open_book = open('CatInTheHat.txt')
 # Read the first line using that thing that you computed
@@ -628,7 +697,10 @@ Since the names `my_open_book` and `the_line` do not reside within a function, t
 
 With functions, we gained a new scope. Names like `i`, `j`, `old`, and `new` in Chapter 3's `my_replace` function are in Python's *local* scope, which is separate from Python's global scope.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 def my_replace(s, old, new):
     """Returns a string replacing all occurrences of old with new."""
     i = 0           # tracks where we are in the input string
@@ -652,7 +724,10 @@ Global variables, on the other hand, are names that are known anywhere in your m
 
 The following code block illustrates global and local names using an example without any import-statements.
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 ### chap03/scope.py
 capitalize = True   # a global variable setting a mode for the script
 
@@ -684,7 +759,10 @@ Finally, the name `new_s` inside `my_scramble` is a local variable. If you try t
 
 Resist the urge to do the second thing except in one limited case, which I'll describe in a moment. But first, let's see what happens to our script if we remove the formal parameters---heck, the global variable is already named what the two function bodies reference, right?
 
-```python
+```{code-block} python
+---
+lineno-start: 1
+---
 ### chap03/scope_broken.py
 capitalize = True   # a global variable setting a mode for the script
 

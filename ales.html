@@ -380,10 +380,10 @@ document.write(`
 <p><strong>Step 4.</strong> What happens to this variable inside the while-loop? Can you write Python code that implements your answer to this question?</p>
 <p><strong>Step 5.</strong> Does this variable need to be initialized before the while-loop? If yes, what value should you use to initialize it? HINT: It does, and the value you use to initialize it depends on the where in the while-loop you update it. Think about the proper initialization value for an update at each possible position in the while-loop body.</p>
 <p><strong>Step 6.</strong> When our scripts sees EOF returned from <code class="docutils literal notranslate"><span class="pre">readline</span></code>, it breaks out of the while-loop. Previously, there was nothing after this while-loop, and the script ended. Now, however, we want to test the value computed across the iterations of the while-loop and then print one of two phrases. This sounds like a job for an if-statement. But to this point, we have only used if-statements to <em>protect</em> a block of code. In this problem, we want the test in our if-statement to <em>select</em> one of two blocks of code. The syntax for this version of an if-statement looks like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">the_test</span><span class="p">:</span>
-    <span class="c1"># statements done on a True test outcome</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="c1"># statements done on a False test outcome</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">if</span> <span class="n">the_test</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="c1"># statements done on a True test outcome</span>
+<span class="linenos">3</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="c1"># statements done on a False test outcome</span>
 </pre></div>
 </div>
 <p><strong>Step 7.</strong> Write and test the complete script!</p>
@@ -392,33 +392,33 @@ document.write(`
 <h2>ALE 1.3: Close the screen door!<a class="headerlink" href="#ale-1-3-close-the-screen-door" title="Permalink to this heading">#</a></h2>
 <p>Create yourself yet another Python project, and again copy in the entire script from the end of Chapter 1. For this exercise, we’re not going to change its functionality, but simply make it more <em>robust</em>.</p>
 <p><strong>Step 1.</strong> A piece of this work involves creating a separate directory for its input files. By putting all the input text files in a subdirectory called <code class="docutils literal notranslate"><span class="pre">txts</span></code>, we’ll avoid mistakenly overwriting one of our scripts while performing file operations on the input texts. Look at the changes to the <code class="docutils literal notranslate"><span class="pre">open</span></code> parameter in the second line of the following script:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
-<span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
-
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-        <span class="c1"># We&#39;ve read the entire book!</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
-        <span class="k">break</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="k">break</span>
 </pre></div>
 </div>
 <p>We will learn more about this syntax in Chapter 2, but briefly, it treats the infix <code class="docutils literal notranslate"><span class="pre">+</span></code> operator as string concatenation when the <code class="docutils literal notranslate"><span class="pre">+</span></code> is placed between two string objects.</p>
 <p>Update the script in your editor pane so that it matches the code above. Make sure you create the <code class="docutils literal notranslate"><span class="pre">txts</span></code> subdirectory in your IDE file browser and move your text files into that new subdirectory before you try running this new script.</p>
 <p><strong>Step 2.</strong> Now add a new statement to the end of your script, as illustrated in the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
-<span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
-
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-        <span class="c1"># We&#39;ve read the entire book!</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
-        <span class="k">break</span>
-
-<span class="n">my_open_book</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="k">break</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">my_open_book</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Adding this <code class="docutils literal notranslate"><span class="pre">close</span></code> statement doesn’t add a new feature to our script.  Run this script to verify this claim. The purpose of this <code class="docutils literal notranslate"><span class="pre">close</span></code> statement is to tell the interpreter that we’re done with the open file and it can close it.</p>
@@ -426,33 +426,33 @@ document.write(`
 <p>When I was a small boy, my parents would constantly remind me to close the screen door. Why did they do that? Yes, they wanted me to keep the bugs out of the house. We won’t go, at this time, into the details of the bugs/errors that can occur if you don’t close a file when you’re done with it, but suffice it to say if you ever open a file, you should close it.</p>
 <p>It’s perfectly fine to do this at the end of your script, as I’ve done here, since the interpreter stops executing your script when it reaches the script’s end. Putting this <code class="docutils literal notranslate"><span class="pre">close</span></code> command right before the end of the script ensures that closing the file is one of the last things the interpreter does for us before stopping execution.</p>
 <p><strong>Step 3.</strong> What if I wanted to close the file earlier in the script? I could do that, but if I’m making as many changes to the script as we made last time, I might mistakenly move the <code class="docutils literal notranslate"><span class="pre">close</span></code> to some point before I’m actually done reading the file. For example, let’s move the <code class="docutils literal notranslate"><span class="pre">close</span></code> statement into the loop and execute the script again.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
-<span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
-
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-        <span class="c1"># We&#39;ve read the entire book!</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
-        <span class="k">break</span>
-
-    <span class="n">my_open_book</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 5</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="k">break</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="n">my_open_book</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Yuk. We got a <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">I/O</span> <span class="pre">operation</span> <span class="pre">on</span> <span class="pre">closed</span> <span class="pre">file.</span></code></p>
 <p>Notice that there’s very little difference between the first and second pieces of code. Basically, four little spaces. This is a nightmare waiting to happen.</p>
 <p>To avoid such nightmares, Python provides us with a piece of syntactic sugar that lets us automatically include a <code class="docutils literal notranslate"><span class="pre">close</span></code> with each <code class="docutils literal notranslate"><span class="pre">open</span></code>. It accomplishes this by turning the <code class="docutils literal notranslate"><span class="pre">open</span></code> into a <code class="docutils literal notranslate"><span class="pre">with-as</span></code> <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html">compound statement</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="c1"># We&#39;ve read the entire book!</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
-            <span class="k">break</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
+<span class="linenos"> 4</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 6</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="c1"># We&#39;ve read the entire book!</span>
+<span class="linenos"> 9</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
+<span class="linenos">10</span>            <span class="k">break</span>
 </pre></div>
 </div>
 <p>The block of code nested inside the <code class="docutils literal notranslate"><span class="pre">with-as</span></code> statement does the <code class="docutils literal notranslate"><span class="pre">open</span></code> and assigns our virtual finger to the name <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> just as before, but it also recognizes when control leaves this nested code block and automatically calls <code class="docutils literal notranslate"><span class="pre">close</span></code> on <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> for us. I wish I had something like this when I was a kid.</p>
@@ -476,38 +476,38 @@ document.write(`
 <h2>ALE 2.1: Counting stuff<a class="headerlink" href="#ale-2-1-counting-stuff" title="Permalink to this heading">#</a></h2>
 <p>The solutions to many problems employ sequence and string processing. We learned that Python strings are a type of Python sequence (i.e., an ordered collection of items, and for strings, the items are characters). In the first several exercises, you’ll gain experience with the methods on sequences and on strings, which will also prepare you for the second programming problem set.</p>
 <p>Exercises 1-5 use the following code (<code class="docutils literal notranslate"><span class="pre">chap02/count32.py</span></code>), which runs but doesn’t count anything correctly.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### chap02/count32.py</span>
-
-<span class="c1"># Grab the text blurb to process</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="c1">#print(&quot;sys.argv =&quot;, sys.argv)</span>
-<span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">blurb</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Text: &#39;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="n">input_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_file</span><span class="p">:</span>
-        <span class="n">blurb</span> <span class="o">=</span> <span class="n">my_open_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Usage: python3 count32.py [blurb.txt]&quot;</span><span class="p">)</span>
-
-<span class="c1"># Count the number of non-blank lines in the blurb</span>
-<span class="c1"># using the Python string method `split`.</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># REPLACE ME with a for-loop</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s2">&quot;line(s)&quot;</span><span class="p">)</span>
-
-<span class="c1"># Count the number of alphabet characters in the blurb</span>
-<span class="c1"># using the Python string method `isalpha`.</span>
-<span class="n">letters</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># REPLACE ME with a for-loop</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="s2">&quot;letter(s)&quot;</span><span class="p">)</span>
-
-<span class="c1"># Count the number of words in the blurb, where a word</span>
-<span class="c1"># is any sequence of non-whitespace characters surrounded</span>
-<span class="c1"># by any amount of whitespace. Please use the Python string</span>
-<span class="c1"># method `split` and one function on sequences.</span>
-<span class="n">words</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># REPLACE THE 0 with an expression</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="s2">&quot;word(s)&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/count32.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># Grab the text blurb to process</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 5</span><span class="c1">#print(&quot;sys.argv =&quot;, sys.argv)</span>
+<span class="linenos"> 6</span><span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos"> 7</span>    <span class="n">blurb</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Text: &#39;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="n">input_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">10</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_file</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">blurb</span> <span class="o">=</span> <span class="n">my_open_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">12</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">13</span>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Usage: python3 count32.py [blurb.txt]&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Count the number of non-blank lines in the blurb</span>
+<span class="linenos">16</span><span class="c1"># using the Python string method `split`.</span>
+<span class="linenos">17</span><span class="n">lines</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">18</span><span class="c1"># REPLACE ME with a for-loop</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s2">&quot;line(s)&quot;</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Count the number of alphabet characters in the blurb</span>
+<span class="linenos">22</span><span class="c1"># using the Python string method `isalpha`.</span>
+<span class="linenos">23</span><span class="n">letters</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">24</span><span class="c1"># REPLACE ME with a for-loop</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="s2">&quot;letter(s)&quot;</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="c1"># Count the number of words in the blurb, where a word</span>
+<span class="linenos">28</span><span class="c1"># is any sequence of non-whitespace characters surrounded</span>
+<span class="linenos">29</span><span class="c1"># by any amount of whitespace. Please use the Python string</span>
+<span class="linenos">30</span><span class="c1"># method `split` and one function on sequences.</span>
+<span class="linenos">31</span><span class="n">words</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># REPLACE THE 0 with an expression</span>
+<span class="linenos">32</span><span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="s2">&quot;word(s)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Notice the four blocks of code in <code class="docutils literal notranslate"><span class="pre">count32.py</span></code> separated by blank lines. The first block is complete and working code; you deal with the commented-out print statement in a moment.</p>
@@ -569,22 +569,22 @@ document.write(`
 <p><strong>Step 1.</strong> Take a moment and think about the problem as stated. Think in pseudocode about what you need to do. <strong>HINT:</strong> Why does the string <code class="docutils literal notranslate"><span class="pre">'Mr.</span> <span class="pre">and</span> <span class="pre">Mrs.</span> <span class="pre">Smith</span> <span class="pre">left</span> <span class="pre">for</span> <span class="pre">vacation.'</span></code> contain three sentences? Is there <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">a method common to all sequences</a> that might help you simply solve this problem?</p>
 <p><strong>Step 2.</strong> Add a new code block to the end of <code class="docutils literal notranslate"><span class="pre">count32.py</span></code>, which counts the number of sentences in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>.</p>
 <p>To test your solution, force the variable blurb to each of the following string values by placing an assignment to blurb just before your new code block. These assignments use Python’s ability to easily create multiline strings using triple quotes.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>blurb = &#39;&#39;&#39;This is a test. A test of what? A test
-with every type of sentence in it!&#39;&#39;&#39;
-
-# blurb = &#39;Mr. and Mrs. Smith left for vacation.&#39;
-
-# blurb = &#39;&#39;&#39;Phronsie still stood just where Polly left her.
-Two hundred candles! oh! what could it mean! She gazed up
-to the old beams overhead, and around the dingy walls, and
-to the old black stove, with the fire nearly out, and then
-over everything the kitchen contained, trying to think how
-it would seem.&#39;&#39;&#39;
-
-print(&quot;Blurb:&quot;, blurb)
-
-sentences = 0 # REPLACE THE 0 with an expression
-print(sentence, &quot;sentence(s)&quot;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>blurb = &#39;&#39;&#39;This is a test. A test of what? A test
+<span class="linenos"> 2</span>with every type of sentence in it!&#39;&#39;&#39;
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span># blurb = &#39;Mr. and Mrs. Smith left for vacation.&#39;
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span># blurb = &#39;&#39;&#39;Phronsie still stood just where Polly left her.
+<span class="linenos"> 7</span>Two hundred candles! oh! what could it mean! She gazed up
+<span class="linenos"> 8</span>to the old beams overhead, and around the dingy walls, and
+<span class="linenos"> 9</span>to the old black stove, with the fire nearly out, and then
+<span class="linenos">10</span>over everything the kitchen contained, trying to think how
+<span class="linenos">11</span>it would seem.&#39;&#39;&#39;
+<span class="linenos">12</span>
+<span class="linenos">13</span>print(&quot;Blurb:&quot;, blurb)
+<span class="linenos">14</span>
+<span class="linenos">15</span>sentences = 0 # REPLACE THE 0 with an expression
+<span class="linenos">16</span>print(sentence, &quot;sentence(s)&quot;)
 </pre></div>
 </div>
 </section>
@@ -639,33 +639,33 @@ print(sentence, &quot;sentence(s)&quot;)
 <li><p>Use for-loops when you want to iterate over a sequence.</p></li>
 </ul>
 <p>As a bit of practice, consider what the string-find method looks like behind the scenes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">the_string</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_string</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">the_string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">the_string</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_string</span><span class="p">)):</span>
+<span class="linenos">3</span>        <span class="k">if</span> <span class="n">the_string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">:</span>
+<span class="linenos">4</span>            <span class="k">return</span> <span class="n">i</span>
+<span class="linenos">5</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p>Let’s try it out, i.e., run the next code block.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
-
-<span class="c1"># a_string.find(&#39;m&#39;)</span>
-<span class="n">find</span><span class="p">(</span><span class="n">a_string</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># a_string.find(&#39;m&#39;)</span>
+<span class="linenos">4</span><span class="n">find</span><span class="p">(</span><span class="n">a_string</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Step 1.</strong> Look carefully at the function body of <code class="docutils literal notranslate"><span class="pre">find</span></code>. By reading the code, do you understand the purpose of the for-loop? Can you describe the conditions under which it returns?</p>
 <p>Yes, you can put an <code class="docutils literal notranslate"><span class="pre">else</span></code> on a for-loop. It means “do the else-block if you exhausted the sequence without hitting an exit condition.”</p>
 <p><strong>Step 2.</strong> Complete the last statement in the following code block so that it fails to find a <code class="docutils literal notranslate"><span class="pre">pattern</span></code> of your choosing in <code class="docutils literal notranslate"><span class="pre">a_string</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
-
-<span class="c1"># a_string.find(...)</span>
-<span class="n">find</span><span class="p">(</span> <span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># a_string.find(...)</span>
+<span class="linenos">4</span><span class="n">find</span><span class="p">(</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Step 3.</strong> Think about the connection between a for-loop and a while-loop. Can you create rewrite the <code class="docutils literal notranslate"><span class="pre">find</span></code> function we’ve been using so that it uses a while-loop instead of a for-loop?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_w</span><span class="p">(</span><span class="n">the_string</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-    <span class="c1"># Put your code here</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">find_w</span><span class="p">(</span><span class="n">the_string</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="c1"># Put your code here</span>
 </pre></div>
 </div>
 <p><strong>Step 4.</strong> Create a code block that tests your <code class="docutils literal notranslate"><span class="pre">find_w</span></code> function.</p>
@@ -673,8 +673,8 @@ print(sentence, &quot;sentence(s)&quot;)
 <section id="ale-3-2-getting-comfortable-with-range">
 <h2>ALE 3.2: Getting comfortable with `range`<a class="headerlink" href="#ale-3-2-getting-comfortable-with-range" title="Permalink to this heading">#</a></h2>
 <p>What is that <code class="docutils literal notranslate"><span class="pre">range</span></code> command? We discussed it as a function that produces an integer sequence whose length is its input parameter. Used in a for-loop, the loop can then assign each element of the generated sequence to its loop variable (e.g., variable <code class="docutils literal notranslate"><span class="pre">i</span></code> in the example below) and execute the loop body for each element.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Questions:</p>
@@ -688,21 +688,21 @@ print(sentence, &quot;sentence(s)&quot;)
 <h2>ALE 3.3: Return with something<a class="headerlink" href="#ale-3-3-return-with-something" title="Permalink to this heading">#</a></h2>
 <p>Python functions always return a value. Whether you explicitly use a return-statement without an expression or end your function without a return statement, the Python interpreter will return the special object <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Execute the following code block, which illustrates the ways we can end a function’s execution.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_f1</span><span class="p">():</span>
-    <span class="k">return</span> <span class="kc">None</span>
-
-<span class="k">def</span> <span class="nf">my_f2</span><span class="p">():</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="k">def</span> <span class="nf">my_f3</span><span class="p">():</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> 
-
-<span class="k">def</span> <span class="nf">my_f4</span><span class="p">():</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">my_f1</span><span class="p">(),</span> <span class="n">my_f2</span><span class="p">(),</span> <span class="n">my_f3</span><span class="p">(),</span> <span class="n">my_f4</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">my_f1</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">my_f2</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">my_f3</span><span class="p">():</span>
+<span class="linenos"> 8</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>    <span class="k">return</span> 
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span> <span class="nf">my_f4</span><span class="p">():</span>
+<span class="linenos">12</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">my_f1</span><span class="p">(),</span> <span class="n">my_f2</span><span class="p">(),</span> <span class="n">my_f3</span><span class="p">(),</span> <span class="n">my_f4</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Make sure you can explain why each function returns the value that was printed.</p>
@@ -722,42 +722,42 @@ print(sentence, &quot;sentence(s)&quot;)
 <section id="ale-3-5-two-different-sequences">
 <h2>ALE 3.5: Two different sequences<a class="headerlink" href="#ale-3-5-two-different-sequences" title="Permalink to this heading">#</a></h2>
 <p>We’ve discussed two different types of objects that adhere to the Python sequence abstraction: strings and lists. The following code block defines one of each of these objects.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Two sequences</span>
-<span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
-<span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cosmo&#39;</span><span class="p">,</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Two sequences</span>
+<span class="linenos">2</span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
+<span class="linenos">3</span><span class="n">a_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cosmo&#39;</span><span class="p">,</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><strong>Step 1.</strong> What does this mean that both of these objects adhere to the same abstraction? Here are a few examples that might help you come up with an answer to this question:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># What is the length of a sequence?</span>
-<span class="n">c1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_string</span><span class="p">)</span>
-<span class="n">c2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># What is the length of a sequence?</span>
+<span class="linenos">2</span><span class="n">c1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_string</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">c2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting an element in a sequence</span>
-<span class="n">e1</span> <span class="o">=</span> <span class="n">a_string</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">e2</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Getting an element in a sequence</span>
+<span class="linenos">2</span><span class="n">e1</span> <span class="o">=</span> <span class="n">a_string</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">3</span><span class="n">e2</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Slice out a piece of the sequence</span>
-<span class="n">s1</span> <span class="o">=</span> <span class="n">a_string</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Slice out a piece of the sequence</span>
+<span class="linenos">2</span><span class="n">s1</span> <span class="o">=</span> <span class="n">a_string</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="linenos">3</span><span class="n">s2</span> <span class="o">=</span> <span class="n">a_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test if an object is a member of the sequence</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;m&#39;</span> <span class="ow">in</span> <span class="n">a_string</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="mi">0</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Test if an object is a member of the sequence</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;m&#39;</span> <span class="ow">in</span> <span class="n">a_string</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="mi">0</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Step 2.</strong> But strings are not lists and lists are not strings. In addition to sharing an abstraction, strings and lists have their own methods. We’ve used the string-find method, and we can see that it doesn’t work on lists.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">a_string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span> <span class="o">=</span> <span class="n">a_string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">a_list</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span> <span class="o">=</span> <span class="n">a_list</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>What is the equivalent to string-find with a list? Search the online documentation for this answer and try it out on <code class="docutils literal notranslate"><span class="pre">a_list</span></code> (i.e., fix the broken statement containing <code class="docutils literal notranslate"><span class="pre">a_list.find(10)</span></code>.</p>
@@ -765,38 +765,38 @@ print(sentence, &quot;sentence(s)&quot;)
 <section id="ale-3-6-what-happens-when">
 <h2>ALE 3.6: What happens when?<a class="headerlink" href="#ale-3-6-what-happens-when" title="Permalink to this heading">#</a></h2>
 <p>Modules are a powerful way of building off code that others have written and published. However, it often isn’t obvious what the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> design pattern is doing for us. To better understand this pattern, consider these two silly scripts:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### chap03/module32.py</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: At start of script&quot;</span><span class="p">)</span>
-
-<span class="c1"># Initialize a variable in this module</span>
-<span class="n">i</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: Initialized i&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">still42</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">42</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: At start of main&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: Before check of __name__ =&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/module32.py</span>
+<span class="linenos"> 2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: At start of script&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Initialize a variable in this module</span>
+<span class="linenos"> 5</span><span class="n">i</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="linenos"> 6</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: Initialized i&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">still42</span><span class="p">():</span>
+<span class="linenos"> 9</span>    <span class="k">return</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">42</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: At start of main&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: Before check of __name__ =&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">15</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### chap03/import.py</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: At start of script&quot;</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">module32</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: At start of main&quot;</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;i = </span><span class="si">{</span><span class="n">module32</span><span class="o">.</span><span class="n">i</span><span class="si">}</span><span class="s2">; &quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;still42? </span><span class="si">{</span><span class="n">module32</span><span class="o">.</span><span class="n">still42</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: Before check of __name__ =&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/import.py</span>
+<span class="linenos"> 2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: At start of script&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">module32</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: At start of main&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;i = </span><span class="si">{</span><span class="n">module32</span><span class="o">.</span><span class="n">i</span><span class="si">}</span><span class="s2">; &quot;</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;still42? </span><span class="si">{</span><span class="n">module32</span><span class="o">.</span><span class="n">still42</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import.py: Before check of __name__ =&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+<span class="linenos">13</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>Step 1.</strong> Put these two scripts into a directory.</p>
@@ -827,51 +827,51 @@ print(sentence, &quot;sentence(s)&quot;)
 <h2>ALE 3.8: Scope and the Danger of Globals<a class="headerlink" href="#ale-3-8-scope-and-the-danger-of-globals" title="Permalink to this heading">#</a></h2>
 <p>Computer scientists talk <em>scope rules</em> when they explain how the interpreter knows which version of a name (i.e., a variable or function) you mean at some point in your script. Scope is a concept closely related to namespaces, which we’ve been discussing since the first chapter. I’ve put off a discussion of scope because it gets … complicated. However, now that you know how to build your own functions, it is time to say a few words about scope.</p>
 <p>When we started writing our scripts, we wrote statements without enclosing them in a function, as illustrated with this short script from Chapter 1:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open the book so we can read it</span>
-<span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
-<span class="c1"># Read the first line using that thing that you computed</span>
-<span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
+<span class="linenos">2</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="c1"># Read the first line using that thing that you computed</span>
+<span class="linenos">4</span><span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Since the names <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> and <code class="docutils literal notranslate"><span class="pre">the_line</span></code> do not reside within a function, they are names in Python’s <em>global</em> scope. This was a fine thing to do when our scripts were very short. But as they grew longer, we’ve learned to chunk our work into sensible pieces and encapsulate those pieces in reusable functions.</p>
 <p>With functions, we gained a new scope. Names like <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code>, <code class="docutils literal notranslate"><span class="pre">old</span></code>, and <code class="docutils literal notranslate"><span class="pre">new</span></code> in Chapter 3’s <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function are in Python’s <em>local</em> scope, which is separate from Python’s global scope.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
-    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
-
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
-            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">return</span> <span class="n">new_s</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 4</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 5</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">10</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
 </pre></div>
 </div>
 <p>What the difference? A local variable like <code class="docutils literal notranslate"><span class="pre">j</span></code> is available only within the enclosing function. It is not known outside of the body of this function. This is a Good Thing because any names we use within this function won’t conflict with any names used within another function. Think about how hard it would be to write your script if you had to know all the names used by the authors of every module you imported!</p>
 <p>Global variables, on the other hand, are names that are known anywhere in your module (i.e., anywhere in the file that holds your script). This includes inside any functions you define in that module. Global names within a module can be made global to any other module by importing them.</p>
 <p>The following code block illustrates global and local names using an example without any import-statements.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### chap03/scope.py</span>
-<span class="n">capitalize</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># a global variable setting a mode for the script</span>
-
-<span class="k">def</span> <span class="nf">my_print</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">capitalize</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">my_scramble</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">new_s</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;just some fun&#39;</span>
-<span class="n">my_print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_scramble</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-<span class="c1">#print(new_s)  # produces a NameError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/scope.py</span>
+<span class="linenos"> 2</span><span class="n">capitalize</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># a global variable setting a mode for the script</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">my_print</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="k">if</span> <span class="n">capitalize</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">my_scramble</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;just some fun&#39;</span>
+<span class="linenos">14</span><span class="n">my_print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">my_scramble</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="linenos">16</span><span class="c1">#print(new_s)  # produces a NameError</span>
 </pre></div>
 </div>
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">capitalize</span></code> is defined outside of any function and is thus available within any of the functions (e.g., in <code class="docutils literal notranslate"><span class="pre">my_print</span></code>, where it tells us whether we should be capitalizing the first letter of the string we’re about to print). Namespaces keep this global name from colliding with the method of the same name in the <code class="docutils literal notranslate"><span class="pre">str</span></code> object.</p>
@@ -883,21 +883,21 @@ print(sentence, &quot;sentence(s)&quot;)
 <li><p>Or, you’ll think to yourself, “I could just put the value I need in the global scope and not have to change the function or any of the call sites.”</p></li>
 </ol>
 <p>Resist the urge to do the second thing except in one limited case, which I’ll describe in a moment. But first, let’s see what happens to our script if we remove the formal parameters—heck, the global variable is already named what the two function bodies reference, right?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### chap03/scope_broken.py</span>
-<span class="n">capitalize</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># a global variable setting a mode for the script</span>
-
-<span class="k">def</span> <span class="nf">my_print</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">capitalize</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">my_scramble</span><span class="p">():</span>
-    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">new_s</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;just some fun&#39;</span>
-<span class="n">my_print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">my_scramble</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/scope_broken.py</span>
+<span class="linenos"> 2</span><span class="n">capitalize</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># a global variable setting a mode for the script</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">my_print</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="k">if</span> <span class="n">capitalize</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span> <span class="nf">my_scramble</span><span class="p">():</span>
+<span class="linenos">10</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;just some fun&#39;</span>
+<span class="linenos">14</span><span class="n">my_print</span><span class="p">()</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">my_scramble</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>The script dies with an <code class="docutils literal notranslate"><span class="pre">UnboundLocalError</span></code> on line 6, where we tried to update the global variable within the function <code class="docutils literal notranslate"><span class="pre">my_print</span></code>. Python gives you a way to fix this with a global-statement, but you’re just heading down dark and bumpy road with more problems to come. For example, did you really want to update the global variable or just a local copy of it?</p>
