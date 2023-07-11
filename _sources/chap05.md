@@ -266,7 +266,7 @@ Let's look at the rest of the unmarked statements. Should any of these run *on t
 
 Ok, so let's flip our question around and ask, "Which of the remaining statements must run *on the client*?" It seems like it would be easiest if the while-loop that grabs and validates the player's guess ran where the player sits. This means we'd mark lines 7-12 with a `C`. 
 
-```python
+```{code-block} python
    1  print('## Welcome to GUESS THE NUMBER! ##')
    2
 S  3  secret = random.randint(1, 100)
@@ -295,7 +295,7 @@ So what about the loop that begins on line 5 (i.e., the game loop)? Let's decide
 
 Here's our final classification of statements across the client and server:
 
-```python
+```{code-block} python
 C  1  print('## Welcome to GUESS THE NUMBER! ##')
    2
 S  3  secret = random.randint(1, 100)

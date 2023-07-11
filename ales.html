@@ -61,11 +61,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ales';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Chapter 5: Play Guess-a-number with a Friend" href="chap05.html" />
+    <link rel="prev" title="Chapter 6: Do You See My Dog?" href="chap06.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -338,6 +341,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-2-so-many-ways-to-pick">ALE 5.2: So many ways to pick</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-3-catching-exceptions">ALE 5.3: Catching exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-4-adding-metadata-to-your-messages">ALE 5.4: Adding metadata to your messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-1-capturing-color">ALE 6.1: Capturing color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-2-diagonal-fade-to-a-color">ALE 6.2: Diagonal fade to a color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-3-creating-a-checkerboard">ALE 6.3: Creating a checkerboard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-4-counting-with-python-integers">ALE 6.4: Counting with Python integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-5-color-the-duck-s-world">ALE 6.5: Color the duck’s world</a></li>
 </ul>
             </nav>
         </div>
@@ -569,22 +577,22 @@ document.write(`
 <p><strong>Step 1.</strong> Take a moment and think about the problem as stated. Think in pseudocode about what you need to do. <strong>HINT:</strong> Why does the string <code class="docutils literal notranslate"><span class="pre">'Mr.</span> <span class="pre">and</span> <span class="pre">Mrs.</span> <span class="pre">Smith</span> <span class="pre">left</span> <span class="pre">for</span> <span class="pre">vacation.'</span></code> contain three sentences? Is there <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">a method common to all sequences</a> that might help you simply solve this problem?</p>
 <p><strong>Step 2.</strong> Add a new code block to the end of <code class="docutils literal notranslate"><span class="pre">count32.py</span></code>, which counts the number of sentences in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>.</p>
 <p>To test your solution, force the variable blurb to each of the following string values by placing an assignment to blurb just before your new code block. These assignments use Python’s ability to easily create multiline strings using triple quotes.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>blurb = &#39;&#39;&#39;This is a test. A test of what? A test
-<span class="linenos"> 2</span>with every type of sentence in it!&#39;&#39;&#39;
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">blurb</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;This is a test. A test of what? A test</span>
+<span class="linenos"> 2</span><span class="s1">with every type of sentence in it!&#39;&#39;&#39;</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span># blurb = &#39;Mr. and Mrs. Smith left for vacation.&#39;
+<span class="linenos"> 4</span><span class="c1"># blurb = &#39;Mr. and Mrs. Smith left for vacation.&#39;</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span># blurb = &#39;&#39;&#39;Phronsie still stood just where Polly left her.
-<span class="linenos"> 7</span>Two hundred candles! oh! what could it mean! She gazed up
-<span class="linenos"> 8</span>to the old beams overhead, and around the dingy walls, and
-<span class="linenos"> 9</span>to the old black stove, with the fire nearly out, and then
-<span class="linenos">10</span>over everything the kitchen contained, trying to think how
-<span class="linenos">11</span>it would seem.&#39;&#39;&#39;
+<span class="linenos"> 6</span><span class="c1"># blurb = &#39;&#39;&#39;Phronsie still stood just where Polly left her.</span>
+<span class="linenos"> 7</span><span class="c1"># Two hundred candles! oh! what could it mean! She gazed up</span>
+<span class="linenos"> 8</span><span class="c1"># to the old beams overhead, and around the dingy walls, and</span>
+<span class="linenos"> 9</span><span class="c1"># to the old black stove, with the fire nearly out, and then</span>
+<span class="linenos">10</span><span class="c1"># over everything the kitchen contained, trying to think how</span>
+<span class="linenos">11</span><span class="c1"># it would seem.&#39;&#39;&#39;</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span>print(&quot;Blurb:&quot;, blurb)
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Blurb:&quot;</span><span class="p">,</span> <span class="n">blurb</span><span class="p">)</span>
 <span class="linenos">14</span>
-<span class="linenos">15</span>sentences = 0 # REPLACE THE 0 with an expression
-<span class="linenos">16</span>print(sentence, &quot;sentence(s)&quot;)
+<span class="linenos">15</span><span class="n">sentences</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># REPLACE THE 0 with an expression</span>
+<span class="linenos">16</span><span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="s2">&quot;sentence(s)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1372,6 +1380,177 @@ document.write(`
 <p><strong>Step 3.</strong> Start <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> by making a copy of the <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> script developed in the chapter. Adapt <code class="docutils literal notranslate"><span class="pre">ale04-client.py</span></code> (above) and <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> so that they play this enhanced guess-the-number game.</p>
 <p>[Version 20230709]</p>
 </section>
+<section id="ale-6-1-capturing-color">
+<h2>ALE 6.1: Capturing color<a class="headerlink" href="#ale-6-1-capturing-color" title="Permalink to this heading">#</a></h2>
+<p>We’ve learned that digital images are nothing more than large two-dimensional arrays of pixels, which we can load into a pixel array and manipulate. Except for the <code class="docutils literal notranslate"><span class="pre">edges.py</span></code> script in which we ran a prepackaged convolution filter on a color image of my dog, we limited ourselves to grayscale images containing 8-bit pixels. With 8 bits, we could represent 256 different shades of gray from black (<code class="docutils literal notranslate"><span class="pre">0x00</span></code>) to white (<code class="docutils literal notranslate"><span class="pre">0xff</span></code>).</p>
+<p>While black-and-white photos can be quite artistic, more often most of us capture color images. I used to take color pictures with a digital single lens reflex (DSLR) camera, but now I take all my photos (and videos) with my cellphone. The manufacturer describes the camera on the back of my cellphone as containing a 12-megapixel sensor, where mega- means <span class="math notranslate nohighlight">\(10^6\)</span> or 1 million.</p>
+<p>The manufacturer-quoted number isn’t an exact measure. The sensor in my cellphone is actually a 2D array of size 4290 by 2800, and the color pictures taken with this camera produce just over 36 megabytes (MB) of image data (by “just over” I’m telling you that the 36MB measure also isn’t exact). Despite the inexactness of both numbers, you can use them to determine <strong>the size of each color pixel in bytes</strong>.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Write out an equation that divides the size of the color images taken by my cellphone by the total number of pixels in my cellphone’s sensor. That equation will tell you the number of bytes per pixel. In other words, you’ll know how many bytes there are per pixel in a color (i.e., RGB-encoded) image. Do the math to figure out the answer.</p>
+</div>
+<p>You should have found that the simplest color images (i.e., those that use <code class="docutils literal notranslate"><span class="pre">RGB</span></code> mode) use three 8-bit numbers to represent the color of a pixel. In Python, each RGB pixel is a tuple of three 8-bit numbers, where the first byte (i.e., 8-bit value) represents how much red is in the pixel. The next indicates how much green the pixel contains, and the last value is the amount of blue. Three zeros would indicate the absence of any of the three colors and would display as black; recall that 0 represents black in every mode. Three values of 255 would appear as a white pixel.</p>
+</section>
+<section id="ale-6-2-diagonal-fade-to-a-color">
+<h2>ALE 6.2: Diagonal fade to a color<a class="headerlink" href="#ale-6-2-diagonal-fade-to-a-color" title="Permalink to this heading">#</a></h2>
+<p>In this chapter, the script <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> created a grayscale image containing a diagonal fade. For this exercise, you’ll change this script so that it fades not from black to white, but from black to one of red, green, or blue. To do this, we’ll need to change the mode of the image we create from <code class="docutils literal notranslate"><span class="pre">'L'</span></code> to <code class="docutils literal notranslate"><span class="pre">'RGB'</span></code>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">HINT</p>
+<p><code class="docutils literal notranslate"><span class="pre">pixels[i,j]</span></code> no longer holds just a single integer. Focus on the color component you want and leave the other black (i.e., <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+</aside>
+<p><strong>Step 1.</strong> Given what you learned in ALE 6.1, complete line 16 in the script (<code class="docutils literal notranslate"><span class="pre">ale02.py</span></code>) to create a diagonal fade from black to red.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># chap06/ale02.py</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Width and height of our image</span>
+<span class="linenos"> 5</span><span class="n">sz</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Create a single plane of black and white pixels, initialized to black</span>
+<span class="linenos"> 8</span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># Create direct access to the pixels in the image</span>
+<span class="linenos">11</span><span class="n">pixels</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># Set the color of each pixel</span>
+<span class="linenos">14</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">15</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">16</span>        <span class="c1"># pixels[i,j] = ???</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;ale02.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 2.</strong> Try not just a diagonal fade from black-to-red, but also create ones from black-to-green and black-to-blue.</p>
+</section>
+<section id="ale-6-3-creating-a-checkerboard">
+<h2>ALE 6.3: Creating a checkerboard<a class="headerlink" href="#ale-6-3-creating-a-checkerboard" title="Permalink to this heading">#</a></h2>
+<p>Starting again with <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, which creates an image containing a diagonal fade, change the body of the innermost for-loop in <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> so that it creates a checkerboard pattern. The checkerboard pattern should adhere to these rules:</p>
+<ul class="simple">
+<li><p>Each pixel contains either the color black or white; and</p></li>
+<li><p>The color of any pixel is not the same as its neighbors to the north, south, east, and west, i.e., if the current pixel is at <code class="docutils literal notranslate"><span class="pre">(i,j)</span></code>, the pixel to the north is at <code class="docutils literal notranslate"><span class="pre">(i,j-1)</span></code>, to the south <code class="docutils literal notranslate"><span class="pre">(i,j+1)</span></code>, to the east is <code class="docutils literal notranslate"><span class="pre">(i+1,j)</span></code>, and to the west is <code class="docutils literal notranslate"><span class="pre">(i-1,j)</span></code>. Don’t worry about neighbors that are not within the pixel array.</p></li>
+</ul>
+<p>You’ll  only need to change line 17 in <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code>. It currently sets every pixel in the <code class="docutils literal notranslate"><span class="pre">pixels</span></code> array to the color white.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># chap06/ale03.py</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Width and height of our image</span>
+<span class="linenos"> 5</span><span class="n">sz</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Create a single plane of black and white pixels, initialized to black</span>
+<span class="linenos"> 8</span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># Create direct access to the pixels in the image</span>
+<span class="linenos">11</span><span class="n">pixels</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># Set the color of each pixel</span>
+<span class="linenos">14</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">15</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">16</span>        <span class="c1"># Create a checkerboard</span>
+<span class="linenos">17</span>        <span class="n">pixels</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;ale03.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="ale-6-4-counting-with-python-integers">
+<h2>ALE 6.4: Counting with Python integers<a class="headerlink" href="#ale-6-4-counting-with-python-integers" title="Permalink to this heading">#</a></h2>
+<p>If you look carefully at the script named <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, you’ll see that it doesn’t do arithmetic on pixels, but on the loop indices <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>, which are values produced by the <code class="docutils literal notranslate"><span class="pre">range</span></code> function. If you pass these names to the built-in function <code class="docutils literal notranslate"><span class="pre">type</span></code>, it will tell you that these names refer to Python integers.</p>
+<p>From experience, we know that Python integers can hold values greater than 255 and less than 0, and so it is not the addition in our script that overflows and forces the saturation, but the act of trying to store the result of this addition into a location in the array <code class="docutils literal notranslate"><span class="pre">pixels</span></code> that causes an issue. In particular, the PIL library checks to see if the value we’re trying to store overflows (or underflows) the 8-bit, unsigned representation used for each pixel in the <code class="docutils literal notranslate"><span class="pre">pixels</span></code> array.</p>
+<p>That’s great, but if we need to be careful with the values we put into the pixels of a black-and-white image, <strong>do we need to be careful about the values we put into a Python integer?</strong> In other words, <strong>will addition on Python integers ever overflow?</strong></p>
+<p>We could go read some documentation or google an answer to this question, but we can also experiment and see what happens.</p>
+<p><strong>Step 1.</strong> We have been using integers to enumerate the things in a set (e.g., shades of gray between black and white). Integers are also great when we simply want to count, and so, let’s see how far we can count with Python integers before we hit an overflow condition.</p>
+<p>The script <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code> contains an infinite loop with no exit condition. Inside this loop, we add one to the variable <code class="docutils literal notranslate"><span class="pre">i</span></code>, which we initialized to <code class="docutils literal notranslate"><span class="pre">0</span></code>, which made it a Python <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap06/ale04_count.py</span>
+<span class="linenos">2</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span><span class="n">next_bound</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">7</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">next_bound</span><span class="p">:</span>
+<span class="linenos">8</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Reached </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">9</span>        <span class="n">next_bound</span> <span class="o">*=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Because we’re not interested in seeing every value that <code class="docutils literal notranslate"><span class="pre">i</span></code> takes on, there’s a bit of extra code in this script to print only when <code class="docutils literal notranslate"><span class="pre">i</span></code> reaches a number that’s a power of 10. Printing takes time, and we don’t want to unnecessarily slow down our script. With a friend, walk through the statements in <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code> and make sure you understand the entire script.</p>
+<p><strong>Step 2.</strong> If you were to run this script, when will it stop running? Think about this question for a bit, jot down the reason for your answer, and then read on.</p>
+<p><strong>Step 3.</strong> When we run <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code>, we fly through the first bunch of powers of 10, showing that our computers can count much faster than we can. My computer gets to 100 million in about 10 seconds, and then it starts to take a noticeably long time between prints. If I listen carefully, I can hear its fan spin up as the processor starts working really hard.</p>
+<p>Notice that there’s no break statement anywhere in the infinite loop, and so the only way that this loop will end is if a runtime exception occurs. Given the statements in the loop’s body, we’re waiting for either the addition or the multiplication to overflow.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Help! I Want It To Stop!</p>
+<p>I hope you tried running <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code>, and at some point, you’ll want it to stop. Here’s how:</p>
+<ul class="simple">
+<li><p>If you started the script in a Shell, push the control-key and the letter-c-key at the same time, which we’ll abbreviate as ctl+c. This key sequence tells the Shell to kill the execution of the currently running script.</p></li>
+<li><p>If you clicked a play button in your IDE, the play button probably turned into a stop button, and if you click this stop button, the IDE will kill the execution of your running script.</p></li>
+</ul>
+</div>
+<p>If you haven’t tried running <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code>, now that you know how to stop it, run it now. Watch its output for a bit and then force it to stop using one of the two methods above.</p>
+<p><strong>Step 4.</strong> Let’s think about the work your processor is doing while running <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code>. It’s not hard work; it’s just adding 1 over and over again. But to get to a big number, it will take a lot of additions. Let’s make this concrete by doing a quick calculation:</p>
+<p>If it took 10 seconds to get to 100 million, estimate how long will it take to get to a trillion, which is 1/30th of the <a class="reference external" href="https://www.usdebtclock.org/">US debt</a> (as of 2022) and therefore a number we may want to represent in a script?</p>
+<p><strong>Step 5.</strong> You should have found that the answer is a lot longer than you’d like to wait. Maybe <code class="docutils literal notranslate"><span class="pre">ale04_count.py</span></code> isn’t the best way to find if addition overflows.</p>
+<p>Edit the script in the code block below (<code class="docutils literal notranslate"><span class="pre">ale04_double.py</span></code>), so that it doubles <code class="docutils literal notranslate"><span class="pre">i</span></code> on each loop iteration rather than adding 1 to <code class="docutils literal notranslate"><span class="pre">i</span></code> (i.e., write Python code for the comments on lines 4 and 8).</p>
+<p>Because this script will increase <code class="docutils literal notranslate"><span class="pre">i</span></code> so much faster than our last script, I’ve inserted a call to <code class="docutils literal notranslate"><span class="pre">time.sleep</span></code> and specified that the script should pause for one-half a second each time it passes the <code class="docutils literal notranslate"><span class="pre">next_bound</span></code>. If you comment out this call, you’ll see why this is necessary.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Tie Back To Bits</p>
+<p>When you complete it, <code class="docutils literal notranslate"><span class="pre">ale04_double.py</span></code> adds another bit (i.e., another binary digit) to the length of <code class="docutils literal notranslate"><span class="pre">i</span></code> for each execution of its loop body. Make sure you fully understand why this is true.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/ale04_double.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># FIXME: initialize i appropriately</span>
+<span class="linenos"> 5</span><span class="n">next_bound</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="c1"># FIXME: update i so it doubles each time</span>
+<span class="linenos"> 9</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">next_bound</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Passed </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">next_bound</span> <span class="o">*=</span> <span class="mi">10</span>
+<span class="linenos">12</span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 6.</strong> The two scripts in this exercise demonstrate two different <em>growth rates</em>: the first exhibits <em>linear growth</em> (i.e., two successive values differ by a constant amount); and the second <em>geometric growth</em> (i.e., two successive values differ by a constant ratio). We’ll encounter growth rates again in Act II.</p>
+<p><strong>Step 7.</strong> Will addition on Python integers ever overflow? Let’s finally answer this question, which was our goal in this exercise. When you run <code class="docutils literal notranslate"><span class="pre">ale04_double.py</span></code> and see <code class="docutils literal notranslate"><span class="pre">1099511627776</span></code>, the script has passed a trillion. It probably took less than 10 seconds to pass that value on your computer.</p>
+<p>You can let <code class="docutils literal notranslate"><span class="pre">ale04_double.py</span></code> continue to run for a while, but at some point, kill its execution. This script clearly demonstrates that we can count pretty high in Python. In fact, Python does not restrict the size of an integer. As long as your computer has the storage necessary to hold whatever big number you can dream up, Python can handle it. This is a very nice feature of this language, and one that is not true in every other programming language.</p>
+</section>
+<section id="ale-6-5-color-the-duck-s-world">
+<h2>ALE 6.5: Color the duck’s world<a class="headerlink" href="#ale-6-5-color-the-duck-s-world" title="Permalink to this heading">#</a></h2>
+<p>Our earlier exercises created their own images. In this exercise, you will start learning how to modify an existing digital image. You’ll also learn a new set of methods for accessing and changing the value of a particular pixel in your open image.</p>
+<p><strong>Step 1.</strong> In your favorite JPEG viewer, open the color image named <code class="docutils literal notranslate"><span class="pre">duck.jpg</span></code>, which you can find in <code class="docutils literal notranslate"><span class="pre">chap06/images</span></code> of the book’s GitHub repo. It should look like a perfectly normal picture that you might have taken with your own cellphone camera.</p>
+<p><strong>Step 2.</strong> The script <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> uses the Python PIL library to open, read, and recolor a single input image. Read through the script and then we’ll briefly discuss what’s new in it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/ale05.py</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Grab the image filename</span>
+<span class="linenos"> 5</span><span class="n">imfile</span> <span class="o">=</span> <span class="s1">&#39;images/&#39;</span> <span class="o">+</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Filename of image: &#39;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">imfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="c1"># Apply a filter that enhances the red and desaturates blue/green</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">10</span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">11</span>            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos">12</span>            <span class="n">im</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">50</span><span class="p">))</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;ale05.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because we’re working with an existing image, the first thing we have to do is open the image file as we did in <code class="docutils literal notranslate"><span class="pre">edges.py</span></code>.</p>
+<p>An existing image contains a 2D image array just like we encountered when we built a new image, and this means that we’ll still need our familiar nested for-loops if we are going to apply a filter to each pixel in the image.</p>
+<p>How big is the image we opened? Well, we knew the size of the images we created because we specified them. Luckily, we can also ask an existing image for its width and height in pixels through the attribute called <code class="docutils literal notranslate"><span class="pre">size</span></code> because <code class="docutils literal notranslate"><span class="pre">Image.open</span></code> fills in this attribute. This attribute returns a 2-tuple of <code class="docutils literal notranslate"><span class="pre">(width,height)</span></code> over which we can iterate.</p>
+<p>The body of our innermost for-loop looks a bit different than what we’ve previously seen. It uses two new methods on the image object: <code class="docutils literal notranslate"><span class="pre">getpixel</span></code> and <code class="docutils literal notranslate"><span class="pre">putpixel</span></code>. These two methods each take a parameter, which is a 2-tuple representing the <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> coordinate of the pixel we wish to get or put. In the coordinate system of the images we manipulate, <code class="docutils literal notranslate"><span class="pre">x</span></code> indexes the columns (of which there are <code class="docutils literal notranslate"><span class="pre">width</span></code> columns) and <code class="docutils literal notranslate"><span class="pre">y</span></code> indexes the rows (of which there are <code class="docutils literal notranslate"><span class="pre">height</span></code> of them).</p>
+<p>So far, this should remind you of the x-y Cartesian plane you probably encountered at some point in your prior schooling. The only twist in the image world is that index <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> is the upper left corner of the image.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">getpixel</span></code>, the pixel comes back as a tuple, which we can pull apart with our assignment statement. To write a pixel using <code class="docutils literal notranslate"><span class="pre">putpixel</span></code>, we not only want to specify the <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> coordinate of the pixel in the image, but also the RGB tuple <code class="docutils literal notranslate"><span class="pre">(r,g,b)</span></code> we want to write.</p>
+<p>I’ll discuss the <code class="docutils literal notranslate"><span class="pre">//</span></code> operator in a moment.</p>
+<p><strong>Step 3.</strong> Run <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> and feed it the image file <code class="docutils literal notranslate"><span class="pre">duck.jpg</span></code>. Can you an understand why it displays a reddish version of our input picture?</p>
+<p>We enhanced the red in our image by desaturating the blue and green values of each pixel. In particular, we scaled down the green and blue values by some fixed factor, which we did through division.</p>
+<p>If you look up the division operator in Python, you’ll see that there are two: <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">//</span></code>. The single forward-slash operator (<code class="docutils literal notranslate"><span class="pre">/</span></code>) is called <em>division</em>, and if you feed it two integer operands, it will produce a <em>floating-point value</em>. A floating-point number is number with a decimal point, which in Python are given the type <code class="docutils literal notranslate"><span class="pre">float</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">42</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code> in Python, but <code class="docutils literal notranslate"><span class="pre">42.0</span></code> is a <code class="docutils literal notranslate"><span class="pre">float</span></code>. We need float-point values because we can’t represent a number like one-half (i.e., one divided by two) as an integer. We need both a whole and a fractional part. We’ll talk more about floating-point numbers in Chapter 7, but right now we need to scale our green and blue values so that they continue to be integers, since that’s what we’re storing in our image files.</p>
+<p>The double forward-slash operator (<code class="docutils literal notranslate"><span class="pre">//</span></code>) is called <em>floor division</em> in Python, and if you feed it two integer operands, it will produce an integer result. This integer result is equivalent to what you’d get if you applied the floor function to the floating-point result from the <code class="docutils literal notranslate"><span class="pre">/</span></code> operator. With positive results, you can think of <code class="docutils literal notranslate"><span class="pre">//</span></code> returning just the whole number part of the result.</p>
+<p><strong>Step 4.</strong> Can you edit <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> so that it highlights the blue aspects of the input image? How about the green aspects?</p>
+<p><strong>Step 5.</strong> Notice that the PIL library functions are smart enough not to care if we feed a JPEG or PNG file to our script. You can test this by running <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> with other input files. Try some of your own digital photos. Remember to put your digital photos in the images directory!</p>
+<div class="admonition-not-too-big admonition">
+<p class="admonition-title">Not Too Big!</p>
+<p>The amount of time it takes to process an image is proportion to the size of the image in bytes. Why? Because the bigger your image is the more pixels it has, and the script has to read and write each one. I’ve been using images of 100-200 kilobytes. Don’t use ones with many megabytes.</p>
+</div>
+<p>[Version 20230710]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1406,12 +1585,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap05.html"
+       href="chap06.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 5: Play Guess-a-number with a Friend</p>
+        <p class="prev-next-title">Chapter 6: Do You See My Dog?</p>
       </div>
     </a>
     <a class="right-next"
@@ -1469,6 +1648,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-2-so-many-ways-to-pick">ALE 5.2: So many ways to pick</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-3-catching-exceptions">ALE 5.3: Catching exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-4-adding-metadata-to-your-messages">ALE 5.4: Adding metadata to your messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-1-capturing-color">ALE 6.1: Capturing color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-2-diagonal-fade-to-a-color">ALE 6.2: Diagonal fade to a color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-3-creating-a-checkerboard">ALE 6.3: Creating a checkerboard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-4-counting-with-python-integers">ALE 6.4: Counting with Python integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-5-color-the-duck-s-world">ALE 6.5: Color the duck’s world</a></li>
 </ul>
   </nav></div>
 
