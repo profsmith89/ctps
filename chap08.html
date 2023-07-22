@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 8: What Is My Problem? &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap08';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Active-Learning Exercises" href="ales.html" />
+    <link rel="prev" title="Chapter 7: Many Numbers But Not Any Number" href="chap07.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    A Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap08.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 8: What Is My Problem?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-8-what-is-my-problem">
+<h1>Chapter 8: What Is My Problem?<a class="headerlink" href="#chapter-8-what-is-my-problem" title="Permalink to this heading">#</a></h1>
+<p>To conclude this act, we’ll tackle what to do when we know we have a problem, but we don’t know exactly what the problem is. This may sound silly, but it is often true. Imagine, for example, that we have a small business operating at a small profit, and we wonder whether it could be generating more profit. What types of customers is our business not reaching? Where could our business operate at less cost? These types of questions lead us to this chapter’s motivating question: <em>How can I use computers to discover what problem(s) we have that we need to solve?</em></p>
+<p>Despite this business-focused example, such questions arise in many disciplines. A natural scientist might ponder: what truth about the world is captured in some experimental data? A social scientist might ask: what does the data gathered from the activities of many people explain about human society? A humanist might wonder: what similarities are discoverable from the many characteristics of two or more cultural artifacts? Even in this course, I might ask: what aspect of the material we’ve covered have I failed to help you understand? These are just a few illustrative examples.</p>
+<p>In short, we want to know how to use computers to analyze data about our “business” for insights on where knowledge lurks and problems could be eliminated. This work is possible because the proliferation of digital technologies has made it possible to collect the mounds of data needed to answer them. Furthermore, the increasing availability of cheap and powerful cloud-based computational services makes it possible for anyone with computational skills to process those data looking for new insights. Taken together, this is why <em>data science</em> is a rapidly expanding field having impact in many professions and industries.</p>
+<p><strong>Data science.</strong> What exactly is data science? It is the extraction of meaningful insights and new knowledge from data. As a process, it involves <em>data collection</em>, <em>data cleaning</em>, <em>data exploration and pattern detection</em>, and <em>model building</em> for prediction and decision-making. These four steps are often repeatedly done until we are able to identify a truly meaningful insight. Once we’ve discovered some new insight or useful fact about our world through these steps, there’s a final step in which we communicate what we have discovered.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Looking Ahead</p>
+<p>Toward the end of this book, we will explore the model building portion of the data science process.</p>
+</aside>
+<p>Acting like a data scientist is a perfect way for us to wrap up our discussion of numbers, since so much of a data scientist’s work is statistical in nature. In this chapter, we’ll focus on the initial steps in every data science process and the domain-agnostic aspects of these steps. In particular, we will focus on these two sub-questions of our motivating question: (1) Once we have collected some data, why it is important to clean the data in our data set before we try to analyze them? And (2) once we’ve cleaned the data, what programming techniques are generally helpful in doing data exploration and pattern detection. We’ll practice both of these skills through two applications on images: (1) a technique for removing a photobombing person from an image (i.e., data set cleaning); and (2) a technique for hiding information inside an image (i.e., data exploration and pattern detection).</p>
+<div class="admonition-learning-outcomes admonition">
+<p class="admonition-title">Learning Outcomes</p>
+<p>In this chapter, you will be introduced to the field of data science and learn how you can use computation to analyze data and discover new knowledge. We focus on the initial steps in every data-science problem (i.e., data collection, data cleaning, and data exploration) using images as our big dataset.</p>
+<ul class="simple">
+<li><p>Enumerate the major steps in every data-science problem [CS concepts];</p></li>
+<li><p>Explain why data cleaning is necessary and important [design and CS concepts];</p></li>
+<li><p>Describe the different ways we can deal with the noise, duplicates, and other irrelevant information in our data sets [design and CS concepts];</p></li>
+<li><p>Implement filters for digital images [CS concepts and programming skills];</p></li>
+<li><p>Understand the hazards of overtraining [CS concepts];</p></li>
+<li><p>Use bitwise operators to create masks and force certain bits to certain patterns [CS concepts and programming skills];</p></li>
+<li><p>Explain the purpose of image steganography [CS concepts];</p></li>
+<li><p>Understanding and coding different traversals over 2D data [CS concepts and programming skills];</p></li>
+<li><p>Use Python’s range function and list comprehensions [programming skills];</p></li>
+<li><p>Relate arrays to sequences and strings, with a nod to Python’s NumPy library [CS concepts and programming skills];</p></li>
+<li><p>Discuss how 2-dimensional arrays are stored in a computer’s memory [CS concepts].</p></li>
+</ul>
+</div>
+<p><strong>Images as data about the world around us.</strong> Instead of diving into a completely new context, we’re going to continue with digital images and consider them a source of data about the world around us. Your first question should be, is this a reasonable thing to do?</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">More Than 2D Arrays</p>
+<p>JPEG and other image file formats are more than simple 2D arrays. They contain metadata, like the time and date on which the image was captured, and they often compress the actual image data so that the file takes less space to store. Computer scientists like to explore the tradeoffs between processing time and storage space.</p>
+</aside>
+<p>Short answer: yes. We have learned that digital images, like those found in JPEG files, are essentially large, two-dimensional arrays of numbers. While we’ve learned how to manipulate the data in these image files using some fairly simple scripts, it’s important to keep in mind that it’s not easy to do any of this work by hand. The images are just too big and the numbers too difficult for humans to interpret directly. This is actually good because data sets in data science are typically very large, and like digital images, you cannot realistically analyze them without the help of powerful computers. In other words, using one or more images as a data set isn’t all that different than using any other large data set when talking about data cleaning and data exploration.</p>
+<p><strong>Yes, you must clean up.</strong> We create digital images with tools (e.g., our smartphone cameras) that sample our physical world, and today’s digital cameras capture the world around us in amazing richness. But does a digital image faithfully capture an instance in time?</p>
+<p>If you think about the sampling that takes place, as we’ll do in a moment, you’ll start to realize that it isn’t a perfect process. The consequences of imperfection often aren’t particularly dire. But if an image full of bad pixels leads to your conviction for a crime you didn’t commit or a diagnosis of cancer you don’t have, you will wish that someone had done their data cleaning.</p>
+<p>Data collection and cleaning are extremely important because what we do here matters greatly to the insights and new knowledge that comes out the backend of the data science process. As data scientists like to say, if our data are garbage, the results of our analyses will be garbage, no matter how “smart” are the analyses that come later. Yet people too often view powerful data-science analyses as flawless: “The computer crunched the numbers and this person isn’t creditworthy for a loan.” We have no idea if the person is creditworthy when the collected data is biased or the data cleaning poorly done.</p>
+<p>But let’s be honest, the actual act of data cleaning holds as much appeal for most people as does any other type of cleaning. If you do any data science in your life, at some point you will be severely tempted to jump directly from data collection to data analysis. For all those that whose lives will be impacted by your work, resist this urge.</p>
+<p>Luckily, we can make cleaning images a bit more fun than the cleaning required for other types of data sets. In fact, the work we’ll do in a moment will help you visualize the impact of cleaning, and it will create a fun challenge for us in terms of data exploration. Don’t tune out; what comes will be worth it!</p>
+<p><strong>Understanding what might go wrong.</strong> How do we do data cleaning? Well, recall that each pixel in our image is simply one or more numbers, and we can easily “fix” any imperfections in our images (or, in general, the recorded samples in any digital data set) by rewriting these numbers.</p>
+<p>Unfortunately, each data value we change can drive us closer to or farther from the truth. While we need to clean our data, we need to remember that there is danger and power in this post-capture processing. As such, it is important to understand what problems can occur during data capture, which of these problems we can correct, and what are the limits of what we can do to improve the veracity of our samples.</p>
+<p>So let’s begin by categorizing the ways in which our images might be incorrect, and by that I mean the pixels in the image do not reflect the scene we meant to capture. Recall that the pixels in a JPEG file represent samples of the colors we saw in some scene before us, and each pixel represents the color seen at each small point in this scene. Let’s call the actual value we wanted to capture the <em>ground truth</em>. Reasonable people may disagree on the ground truth for any particular observation, but we won’t concern ourselves with such disagreements. We will assume that there is a single, agreed-upon ground truth that is the value we want captured and recorded.</p>
+<p>How might the value we record differ from this ground truth? Let’s see if we can gain some intuition about the types of failures by constructing a list of example failures.</p>
+<p>One thing that might happen is the existence of some physical phenomenon between our digital camera and the object we are imaging that distorts the object’s color. For example, a red shirt may appear yellow because of glare or brown because of shadows. Or perhaps the shirt’s color is undistorted to the camera’s lens, but there’s a hardware problem with our smartphone’s camera. The camera’s sensor array might record a pixel in the shirt as black because the sensor corresponding to this pixel wasn’t functioning correctly. Or maybe the camera correctly captures the shirt’s color, but an error occurs that changes the value of a particular pixel as the image is transferred from our smartphone to our laptop. In all these cases, and many others like them, we would want to correct the incorrect value.</p>
+<p>On the other hand, there are times when the captured value differs from the ground truth and we don’t want or might not be able to correct this discrepancy. For instance, there are an infinite number of shades of color in the real world, but only a fixed number of encodings in the RGB encoding (16,777,216 to be precise). A correctly functioning camera sensor will pick the closest color encoding to the ground truth, and it does us no good to change this value. We will come back to this issue when we talk about computing with the values in our data array, but for now, we will focus on the previous category of incorrect values (i.e., the ones we should change because there is a better representation in our encoding space of the ground truth).</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Before moving on, take a moment and think about collecting survey data. How might this data collection process result in incorrect captured values? Consider as many steps in the process of surveying people that you can imagine.</p>
+</div>
+<p><strong>Noise and its removal.</strong> We describe incorrect values in our data that are a result of errors and bad samples as <em>noise</em>. Ideally, we want to make changes to our data to eliminate everything that is noise and replace it with the appropriate ground-truth values. In digital photography, this is called <em>image enhancement</em> or <em>photo retouching</em>. In data science, this is called <em>data cleaning</em>.</p>
+<p>Unfortunately in real life, we might not always know the ground truth, and in general, we have three options:</p>
+<ol class="arabic simple">
+<li><p><em>Remove the sample.</em> While simple to understand and implement, this is not always possible or appropriate. For example, it doesn’t make much sense to “remove” a pixel from an image. On the other hand, if your data are responses to a single-question poll, it might make sense to remove a nonsensical response.</p></li>
+<li><p><em>Impute (or guess) at the actual value of the sample.</em> How you do this is highly dependent upon the type of data you’ve collected. For a real-world image, we might guess at a pixel’s correct color by checking the colors of its neighbors. Guessing responses to poll questions, in contrast, is quite dangerous.</p></li>
+<li><p><em>Flag the data as missing.</em> With this option, any subsequent analyses that compute with the data can be informed that these missing data elements need to be handled carefully. With our image example and assuming a subsequent image recognition analysis, we might set all missing and corrupted pixels to absolute black and then inform the image recognizer that such pixels are to be ignored. In the polling example, a later analysis might include an additional “not answered” category, which might indicate something unexpected was taking place with a question that had a lot of missing or nonsensical answers (e.g., the question wasn’t easy to understand).</p></li>
+</ol>
+<p><strong>The power to create new realities.</strong> If noise is anything we don’t want captured in our data and our data sets are simply files of numbers, we can easily get carried away and start rewriting more than just incorrect or missing data values. We may decide to rewrite any value that we consider to be problematic. When done unconsciously, we might begin to change our data in a manner that makes it easy to validate our hypotheses (and therefore invalidate our research). When done consciously, we can create new realities.</p>
+<p>One goal in this course is to make you aware of the need to deal with noise in your data sets, understand that it is difficult to do it well, and gain some experience in cleaning a data set. Many computational techniques exist for properly cleaning different kinds of data sets. The space is large, and this is just an introduction.</p>
+<p><strong>A process for eliminating photobombing.</strong> While thinking about noise and removing it can seem like necessary and tedious work, you’ll start building your skills in this large space by working something that’s particularly satisfying to remove.</p>
+<p>All of us have probably taken a picture in which we captured someone or something that we really wish hadn’t been there. When someone jumps into the frame of our picture on purpose, we call it <em>photobombing</em>. We’ll talk here about a general approach for removing this unwanted subject, and you’ll get the opportunity to write a script that removes a photobombing person (or object) from an image in one of the chapter’s active-learning exercises.</p>
+<p>To develop the foundation necessary to complete this exercise, we’ll work with a picture of the circa-1909 <a class="reference external" href="https://en.wikipedia.org/wiki/Harvard_Classics">Harvard Classics</a> sitting on my shelf at home. Actually, we’ll use a collection of three images, each of which has been photobombed by the CS50 debugging duck. The duck is the noise we wish to remove from our data. Notice that this declaration of noise puts us squarely in the space of consciously creating a new reality. The resulting picture we want is not the scene I <em>had captured</em>; it is the scene I <em>wished</em> I had captured.</p>
+<p>You can check out the three images using any JPEG viewer, or if you’re reading this chapter as an interactive Python notebook, you can execute each of the following three code blocks. Make sure to start with the first, which imports the PIL library.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">duck1</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;images/duck1.jpg&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">duck1</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">duck2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;images/duck2.jpg&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">duck2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">duck3</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;images/duck3.jpg&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">duck3</span>
+</pre></div>
+</div>
+<p>The script you’ll write in the active learning exercises is a example of a filter tool, of which there are many types. The filtering you’ll do requires multiple images, which are basically identical except for the photobombing object, and a routine from a basic statistics package. We don’t have to learn a lot about image processing to write a fun image filter!</p>
+<p>As you can see in the three duck images, the duck is never in the same place. If you think about this, it means that, of the pixels from the three images at any location <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code>, most of these pixels are what we want to see. To select this majority, we simply have to compute the median of the three pixels. Doing this across every pixel location in our images, we’ll produce a new image without the duck. Even more impressive is that this approach works even if the photobombing subject overlaps with themself/itself in a minority of the images. With additional data (i.e., images), this approach is robust!</p>
+<p><strong>This data is not wrong, but ….</strong> We’ll now move from erasing a photobomb (i.e., eliminating incorrect data in our data set) to a new application involving images. This application takes advantage of the fact that data collection can be messy beyond the capturing of incorrect information. In particular, we also want to remove from our data set any duplicates and other types of irrelevant information. Instead of making our downstream analyses deal with these headaches, we can enhance our cleaning routines to deal with them.</p>
+<p>Digital images are a great example of the fact that, when we digitize the real world, we often capture it in more precision than our application demands or requires. Sometimes this additional precision is handy and useful, as we experience when we enlarge a portion of a digital photograph captured in high resolution. Our eyes cannot distinguish the extra precision in a high-resolution image, but it keeps the image looking great as we zoom in on a portion of it. Yet if the resolution of our original image is small, enlarging it results in <em>pixelation</em>, which the blocky look that occurs when we have no extra resolution to call upon and we’re left with no choice but to enlarge a single pixel into a large square of that pixel’s color.</p>
+<p>Despite this benefit of capturing extra resolution, sometimes too much precision in your data can cause pesky problems. Data scientists often use real-world data to train computer models and then use these models to predict what might (or will) happen on new inputs, as we’ll do in Chapter 17. If during training we pay too much attention to specifics in the captured data, the models become <em>overtrained</em>. In other words, the model begins to pay too much attention to the specific details of the real-world situations your data captured and less to the properties of those situations that generalize to the broad class of situations your captured data is supposed to represent.</p>
+<p><strong>Zero out the unnecessary details.</strong> Let’s get a feel for the precision we don’t need in a digital image that we have no plan on enlarging. In particular, let’s inspect a pretty picture of Harvard Yard taken on a lovely September morning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">yard</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;images/harvard.png&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">yard</span>
+</pre></div>
+</div>
+<p>We learned that <code class="docutils literal notranslate"><span class="pre">RGB</span></code> mode represents color pixels with a tuple of three 8-bit numbers: The first representing the amount of red in the pixel; the second the amount of green; and the last the amount of blue. We can manipulate these numbers using not only the common unary and binary <em>arithmetic</em> operators (e.g., the unary negate operator and the binary add operator), but with what are called unary and binary <em>bitwise</em> (or sometimes called <em>logical</em>) operators. Remember that a number like 240 is stored in the computer in its binary representation (i.e., 11110000), and bitwise operators allow us to operate directly on these bits.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is a binary bitwise operator in Python that takes two integers, and for each bit location in the input integers performs an AND operation. This operation, for single-bit inputs, produces a <code class="docutils literal notranslate"><span class="pre">1</span></code> only when both of its inputs are <code class="docutils literal notranslate"><span class="pre">1</span></code>. If either input is a <code class="docutils literal notranslate"><span class="pre">0</span></code>, the output is a <code class="docutils literal notranslate"><span class="pre">0</span></code>. For multi-bit inputs, the single-bit operation is performed at each bit position.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Syntax Explained</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">0b</span></code> prefix on the four zeros and ones in the <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> constants simply tells the Python interpreter that these integer literals are expressed in base 2, not base 10.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Example of bitwise AND on a sequence of bits</span>
+<span class="linenos">2</span><span class="n">i</span> <span class="o">=</span> <span class="mb">0b0011</span>
+<span class="linenos">3</span><span class="n">j</span> <span class="o">=</span> <span class="mb">0b0101</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i     = 0b</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;j     = 0b</span><span class="si">{</span><span class="n">j</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i &amp; j = 0b</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">What can be a Boolean?</p>
+<p>Python is lenient about what can be interpreted as a Boolean value, and while it isn’t important to what we’re doing here, you might want to checkout <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#boolean-operations">the Python documentation on Boolean operations</a> if you’re curious.</p>
+</aside>
+<p>The <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operation on single-bit inputs is like the Python Boolean operation <code class="docutils literal notranslate"><span class="pre">and</span></code> that we’ve used in the condition of an if-statement, where the output of the <code class="docutils literal notranslate"><span class="pre">and</span></code> operation is <code class="docutils literal notranslate"><span class="pre">True</span></code> only when both input operands are <code class="docutils literal notranslate"><span class="pre">True</span></code>. In contrast to <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> that operates only on integer operands, <code class="docutils literal notranslate"><span class="pre">and</span></code> expects its operands to be Booleans values (i.e., <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) or ones that can be interpreted as Boolean values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Similar calculations using the Boolean `and` operator</span>
+<span class="linenos"> 2</span><span class="n">a</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 3</span><span class="n">b</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 4</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">b</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 6</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">a</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 8</span><span class="n">b</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 9</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">b</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Whoa, you might say. Head rush. Yes, the terminology here can be confusing. Many programming languages – Python included – talk about <em>binary</em> operators, and when they do so, they’re talking about operators that take two operands (like our familiar <code class="docutils literal notranslate"><span class="pre">+</span></code> operator). They’re not talking about operations that operate on binary numbers in a bitwise fashion, which are called <em>bitwise</em> operations. Finally, these languages distinguish Boolean operations from binary operators and bitwise operations. A Python <code class="docutils literal notranslate"><span class="pre">and</span></code> operation is a binary operator that works on two Boolean operands and produces a Boolean result. The Python <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operation is also a binary operator, and its operation is built on the same logical AND concept, but applies this logical AND concept to each bit location in the input integers.</p>
+<p>Let’s see the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operation in action to help us understand it better. Take a look at the code in the function <code class="docutils literal notranslate"><span class="pre">zero_lowest_bits</span></code> below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1">### chap08/zero.py</span>
+<span class="linenos">10</span><span class="k">def</span> <span class="nf">zero_lowest_bits</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="linenos">11</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Zero lowest 4 bits of an 8-bit input&#39;&#39;&#39;</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="p">(</span><span class="n">v</span> <span class="o">&amp;</span> <span class="mb">0b11110000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function takes a single argument <code class="docutils literal notranslate"><span class="pre">v</span></code>, performs a bitwise AND operation with that input and a specified constant, and returns the result. The crazy-looking value <code class="docutils literal notranslate"><span class="pre">0b11110000</span></code> is a numeric constant just like <code class="docutils literal notranslate"><span class="pre">240</span></code> is. In fact, it is nothing more than the 8-bit representation for <code class="docutils literal notranslate"><span class="pre">240</span></code> in base two. We’ve simply expressed the base-10 integer <code class="docutils literal notranslate"><span class="pre">240</span></code> as a binary value because, in this form, it is easier to see what we’re trying to do. And what we’re doing is forcing the lowest four bits of the input value <code class="docutils literal notranslate"><span class="pre">v</span></code> to be all zeros.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Lowest Four Bits</p>
+<p>“Lowest” in this phrase refers to the right-hand side of the number, which is where we put the digits with the least significance to the whole number. Zeroing the <code class="docutils literal notranslate"><span class="pre">3</span></code> in <code class="docutils literal notranslate"><span class="pre">543</span></code> doesn’t change the number as much as zeroing the <code class="docutils literal notranslate"><span class="pre">4</span></code> or the <code class="docutils literal notranslate"><span class="pre">5</span></code>. The same is true in binary numbers.</p>
+</aside>
+<p>Let’s run a few tests using this new function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">n</span> <span class="o">=</span> <span class="mi">240</span>
+<span class="linenos">2</span><span class="n">rounded_n</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">rounded_n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">zero_lowest_bits</span></code> with the integer <code class="docutils literal notranslate"><span class="pre">240</span></code> produces the resulting value of <code class="docutils literal notranslate"><span class="pre">240</span></code>. Since the lowest 4 bits of <code class="docutils literal notranslate"><span class="pre">240</span></code> are already all zeros, our function doesn’t change the value at all.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">n</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="linenos">2</span><span class="n">rounded_n</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">rounded_n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">zero_lowest_bits</span></code> with the integer <code class="docutils literal notranslate"><span class="pre">255</span></code> returns the value <code class="docutils literal notranslate"><span class="pre">240</span></code>. Notice that <code class="docutils literal notranslate"><span class="pre">240</span></code> is 15 less than <code class="docutils literal notranslate"><span class="pre">255</span></code>. The value <code class="docutils literal notranslate"><span class="pre">255</span></code> has all ones in its lowest 4 bits, and when we zero these 4 bits, we have effectively made <code class="docutils literal notranslate"><span class="pre">255</span></code> smaller by <code class="docutils literal notranslate"><span class="pre">0b1111</span></code> or <code class="docutils literal notranslate"><span class="pre">15</span></code>.</p>
+<p>Let’s run two more tests.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">n1</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="linenos">2</span><span class="n">r1</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">n2</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="linenos">4</span><span class="n">r2</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>How many bits does it take to encode <code class="docutils literal notranslate"><span class="pre">256</span></code> in binary? What does this mean for the bits in the constant <code class="docutils literal notranslate"><span class="pre">0b11110000</span></code> above the most significant <code class="docutils literal notranslate"><span class="pre">1</span></code>?</p>
+<p>If you can answer these two questions, then you’ll understand why the docstring on the function <code class="docutils literal notranslate"><span class="pre">zero_lowest_bits</span></code> says it takes 8-bit inputs. We’re going to pass it 8-bit values representing the <code class="docutils literal notranslate"><span class="pre">RGB</span></code> colors of our image’s pixels, but if you passed the routine an integer with a value requiring more than 8 bits, our routine will ignore any bits above the lower 8 (i.e., it will zero them out as it does with the lower 4 bits).</p>
+<p>How many bits does it take to encode <code class="docutils literal notranslate"><span class="pre">14</span></code> in binary? Do you understand why this test also returns <code class="docutils literal notranslate"><span class="pre">0</span></code>?</p>
+<p>Hopefully by now, you are starting to see that we’re rounding the input numbers, as I hinted with the naming of the returned result in the earlier code examples. You practiced rounding base-10 numbers in grade school. What’s <code class="docutils literal notranslate"><span class="pre">543</span></code> rounded down to the nearest 10? <code class="docutils literal notranslate"><span class="pre">540</span></code>. What’s <code class="docutils literal notranslate"><span class="pre">543</span></code> rounded down to the nearest 100? <code class="docutils literal notranslate"><span class="pre">500</span></code>. What’s <code class="docutils literal notranslate"><span class="pre">543</span></code> rounded down to the nearest 1000? <code class="docutils literal notranslate"><span class="pre">0</span></code>.  If you want to start thinking in hexadecimal, we rounded the formal parameter <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">zero_lowest_bits</span></code> down to the nearest <code class="docutils literal notranslate"><span class="pre">0x10</span></code> (or decimal 16). In other words, we dropped the least significant hexadecimal digit just like we can drop the lowest decimal digit.</p>
+<p><strong>No visible difference.</strong> Now that you’re on your way to becoming a person comfortable with numbers in multiple bases, we can use it to see if we can remove unnecessary information and not have the process result in any perceptible change to the image.</p>
+<p>Read through the code for <code class="docutils literal notranslate"><span class="pre">zero_image_lowest_bits</span></code> below. You’ll notice that it processes the image pixels in a fashion that we have seen repeatedly: a nested pair of for-statements that run over each dimension of the input data set. The body of the innermost loop simply grabs a specified pixel (specified by the current value of the loop indices) from the source image, manipulates it, and stores the resulting value into the same location in the destination image.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">14</span><span class="c1">### chap08/zero.py</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">zero_image_lowest_bits</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span>
+<span class="linenos">16</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Zeroing lowest 4 bits in all channels of input image&#39;&#39;&#39;</span>
+<span class="linenos">17</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">18</span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">19</span>            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos">20</span>            <span class="n">new_r</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">21</span>            <span class="n">new_g</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">22</span>            <span class="n">new_b</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos">23</span>            <span class="n">dest</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_r</span><span class="p">,</span> <span class="n">new_g</span><span class="p">,</span> <span class="n">new_b</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">35</span><span class="c1">### chap08/zero.py</span>
+<span class="linenos">36</span><span class="c1"># Create a temp frame for the new Yard image</span>
+<span class="linenos">37</span><span class="n">yardless</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">yard</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">yard</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="n">zero_image_lowest_bits</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="n">yardless</span><span class="p">)</span>
+<span class="linenos">40</span><span class="n">yardless</span>
+</pre></div>
+</div>
+<p>Now run the code cell above, and compare the image of Harvard Yard before and after zeroing out the lowest bits of each pixel. Can you see a difference between the original and our processed image? If you look closely, perhaps, but most people wouldn’t notice any difference on a quick glance. This tells us that most of the color information that our eyes perceive is encoded in the most significant 4 bits of the color information, and therefore, we can play with the least significant bits and not really change how most people experience our picture.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Feel free to try this with your own JPEG and PNG images, but just make sure that they are encoded in <code class="docutils literal notranslate"><span class="pre">RGB</span></code> mode and not too large in size!</p>
+</div>
+<p><strong>Image steganography.</strong> This “data cleaning” has removed redundant information and given us space within the image that we can use for another purpose, if we so desire. Remember that our pixels still contain 8-bit values even if the lowest four bits of each are zeros.</p>
+<p>Let’s say our desire is to send an image to another person but not have anyone observing this transmission know what we’re sending. We can accomplish this by sending one image hidden inside another. Let’s call the outer, observable image <em>the envelope image</em>, and the inner, unseen image <em>the hidden image</em>. In general, we could hide any information in the envelope image, and this is called <em>image steganography</em>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Alternative Methods</p>
+<p>You could also distribute each 8-bit pixel of the hidden image across two pixels with their lower 4 bits cleared of the envelope image, as long as the envelope image was as least twice as large as the hidden image. In general, there are lots of ways you might imagine hiding one image inside another.</p>
+</aside>
+<p>The specific process we’d use would be to “clean” a nondescript digital image to remove its redundant information and designate it as our envelope image. In the freed space, we would store our hidden image. Since we have been clearing out the lowest 4 bits of every 8-bit pixel in our envelope image, we might also throw away the lowest 4 bits of every 8-bit pixel in our hidden image. Then we might combine the 4-bit pixel values from the envelope image with the 4-bit pixel values from the hidden image to produce a resulting image with 8-bit pixels that looks like the envelope image but also contains the hidden image.</p>
+<p>This process describes this chapter’s programming problem set. It has you use this intriguing fact about digital images (i.e., we can delete some of the precision in them and not impact our enjoyment of them) to hide and then later recover a hidden image. To reiterate, this is not technique used in data science, but it will set us up to do something interesting and fun with the data exploration step of the general data science process.</p>
+<p><strong>Where is that pixel?</strong> When we write a Python script to blend a hidden image into an envelope image, the two images might be the same size, and in this case, we’re simply laying one image over the other. We could also place several small images in a large envelope image. In this, we’ll want to say where in the envelope image we want to place each hidden image, and to do this, we need a coordinate system that uniquely identifies each pixel in an image.</p>
+<p>We haven’t needed to think about the coordinate system in images because all of the work we have done to this point has had us process each and every pixel. Using PIL’s <code class="docutils literal notranslate"><span class="pre">getpixel</span></code> and <code class="docutils literal notranslate"><span class="pre">putpixel</span></code> methods, we indexed individual pixels in an image’s two-dimensional array using a coordinate tuple <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code>, but where in an image is a particular <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> coordinate?</p>
+<p>To answer this question, we can look at <a class="reference external" href="https://pillow.readthedocs.io/en/stable/handbook/concepts.html#coordinate-system">the Python Imaging Library documentation where it says</a> that it “uses a Cartesian pixel coordinate system, with (0,0) in the upper left corner. Note that the coordinates refer to the implied pixel corners; the centre of a pixel addressed as (0, 0) actually lies at (0.5, 0.5).”</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Data Sets of Higher Dimensionality</p>
+<p>If our data set was organized with more dimensions, our code would include a larger number of nested for-loops.</p>
+</aside>
+<p><strong>And how did we get there?</strong> Similar to how we largely ignored the coordinate system in our images, we also haven’t thought much about the particulars of our <em>traversal</em> of an image’s pixels. Our scripts contained two nested for-loops, and we randomly picked one dimension for the outer for-loop (i.e., <code class="docutils literal notranslate"><span class="pre">src.size[0]</span></code>) and the other dimension fell to the inner for-loop (i.e., <code class="docutils literal notranslate"><span class="pre">src.size[1]</span></code>). We also choose, honestly randomly, to start each for-loop at index 0. These are choices, and by making different choices, we change our <em>order of traversal</em> of the elements in the data set.</p>
+<p>We can learn about an image’s dimensions by looking at its <code class="docutils literal notranslate"><span class="pre">size</span></code> attribute. <a class="reference external" href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.size">The documentation says</a> that this attribute is “a 2-tuple (width, height).” This means that <code class="docutils literal notranslate"><span class="pre">src.size[0]</span></code> provides us with a measurement of the width of the image. In a Cartesian plane, this would correspond to the x-axis, which is often how we labeled the outer loop in our scripts. You can also think of this index as numbering the columns in our image (i.e., our data set). The other value, <code class="docutils literal notranslate"><span class="pre">src.size[1]</span></code> in our scripts, represents the height of the image, or the number of rows of pixels in it.</p>
+<p><strong>Visualizing a traversal.</strong> To visualize an image’s coordinate system, let’s build a script that marks its moves partway through the image’s pixels. To start, we’ll have this script traverse an image from its origin (i.e., the upper left-hand corner) to a specified <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> coordinate of interest. The script’s code would contain a nested for-loop structure that we’ve regularly used to traverse the pixels in an image. Let’s choose to use the names <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> for our point of interest and <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> for the two loop variables. With these decisions made, a <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function might look like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Traverse an image from (0,0) until location (x,y)&#39;&#39;&#39;</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">4</span>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">5</span>            <span class="n">pixel</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+<span class="linenos">6</span>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">7</span>                <span class="k">return</span>
+<span class="linenos">8</span>
+<span class="linenos">9</span><span class="n">traverse</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To call this function with a valid <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> coordinate, we need to know the size of our image, which now know is stored in an image’s <code class="docutils literal notranslate"><span class="pre">size</span></code> attribute.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">yard</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ours envelope is a nice big image. How about we place our hidden image in it at coordinate <code class="docutils literal notranslate"><span class="pre">(100,100)</span></code>? This should shift the hidden image equally distant down and to the right from the envelope image’s <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> origin.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">traverse</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you’ll notice, our <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function doesn’t do anything to each point it visits. Let’s extend this function so that it calls a helper function (<code class="docutils literal notranslate"><span class="pre">do_something</span></code>) that changes the values of the visited pixels, and let’s have <code class="docutils literal notranslate"><span class="pre">traverse</span></code> return the changed image.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">34</span><span class="c1">### chap08/xverse.py</span>
+<span class="linenos">35</span><span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">pixel</span><span class="p">):</span>
+<span class="linenos">36</span>    <span class="k">return</span> <span class="n">pixel</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">39</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Traverse an image from (0,0) until location (x,y)</span>
+<span class="linenos">40</span><span class="sd">       and do something at each visited pixel.  The input</span>
+<span class="linenos">41</span><span class="sd">       image is unchanged, and the changed image is returned.</span>
+<span class="linenos">42</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">43</span>    <span class="c1"># Create an image frame and initialize it with the input image</span>
+<span class="linenos">44</span>    <span class="n">new_im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">47</span>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">48</span>            <span class="n">pixel</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+<span class="linenos">49</span>            <span class="n">new_im</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">do_something</span><span class="p">(</span><span class="n">pixel</span><span class="p">))</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">52</span>                <span class="k">return</span> <span class="n">new_im</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="n">new_im</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">55</span><span class="n">new_im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;images/new.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Inverting a pixel’s color.</strong> Our function is structured as we desire, but the helper function still doesn’t change the value of the visited pixels. What might we do to create a path of visited pixels that is easy for us to see? How about we invert our image? It’s easy to create an inverted video image by simply replacing the value of each color in each pixel with the result of the calculation: <code class="docutils literal notranslate"><span class="pre">256</span> <span class="pre">-</span> <span class="pre">orig_color_value</span></code>.</p>
+<p>The following code block does this by replacing our do-nothing <code class="docutils literal notranslate"><span class="pre">do_something</span></code> function with one that reverses the input pixel. Try it out, and then look at the resulting image.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">32</span><span class="c1">### chap08/xverse.py</span>
+<span class="linenos">33</span><span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">pixel</span><span class="p">):</span>
+<span class="linenos">34</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Reverse video the input pixel&#39;&#39;&#39;</span>
+<span class="linenos">35</span>    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">pixel</span>
+<span class="linenos">36</span>    <span class="k">return</span> <span class="p">(</span><span class="mi">256</span> <span class="o">-</span> <span class="n">r</span><span class="p">,</span> <span class="mi">256</span> <span class="o">-</span> <span class="n">g</span><span class="p">,</span> <span class="mi">256</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="n">inverted</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">inverted</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;images/new.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Naming the traversal.</strong> If you display the resulting image, zoom in, and find where the <code class="docutils literal notranslate"><span class="pre">(100,100)</span></code> point is, you’ll see that our <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function looks like it visited the pixels in the order shown on the left-hand side of <a class="reference internal" href="#c08-fig1-ref"><span class="std std-numref">Figure 12</span></a>.</p>
+<figure class="align-default" id="c08-fig1-ref">
+<img alt="_images/c08_fig1.png" src="_images/c08_fig1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">The left-hand 2D array illustrates a column-major traversal, and the right-hand one a row-major traversal.</span><a class="headerlink" href="#c08-fig1-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A traversal in this fashion is called visiting the elements of the 2D array in <em>column-major order</em>. We start at the pixel at location <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> and then visit the next pixel down column 0. This next pixel is at coordinate <code class="docutils literal notranslate"><span class="pre">(0,1)</span></code>. Then we visit <code class="docutils literal notranslate"><span class="pre">(0,2)</span></code> and continue in this direction all the way down the first column. We then start on the second column with the pixel at coordinate <code class="docutils literal notranslate"><span class="pre">(1,0)</span></code>. We stop when we reach the 101st pixel in the 101st column—remember that we started counting at 0! While tedious, this should make sense because our outer for-loop runs over the image’s width (i.e., columns), and the inner loop runs over its height (i.e., rows).</p>
+<p>If we switch the two for-loop statements so that the outer now runs over the height and the inner over the width, we’d see a different pattern in our output image, which corresponds to the right-hand side of <a class="reference internal" href="#c08-fig1-ref"><span class="std std-numref">Figure 12</span></a>. Notice that the following code block just switches the for-loop statements; it doesn’t change the order of the loop variables in the coordinate tuples. Make sure you understand why.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">38</span><span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">39</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Traverse an image from (0,0) until location (x,y)</span>
+<span class="linenos">40</span><span class="sd">       and do something at each visited pixel.  The input</span>
+<span class="linenos">41</span><span class="sd">       image is unchanged, and the changed image is returned.</span>
+<span class="linenos">42</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">43</span>    <span class="c1"># Create an image frame and initialize it with the input image</span>
+<span class="linenos">44</span>    <span class="n">new_im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">47</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">48</span>            <span class="n">pixel</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+<span class="linenos">49</span>            <span class="n">new_im</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">do_something</span><span class="p">(</span><span class="n">pixel</span><span class="p">))</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos">52</span>                <span class="k">return</span> <span class="n">new_im</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="n">inverted</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">yard</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">55</span><span class="n">inverted</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;images/new.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">When Different Traversals Matter</p>
+<p>As a simple example, consider a calendar, which is a 2D array. The columns are days of the week, and the rows are weeks of the year. You’d use a column-major traversal to discover, for example, on which weekday you had the most appointments. You’d use a row-major traversal, if you wanted to know the total number of events in each week.</p>
+</aside>
+<p>This <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function implements what is called a <em>row-major</em> traversal. In general, different traversals matter in different problem domains.</p>
+<p><strong>Specifying the range sequence you want.</strong> Each of our previous traversals started from the upper left-hand corner of the image. This is because each for-loop starts at 0. Of course, we don’t have to start our traversal at the <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> corner of the image. We could start from any corner.</p>
+<p>How would we change our <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function if we wanted to run a column-major traversal starting at the lower right-hand corner? Well, we’d want the sequence of integers produced by the range function in the outer for-loop to run from <code class="docutils literal notranslate"><span class="pre">im.size[0]</span> <span class="pre">-</span> <span class="pre">1</span></code> down to <code class="docutils literal notranslate"><span class="pre">0</span></code> (inclusive). Similarly for the inner loop. Remember that the indices of the pixel elements in this 2-dimensional array run from 0 to one less than width or height!</p>
+<p>Nicely, there is a general form of the Python <code class="docutils literal notranslate"><span class="pre">range</span></code> function, as described in <a class="reference external" href="https://docs.python.org/3/library/functions.html#func-range">the Python documentation</a>, that can help. In this general form, you specify the <em>start</em>, <em>stop</em>, and <em>step</em> values you’d like <code class="docutils literal notranslate"><span class="pre">range</span></code> to use. You can play with it in the following code blocks, which capture the <code class="docutils literal notranslate"><span class="pre">range</span></code> sequence in a list using Python <em>list comprehensions</em>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">List Comprehensions</p>
+<p>These are syntactic shorthands for creating a list from using an <em>expression</em>, an <em>iterable</em>, and an optional <em>condition</em>. It replaces the writing of a for-loop to initialize a list, where the body of the loop computes an expression and appends each computed value to the list. If you want only some of the computed values, you include an if-statement based on the desired condition. The syntax is: <code class="docutils literal notranslate"><span class="pre">newlist</span> <span class="pre">=</span> <span class="pre">[expression</span> <span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">iterable</span> <span class="pre">if</span> <span class="pre">condition]</span></code></p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default start to 0 and step to 1</span>
+<span class="n">my_range</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicitly state start is 0 and step is 1</span>
+<span class="n">my_range</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the same sequence backwards</span>
+<span class="n">my_range</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p><strong>Storing a 2-dimensional array in memory.</strong> I said that different analyses will naturally use different traversals of the different dimensions in your data set. When a programming language linearizes a multi-dimensional data set to store its individual values contiguously in the computer’s memory, it also decides on an ordering of the dimensions.</p>
+<p>Recall our discussion of hexdump in Chapter 6. The hexdump program displayed the contents of a file as a 2-dimensional array, but this was just for ease of display in a 2-dimensional computer window. Similarly, we like to think of our JPEG files as 2-dimensional images, and we display them that way, but the contents of these files are just a single long string of 8-bit numbers.</p>
+<p>To understand this better, it might be easier to stop thinking of image files and recall the text files from earlier in this act. These text files were nothing more than a long sequence of characters corresponding to the characters in the book we were reading. Below I ran the standalone version of <code class="docutils literal notranslate"><span class="pre">hexdump</span></code> on the file containing the text to <em>The Cat in the Hat</em> by Dr. Seuss.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT executable
+<span class="hll">$ hexdump -C CatInTheHat.txt
+</span>00000000  54 68 65 20 73 75 6e 20  64 69 64 20 6e 6f 74 20  |The sun did not |
+00000010  73 68 69 6e 65 2e 0a 49  74 20 77 61 73 20 74 6f  |shine..It was to|
+00000020  6f 20 77 65 74 20 74 6f  20 70 6c 61 79 2e 0a 53  |o wet to play..S|
+...
+</pre></div>
+</div>
+<p>You should think of all files as long sequences (i.e., a 1-dimensional array) of bytes, and in this way, files are a great analogy for our computer’s memory, in which we store the contents of these files while we operate on them.</p>
+<p>What are the implications of this on how we design and implement a programming language like Python? Well, a programming language designer needs to decide how to linearize our 2-dimensional arrays and place them into the 1-dimensional memory. In other words, it has to decide whether it stores element <code class="docutils literal notranslate"><span class="pre">(0,1)</span></code> or element <code class="docutils literal notranslate"><span class="pre">(1,0)</span></code> after <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code>. Depending on this choice, we talk about a programming language as storing its 2-dimensional arrays in row-major or column-major order.</p>
+<p>In the next act, we’ll learn how to measure the performance of our programs, and the order in which the elements of a data set are stored in memory can have a significant effect on how fast your code runs. But for now, you should just know that many programming languages choose one of these two orderings, and once this decision has been made, you (as a programmer in that language) are stuck with the implications of that decision. For example, C and C++ store their arrays in row-major order, while MATLAB and R use column-major order. When you write in those languages and if you’re concerned about your program’s performance, you’ll want to consider the language’s native ordering when you decide how you’ll order the nested for-loops that visit the elements of your two-dimensional arrays.</p>
+<p>Other programming languages, including Python, don’t force your array data into row-major or column-major order. We’ve talked about arrays as if they are a fundamental data type in Python, like integers and lists, but they’re not. We’ve used the abstractions in the Python Image Library, which allowed us to think about our images as 2-dimensional arrays. For general scientific computing, you’ll probably use <a class="reference external" href="https://numpy.org/">Python’s NumPy library</a>, which allows you (the programmer) to specify whether it should use row- or column-major ordering for its <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> type. If you don’t specify a preferred ordering, this library will default to row-major ordering. It has to pick one in order to store your array in your computer’s memory!</p>
+<p>[Version 20230722]</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 7: Many Numbers But Not Any Number</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ales.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Active-Learning Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

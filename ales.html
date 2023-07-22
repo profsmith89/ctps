@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Chapter 7: Many Numbers But Not Any Number" href="chap07.html" />
+    <link rel="prev" title="Chapter 8: What Is My Problem?" href="chap08.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -347,6 +348,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-3-creating-a-checkerboard">ALE 6.3: Creating a checkerboard</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-4-counting-with-python-integers">ALE 6.4: Counting with Python integers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-5-color-the-duck-s-world">ALE 6.5: Color the duck’s world</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-1-parameters-and-parentheses">ALE 8.1: Parameters and Parentheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-2-erase-the-duck">ALE 8.2: Erase the Duck</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-3-create-and-fix-your-own-photobomb">ALE 8.3: Create and Fix Your Own Photobomb</a></li>
 </ul>
             </nav>
         </div>
@@ -1552,6 +1556,135 @@ document.write(`
 </div>
 <p>[Version 20230710]</p>
 </section>
+<section id="ale-8-1-parameters-and-parentheses">
+<h2>ALE 8.1: Parameters and Parentheses<a class="headerlink" href="#ale-8-1-parameters-and-parentheses" title="Permalink to this heading">#</a></h2>
+<p>We used the <code class="docutils literal notranslate"><span class="pre">Image.putpixel</span></code> method many times in this chapter. <a class="reference external" href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.putpixel">Its documentation</a> says that it takes two input parameters: an <code class="docutils literal notranslate"><span class="pre">xy</span></code> coordinate of the pixel in the Image object, and the <code class="docutils literal notranslate"><span class="pre">value</span></code> we want there. The script <code class="docutils literal notranslate"><span class="pre">zero.py</span></code> used this method in the function <code class="docutils literal notranslate"><span class="pre">zero_image_lowest_bits</span></code> as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">14</span><span class="c1">### chap08/zero.py</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">zero_image_lowest_bits</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span>
+<span class="linenos">16</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Zeroing lowest 4 bits in all channels of input image&#39;&#39;&#39;</span>
+<span class="linenos">17</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">18</span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">19</span>            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos">20</span>            <span class="n">new_r</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">21</span>            <span class="n">new_g</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">22</span>            <span class="n">new_b</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos">23</span>            <span class="n">dest</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_r</span><span class="p">,</span> <span class="n">new_g</span><span class="p">,</span> <span class="n">new_b</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Step 1.</strong> What’s wrong with this version of the statement on line 23?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">23</span>            <span class="n">dest</span><span class="o">.</span><span class="n">putpixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">new_r</span><span class="p">,</span> <span class="n">new_g</span><span class="p">,</span> <span class="n">new_b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 2.</strong> Would this version of <code class="docutils literal notranslate"><span class="pre">zero_image_lowest_bits</span></code> work? It clearly passes two actual parameters that match the two formal parameters in the <code class="docutils literal notranslate"><span class="pre">Image.putpixel</span></code> interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span><span class="k">def</span> <span class="nf">zero_image_lowest_bits</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span>
+<span class="linenos">16</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Zeroing lowest 4 bits in all channels of input image&#39;&#39;&#39;</span>
+<span class="linenos">17</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">18</span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">19</span>            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos">20</span>            <span class="n">new_r</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">21</span>            <span class="n">new_g</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">22</span>            <span class="n">new_b</span> <span class="o">=</span> <span class="n">zero_lowest_bits</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="linenos">23</span>            
+<span class="linenos">24</span>            <span class="n">coordinate</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">25</span>            <span class="n">new_pixel</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_r</span><span class="p">,</span> <span class="n">new_g</span><span class="p">,</span> <span class="n">new_b</span><span class="p">)</span>
+<span class="linenos">26</span>            <span class="n">dest</span><span class="o">.</span><span class="n">putpixel</span><span class="p">(</span><span class="n">coordinate</span><span class="p">,</span> <span class="n">new_pixel</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="ale-8-2-erase-the-duck">
+<h2>ALE 8.2: Erase the Duck<a class="headerlink" href="#ale-8-2-erase-the-duck" title="Permalink to this heading">#</a></h2>
+<p>Now that we know how to read and write the pixels in a digital images, we’re going to use that knowledge to solve a common problem: removing an unintended subject in a sequence of pictures containing no moving objects except for our unintended subject. This exercise was inspired by <a class="reference external" href="http://nifty.stanford.edu/2014/nicholson-the-pesky-tourist/">John Nicholson’s 2014 Nifty Assignment titled The Pesky Tourist</a>, and we thank him for sharing it with the world.</p>
+<p>How will our script remove the unintended subject (i.e., the noise in our digital image)? Our script will:</p>
+<ol class="arabic simple">
+<li><p>Expect you to give it <em>N</em> pictures, for <em>N</em> greater than 2, that are all of the same size and orientation;</p></li>
+<li><p>Visit each pixel location in this common image frame, reading the pixel values there for each of the input pictures; and</p></li>
+<li><p>Compute the median of these values as the value of each pixel in the final filtered image.</p></li>
+</ol>
+<p>Ready to get started?</p>
+<p><strong>Step 1. Reading multiple input files.</strong> The fifth step of our problem-solving process says that we should begin a new problem by considering what previously written scripts can help us with our current problem. In this case, the script from ALE 6.5 would be a great start as both that script and the one we’re writing visit each pixel in an input image.</p>
+<p>That script is repeated and renamed below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap08/ale01.py</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Grab the image filename</span>
+<span class="linenos"> 5</span><span class="n">imfile</span> <span class="o">=</span> <span class="s1">&#39;images/&#39;</span> <span class="o">+</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Filename of image: &#39;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">imfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="c1"># Apply a filter that enhances the red and desaturates blue/green</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="linenos">10</span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">11</span>            <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos">12</span>            <span class="n">im</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">50</span><span class="p">))</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;images/out.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Change this script so that it reads <em>exactly three</em> input files from <em>the command line or from user input</em>.</p>
+<p><strong>Step 2. Opening multiple input files.</strong> Now that our script knows the names of three input files, we need it to open the three files.</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">with</span></code> <code class="docutils literal notranslate"><span class="pre">Image.open</span></code> line so that it repeats the open-as phrase in the with-statement three times. Each open-as phrase should be separated by commas. This will cause the script to open (and later close) multiple image objects. It should look something like the following, with each <code class="docutils literal notranslate"><span class="pre">open_as_phrase</span></code> replaced with <code class="docutils literal notranslate"><span class="pre">Image.open(filename_var)</span> <span class="pre">as</span> <span class="pre">image_object_name</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">open_as_phrase1</span><span class="p">,</span> <span class="n">open_as_phrase2</span><span class="p">,</span> <span class="n">open_as_phrase3</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>The resulting with-statement might get quite long, and you can split it across multiple lines at a comma by using the line continuation character in Python, which is the backslash (<code class="docutils literal notranslate"><span class="pre">\</span></code>).</p>
+<p>Take a look at <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#maximum-line-length">the Style Guide for Python Code (PEP 8) under “Maximum Line Length”</a> to see an example of how this is done. As it says there, we prefer to use Python’s implied line continuation in most long-line situations rather than this explicit line continuation syntax, but this is a common situation where you can’t use anything but the explicit syntax.</p>
+<p><strong>Step 3. Testing what we’ve done so far.</strong> Take a moment and add some statements to your script so that it prompts the user to ask which input file the script should modify in the nested for-loops and then save the changed image in <code class="docutils literal notranslate"><span class="pre">out.png</span></code>.</p>
+<p>As you do this work, don’t worry about checking for all kinds of bad user input: You’re just testing what you’ve written in steps 1 and 2, and we’ll delete this extra code in a moment. Do, however, make sure that the correct file was displayed!</p>
+<p>If you have access to the this book’s Github repo, you can test your script using the image files with the prefix name <code class="docutils literal notranslate"><span class="pre">duck</span></code> or <code class="docutils literal notranslate"><span class="pre">photobomb</span></code> in the <code class="docutils literal notranslate"><span class="pre">images</span></code> directory under <code class="docutils literal notranslate"><span class="pre">chap08</span></code>.</p>
+<p>When you’re done testing your script, get rid of the prompt you just added, but make sure you leave the statements you added in Steps 1 and 2!</p>
+<p><strong>Step 4. Finding the statistical median.</strong> Alright, you are now ready to erase an unintended subject. The nested for-loops provide the logic we need to visit each pixel in an image, but the statements in the body of these nested for-loops are not the work we need done. The work we need is to grab the pixel values at each location <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> in the three input images and compute the median of these values.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Read about the Function</p>
+<p>You should <a class="reference external" href="https://docs.python.org/3/library/statistics.html#statistics.median">read about <code class="docutils literal notranslate"><span class="pre">statistics.median</span></code></a> before attempting to complete this step.</p>
+</aside>
+<p>Although we could write a function that computed a median given a list of numbers, let’s take advantage of the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> library in Python, which has conveniently provided us with a <code class="docutils literal notranslate"><span class="pre">statistics.median</span></code> function. You’ll notice that the <code class="docutils literal notranslate"><span class="pre">statistics.median</span></code> function may produce a value that is not one of the input data points. This will be a problem for us because we don’t want our input integer values turned into an output floating-point value. Our color values are integers and need to stay as such. While you might force the value returned from <code class="docutils literal notranslate"><span class="pre">statistics.median</span></code> back into an integer, we can also simply use <code class="docutils literal notranslate"><span class="pre">statistics.median_low</span></code>. Ahh, what a helpful and a well-designed library!</p>
+<p>Once you have a median value (and think about what that means for a pixel), you’ll want to store the result in a new output image.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Write pseudocode reflecting what was just discussed. Don’t try to jump right into Python code! Make sure you see the script’s complete flow in pseudocode before you start translating these new pieces of logic into Python. It will save you time in the long run!</p>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>If you are unfamiliar with this children’s game, <a class="reference external" href="https://en.wikipedia.org/wiki/Where%27s_Wally%3F">this Wikipedia article</a> provides some background.</p>
+</aside>
+<p>To test your code with our images, start with the three <code class="docutils literal notranslate"><span class="pre">photobomb</span></code> images in the <code class="docutils literal notranslate"><span class="pre">images</span></code> directory. If those work, check your code with the three <code class="docutils literal notranslate"><span class="pre">duck</span></code> images. The <code class="docutils literal notranslate"><span class="pre">photobomb</span></code> images were created by copying a single picture of Harvard Yard and then inserting Waldo from <em>Where’s Waldo?</em> fame into this image in three different locations. The three <code class="docutils literal notranslate"><span class="pre">duck</span></code> images are a real sequence of three pictures with a common background and moving character. As such, many pixels—even those not obscured by the duck—are subtly different from picture to picture.</p>
+<p><strong>Step 5. The need for more input files.</strong> Congratulations on erasing the CS50 debugging duck and Waldo from our images! As wonderful as our current script is, it isn’t very robust. For example, it expects exactly three input images, and the unintended object can’t overlap with itself in any of the three images.</p>
+<p>To see this second point for yourself, run your solution to the previous step with the first three images with the prefix <code class="docutils literal notranslate"><span class="pre">apsu</span></code>, which have a <code class="docutils literal notranslate"><span class="pre">.png</span></code> extension. Look at the resulting image very closely, and you’ll see a shadowy image of the person’s feet where the unintended subject overlapped with his previous self.</p>
+<p><strong>Step 6. Accepting and computing with any number of input files.</strong> We will eliminate the problem identified in Step 5 by building a script that accepts more input images. The unintended object or subject could then overlap with itself/himself in some of the input images as long as the majority of the images contained only the desired background.</p>
+<p>To begin, make a backup copy of your current script, and then follow the directions below:</p>
+<ol class="arabic simple">
+<li><p>Eliminate the statements that allowed the user to input the image filenames. Your final script will accept the input image filenames from the command line.</p></li>
+<li><p>Fix the “proper usage” check so that it expects <em>at least 3 command line arguments</em>. Remember that the your program’s name (but not the <code class="docutils literal notranslate"><span class="pre">python3</span></code> interpreter) counts as one of the command line arguments.</p></li>
+<li><p>Time to write some pseudocode again. Think about a data structure that we can use to collect all the input filenames as well as keep track of our image objects that you’ll open using these filenames. To this point, you were probably using a unique variable for each input filename and the result of each of the three <code class="docutils literal notranslate"><span class="pre">Image.open</span></code> commands. This worked because we knew that there were exactly three of each. We now need a data structure that can expand while the program runs to accommodate all the filenames and open-file objects we’ll need. Can you think of a data structure that will allow us to work with a variable-length list of objects? Yes, we just said it! A Python <code class="docutils literal notranslate"><span class="pre">list</span></code> will do this quite nicely. We’ll talk a lot more about different types of common data structures in the next act. Go through your script and add pseudocode for every piece of work that needs to change because you’re using lists instead of single variables.</p></li>
+<li><p>When you think you’ve got all the logic you think you need in pseudocode, start translating this pseudocode into Python. Don’t forget that you can ask for the size of the <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> list and subtract <code class="docutils literal notranslate"><span class="pre">1</span></code> from this value to determine the number of input files. This might be very useful in creating a bound you could use in one or more for-loops that walk over the elements in a list.</p></li>
+<li><p>While translating pseudocode into Python code, you’ll undoubtedly realize that the nice with-statement we’ve been using requires us to know the exact number of files we want to open at the time we write the script. Yup, you are going to have to open each input image file and later explicitly close each one (using <code class="docutils literal notranslate"><span class="pre">Image.close</span></code>).</p></li>
+</ol>
+<p>Once you’ve done all this work, run your script as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 ale01.py apsu1.png apsu2.png apsu3.png apsu4.png apsu5.png apsu6.png
+</pre></div>
+</div>
+<p>Did this produce a much cleaner resulting image?  It should! Go show your family and friends your amazing script. (You might rename your final script from <code class="docutils literal notranslate"><span class="pre">ale01.py</span></code> to <code class="docutils literal notranslate"><span class="pre">erase32.py</span></code>.)</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Hint</p>
+<p>What’s different in how we gathered the original data (i.e., images) in these two cases?</p>
+</aside>
+<p><strong>Step 7. Why median, but not mode?</strong> Take a look at the files <code class="docutils literal notranslate"><span class="pre">images/photobomb-mode.jpg</span></code> and <code class="docutils literal notranslate"><span class="pre">images/duck-mode.jpg</span></code>. These files were produced by our solution script, except that we used <code class="docutils literal notranslate"><span class="pre">statistics.mode</span></code> instead of <code class="docutils literal notranslate"><span class="pre">statistics.median</span></code> to compute the pixel we placed in the output image. As you’ll see by looking at these two images, we successfully erased Waldo using the <code class="docutils literal notranslate"><span class="pre">mode</span></code> function, but not the duck. Why is this?</p>
+<p>And when you figure out why median is more robust an approach than mode, please make sure you can explain why is it the first duck that remains. This doesn’t have anything to do with the statistical properties of the function, but choices that the library designer made. What are you learning about quantitative reasoning with data here?</p>
+</section>
+<section id="ale-8-3-create-and-fix-your-own-photobomb">
+<h2>ALE 8.3: Create and Fix Your Own Photobomb<a class="headerlink" href="#ale-8-3-create-and-fix-your-own-photobomb" title="Permalink to this heading">#</a></h2>
+<p>In 8.2, you created a script that fixed photobombs in our pictures. Now it is your turn.</p>
+<p><strong>Step 1.</strong> Take a sequence of 3 or more pictures with your smartphone and download them to your computer. Here are some recommendations that will help you make the next step work well:</p>
+<ol class="arabic simple">
+<li><p>Find a place where you can set your phone and it won’t move for your sequence of pictures. Ideally, use some kind of tripod.</p></li>
+<li><p>In the scene you want to capture in a picture, nothing should be moving. If you want to capture a person in front of a beautiful backdrop, make sure that nothing in the whole scene will be moving, including your subject. In other words, the person needs to stand/sit still for a few pictures.</p></li>
+<li><p>Now decide on the photobomb(s) that will be in your pictures and that your script will eliminate. If that’s another person, have them move after you take each picture. Make sure that they move enough that they don’t appear stationary. If you want to include two photobombing people, try it!</p></li>
+<li><p>Take enough pictures that, for all points in the scene you want, the majority of the pictures show that each point unobscured.</p></li>
+<li><p>On your computer, reduce the size of your images — ideally no more than a few hundred kilobytes. The larger the images the longer your script will take to run!</p></li>
+<li><p>Make sure you saved the reduced images in RGB, not RGBA, format.</p></li>
+</ol>
+<p><strong>Step 2.</strong> Run your images through the script you built in 8.2. Show your friends and family!</p>
+<p>[Version 20230722]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1586,12 +1719,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap07.html"
+       href="chap08.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 7: Many Numbers But Not Any Number</p>
+        <p class="prev-next-title">Chapter 8: What Is My Problem?</p>
       </div>
     </a>
     <a class="right-next"
@@ -1654,6 +1787,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-3-creating-a-checkerboard">ALE 6.3: Creating a checkerboard</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-4-counting-with-python-integers">ALE 6.4: Counting with Python integers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-6-5-color-the-duck-s-world">ALE 6.5: Color the duck’s world</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-1-parameters-and-parentheses">ALE 8.1: Parameters and Parentheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-2-erase-the-duck">ALE 8.2: Erase the Duck</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-3-create-and-fix-your-own-photobomb">ALE 8.3: Create and Fix Your Own Photobomb</a></li>
 </ul>
   </nav></div>
 

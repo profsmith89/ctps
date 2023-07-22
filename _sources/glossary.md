@@ -14,6 +14,8 @@
 
 **API:** an application programming interface is the definitions (i.e., variables, constants, classes, and functions) in a module, package, or library that they make available for programmers to use.
 
+**array:** a sequence of items of the same type, which are stored compactly in the computer's memory, i.e., sequentially one after the other. A string is a 1-dimensional array of characters, and an image is a 2-dimensional array of pixels.
+
 **attributes:** Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.
 
 **background:** when you launch a program through the shell, it can be run in *foreground* or *background*. When run in the foreground, the program must terminate before the shell prompt reappears. When run in background, the shell prompt reappears as soon as the program launches. The program's output and shell's output will then be interleaved as each executes concurrently. Having the capacity to run a program in background allows us to launch a server in background and then use the shell to run the client.
@@ -27,6 +29,8 @@
 **binary numbers:** a number written in bits (i.e., base-2).
 
 **bind:** the term used when pairing an actual parameter with its formal parameter during a function call.
+
+**bitwise operators:** the set of binary operator that don't act like arithmetic operators, which treat a string of *n* bits like a number, but instead treat a string of *n* bits as *n* independent operations to be perform at each bit location in the string. These operations are particularly useful in creating masks, which help you grab a portion of a string of bits.
 
 **blocking** and **non-blocking calls:** in a blocking call, your script doesn't continue its execution until the work in the call is complete. This is the type of function call we have learned to build. A non-blocking function call is our introduction to concurrency in computation. The call doesn't finish its work before returning to the caller. It causes two processes to run concurrently!
 
@@ -122,6 +126,8 @@
 
 **nibble:** half a **byte** or 4 bits. A nibble can be written as a single hexadecimal character. See **hexadecimal numbers**.
 
+**noise:** any degradation in the fidelity of our data.
+
 **non-deterministic:** a process where an input can produce a number of different outputs. See **deterministic**.
 
 **object:** pretty much everything in Python is an object with which we can interact.
@@ -133,6 +139,8 @@
 **overflow** and **underflow**: while we can imagine a number of any size, computers are built from physical devices that have a fixed size. The computer I'm typing on right now contains 64-bit registers into which I can put an integer. While $2^{64}$ is a lot of values, I can still imagine more. As such, we define what bit patterns represent which numbers when stored in one of these registers. Typically, the range of representable integers is $-2^{63}$ to $2^{63} - 1$. If you perform a calculation that produces a positive integer greater than $2^{63} - 1$, the computation is said to have overflowed the computer's integer representation. Similarly for underflow.
 
 **overloading:** using the same operator (e.g., `+`) or method name (`find`) for distinctly different operations. The actual operation performed depends upon the type of operands you provide to the operator or method.
+
+**overtraining:** data-science models are trained to recognize certain generalities in our world, e.g., we might train a model to recognize swans. We've overtrained this model when it starts to say that all swans are white.
 
 **package:** a whole set of helpful modules that a Python programmer wishes to distribute all together. There are many packages in Python. The [Python Package Index](https://pypi.org/) is an online repository of software for the Python programming language.
 
@@ -179,6 +187,8 @@
 **TCP/IP:** the protocol suite that underlies the Internet. The TCP acronym stands for Transmission Control Protocol and the IP acronym stands for Internet Protocol (IP).
 
 **transaction:** the fundamental operation that takes place when two processes communicate with each other.
+
+**traversal:** given an **array**, a traversal defines the order in which you'll visit the elements in the array. For example, a row-major traversal of a 2-dimensional array would visit each element in a particular row before visiting any element in the next row.
 
 **tuple:** one of Python's built-in data types. It is like a list in that the data in a tuple are ordered, but unlike lists, tuples are immutable. We can create a tuple using parentheses, and the assignment operator can disassemble a tuple.
 

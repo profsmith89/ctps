@@ -165,6 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glossary</a></li>
 </ul>
@@ -324,6 +325,7 @@ document.write(`
 <p><strong>algorithm (Chapter 3):</strong> a sequence of well-specified steps that a computer can execute.</p>
 <p><strong>aliases:</strong> what we call two names that refer to the same object.</p>
 <p><strong>API:</strong> an application programming interface is the definitions (i.e., variables, constants, classes, and functions) in a module, package, or library that they make available for programmers to use.</p>
+<p><strong>array:</strong> a sequence of items of the same type, which are stored compactly in the computer’s memory, i.e., sequentially one after the other. A string is a 1-dimensional array of characters, and an image is a 2-dimensional array of pixels.</p>
 <p><strong>attributes:</strong> Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.</p>
 <p><strong>background:</strong> when you launch a program through the shell, it can be run in <em>foreground</em> or <em>background</em>. When run in the foreground, the program must terminate before the shell prompt reappears. When run in background, the shell prompt reappears as soon as the program launches. The program’s output and shell’s output will then be interleaved as each executes concurrently. Having the capacity to run a program in background allows us to launch a server in background and then use the shell to run the client.</p>
 <p><strong>bit:</strong> the fundamental unit of information in all computing and digital communications systems. The value of a bit is either 0 or 1, and as such, it corresponds to a binary digit (i.e., a digit in base-2).</p>
@@ -331,6 +333,7 @@ document.write(`
 <p><strong>binary data:</strong> normally we think of data as representing something, like a string or an integer, but binary data are data that we think of only as what they’re made of: <strong>bits</strong>.</p>
 <p><strong>binary numbers:</strong> a number written in bits (i.e., base-2).</p>
 <p><strong>bind:</strong> the term used when pairing an actual parameter with its formal parameter during a function call.</p>
+<p><strong>bitwise operators:</strong> the set of binary operator that don’t act like arithmetic operators, which treat a string of <em>n</em> bits like a number, but instead treat a string of <em>n</em> bits as <em>n</em> independent operations to be perform at each bit location in the string. These operations are particularly useful in creating masks, which help you grab a portion of a string of bits.</p>
 <p><strong>blocking</strong> and <strong>non-blocking calls:</strong> in a blocking call, your script doesn’t continue its execution until the work in the call is complete. This is the type of function call we have learned to build. A non-blocking function call is our introduction to concurrency in computation. The call doesn’t finish its work before returning to the caller. It causes two processes to run concurrently!</p>
 <p><strong>byte:</strong> eight bits grouped together. This is typically the smallest unit of data that you can access given a memory (or other type of) <strong>address</strong>.</p>
 <p><strong>class:</strong> see <strong>type</strong> (until Act II).</p>
@@ -378,12 +381,14 @@ document.write(`
 <p><strong>namespace:</strong> a context that helps you keep track of what object a particular name resolves to. A name might have meaning in one namespace, but not another.</p>
 <p><strong>network buffer:</strong> pieces of computer memory temporarily used as a holding spot for network data as these data are moved from one network endpoint to another.</p>
 <p><strong>nibble:</strong> half a <strong>byte</strong> or 4 bits. A nibble can be written as a single hexadecimal character. See <strong>hexadecimal numbers</strong>.</p>
+<p><strong>noise:</strong> any degradation in the fidelity of our data.</p>
 <p><strong>non-deterministic:</strong> a process where an input can produce a number of different outputs. See <strong>deterministic</strong>.</p>
 <p><strong>object:</strong> pretty much everything in Python is an object with which we can interact.</p>
 <p><strong>off-by-1 error:</strong> a very common error in programming, where you think you know where a sequence starts or ends, but you misjudge it by a single step.</p>
 <p><strong>optional parameters:</strong> some commands take lots of input parameters, but you need specify only a few of them and the Python interpreter assumes you meant the default for the other unspecified ones (e.g., <code class="docutils literal notranslate"><span class="pre">open</span></code> assumes you want to open a file for reading).</p>
 <p><strong>overflow</strong> and <strong>underflow</strong>: while we can imagine a number of any size, computers are built from physical devices that have a fixed size. The computer I’m typing on right now contains 64-bit registers into which I can put an integer. While <span class="math notranslate nohighlight">\(2^{64}\)</span> is a lot of values, I can still imagine more. As such, we define what bit patterns represent which numbers when stored in one of these registers. Typically, the range of representable integers is <span class="math notranslate nohighlight">\(-2^{63}\)</span> to <span class="math notranslate nohighlight">\(2^{63} - 1\)</span>. If you perform a calculation that produces a positive integer greater than <span class="math notranslate nohighlight">\(2^{63} - 1\)</span>, the computation is said to have overflowed the computer’s integer representation. Similarly for underflow.</p>
 <p><strong>overloading:</strong> using the same operator (e.g., <code class="docutils literal notranslate"><span class="pre">+</span></code>) or method name (<code class="docutils literal notranslate"><span class="pre">find</span></code>) for distinctly different operations. The actual operation performed depends upon the type of operands you provide to the operator or method.</p>
+<p><strong>overtraining:</strong> data-science models are trained to recognize certain generalities in our world, e.g., we might train a model to recognize swans. We’ve overtrained this model when it starts to say that all swans are white.</p>
 <p><strong>package:</strong> a whole set of helpful modules that a Python programmer wishes to distribute all together. There are many packages in Python. The <a class="reference external" href="https://pypi.org/">Python Package Index</a> is an online repository of software for the Python programming language.</p>
 <p><strong>pixel:</strong> the smallest display element (and therefore addressable element) in an image. It is short for picture element.</p>
 <p><strong>procedure:</strong> another term for <strong>function</strong>.</p>
@@ -407,6 +412,7 @@ document.write(`
 <p><strong>syntax:</strong> rules we need to follow when saying something in any programming language.</p>
 <p><strong>TCP/IP:</strong> the protocol suite that underlies the Internet. The TCP acronym stands for Transmission Control Protocol and the IP acronym stands for Internet Protocol (IP).</p>
 <p><strong>transaction:</strong> the fundamental operation that takes place when two processes communicate with each other.</p>
+<p><strong>traversal:</strong> given an <strong>array</strong>, a traversal defines the order in which you’ll visit the elements in the array. For example, a row-major traversal of a 2-dimensional array would visit each element in a particular row before visiting any element in the next row.</p>
 <p><strong>tuple:</strong> one of Python’s built-in data types. It is like a list in that the data in a tuple are ordered, but unlike lists, tuples are immutable. We can create a tuple using parentheses, and the assignment operator can disassemble a tuple.</p>
 <p><strong>type (Chapter 1):</strong> what defines the kinds of attributes you’ll find on a Python object.</p>
 <p><strong>type information (Chapter 5):</strong> information that tells us (or the Python interpreter) how to interpret the “bag of bits” before us (or it). For example, the quotes around a string in a Python script are not a part of the string, but tell us and the Python interpreter how we should interpret the characters and words in the string (i.e., as a literal string value and not as a variable name or Python reserved word). The quotes are acting like type information.</p>
