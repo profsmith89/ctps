@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 9: Find a Phrase &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap09';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Active-Learning Exercises" href="ales.html" />
+    <link rel="prev" title="Chapter 8: What Is My Problem?" href="chap08.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    A Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 9: Find a Phrase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap09.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 9: Find a Phrase</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-complex-problem-to-be-solved">A complex problem-to-be-solved</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-basic-facts">Some basic facts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-algorithm">Which algorithm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-formally">Algorithms, formally</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-well-studied-specification-for-string-matching">A well-studied specification for string matching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-a-specification-an-algorithm">Is a specification an algorithm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-brute-force-algorithm">A brute-force algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bf-string-matching-program">A BF-string-matching program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-algorithm-multiple-implementations">One algorithm, multiple implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-in-context">Evaluation in context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-performance">Measuring performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-do-better">How do we do better?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-are-where-the-action-is">Loops are where the action is</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-complexity">Computational complexity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-complexity-in-action">Computational complexity in action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-unsolved">Problem unsolved</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-9-find-a-phrase">
+<h1>Chapter 9: Find a Phrase<a class="headerlink" href="#chapter-9-find-a-phrase" title="Permalink to this heading">#</a></h1>
+<p>The first act introduced fundamental ideas in problem solving with computers, and it set the stage for the conflict revealed in this second act: The world is a wondrously complex place. If you do not manage this complexity in a systematic way, it will overwhelm you.</p>
+<p>Luckily, through your work in Act I, you have already begun using the most-important tools of computer science—<em>decomposition</em>, <em>abstraction</em>, and <em>encapsulation</em>—to systematically manage a complex world with complex problems. This act dives deeper into the power of these tools, and it illustrates how you can elegantly manage nearly any amount of complexity the world throws at you.</p>
+<section id="a-complex-problem-to-be-solved">
+<p><strong>A complex problem-to-be-solved.</strong> We’ll start with a theme you may have noticed in previous act’s problems. We asked if we could find a double-quote character in a string and the words “cat” and “hat” in a text file. We asked if we could find a particular book in the Harvard Library. And in the previous chapter, we looked for particular patterns in a sea of numbers. These are all examples of <em>search problems</em>.</p>
+<p>Search appears in almost all aspects of our personal and professional lives, making it a nearly ubiquitous technique in problem solving. Looking across time at the characteristics of our search problems, we see a fascinating trend: the data over which we search has consistently grown in size. Fueling this has been relentless growth in the capabilities of our computers, which allow us to solve ever larger search problems in ever shorter amounts of time. This human desire to find answers to our questions ever more quickly has become, in fact, a big business.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In October of 2020, Google posted <a class="reference external" href="https://www.youtube.com/watch?v=tFq6Q_muwG0&amp;t=6s">a video titled “Trillions of Questions, No Easy Answers: A (home) movie about how Google Search works”</a>. This video is also highlighted on <a class="reference external" href="https://www.google.com/search/howsearchworks/">Google’s page describing how it thinks about search</a>.</p>
+</aside>
+<p>In Google’s “home” movie about its beginnings and its mission, it mentions that it took King Louis XIV in 1685 about the 5 years, 4 months, and 2 days to get an answer to his question about the Qing Dynasty. Today, Google and other search engines like it report such answers in under a second, as illustrated in <a class="reference internal" href="#c09-fig1-ref"><span class="std std-numref">Figure 13</span></a>.</p>
+<figure class="align-default" id="c09-fig1-ref">
+<img alt="_images/c09_fig1.png" src="_images/c09_fig1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Highlighted is the amount of time it took to run a search on Google.</span><a class="headerlink" href="#c09-fig1-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>What specifically is the Google search problem? Well, <a class="reference external" href="https://www.google.com/search/howsearchworks/mission/">Google’s mission</a> is “to organize the world’s information and make it universally accessible and useful.” They’re specifically talking about information that individuals and corporations around the world publish in electronic form on the Internet. Ideally, Google wants to understand the questions we have and serve us the most relevant information it has found.</p>
+<p>This is actually quite a hard problem. It involves <a class="reference external" href="https://www.ibm.com/topics/natural-language-processing">natural language processing (NLP)</a> and the use of other contextual information to understand exactly what we want (or might likely want) to know. In searching for answers, we expect Google to understand all types of digital information, including web pages, images, videos, podcasts, and other types of standardized file formats. We expect Google to highlight the most relevant answers and also sift out the dreck. And, of course, Google as a for-profit company should find some way to earn money while doing this.</p>
+<p>We’ll get to many of these issues in this act, but to begin, let’s simplify and focus where Google started: <em>how do we make it easy to find the web pages that mention a particular word or phrase?</em> We won’t build our own web search function, but we will determine what it would take to write a script that finds and returns a listing of all pages on the World Wide Web containing our search phrase, as illustrated in <a class="reference internal" href="#c09-fig1-ref"><span class="std std-numref">Figure 13</span></a>.</p>
+<div class="admonition-learning-outcomes admonition">
+<p class="admonition-title">Learning Outcomes</p>
+<p>In this chapter, you will learn about the ubiquity of search problems and dive into the details of Google search. You will understand the difference between algorithms and formal specifications. You’ll investigate several ways to do string matching and measure the performance of each. You’ll learn to evaluate an algorithm without having to run it by roughly calculating its computational complexity.</p>
+<ul class="simple">
+<li><p>Learn to estimate the size of your problem [design];</p></li>
+<li><p>Understand the different, formal aspects of an algorithm [design and CS concepts];</p></li>
+<li><p>Write a formal specification for string matching [design and CS concepts];</p></li>
+<li><p>Discuss the differences between algorithms and specifications [design];</p></li>
+<li><p>Recognize brute-force algorithms and whether they’re a sufficient solution or not [design];</p></li>
+<li><p>Identify when different programs all implement the same algorithmic approach [design and CS concepts];</p></li>
+<li><p>Evaluate and measure the performance of a program [CS concepts and programming skills];</p></li>
+<li><p>Use the tool of computational complexity to compare two algorithms [CS concepts].</p></li>
+</ul>
+</div>
+</section>
+<section id="some-basic-facts">
+<p><strong>Some basic facts.</strong> What do we know about this problem? First of all, we can learn that web pages are simply text files written with a particular structure and adhering to one of several Web standards. Since we are not worried about how they are rendered by a web browser but only what words they contain, we can mostly ignore the specifics of these standards and treat web pages as simple text files, like the ones we saw in Chapter 1.</p>
+<p>We can also discover that there are a lot of web pages out there. <a class="reference external" href="https://www.google.com/search/howsearchworks/crawling-indexing/">Google says</a> that its search index “contains hundreds of billions of web pages and is well over 100,000,000 gigabytes in size.” Let’s not worry about what Google means by its “search index,” and let’s just keep in mind that there are so many web pages out there that they might be a challenge for our script to process.</p>
+<p>Finally, from our own experience surfing around the web, we know that individual web pages come in a wide range of sizes, where we measure sizes in number of characters. Many pages, however, are not much longer than a short story. In other words, it is probably the size of the total search, and not the search on any one webpage that will challenge us.</p>
+<p>All together, this information tells us a lot about the input to our problem.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Finding substrings</p>
+<p>In Chapter 2, we saw three different approaches: membership test using the in-operator; Python’s string-find method; and our own string-find function.</p>
+</aside>
+</section>
+<section id="which-algorithm">
+<p><strong>Which algorithm?</strong> Now that we’ve thought about the input data, what can we say about the algorithm that will consume this data? We used several ways of finding a target string in some larger input string in Chapter 2. We could iteratively read each webpage as a string and use one of these to determine on which pages our search phrase occurs. We’d then collect and return a list of all these webpages.</p>
+<p>While this would work, we might want to know more. For example, we might also wish to know where on the webpage the search phrase was found, which means we want to use something like Python’s string-find method. And beyond a question of functionality, we don’t know anything about how Python has implemented any of these approaches.</p>
+<p>Unlike the first act, we want in this act to do more than just find a solution to our problem. We’re going to want to learn how to evaluate a number of different algorithms so that we can determine which does what we need and works reasonably well under the problem’s conditions. Only then will we be sure that we’ve truly solved our problem for the use cases that concern us.</p>
+</section>
+<section id="algorithms-formally">
+<p><strong>Algorithms, formally.</strong> Boaz Barak, a brilliant colleague of mine at Harvard, says that algorithms have three formal components: (1) a <em>specification</em>; (2) an <em>implementation</em>; and (3) a <em>proof of correctness</em>.</p>
+<p>In Act I, we focused largely on an algorithm’s implementation, which is a step-by-step description of <em>how</em> the algorithm accomplishes its task. But <em>what</em> task is that? This is the job of an algorithm’s specification. When given a fairly precise specification of the behavior we would like to see in an algorithm’s implementation, there are techniques we can use to verify that the how satisfies the what. In fact, there exists a whole field of <em>formal verification</em> concerned with the matching of software implementations against their specifications. When this matching succeeds, computer scientists say that the implementation has been proven to be correct.</p>
+<p>We won’t concern ourselves with formal proofs of correctness, but we do need to stop being so loose in our specification of what our algorithms should do. By separating specification from implementation, we can compare two different solutions, which might match in their what but not their how. Sometimes we are happy to pay for more what (e.g., knowledge of not just that a search phrase exists on a webpage, but how many times and where it appears on each page). Other times, we want one particular what, and for two algorithms with a shared specification, we might be interested in the effects of differences in the how of each (e.g., without any differences in what they do, which runs fastest given a particular input).</p>
+</section>
+<section id="a-well-studied-specification-for-string-matching">
+<p><strong>A well-studied specification for string matching.</strong> Let’s decide upon a specification for our current problem-to-be-solved. This won’t be hard because lots of programs we use everyday frequently need to find the locations of one string within another. It’s not just web search engines. Think about how many times you run a program and “find” is a command under the “edit” menu. Because this functionality is so important to so many applications, string matching has been a well-studied problem in computer science.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Reference</p>
+<p><em>Introduction to Algorithms (Third Edition)</em> by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein [The MIT Press; Cambridge, MA; 2009], p. 985.</p>
+</aside>
+<p>In their popular text titled <em>Introduction to Algorithms</em>, the authors state a formal specification for string matching, which we’ll use. It first describes the two inputs to the problem: a text array <em>T</em>[1..<em>n</em>] of length <em>n</em> and a pattern array <em>P</em>[1..<em>m</em>] of length <em>m</em> ≤ <em>n</em>. It then defines a property called a <em>valid shift s</em>, which is an integer between 0 ≤ <em>s</em> ≤ <em>n</em> – <em>m</em> where <em>T</em>[<em>s</em> + 1..<em>s</em> + <em>m</em>] = <em>P</em>[1..<em>m</em>]. An algorithm satisfies the string-matching problem given text <em>T</em> and pattern <em>P</em> if it can find all valid shifts of <em>P</em> in <em>T</em>.</p>
+<p>In terms of our web search problem and Python data types, <em>P</em> is a Python string we typed in the Google search box, whose location we want to find in every webpage known to Google. <em>T</em> is also a Python string, and we can think of it as the concatenation of the text of every webpage known to Google. Each valid shift <em>s</em> is an index into <em>T</em> where we can find the start of an instance of <em>P</em>.</p>
+<p>Be careful with the index notation here. The specification numbers the characters in <em>T</em> and <em>P</em> starting at index 1, which is common in formal languages that describes the behavior of something. The first character of <em>P</em> is <em>P</em>[1], and this character can be found at <em>T</em>[<em>s</em> + 1] for any valid shift <em>s</em>. This is why the string-match equality might look a bit strange to your mind that has gotten used to 0-based indexing. When we implement this specification in Python, we’ll switch from 1-based to 0-based indexing.</p>
+</section>
+<section id="is-a-specification-an-algorithm">
+<p><strong>Is a specification an algorithm?</strong> Be careful not to fall into the trap of thinking that a specification is an algorithm. Someone might give you a specification that contains statements of how among the what, but specifications need only describe behavior.</p>
+<p>In textbooks that teach you to program, you’ll often see a picture like the one in <a class="reference internal" href="#c09-fig2-ref"><span class="std std-numref">Figure 14</span></a>, where the black box is labeled with the text “algorithm” or “program.” This sort of picture is simply a graphical depiction of a specification. Specifications tell you what output you’ll get for each input. Good specifications tell you how the black box behaves on all inputs, including what happens between inputs and when it’s given no input.</p>
+<figure class="align-default" id="c09-fig2-ref">
+<img alt="_images/c09_fig2.png" src="_images/c09_fig2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">The canonical illustration of an algorithm (or program).</span><a class="headerlink" href="#c09-fig2-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The box is often colored black because you’re supposed to think of the box as opaque. It is easy to imagine an opaque box hiding the algorithm that implements the specification (or the program that implements the algorithm that implements the specification).</p>
+<p>However, as we will see in Chapter 14, we can have a specification that can’t be implemented by any algorithm. (Just trust me at this point. We’ll prove it later.) This means that we can draw every algorithm and every program with this type of picture, but we cannot take every picture describing a specification and find an algorithm or write a program for it. Yes, the world is strangely beautiful.</p>
+</section>
+<section id="a-brute-force-algorithm">
+<p><strong>A brute-force algorithm.</strong> Let’s now create an algorithm for this string-matching specification. We will take advantage of the fact that today’s computers are amazingly powerful and never get bored, which means that we can assign them a crazy amount of work and they’ll do it without complaint. This is called a <em>brute-force approach to problem solving</em>, and it sometimes works just fine. It has the computer explore the entire space of possible solutions, flagging those that are actual solutions to our problem.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Pseudocode That Looks Like Python</p>
+<p>Remember that we can write any statements in our pseudocode as long as they are steps that can be carried out by a machine. Since we’re more comfortable with Python now, I’ll sometimes write pseudocode with very Python-like statements (e.g, the for-loop).</p>
+</aside>
+<p>The following pseudocode describes an algorithm for brute-force string matching (BF_STRMATCH):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># BF_STRMATCH(t, p)</span>
+<span class="linenos">2</span><span class="c1"># inputs are the text t and the pattern to match p</span>
+<span class="linenos">3</span><span class="c1"># n = length of t</span>
+<span class="linenos">4</span><span class="c1"># m = length of p</span>
+<span class="linenos">5</span><span class="c1"># for s = 0 to n - m:</span>
+<span class="linenos">6</span><span class="c1">#     if p[0:m] == t[s:s+m]:</span>
+<span class="linenos">7</span><span class="c1">#         print &quot;Pattern occurs with shift&quot; s</span>
+</pre></div>
+</div>
+<p>This particular algorithm closely follows the one given in Section 32.1 of Cormen <em>et al.</em> [2009], where the authors describe this brute-force algorithm as implementing the pattern as a template slid along below the text (see  <a class="reference internal" href="#c09-fig3-ref"><span class="std std-numref">Figure 15</span></a>). When the characters in the text above the template match those at each location in the template, the algorithm announces the number of uncovered characters from the start of the text as a valid shift.</p>
+<figure class="align-default" id="c09-fig3-ref">
+<img alt="_images/c09_fig3.png" src="_images/c09_fig3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">An illustration of BF_STRMATCH where we want to know the shifts where we can find the pattern “test” inside the text “This test is a….”</span><a class="headerlink" href="#c09-fig3-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>This is a very simple solution to our string-matching problem, and something each of us has probably done at some point when trying to find the last few words in a word-find puzzle. We do it last because it’s tedious to check each starting location and whether the letters at that starting location exactly match each letter in the pattern word. Of course, if we persevere and get to the end of the puzzle, we are rewarded by knowing that we’ve considered every possible location, and that there cannot be anymore instances of the pattern in the input text. For these human and technical reasons, people also call brute-force approaches <em>exhaustive approaches</em>.</p>
+</section>
+<section id="a-bf-string-matching-program">
+<p><strong>A BF-string-matching program.</strong> Since we’re not going to formally prove that our BF_STRMATCH algorithm implements our string-matching specification, let’s implement this algorithm in Python and run a few test inputs. This doesn’t guarantee that our algorithm is correct in all cases, but it gives us some assurance that we’re not missing something obvious.</p>
+<p>The translation from pseudocode to Python is straightforward, especially given the simplicity with which we can specify string comparisons in Python.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap09/bf_strmatch.py</span>
+<span class="linenos">2</span><span class="k">def</span> <span class="nf">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos">3</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">6</span>        <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">7</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now let’s run a few tests.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This is a test.&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="linenos">3</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Counting the number of characters before the start of the occurrence of <code class="docutils literal notranslate"><span class="pre">p</span></code> in <code class="docutils literal notranslate"><span class="pre">t</span></code> shows that our code works on this simple example.</p>
+<p>Will our function work with a longer test string and multiple matches?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This test is a longer test.&#39;</span>
+<span class="linenos">2</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So far so good. As we discussed in Act I, it’s always good to check what are called <em>edge cases</em>: Can we find a pattern string at the start or end of the text? What happens when the pattern doesn’t occur in the text? Does a space work as a pattern string? What does an empty pattern string match? Does our script find overlapping matches? You might try your own tests to see if you can break this implementation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This test is a longer test&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;est&#39;</span>
+<span class="linenos">3</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;This&#39;</span>
+<span class="linenos">2</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;this&#39;</span>
+<span class="linenos">2</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+<span class="linenos">2</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos">2</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This teeest is a longer test&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;ee&#39;</span>
+<span class="linenos">3</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="one-algorithm-multiple-implementations">
+<p><strong>One algorithm, multiple implementations.</strong> Our Python implementation <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> is not the only Python code capable of implementing the algorithm BF_STRMATCH. The following function also implements our algorithm:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">What’s the difference?</p>
+<p>Take a moment and compare <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> against <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code>. I’ve changed the body of the for-loop. It’s simply a different way of comparing the pattern against the characters at a new starting point in <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap09/bf_strmatch2.py</span>
+<span class="linenos"> 2</span><span class="k">def</span> <span class="nf">bf_strmatch2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="linenos"> 7</span>            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">i</span><span class="p">]:</span>
+<span class="linenos"> 8</span>                <span class="k">break</span>
+<span class="linenos"> 9</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s run our last test again to make sure this new version operates correctly. You can try any of the other tests too.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This teeest is a longer test&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;ee&#39;</span>
+<span class="linenos">3</span><span class="n">bf_strmatch2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The point is that a single algorithm can have many programming language implementations. We created two in Python, but we could have used any other programming language to create an alternative implementation.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Different Implementations</p>
+<p>We will continue to look only at different implementations of our algorithms in Python, but everywhere we ask questions like this, you should include changing the programming language as something you might choose to do differently.</p>
+</aside>
+</section>
+<section id="evaluation">
+<p><strong>Evaluation.</strong> Which Python implementation, <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> or <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code>, do we prefer? Well, what are our criteria for preferring one implementation over another?</p>
+<p>One obvious criteria jumps out when we look at these two Python functions: <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> requires fewer characters than <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code>. That might be a good reason to choose the first over the second.</p>
+<p>Of course, it is possible to go too far in this direction. The more shorthand notations we use the more knowledgeable our reader has to be. You’ve probably encountered this at a lecture where the speaker assumes the entire audience is comfortable with the discipline’s lingo. If you’re not, you quickly lose any idea of what the speaker is talking about.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Type-checking Tools</p>
+<p>We’ll see an example of such tools in Chapter 16.</p>
+</aside>
+<p>We may not care about a single criterion, but multiple criteria and the tradeoffs between them. For example, we strive to write bug-free scripts, and some programming languages constrain the types of values a variable can hold so that you can use specialized tools to identify hard-to-find bugs. This approach trades one criterion (i.e., shortness of our scripts) for another (i.e., ease of finding bugs).</p>
+<p>In general, there are many criteria on which we might judge one implementation against another. Correctness is clearly a necessary criterion, but not the only one you may care about. Which other criteria matter depends on your problem-to-be-solved.</p>
+</section>
+<section id="evaluation-in-context">
+<p><strong>Evaluation in context.</strong> We have a context for our string-matching script, and we can ask, “Will brute-force string-matching work for Google Search?” Well, which evaluation criteria matter most (besides correctness) in this context?</p>
+<p>At the start of this chapter, we mentioned that people expect answers to their search questions in ever shorter amounts of time. Therefore, in this context, we care about how quickly a script’s implementation can return an answer.</p>
+<p>Overall, the performance of an algorithm and its implementation is one of a handful of questions that computer scientists ask all the time. Does the algorithm solve our problem of interest? If yes, does it run correctly under all input conditions? If yes, how fast does it run? How much space does it use while running? Is it resilient to adversary attacks? We will cover most of these questions and say a few words in the next act about the historical importance of the last few. But for now, we will focus on answering the question of how long an algorithm (or the script that implements it) takes to run, since that’s important in searching a 100 million gigabytes of text.</p>
+</section>
+<section id="measuring-performance">
+<p><strong>Measuring performance.</strong> Asking how long a script takes to run seems like a straightforward question: Go grab your smartphone, launch the stopwatch app, start the stopwatch as you begin running the script, and stop it when the script completes. However, coordinating the starting and stopping of your stopwatch with the starting and stopping of a program is a bit tricky, and most operating systems provide you with a time utility that does this work for you.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Measuring Elapsed Time</p>
+<p>On most computers, there is a standalone time utility, which is what I use in the example. Your results should be the same whether you use this or others like it (e.g., one you might find built into your user shell).</p>
+</aside>
+<p>To use this utility, you simply type the name of the time utility and then the command you want timed. The next code block illustrates this and the result of using my operating system’s time utility to measure how long it takes to run  <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code> with the same input.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
+<span class="hll">&gt; /usr/bin/time python3 bf_strmatch.py &#39;This test is a bigger test&#39; &#39;test&#39;
+</span>Pattern occurs with shift 5
+Pattern occurs with shift 22
+        0.05 real         0.02 user         0.01 sys
+<span class="hll">&gt; /usr/bin/time python3 bf_strmatch2.py &#39;This test is a bigger test&#39; &#39;test&#39;
+</span>Pattern occurs with shift 5
+Pattern occurs with shift 22
+        0.05 real         0.03 user         0.01 sys
+</pre></div>
+</div>
+<p>From the output, we see that our two scripts ran and provided us with the expected output. In addition, the <code class="docutils literal notranslate"><span class="pre">time</span></code> utility printed three different measures of the execution of each script, each measured in seconds. You can think of the first number, which is labeled <code class="docutils literal notranslate"><span class="pre">real</span></code>, as wall-clock time. It is the one that concerns us. We’re going to ignore the other two, which break wall-clock time down into two components that are not important to our current evaluation question.</p>
+<p>Both scripts took 5 hundreds of a second to execute. If you run these two commands yourself, you’ll see the first number vary a bit. For instance, I got 0.08 seconds on one run, but most of my runs were 0.05 seconds. There was no discernible pattern that said one script was faster than the other.</p>
+<p>Part of the problem here is that my computer is fast and the program doesn’t make it work too hard. How can we make it work harder to see if one script is actually faster?</p>
+<p>That’s right. The script will run longer if we give it more text to search.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Capabilities of the Shell</p>
+<p>We’ll talk more about the Shell and the redirecting of our script’s inputs and outputs in Chapter 13.</p>
+</aside>
+<p>Since we probably don’t want to type all of (say) <em>War and Peace</em> by Tolstoy just to stress our computers, we can modify our two scripts so that they fill the variables <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> in a new way. Beside from user input and from strings included in the command line, we can create an option that grabs the text (i.e., <code class="docutils literal notranslate"><span class="pre">t</span></code>) from <em>standard input (stdin)</em>, which we’ll feed with the contents of a file. In Python, <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> is a file object like those we created with the <code class="docutils literal notranslate"><span class="pre">open</span></code> command, and on which, we can perform operations like <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">readline</span></code>. Here’s what this looks like in <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code>, paying particular attention to lines 20-23; <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code> contains similar code.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">A Standalone Script</p>
+<p>This is a copy of the script that you can find in the book’s GitHub repo. Don’t run the code block if you’re reading this chapter as an interactive Python notebook.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap09/bf_strmatch.py</span>
+<span class="linenos"> 2</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 3</span><span class="sd">A brute-force implementation of the string-matching problem.</span>
+<span class="linenos"> 4</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">13</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">16</span>    <span class="c1"># Check for proper usage and grab the input strings</span>
+<span class="linenos">17</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">18</span>        <span class="n">t</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Text: &#39;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="n">p</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Pattern: &#39;</span><span class="p">)</span>
+<span class="linenos">20</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">21</span>        <span class="c1"># Reads text from stdin</span>
+<span class="linenos">22</span>        <span class="n">t</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">23</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">24</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">25</span>        <span class="n">t</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">26</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">27</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">28</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Usage: python3 bf_strmatch.py text pattern&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">33</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>On Linux-like systems, you signify the contents of <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> using the less-than sign (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>); what comes after this character is a filename whose contents you want available on <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>. The following code block runs <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> looking for the phrase “has left” in the file <code class="docutils literal notranslate"><span class="pre">JustDavid.txt</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
+<span class="hll">&gt; /usr/bin/time python3 bf_strmatch.py &#39;has left&#39; &lt; JustDavid.txt
+</span>Pattern occurs with shift 326953
+        0.15 real         0.10 user         0.01 sys
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">On Faster Machines</p>
+<p>You might have a machine faster than mine, and if so, you still may not see a difference. Using <code class="docutils literal notranslate"><span class="pre">cmp_bf_times.py</span></code> in the tip below, try even bigger inputs until you see the difference.</p>
+</aside>
+<p>This is still not a very big text, and the script runs in about 15 hundredths of a second on my computer. However, the text is large enough to see that Python’s string comparison using the equal-equal operator (<code class="docutils literal notranslate"><span class="pre">==</span></code>) is slightly faster than our own for-loop comparison. We will talk about why this is true in Chapter 16, but for our purposes here, it’s good enough for us to know that we’ve added work for the Python interpreter to do using our own for-loop in <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code> that doesn’t exist when we forego that for-loop and instead use the equal-equal operator built into the language.</p>
+<p>The key point here is that the wall-clock difference between <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code> isn’t the result of something inherent in our algorithm. It exists because of the choices we made when implementing the BF_STRMATCH algorithm. As we have briefly seen, we can eliminate this time difference with careful choices as we code our algorithms, if we understand what takes what amount of time at execution. Again, a topic for later.</p>
+<p>But let’s return to the real question: Should we use the BF_STRMATCH algorithm to search a 100 million gigabytes of text every time a user types a search into Google? Let’s do some back-of-the-envelope calculations. If a 327-kilobyte text file (i.e., <code class="docutils literal notranslate"><span class="pre">JustDavid.txt</span></code>) took about 0.1 seconds to search, it will take my machine about 30 billion seconds to complete the Google search problem, because that input is approximately 300 billion times bigger (i.e., 0.1 seconds times 100 million gigabytes divided by 327 kilobytes). Google’s users don’t want to wait 30 billion seconds, or about 1000 years, for their answers. Even King Louis XIV wasn’t going to be that patient.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Roughly</p>
+<p>I’ve made an assumption in doing this calculation that the majority of the 0.15 seconds is spent in the for-s loop (lines 11-13). Even if I’m wrong, it will change our answer by at most a factor of 10. The conclusion that we need to find a better algorithm remains.</p>
+</aside>
+<p>Certainly Google has access to machines faster than my laptop, but not 46 billion times faster. We need to find a different solution.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to feed <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code> some of your own big input text files and time them, here is an interactive Python script you can use. It uses a method from the Python <code class="docutils literal notranslate"><span class="pre">time</span></code> module.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap09/cmp_bf_times.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Grab the contents of a file as our large text string</span>
+<span class="linenos"> 5</span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;JustDavid.txt&#39;</span>
+<span class="linenos"> 6</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos"> 7</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># Set the pattern string</span>
+<span class="linenos">10</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;has left&#39;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos">13</span><span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bf_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos">17</span><span class="n">bf_strmatch2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bf_strmatch2 took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="how-do-we-do-better">
+<p><strong>How do we do better?</strong> If we want a script that solves our problem significantly faster, the first thing we need to realize is that our biggest gains will come from changes to our algorithm and not to coding changes in the implementation of the algorithm we happen to be currently using.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your script runs too slow, think about using a different algorithm.</p>
+</div>
+<p>I said earlier that string matching is a well-studied problem in computer science, and some very smart people have come up with algorithms that are significantly faster than our brute-force technique. The following is a Python implementation of one called the <a class="reference external" href="https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm">Rabin-Karp algorithm</a>. You don’t have to understand the algorithm at this point; we’ll discuss its operation in the next chapter. Right now, I just want you to notice that its implementation takes more statements than our brute-force method. This raises the interesting question: What additional work have Rabin and Karp identified that creates an algorithm that runs faster than the brute-force approach?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">13</span><span class="c1">### chap09/rk_strmatch.py</span>
+<span class="linenos">14</span><span class="k">def</span> <span class="nf">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="c1"># Preprocessing steps</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>    <span class="c1"># Constants in Rabin-Karp string-matching problem</span>
+<span class="linenos">21</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
+<span class="linenos">22</span>    <span class="n">q</span> <span class="o">=</span> <span class="mi">65537</span>  <span class="c1"># a prime number</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
+<span class="linenos">25</span>    <span class="c1"># m-1th position), where digits have radix d</span>
+<span class="linenos">26</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">27</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">28</span>        <span class="n">hh</span> <span class="o">=</span> <span class="p">(</span><span class="n">hh</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the matching</span>
+<span class="linenos">31</span>    <span class="c1"># loop needs these values as it starts</span>
+<span class="linenos">32</span>    <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">33</span>    <span class="n">ht</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">34</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="linenos">35</span>        <span class="n">hp</span> <span class="o">=</span> <span class="p">((</span><span class="n">hp</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">%</span> <span class="n">q</span>
+<span class="linenos">36</span>        <span class="n">ht</span> <span class="o">=</span> <span class="p">((</span><span class="n">ht</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">%</span> <span class="n">q</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>    <span class="c1">#print(f&#39;DEBUG: pattern hash(&quot;{p[0:m]}&quot;) = {hp}&#39;)</span>
+<span class="linenos">39</span>    <span class="c1">#print(f&#39;DEBUG: hash(&quot;{t[0:m]}&quot;) = {ht}&#39;)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>    <span class="c1"># Matching step</span>
+<span class="linenos">42</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">43</span>        <span class="k">if</span> <span class="n">hp</span> <span class="o">==</span> <span class="n">ht</span><span class="p">:</span>
+<span class="linenos">44</span>            <span class="c1"># Verify that this is an actual match</span>
+<span class="linenos">45</span>            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">]:</span>
+<span class="linenos">46</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">47</span>            <span class="c1">#else:</span>
+<span class="linenos">48</span>                <span class="c1">#print(f&#39;DEBUG: hash collision&#39;)</span>
+<span class="linenos">49</span>                <span class="c1">#print(f&#39;DEBUG: hash(&quot;{t[s:s+m]}&quot;) = {ht}&#39;)</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>        <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">:</span>
+<span class="linenos">52</span>            <span class="c1"># Need to compute hash for next iteration</span>
+<span class="linenos">53</span>            <span class="n">ht</span> <span class="o">=</span> <span class="p">((</span><span class="n">ht</span> <span class="o">-</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="o">*</span> <span class="n">hh</span><span class="p">))</span> <span class="o">*</span> <span class="n">d</span>
+<span class="linenos">54</span>                  <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">]))</span> <span class="o">%</span> <span class="n">q</span>
+<span class="linenos">55</span>            <span class="k">if</span> <span class="n">ht</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">56</span>                <span class="n">ht</span> <span class="o">+=</span> <span class="n">q</span>
+<span class="linenos">57</span>            <span class="c1">#print(f&#39;DEBUG: hash(&quot;{t[s+1:s+1+m]}&quot;) = {ht}&#39;)</span>
+</pre></div>
+</div>
+<p>The following code blocks allow you to try the Rabin-Karp algorithm with some of our recent test inputs. Nothing too exciting here, as we’d expect it to produce the same output as our brute-force algorithm. Both satisfy the same specification.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This is a test.&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="linenos">3</span><span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This test is a longer test.&#39;</span>
+<span class="linenos">2</span><span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;This&#39;</span>
+<span class="linenos">2</span><span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;This teeest is a longer test&#39;</span>
+<span class="linenos">2</span><span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;ee&#39;</span>
+<span class="linenos">3</span><span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="loops-are-where-the-action-is">
+<p><strong>Loops are where the action is.</strong> When we are concerned about performance, straight-line code may take some time to execute, but a script will typically spend the majority of its time executing in loops, especially when each loop index covers a large range. As such, let’s compare the looping structure in <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> with that in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code>. In particular, let’s abstract away most of the detail except for the loops and any conditionals protecting the execution of a loop. In some sense, we’re returning to pseudocode, but focusing our pseudocode not on function, but behavior.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="c1"># some setup work</span>
+<span class="linenos">3</span>    <span class="c1"># no loops</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span>    <span class="c1"># Matching work</span>
+<span class="linenos">6</span>    <span class="c1"># loop on s up to n times</span>
+<span class="linenos">7</span>    <span class="c1">#     loop up to m times checking for match</span>
+<span class="linenos">8</span>    <span class="c1">#     if found-match print</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="c1"># some setup work</span>
+<span class="linenos"> 3</span>    <span class="c1"># loop on i exactly m-1 times</span>
+<span class="linenos"> 4</span>    <span class="c1"># loop on i exactly m times</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="c1"># Matching work</span>
+<span class="linenos"> 7</span>    <span class="c1"># loop on s up to n</span>
+<span class="linenos"> 8</span>    <span class="c1">#     if two numbers match</span>
+<span class="linenos"> 9</span>    <span class="c1">#         loop up to m times checking for match</span>
+<span class="linenos">10</span>    <span class="c1">#         if found-match print</span>
+<span class="linenos">11</span>    <span class="c1">#</span>
+<span class="linenos">12</span>    <span class="c1">#     if not at end of s loop</span>
+<span class="linenos">13</span>    <span class="c1">#         do some math; no loops</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">An Empty Pattern</p>
+<p>I ignore the case when the pattern string is empty because that’s a trivial result. Every shift is a valid shift when the pattern string is empty. I don’t need to run the algorithm, and we could add a conditional at the start of our functions that checks for an empty pattern string.</p>
+</aside>
+<p>Both algorithms have a loop with index variable <code class="docutils literal notranslate"><span class="pre">s</span></code> that does some work for each possible shift value. Both these algorithms loop up to <code class="docutils literal notranslate"><span class="pre">n</span></code> (i.e., the length of the input text) times. They may loop fewer times, but in the worse case, they will loop <code class="docutils literal notranslate"><span class="pre">n</span></code> times when the length of the pattern string is 1.</p>
+<p>Before we look at the internals of these two matching loops, let’s consider the setup work done by each algorithm prior to matching. Looking first at <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>, it does a couple of simple assignments; no loops appear in its setup work (lines 9-10). The setup code in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> (lines 15-36), in contrast, includes two loops on index variable <code class="docutils literal notranslate"><span class="pre">i</span></code> that loop almost exactly <code class="docutils literal notranslate"><span class="pre">m</span></code> (i.e., the length of the pattern string) times. Inside these, the algorithm does some simple math and makes an assignment or two.</p>
+<p>To this point in our analysis, <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> looks like it is going to be faster. In the worst case, it does some straight-line code and then loops roughly <code class="docutils literal notranslate"><span class="pre">n</span></code> times, while <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> loops to <code class="docutils literal notranslate"><span class="pre">m</span></code> twice and then loops to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>Let’s turn this English into an arithmetic expression. Let’s say that a reasonable amount of straight-line work is proportional to one unit of execution time. A loop body without any loops in it (i.e., just straight-line code) would therefore also have a cost proportional to one unit of execution time. The cost of a loop and its body would simply be the execution-time cost of its body times the number of iterations we estimate that it will make.</p>
+<p>With these simple rules, the estimated execution time of <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> would be proportional to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">something</span></code>, where <code class="docutils literal notranslate"><span class="pre">something</span></code> represents the cost of the matching loop body, which we haven’t estimated yet. The estimated execution time of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> would be proportional to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">(m-1)</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">m</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">a_different_something</span></code>. Simplifying the expressions and dropping the “<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span></code>”  and “<code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">1</span></code>” terms, which are swamped in the worst case by large m and n values, we get the estimated, worst-case execution time of <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> to be proportional to <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">something</span></code> and of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> to be proportional to <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">a_different_something</span></code>.</p>
+<p>Now, what are the estimated costs of the body of each algorithm’s matching loop? The body of the matching loop in <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> contains a loop with a simple body, and as such, <code class="docutils literal notranslate"><span class="pre">something</span></code> is <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">1</span></code>, or just <code class="docutils literal notranslate"><span class="pre">m</span></code>, in the worst case. Remember that the <code class="docutils literal notranslate"><span class="pre">==</span></code>-operator is doing work equivalent to the for-i loop in <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code>!</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">That Other if-statement</p>
+<p>The other if-statement in the matching loop (<code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>, line 51) has an execution cost proportional to 1, and we can ignore it.</p>
+</aside>
+<p>The body of the matching loop in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> also contains a loop with a simple body that iterates up to <code class="docutils literal notranslate"><span class="pre">m</span></code> times, but this inner loop is protected by an if-statement (line 43). Unfortunately, we don’t have enough information right now about the operation of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> to estimate when the condition in this if-statement will be true. It might be true during just one of the total <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the outer matching loop. Or it might be true on every iteration of the outer matching loop. In the first case, the execution time of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> will be proportional to <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">((n-1)</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">*</span> <span class="pre">m)</span></code>, or <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span></code> when we ignore constants. In the second case, <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> looks a lot like <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>, but with more setup work. The dominate factor effecting the execution time in this case is <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">m</span></code>, or more precisely when n and m are both large: <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">-</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">m</span></code>.</p>
+</section>
+<section id="computational-complexity">
+<p><strong>Computational complexity.</strong> This way of thinking gets away from specifics of our machine’s hardware, the choices different designers make in creating a programming language, the performance of the interpreter and runtime system that help run our scripts, and lots of other small details that affect wall-clock runtimes, but aren’t inherent in the performance of one algorithm versus another. Instead, this way of thinking focuses on a few characteristics of the input and how they influence the gross behavior of the algorithm. This is all a long way of saying some things matter much more than others, and all we really care about is that:</p>
+<ol class="arabic simple">
+<li><p>large inputs will take more time to process than small ones; and</p></li>
+<li><p>complex inputs will take more time to process than simple ones.</p></li>
+</ol>
+<p>We saw this in the rough analysis of our two string-match algorithms. In particular, we found that the runtimes the two algorithms were proportional to size of their inputs, i.e., <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>. And the magnitude of these numbers directly changed the running time of each algorithm through its looping structure.</p>
+<p>If you continue with other courses in computer science, you’ll soon learn that this type of work is the domain of theorists interested in questions of <em>computational complexity</em>. These individuals ask how efficiently, in terms of time and space, an algorithm can compute a solution. They’re interested in finding a collection of expressions (or technically <em>functions</em>), as we did just a moment ago, that do a good job of describing the behavior of an algorithm as its input grows in size and complexity. For example, these functions might bound the running time of an algorithm from above (i.e., in the worst case, the algorithm’s running time won’t grow faster than a particular function) and below (i.e., in the best case, the algorithm’s running time won’t grow slower than another, possibly the same, function).</p>
+<p>The rules we have described above are a simplified way of finding such <em>asymptotic running times</em>. Theorists often present the results of this type of analysis using what’s called <em>big-O notation</em>, which has us focus on the dominant terms in the expression describing, for instance, an algorithm’s running time.</p>
+<p>The matching time of the algorithm behind <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> is <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span>, which you should recognize as the expression we derived. It is also the worst-case matching time for <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code>. This big-O notation means that, within some constant factor, there exists some numbers for <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> beyond which the growth of algorithm’s running time will not exceed the growth rate of this big-O function.</p>
+<p>If you don’t understand all these details, that’s fine. I simply want you to identify these dominate terms in our algorithms and compare the growth rates for two different algorithms to see which is appropriate for your problem-to-be-solved.</p>
+</section>
+<section id="computational-complexity-in-action">
+<p><strong>Computational complexity in action.</strong> While we still don’t know how <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> finds matches in a cheaper manner than <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>, we have learned enough to manipulate the inputs to our two string-matching algorithms and see if we can experience the computational complexity differences we just computed. In particular, we expect to see the following:</p>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(m\)</span> is small compared to <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(m\)</span> will look like a constant factor in <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span>, and the matching time of both algorithms will grow like <span class="math notranslate nohighlight">\(O(n)\)</span>. In fact, <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> might outperform <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> since the extra setup work in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> as well as the additional work inside the matching loop may become noticeable.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(m\)</span> is a significant proportion of <span class="math notranslate nohighlight">\(n\)</span> (e.g., 25 percent of its size), <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span> will start to look more like <span class="math notranslate nohighlight">\(O(n^2)\)</span> for <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>. For <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code>, how often the first if-statement within its matching loop evaluates true will dictate whether this algorithm grows as <span class="math notranslate nohighlight">\(O(n)\)</span> or <span class="math notranslate nohighlight">\(O(n^2)\)</span>. We will assume that this if-statement evaluates true only when there’s an actual valid shift, and under this assumption, we will craft the pattern string so that it never matches, hopefully driving <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> toward <span class="math notranslate nohighlight">\(O(n)\)</span> growth as <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> experiences <span class="math notranslate nohighlight">\(O(n^2)\)</span> growth.</p></li>
+</ul>
+<p>The following code block implements this experiment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap09/cmp_strmatch.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;For p = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes, t = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes&#39;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos"> 8</span>    <span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bf_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos">12</span>    <span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rk_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Grab the text from a file</span>
+<span class="linenos">18</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;JustDavid.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">19</span>    <span class="n">t_orig</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># A reasonable search pattern that won&#39;t ever match.  The loop grows it</span>
+<span class="linenos">22</span><span class="c1"># through repetition to be about a quarter the size of the text input.</span>
+<span class="linenos">23</span><span class="n">p_orig</span> <span class="o">=</span> <span class="s1">&#39;David laughed softty&#39;</span>
+<span class="linenos">24</span><span class="n">p_big</span> <span class="o">=</span> <span class="n">p_orig</span>
+<span class="linenos">25</span><span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_big</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_orig</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+<span class="linenos">26</span>    <span class="n">p_big</span> <span class="o">+=</span> <span class="n">p_big</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="n">times_to_double</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: m &lt;&lt; t&#39;</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
+<span class="linenos">32</span><span class="n">p</span> <span class="o">=</span> <span class="n">p_orig</span>
+<span class="linenos">33</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
+<span class="linenos">34</span>    <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
+<span class="linenos">36</span>    <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: m &lt; t&#39;</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
+<span class="linenos">40</span><span class="n">p</span> <span class="o">=</span> <span class="n">p_big</span>
+<span class="linenos">41</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
+<span class="linenos">42</span>    <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">43</span>    <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
+<span class="linenos">44</span>    <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>This code, when run on my laptop, produces the following output. Notice that I had to kill the script before it finished the last run. I guess I have less patience than King Louis XIV.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
+<span class="hll">&gt; python3 cmp_strmatch.py
+</span>### Test: m &lt;&lt; t
+For p = 20 bytes, t = 326962 bytes
+bf_strmatch took 0.065106 secs
+rk_strmatch took 0.15572799999999998 secs
+
+For p = 40 bytes, t = 653924 bytes
+bf_strmatch took 0.14156000000000002 secs
+rk_strmatch took 0.289499 secs
+
+For p = 80 bytes, t = 1307848 bytes
+bf_strmatch took 0.25473499999999993 secs
+rk_strmatch took 0.5699639999999999 secs
+
+For p = 160 bytes, t = 2615696 bytes
+bf_strmatch took 0.5031830000000002 secs
+rk_strmatch took 1.1247690000000001 secs
+
+For p = 320 bytes, t = 5231392 bytes
+bf_strmatch took 1.0640210000000003 secs
+rk_strmatch took 2.511254 secs
+
+For p = 640 bytes, t = 10462784 bytes
+bf_strmatch took 3.7074369999999996 secs
+rk_strmatch took 4.611154000000001 secs
+
+For p = 1280 bytes, t = 20925568 bytes
+bf_strmatch took 5.857962999999998 secs
+rk_strmatch took 9.736253999999999 secs
+
+### Test: m &lt; t
+For p = 81920 bytes, t = 326962 bytes
+bf_strmatch took 0.7853179999999966 secs
+rk_strmatch took 0.13610599999999806 secs
+
+For p = 163840 bytes, t = 653924 bytes
+bf_strmatch took 3.198730000000001 secs
+rk_strmatch took 0.288534999999996 secs
+
+For p = 327680 bytes, t = 1307848 bytes
+bf_strmatch took 13.31402 secs
+rk_strmatch took 0.551440999999997 secs
+
+For p = 655360 bytes, t = 2615696 bytes
+bf_strmatch took 53.568979999999996 secs
+rk_strmatch took 1.1143089999999916 secs
+
+For p = 1310720 bytes, t = 5231392 bytes
+bf_strmatch took 219.77597399999996 secs
+rk_strmatch took 2.3525840000000358 secs
+
+For p = 2621440 bytes, t = 10462784 bytes
+bf_strmatch took 890.305337 secs
+rk_strmatch took 4.559676000000081 secs
+
+For p = 5242880 bytes, t = 20925568 bytes
+^C
+</pre></div>
+</div>
+<figure class="align-default" id="c09-fig4-ref">
+<img alt="_images/c09_fig4.png" src="_images/c09_fig4.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Plot of the runtime (in seconds) of each script against the input text size (variable <code class="docutils literal notranslate"><span class="pre">t</span></code>). Notice that, unlike the brute-force approach, the runtime of Rabin-Karp isn’t affected by size of the pattern string.</span><a class="headerlink" href="#c09-fig4-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As you can see in the output and <a class="reference internal" href="#c09-fig4-ref"><span class="std std-numref">Figure 16</span></a>, when the pattern string is much smaller than the text, a doubling of the text size (<span class="math notranslate nohighlight">\(n\)</span>) basically doubles the execution time of both functions. Both algorithms grow as <span class="math notranslate nohighlight">\(O(n)\)</span>, and the extra processing in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> makes its implementation slightly slower.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Can We Do Better?</p>
+<p>Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., <span class="math notranslate nohighlight">\(O(m)\)</span>), but a better worst-case matching bound of <span class="math notranslate nohighlight">\(O(n)\)</span> for all inputs. Technically, its bounds are <span class="math notranslate nohighlight">\(𝛩(m)\)</span> and <span class="math notranslate nohighlight">\(𝛩(n)\)</span>. Yup, you need to go learn the difference between Big-O and Big Theta 𝛩 notation!</p>
+</aside>
+<p>However, when the pattern string is comparable in size with the text, we see a very different trend. The <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> function starts out slightly slower than the <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> function, but as the size of both the pattern and text strings double, the <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> function experiences only a doubling in its running time. The doubling of the pattern string doesn’t affect its running time; only the doubling of the text file affects the running time, as our <span class="math notranslate nohighlight">\(O(n)\)</span> complexity analysis predicted. The running time of the <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> function, on the other hand, grows by approximately a factor of 4, corresponding to the doubling of both <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> and the algorithm’s <span class="math notranslate nohighlight">\(O(n^2)\)</span> complexity bound when <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> are comparable.</p>
+</section>
+<section id="problem-unsolved">
+<p><strong>Problem unsolved.</strong> We’ve come to the end of the chapter, and we haven’t yet solved our problem: how do we make it easy to find the web pages that mention a particular word or phrase? And by easy, we’ve learned that our biggest challenge in this problem is to do it quickly. While Rabin-Karp is faster than brute-force string matching, it alone isn’t fast enough to power Google search. But the technical details of Rabin-Karp give us the key to running web searches quickly.</p>
+<p>In the next chapter, we’ll explore these details and learn about a technique called <em>hashing</em>, which is how Rabin-Karp beats brute force. Hashing will lead us to <em>hash tables</em>, a widely-used data structure, which just happens to be at the heart of Python’s dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach!</p>
+<p>[Version 20230812]</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap08.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 8: What Is My Problem?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ales.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Active-Learning Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-complex-problem-to-be-solved">A complex problem-to-be-solved</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-basic-facts">Some basic facts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-algorithm">Which algorithm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-formally">Algorithms, formally</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-well-studied-specification-for-string-matching">A well-studied specification for string matching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-a-specification-an-algorithm">Is a specification an algorithm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-brute-force-algorithm">A brute-force algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bf-string-matching-program">A BF-string-matching program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-algorithm-multiple-implementations">One algorithm, multiple implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-in-context">Evaluation in context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-performance">Measuring performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-do-better">How do we do better?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-are-where-the-action-is">Loops are where the action is</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-complexity">Computational complexity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-complexity-in-action">Computational complexity in action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-unsolved">Problem unsolved</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

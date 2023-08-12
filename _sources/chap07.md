@@ -6,7 +6,9 @@ Clearly, counting isn't the only thing we do with numbers, and the world isn't n
 
 If we're going to use computers to help us do creative things and generate new knowledge in our physical world, we're going to need to represent and manipulate *measured values*. For instance, we will soon measure the running time of our scripts, and in this, we will look at not just the time in seconds, but also fractions of a second.
 
-**Floating-point numbers and numerical computing.** Measurements with fractional units, like 6.574 seconds, are described as *real numbers*, and Python uses a datatype called `float` to represent such numbers. This name is a shorthand for *floating point (FP)*, [a standardized representation and a type of computational arithmetic.](https://standards.ieee.org/standard/754-2019.html)
+## Floating-point numbers and numerical computing
+
+Measurements with fractional units, like 6.574 seconds, are described as *real numbers*, and Python uses a datatype called `float` to represent such numbers. This name is a shorthand for *floating point (FP)*, [a standardized representation and a type of computational arithmetic.](https://standards.ieee.org/standard/754-2019.html)
 
 There are many details involved in this standard and peculiarities involved in using FP numbers to solve your problems. There are entire courses that will teach you how to use a computer to accurately solve problems involving continuous variables, like time and distance. This area of computer science comes under many names, including *numerical computing* and *scientific computing*, and the techniques taught will help you to use computers to study the range of physical and social phenomena in the world around us.
 
@@ -18,7 +20,9 @@ In this chapter, you will learn how computers represent numbers with fractional 
 *   Discuss the difficulty computers have representing some real numbers [CS concepts and programming skills].
 ```
 
-**Computers struggle with arithmetic?** We won't attempt to cover the breadth of numerical algorithms, but answer a fundamental question at the heart of numerical computing and in line with our efforts to understand how computers operate: *If computers see everything in the world as a collection of numbers and they've been constructed to do computation on numbers, why are some types of computation hard to do on a computer?*
+## Computers struggle with arithmetic?
+
+We won't attempt to cover the breadth of numerical algorithms, but answer a fundamental question at the heart of numerical computing and in line with our efforts to understand how computers operate: *If computers see everything in the world as a collection of numbers and they've been constructed to do computation on numbers, why are some types of computation hard to do on a computer?*
 
 While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between *range* (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and *precision* (i.e., how close is a real number we can represent to the real number we want to represent?).
 
@@ -40,7 +44,9 @@ n * n == 0.01
 
 When you run this code block, it should surprise you that the value you know to be n-squared for `n = 0.1` is not the result of the multiplication of that number with itself. How can our fancy computers get the wrong answer to this simple arithmetic problem?!? Well, let's find out by writing a script to understand how the FP standard represents real numbers like `0.1`.
 
-**The range of a FP number.** Floating point represents a real number in the form of a *significand* times a *base* raised to an *exponent*, where the significand and the exponent are integers stored directly in the FP representation. The base is an integer greater than or equal to two. This base is defined in the standard and not stored explicitly in the representation. To know what real number is expressed by a particular FP representation, however, you also have to know where the representation assumes that the number's *radix point* (more commonly called a decimal point for base-10 numbers) is placed.
+## The range of a FP number
+
+Floating point represents a real number in the form of a *significand* times a *base* raised to an *exponent*, where the significand and the exponent are integers stored directly in the FP representation. The base is an integer greater than or equal to two. This base is defined in the standard and not stored explicitly in the representation. To know what real number is expressed by a particular FP representation, however, you also have to know where the representation assumes that the number's *radix point* (more commonly called a decimal point for base-10 numbers) is placed.
 
 For example, we could encode 6.574 as follows:
 
@@ -54,7 +60,9 @@ The range of a FP representation depends on the range of integers we can store i
 
 The range of these two representations is impressive. While the single-precision representation can't represent the estimated number of atoms in the known universe, which somewhere between `10**78` and `10**82`, the double-precision representation with a maximum base-10 exponent of 308 easily can. You can also measure things as microscopically small as this maximum number is astronomically large.
 
-**Precision.** But what about precision? In base 10, we understand the fractional part of a real number as the group of digits to the right of the decimal point. The value of each of these digits to the total fraction is the digit multiplied by `10**-m`, where `m` is 1 for the digit immediately to the right of the decimal point, 2 for the next digit to the right, and so forth.
+## Precision
+
+But what about precision? In base 10, we understand the fractional part of a real number as the group of digits to the right of the decimal point. The value of each of these digits to the total fraction is the digit multiplied by `10**-m`, where `m` is 1 for the digit immediately to the right of the decimal point, 2 for the next digit to the right, and so forth.
 
 This is that expansion for the decimal fraction 0.574:
 
@@ -70,7 +78,9 @@ A binary fraction can be expanded in the same way as a decimal fraction, except 
 The leading `0b` mimics the leading `0x` we saw on hexadecimal numbers. Following this prefix, we write a `0`, which indicates that there's no whole number here, and the radix point, which always proceeds the fractional part.
 ```
 
-**Illustrating this issue of precision.** We can get a sense for precision by writing a Python program that constructs the binary representation for a decimal fraction. Our script will prefix the answer we compute with the string `'0b0.'`, which will help us to remember that this is the binary representation of a fraction between 0 and 1.
+## Illustrating this issue of precision
+
+We can get a sense for precision by writing a Python program that constructs the binary representation for a decimal fraction. Our script will prefix the answer we compute with the string `'0b0.'`, which will help us to remember that this is the binary representation of a fraction between 0 and 1.
 
 Our script will expect two inputs. The first is the decimal fraction we want to represent and the second is the size in bits of our chosen FP representation's significand. If we wanted to mimic the precision of IEEE 754 single-precision, we'd input 23. The following script gets us started.
 
@@ -114,7 +124,9 @@ best = lower  # with 0 bits used, our best estimate is 0
 encoding = ''
 ```
 
-**One bit at at time.** What would we do next if we wanted to add one bit to our significand? Since we have no bits in our significand, that bit would be the coefficient of the first term in the expansion we discussed earlier. Do we want this coefficient to be `0` or `1`? Well, which of these two values creates a new guess that is closer to the actual number `n` than our current guess? The one that is closer becomes our new best guess.
+## One bit at at time
+
+What would we do next if we wanted to add one bit to our significand? Since we have no bits in our significand, that bit would be the coefficient of the first term in the expansion we discussed earlier. Do we want this coefficient to be `0` or `1`? Well, which of these two values creates a new guess that is closer to the actual number `n` than our current guess? The one that is closer becomes our new best guess.
 
 If we're updating our best guess as we add bits to our significand, this starts to sound like we're building a loop. As we know, loops have exit conditions, and the exit condition in this case is when the best guess is exactly `n`. If our current best guess isn't exactly `n`, then we loop to again add new bit to the significand, which will bring us closer to the input decimal fraction. Of course, we also have to exit this loop if we run out of significand bits.
 
@@ -122,7 +134,9 @@ If we're updating our best guess as we add bits to our significand, this starts 
 Before reading on, practice writing the pseudocode for the loop I just described. What type of loop might you use (i.e., a for- or a while-loop)? What's the condition we'll test that protects the break-statement in the loop?
 ```
 
-**Searching for the smallest difference.** As we slowly add bits to the righthand side of the significand, we increase the precision of our binary encoding by reducing the difference between the input decimal fraction `n` and our current `best` guess, which is a binary fraction that we'll store in `encoding`. The complete script is below.
+## Searching for the smallest difference
+
+As we slowly add bits to the righthand side of the significand, we increase the precision of our binary encoding by reducing the difference between the input decimal fraction `n` and our current `best` guess, which is a binary fraction that we'll store in `encoding`. The complete script is below.
 
 I used a for-loop since we know the maximum number of bits in our significand; the loop must end at that maximum and a for-loop makes this easy to do and to understand. You could build an equivalent solution with a while-loop.
 
@@ -192,10 +206,12 @@ Run this code block with the inputs of `0.574` and `23`, you'll see that the enc
 If you set `n = 0.1` and then print `n` in the interactive Python interpreter, it will tell you that `n` is `0.1`. As [this tutorial page](https://docs.python.org/3/tutorial/floatingpoint.html) says, Python sometimes rounds what it prints. What it displays and what it stores may be different when dealing with FP numbers!
 ```
 
-**FP errors accumulate.** Unfortunately, precision doesn't just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why `0.1 * 0.1` doesn't equal `0.01`. A slightly inaccurate FP representation of `0.1` times itself produces a result with more inaccuracy than the conversion of `0.01` into a FP number. Or stated another way, the computer doesn't know if you were trying to multiple `0.1` times itself or `0.10000002384185791` times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.
+## FP errors accumulate
+
+Unfortunately, precision doesn't just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why `0.1 * 0.1` doesn't equal `0.01`. A slightly inaccurate FP representation of `0.1` times itself produces a result with more inaccuracy than the conversion of `0.01` into a FP number. Or stated another way, the computer doesn't know if you were trying to multiple `0.1` times itself or `0.10000002384185791` times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.
 
 If your script operates with floating-point numbers and you need the results to be precise, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on [accuracy problems in floating-point arithmetic](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems) can get you started on this tricky subject.
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20230712\]
+\[Version 20230811\]

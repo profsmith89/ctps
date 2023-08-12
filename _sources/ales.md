@@ -1693,7 +1693,7 @@ That script is repeated and renamed below:
 ---
 lineno-start: 1
 ---
-### chap08/ale01.py
+### chap08/ale02.py
 from PIL import Image
 
 # Grab the image filename
@@ -1768,10 +1768,10 @@ To begin, make a backup copy of your current script, and then follow the directi
 Once you've done all this work, run your script as follows:
 
 ```{code-block} none
-python3 ale01.py apsu1.png apsu2.png apsu3.png apsu4.png apsu5.png apsu6.png
+python3 ale02.py apsu1.png apsu2.png apsu3.png apsu4.png apsu5.png apsu6.png
 ```
 
-Did this produce a much cleaner resulting image?  It should! Go show your family and friends your amazing script. (You might rename your final script from `ale01.py` to `erase32.py`.)
+Did this produce a much cleaner resulting image?  It should! Go show your family and friends your amazing script. (You might rename your final script from `ale02.py` to `erase32.py`.)
 
 ```{margin} Hint
 What's different in how we gathered the original data (i.e., images) in these two cases?

@@ -165,6 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -290,7 +291,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -306,6 +309,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers-and-numerical-computing">Floating-point numbers and numerical computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computers-struggle-with-arithmetic">Computers struggle with arithmetic?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-range-of-a-fp-number">The range of a FP number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-this-issue-of-precision">Illustrating this issue of precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-bit-at-at-time">One bit at at time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-the-smallest-difference">Searching for the smallest difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fp-errors-accumulate">FP errors accumulate</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -320,6 +338,7 @@ document.write(`
 <p>In the last chapter, we heard from Jill Lepore that counting was a key metric in industrialization and measurement a key driver of science, but we looked mostly at the computational data type for counting: the integer.</p>
 <p>Clearly, counting isn’t the only thing we do with numbers, and the world isn’t nicely discrete in everything we do. In fact, we perceive the world as mostly <em>continuous</em>. For example, time doesn’t just move forward in discrete seconds, but also in tenths, hundredths, and infinitely small pieces of a second. Similarly, we don’t solely measure distance in an integral number of meters, but also in centimeters, millimeters, and infinitely small pieces of a meter. The same logic applies to measuring volume and weight and force and pretty much anything else we measure.</p>
 <p>If we’re going to use computers to help us do creative things and generate new knowledge in our physical world, we’re going to need to represent and manipulate <em>measured values</em>. For instance, we will soon measure the running time of our scripts, and in this, we will look at not just the time in seconds, but also fractions of a second.</p>
+<section id="floating-point-numbers-and-numerical-computing">
 <p><strong>Floating-point numbers and numerical computing.</strong> Measurements with fractional units, like 6.574 seconds, are described as <em>real numbers</em>, and Python uses a datatype called <code class="docutils literal notranslate"><span class="pre">float</span></code> to represent such numbers. This name is a shorthand for <em>floating point (FP)</em>, <a class="reference external" href="https://standards.ieee.org/standard/754-2019.html">a standardized representation and a type of computational arithmetic.</a></p>
 <p>There are many details involved in this standard and peculiarities involved in using FP numbers to solve your problems. There are entire courses that will teach you how to use a computer to accurately solve problems involving continuous variables, like time and distance. This area of computer science comes under many names, including <em>numerical computing</em> and <em>scientific computing</em>, and the techniques taught will help you to use computers to study the range of physical and social phenomena in the world around us.</p>
 <div class="admonition-learning-outcomes admonition">
@@ -331,6 +350,8 @@ document.write(`
 <li><p>Discuss the difficulty computers have representing some real numbers [CS concepts and programming skills].</p></li>
 </ul>
 </div>
+</section>
+<section id="computers-struggle-with-arithmetic">
 <p><strong>Computers struggle with arithmetic?</strong> We won’t attempt to cover the breadth of numerical algorithms, but answer a fundamental question at the heart of numerical computing and in line with our efforts to understand how computers operate: <em>If computers see everything in the world as a collection of numbers and they’ve been constructed to do computation on numbers, why are some types of computation hard to do on a computer?</em></p>
 <p>While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between <em>range</em> (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and <em>precision</em> (i.e., how close is a real number we can represent to the real number we want to represent?).</p>
 <p>We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language’s physical representation. While Python doesn’t place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer datatypes. And for FP numbers, the same is true in Python.</p>
@@ -342,6 +363,8 @@ document.write(`
 </pre></div>
 </div>
 <p>When you run this code block, it should surprise you that the value you know to be n-squared for <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">0.1</span></code> is not the result of the multiplication of that number with itself. How can our fancy computers get the wrong answer to this simple arithmetic problem?!? Well, let’s find out by writing a script to understand how the FP standard represents real numbers like <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p>
+</section>
+<section id="the-range-of-a-fp-number">
 <p><strong>The range of a FP number.</strong> Floating point represents a real number in the form of a <em>significand</em> times a <em>base</em> raised to an <em>exponent</em>, where the significand and the exponent are integers stored directly in the FP representation. The base is an integer greater than or equal to two. This base is defined in the standard and not stored explicitly in the representation. To know what real number is expressed by a particular FP representation, however, you also have to know where the representation assumes that the number’s <em>radix point</em> (more commonly called a decimal point for base-10 numbers) is placed.</p>
 <p>For example, we could encode 6.574 as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">6574</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">3</span>
@@ -350,6 +373,8 @@ document.write(`
 <p>where <code class="docutils literal notranslate"><span class="pre">6574</span></code> is the significand, <code class="docutils literal notranslate"><span class="pre">-3</span></code> is the exponent, <code class="docutils literal notranslate"><span class="pre">10</span></code> is the assumed base, and the radix point is assumed to sit just to the right of the rightmost digit of the significand.</p>
 <p>The range of a FP representation depends on the range of integers we can store in that representation’s exponent field. The IEEE 754 standard for <em>single-precision</em> FP numbers, for example, has an 8-bit exponent field, and the exponent field in its <em>double-precision</em> encoding is 11 bits. Clearly 11 is not twice 8, and the term “double precision” comes from the rough doubling of the size of the significand field (from 23 to 52 bits). Each encoding also includes a sign bit, which indicates the sign of the significand (not the exponent), and from this you can compute that double-precision FP numbers require twice as many bits as single-precision ones in the IEEE 754 standard.</p>
 <p>The range of these two representations is impressive. While the single-precision representation can’t represent the estimated number of atoms in the known universe, which somewhere between <code class="docutils literal notranslate"><span class="pre">10**78</span></code> and <code class="docutils literal notranslate"><span class="pre">10**82</span></code>, the double-precision representation with a maximum base-10 exponent of 308 easily can. You can also measure things as microscopically small as this maximum number is astronomically large.</p>
+</section>
+<section id="precision">
 <p><strong>Precision.</strong> But what about precision? In base 10, we understand the fractional part of a real number as the group of digits to the right of the decimal point. The value of each of these digits to the total fraction is the digit multiplied by <code class="docutils literal notranslate"><span class="pre">10**-m</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is 1 for the digit immediately to the right of the decimal point, 2 for the next digit to the right, and so forth.</p>
 <p>This is that expansion for the decimal fraction 0.574:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">3</span>
@@ -361,6 +386,8 @@ document.write(`
 <p class="sidebar-title">Notation</p>
 <p>The leading <code class="docutils literal notranslate"><span class="pre">0b</span></code> mimics the leading <code class="docutils literal notranslate"><span class="pre">0x</span></code> we saw on hexadecimal numbers. Following this prefix, we write a <code class="docutils literal notranslate"><span class="pre">0</span></code>, which indicates that there’s no whole number here, and the radix point, which always proceeds the fractional part.</p>
 </aside>
+</section>
+<section id="illustrating-this-issue-of-precision">
 <p><strong>Illustrating this issue of precision.</strong> We can get a sense for precision by writing a Python program that constructs the binary representation for a decimal fraction. Our script will prefix the answer we compute with the string <code class="docutils literal notranslate"><span class="pre">'0b0.'</span></code>, which will help us to remember that this is the binary representation of a fraction between 0 and 1.</p>
 <p>Our script will expect two inputs. The first is the decimal fraction we want to represent and the second is the size in bits of our chosen FP representation’s significand. If we wanted to mimic the precision of IEEE 754 single-precision, we’d input 23. The following script gets us started.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&#39;&#39;&#39;Convert a decimal fraction into a binary string&#39;&#39;&#39;</span>
@@ -393,12 +420,16 @@ document.write(`
 <span class="linenos">16</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 </pre></div>
 </div>
+</section>
+<section id="one-bit-at-at-time">
 <p><strong>One bit at at time.</strong> What would we do next if we wanted to add one bit to our significand? Since we have no bits in our significand, that bit would be the coefficient of the first term in the expansion we discussed earlier. Do we want this coefficient to be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>? Well, which of these two values creates a new guess that is closer to the actual number <code class="docutils literal notranslate"><span class="pre">n</span></code> than our current guess? The one that is closer becomes our new best guess.</p>
 <p>If we’re updating our best guess as we add bits to our significand, this starts to sound like we’re building a loop. As we know, loops have exit conditions, and the exit condition in this case is when the best guess is exactly <code class="docutils literal notranslate"><span class="pre">n</span></code>. If our current best guess isn’t exactly <code class="docutils literal notranslate"><span class="pre">n</span></code>, then we loop to again add new bit to the significand, which will bring us closer to the input decimal fraction. Of course, we also have to exit this loop if we run out of significand bits.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
 <p>Before reading on, practice writing the pseudocode for the loop I just described. What type of loop might you use (i.e., a for- or a while-loop)? What’s the condition we’ll test that protects the break-statement in the loop?</p>
 </div>
+</section>
+<section id="searching-for-the-smallest-difference">
 <p><strong>Searching for the smallest difference.</strong> As we slowly add bits to the righthand side of the significand, we increase the precision of our binary encoding by reducing the difference between the input decimal fraction <code class="docutils literal notranslate"><span class="pre">n</span></code> and our current <code class="docutils literal notranslate"><span class="pre">best</span></code> guess, which is a binary fraction that we’ll store in <code class="docutils literal notranslate"><span class="pre">encoding</span></code>. The complete script is below.</p>
 <p>I used a for-loop since we know the maximum number of bits in our significand; the loop must end at that maximum and a for-loop makes this easy to do and to understand. You could build an equivalent solution with a while-loop.</p>
 <p>Inside the for-loop, I check to see if our best guess (<code class="docutils literal notranslate"><span class="pre">best</span></code>) matches <code class="docutils literal notranslate"><span class="pre">n</span></code>, and break out of the loop early if it is. Besides updating the string encoding of the significand, the loop body adjusts the bounds (i.e., <code class="docutils literal notranslate"><span class="pre">upper</span></code> and <code class="docutils literal notranslate"><span class="pre">lower</span></code>) as it updates <code class="docutils literal notranslate"><span class="pre">guess</span></code>, since every bit we add to the significand tightens one or the other of the two bounds.</p>
@@ -461,10 +492,13 @@ document.write(`
 <p class="sidebar-title">Print Rounds</p>
 <p>If you set <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">0.1</span></code> and then print <code class="docutils literal notranslate"><span class="pre">n</span></code> in the interactive Python interpreter, it will tell you that <code class="docutils literal notranslate"><span class="pre">n</span></code> is <code class="docutils literal notranslate"><span class="pre">0.1</span></code>. As <a class="reference external" href="https://docs.python.org/3/tutorial/floatingpoint.html">this tutorial page</a> says, Python sometimes rounds what it prints. What it displays and what it stores may be different when dealing with FP numbers!</p>
 </aside>
+</section>
+<section id="fp-errors-accumulate">
 <p><strong>FP errors accumulate.</strong> Unfortunately, precision doesn’t just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why <code class="docutils literal notranslate"><span class="pre">0.1</span> <span class="pre">*</span> <span class="pre">0.1</span></code> doesn’t equal <code class="docutils literal notranslate"><span class="pre">0.01</span></code>. A slightly inaccurate FP representation of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself produces a result with more inaccuracy than the conversion of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> into a FP number. Or stated another way, the computer doesn’t know if you were trying to multiple <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself or <code class="docutils literal notranslate"><span class="pre">0.10000002384185791</span></code> times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.</p>
 <p>If your script operates with floating-point numbers and you need the results to be precise, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems">accuracy problems in floating-point arithmetic</a> can get you started on this tricky subject.</p>
 <p>As if it wasn’t hard enough to write a correct program!</p>
-<p>[Version 20230712]</p>
+<p>[Version 20230811]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -525,6 +559,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers-and-numerical-computing">Floating-point numbers and numerical computing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computers-struggle-with-arithmetic">Computers struggle with arithmetic?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-range-of-a-fp-number">The range of a FP number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrating-this-issue-of-precision">Illustrating this issue of precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-bit-at-at-time">One bit at at time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-the-smallest-difference">Searching for the smallest difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fp-errors-accumulate">FP errors accumulate</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

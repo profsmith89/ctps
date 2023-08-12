@@ -30,7 +30,9 @@ To successfully solve a complex problem, you need to learn to scaffold. This cha
 *   Discuss the purpose of a shim library [design and CS concepts].
 ```
 
-**Guessing a number.** Let's build an extremely simple (and silly) game involving randomness. This game will have the computer "think" of a number between 1 and 100, and then we will try to guess it. 
+## Guessing a number
+
+Let's build an extremely simple (and silly) game involving randomness. This game will have the computer "think" of a number between 1 and 100, and then we will try to guess it. 
 
 The core of this game is generating a secret number, and if we can figure out how to do that in Python, we can probably build the rest of the game based on stuff we've already learned (i.e., using loops and conditionals). Given our recent mentions about randomness, you've probably guessed that having a computer "think" of a number means that it should randomly select a number within a given range. As we have experienced lately, the Python library often has exactly the functionality we need, and it is true once again in this instance. We simply need to import [the `random` library](https://docs.python.org/3/library/random.html) and invoke its `randint` function, specifying the range we desire.
 
@@ -92,7 +94,9 @@ else:
     print('Too big!')
 ```
 
-**The player's guess.** Good work! Now, how do we grab the player's guess? To this point, we've learned how to take input directly from a user, from a file, from the script's command line, and from a network resource. Which is appropriate for this problem?
+## The player's guess
+
+Good work! Now, how do we grab the player's guess? To this point, we've learned how to take input directly from a user, from a file, from the script's command line, and from a network resource. Which is appropriate for this problem?
 
 Given that we'd like to build an interactive game, the first option is probably the most appropriate, and this means we'll use Python's built-in function `input` to grab something directly from the user. Like this:
 
@@ -136,7 +140,9 @@ else:
     print('Too big!')
 ```
 
-**Type conversion.** What we have just done is known as *type conversion*. Type information helps the interpreter to know how it should interpret the bag of stuff you gave it and, if you instructed the interpreter to do something with this bag of stuff, manipulate it. What do I mean by "bag of stuff"? In the next chapter, we'll learn how computers exactly represent an object like an `int` and a `str`, but for now, we can use an analogy. 
+## Type conversion
+
+What we have just done is known as *type conversion*. Type information helps the interpreter to know how it should interpret the bag of stuff you gave it and, if you instructed the interpreter to do something with this bag of stuff, manipulate it. What do I mean by "bag of stuff"? In the next chapter, we'll learn how computers exactly represent an object like an `int` and a `str`, but for now, we can use an analogy. 
 
 My dog and I are both living beings that can be thought of as a "bag of stuff," i.e., collection of biological cells or molecules or atoms). We'll soon learn that `'42'` and `42` are both a collection of *bits*. This is what people mean when they describe the physical world as the world of atoms and the digital world as the world of bits.
 
@@ -146,7 +152,9 @@ Why doesn't the Python interpreter allow us to compare a string to an integer de
 
 This brings us to the concept of type conversion. Sometimes two bags of stuff have different types, but they represent the same idea. When this is true, we can successfully perform a type conversion. A dog and a man in a dog suit have two different types (`dog` and `man`), but they represent the same idea (dog). The same thing happens with `42` and `'42'`. The string `'42'` is a string in an integer suit. It's not the integer `42`, but we know that it represents the idea of the number 42.
 
-**Try and recover.** Of course, not every string value is a string in an integer suit. What happens if the player types `garbage` at our input prompt? Well, `input` will return a string object with the value `'garbage'` and this object will be passed to `int`, which will try unsuccessfully to convert it into a integer value. This unsuccessful attempt will generate a `ValueError` exception and end our script.
+## Try and recover
+
+Of course, not every string value is a string in an integer suit. What happens if the player types `garbage` at our input prompt? Well, `input` will return a string object with the value `'garbage'` and this object will be passed to `int`, which will try unsuccessfully to convert it into a integer value. This unsuccessful attempt will generate a `ValueError` exception and end our script.
 
 Perhaps that's a fine action for a player silly enough to type `garbage` when we asked them for a number, but is that what we want to happen if the player simply mistypes their input? Perhaps I mean to type `42`, but on my way to the `return` key, I mistakenly swipe the apostrophe key and actually input `42'`. Could we make our script a bit more resilient?
 
@@ -182,7 +190,9 @@ By catching exceptions like this, we save ourselves some difficult coding work a
 You _never_ want to trust that the user provided your script with well-structured input. You should _always_ have your script check that the user input is what you expect it to be. This is the first step in writing scripts with strong security guarantees. A try-except statement wrapped in an infinite loop is just one design pattern that accomplishes this.
 ```
 
-**The game loop.** We started building our game from the inside-out, and now we have to think about the relationship between a single turn of the game to the entire game. Well, the game is not over until the player guesses the secret number and the computer prints: `Exactly! You win!` If we want the player to make multiple guesses, we probably have to wrap our logic for a single turn inside another loop. Let's make it an infinite loop, since we don't know how many attempts the player will need to finally guess the secret number, and `break` out of this infinite loop when the guess is correct. Here is the game all together, with a few debugging `print` statements currently commented out.
+## The game loop
+
+We started building our game from the inside-out, and now we have to think about the relationship between a single turn of the game to the entire game. Well, the game is not over until the player guesses the secret number and the computer prints: `Exactly! You win!` If we want the player to make multiple guesses, we probably have to wrap our logic for a single turn inside another loop. Let's make it an infinite loop, since we don't know how many attempts the player will need to finally guess the secret number, and `break` out of this infinite loop when the guess is correct. Here is the game all together, with a few debugging `print` statements currently commented out.
 
 ```{code-block} python
 ---
@@ -221,7 +231,9 @@ if __name__ == '__main__':
     main()
 ```
 
-**Testing our proposed solution.** We have a solution, but how do we know if it works correctly? As we learned in earlier problems, we could run it with a range of inputs that together test the different sequences of statements (also called *code paths*) in our script. In particular, we'll want to input integers and some garbage to test our grab-a-player's-guess loop, and we'll want to exercise each of the branches of the if-statement that compares the `guess` and the `secret`.
+## Testing our proposed solution
+
+We have a solution, but how do we know if it works correctly? As we learned in earlier problems, we could run it with a range of inputs that together test the different sequences of statements (also called *code paths*) in our script. In particular, we'll want to input integers and some garbage to test our grab-a-player's-guess loop, and we'll want to exercise each of the branches of the if-statement that compares the `guess` and the `secret`.
 
 But how, for example, can we input a guess that's bigger than the secret if we don't know the secret? The answer is simple: We remove the randomness while testing. This is the purpose of the print-statements in the script that are currently commented out. Removing the comment character allows us to see the secret and input an appropriate guess to test a selected code path. We may also want to print `guess` to reassure ourselves that the script is working with the value we think it should have grabbed.
 
@@ -229,7 +241,9 @@ But how, for example, can we input a guess that's bigger than the secret if we d
 Run some tests on `guess32.py`. Make sure you believe it works as expected.
 ```
 
-**A networked architecture of the guessing game.** Now that we understand the logic involved in a single-player game and have a working script for it, we can think about splitting this script's operation across a client script and a server script.
+## A networked architecture
+
+Now that we understand the logic involved in a single-player game and have a working script for it, we can think about splitting this script's operation across a client script and a server script.
 
 What does that exactly mean? It means that the client and server scripts will work together to generate the exact same user experience as we achieved with `guess32.py`. However, some part of the game will be running not on our machine, but some other machine elsewhere on the Internet.
 
@@ -318,7 +332,9 @@ S 19      else:
 S 20          print('Too big!')
 ```
 
-**A sequence diagram for our game.** Now that we have decomposed our game into a client portion and a separate server portion, we next have to determine: (1) the messages that will be sent back and forth; and (2) what Python libraries exist that will help us transmit and receive these messages (e.g., as the Python `requests` library did for our `qweb` examples).
+## Its sequence diagram
+
+Now that we have decomposed our game into a client portion and a separate server portion, we next have to determine: (1) the messages that will be sent back and forth; and (2) what Python libraries exist that will help us transmit and receive these messages (e.g., as the Python `requests` library did for our `qweb` examples).
 
 In determining the messages we want sent, it helps to draw what's called a *sequence diagram*. The executions of the client and server are shown in these diagrams as parallel, vertical lines, where time runs from the top to the bottom of the page. An event taking place at time *t1* in the client will generate a message that is sent to the server, and this message is shown as an arrow from the client to the server. Typically, we label these arrows with the content of the message. At a later time *t2*, the server might send a response message to the client. And so forth. Think of it as a conversation between two individuals.
 
@@ -334,7 +350,9 @@ The server would compare this guess against its secret number and respond with a
 
 Finally, unless the player guessed the secret number, the client grabs a new guess from the player, and the message loop begins again.
 
-**When to use a new library.** We have a complete design for our networked game, and our next task is to start coding the client and server scripts. In this, we need to use a library that allows us to send messages between separately running applications. Can we use the `requests` library, as we did in our last problem-to-be-solved?
+## When to use a new library
+
+We have a complete design for our networked game, and our next task is to start coding the client and server scripts. In this, we need to use a library that allows us to send messages between separately running applications. Can we use the `requests` library, as we did in our last problem-to-be-solved?
 
 When we previously used the `requests` library, we didn't think much about the network messages that were sent between the machine on which we ran our script and the server to which we were communicating. We simply specified a protocol (i.e., HTTP), the hostname of the server we wanted to contact, a path to a resource on that server (which we had to look up), and some parameters to help the server know what we wanted back. 
 
@@ -354,7 +372,9 @@ Now, if you look at the structure of the conversation in our particular sequence
 Python, like many programming languages, has lots of libraries with overlapping functionality. In problem solving, it is worth your time to find the right library for your task at hand.
 ```
 
-**Sockets in action.** To understand the `socket` library, it helps to have the right image in your mind. The image we used with the `requests` library was a verbal request. For the `socket` library, you should think of a thing, not an action, and the thing you should have in mind is an endpoint through which you can send and receive information, like a smartphone. As such, we need to create an abstract object in our script corresponding to this endpoint.
+## Sockets in action
+
+To understand the `socket` library, it helps to have the right image in your mind. The image we used with the `requests` library was a verbal request. For the `socket` library, you should think of a thing, not an action, and the thing you should have in mind is an endpoint through which you can send and receive information, like a smartphone. As such, we need to create an abstract object in our script corresponding to this endpoint.
 
 We will need one in both our client and server scripts (you can't communicate through your phone to another person unless they have a phone too), but let's start by focusing on the client. The following script grabs the statements from `guess32.py` that we marked as belonging in the client, and it inserts pseudocode corresponding to the messages in our sequence diagram.
 
@@ -416,7 +436,9 @@ There are many resources available on the Internet where you can learn about thi
 
 Just as we had to tell `open` some configuration parameters (e.g., are we opening a file for reading or writing?), we have to pass `socket.socket` some configuration parameters so that it creates for us a particular `socket` object. We won't dive into the many different types of sockets that are possible. It is sufficient for us to know that the parameters in our partial script will create a socket that uses TCP/IPv4, which is a common protocol used for transporting messages around the Internet. Using different parameters to create another kind of socket object is like choosing to use a different messaging app (e.g., Slack versus Message) in our smartphone analogy.
 
-**Specifying the other party.** So far, we've selected the channel that we will use to communicate, and the next step is to specify to whom we want to communicate. A client script does this with a call to `socket.connect`, in which we specify a tuple consisting of a *hostname* (or the IP address corresponding to that hostname) and a *port* on that host.
+## Specifying the other party
+
+So far, we've selected the channel that we will use to communicate, and the next step is to specify to whom we want to communicate. A client script does this with a call to `socket.connect`, in which we specify a tuple consisting of a *hostname* (or the IP address corresponding to that hostname) and a *port* on that host.
 
 ```{margin} Software ports
 Although the imagery in the text talks about a friend with multiple cell phones, the ports we're talking about are not the hardware ports that you can find, for example, on the side of your laptop. Software ports are a way to separate the stream of messages coming in on your laptop's network connection into several different logical streams. It's like what you probably do when you separate your real mail from your junk mail.
@@ -454,7 +476,9 @@ You'll also hear people talking about `127.0.0.1` as the *loopback address*. The
 Both these methods are blocking calls, e.g., `socket.sendall` blocks until the entire message is sent (or an error occurs). For short messages in an application like ours, where our server serves only one client, this is a reasonable thing to do.
 ```
 
-**Sending and receiving messages.** With a socket created and configured, we are ready to start sending and receiving messages. There are numerous different methods for sending and receiving messages in the `socket` library, and we're going to use two fairly simple ones: `socket.sendall` and `socket.recv`.
+## Sending and receiving messages
+
+With a socket created and configured, we are ready to start sending and receiving messages. There are numerous different methods for sending and receiving messages in the `socket` library, and we're going to use two fairly simple ones: `socket.sendall` and `socket.recv`.
 
 Roughly speaking, `socket.sendall` takes the string we want to send and sends it over the network, and `socket.recv` returns a message that was sent to us. But because the `socket` library is closer to the primitives in the machine than the `requests` library, it asks us to specify the size of the buffers we'll use to send and receive messages and the character encodings used in these messages. So many details!
 
@@ -498,17 +522,23 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             break
 ```
 
-**Size matters.** The first helpful abstraction in our `socket32` shim is to ignore message size. In the `socket` library, send and receive methods operate on network buffers, and these buffers are of a fixed size. This means that we need to pay attention to how the sizes of our messages interact with the fixed size of the network buffers.
+## Size matters
+
+The first helpful abstraction in our `socket32` shim is to ignore message size. In the `socket` library, send and receive methods operate on network buffers, and these buffers are of a fixed size. This means that we need to pay attention to how the sizes of our messages interact with the fixed size of the network buffers.
 
 In general, this is a messy problem that can result in some complicated code. You can read about some of the complicated situations in [the Python documentation titled "Socket Programming HOWTO."](https://docs.python.org/3/howto/sockets.html#socket-howto) This is an important issue for a production piece of code to handle, but we ignore it inside our `socket32` shim since the messages in our current problem-to-be-solved are small in size and neither the client nor the server will send multiple messages before performing a receive.
 
 In particular, our `socket32` shim specifies that we'll use a buffer size of `1024`, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the `recv` call in the code block above. It's not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your applications largest message size, assuming it is known. As you can imagine in these instances, you'd have to turn a simple receive call into a loop of receive calls.
 
-**Encoding again!** The second abstraction we exploit with our `socket32` shim is to use it in both our client and server scripts. By having our client and the server use this same shim, we guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.
+## Encoding again!
+
+The second abstraction we exploit with our `socket32` shim is to use it in both our client and server scripts. By having our client and the server use this same shim, we guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.
 
 In some applications, clients and servers are written by different programmers. When this happens, we have to know the character encoding that the server will use and force our strings into that encoding. This is the work being done by the `str.encode` and `str.decode` methods in the code block above. In particular, the script encodes into a Python `bytes` object, which is useful for holding and manipulating *binary data*. Binary data is a topic we'll discuss soon, and for now, just think of this encoding work as transforming our string message into an agreed-upon encoding.
 
-**Our client with a simplified networking interface.** At this point, you shouldn't worry about understanding all the reasons why `sendall` and `recv` work the way that they do. In fact, `guess-client.py` hides these details behind our shim library's API and is the client script we'll use for the rest of this chapter. Carefully compare each statement in `guess-client.py` against its equivalent in `guess-client-noabstractions.py` and you'll see what I mean by hiding details.
+## A simplified networking interface
+
+At this point, you shouldn't worry about understanding all the reasons why `sendall` and `recv` work the way that they do. In fact, `guess-client.py` hides these details behind our shim library's API and is the client script we'll use for the rest of this chapter. Carefully compare each statement in `guess-client.py` against its equivalent in `guess-client-noabstractions.py` and you'll see what I mean by hiding details.
 
 ```{margin} Line 22
 Notice that it is now easier to see that we have to convert the user's integer `guess` into a string to be sent in the client's message to the server. This type conversion is required because we're sending strings, not integers in our messages!
@@ -546,7 +576,9 @@ with create_new_socket() as s:
             break
 ```
 
-**The server.** With our client complete, we can write pseudocode for the server script, taking the code parts of `guess32.py` we marked as belonging in the server. You'll notice that the code block below pre-populates the server script with a call to create the server's socket (line 11) and the address information the client uses to connect to the server (lines 5-6).
+## The server
+
+With our client complete, we can write pseudocode for the server script, taking the code parts of `guess32.py` we marked as belonging in the server. You'll notice that the code block below pre-populates the server script with a call to create the server's socket (line 11) and the address information the client uses to connect to the server (lines 5-6).
 
 ```{code-block} python
 ---
@@ -585,7 +617,9 @@ with create_new_socket() as s:
     # If we get here, client broke connection
 ```
 
-**A connection.** Inside the with-block, you'll notice that this script doesn't just create a socket. It introduces the idea of a *connection*. To understand this, we need to move away from our image of two people texting and think about a phone call. In a phone call, there's an open line between the two parties for the entire length of the call. Even when both parties are silent (i.e., no one is sending a message), the phone line keeps the two parties connected. This is how a server works with messages sent to its sockets.
+## A connection
+
+Inside the with-block, you'll notice that this script doesn't just create a socket. It introduces the idea of a *connection*. To understand this, we need to move away from our image of two people texting and think about a phone call. In a phone call, there's an open line between the two parties for the entire length of the call. Even when both parties are silent (i.e., no one is sending a message), the phone line keeps the two parties connected. This is how a server works with messages sent to its sockets.
 
 Let's see how we create such a connection. The next code block turns the pseudocode on line 12 of the previous code block into Python. It takes the socket the server created and manipulates it so that a client can message the server on this socket. In particular, the server script must `bind` the socket object to a host and port (line 13). This is equivalent to associating a cell phone (i.e., the socket) with a particular phone number (i.e., the host and port).
 
@@ -614,7 +648,9 @@ with create_new_socket() as s:
 
 To receive phone calls on that phone, we also have to publish the phone number, which lets people know we'll answer it if they call it. This is the purpose of `listen` method (line 14), which we will always group with the call to `bind`.
 
-**Picking up a call.** With that configuration complete, the server can now await a `socket.connect` call from a client. The server does this with a call to `socket.accept` (line 18), which blocks the server script until the operating system notifies it that some client has asked for a connection. When this happens, the `accept` method returns a tuple consisting of a new `socket` object and an address tuple. This address tuple contains the client's address information, which is in the form of host and port. The address information is like caller-id on your phone!
+## Picking up a call
+
+With that configuration complete, the server can now await a `socket.connect` call from a client. The server does this with a call to `socket.accept` (line 18), which blocks the server script until the operating system notifies it that some client has asked for a connection. When this happens, the `accept` method returns a tuple consisting of a new `socket` object and an address tuple. This address tuple contains the client's address information, which is in the form of host and port. The address information is like caller-id on your phone!
 
 ```{code-block} python
 ---
@@ -635,7 +671,9 @@ with create_new_socket() as s:
     # REST OF SCRIPT
 ```
 
-**The conversation.** The returned socket (i.e., `conn`) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., `s` in our script) is how all clients reach the server to request a connection. When the server accepts a client's connection, it converses with it through a separate socket, one dedicated to that client's conversation. This separation of tasks is a very powerful problem-solving technique!
+## The conversation
+
+The returned socket (i.e., `conn`) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., `s` in our script) is how all clients reach the server to request a connection. When the server accepts a client's connection, it converses with it through a separate socket, one dedicated to that client's conversation. This separation of tasks is a very powerful problem-solving technique!
 
 ```{margin} No as-clause
 There is no as-clause in the with-statement on line 22 because we previously created and named the object whose lifetime ends when the with-block is exited.
@@ -695,13 +733,17 @@ If the server breaks the connection before the client, the connection won't be s
 
 When is the server done with the `conn` socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem. Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.
 
-**Programmer beware.** The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we'd want to write them to catch and gracefully handle all these errors. But we just want our scripts to work assuming everything proceeds smoothly, and that means that our server script need gracefully handle only one networking condition: the client disconnected.
+## Programmer beware
+
+The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we'd want to write them to catch and gracefully handle all these errors. But we just want our scripts to work assuming everything proceeds smoothly, and that means that our server script need gracefully handle only one networking condition: the client disconnected.
 
 The if-statement on line 25 is the code that recognizes when the client disconnects. It doesn't look it does this, but here's how it works: This if-statement checks the value of `guess` from the `recv` method call, and if this value is the empty string, it breaks us out of the infinite loop. It doesn't matter whether the client finished its work (i.e., terminated cleanly) or it terminated prematurely. The networking protocol running below the socket library's API knows when the client breaks the connection and it alerts the server's operating system (OS). The OS then unblocks the server's `recv` call, and since there was no client message, the returned result of the `recv` is the empty string. Our script sees this empty string and knows that the client has terminated.
 
 You might feel that there is a lot of networking setup for the server in our simple application. There is definitely more than in the client, but this setup supports the generation of very powerful servers that converse with many clients simultaneously. In fact, you use such servers everyday! As you try your own version of a networked game, your server script should copy lines 12-26 unchanged. You can change the name used for the result of the `conn.recv()` call on lines 24-25, but don't change the order of the networking calls or move this cryptic if-statement. Networking is a complicated and tricky subject. Our goal in this chapter and its exercises is understand the basics of network programming and play a bit with the power of it.
 
-**Run it!** Are you ready to try running our client and server scripts? Terrific, here's how! First, download `socket32.py`, `guess-client.py`, and `guess-server.py` to your local machine from this book's companion website. Then follow the directions in one of the bullets below; most of you will want to follow the instructions in the first bullet.
+## Run it!
+
+Are you ready to try running our client and server scripts? Terrific, here's how! First, download `socket32.py`, `guess-client.py`, and `guess-server.py` to your local machine from this book's companion website. Then follow the directions in one of the bullets below; most of you will want to follow the instructions in the first bullet.
 
 * A simplest approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell *before* the client script in the other.
 * If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like this:
@@ -727,4 +769,4 @@ The nohup command is a fun, infrequently used command that stands for "no hang u
 
 In each of these approaches, we're not really using the network. Remember that we're running these two scripts with the loopback interface, but we can't easily tell that without looking at the code. Again, abstraction at work!
 
-\[Version 20230707\]
+\[Version 20230811\]

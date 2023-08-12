@@ -165,6 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -290,7 +291,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -306,6 +309,39 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internationalization">Internationalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standards">Standards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unicode">Unicode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-problem">A new problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition-to-reduce-the-problem-s-complexity">Decomposition to reduce the problem’s complexity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-as-immutable-sequences">Strings as immutable sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-an-emoji-in-unicode">Encode an emoji in Unicode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-different-replacements">Multiple different replacements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feeling-overwhelmed">Feeling overwhelmed?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-definitions">Function definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-actual-function-definition-and-its-invocation">The actual function definition and its invocation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-execution">Function execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-decomposition-and-algorithms">Abstraction, decomposition, and algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-before-use">Definition before use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-s-special-variables">Python’s special variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-feel-for-abstraction">Getting a feel for abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-kind-of-abstraction">Another kind of abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-are-sequence-objects">Lists are sequence objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-barriers">Abstraction barriers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main"><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-functions">Pure functions</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -342,11 +378,14 @@ document.write(`
 <li><p>Begin to use Python modules in your coding projects [programming skills].</p></li>
 </ul>
 </div>
+<section id="internationalization">
 <p><strong>Internationalization.</strong> I ended the last chapter with a disclosure: What we think of as an individual character is simply a Python string of length 1. This is a beautiful simplification that makes it easy to write a script that processes characters and strings. But you might wonder, “Strings in whose native tongue?” To create programs that solve the world’s problems, our computers and the software that runs on them must handle the character sets of the world’s many human languages.</p>
 <p>The software community uses the term <em>internationalization</em> when it describes the process of building programs and systems that adapt to the multitude of human languages and dialects. You will also hear the software community talk about the process of <em>localization</em>, which takes internationalized software and configures it for a specific language and locale.</p>
 <p>This might be a bit abstract, and so let’s take a specific example. I’m writing this book on a MacBook Pro running MacOS Mojave. Does Apple sell this laptop and operating system around the world? You bet it does. Does every person purchasing a MacBook Pro speak English like me, or want to interact with it in English? Definitely not. MacOS Mojave is internationalized so that Apple can sell its laptops around the world. A particular laptop is then localized when sold to a particular customer, like me. We can see this by looking at the “Language &amp; Region” controls in the “System Preferences.” Mine says that English is my preferred language, but I could change it to one of many other options.</p>
 <p>In this chapter, we are going to focus on just one piece of this large and complex problem of internationalization: computing with the multitude of characters in the world’s many human languages. Lucky for us, much of the complexity in even this well-defined problem is hidden from you as a programmer. While we don’t have to understand everything about <em>the problem of encoding</em> every character in every human language, we also can’t be ignorant of it.</p>
-<p><strong>Encoding standards.</strong> Let’s begin with a demonstration of this encoding problem, using our now familiar <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>. We’ll feed a small excerpt from <em>The Cat in the Hat</em>, written not in English (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptE.txt</span></code>) but in Spanish (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptS.txt</span></code>) to this script. Notice that the Spanish version uses punctuation marks that appear in Spanish but not English. It also correctly includes accents that help readers distinguish the Spanish word <em>el</em> (meaning ‘the’) from the different word <em>él</em> (meaning ‘he’).</p>
+</section>
+<section id="encoding">
+<p><strong>Encoding.</strong> Let’s begin with a demonstration of this encoding problem, using our now familiar <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>. We’ll feed a small excerpt from <em>The Cat in the Hat</em>, written not in English (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptE.txt</span></code>) but in Spanish (<code class="docutils literal notranslate"><span class="pre">CatInTheHat-excerptS.txt</span></code>) to this script. Notice that the Spanish version uses punctuation marks that appear in Spanish but not English. It also correctly includes accents that help readers distinguish the Spanish word <em>el</em> (meaning ‘the’) from the different word <em>él</em> (meaning ‘he’).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### A portion of the excerpt files</span>
 <span class="linenos">2</span><span class="n">lines_in_English</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;The Cat in the Hat!</span>
 <span class="linenos">3</span><span class="s1">And he said to us,</span>
@@ -369,6 +408,8 @@ document.write(`
 <p class="admonition-title">You Try It</p>
 <p>Go ahead and try this by alternatively using each one of the three different with-as-statements included in <code class="docutils literal notranslate"><span class="pre">chap03/script32.py</span></code>.</p>
 </div>
+</section>
+<section id="standards">
 <p><strong>Standards.</strong> <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> and <code class="docutils literal notranslate"><span class="pre">latin-1</span></code> are two of a large number of different encoding <em>standards</em>. You’ll find standards all throughout our physical and virtual worlds. A standard is simply a documented and widely agreed-upon method for doing something.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">References</p>
@@ -382,8 +423,12 @@ document.write(`
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Unicode">https://en.wikipedia.org/wiki/Unicode</a></p>
 </aside>
 <p>By the way, if you’re interested, you can begin an exploration of the checkered history of encoding standards by reading about Unicode, the standard we use and explore next.</p>
+</section>
+<section id="unicode">
 <p><strong>Unicode.</strong> The Unicode standard maps each language character to a unique <em>code point</em> in a <em>codespace</em>. This approach attempts to take every character in every language in the world and maps them into a rigorously defined space of values. For example, the code point for the capital letter “A” is <code class="docutils literal notranslate"><span class="pre">U+0041</span></code>, while the code point for the division sign “÷” is <code class="docutils literal notranslate"><span class="pre">U+00F7</span></code>. The four digits at the end of each of these two code points represent a hexadecimal number, which we will learn more about in a later chapter. For now, we simply need to know the code point number for each character we want to specify.</p>
 <p>You should notice a couple of things here. First, code points simply tell you the character. A code point does not tell you what font to use for that character. Nor does it tell you whether the character should be displayed in bold or italics, or even in what color. What sounds simple — display a capital “A” please — is actually a complex system of standards and interacting systems, each with their own special purpose and function. While we will later discuss some of this, let’s stick for the time being with the goal of how to specify different characters.</p>
+</section>
+<section id="a-new-problem">
 <p><strong>A new problem.</strong> The other interesting thing about Unicode is that it includes not only letters, but symbols. In fact, the concept of a character is quite liberal, encompassing even emoji. For instance, the cat-with-wry-smile emoji (😼) is codepoint <code class="docutils literal notranslate"><span class="pre">U+1F63C</span></code>. Let’s use that to make the stories our scripts read a bit more fanciful.</p>
 <p>In particular, let’s start our work with the script from Chapter 1 (slightly improved and listed just below), which reads a specified children’s book.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace0.py</span>
@@ -402,12 +447,16 @@ document.write(`
 </pre></div>
 </div>
 <p>What we eventually want this script to do is to <em>replace</em> some of the words with emoji characters as it prints out the book’s text. Which words? Let’s replace every instance of “Cat” with 😼 and “Hat” with 🎩.</p>
+</section>
+<section id="decomposition-to-reduce-the-problem-s-complexity">
 <p><strong>Decomposition to reduce the problem’s complexity.</strong> Before we try to solve this entire challenge in one go, let’s ask if we can break it into simpler pieces. What do you think?</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Break It Down</p>
 <p>Remember! Decompose complex problems in a sequence of simple steps and you’ll solve your challenges every time!</p>
 </aside>
 <p>Of course we can. Forgetting about emojis for a moment, we might start by asking how we replace <em>one word with another</em> in a Python string. If we can accomplish this, then we can move to replacing <em>one word with an emoji</em>, which involves understanding how to print code points in a Unicode string. From there, we can move to replacing <em>every instance of a word in a line</em>, and ultimately <em>every instance of multiple different words</em>. Then bam, we’ve solved our problem!</p>
+</section>
+<section id="strings-as-immutable-sequences">
 <p><strong>Strings as immutable sequences.</strong> We’ll begin by learning how to replace one word with another. We could code this functionality ourselves, but we have already seen that Python provides a number of useful methods that operate on sequences and Python strings are sequences. Before reading on, skim at the <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Python documentation</a> that lists the pre-programmed operations for sequences.</p>
 <p>We have used a number of these operations in our previous scripts, but nothing in this list helps us replace part of a sequence with another sequence.</p>
 <p>Scroll down to <a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#mutable-sequence-types">the table of operations on <em>mutable</em> sequence types</a>. Mutable means that we can change an object’s pieces, and with a mutable sequence, we can replace the sequence’s items. The first example in this list of operations does exactly this using syntax familiar to us: <code class="docutils literal notranslate"><span class="pre">s[i]</span> <span class="pre">=</span> <span class="pre">x</span></code> where <code class="docutils literal notranslate"><span class="pre">s</span></code> is a mutable sequence and <code class="docutils literal notranslate"><span class="pre">x</span></code> is some object that should replace the current object in <code class="docutils literal notranslate"><span class="pre">s</span></code> at index <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
@@ -456,6 +505,8 @@ document.write(`
 <span class="linenos">2</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;me&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="encode-an-emoji-in-unicode">
 <p><strong>Encode an emoji in Unicode.</strong> Onto the second step, which has us substitute the string <code class="docutils literal notranslate"><span class="pre">'Gato'</span></code> with the Unicode code point for the cat-with-wry-smile emoji. You’ve already done something like this when we talked about how to express a carriage return. We used the special character sequence <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> where the <code class="docutils literal notranslate"><span class="pre">'\'</span></code> told the Python interpreter that the next character wasn’t a simple <code class="docutils literal notranslate"><span class="pre">'n'</span></code> but an encoding of something we couldn’t express in a single printable character. We will do the same thing here.</p>
 <p>Python provides two ways to specify Unicode code points: We can use ‘<code class="docutils literal notranslate"><span class="pre">\u</span></code>’ followed by four hexadecimal characters, if the character we want is at the start of the Unicode code space, like the letter ‘G’.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\u0047</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -495,6 +546,8 @@ document.write(`
 <span class="linenos">17</span>            <span class="k">break</span>
 </pre></div>
 </div>
+</section>
+<section id="multiple-different-replacements">
 <p><strong>Multiple different replacements.</strong> Let’s now extend our script so that it makes replacements for “Cat” and “Hat”. This task is fairly straightforward because the two substitutions are independent, and by that I mean that one substitution doesn’t insert something that the other is expected to replace. As such, we simply need to run every replacement on every line we read.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace4.py</span>
 <span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
@@ -516,9 +569,13 @@ document.write(`
 <span class="linenos">18</span>            <span class="k">break</span>
 </pre></div>
 </div>
+</section>
+<section id="feeling-overwhelmed">
 <p><strong>Feeling overwhelmed?</strong> While you should feel a real sense of accomplishment for all that you’ve learned, you might also be feeling a bit overwhelmed. How do you know if a programming language provides you with a piece of functionality like <code class="docutils literal notranslate"><span class="pre">replace</span></code>? And even if you know that it does, how do you know the name the language designer chose for that functionality?</p>
 <p>The simple answer is, you don’t. Python provides us with a pretty decent set of documentation pages, and we are fortunate to live in a world where sensible questions fed to a search engine or chatbot will often produce a great start on a set of possibly helpful answers.</p>
 <p>Of course, if you don’t realize that the functionality you need already exists, you can always build the functionality yourself. Let’s see how this is done.</p>
+</section>
+<section id="functions">
 <p><strong>Functions.</strong> Let’s pretend that there is no string-replace method built into Python. How would we write a script that does what <code class="docutils literal notranslate"><span class="pre">replace4.py</span></code> does? Without access to Python’s <code class="docutils literal notranslate"><span class="pre">replace</span></code> method, we would probably write some pseudocode that looks as follows.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace5.py</span>
 <span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
@@ -543,6 +600,8 @@ document.write(`
 <p>If we needed this functionality only once in our program, we might write code right where we have these lines of pseudocode. We, however, need the functionality twice, not once. Would we want to write out this code twice?</p>
 <p>Probably not. Think about what happens if you find a mistake. You’d have to fix that mistake everywhere you copied the code. That is a bookkeeping nightmare. Furthermore, as the form of the pseudocode comments above illustrate, there is probably a lot of similarity in the two pieces of code. Both replace a specified substring in a string with a second substring. The only difference between the two pieces of code is the existing and new substrings specified. Wouldn’t it be nice to write the code for our <code class="docutils literal notranslate"><span class="pre">replace</span></code> operation once and invoke that code whenever we needed it?</p>
 <p>Yes it would. Programming language support for <em>functions</em> (also called <em>procedures</em> and <em>methods</em>) provides us with exactly this ability. By separating the implementation of a function from the possibly many places where you invoke it, you make it easy to fix a function’s implementation if it contains a mistake or if you find some aspect of its behavior (e.g., how fast it runs, as we’ll discuss in later chapters) is not what you hoped it would be.</p>
+</section>
+<section id="function-definitions">
 <p><strong>Function definitions.</strong> We are ready to expand our pseudocode to include the concept of a function definition. When you define a function, you should think about creating two important pieces: a <em>public interface</em> and a <em>hidden implementation</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace6.py</span>
 <span class="linenos"> 2</span>
@@ -575,7 +634,9 @@ document.write(`
 <p>The interface is an abstract way of thinking about the function’s operation. We had no idea, for example, how Python’s string-replace method worked when we used it in our earlier script.  We simply knew that the documentation said <code class="docutils literal notranslate"><span class="pre">str.replace(old,</span> <span class="pre">new)</span></code> returned “a copy of the string <code class="docutils literal notranslate"><span class="pre">str</span></code> with all occurrences of substring <code class="docutils literal notranslate"><span class="pre">old</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">new</span></code>.” This was sufficient knowledge for us to use the method. Similarly, the interface we specify for our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function should be sufficient for others to know how to use it.</p>
 <p>The rest of the function definition is its concrete implementation. An implementation is simply a set of Python statements just like the ones we have been writing, but with one twist: We need to learn how to send data to our function and return any results the function computes.</p>
 <p>In general, you can think of a function as a script that performs a specific action using data you send it. And just as we have been running our scripts numerous times, you can run this new function numerous times with different data and get back possibly different results.</p>
-<p><strong>The actual function definition and its invocations.</strong> Let’s now fill in our pseudocode with actual Python code.</p>
+</section>
+<section id="the-actual-function-definition-and-its-invocation">
+<p><strong>The actual function definition and its invocation.</strong> Let’s now fill in our pseudocode with actual Python code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace7.py</span>
 <span class="linenos"> 2</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
 <span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
@@ -623,6 +684,8 @@ document.write(`
 </aside>
 <p>When a function call is executed by the Python interpreter, each actual parameter is bound to its corresponding formal parameter. In the simplest case, this binding is done, as it is done here, in list order: the first actual parameter is bound to the first formal parameter; the second to the second; and so forth.</p>
 <p>In plain English, what does this binding mean? It means that we give another name to each object in the actual parameter list. For example, <code class="docutils literal notranslate"><span class="pre">the_line</span></code> names a string object, and as part of the invocation of the <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function when the Python interpreter executes line 26, that string object will also be given the name <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+</section>
+<section id="function-execution">
 <p><strong>Function execution.</strong> It’s important to realize that we have switched from talking about writing a function to a discussion of what happens when it executes. It might be helpful to state all together what happens when we tell the Python interpreter to execute <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, which includes a function call.</p>
 <p>We start at the beginning of our script’s execution, i.e., immediately after we have typed <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">replace7.py</span></code> and hit return. Like a script reading a plaintext file, the Python interpreter starts reading from line 1. Our script’s first line is a comment, and the interpreter moves to line 2. The statement on line 2 is a function definition, and like a new variable definition, it causes the Python interpreter to add the name <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> to the currently active namespace and associate this new name with the list of statements in the function’s body. To be clear, none of the statements in the function’s body are themselves executed at this point.</p>
 <p>When the Python interpreter is done with this work, it moves on to line 18, where it asks the user for a filename. It opens that named file on line 21 and adds <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> into the current namespace. Line 22 then tells the interpreter that the indented statements below it are the body of an infinite loop. The interpreter continues sequentially, reading the statement on line 23, where it proceeds to create a string object containing the first line of the input file and associating the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code> with this string object. Because this is the first time we have encountered the name <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, the interpreter also adds this name to the current namespace. The interpreter ignores line 25, which contains only a comment, and finally we are at line 26, the first of the two calls of our function <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
@@ -636,17 +699,23 @@ document.write(`
 <p class="admonition-title">Tip</p>
 <p>A function returns if the interpreter reaches the end of the function body without encountering a return-statement. The result returned is the special object <code class="docutils literal notranslate"><span class="pre">None</span></code>, which is also the result when a return-statement has no expression.</p>
 </div>
+</section>
+<section id="abstraction-decomposition-and-algorithms">
 <p><strong>Abstraction, decomposition, and algorithms.</strong> Let’s pause for a moment and rise above the details of building a function and learning how it executes. Our goal was to print a story from a file to our terminal screen while replacing occurrences of some words with some funny emoji. This short description pretty well sums up what our script does. It describes <em>the script’s purpose</em>.</p>
 <p>While writing the Python code, we learned a couple of different ways to replace a portion of a string with another string, with the last version of our script implementing our own string replace. Notice that the script’s purpose doesn’t include this level of detail. The Python interpreter needs these details (i.e., how it should replace words in a string), but in solving the problem, we don’t particularly care if the interpreter uses <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> or Python’s built-in <code class="docutils literal notranslate"><span class="pre">str.replace</span></code> method.</p>
 <p>This is <em>abstraction</em> at work, and it is one of the benefits of using functions. With them, we can hide necessary but unimportant-to-the-script’s-main-purpose details. In fact, even though the implementation of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> was sitting there in lines 3-15 of <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, did you take the time to read and understand exactly how it works? Be honest. Probably not many readers did, and that, my friend, is abstraction at its finest! We used <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>. We talked about it. You (hopefully) understood its interface and could use it yourself, but you didn’t ever bother to worry about how it exactly did what you abstractly thought about it doing.</p>
 <p>Abstraction is a big idea in computer science, but don’t let that frighten you. It is something that each of us does all the time in life. As you gain experience in problem solving, you’ll find that abstraction goes hand-in-hand with <em>decomposition</em>, i.e., the breaking down of a large, complex problem into simpler steps, as we did to solve this chapter’s problem. We began by abstractly thinking about replacing a part of a string with a different string, and we weren’t initially concerned with how we would accomplish this replacement. Only later did we ask whether this replacement was something we had to write for ourselves or was a piece of functionality someone else had already written for us.</p>
 <p>The result of all this abstraction and decomposition is an <em>algorithm</em>. An algorithm is simply a sequence of well-specified steps that when executed allow a computer (or us acting like a computer) to solve a problem. Lines 3-15 are an algorithm for replacing all occurrences of the <code class="docutils literal notranslate"><span class="pre">old</span></code> substring in string <code class="docutils literal notranslate"><span class="pre">s</span></code> with the <code class="docutils literal notranslate"><span class="pre">new</span></code> substring. Lines 18-34 are an algorithm for reading a story from a file, replacing each occurrence of <code class="docutils literal notranslate"><span class="pre">'Cat'</span></code> and <code class="docutils literal notranslate"><span class="pre">'Hat'</span></code> with some fun emoji and printing the modified story to the terminal screen.</p>
+</section>
+<section id="definition-before-use">
 <p><strong>Definition before use.</strong> I said, “a sequence of well-specified steps” when defining an algorithm, and by “well-specified” I mean that the Python interpreter (or a computer in general) needs to know how to execute each specified statement it encounters. In <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, the interpreter knows how to execute line 23, for example, because <code class="docutils literal notranslate"><span class="pre">readline</span></code> is a piece of built-in functionality. It knows how to execute line 26 because the Python interpreter had earlier encountered the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
 <p>What would happen if we placed the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> (lines 2-15) at the end of our script instead of at its beginning? In this case, the interpreter would encounter the name <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> before seeing its definition, and it would exit with the message: <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'my_replace'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>. “But it is!” you would say. “But it isn’t when I read the script from start (top) to end (bottom),” the interpreter would reply.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Computer programs are not mystery novels. Computers do not like ambiguity and do not understand suspense. Make sure you give definitions to the names you use before you use them.</p>
 </div>
+</section>
+<section id="python-s-special-variables">
 <p><strong>Python’s special variables.</strong> A design pattern that we will frequently use to avoid this sort of problem is illustrated in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> below. Pay particular attention to the two statements I appended to the very end of the script, and what I did to the statements that described the main action of the script.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace32.py</span>
 <span class="linenos"> 2</span>
@@ -696,9 +765,13 @@ document.write(`
 <p class="admonition-title">Tip</p>
 <p>Use this design pattern of wrapping your script’s “main” work in a function called <code class="docutils literal notranslate"><span class="pre">main</span></code>, and protect its invocation with: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code>. You can then place <code class="docutils literal notranslate"><span class="pre">main</span></code> anywhere in your script. Some people like to start their Python scripts with the <code class="docutils literal notranslate"><span class="pre">main</span></code> routine, as everything after it are just details!</p>
 </div>
+</section>
+<section id="docstrings">
 <p><strong>Docstrings.</strong> We added one other new line to <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, and that is the funny-looking string on line 4. This is called a <em>docstring</em>, and it is simply a string literal that, as <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> states, “occurs as the first statement in a module, function, class, or method definition.” Its purpose is to explain what the function’s interface leaves unsaid that is important in order for you or someone else to use this function in their code.</p>
 <p>For example, the interface to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> indicates that we need to call it with three input parameters, but it provides no clues as to what value will be returned from the function’s execution. A docstring should tell us what’s returned. We might also use the docstring to say a bit more than the function’s name tells us about its purpose.</p>
 <p>More generally, a docstring does not have to be a single line in length. You should think of the docstring as its formal specification. It outlines the contract between the person who wrote the function and the many people who will use it. John Guttag in his book on Python helpfully describes a function specification as having two primary pieces: (1) a description of the <em>assumptions</em> that the function makes about, for instance, its input parameters; and (2) the <em>guarantees</em> that the function provides if the assumptions are met.</p>
+</section>
+<section id="getting-a-feel-for-abstraction">
 <p><strong>Getting a feel for abstraction.</strong> Functions provide us with a particularly useful abstraction. With experience, you’ll gain an intuitive sense for what makes a good procedure, i.e., a useful procedural abstraction. Let’s start you on this experiential journey.</p>
 <p>Some software engineers argue that a function should have a single, well-defined job. Our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function is a good example of this. As we develop programs that solve more complex problems than the ones we have seen to date, we will begin to understand why these engineers say that if a script performs a number of distinct tasks in sequence, you should create a procedure for each of those tasks. Of course, in programs that solve quite complex tasks, you may sensibly choose to gather a sequence of procedure calls into the body of a procedure that itself describes a coarser-grained action. This, again, is decomposition at work.</p>
 <p>However, these same engineers will tell you that your functions should be as general as possible. Are these not conflicting pieces of advice?</p>
@@ -713,12 +786,16 @@ document.write(`
 <p>Abstraction and decomposition are more art than science. You should take anyone’s rules about what you should do around functional abstraction as guidelines, not absolutes.</p>
 </div>
 <p>On top of considerations of readability, understanding, and maintainability to which we have alluded, the particular abstractions employed by software designers are sometimes also influenced by other considerations, like performance and security. Take the Python built-in function <code class="docutils literal notranslate"><span class="pre">pow</span></code> that takes three formal parameters: a base, an exponent, and an optional modulus. It’s not obvious to first-time programmers why <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp,</span> <span class="pre">mod)</span></code> is a useful abstraction. Well, this abstraction exists because the computer will be quicker to compute <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp,</span> <span class="pre">mod)</span></code> than the semantically equivalent <code class="docutils literal notranslate"><span class="pre">pow(base,</span> <span class="pre">exp)</span> <span class="pre">%</span> <span class="pre">mod</span></code> expression, based on some tricks hidden in Python’s implementation of <code class="docutils literal notranslate"><span class="pre">pow</span></code>.</p>
+</section>
+<section id="another-kind-of-abstraction">
 <p><strong>Another kind of abstraction.</strong> Let’s return to our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function and think about it in terms of these abstraction and decomposition guidelines. As mentioned earlier, <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> has a single, well-defined job: it makes a copy of the input string <code class="docutils literal notranslate"><span class="pre">s</span></code>, finds all occurrences of <code class="docutils literal notranslate"><span class="pre">old</span></code> substring in this copy, replaces these occurrences with the <code class="docutils literal notranslate"><span class="pre">new</span></code> substring, and returns the modified copy.</p>
 <p>Now let’s ask, does <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> work only on string objects? Our docstring says so, but that’s just documentation. What we want to know, in the words of the second principle mentioned above, is it more general?  In other words, will it execute successfully with any sequence object, which strings are simply one particular kind? For example, we discussed my office bookshelf as another example of a sequence object. Can we use <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> to replace a subsequence in a bookshelf object?</p>
 <p>Notice that we’re talking about two kinds of abstraction here. In this chapter, we have been discussing <em>functional abstraction</em>, which allows us to think about the effect of some block of statements (i.e., a function’s body) on the state of our program without having to have detailed knowledge of the function’s body. Our new question talks about <em>data abstraction</em>. This type of abstraction has us think about a specific object as an instance of a more general object. In our example, a string is a specific type of the more general sequence object. When thinking about a specific string object as a general sequence object, we ignore the characteristics of the object that makes it a string, and we focus only on those characteristics that are true of every sequence object.</p>
 <p>Strings and bookshelves are both a kind of sequence, and as such, we can ask for their first elements. In fact, every (non-empty) sequence object has a first element, and thus we can ask that question of any sequence object. On the other hand, not every valid question about a string object makes sense for some hypothetical bookshelf object. I can ask if a string is capitalized, but it’s nonsensical to ask if a bookshelf is capitalized.</p>
 <p>Data abstraction allows us to think about a piece of data without having to have detailed knowledge of all its characteristics. What’s particularly powerful about this is that it allows us to write functions that operate on both strings and bookshelves.</p>
 <p>Is <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> one such function? Does it operate not on string objects per se, but any sequence object? Is its single, well-defined job to make a copy of the input sequence <code class="docutils literal notranslate"><span class="pre">s</span></code>, find all occurrences of the <code class="docutils literal notranslate"><span class="pre">old</span></code> subsequence in this copy, replace these occurrences with the <code class="docutils literal notranslate"><span class="pre">new</span></code> subsequence, and return the modified copy? There’s one way to find out. Let’s try it!</p>
+</section>
+<section id="lists-are-sequence-objects">
 <p><strong>Lists are sequence objects.</strong> I’ve copied our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function into <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code>. The first block of code in <code class="docutils literal notranslate"><span class="pre">main</span></code> (lines 21-25) uses <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> as a function that processes string objects, as we did in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>. Unsurprisingly, this call to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> should work, and we include it simply to reassure ourselves that no slight-of-hand is taking place.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf1.py</span>
 <span class="linenos"> 2</span>
@@ -779,6 +856,8 @@ The Cat in the 🎩!
 </pre></div>
 </div>
 <p>It worked! Our docstring and comments are misleading. We should replace the word “string” in them with the word “sequence”.</p>
+</section>
+<section id="abstraction-barriers">
 <p><strong>Abstraction barriers.</strong> We’ll expand our discussion of abstraction, its beauty, and its power in Act II, but before leaving this topic, I want to put in a word of warning about building abstractions. Of all the statements in <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, the one that’s easiest to get “wrong” is: <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">=</span> <span class="pre">s[0:0]</span></code>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Exposing What’s Behind the Curtain</p>
@@ -792,6 +871,8 @@ The Cat in the 🎩!
 <p class="admonition-title">Tip</p>
 <p>Abstraction is a very powerful technique, but it is harder to build and abide by an abstraction than you might at first think.</p>
 </div>
+</section>
+<section id="methods">
 <p><strong>Methods.</strong> You may have wondered as we went through this exercise why the statement that used the built-in string-replace method looked like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
@@ -805,6 +886,8 @@ The Cat in the 🎩!
 <p>However, the two representations do not use the same syntax because the abstraction barrier in each representation is different. Function calls may make, as we have discussed at length, some assumptions about kind of objects being passed as parameters, but we only know about these assumptions through the generous description provided in the function’s docstring or by carefully analyzing the statements in the function’s body. In other words, little can be gleaned from the syntax of the function invocation about its abstraction barrier.</p>
 <p>The syntax of a method call, on the other hand, tells us something quite specific about its abstraction barrier. Using our example, we are not calling any replacement routine, but one written specifically to work with the kind of object that comes before the name of the method. The replacement routine may not take advantage of all the specific characteristics of this object (e.g., it may treat a string object like a more general sequence object), but we know the specific routine invoked is allowed to do so.</p>
 <p>We will peel back more of this magic in Act II, when we talk about object-oriented programming. For now, just mentally translate the first syntax into the second if you’re ever confused about what is happening in a particular Python statement.</p>
+</section>
+<section id="modules">
 <p><strong>Modules.</strong> When we wrote our short <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> script, we used our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function from <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>. To do this, we copied the function definition (including its body) and pasted it into <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code>. Yet, we just finished talking about invoking the function numerous times while defining it only once. Why can’t we use that single definition from <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> in <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> instead of making another copy of it, continuing our desire to avoid the problems of maintaining multiple copies of the same operation?</p>
 <p>Well, we can! Python allows you to reference definitions contained in other <code class="docutils literal notranslate"><span class="pre">.py</span></code> files using what it calls <em>modules</em>. Since a module is nothing more than a file just like the scripts we have been writing, the script we should have written that doesn’t duplicate the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf2.py</span>
@@ -869,17 +952,22 @@ The Cat in the 🎩!
 </div>
 <p>The syntax of the function invocation should look familiar. Does it remind you of a Python string’s method invocation? It should, and this is on purpose. Both use the dot notation to mean, “Use the specified namespace to find the definition of the attribute after the dot.”</p>
 <p>There are other forms of the import-statement that you can use (and ones you should not). Take a look at the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">Python documentation on modules</a> to learn more about them and when to use (or why not to use) them.</p>
-<p><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code><strong>.</strong> A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you’ll recall, is a statement that starts with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>, as we did when we defined our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function. These definitions are typically what we want to import from a module (i.e., another Python script).</p>
+</section>
+<section id="revisiting-main">
+<p><strong><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>.</strong> A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you’ll recall, is a statement that starts with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>, as we did when we defined our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function. These definitions are typically what we want to import from a module (i.e., another Python script).</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Top-level Statements</p>
 <p>In a script, the Python interpreter executes each non-indented (i.e., top-level) statement it comes across, in order starting with the ones at the start of the file.</p>
 </aside>
 <p>Did you wonder why we didn’t see any of the work in the <code class="docutils literal notranslate"><span class="pre">main</span></code> function of <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code> when running <code class="docutils literal notranslate"><span class="pre">bookshelf3.py</span></code>? We didn’t because there’s only one non-indented, non-definition statement in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, and that’s the funny-looking if-statement we added to the bottom of the file to protect the invocation of <code class="docutils literal notranslate"><span class="pre">main</span></code>. You probably felt that this if-statement was unnecessary work when we discussed it earlier, but now we see its power.</p>
 <p>When the Python interpreter executes the if-statement at the bottom of <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>, it is doing it after processing of the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement at the top of <code class="docutils literal notranslate"><span class="pre">bookshelf3.py</span></code>. On of the things that occurred during this processing is that the interpreter set <code class="docutils literal notranslate"><span class="pre">__name__</span></code> to the name of the imported module. As such, <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">False</span></code>, giving us access to just the definitions in <code class="docutils literal notranslate"><span class="pre">replace32.py</span></code>!</p>
+</section>
+<section id="pure-functions">
 <p><strong>Pure functions.</strong> Let’s go a little deeper here. We needed only the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in our <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code> scripts, and <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is what computer scientists call a <em>pure function</em>. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.</p>
 <p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
 <p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
-<p>[Version 20230705]</p>
+<p>[Version 20230811]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -940,6 +1028,45 @@ The Cat in the 🎩!
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internationalization">Internationalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standards">Standards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unicode">Unicode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-problem">A new problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition-to-reduce-the-problem-s-complexity">Decomposition to reduce the problem’s complexity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-as-immutable-sequences">Strings as immutable sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-an-emoji-in-unicode">Encode an emoji in Unicode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-different-replacements">Multiple different replacements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feeling-overwhelmed">Feeling overwhelmed?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-definitions">Function definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-actual-function-definition-and-its-invocation">The actual function definition and its invocation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-execution">Function execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-decomposition-and-algorithms">Abstraction, decomposition, and algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-before-use">Definition before use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-s-special-variables">Python’s special variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-feel-for-abstraction">Getting a feel for abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-kind-of-abstraction">Another kind of abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-are-sequence-objects">Lists are sequence objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-barriers">Abstraction barriers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main"><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-functions">Pure functions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

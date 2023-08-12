@@ -167,6 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -292,7 +293,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -308,6 +311,28 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numbers-and-knowledge">Numbers and knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-you-see-my-dog">Do you see my dog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-interpretation-please">No interpretation, please</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-hexdump">Reading a hexdump</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hexadecimal-explained">Hexadecimal explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-number-systems">Converting between number systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-computer-see-my-dog">Does the computer see my dog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#painting-a-picture">Painting a picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bits">Bits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-finger-no-thumb">One finger, no thumb</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-digital-abstraction">The digital abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bits-bytes-and-nibbles">Bits, bytes, and nibbles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-a-pixel-s-color">Setting a pixel’s color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturation">Saturation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-edges">Finding edges</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -337,6 +362,7 @@ document.write(`
 <li><p>Code a simple filter that when applied to an image file can highlight the edges of the objects in that image [CS concepts].</p></li>
 </ul>
 </div>
+<section id="numbers-and-knowledge">
 <p><strong>Numbers and knowledge.</strong> We are about to discover that computers encode everything as numbers. My electronic copy of this book’s manuscript is a bunch of numbers. The picture I took of my dog one weekend is stored as a bunch of numbers. The podcast I listened to on my morning walk and the songs my wife streamed on her run are simply a bunch of numbers. In fact, every file and every program on our computers are nothing but a long list of numbers.</p>
 <p>That may sound very dry and unexciting, but it is also a very powerful idea. To understand why, we’re going to turn to Harvard professor and American historian Jill Lepore and her work in answering the question, what counts a knowledge?</p>
 <p>There are many ways to attack this question, and I should be clear that Jill is not trying to enumerate everything that society has deemed to be knowledge. She’s been focused on identifying what society has historically used as the elemental unit of knowledge. In other words, what constitutes a fact and how is it established?</p>
@@ -354,6 +380,8 @@ document.write(`
 </aside>
 <p>Jill marks the beginning of society’s transition into valuing data with the invention of modern computers in the 1950s. Fast forward to today, and <em>data science</em>, which relies heavily on computation, permeates nearly every corner of our society. Through it, we extract meaningful insights and generate new knowledge. If you ask data scientists what they do, they’ll tell you that their objective is “to use data to answer questions and guide decision making.” They are establishing what is true.</p>
 <p>Given that we built our first computers to help us to crunch lots of numbers and spit out new knowledge, it’s logical that those machines store and manipulate numbers. What may be surprising, however, is that today’s computers use the same basic <em>computer architecture</em>, proposed by John von Neumann in 1945, as those original machines. In other words, at their most fundamental level (and behind all the abstractions we have discussed and all the apps you use), your laptop, smartphone, and smartwatch are simply processing numbers. Computers see the world as nothing but numbers.</p>
+</section>
+<section id="do-you-see-my-dog">
 <p><strong>Do you see my dog?</strong> Here’s a picture I took of my dog in May of 2020.</p>
 <figure class="align-default" id="c06-fig1-ref">
 <img alt="_images/c06_fig1.png" src="_images/c06_fig1.png" />
@@ -367,6 +395,8 @@ document.write(`
 <li><p>What is in an image file like <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>?</p></li>
 <li><p>What does it take for the computer to see the dog in that file?</p></li>
 </ol>
+</section>
+<section id="no-interpretation-please">
 <p><strong>No interpretation, please.</strong> Let’s start with the first of these two questions. When you ask a computer to open a file like <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>, it displays a window with the image in <a class="reference internal" href="#c06-fig1-ref"><span class="std std-numref">Figure 10</span></a>. Why is that?</p>
 <p>Well, what might you, as a human, guess about the file’s contents when you look at the filename <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>? If you’ve ever worked with image files, the <em>filename extension</em> (i.e., that sequence of letters and numbers after the final period mark in the filename) is a great hint about what’s in the file. By convention, the extension <code class="docutils literal notranslate"><span class="pre">.jpg</span></code> means that the file contains an image encoded in the <a class="reference external" href="https://docs.fileformat.com/image/jpeg/">JPEG standard</a>.</p>
 <p>Our computers have been programmed to do the same thing. When we double-click a file like <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>, our computers look at the filename extension and guess that they should load the file into a program that can display JPEG images.</p>
@@ -381,6 +411,8 @@ document.write(`
 <p><span class="caption-number">Fig. 11 </span><span class="caption-text">The start of the raw data in <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>, as displayed by a hexdump program.</span><a class="headerlink" href="#c06-fig2-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="reading-a-hexdump">
 <p><strong>Reading a hexdump.</strong> <a class="reference internal" href="#c06-fig2-ref"><span class="std std-numref">Figure 11</span></a> shows the output of hexdump when it reads the file <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>. The black characters in the 2-dimensional (2D) array in the middle of this figure are hexadecimal numbers corresponding to the contents of the file. Yes, the file contains nothing but lots and lots of numbers.</p>
 <p>The blue numbers at the left and top (also in hexadecimal) are displayed so that you can easily determine the index of any pair of black digits, when you think about the file’s contents as a long 1-dimensional (1D) sequence of pairs. For example, the first pair of black hexadecimal digits in the upper left-hand corner of the 2D array is <code class="docutils literal notranslate"><span class="pre">FF</span></code>, and this pair is given offset <code class="docutils literal notranslate"><span class="pre">00000000</span></code> (i.e., the row number plus the column number). The next pair to the right (<code class="docutils literal notranslate"><span class="pre">D8</span></code>) is given the offset <code class="docutils literal notranslate"><span class="pre">00000001</span></code>. The last pair in the first row (<code class="docutils literal notranslate"><span class="pre">48</span></code>) has offset <code class="docutils literal notranslate"><span class="pre">0000000f</span></code>, and it is followed in the file by the first pair in the second row (<code class="docutils literal notranslate"><span class="pre">00</span></code>) at offset <code class="docutils literal notranslate"><span class="pre">00000010</span></code>. In other words, while hexdump prints the file contents as a 2D array, you should think of it as a long 1D array.</p>
 <p>Finally, the green characters to the right in <a class="reference internal" href="#c06-fig2-ref"><span class="std std-numref">Figure 11</span></a> are an ASCII interpretation of each pair of black hexadecimal numbers. For instance, <code class="docutils literal notranslate"><span class="pre">D8</span></code> at offset <code class="docutils literal notranslate"><span class="pre">00000001</span></code> is the letter capital-X in the ASCII text encoding.</p>
@@ -389,6 +421,8 @@ document.write(`
 <p class="admonition-title">You Try It</p>
 <p><a class="reference internal" href="#c06-fig2-ref"><span class="std std-numref">Figure 11</span></a> illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string <code class="docutils literal notranslate"><span class="pre">'Apple</span> <span class="pre">iPhone'</span></code> starting at offset <code class="docutils literal notranslate"><span class="pre">000000a4</span></code>. Many file formats are structured like the messages we passed between processes in one of Chapter 5’s exercises: they include a header with extra information (called metadata) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 </div>
+</section>
+<section id="hexadecimal-explained">
 <p><strong>Hexadecimal explained.</strong> I’ve mentioned hexadecimal numbers several times over the last few chapters, and now is a good time to make sure we are all comfortable with what this exactly means.</p>
 <p>Look at the top of the hexdump in <a class="reference internal" href="#c06-fig2-ref"><span class="std std-numref">Figure 11</span></a>. The leftmost column is labeled with a blue <code class="docutils literal notranslate"><span class="pre">00</span></code> and the rightmost one <code class="docutils literal notranslate"><span class="pre">0F</span></code>. Now count the number of columns. I’ll wait.</p>
 <p>You should have counted to 16. A <em>hexadecimal number system</em> is one that contains 16 symbols, which correspond to the 16 symbols in the righthand digit of these 16 column labels.</p>
@@ -406,6 +440,8 @@ document.write(`
 <p class="admonition-title">You Try It</p>
 <p>What is the index, in hexadecimal, for the first occurrence of the value <code class="docutils literal notranslate"><span class="pre">1B</span></code> in the hexdump of <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>? What is the decimal value of that index?<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 </div>
+</section>
+<section id="converting-between-number-systems">
 <p><strong>Converting between number systems.</strong> You should take the time to completely understand how to convert back and forth between base-10 and base-16 representations. If you have any questions at this point, there are many resources online that can help. But once you understand how to do this work, you can use the Python interpreter to do the grunt work of converting numbers between different bases! Remember that computers are built to do numerical work.</p>
 <p>To convert a number in another base, like 16, to decimal, we simply need to evaluate <code class="docutils literal notranslate"><span class="pre">int('11e',</span> <span class="pre">base=16)</span></code>, where <code class="docutils literal notranslate"><span class="pre">'11e'</span></code> is replaced by the number you want converted. Notice that the hexadecimal number is specified as a string.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;11e&#39;</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
@@ -416,6 +452,8 @@ document.write(`
 </pre></div>
 </div>
 <p>When you run the hex command, you’ll see that the Python interpreter prepended the string <code class="docutils literal notranslate"><span class="pre">'0x'</span></code> to hexadecimal equivalent of 286. This prefix is how you and the interpreter know that the string represents a number in base-16, not base-10.</p>
+</section>
+<section id="does-the-computer-see-my-dog">
 <p><strong>Does the computer see my dog?</strong> While we can see that the bunch of numbers saved in <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code> and then displayed as an image contains a dog, can the computer recognize that there’s a dog in this sea of numbers? Short answer, yes, with the help of machine learning (ML), which we will discuss in later chapters. If you have a phone that unlocks with facial recognition, you’ll already using this technology in your daily life. For now, we can get an idea of how this works, and importantly learn that the work going on in the bowels of our computers is really nothing more than math on numbers.</p>
 <p>To work with images, we are going to use a very handy library called <code class="docutils literal notranslate"><span class="pre">PIL</span></code>, <a class="reference external" href="https://pillow.readthedocs.io/en/stable/handbook/overview.html">the Python Imaging Library</a>. This library includes support for a wide range of file formats, including JPEG, and it allows us to write only a few lines of code to perform an extensive set of image processing tasks.</p>
 <p>For example, similar to what we did when we read the text files containing the story of <em>The Cat In Hat</em>, we will use the <code class="docutils literal notranslate"><span class="pre">Image.open</span></code> method to read the image data into an <code class="docutils literal notranslate"><span class="pre">Image</span></code> object, which I’ve named <code class="docutils literal notranslate"><span class="pre">im</span></code> in <code class="docutils literal notranslate"><span class="pre">edges.py</span></code>. After processing this image, our scripts will write out the new image to a file called <code class="docutils literal notranslate"><span class="pre">out.png</span></code> using the <code class="docutils literal notranslate"><span class="pre">Image.save</span></code> method. Feel free to change the filename and file extension; the extension tells the PIL library in which format to write. To see the resulting image, simply open the saved file as you would with any image file (e.g., double-click the file).</p>
@@ -439,6 +477,8 @@ document.write(`
 <p>If you don’t know what a convolution filter is, you will in a few moments. Keep reading!</p>
 </aside>
 <p><code class="docutils literal notranslate"><span class="pre">Image</span></code> objects have a large number of methods we could invoke. To highlight the edges, or contours, of the things in an image, we apply a convolution filter. Run the code block above, inputting <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>, and in <code class="docutils literal notranslate"><span class="pre">out.png</span></code> you’ll see that this mathematical transform nicely outlines my dog.</p>
+</section>
+<section id="painting-a-picture">
 <p><strong>Painting a picture.</strong> To understand what took place when we ran a convolution filter, we are going to use the the PIL library to build a very simple image that contains a single edge and then write a few lines of Python code to detect that edge. The script <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> gets us started.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/edge1.py</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -467,6 +507,8 @@ document.write(`
 <p>See <a class="reference external" href="https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes">the PIL Modes page</a> for a full mapping of mode codes too pixel types and depths.</p>
 </aside>
 <p>Pixels come in different ranges of colors. Our script asked the <code class="docutils literal notranslate"><span class="pre">Image</span></code> library for pixels that can be colored with one of 256 different shades of gray, where <code class="docutils literal notranslate"><span class="pre">0</span></code> represents pure black and <code class="docutils literal notranslate"><span class="pre">255</span></code> pure white. This is what the first parameter, called the <em>mode</em>, to the <code class="docutils literal notranslate"><span class="pre">Image.new</span></code> call specifies when passed with the string value <code class="docutils literal notranslate"><span class="pre">'L'</span></code>. In an exercise, you will change this mode to <code class="docutils literal notranslate"><span class="pre">'RGB'</span></code> so that you can build pictures with a rainbow of colors. In RGB mode, the number <code class="docutils literal notranslate"><span class="pre">0</span></code> still represents pure black, but we now have more than 16.7 million colors between the color black and the color white (16,777,216 colors in total to be exact). As a last example, we might have specified the mode  <code class="docutils literal notranslate"><span class="pre">'1'</span></code>, which encodes pure black as the number <code class="docutils literal notranslate"><span class="pre">0</span></code> and pure white as the number <code class="docutils literal notranslate"><span class="pre">1</span></code>. In this mode, you have only two colors in your pallet.</p>
+</section>
+<section id="bits">
 <p><strong>Bits.</strong> Each of these modes has two things in common: <code class="docutils literal notranslate"><span class="pre">0</span></code> represents black; and the total number of colors between black and white, inclusive, is a power of 2. This makes the encoding for white to be <span class="math notranslate nohighlight">\(2^{numberOfEncodingBits} - 1\)</span> in each of these modes.</p>
 <p>A <em>bit</em> is the most elemental unit of storage in our computing systems. It represents a single digit in a base-2 numbering system, also called <em>binary</em> numbers. With a single bit, the value of this binary number is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>. The value <code class="docutils literal notranslate"><span class="pre">2</span></code> (base 10) is encoded as <code class="docutils literal notranslate"><span class="pre">10</span></code> (base 2), following the same reasoning we used when we discussed base-10 and base-16 numbering.</p>
 <p>Great, but you might be wondering why computers use binary numbering. You might claim that hexdump didn’t display the numbers contained in my JPEG file in base-2. Yes, that’s true about hexdump, but this was a usability design decision that the creators of hexdump made.</p>
@@ -476,8 +518,12 @@ document.write(`
 <p>Remember what Visual Studio said to us when we asked it to open the file named <code class="docutils literal notranslate"><span class="pre">cosmo</span></code>? The file “is either a binary or ….” Visual Studio was telling us that it was a file full of binary numbers that don’t represent any text encoding. Those numbers encode some kind of information, but not something that is entirely text! In our case, this other kind of information was an image file.</p>
 </aside>
 <p>Hexdump uses base-16 because it is easier to read hex numbers and trivial to convert back and forth between base-2 and base-16. You just group every four bits together, and those four bits correspond to a single hexadecimal digit. For example, <code class="docutils literal notranslate"><span class="pre">11011000</span></code> becomes <code class="docutils literal notranslate"><span class="pre">1101</span> <span class="pre">1000</span></code>, which becomes <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">8</span></code>, which we can push back together as <code class="docutils literal notranslate"><span class="pre">D8</span></code>. (Feel free to run the process in reverse, when needed.) When you realize this, it’s hopefully easy to understand that hexdump is actually showing us the bits in the JPEG file.</p>
-<p><strong>1 finger, no thumb.</strong> The careful reader will interrupt at this time and point out that I still haven’t told you why computers store numbers with binary digits and not, say, decimal digits. A simple answer is that humans learned to count using their fingers, and since most of us have 10 fingers, base-10 numbering comes naturally to us. Computers don’t have any fingers, and what is natural for them is sensing the difference between on and off.</p>
+</section>
+<section id="one-finger-no-thumb">
+<p><strong>One finger, no thumb.</strong> The careful reader will interrupt at this time and point out that I still haven’t told you why computers store numbers with binary digits and not, say, decimal digits. A simple answer is that humans learned to count using their fingers, and since most of us have 10 fingers, base-10 numbering comes naturally to us. Computers don’t have any fingers, and what is natural for them is sensing the difference between on and off.</p>
 <p>If you take a course in digital logic design, you’ll learn that modern computers, and most every piece of logic in them, are built from very simple switches, which are either on or off. Yes, these switches are like the light switches in your home. Flip the switch up and the light goes on; flip it down and the light goes off. From this incredibly simple switch, we can build the large memories and fast processors found in the smartphones we hold in our hands, the laptop computers on our desks, and the corporate servers in the cloud.</p>
+</section>
+<section id="the-digital-abstraction">
 <p><strong>The digital abstraction.</strong> When we build smart phones, computers, and servers from circuitry that acts like simple switches, we call the result a <em>digital</em> device. This nomenclature reminds us that we are relying on another abstraction boundary: <em>the digital abstraction</em>.</p>
 <p>What a digital circuit senses as “on” (or a <code class="docutils literal notranslate"><span class="pre">1</span></code> value) is a real-world value (called an <em>analog</em> or <em>continuous</em> value) somewhere near the ideal “on” value. You can think of this as the rounding we learned in grade school. We might measure some length as 1.03 miles, and we round it to 1 mile when all we care about is roughly how many miles it is from my home to my grandmother’s house. Similarly, a value of 0.042 miles is rounded to 0 miles.</p>
 <aside class="margin sidebar">
@@ -489,6 +535,8 @@ document.write(`
 <p class="admonition-title">You Try It</p>
 <p>What happens if the measurement is 0.47 miles? Should we round this down or up?<a class="footnote-reference brackets" href="#fn3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
 </div>
+</section>
+<section id="bits-bytes-and-nibbles">
 <p><strong>Bits, bytes, and nibbles.</strong> With this new knowledge, let’s return to our <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> script. The code creates a 100x100 2D-array of pixels, and each pixel can contain one of 256 shades of gray. 256 is <span class="math notranslate nohighlight">\(2^8\)</span>, which explains why <code class="docutils literal notranslate"><span class="pre">'L'</span></code> is described on <a class="reference external" href="https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes">the documentation page</a> as “8-bit pixels, black and white.”</p>
 <p>Eight bits grouped together occurs so frequently in computer science that this grouping is given its own name: a <em>byte</em>. If you look back at the hexdump, you’ll notice that this is what hexdump is indexing. <code class="docutils literal notranslate"><span class="pre">FF</span></code> is the value of the first byte in <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>; <code class="docutils literal notranslate"><span class="pre">D8</span></code> is the value of the second byte.</p>
 <p>You might also hear the term <em>nibble</em>, which is half a byte or 4 bits. Half a byte like <code class="docutils literal notranslate"><span class="pre">D8</span></code> is simply one of the hexadecimal characters.</p>
@@ -497,6 +545,8 @@ document.write(`
 <p>I say “a little bit more than” because the 16 in 16 GB is rounded too.</p>
 </aside>
 <p>You’ll also recognize the term byte from the unit of size in which you buy computer memory or hard-drive storage. My laptop has 16 GB, or 16 gigabytes, of memory, where giga- means <span class="math notranslate nohighlight">\(10^9\)</span>. In other words, my laptop has a little bit more than 16 billion bytes of memory.</p>
+</section>
+<section id="setting-a-pixel-s-color">
 <p><strong>Setting a pixel’s color.</strong> By default, <code class="docutils literal notranslate"><span class="pre">Image.new</span></code> sets each pixel in our created 2D array to the color black. Why black? Because this default is easy. Every mode defines black as <code class="docutils literal notranslate"><span class="pre">0</span></code>, and if we fill the 2D array with zeros everywhere, we get a completely black picture.</p>
 <p>To make a more interesting image, <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> accesses the 2D array of pixels in the <code class="docutils literal notranslate"><span class="pre">Image</span></code> object created by <code class="docutils literal notranslate"><span class="pre">Image.new</span></code> so that it can paint each pixel with a color of our choosing. It calls the <code class="docutils literal notranslate"><span class="pre">Image.load</span></code> method to accomplish this. It returns an object that allows us to use the traditional Python indexing syntax (i.e., square brackets) to access each individual pixel in the <code class="docutils literal notranslate"><span class="pre">im</span></code> object’s 2D array of pixels.</p>
 <p>With this array in hand, the script next runs a nested for-loop (lines 14-17) to produce an index <code class="docutils literal notranslate"><span class="pre">i,j</span></code>, which I’ll write as <code class="docutils literal notranslate"><span class="pre">(i,j)</span></code>, that allows us to set the color of each pixel. The color chosen for each pixel is determined by a simple summation of the two index values.</p>
@@ -504,6 +554,8 @@ document.write(`
 <p>But which pixel in the 2D <code class="docutils literal notranslate"><span class="pre">pixels</span></code> array is the pixel at <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code>? If you read the PIL documentation, you’ll learn that <code class="docutils literal notranslate"><span class="pre">(0,0)</span></code> is defined to be the upper lefthand corner of the image (i.e., that’s how the code in the library works).</p>
 <p>We’ll learn more in the next chapter about how the nested loop causes us to move through the pixels in an image, but for now, we only care that, as we move right and down in the <code class="docutils literal notranslate"><span class="pre">pixels</span></code> array, we will store ever larger sums, which in our color pallet moves us closer to the color white. So, it sounds like this script will produce an image with a diagonal fade, from black in the upper lefthand corner to white in the lower righthand corner.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> and see that it does produce such an image!</p>
+</section>
+<section id="saturation">
 <p><strong>Saturation.</strong> Let’s try making a bigger image using our simple method for creating a diagonal fade. In particular, let’s change the value of <code class="docutils literal notranslate"><span class="pre">sz</span></code> from <code class="docutils literal notranslate"><span class="pre">(100,</span> <span class="pre">100)</span></code> to <code class="docutils literal notranslate"><span class="pre">(400,</span> <span class="pre">400)</span></code> and re-run the script.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/edge2.py</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -553,6 +605,8 @@ Saturation is one way of “correcting” these situations. In our current probl
 <p>We’ve seen several types of exceptions to this point, and they are ways for a running programming to indicate that something happened that it doesn’t know how to handle. If your script doesn’t doesn’t register a way to handle an exceptional event, the event will terminate the running instance of your script.</p>
 <p>Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C’s unsigned add is that you perform the addition and then lop off the most significant bits that don’t fit in the physical representation. All of these, of course, are just different ways of describing the concept of modulo arithmetic.</p>
 </div>
+</section>
+<section id="finding-edges">
 <p><strong>Finding edges.</strong> We are FINALLY ready to build a black-and-white picture containing an edge and then do some simple math to highlight that edge’s location in the image.</p>
 <p>The script <code class="docutils literal notranslate"><span class="pre">edge3.py</span></code> builds two images. In the first (called <code class="docutils literal notranslate"><span class="pre">im</span></code>), it sets the color of all columns in the image array with indices below 25 to black and the rest to white, which creates a vertical boundary between the black and white areas. The second image (called <code class="docutils literal notranslate"><span class="pre">filtered</span></code>) builds each of its pixel values by performing some math using a selected group of the pixels in <code class="docutils literal notranslate"><span class="pre">im</span></code>, as I’ll explain in detail in a moment.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/edge3.py</span>
@@ -608,7 +662,7 @@ Saturation is one way of “correcting” these situations. In our current probl
 </aside>
 <p>The only other situation of interest is the case when the leftmost two columns of our window are black and the rightmost column is white. In this case, the computation produces the value -765, which the saturation logic drives to <code class="docutils literal notranslate"><span class="pre">0</span></code> (black).</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">edge3.py</span></code>, and you’ll see that the filtered image contains a white line where the edge between the black and white regions were in the original image. This is all that the <code class="docutils literal notranslate"><span class="pre">ImageFilter</span></code> library did when our code in <code class="docutils literal notranslate"><span class="pre">edges.py</span></code> applied a <code class="docutils literal notranslate"><span class="pre">CONTOUR</span></code> filter. In this way, the computer can highlight the dog-shaped blob in <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>. Knowing that that blob looks like a dog requires machine learning, a topic for later.</p>
-<p>[Version 20230710]</p>
+<p>[Version 20230811]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -622,6 +676,7 @@ Saturation is one way of “correcting” these situations. In our current probl
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>The answer is neither. If we ignore the imprecision around 0 and 1, we similarly shouldn’t believe the small differences around 0.5. Furthermore, if a signal is measured close to neither the value that represents a digital 0 nor a digital 1, it means we have some type of error in system.</p>
 </aside>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -682,6 +737,34 @@ Saturation is one way of “correcting” these situations. In our current probl
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numbers-and-knowledge">Numbers and knowledge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-you-see-my-dog">Do you see my dog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-interpretation-please">No interpretation, please</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-hexdump">Reading a hexdump</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hexadecimal-explained">Hexadecimal explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-number-systems">Converting between number systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-computer-see-my-dog">Does the computer see my dog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#painting-a-picture">Painting a picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bits">Bits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-finger-no-thumb">One finger, no thumb</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-digital-abstraction">The digital abstraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bits-bytes-and-nibbles">Bits, bytes, and nibbles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-a-pixel-s-color">Setting a pixel’s color</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saturation">Saturation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-edges">Finding edges</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

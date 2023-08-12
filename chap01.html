@@ -165,6 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -290,7 +291,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -306,6 +309,51 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-solving-in-general">Problem solving, in general</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-solving-in-detail">Problem solving, in detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-computational-problem">Our first computational problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagine-a-specific-instance">Imagine a specific instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sketch-using-computational-thinking">Sketch using computational thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capturing-this-thinking">Capturing this thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-your-ide">Choose your IDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-generic-ide">Our generic IDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-pseudocode">Our first pseudocode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commands-and-input-parameters">Commands and input parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-versus-execution">Scripts versus execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-error">Our first error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interactive-interpreter">The interactive interpreter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interpreter-as-a-calculator">The interpreter as a calculator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-help">Python help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-our-first-error">Revisiting our first error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undefined-names">Undefined names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#talking-through-your-confusion">Talking through your confusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-a-computation-s-result">Naming a computation’s result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#showtime">Showtime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-to-the-console-pane">Printing to the console pane</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statements-objects-attributes-types-and-string-literals">Statements, objects, attributes, types, and string literals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing">Aliasing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-more-than-one-line">Reading more than one line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carriage-returns">Carriage returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-statements">Control-flow statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#be-open-to-change">Be open to change</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-spaghetti-code">No spaghetti code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-condition">Testing a condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">Indentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spaces-not-tabs">Spaces, not tabs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-and-breaks">Loops and breaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#any-book">Any book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-problem-in-general">This problem, in general</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -320,6 +368,7 @@ document.write(`
 <p>I love a good story that opens with action and suspense. The action in this opening chapter will be to <em>solve our first computational problem</em> and <em>write our first Python script</em>. These two things are linked. The goal of a Python script is to get a computer to act in a certain way, to perform one or more specific computations. And if we correctly do the problem-solving work that sets up the writing of such a script, the computations that result will be a solution to our problem.</p>
 <p>The suspense? Well, you won’t just read about what it takes to write a script that solves the problem before us, but actively try many different short scripts that may move us closer to solving our problem. For each script, we will pay careful attention to how the computer reacts. I will help you to understand each response, and through this experience, you’ll begin to build a mental model of what it takes to write a script that causes the computer to perform as we desire.</p>
 <p>This trial-and-error approach is not that much different than what we did as young children as we learned how to communicate with those around us. There was a language that the adults were speaking, but we didn’t yet understand it. We wanted to be part of the action, and so we would string together some words from this language and notice how the adults reacted. By paying careful attention to their reactions, we built <em>a mental model</em> that mapped our ideas to what statements we needed to say to express those ideas in that language.</p>
+<section id="problem-solving-in-general">
 <p><strong>Problem solving, in general.</strong> But we want to do more than just develop this mental model and learn to express simple concepts in Python: We want to solve computational problems. To solve a problem, we will begin by imagining and then sketching out <em>a set of actions</em> that we think, if followed, would solve the problem before us. This set of actions is the content of the script that we want our computer to follow.</p>
 <p>In the theater, scripts are useful when we can read them and follow their stage directions. If a script uses a language or a lot of terms that we do not understand, it is gibberish to us. The same is true for a computer script. We need to express the script in a language and with terms that the computer understands. Python is a language the computer understands, and this is where our mental model of what we can express in Python comes into play. The second part of problem solving with computation, then, is the translation of our imagined set of actions into Python.</p>
 <p>If you keep in mind the elements involved in good storytelling, you can use them to become a good problem solver. Just as there are different narrative structures that help writers organize their stories, there are different problem solving strategies that we will use to structure our scripts. Just as storytellers need to decide what narrative details are necessary to include and which can be left out, we too will have to grapple with what details of our problem are pertinent in order to find a solution to it. And just as storytellers take advantage of cultural knowledge to streamline their narrative, we will learn to use prominent features of our computer and its programming language to produce efficient and easily understood scripts.</p>
@@ -335,6 +384,8 @@ document.write(`
 <p class="sidebar-title">Terminology</p>
 <p>I’ll talk about computer scripts as being <em>executed</em> or <em>run</em>. Both terms simply mean that the computer performs the actions dictated in the script.</p>
 </aside>
+</section>
+<section id="problem-solving-in-detail">
 <p><strong>Problem solving, in detail.</strong> While <a class="reference internal" href="#c01-fig1-ref"><span class="std std-numref">Figure 1</span></a> makes it look like problem solving is a <em>linear</em> process, our first attempt, like a first draft of a story, might miss its mark. For most of us, including me, problem solving is not a linear process, but an <em>iterative</em> one. A script when executed might not produce a correct solution or even run at all, and when this happens, we will need to figure out what went wrong and then restart our problem-solving process at some earlier step.</p>
 <p>This need to back up and restart might occur at any step in our problem-solving process. For example, we might start translating our outlined set of actions into Python and then realize that we forgot a case that we need to handle. No problem. This simply means we need to back up and restart at an earlier step in our problem-solving process. At which step we restart depends upon the implications of what we had overlooked.</p>
 <p>Now I don’t know about you, but I don’t like to redo my work over and over again. We can avoid some of this back-up-and-restart action if we are more thoughtful before we begin sketching a set of computational actions. How thoughtful? Well, we will add an additional <em>five</em> steps to the front of the process in <a class="reference internal" href="#c01-fig1-ref"><span class="std std-numref">Figure 1</span></a>.</p>
@@ -371,9 +422,13 @@ document.write(`
 <li><p>Read a text file and print its contents [programming skills].</p></li>
 </ul>
 </div>
+</section>
+<section id="our-first-computational-problem">
 <p><strong>Our first computational problem.</strong> I employed the imagery of how we learn to communicate ideas and stories to help you imagine how you will learn to solve problems with computation. Let’s stay close to this imagery with our first problem-to-be-solved.</p>
 <p>When my children were young, I read to them nightly in the hope that this special time together would help them as they struggled to learn how to read. As we embark on learning to read and write Python, let’s see if we can <em>have our computer to read a children’s book to us</em>.</p>
-<p><strong>Imagine a specific instance of the problem.</strong> We don’t yet have enough experience in computation to know whether we have precisely specified this problem, but that’s ok. Since problem solving is an iterative process, we can always come back and refine our simple specification later. Let’s move on to Step 2 of the problem-solving process and consider a specific instance of our problem.</p>
+</section>
+<section id="imagine-a-specific-instance">
+<p><strong>Imagine a specific instance.</strong> We don’t yet have enough experience in computation to know whether we have precisely specified this problem, but that’s ok. Since problem solving is an iterative process, we can always come back and refine our simple specification later. Let’s move on to Step 2 of the problem-solving process and consider a specific instance of our problem.</p>
 <p>Step 2 talks about identifying our inputs, and for our problem this means choosing a book to read. One of the first books I remember having read to me when I was young was <em>The Cat in the Hat</em> by Dr. Seuss. I loved this rambunctious story, and it naturally was the first book I pulled out to read to my children. Let’s have this be the first book we get the computer to read to us.</p>
 <p>Ok, but what copy of this book? In the physical world, this book comes in many different shapes and sizes, and digitally, in many different file formats. We need a file format that our computers can access and interpret.</p>
 <p>We might choose a copy of our book in PDF (Portable Document Format) or DOCX (Microsoft’s file format for word processing), as these formats allow us to include text and pictures. Or we might choose a file format that stores only the book’s text. Notice that, in making this choice, we are already refining our problem specification!</p>
@@ -390,6 +445,8 @@ document.write(`
 <p>These two choices illustrate an approach for which I’ll repeatedly advocate: Start with a single and simple instance of your problem-to-be-solved. (For example, we have decided to start with a script that won’t read any book in any format, but this one specific book in one particular format.) Then write a script that solves that instance. Only then should you consider how you might expand your script’s functionality so that it solves multiple different instances of your problem (e.g., other books and other formats).</p>
 </div>
 <p>In summary, the script we will write will take the contents of the file named <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> as input and display its contents on our computer screen, as if it were reading the book from start to finish. As a finishing touch, let’s have the script add an extra line to the end of the book where it will say, as I always did for my children, “The end.”</p>
+</section>
+<section id="sketch-using-computational-thinking">
 <p><strong>Sketch using computational thinking.</strong> Given that this is our first computational problem, we will skip over Steps 3 through 5 of our problem-solving process. These three steps become important as you gain experience. With experience (and in subsequent chapters), you will start to see problems that you have already solved as pieces of the problem you are currently trying to solve. But since we can’t yet plumb such experience, we will jump directly to Step 6 and sketch out the sequence of actions that will get the computer to read our book to us.</p>
 <p>Remember that our goal in this step is a sketch. Although our script must eventually be written in a programming language, Step 6 is not about programming, but about <em>computational thinking</em>. This step is not programming because we are not trying to say something <em>in</em> a programming language like Python. This means that you don’t need to know Python or any other programming language to create a sketch. You can use any language you would like to capture the sequence of actions in your sketch.</p>
 <aside class="margin sidebar">
@@ -401,14 +458,20 @@ document.write(`
 </aside>
 <p>So what is computational thinking if it is not programming? The margin note presents what some noteworthy people have said about this term, but for our purposes, we mean <em>the thought that we as humans do to structure a problem and its solution script so that the problem is amenable to being solved by a computational device</em>.</p>
 <p>This definition begins by emphasizing one of Jeanette Wing’s important characteristics about computational thinking: It is “a way humans solve problems” and it is not about “trying to get humans to think like computers.” It is <em>a way</em> because the definition constrains our creative, problem-solving ability: the problem specification must be amenable to a computational solution and the solution script that we eventually produce must be able to be run on a computer. This constraint is something that Alfred Aho emphasizes in his definition of computational thinking. In other words, computers and computation are the primary tools we will use in producing a solution to our problem. Beyond this constraint, we can use any of the diverse skills we often employ in everyday problem solving, from simple mathematical analyses to complex planning to the understanding of human behavior. You can see this if you read through Jeannette Wing’s seminal paper on computational thinking and think about what is involved in each of her many examples.</p>
-<p><strong>Capturing our computational thinking.</strong> Creating a sketch of a script using computational thinking is what we want to do, but you are probably still thinking, “This isn’t clear. What exactly am I supposed to do?”</p>
+</section>
+<section id="capturing-this-thinking">
+<p><strong>Capturing this thinking.</strong> Creating a sketch of a script using computational thinking is what we want to do, but you are probably still thinking, “This isn’t clear. What exactly am I supposed to do?”</p>
 <p>To help, let’s return to our imagery of children learning. With time and practice, children are able to quickly turn ideas into coherent, grammatically correct statements, but are perfect clarity and correct grammar the most important issues when first learning to talk? Do you see parents interrupting their young child every time the child is unclear or makes a grammatical mistake? I don’t. Instead, I see parents encouraging their children to <em>put words to their ideas</em>. The resulting broken English (or whatever your native tongue) isn’t always coherent or grammatically correct, but it is often sufficient to communicate the child’s thoughts.</p>
 <p>When starting out, we have the same goal: <em>capture in a sketch (i.e., broken English) our ideas about how we might computationally solve the problem</em>.</p>
 <p>Broken English for us is what computer scientists call <em>pseudocode</em>. In pseudocode, it is fair game to write down the set of actions you’d like the computer to take in any English phrase that makes sense to you. If you want the computer to open a window on the screen, you can type the phrase: <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">a</span> <span class="pre">window</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">screen</span></code>. If you want the computer to add 5 to 6, you can type: <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">5</span> <span class="pre">+</span> <span class="pre">6</span></code>. I don’t care what you write as long as you — and hopefully others — have a strong sense of what you mean.</p>
+</section>
+<section id="choose-your-ide">
 <p><strong>Choose your IDE.</strong> So lets’s write down some pseudocode, i.e., some ideas about how to instruct a computer to read a book to us. But where should we write these ideas, this pseudocode? We could scribble on a piece of paper, but it would be better if we wrote this pseudocode where it would be easy for us to turn our ideas into actual Python code, which is the next step in our problem-solving process.</p>
 <p>Fortunately, there are numerous applications available in which you can write, run, and inspect code. These tools are typically called an <em>editor</em>, an <em>interpreter</em>, and a <em>debugger</em>. The editor is where we will write our pseudocode and then our Python script. The interpreter is what allows us to run the script we have written, and the debugger is a tool that can help us understand the reasons why our script may not have run as we had hoped.</p>
 <p>While you can use these as standalone tools, many programmers like to use what is called an <em>Integrated Development Environment (IDE)</em>. An IDE packages together all the tools you’ll need in a single application. On the website that is a companion to this book [see P01wp01], you can find directions that will help you get started with several different, including some free, IDEs. It doesn’t matter which of these you choose, but start using one as you work your way through this book.</p>
 <p>These IDEs contain many features, but don’t let yourself be overwhelmed with their extensive functionality. We will need only a small slice of it. Many professional programmers use these IDEs, which means that you can continue to use your selected tool long after you finish this book.</p>
+</section>
+<section id="our-generic-ide">
 <p><strong>Our generic IDE.</strong> In whichever IDE you chose, pay special attention to two bars, three panels, and one button. <a class="reference internal" href="#c01-fig3-ref"><span class="std std-numref">Figure 3</span></a> illustrates where I locate these items in what this book calls a <em>generic IDE</em>. Many IDEs follow this layout. If you use one of the recommended IDEs, the setup instructions describe where you can find each of these things.</p>
 <figure class="align-default" id="c01-fig3-ref">
 <img alt="_images/c01_fig3.png" src="_images/c01_fig3.png" />
@@ -434,6 +497,8 @@ document.write(`
 <p class="admonition-title">Tip</p>
 <p>If you haven’t selected an IDE and followed the directions on the book’s website for getting started with that IDE, please do that now. No matter which IDE you choose, bookmark its “getting started” webpage in your browser, since we will refer to it several times in this chapter.</p>
 </div>
+</section>
+<section id="our-first-pseudocode">
 <p><strong>Our first pseudocode.</strong> We are now ready to do some computational thinking and sketch out our thoughts in an IDE. If we want our computer to read <em>The Cat in the Hat</em> to us, what is the first action it should take? Think about the first action that you would take if you were to read this book to another person. Now write that down in the editor window.</p>
 <p>You probably wrote something like the following, where the initial <code class="docutils literal notranslate"><span class="pre">1</span></code> is just the line number displayed by the IDE’s editor:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
@@ -441,6 +506,8 @@ document.write(`
 </div>
 <p>If you wrote something like, “Read the first line” then you have to get used to thinking about <em>every</em> step in the process of doing something. Unlike a human, the Python interpreter won’t know that to read the first line, you must first open the book. This is important: When writing a computer script, you must tell it every detail of what you want it to do. We will see in a moment what happens when we don’t provide the interpreter with specific instructions.</p>
 <p>What we just wrote is pseudocode. It is a description of what we want this part of our script to tell the interpreter do. This description isn’t Python code, and we want to make sure that the interpreter doesn’t try to interpret it as such.</p>
+</section>
+<section id="comments">
 <p><strong>Comments.</strong> I made sure that the interpreter would ignore my line of pseudocode by placing a hash mark (<code class="docutils literal notranslate"><span class="pre">#</span></code>) at the start of the line. This character holds special meaning in Python. When the interpreter sees it, it knows to ignore everything from the hash mark to the end of the line. Programmers refer to things like this as <em>comments</em>.</p>
 <p>Comments are notes to ourselves, or we might use them to leave a note for anyone else reading our script. Let me emphasize that comments are for humans. The interpreter will ignore whatever is in a comment and so it cannot contain any actions that we want the computer to interpret or act out.</p>
 <p>Despite the fact that comments don’t tell the computer anything, they are important and useful. I will use them for two distinct purposes:</p>
@@ -448,6 +515,8 @@ document.write(`
 <li><p>To capture our ideas during the problem-solving phase when we are sketching out the actions we would like the computer to take (Step 6).</p></li>
 <li><p>To explain why the Python code we write in Step 7 looks like it does. According to Swaroop in <a class="reference external" href="https://python.swaroopch.com/"><em>A Byte of Python</em></a>, “Code tells you how, comments should tell you why.”</p></li>
 </ol>
+</section>
+<section id="commands-and-input-parameters">
 <p><strong>Commands and input parameters.</strong> Normally, we would write more pseudocode to sketch out what we want the interpreter to do for us, but let’s convert this pseudocode into Python code so that we can start to get a feel for what it is like to command the computer to do things.</p>
 <p>Our pseudocode instructs the interpreter to open up our book, just as if we had a physical copy of <em>The Cat in the Hat</em>, and so let’s write <code class="docutils literal notranslate"><span class="pre">open('CatInTheHat.txt')</span></code> on the line below our pseudocode. This new line is a valid Python statement. What does it command the interpreter to do? To open the file named <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>.</p>
 <p>Let’s talk about this statement’s syntax. The form of this statement is: <em>command</em>(<em>input parameters</em>). In our example, we are issuing an <code class="docutils literal notranslate"><span class="pre">open</span></code> command, which requires a single input parameter. The parameter tells the interpreter what we want opened. With commands like this, we follow the command with a possibly empty list of input parameters enclosed in parentheses.</p>
@@ -462,6 +531,8 @@ document.write(`
 <p>Think of the term <em>command</em> and <em>function</em> as interchangeable terms, as in every command is performed by some code that we think of as a function.</p>
 </aside>
 <p>In the case of open, it is a built-in function. We will stick with what is built into the Python language in solving this chapter’s problem; we’ll see the other two categories of commands in the following chapters.</p>
+</section>
+<section id="scripts-versus-execution">
 <p><strong>Scripts versus execution.</strong> So far we have a script with a single statement written in it. This is like a playwright writing one line for an actor. But a theatrical script isn’t just written, we also want the actor to perform this line so that we can see how it works. The equivalent of this handoff from playwright to an actor in programming is: Click your IDE’s Run button. This instructs the Python interpreter to run your script.</p>
 <p>Go ahead and try it with the script we’ve written so far, which is copied below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
@@ -473,6 +544,8 @@ document.write(`
 <p>You will notice that I do not reproduce the result of running this script in the text. This is to encourage you to be an active learner. You should write the code along with me in your own IDE, and then hit the Run button and see what happens. You should also feel free to experiment by changing the code and hitting the Run button again. You can’t break anything and so experiment. Be creative!</p>
 </aside>
 <p>Oops, our code produced a whole lot of red text in the console panel (or just below the code block if you are reading this chapter as an interactive Python notebook).</p>
+</section>
+<section id="our-first-error">
 <p><strong>Our first error.</strong> Computer scientists call this red text an <em>error</em>. I don’t want you to think of this as an error, but as <em>feedback</em>. The Python interpreter is trying to tell us that it couldn’t understand our script in some way. If it helps, think about the interpreter as an actor whose English isn’t too great.</p>
 <p>What can we learn from the broken English in this error message? <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> looks like promising information, and the file the interpreter couldn’t find was <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>. Do you see this in the error message? The message also says that the interpreter had this trouble when it tried to execute our <code class="docutils literal notranslate"><span class="pre">open</span></code> command on line 2 of our script.</p>
 <p>The interpreter can’t find the input file because there is nothing but our Python script in the file explorer panel. How can we change this? We could add a new empty file to our project called <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>, but then we’d have to type its contents and I’d rather not type in something that already exists. So where can you find this existing file? Return to the webpage on the companion site that helped you get started with your chosen IDE (or Jupyter notebook application), and follow the directions in the section titled “Loading files into your runtime.”</p>
@@ -484,6 +557,8 @@ document.write(`
 <p>Success! I mean, at least no error this time.</p>
 <p>If you are following along using an IDE, clicking the Run button caused nothing to appear in the console panel. If you are reading this chapter as an Interactive Python Notebook, you saw something strange printed after the code block. For those using an IDE, you will see this strange output in a moment.</p>
 <p>Both the IDE and the Jupyter notebook application are using the same Python interpreter, but we experienced two different behaviors. Let’s understand this difference because it will help us to build a mental model of the Python interpreter’s operation.</p>
+</section>
+<section id="the-interactive-interpreter">
 <p><strong>The interactive interpreter.</strong> The console panel in an IDE isn’t just a place where we see the results of the execution of our script, but it is also where we can feed pieces of Python code directly to the <em>interactive</em> Python interpreter. This is like asking the actor to read one line of your script so that you can see how it sounds, or in our case, what the line causes the interpreter to do.</p>
 <p>Let’s feed the two lines of our script to the interactive Python interpreter one at a time.</p>
 <p>What happens when we feed our comment line to the interactive interpreter? For those running in an IDE, you should be copying the following line from the editor pane and pasting it into the console panel at the console’s prompt. Now hit the return key (with the focus in the console panel). For those running in a Jupyter notebook application, just hit the Run button on the following code block.</p>
@@ -500,7 +575,9 @@ document.write(`
 <p class="sidebar-title">Note</p>
 <p>At this point, I stop providing explicit directions for using the interactive Python interpreter in IDEs and Jupyter notebooks.</p>
 </aside>
-<p><strong>The interactive interpreter as a calculator.</strong> What happens if you write <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> as the input to the interactive Python interpreter? Before you run it, take a moment and think about what we are asking the interpreter to do.</p>
+</section>
+<section id="the-interpreter-as-a-calculator">
+<p><strong>The interpreter as a calculator.</strong> What happens if you write <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> as the input to the interactive Python interpreter? Before you run it, take a moment and think about what we are asking the interpreter to do.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
 </pre></div>
 </div>
@@ -510,6 +587,8 @@ document.write(`
 <p>Take a bit of time and play with the interpreter as a calculator. Keep in mind as you play that you are playing to learn. If you try something and it fails, try something slightly different. As you read this book, get into the habit of experimenting and forming theories from what you observe during these experiments.</p>
 </div>
 <p>From your experiments, I hope you have learned that the interactive Python interpreter prints the value of the statement we ask it to evaluate. So, what is this value that it printed when we asked it to open a file?</p>
+</section>
+<section id="python-help">
 <p><strong>Python help.</strong> Wouldn’t it be nice to ask for some help? It would and so let’s do that. Type <code class="docutils literal notranslate"><span class="pre">help(open)</span></code> in the interactive interpreter and run it.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">open</span><span class="p">)</span>
 </pre></div>
@@ -518,6 +597,8 @@ document.write(`
 <p>For now, let’s look only at <code class="docutils literal notranslate"><span class="pre">mode</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding</span></code>. <code class="docutils literal notranslate"><span class="pre">mode</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">'r'</span></code>, which means that we are going to read the file. Alternatively, we might want to write the file. <code class="docutils literal notranslate"><span class="pre">encoding</span></code> is something we will talk about in greater detail later, but for now you can think of it as telling the interpreter in what language the file is written (i.e., the computer equivalent of asking if it is written in English or French).</p>
 <p>Finally, <code class="docutils literal notranslate"><span class="pre">help</span></code> tells us that this built-in function opens a file and returns a <em>stream</em>. Again, we will talk about file input and file output (i.e., file I/O) in greater detail later in the book, but think about it. When I open a book, I probably open the cover and put my finger on the first word on the first page. You can think of a stream as my virtual finger telling me where I’ll read the next characters in the file.</p>
 <p>Returning to the question about the value the interpreter printed, it was cryptically telling us about the position of its virtual finger in the file. Less cryptically, this value is the description of an object that does I/O on a text file whose name is <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>. This object has only opened the file for reading, and it expects the file’s content to be encoded in this UTF-8 language.</p>
+</section>
+<section id="revisiting-our-first-error">
 <p><strong>Revisiting our first error.</strong> What happens if we ask the interactive Python interpreter to open a file that doesn’t exist? We saw that this caused an error when we executed our whole script and the text file we wanted wasn’t in the list of files. Will this error message look different when the problem occurs in the interactive interpreter? I don’t know. Ok, I do, but let’s pretend I don’t.</p>
 <p>Let’s misspell the file name and execute that <code class="docutils literal notranslate"><span class="pre">open</span></code> statement. Type and execute <code class="docutils literal notranslate"><span class="pre">open('CatInTheHut.txt')</span></code> in the interactive interpreter.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHut.txt&#39;</span><span class="p">)</span>
@@ -525,6 +606,8 @@ document.write(`
 </div>
 <p>We got a red error message again, as expected. This time it shouldn’t look as scary, as we’re already familiar with it. Yup, <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> as we might have expected. This is a type of <code class="docutils literal notranslate"><span class="pre">OSError</span></code> that <code class="docutils literal notranslate"><span class="pre">help</span></code> told us would be raised upon failure to successfully complete the <code class="docutils literal notranslate"><span class="pre">open</span></code> operation.</p>
 <p>The only difference this time is that the <code class="docutils literal notranslate"><span class="pre">Traceback</span></code> looks a bit different. It doesn’t tell us where in our script the execution error occurred, but that there was a failure on line 1 of this cryptic file “<code class="docutils literal notranslate"><span class="pre">&lt;stdin&gt;</span></code>”. We don’t really need to understand this broken English, since this traceback information is only needed when we have an error buried somewhere in a multi-line script.</p>
+</section>
+<section id="undefined-names">
 <p><strong>Undefined names.</strong> Let’s get back to our script. After <code class="docutils literal notranslate"><span class="pre">open</span></code>, the interpreter is sitting waiting for us to tell it what we want it to do with the open file (our virtual open book).</p>
 <p>Well, how about we read the first line? If Python has a built-in file <code class="docutils literal notranslate"><span class="pre">open</span></code> command, maybe it has another built-in function called <code class="docutils literal notranslate"><span class="pre">readline</span></code>. Let’s type <code class="docutils literal notranslate"><span class="pre">readline()</span></code> at the bottom of our script and run it. The empty parentheses at the end of <code class="docutils literal notranslate"><span class="pre">readline</span></code> simply say that we’re not passing this command any input parameters.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
@@ -534,13 +617,17 @@ document.write(`
 </div>
 <p>Oops, another error that says, <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'readline'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>. This seems to be telling us that Python doesn’t know what to do when we tell it to execute a command called <code class="docutils literal notranslate"><span class="pre">readline</span></code>.</p>
 <p>Let’s look at the online Python documentation and in particular at the list of <a class="reference external" href="https://docs.python.org/3/library/functions.html#built-in-funcs">built-in functions</a>. The command <code class="docutils literal notranslate"><span class="pre">open</span></code> is there, but not <code class="docutils literal notranslate"><span class="pre">readline</span></code>. In fact, there are no read functions at all. There must be something wrong with our thinking. What good is it to open a file if you cannot read it?</p>
+</section>
+<section id="talking-through-your-confusion">
 <p><strong>Talking through your confusion.</strong> Let’s try these commands on a person to see if we can glean what might have gone wrong. Yes, you should try the following with a friend or family member.</p>
 <p>Give your friend a book and then command them to <code class="docutils literal notranslate"><span class="pre">open('book_name')</span></code>, where <code class="docutils literal notranslate"><span class="pre">book_name</span></code> is the name of a book that they’re holding. Next, command them to <code class="docutils literal notranslate"><span class="pre">readline()</span></code>.</p>
 <p>Did they do what was commanded? They probably opened the book, but it’s hit or miss if they read a line from that book. When you say <code class="docutils literal notranslate"><span class="pre">readline()</span></code>, you didn’t specify what line you wanted read. What if our script had opened two files? How would the interpreter know which of the open files it should read?</p>
 <p>This is an example of what’s good and bad about computers. They are very literal. They will do exactly what you ask them to do and nothing more.</p>
 <p>If you’re lucky, when you tell a computer to do something ambiguous, it won’t do anything and tell you that it is confused by your command. That’s what the Python interpreter did when I asked it to execute a command name that it didn’t know.</p>
 <p>If you’re unlucky, it will do something random, and you need to determine for yourself if the computer did what you wanted it to do. We will spend a good bit of time talking about how to avoid these situations and what to do when you find yourself in them.</p>
-<p><strong>Naming the result of a computation.</strong> We can solve this problem of ours by using the result of the <code class="docutils literal notranslate"><span class="pre">open</span></code> command. In particular, we want to tell the interpreter to use that thing it computed during <code class="docutils literal notranslate"><span class="pre">open</span></code> to read the first line in that file’s stream. You know, that line under its virtual finger.</p>
+</section>
+<section id="naming-a-computation-s-result">
+<p><strong>Naming a computation’s result.</strong> We can solve this problem of ours by using the result of the <code class="docutils literal notranslate"><span class="pre">open</span></code> command. In particular, we want to tell the interpreter to use that thing it computed during <code class="docutils literal notranslate"><span class="pre">open</span></code> to read the first line in that file’s stream. You know, that line under its virtual finger.</p>
 <p>Let’s delete <code class="docutils literal notranslate"><span class="pre">readline()</span></code> and type a new piece of pseudocode:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
 <span class="linenos">2</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
@@ -563,6 +650,8 @@ document.write(`
 </pre></div>
 </div>
 <p>Click the Run button. No errors! But whether you see the first line of the book depends upon whether you ran this block of code using the interactive Python interpreter or not.</p>
+</section>
+<section id="debugging">
 <p><strong>Debugging.</strong> It’s one thing to have the interpreter report to you that something didn’t work, but it can be even more frustrating when it runs to completion and the result isn’t what you expect. How do you figure out where and what went wrong?</p>
 <p>We will learn that there’s no single, simple answer to this important question. The good news is that there are many effective strategies you can employ to determine what went wrong. Because our current script is so small, we’ll start with the most straightforward, which you can think of as a brute-force approach. In this approach, we start at the beginning of the script and perform each operation in order using the interactive interpreter. This tool will show us the result of each Python statement and keep track of the prior statements’ named results.</p>
 <aside class="margin sidebar">
@@ -581,8 +670,12 @@ document.write(`
 <p>You’ll see that I typed the name of the result we computed in our <code class="docutils literal notranslate"><span class="pre">open</span></code> command (i.e., <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code>) at the second prompt, and the interpreter printed the value of the object associated with that name (i.e., a <code class="docutils literal notranslate"><span class="pre">TextIOWrapper</span></code> object). The printed details match what we had earlier discussed.</p>
 <p>By typing this name at the interactive interpreter’s prompt, we can see what it means for the interactive interpreter to remember named results (i.e., keep the state of our running computation). We can look at (and even modify) this state at any point in the execution of our script.</p>
 <p>Continuing with the transcript above, I then typed the second line of our script and hit return. In response, the interpreter printed the book’s first line. Our script will read the first line of our book! And congratulations on successfully completing your first debugging session.</p>
+</section>
+<section id="showtime">
 <p><strong>Showtime.</strong> The interactive interpreter is a great way to test little pieces of code. It’s like asking the actors in the theater to run through just a small piece of a theatrical script. We expect our actors to jump in and out of character while we run these tests on pieces of the script. When it comes to showtime, however, we want slightly different behavior. Actors should stay on script and do only what’s specified.</p>
 <p>Showtime for our Python script is when we click our IDE’s Run button. The showtime run of our Python script prints nothing in the console panel because <em>we didn’t tell the Python interpreter to print anything</em>. In particular, the last statement we told the interpreter to execute was to read a line from our file. And that’s all it did. If we want the interpreter to print the line it read, we must tell it explicitly to do this. It’s like the difference between asking a human actor to read a line in a book while onstage versus reading a line in a book and saying it out loud.</p>
+</section>
+<section id="printing-to-the-console-pane">
 <p><strong>Printing to the console pane.</strong> To have your script print something to the IDE’s console panel, you must command the interpreter to <code class="docutils literal notranslate"><span class="pre">print</span></code>. The argument to the <code class="docutils literal notranslate"><span class="pre">print</span></code> command is what we want to print, which in our case is that thing the interpreter read in <code class="docutils literal notranslate"><span class="pre">readline</span></code>.</p>
 <p>If you guessed that we had better name this thing we read so that we can refer to it in our <code class="docutils literal notranslate"><span class="pre">print</span></code> command, good for you! You are learning to code! Let’s call the value we read <code class="docutils literal notranslate"><span class="pre">the_line</span></code>. The following is what our script looks like after these additions:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
@@ -595,6 +688,8 @@ document.write(`
 <p>In pseudocode, <code class="docutils literal notranslate"><span class="pre">print(the_line)</span></code> says something like “please print the value of the object named <code class="docutils literal notranslate"><span class="pre">the_line</span></code> to the console.”</p>
 <p>Do we dare try running our entire script now? Are you ready for showtime? Go ahead and run it.</p>
 <p>Success! We have started to create a digital agent that can read a book to us, or it could be a digital actor that could read a script to an audience.</p>
+</section>
+<section id="statements-objects-attributes-types-and-string-literals">
 <p><strong>Statements, objects, attributes, types, and string literals.</strong> We’ve done a lot, and let’s take a moment to focus on terminology and what’s happening in what we’ve written.</p>
 <p>We have been writing <em>statements</em>, one per line, that the Python interpreter reads. As the interpreter reads a line, it discards anything that is a comment, and if there’s something left, it performs the requested computation.</p>
 <p>When the Python interpreter executes a computation based on a statement in our script, it works with things called <em>objects</em>. As you’ll come to learn, almost everything our script manipulates is an object. For now, think of an object as a blob with <em>attributes</em>. An object’s attributes are defined by its <em>type</em>, also called its <em>class</em>.</p>
@@ -645,6 +740,8 @@ document.write(`
 <p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> command reports that the object named <code class="docutils literal notranslate"><span class="pre">open</span></code> is a built-in function. I’ve already mentioned that I’ll use the terms <em>command</em> and <em>function</em> interchangeably, and to that list I’ll add <em>method</em>. They all roughly mean: “go do something complex based possibly on some input parameters I provide and return to me the result of your computation.”</p>
 <p>When we want a function object to do its work, we follow its name with a set of parentheses, as we did with <code class="docutils literal notranslate"><span class="pre">open</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code>, and interestingly <code class="docutils literal notranslate"><span class="pre">readline</span></code> in script we wrote. Technically, <code class="docutils literal notranslate"><span class="pre">readline</span></code> is a method because it is a function attribute of the objects of type <code class="docutils literal notranslate"><span class="pre">_io.TextIOWrapper</span></code>.</p>
 <p>This is a lot of jargon, but don’t worry. We’ll continue talking about types, attributes, and this dot syntax in a moment.</p>
+</section>
+<section id="aliasing">
 <p><strong>Aliasing.</strong> The name <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> is a variable because it may name the first book I read to my children at night and then later that evening name the second book we read. In a Python script, this might look something like the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### RUNNABLE, but NOT part of our script</span>
 <span class="linenos">2</span><span class="c1"># Open the first book to be read</span>
@@ -690,6 +787,8 @@ document.write(`
 </div>
 <p>What happened? My virtual finger moved along in the book no matter which name I used to read a line! This is called <em>aliasing</em> in computer science, which makes sense given our common understanding of the term.</p>
 <p>Again, I raise this point for two reasons: (1) You should have the right mental model for what’s happening in the Python interpreter; and (2) you will be surprised by aliasing at some point in your writing of Python scripts.</p>
+</section>
+<section id="namespaces">
 <p><strong>Namespaces.</strong> Before completing our script, I want to explain the dot syntax in <code class="docutils literal notranslate"><span class="pre">my_open_book.readline()</span></code>. We saw earlier that <code class="docutils literal notranslate"><span class="pre">readline</span></code> by itself was not a name for a Python object because we received a <code class="docutils literal notranslate"><span class="pre">NameError</span></code> when we tried executing <code class="docutils literal notranslate"><span class="pre">readline()</span></code>. But by typing <code class="docutils literal notranslate"><span class="pre">my_open_book.readline()</span></code>, we successfully called a function. What’s going on here?</p>
 <p>The computer science term for this is <em>namespaces</em>. This concept isn’t hard because we use namespaces in our daily lives all the time. For example, when I use the name “Christina” at the office, I mean my administrative assistant. When I think of “Christina” at home, I mean by wife. My office and my home are two different namespaces, and I replace one with the other as I move from home to work and back again.</p>
 <p>As another example, when I think of “Jim” while at work, I’m thinking of Jim Waldo, my long-time co-instructor. If someone mentions “Jim” to me at home, I’ll look confused. I don’t have anyone at home named “Jim”. This is what happened with the name <code class="docutils literal notranslate"><span class="pre">readline</span></code>. This name is known only within the namespace of an object of type <code class="docutils literal notranslate"><span class="pre">_io.TextIOWrapper</span></code>.</p>
@@ -698,7 +797,9 @@ document.write(`
 <p>Of particular note is that the name <code class="docutils literal notranslate"><span class="pre">readline</span></code> is not in the local namespace or the <code class="docutils literal notranslate"><span class="pre">__builtins__</span></code> namespace. What about the namespace associated with the object <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code>? Let’s type <code class="docutils literal notranslate"><span class="pre">dir(my_open_book)</span></code> and see. Bingo! There it is! These are the attributes of the object known to us as <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code>.</p>
 <p>Putting this all together. When we wrote <code class="docutils literal notranslate"><span class="pre">my_open_book.readline()</span></code>, you can read that as saying, “We expect that in the namespace of the Python object named <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> there is an attribute called <code class="docutils literal notranslate"><span class="pre">readline</span></code>. And because we followed that attribute with empty parentheses, we believe that this attribute is a function we can invoke without any input parameters. Assuming we’re correct, execute this command and please return to me the result of that computation.”</p>
 <p>Give yourself a high-five. You have learned a lot about writing scripts that a program can interpret and how it accomplishes this.</p>
-<p><strong>Reading more than one line, by duplicating commands.</strong> I don’t know about you, but if someone told me that they were going to read to me and then stopped reading after the first line, I’d be unhappy with them. How do we get our script to read the next line in our book?</p>
+</section>
+<section id="reading-more-than-one-line">
+<p><strong>Reading more than one line.</strong> I don’t know about you, but if someone told me that they were going to read to me and then stopped reading after the first line, I’d be unhappy. How do we get our script to read the next line in our book?</p>
 <p>We saw earlier that multiple calls to the object representing my virtual finger in the file moves my virtual finger forward. So if we add another copy of the command <code class="docutils literal notranslate"><span class="pre">my_open_book.readline()</span></code> to the end of our script, we might read the next line and move our virtual finger to the third line. And if we want to see the line we just read, we should print again. Since our script is starting to get long, I’ll also remove the comments we originally inserted. When your script looks like the following, hit that Run button.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -707,6 +808,8 @@ document.write(`
 <span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="carriage-returns">
 <p><strong>Carriage returns.</strong> You might be annoyed by the blank line that our script inserts between the first two lines of our book. To understand why this happens, we first need to talk about special characters, and specifically, the carriage return character.</p>
 <p>What, might you ask, is a carriage return? It is a term that had meaning when people used <a class="reference external" href="https://www.youtube.com/watch?v=FkUXn5bOwzk">old-style typewriters</a>. Around 1:28 into the linked video, the person pushes the silver handle to reset the carriage to the start of the next line. This silver handle is a carriage return. On our computers when we’re in a text editor, we simply hit <a class="reference external" href="https://en.wikipedia.org/wiki/Enter_key">the button labeled “return” (Apple Mac) or “enter” (IBM PC)</a>.</p>
 <p>The question for us is how do we represent this carriage return in our text documents? The answer is that it becomes a special character sequence in our strings. We can find this sequence at the end of each line we read in using the <code class="docutils literal notranslate"><span class="pre">readline</span></code> method. Again, we can use the interactive interpreter to take a peek behind the scenes at our computation. Remember, in the interactive interpreter, typing an object’s name tells the interactive interpreter that we want to see the value of that object.</p>
@@ -743,6 +846,8 @@ document.write(`
 <span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="control-flow-statements">
 <p><strong>Control-flow statements.</strong> We have a script that reads the first two lines of the story, and we could clearly copy the last two statements many more times if we wanted the entire story read. But that creates a script that is tailored to the length of this specific story. What if we wanted to build a digital actor that could read an entire story no matter what its length?</p>
 <p>This is the purpose of <em>control-flow</em> statements in computer programs. The behavior of our script changes based on the testing of some condition in our code. In this case, the condition we want to test is if we have run out of lines in our story.</p>
 <p>What would the pseudocode for such a script look like? Well, it wouldn’t duplicate the <code class="docutils literal notranslate"><span class="pre">readline</span></code> and <code class="docutils literal notranslate"><span class="pre">print</span></code> statements, but reuse the original ones. This loop back needs to occur only when there is more story to be read, and so we need to insert some kind of test. A test that would work would be to ask if we just printed the last line of the story. Spend some time making sure you understand the following pseudocode that implements this set of ideas:</p>
@@ -759,6 +864,8 @@ document.write(`
 <p>Notwithstanding this insight, I’ll continue using my theater analogy.</p>
 </aside>
 <p>The pseudocode also illustrates that we can add statements that (unconditionally) jump around in our script, both forward (toward statements later in our script) and backward (toward statements earlier in our script). With this new capability, we don’t have to just execute a script one statement at a time from the first to the last. Our programs will now look more like musical scores than the script for a play.</p>
+</section>
+<section id="unit-tests">
 <p><strong>Unit tests.</strong> Before we convert our new pseudocode to actual Python statements, let’s ask ourselves if this logic is correct. This is not easy to do. As I designed this logic, I’m already inclined to believe it is correct. That’s just human nature.</p>
 <p>A good way to avoid this trap is to pick a set of test inputs from different parts of the input space, and then carefully work through our code thinking about what it will do on each input. When we have running code, we can perform these same tests by building actual test inputs (called <em>unit tests</em>) and running the code to see what happens, but for now, let’s just analyze things by hand.</p>
 <p>What describes the space of inputs for our script?</p>
@@ -784,6 +891,8 @@ document.write(`
 <span class="linenos">5</span><span class="c1"># Did open return EOF? If yes, quit. If no, go here.</span>
 </pre></div>
 </div>
+</section>
+<section id="be-open-to-change">
 <p><strong>Be open to change.</strong> Take note of this simple change, and think about what we just did. It is an example of making small adjustments to the logic of our originally conceived script so that what we are designing fits better with what’s easy in our programming language. It is an example of stepping back to an earlier step in our problem-solving process.</p>
 <p>Be open to this. Playwrights, artists, engineers, and other designers do this all the time. They listen to the “backtalk” from their materials or, in the case of playwrights, from their actors. There are typically many ways to accomplish something, and it is often a Good Thing to listen and adjust your design accordingly.</p>
 <div class="admonition-you-try-it admonition">
@@ -794,6 +903,8 @@ document.write(`
 <p class="sidebar-title">Terminology</p>
 <p>By HLL, I mean a programming language that is close to something we humans can read and understand. The opposite of high level is the very simple statements that direct the hardware processor in our computers. In Act III, we will talk about how the HLL statements we write are “lowered” into instructions that our computer’s processor understands.</p>
 </aside>
+</section>
+<section id="no-spaghetti-code">
 <p><strong>No spaghetti code.</strong> Let’s now convert our pseudocode into actual Python code. This is a bit tricky because computer scientists are quite picky about the kind of control flow you should write in a <em>high-level language</em> (HLL) like Python.</p>
 <p>Our commented pseudocode contains an unconstrained <code class="docutils literal notranslate"><span class="pre">goto</span></code> statement. What is a <code class="docutils literal notranslate"><span class="pre">goto</span></code>? With our original scripts, the interpreter finished a statement and then moved down a line to interpret the next statement. With a <code class="docutils literal notranslate"><span class="pre">goto</span></code> statement, we can tell the interpreter to jump to any point in our script. To indicate where the interpreter should go, computer scientists <em>label</em> a script’s statements. Our pseudocode inserted a comment containing the word <code class="docutils literal notranslate"><span class="pre">Here</span></code>. Alternatively, we could have used the line number of a statement and written our comment this way: “Did open return EOF? If yes, quit. If no, goto line 2.”</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
@@ -804,6 +915,8 @@ document.write(`
 </div>
 <p>This tiny <code class="docutils literal notranslate"><span class="pre">goto</span></code> might not look dangerous, but its simplicity is what makes it dangerous: it gives you (the programmer) the power to go anywhere in your script by simply changing the line number. Used in an constrained way, this tiny <code class="docutils literal notranslate"><span class="pre">goto</span></code> leads, it has been argued (vehemently), to unmaintainable spaghetti code. You can read about <a class="reference external" href="https://en.wikipedia.org/wiki/Goto">this historical debate</a> on Wikipedia.</p>
 <p>The solution is to hide the <code class="docutils literal notranslate"><span class="pre">goto</span></code> in more constrained, control-flow statements. For our script, we’ll use <em>if-</em> and <em>loop-statements</em>. Together, they help humans to understand and maintain their scripts.</p>
+</section>
+<section id="testing-a-condition">
 <p><strong>Testing a condition.</strong> We begin by learning how to test a condition in Python, which is an integral part of both if- and loop-statements. You’ll remember that our pseudocode contains a condition we want tested: is the result of <code class="docutils literal notranslate"><span class="pre">readline</span></code> equal to the empty string (indicating EOF)? In Python, this is written as: <code class="docutils literal notranslate"><span class="pre">the_line</span> <span class="pre">==</span> <span class="pre">''</span></code>. It asks, “Is the value of the object called <code class="docutils literal notranslate"><span class="pre">the_line</span></code> equal to the empty string?”</p>
 <p>Notice the special way Python writes “is equal to?”, which distinguishes this operation from Python’s assignment operator. The double equal (<code class="docutils literal notranslate"><span class="pre">==</span></code>) operator compares the objects to its left and right, and it returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if they are equal and <code class="docutils literal notranslate"><span class="pre">False</span></code> if they are not. <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> are built-in literals of type <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
 <p>The Python if-statement expects an expression like this, and it uses this test result to dynamically determine which group of statements the interpreter should execute next. For example, the following if-statement prints “The End.” only when the value of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is the empty string.</p>
@@ -816,8 +929,12 @@ document.write(`
 </pre></div>
 </div>
 <p>You can put any expression that evaluates to a <code class="docutils literal notranslate"><span class="pre">bool</span></code> between the <code class="docutils literal notranslate"><span class="pre">if</span></code> and the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>). Only if this expression is <code class="docutils literal notranslate"><span class="pre">True</span></code> will the indented statements after the if-statement be executed. We’ll see other comparison operators and other forms of Python’s if-statement in later problems.</p>
+</section>
+<section id="indentation">
 <p><strong>Indentation.</strong> Indentation, or the whitespace at the start of each line in a script, holds meaning in Python. This shouldn’t be a completely strange concept for we use whitespace in our writing to, for example, indicate the start of a new paragraph.</p>
 <p>Other programming languages use explicit symbols to group statements together. The difference is more taste than anything, but Python believes that indentation without any extra special symbols makes scripts easier to read and understand.</p>
+</section>
+<section id="spaces-not-tabs">
 <p><strong>Spaces, not tabs.</strong> We will talk more about indentation, but know that it matters to the way that the Python interpreter understands your script. If you want to avoid problems, use spaces, not tabs, when indenting your Python statements. A tab is a special character, like the newline character, and you will want to set your IDE to convert tabs into spaces.</p>
 <p>Furthermore, in Python, all the statements you want grouped together should be indented <em>by the same amount</em>. If they are not, you will have problems.</p>
 <div class="admonition-you-try-it admonition">
@@ -831,6 +948,8 @@ document.write(`
 <li><p>E.	All the lines followed by The End.</p></li>
 </ol>
 </div>
+</section>
+<section id="loops-and-breaks">
 <p><strong>Loops and breaks.</strong> We are almost done. We only need a Python statement that creates a loop, allowing us to repeat the execution of lines 2-4 until we hit EOF. There are two looping statements in Python, and we will use the first of them, a <em>while-loop</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;CatInTheHat.txt&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -863,6 +982,8 @@ document.write(`
 <p class="sidebar-title">More Instructions</p>
 <p>Use Project Gutenberg’s advanced search option and set “Filetype” to “Plain Text (txt)” and “Language” to English.</p>
 </aside>
+</section>
+<section id="any-book">
 <p><strong>Any book.</strong> By the way, our script is flexible enough handle any book (i.e., plain text file) by simply changing the literal string in <code class="docutils literal notranslate"><span class="pre">open</span></code>. Download the plain text version of your favorite book from <a class="reference external" href="https://www.gutenberg.org/">Project Gutenberg</a> and try it.</p>
 <p>This works, but it isn’t a great solution. We can make this easier if we slightly change our problem specification (and learn a new built-in function). Instead of using a string literal in <code class="docutils literal notranslate"><span class="pre">open</span></code>, our script should ask the user what book they’d like to read, store the response in a variable, and then use that variable as the input parameter to <code class="docutils literal notranslate"><span class="pre">open</span></code>.</p>
 <p>To ask the user for input while your script is running, Python provides us with the built-in function <code class="docutils literal notranslate"><span class="pre">input</span></code>. Type <code class="docutils literal notranslate"><span class="pre">help(input)</span></code> at the console prompt to read a bit about this function. It does exactly what we need.</p>
@@ -876,10 +997,13 @@ document.write(`
 <span class="linenos">8</span>        <span class="k">break</span>
 </pre></div>
 </div>
-<p><strong>This problem, in general.</strong>  Congratulations on solving your first computational problem! I hope you feel proud of your accomplishment. But you might also be asking, “Was this problem just a vehicle to get started in problem solving with computation, or was it something more?” The answer is something more.</p>
+</section>
+<section id="this-problem-in-general">
+<p><strong>This problem, in general.</strong> Congratulations on solving your first computational problem! I hope you feel proud of your accomplishment. But you might also be asking, “Was this problem just a vehicle to get started in problem solving with computation, or was it something more?” The answer is something more.</p>
 <p>While the context and storyline in which I wrapped this chapter’s problem may not seem like something you’d ask your computer to do, the act of opening and accessing the contents of digital files is a skill that you will use over and over again in solving your own problems. You have now started to build that skill.</p>
 <p>Like this first problem-to-be-solved, I chose the problems in each chapter of this book for two reasons: (1) each builds upon the knowledge you’ve gained in previous chapters to teach you new design techniques, CS concepts, and programming skills; and (2) because each problem is an instance of a more generally applicable problem. In other words, my selection of our problems-to-be-solved is not frivolous, but builds in you a competency to attack many similar problems.</p>
-<p>[Version 20230630]</p>
+<p>[Version 20230811]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -940,6 +1064,57 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-solving-in-general">Problem solving, in general</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-solving-in-detail">Problem solving, in detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-computational-problem">Our first computational problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagine-a-specific-instance">Imagine a specific instance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sketch-using-computational-thinking">Sketch using computational thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capturing-this-thinking">Capturing this thinking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-your-ide">Choose your IDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-generic-ide">Our generic IDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-pseudocode">Our first pseudocode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commands-and-input-parameters">Commands and input parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-versus-execution">Scripts versus execution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-error">Our first error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interactive-interpreter">The interactive interpreter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interpreter-as-a-calculator">The interpreter as a calculator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-help">Python help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-our-first-error">Revisiting our first error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undefined-names">Undefined names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#talking-through-your-confusion">Talking through your confusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-a-computation-s-result">Naming a computation’s result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#showtime">Showtime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-to-the-console-pane">Printing to the console pane</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statements-objects-attributes-types-and-string-literals">Statements, objects, attributes, types, and string literals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing">Aliasing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespaces">Namespaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-more-than-one-line">Reading more than one line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carriage-returns">Carriage returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow-statements">Control-flow statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#be-open-to-change">Be open to change</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#no-spaghetti-code">No spaghetti code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-condition">Testing a condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">Indentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spaces-not-tabs">Spaces, not tabs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-and-breaks">Loops and breaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#any-book">Any book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-problem-in-general">This problem, in general</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -21,17 +21,23 @@ In this chapter, you will learn how to query networked resources through their a
 A _package_ is simply a set of modules that a Python programmer wishes to distribute all together.
 ```
 
-**Packages and libraries.** To access information out on the Internet, we will use the `requests` package. The `requests` package is one among many available through the [Python Package Index](https://pypi.org/), which is simply an online repository of software for the Python programming language.
+## Packages and libraries
+
+To access information out on the Internet, we will use the `requests` package. The `requests` package is one among many available through the [Python Package Index](https://pypi.org/), which is simply an online repository of software for the Python programming language.
 
 Another name you'll often hear programmers use for a collection of modules is *library*. Programming languages like Python are typically distributed with what is called a *standard library*, which you can think of as the modules and packages available by default wherever the programming language is installed. The [Python standard library](https://docs.python.org/3/library/) includes built-in constants (e.g., `True`), data types (e.g., `str`), and functions (e.g., the file I/O facilities) that we have repeatedly used in our scripts. 
 
-**APIs.** How do we use the functions and data structures in published packages and libraries to accelerate the development of our own scripts? We use their *application programming interface (API)*.
+## APIs
+
+How do we use the functions and data structures in published packages and libraries to accelerate the development of our own scripts? We use their *application programming interface (API)*.
 
 An API begins with the functions and data structures defined in the package or library, but it doesn't stop there. As we talked in the last chapter, the public interface for a function is often not enough for us to fully understand how to use the function, and so an API isn't complete without well-written documentation, like the information we discussed putting in the docstring of the functions we write. To emphasize, an API refers to both the function interfaces and data structure definitions we can `import` into our scripts as well as the documentation for these interface and definitions that tell us how we can properly use them. You have already been using an API when you used Python's built-in types (like strings), their methods (like string-find), and Python's documentation (like the documentation on Python's sequence types).
 
 As you've experienced, a module and its API simplifies the work we need to do in building solutions to the problems that interest us because we can use a module's functions and data structures without having to write this functionality ourselves or even understand exactly how the functions and data structures operate. Because Python has a treasure trove of existing libraries, our scripts are now no longer limited by what's built in the Python language or what we know how to build ourselves. This is incredibly powerful for it expands the limits of our dramatic stage and permits us to reach beyond our own laptops to take advantage of everything on the Internet. Let's start doing that now.
 
-**A new problem.** To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in Harvard's library system? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in its miles of bookshelves.
+## A new problem
+
+To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in Harvard's library system? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in its miles of bookshelves.
 
 ```{margin} Card Catalogs
 [https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/](https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/)
@@ -57,7 +63,9 @@ In the next chapter, we will peek under the covers of this API, just as we did w
 
 This looks simple enough, as long as we can find libraries with APIs that make, for example, sending a request from one computer to another as simple as a function call. Think about this. There is almost certainly a boatload of work that needs to be done to send a message from our computer to some other computer, and we'd love it if someone else had figured out how that exactly works and has hidden that work behind the interface of a simple function call. Luckily, there is such an API, and we'll use it to do something pretty amazing.
 
-**Searching Wikipedia.** HOLLIS is programmed to provide its users with lots of information in response to their queries. You'd learn a book's catalogue number, publisher, and publication date. You'd find a short description of its subject matter and any notes that a librarian attached to the entry. You'd also know exactly where you could find the book on Harvard's shelves.
+## Searching Wikipedia
+
+HOLLIS is programmed to provide its users with lots of information in response to their queries. You'd learn a book's catalogue number, publisher, and publication date. You'd find a short description of its subject matter and any notes that a librarian attached to the entry. You'd also know exactly where you could find the book on Harvard's shelves.
 
 Since we've learned that it's best to start problem solving with a simple instance, let's write most of what we need in our script while targeting a simple web resource. In particular, let's ask whether Wikipedia has an entry for *The Cat in the Hat*. The pseudocode for this problem is the same as above, except we replace HOLLIS with [wikipedia.org](http://wikipedia.org).
 
@@ -97,7 +105,9 @@ This call and its returned result hide all the hard and confusing parts of commu
 
 Run the `qweb1.py` and it will respond that it successfully talked to a Wikipedia server.
 
-**The client-server programming model.** Congratulations! You have successfully executed and generally understood your first network program. We all use network programs every day, from the web browsers running on our laptops to the bank apps running on our cell phones. Nearly every one of these network applications follows the same, straightforward programming model illustrated in `qweb1.py`. Before we dive deeper into its code, let's take a moment and understand the basics of this client-server programming model.
+## The client-server programming model
+
+Congratulations! You have successfully executed and generally understood your first network program. We all use network programs every day, from the web browsers running on our laptops to the bank apps running on our cell phones. Nearly every one of these network applications follows the same, straightforward programming model illustrated in `qweb1.py`. Before we dive deeper into its code, let's take a moment and understand the basics of this client-server programming model.
 
 We have written a script that acts as a *client* in this client-server model. To complete its task, it makes a *request* of some other computational entity called a *server*. Typically, this server runs on some other computer, and the machines on which the client and server run are connected by a *computer network*. It is, however, possible that the client and the server are in fact running on the same machine, and we will take advantage of this ability in some of our upcoming examples.
 
@@ -113,7 +123,9 @@ By the way, the computer science term for a running program (or more precisely a
 
 Whether the client and server are running on two separate, networked computers or both on the same computer is a detail hidden by the abstraction of the client-server programming model. And when networks are involved, the model hides the details of whether it is a wired network, a wireless network, or some combination of networks using lots of different transport mechanisms and data exchange protocols!
 
-**Resources, transactions, and protocols (oh my).** Getting back to the structure of the client-server programming model, a server program is responsible for managing some *resource* that client programs find useful. A web server, like [wikipedia.org](http://wikipedia.org), manages access to the files that comprise the articles in that online encyclopedia. An email server manages the transfer of email messages between email clients. A gaming server manages the shared state of the game and keeps each clients' view of the game globally consistent.
+## Resources, transactions, and protocols
+
+Getting back to the structure of the client-server programming model, a server program is responsible for managing some *resource* that client programs find useful. A web server, like [wikipedia.org](http://wikipedia.org), manages access to the files that comprise the articles in that online encyclopedia. An email server manages the transfer of email messages between email clients. A gaming server manages the shared state of the game and keeps each clients' view of the game globally consistent.
 
 The signature operation that takes place repeatedly in the client-server programming model is a *transaction*. The Python `requests` library hides the four fundamental steps of a transaction between a client and a server behind the `requests.request` function interface, of which we have used a specific type of request in our network program. The four steps are: (1) the client sends a request to the server; (2) the server receives the request, interprets it, and manipulates the resource it controls in the requested manner (assuming it is a valid request); (3) the server sends a response to the client; and (4) the client receives the response and interprets it.
 
@@ -131,7 +143,9 @@ What is a protocol? It is a fancy way of saying that two communicating processes
 
 In the Worldwide Web, browsers (i.e., clients) and web servers interact using a text-based protocol known as the *hypertext transfer protocol (HTTP)*. We see pieces of this protocol in the `url` string. In fact, HTTP defines a handful of methods that are the only ways that clients can ask servers to perform actions on their resources. One of these methods is GET, which simply asks the server to return a representation of the specified resource. The other popular HTTP method is POST, which essentially asks the server to accept the data accompanying the request as a new piece of the specified resource. Our script invokes the simpler GET method. That's why the function name we use from the `requests` library is `get`!
 
-**The URL.** When we "get" content from a web server, the data we receive comes in part from some file that the server manages, and as you might expect, each file on the server has a unique name. When we type a *URL (a universal resource locator)* in the address bar of a browser, this URL includes a *path* in the server's file system to the file (i.e., resource) that interests us. The script `qweb2.py` rewrites the setup work we did in `qweb1.py` so that we can see the four main components of the URLs used in the HTTP protocol.
+## The URL
+
+When we "get" content from a web server, the data we receive comes in part from some file that the server manages, and as you might expect, each file on the server has a unique name. When we type a *URL (a universal resource locator)* in the address bar of a browser, this URL includes a *path* in the server's file system to the file (i.e., resource) that interests us. The script `qweb2.py` rewrites the setup work we did in `qweb1.py` so that we can see the four main components of the URLs used in the HTTP protocol.
 
 ```{code-block} python
 ---
@@ -178,7 +192,9 @@ The third piece of a URL for the HTTP protocol is the path to the specific resou
 
 Finally, HTTP allows us to specify an optional query at the end of our URL. The question mark (`?`) character separates the path from the query. The query itself is a string comprised of name and value pairs, with each pair separated by an ampersand (`&`) character.
 
-**The Programmable Web.** You might wonder, how did I know to create this specific URL? If we point our browser to [en.wikipedia.org](http://en.wikipedia.org) and type "The Cat in the Hat" in the search box there, the URL to which we're directed is <https://en.wikipedia.org/wiki/The_Cat_in_the_Hat> and not the one found in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we want to access the parts of the Web with published APIs.
+## The Programmable Web
+
+You might wonder, how did I know to create this specific URL? If we point our browser to [en.wikipedia.org](http://en.wikipedia.org) and type "The Cat in the Hat" in the search box there, the URL to which we're directed is <https://en.wikipedia.org/wiki/The_Cat_in_the_Hat> and not the one found in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we want to access the parts of the Web with published APIs.
 
 ```{margin} Other API Directories
 [Rapid API Hub](https://rapidapi.com/hub); 
@@ -190,7 +206,9 @@ To learn what Internet-based APIs existed, I visited the [ProgrammableWeb](https
 
 To converse with the server at this endpoint, we have to craft a *query string*. In this string, the MediaWiki site explained that we should set the parameter named `action` to the value `query` when we want to fetch data. If then we set the `list` parameter to `search`, we can perform a full text search. Since we're doing a search, we set the parameter `srsearch` with the value of our search string and the parameter `srlimt` to the number of page matches that we'd like returned. Finally, we set the parameter `format` to `json` so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we'll discuss in a moment.
 
-**Python dictionaries.** It's ugly and error prone to write out these cryptic query strings ourselves. You've undoubtedly noticed that we can't use spaces in a query string and must replace each space character with a plus sign (`+`), as we did on line 11 in `qweb2.py`. But what if you wanted a search for a string containing a `+` character? We probably don't want to become an expert in URL encoding to simply ask our question to Wikipedia. Luckily, we don't have to because the author of the `requests` library realized this too!
+## Python dictionaries
+
+It's ugly and error prone to write out these cryptic query strings ourselves. You've undoubtedly noticed that we can't use spaces in a query string and must replace each space character with a plus sign (`+`), as we did on line 11 in `qweb2.py`. But what if you wanted a search for a string containing a `+` character? We probably don't want to become an expert in URL encoding to simply ask our question to Wikipedia. Luckily, we don't have to because the author of the `requests` library realized this too!
 
 ```{code-block} python
 ---
@@ -300,7 +318,9 @@ Go ahead and create a code block in which you can experiment with these Python d
 Another thing you might try is to print the actual URL used in our `requests.get` call. You can see this string if you print `response.url`, which is the URL that produced the response we received.
 ```
 
-**An HTTP response.** So far we have spoken to a Web API, but we haven't done much with the HTTP response. In fact, our current script simply looks at something called the *status code* on the response and checks to see if this code is equal to `200`. While surfing around the Internet, you may have seen the phrase `200 OK` or `404 Not Found`. In general, the first is something good and the second isn't. Unfortunately, the first, while good in some ways, may not mean we were completely successful in accomplishing what we hoped to do.
+## An HTTP response
+
+So far we have spoken to a Web API, but we haven't done much with the HTTP response. In fact, our current script simply looks at something called the *status code* on the response and checks to see if this code is equal to `200`. While surfing around the Internet, you may have seen the phrase `200 OK` or `404 Not Found`. In general, the first is something good and the second isn't. Unfortunately, the first, while good in some ways, may not mean we were completely successful in accomplishing what we hoped to do.
 
 Instead of acting upon the value of the `status_code` in our received response, let's change our script for a moment and have it simply print the value of `status_code`. We will then manipulate the parameters to `requests.get` and see which affect the status code. We'll modify `qweb4.py` in our experiments.
 
@@ -372,7 +392,9 @@ Restore the good assignment to `hostname`. Now change the value for key `'srsear
 
 It's `200`. The same status code we got when we searched for `'The Cat in the Hat'`. Why is that? You can verify for yourself that Wikipedia will tell you that it doesn't contain a page with this particular string.
 
-**The response header.** To figure this out, we need to look at more than the response's status code. Fortunately, HTTP request and response messages were designed to be human readable. Printing them can be instructional.
+## The response header
+
+To figure this out, we need to look at more than the response's status code. Fortunately, HTTP request and response messages were designed to be human readable. Printing them can be instructional.
 
 Roughly speaking, these messages consist of a *header* and a *body*. We can think of the header as containing the information we might see on the outside of an envelope (e.g., who the letter is meant for and the date it was posted at the post office). The body is the contents of the letter sealed in the envelope. Or if you prefer email, the header contains information like the "from" and "subject" fields, while the body is what is written below the subject line in most email clients.
 
@@ -422,7 +444,9 @@ if __name__ == '__main__':
 
 We're not too concerned with most of the header, but one field that should interest us is the value of the key `'Content-Type'` for this indicates how the server has encoded the body of the response. The value of this key is `'application/json; charset=utf-8'`. As we learned in the last chapter, the Python interpreter we're using defaults to `utf-8` for character encodings and having the Wikipedia server return a response in this encoding format makes our lives easy. Beyond the encoding of the individual characters in the response's body, this value tells us that the body is organized using the JSON data-interchange standard, which is what we asked it to do when we specified `'format': 'json'` as one of our `query` parameters.
 
-**JSON and the response body.** JSON stands for [JavaScript Object Notation](http://json.org), and it is meant to be standard for exchanging structured data that is easy for machines to generate and parse, while also being relatively easy for humans to read and write.
+## JSON and the response body
+
+JSON stands for [JavaScript Object Notation](http://json.org), and it is meant to be standard for exchanging structured data that is easy for machines to generate and parse, while also being relatively easy for humans to read and write.
 
 As we saw when we looked at the body of our `response`, JSON-structured data resembles a dictionary of key-value pairs. Some of the values might be singleton values like a string or an integer, and other values might themselves be lists (i.e., enclosed in square brackets) or dictionaries (i.e., enclosed in curly braces). 
 
@@ -493,7 +517,9 @@ While we will continue to play with JSON-structured response bodies, you may see
 To communicate with the Harvard Library system, `qweb7.py` uses [the LibraryCloud API](https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs).
 ```
 
-**Enumerating answers from HOLLIS.** The `qweb7.py` script below communicates not with Wikipedia, but (finally!) Harvard Library. You should recognize and understand every statement except for the details of the for-loop that processes the returned response.
+## Enumerating answers from HOLLIS
+
+The `qweb7.py` script below communicates not with Wikipedia, but (finally!) Harvard Library. You should recognize and understand every statement except for the details of the for-loop that processes the returned response.
 
 ```{code-block} python
 ---
@@ -553,7 +579,9 @@ You can learn more about tuples in this chapter's active-learning exercises.
 
 In this script, we have asked HOLLIS to return not just the top search result, but the top two results. The final lines of the script then dig down into the JSON-structured data to grab the Python list of results, and it passes that list to the Python built-in function `enumerate`. This is a very useful little function when what you need is not just each value in a list, but each value paired with its list index. We pull this returned *tuple* apart (using multiple assignment) in the for-loop, placing the index in `i` and the dictionary that is the next value from the list in `item`. From this dictionary, we grab the information associated with the key `'titleInfo'` and print it.
 
-**Beyond printing.** Now that we understand the basics of grabbing data off the Internet, we can start having some real fun. Printing pieces of the data we've collected has helped us see what we've been getting back from these Web APIs, but why should we recreate what the software engineers at Wikipedia and Harvard Library have already spent years thinking about how to display? Imagine that we wanted to develop a script that searched multiple different libraries for a particular book. When it finds the book we're interested in, we instruct this script to open the result in a browser window. We can see how this might be done using the HOLLIS URL in the response we just received.
+## Beyond printing
+
+Now that we understand the basics of grabbing data off the Internet, we can start having some real fun. Printing pieces of the data we've collected has helped us see what we've been getting back from these Web APIs, but why should we recreate what the software engineers at Wikipedia and Harvard Library have already spent years thinking about how to display? Imagine that we wanted to develop a script that searched multiple different libraries for a particular book. When it finds the book we're interested in, we instruct this script to open the result in a browser window. We can see how this might be done using the HOLLIS URL in the response we just received.
 
 ```{code-block} python
 ---
@@ -639,7 +667,9 @@ And what did our script do when it found our desired book? It grabbed the HOLLIS
 
 Did we have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the `webbrowser` library; I simply imported and used this library after spending only a few minutes with its API description.
 
-**Blocking and non-blocking function calls.** Let's pause for a moment and look at two of the wonderfully powerful function calls we made in `qweb8.py`. The `requests.get` call on line 18 and the `browser.open` call on line 56 are different in a fundamentally interesting way. I don't mean that one returns a Python list and the other returns the special Python object `None`. No, I want you to think about when lines 21 and 57 execute.
+## Blocking and non-blocking function calls
+
+Let's pause for a moment and look at two of the wonderfully powerful function calls we made in `qweb8.py`. The `requests.get` call on line 18 and the `browser.open` call on line 56 are different in a fundamentally interesting way. I don't mean that one returns a Python list and the other returns the special Python object `None`. No, I want you to think about when lines 21 and 57 execute.
 
 ```{margin}
 For those paying close attention, `webbrowser.open` is non-blocking if you call a graphical browser. As [the documentation](https://docs.python.org/2/library/webbrowser.html) says, text-mode browsers, which presumably use the same terminal window as the executing script, will block.
@@ -649,4 +679,4 @@ Line 21 can't execute until we have completed the `requests.get` call and have a
 
 This is your first taste of concurrency (also called parallelism), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
 
-\[Version 20230706\]
+\[Version 20230811\]

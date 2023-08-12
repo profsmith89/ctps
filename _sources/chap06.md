@@ -19,7 +19,9 @@ This chapter introduces you to the digital world that underlies all modern compu
 *   Code a simple filter that when applied to an image file can highlight the edges of the objects in that image [CS concepts].
 ```
 
-**Numbers and knowledge.** We are about to discover that computers encode everything as numbers. My electronic copy of this book's manuscript is a bunch of numbers. The picture I took of my dog one weekend is stored as a bunch of numbers. The podcast I listened to on my morning walk and the songs my wife streamed on her run are simply a bunch of numbers. In fact, every file and every program on our computers are nothing but a long list of numbers.
+## Numbers and knowledge
+
+We are about to discover that computers encode everything as numbers. My electronic copy of this book's manuscript is a bunch of numbers. The picture I took of my dog one weekend is stored as a bunch of numbers. The podcast I listened to on my morning walk and the songs my wife streamed on her run are simply a bunch of numbers. In fact, every file and every program on our computers are nothing but a long list of numbers.
 
 That may sound very dry and unexciting, but it is also a very powerful idea. To understand why, we're going to turn to Harvard professor and American historian Jill Lepore and her work in answering the question, what counts a knowledge? 
 
@@ -45,7 +47,9 @@ Jill marks the beginning of society's transition into valuing data with the inve
 
 Given that we built our first computers to help us to crunch lots of numbers and spit out new knowledge, it's logical that those machines store and manipulate numbers. What may be surprising, however, is that today's computers use the same basic *computer architecture*, proposed by John von Neumann in 1945, as those original machines. In other words, at their most fundamental level (and behind all the abstractions we have discussed and all the apps you use), your laptop, smartphone, and smartwatch are simply processing numbers. Computers see the world as nothing but numbers.
 
-**Do you see my dog?** Here's a picture I took of my dog in May of 2020. 
+## Do you see my dog?
+
+Here's a picture I took of my dog in May of 2020. 
 
 ```{figure} images/c06_fig1.png
 :name: c06_fig1_ref
@@ -60,7 +64,9 @@ This image is stored in a file named `cosmo.jpg`. While we see a dog when a comp
 1. What is in an image file like `cosmo.jpg`?
 2. What does it take for the computer to see the dog in that file?
 
-**No interpretation, please.** Let's start with the first of these two questions. When you ask a computer to open a file like `cosmo.jpg`, it displays a window with the image in {numref}`Figure %s<c06_fig1_ref>`. Why is that?
+## No interpretation, please
+
+Let's start with the first of these two questions. When you ask a computer to open a file like `cosmo.jpg`, it displays a window with the image in {numref}`Figure %s<c06_fig1_ref>`. Why is that?
 
 Well, what might you, as a human, guess about the file's contents when you look at the filename `cosmo.jpg`? If you've ever worked with image files, the *filename extension* (i.e., that sequence of letters and numbers after the final period mark in the filename) is a great hint about what's in the file. By convention, the extension `.jpg` means that the file contains an image encoded in the [JPEG standard](https://docs.fileformat.com/image/jpeg/). 
 
@@ -84,7 +90,9 @@ Ok, but we don't want Visual Studio to use an incorrect interpretation, we want 
 The start of the raw data in `cosmo.jpg`, as displayed by a hexdump program.
 ```
 
-**Reading a hexdump.** {numref}`Figure %s<c06_fig2_ref>` shows the output of hexdump when it reads the file `cosmo.jpg`. The black characters in the 2-dimensional (2D) array in the middle of this figure are hexadecimal numbers corresponding to the contents of the file. Yes, the file contains nothing but lots and lots of numbers.
+## Reading a hexdump
+
+{numref}`Figure %s<c06_fig2_ref>` shows the output of hexdump when it reads the file `cosmo.jpg`. The black characters in the 2-dimensional (2D) array in the middle of this figure are hexadecimal numbers corresponding to the contents of the file. Yes, the file contains nothing but lots and lots of numbers.
 
 The blue numbers at the left and top (also in hexadecimal) are displayed so that you can easily determine the index of any pair of black digits, when you think about the file's contents as a long 1-dimensional (1D) sequence of pairs. For example, the first pair of black hexadecimal digits in the upper left-hand corner of the 2D array is `FF`, and this pair is given offset `00000000` (i.e., the row number plus the column number). The next pair to the right (`D8`) is given the offset `00000001`. The last pair in the first row (`48`) has offset `0000000f`, and it is followed in the file by the first pair in the second row (`00`) at offset `00000010`. In other words, while hexdump prints the file contents as a 2D array, you should think of it as a long 1D array.
 
@@ -98,7 +106,9 @@ We can see that this isn't a normal text file, since most of the ASCII interpret
 
 ```
 
-**Hexadecimal explained.** I've mentioned hexadecimal numbers several times over the last few chapters, and now is a good time to make sure we are all comfortable with what this exactly means. 
+## Hexadecimal explained
+
+I've mentioned hexadecimal numbers several times over the last few chapters, and now is a good time to make sure we are all comfortable with what this exactly means. 
 
 Look at the top of the hexdump in {numref}`Figure %s<c06_fig2_ref>`. The leftmost column is labeled with a blue `00` and the rightmost one `0F`. Now count the number of columns. I'll wait.
 
@@ -126,7 +136,9 @@ What is the index, in hexadecimal, for the first occurrence of the value `1B` in
 
 ```
 
-**Converting between number systems.** You should take the time to completely understand how to convert back and forth between base-10 and base-16 representations. If you have any questions at this point, there are many resources online that can help. But once you understand how to do this work, you can use the Python interpreter to do the grunt work of converting numbers between different bases! Remember that computers are built to do numerical work.
+## Converting between number systems
+
+You should take the time to completely understand how to convert back and forth between base-10 and base-16 representations. If you have any questions at this point, there are many resources online that can help. But once you understand how to do this work, you can use the Python interpreter to do the grunt work of converting numbers between different bases! Remember that computers are built to do numerical work.
 
 To convert a number in another base, like 16, to decimal, we simply need to evaluate `int('11e', base=16)`, where `'11e'` is replaced by the number you want converted. Notice that the hexadecimal number is specified as a string.
 
@@ -142,7 +154,9 @@ hex(286)
 
 When you run the hex command, you'll see that the Python interpreter prepended the string `'0x'` to hexadecimal equivalent of 286. This prefix is how you and the interpreter know that the string represents a number in base-16, not base-10.
 
-**Does the computer see my dog?** While we can see that the bunch of numbers saved in `cosmo.jpg` and then displayed as an image contains a dog, can the computer recognize that there's a dog in this sea of numbers? Short answer, yes, with the help of machine learning (ML), which we will discuss in later chapters. If you have a phone that unlocks with facial recognition, you'll already using this technology in your daily life. For now, we can get an idea of how this works, and importantly learn that the work going on in the bowels of our computers is really nothing more than math on numbers. 
+## Does the computer see my dog?
+
+While we can see that the bunch of numbers saved in `cosmo.jpg` and then displayed as an image contains a dog, can the computer recognize that there's a dog in this sea of numbers? Short answer, yes, with the help of machine learning (ML), which we will discuss in later chapters. If you have a phone that unlocks with facial recognition, you'll already using this technology in your daily life. For now, we can get an idea of how this works, and importantly learn that the work going on in the bowels of our computers is really nothing more than math on numbers. 
 
 To work with images, we are going to use a very handy library called `PIL`, [the Python Imaging Library](https://pillow.readthedocs.io/en/stable/handbook/overview.html). This library includes support for a wide range of file formats, including JPEG, and it allows us to write only a few lines of code to perform an extensive set of image processing tasks.
 
@@ -173,7 +187,9 @@ If you don't know what a convolution filter is, you will in a few moments. Keep 
 
 `Image` objects have a large number of methods we could invoke. To highlight the edges, or contours, of the things in an image, we apply a convolution filter. Run the code block above, inputting `cosmo.jpg`, and in `out.png` you'll see that this mathematical transform nicely outlines my dog.
 
-**Painting a picture.** To understand what took place when we ran a convolution filter, we are going to use the the PIL library to build a very simple image that contains a single edge and then write a few lines of Python code to detect that edge. The script `edge1.py` gets us started.
+## Painting a picture
+
+To understand what took place when we ran a convolution filter, we are going to use the the PIL library to build a very simple image that contains a single edge and then write a few lines of Python code to detect that edge. The script `edge1.py` gets us started.
 
 ```{code-block} python
 ---
@@ -208,7 +224,9 @@ See [the PIL Modes page](https://pillow.readthedocs.io/en/stable/handbook/concep
 
 Pixels come in different ranges of colors. Our script asked the `Image` library for pixels that can be colored with one of 256 different shades of gray, where `0` represents pure black and `255` pure white. This is what the first parameter, called the *mode*, to the `Image.new` call specifies when passed with the string value `'L'`. In an exercise, you will change this mode to `'RGB'` so that you can build pictures with a rainbow of colors. In RGB mode, the number `0` still represents pure black, but we now have more than 16.7 million colors between the color black and the color white (16,777,216 colors in total to be exact). As a last example, we might have specified the mode  `'1'`, which encodes pure black as the number `0` and pure white as the number `1`. In this mode, you have only two colors in your pallet. 
 
-**Bits.** Each of these modes has two things in common: `0` represents black; and the total number of colors between black and white, inclusive, is a power of 2. This makes the encoding for white to be $2^{numberOfEncodingBits} - 1$ in each of these modes.
+## Bits
+
+Each of these modes has two things in common: `0` represents black; and the total number of colors between black and white, inclusive, is a power of 2. This makes the encoding for white to be $2^{numberOfEncodingBits} - 1$ in each of these modes.
 
 A *bit* is the most elemental unit of storage in our computing systems. It represents a single digit in a base-2 numbering system, also called *binary* numbers. With a single bit, the value of this binary number is either `0` or `1`. The value `2` (base 10) is encoded as `10` (base 2), following the same reasoning we used when we discussed base-10 and base-16 numbering.
 
@@ -222,11 +240,15 @@ Remember what Visual Studio said to us when we asked it to open the file named `
 
 Hexdump uses base-16 because it is easier to read hex numbers and trivial to convert back and forth between base-2 and base-16. You just group every four bits together, and those four bits correspond to a single hexadecimal digit. For example, `11011000` becomes `1101 1000`, which becomes `D 8`, which we can push back together as `D8`. (Feel free to run the process in reverse, when needed.) When you realize this, it's hopefully easy to understand that hexdump is actually showing us the bits in the JPEG file.
 
-**1 finger, no thumb.** The careful reader will interrupt at this time and point out that I still haven't told you why computers store numbers with binary digits and not, say, decimal digits. A simple answer is that humans learned to count using their fingers, and since most of us have 10 fingers, base-10 numbering comes naturally to us. Computers don't have any fingers, and what is natural for them is sensing the difference between on and off.
+## One finger, no thumb
+
+The careful reader will interrupt at this time and point out that I still haven't told you why computers store numbers with binary digits and not, say, decimal digits. A simple answer is that humans learned to count using their fingers, and since most of us have 10 fingers, base-10 numbering comes naturally to us. Computers don't have any fingers, and what is natural for them is sensing the difference between on and off.
 
 If you take a course in digital logic design, you'll learn that modern computers, and most every piece of logic in them, are built from very simple switches, which are either on or off. Yes, these switches are like the light switches in your home. Flip the switch up and the light goes on; flip it down and the light goes off. From this incredibly simple switch, we can build the large memories and fast processors found in the smartphones we hold in our hands, the laptop computers on our desks, and the corporate servers in the cloud. 
 
-**The digital abstraction.** When we build smart phones, computers, and servers from circuitry that acts like simple switches, we call the result a *digital* device. This nomenclature reminds us that we are relying on another abstraction boundary: *the digital abstraction*. 
+## The digital abstraction
+
+When we build smart phones, computers, and servers from circuitry that acts like simple switches, we call the result a *digital* device. This nomenclature reminds us that we are relying on another abstraction boundary: *the digital abstraction*. 
 
 What a digital circuit senses as "on" (or a `1` value) is a real-world value (called an *analog* or *continuous* value) somewhere near the ideal "on" value. You can think of this as the rounding we learned in grade school. We might measure some length as 1.03 miles, and we round it to 1 mile when all we care about is roughly how many miles it is from my home to my grandmother's house. Similarly, a value of 0.042 miles is rounded to 0 miles. 
 
@@ -242,7 +264,9 @@ What happens if the measurement is 0.47 miles? Should we round this down or up?[
 
 ```
 
-**Bits, bytes, and nibbles.** With this new knowledge, let's return to our `edge1.py` script. The code creates a 100x100 2D-array of pixels, and each pixel can contain one of 256 shades of gray. 256 is $2^8$, which explains why `'L'` is described on [the documentation page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) as "8-bit pixels, black and white."
+## Bits, bytes, and nibbles
+
+With this new knowledge, let's return to our `edge1.py` script. The code creates a 100x100 2D-array of pixels, and each pixel can contain one of 256 shades of gray. 256 is $2^8$, which explains why `'L'` is described on [the documentation page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) as "8-bit pixels, black and white."
 
 Eight bits grouped together occurs so frequently in computer science that this grouping is given its own name: a *byte*. If you look back at the hexdump, you'll notice that this is what hexdump is indexing. `FF` is the value of the first byte in `cosmo.jpg`; `D8` is the value of the second byte.
 
@@ -254,7 +278,9 @@ I say "a little bit more than" because the 16 in 16 GB is rounded too.
 
 You'll also recognize the term byte from the unit of size in which you buy computer memory or hard-drive storage. My laptop has 16 GB, or 16 gigabytes, of memory, where giga- means $10^9$. In other words, my laptop has a little bit more than 16 billion bytes of memory. 
 
-**Setting a pixel's color.** By default, `Image.new` sets each pixel in our created 2D array to the color black. Why black? Because this default is easy. Every mode defines black as `0`, and if we fill the 2D array with zeros everywhere, we get a completely black picture.
+## Setting a pixel's color
+
+By default, `Image.new` sets each pixel in our created 2D array to the color black. Why black? Because this default is easy. Every mode defines black as `0`, and if we fill the 2D array with zeros everywhere, we get a completely black picture.
 
 To make a more interesting image, `edge1.py` accesses the 2D array of pixels in the `Image` object created by `Image.new` so that it can paint each pixel with a color of our choosing. It calls the `Image.load` method to accomplish this. It returns an object that allows us to use the traditional Python indexing syntax (i.e., square brackets) to access each individual pixel in the `im` object's 2D array of pixels.
 
@@ -268,7 +294,9 @@ We'll learn more in the next chapter about how the nested loop causes us to move
 
 Run `edge1.py` and see that it does produce such an image!
 
-**Saturation.** Let's try making a bigger image using our simple method for creating a diagonal fade. In particular, let's change the value of `sz` from `(100, 100)` to `(400, 400)` and re-run the script.
+## Saturation
+
+Let's try making a bigger image using our simple method for creating a diagonal fade. In particular, let's change the value of `sz` from `(100, 100)` to `(400, 400)` and re-run the script.
 
 ```{code-block} python
 ---
@@ -337,7 +365,9 @@ We've seen several types of exceptions to this point, and they are ways for a ru
 Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C's unsigned add is that you perform the addition and then lop off the most significant bits that don't fit in the physical representation. All of these, of course, are just different ways of describing the concept of modulo arithmetic.
 ```
 
-**Finding edges.** We are FINALLY ready to build a black-and-white picture containing an edge and then do some simple math to highlight that edge's location in the image.
+## Finding edges
+
+We are FINALLY ready to build a black-and-white picture containing an edge and then do some simple math to highlight that edge's location in the image.
 
 The script `edge3.py` builds two images. In the first (called `im`), it sets the color of all columns in the image array with indices below 25 to black and the rest to white, which creates a vertical boundary between the black and white areas. The second image (called `filtered`) builds each of its pixel values by performing some math using a selected group of the pixels in `im`, as I'll explain in detail in a moment. 
 
@@ -405,7 +435,7 @@ The only other situation of interest is the case when the leftmost two columns o
 
 Run `edge3.py`, and you'll see that the filtered image contains a white line where the edge between the black and white regions were in the original image. This is all that the `ImageFilter` library did when our code in `edges.py` applied a `CONTOUR` filter. In this way, the computer can highlight the dog-shaped blob in `cosmo.jpg`. Knowing that that blob looks like a dog requires machine learning, a topic for later.
 
-\[Version 20230710\]
+\[Version 20230811\]
 
 [^fn1]: The date starts at offset 000000CC. The picture was taken at 3:39pm on May 19, 2020.
 

@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Chapter 8: What Is My Problem?" href="chap08.html" />
+    <link rel="prev" title="Chapter 9: Find a Phrase" href="chap09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,6 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -1603,7 +1604,7 @@ document.write(`
 <p>Ready to get started?</p>
 <p><strong>Step 1. Reading multiple input files.</strong> The fifth step of our problem-solving process says that we should begin a new problem by considering what previously written scripts can help us with our current problem. In this case, the script from ALE 6.5 would be a great start as both that script and the one we’re writing visit each pixel in an input image.</p>
 <p>That script is repeated and renamed below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap08/ale01.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap08/ale02.py</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="c1"># Grab the image filename</span>
@@ -1659,10 +1660,10 @@ document.write(`
 <li><p>While translating pseudocode into Python code, you’ll undoubtedly realize that the nice with-statement we’ve been using requires us to know the exact number of files we want to open at the time we write the script. Yup, you are going to have to open each input image file and later explicitly close each one (using <code class="docutils literal notranslate"><span class="pre">Image.close</span></code>).</p></li>
 </ol>
 <p>Once you’ve done all this work, run your script as follows:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 ale01.py apsu1.png apsu2.png apsu3.png apsu4.png apsu5.png apsu6.png
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 ale02.py apsu1.png apsu2.png apsu3.png apsu4.png apsu5.png apsu6.png
 </pre></div>
 </div>
-<p>Did this produce a much cleaner resulting image?  It should! Go show your family and friends your amazing script. (You might rename your final script from <code class="docutils literal notranslate"><span class="pre">ale01.py</span></code> to <code class="docutils literal notranslate"><span class="pre">erase32.py</span></code>.)</p>
+<p>Did this produce a much cleaner resulting image?  It should! Go show your family and friends your amazing script. (You might rename your final script from <code class="docutils literal notranslate"><span class="pre">ale02.py</span></code> to <code class="docutils literal notranslate"><span class="pre">erase32.py</span></code>.)</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Hint</p>
 <p>What’s different in how we gathered the original data (i.e., images) in these two cases?</p>
@@ -1719,12 +1720,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap08.html"
+       href="chap09.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 8: What Is My Problem?</p>
+        <p class="prev-next-title">Chapter 9: Find a Phrase</p>
       </div>
     </a>
     <a class="right-next"

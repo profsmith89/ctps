@@ -6,7 +6,9 @@ Despite this business-focused example, such questions arise in many disciplines.
 
 In short, we want to know how to use computers to analyze data about our "business" for insights on where knowledge lurks and problems could be eliminated. This work is possible because the proliferation of digital technologies has made it possible to collect the mounds of data needed to answer them. Furthermore, the increasing availability of cheap and powerful cloud-based computational services makes it possible for anyone with computational skills to process those data looking for new insights. Taken together, this is why *data science* is a rapidly expanding field having impact in many professions and industries.
 
-**Data science.** What exactly is data science? It is the extraction of meaningful insights and new knowledge from data. As a process, it involves *data collection*, *data cleaning*, *data exploration and pattern detection*, and *model building* for prediction and decision-making. These four steps are often repeatedly done until we are able to identify a truly meaningful insight. Once we've discovered some new insight or useful fact about our world through these steps, there's a final step in which we communicate what we have discovered.
+## Data science
+
+What exactly is data science? It is the extraction of meaningful insights and new knowledge from data. As a process, it involves *data collection*, *data cleaning*, *data exploration and pattern detection*, and *model building* for prediction and decision-making. These four steps are often repeatedly done until we are able to identify a truly meaningful insight. Once we've discovered some new insight or useful fact about our world through these steps, there's a final step in which we communicate what we have discovered.
 
 ```{margin} Looking Ahead
 Toward the end of this book, we will explore the model building portion of the data science process.
@@ -30,7 +32,9 @@ In this chapter, you will be introduced to the field of data science and learn h
 *   Discuss how 2-dimensional arrays are stored in a computer's memory [CS concepts].
 ```
 
-**Images as data about the world around us.** Instead of diving into a completely new context, we're going to continue with digital images and consider them a source of data about the world around us. Your first question should be, is this a reasonable thing to do?
+## Images as data about the world
+
+Instead of diving into a completely new context, we're going to continue with digital images and consider them a source of data about the world around us. Your first question should be, is this a reasonable thing to do?
 
 ```{margin} More Than 2D Arrays
 JPEG and other image file formats are more than simple 2D arrays. They contain metadata, like the time and date on which the image was captured, and they often compress the actual image data so that the file takes less space to store. Computer scientists like to explore the tradeoffs between processing time and storage space.
@@ -38,7 +42,9 @@ JPEG and other image file formats are more than simple 2D arrays. They contain m
 
 Short answer: yes. We have learned that digital images, like those found in JPEG files, are essentially large, two-dimensional arrays of numbers. While we've learned how to manipulate the data in these image files using some fairly simple scripts, it's important to keep in mind that it's not easy to do any of this work by hand. The images are just too big and the numbers too difficult for humans to interpret directly. This is actually good because data sets in data science are typically very large, and like digital images, you cannot realistically analyze them without the help of powerful computers. In other words, using one or more images as a data set isn't all that different than using any other large data set when talking about data cleaning and data exploration.
 
-**Yes, you must clean up.** We create digital images with tools (e.g., our smartphone cameras) that sample our physical world, and today's digital cameras capture the world around us in amazing richness. But does a digital image faithfully capture an instance in time?
+## Yes, you must clean up
+
+We create digital images with tools (e.g., our smartphone cameras) that sample our physical world, and today's digital cameras capture the world around us in amazing richness. But does a digital image faithfully capture an instance in time?
 
 If you think about the sampling that takes place, as we'll do in a moment, you'll start to realize that it isn't a perfect process. The consequences of imperfection often aren't particularly dire. But if an image full of bad pixels leads to your conviction for a crime you didn't commit or a diagnosis of cancer you don't have, you will wish that someone had done their data cleaning.
 
@@ -48,7 +54,9 @@ But let's be honest, the actual act of data cleaning holds as much appeal for mo
 
 Luckily, we can make cleaning images a bit more fun than the cleaning required for other types of data sets. In fact, the work we'll do in a moment will help you visualize the impact of cleaning, and it will create a fun challenge for us in terms of data exploration. Don't tune out; what comes will be worth it!
 
-**Understanding what might go wrong.** How do we do data cleaning? Well, recall that each pixel in our image is simply one or more numbers, and we can easily "fix" any imperfections in our images (or, in general, the recorded samples in any digital data set) by rewriting these numbers.
+## Understanding what might go wrong
+
+How do we do data cleaning? Well, recall that each pixel in our image is simply one or more numbers, and we can easily "fix" any imperfections in our images (or, in general, the recorded samples in any digital data set) by rewriting these numbers.
 
 Unfortunately, each data value we change can drive us closer to or farther from the truth. While we need to clean our data, we need to remember that there is danger and power in this post-capture processing. As such, it is important to understand what problems can occur during data capture, which of these problems we can correct, and what are the limits of what we can do to improve the veracity of our samples.
 
@@ -64,7 +72,9 @@ On the other hand, there are times when the captured value differs from the grou
 Before moving on, take a moment and think about collecting survey data. How might this data collection process result in incorrect captured values? Consider as many steps in the process of surveying people that you can imagine. 
 ```
 
-**Noise and its removal.** We describe incorrect values in our data that are a result of errors and bad samples as *noise*. Ideally, we want to make changes to our data to eliminate everything that is noise and replace it with the appropriate ground-truth values. In digital photography, this is called *image enhancement* or *photo retouching*. In data science, this is called *data cleaning*.
+## Noise and its removal
+
+We describe incorrect values in our data that are a result of errors and bad samples as *noise*. Ideally, we want to make changes to our data to eliminate everything that is noise and replace it with the appropriate ground-truth values. In digital photography, this is called *image enhancement* or *photo retouching*. In data science, this is called *data cleaning*.
 
 Unfortunately in real life, we might not always know the ground truth, and in general, we have three options:
 
@@ -72,11 +82,15 @@ Unfortunately in real life, we might not always know the ground truth, and in ge
 2. *Impute (or guess) at the actual value of the sample.* How you do this is highly dependent upon the type of data you've collected. For a real-world image, we might guess at a pixel's correct color by checking the colors of its neighbors. Guessing responses to poll questions, in contrast, is quite dangerous.
 3. *Flag the data as missing.* With this option, any subsequent analyses that compute with the data can be informed that these missing data elements need to be handled carefully. With our image example and assuming a subsequent image recognition analysis, we might set all missing and corrupted pixels to absolute black and then inform the image recognizer that such pixels are to be ignored. In the polling example, a later analysis might include an additional "not answered" category, which might indicate something unexpected was taking place with a question that had a lot of missing or nonsensical answers (e.g., the question wasn't easy to understand).
 
-**The power to create new realities.** If noise is anything we don't want captured in our data and our data sets are simply files of numbers, we can easily get carried away and start rewriting more than just incorrect or missing data values. We may decide to rewrite any value that we consider to be problematic. When done unconsciously, we might begin to change our data in a manner that makes it easy to validate our hypotheses (and therefore invalidate our research). When done consciously, we can create new realities.
+## The power to create new realities
+
+If noise is anything we don't want captured in our data and our data sets are simply files of numbers, we can easily get carried away and start rewriting more than just incorrect or missing data values. We may decide to rewrite any value that we consider to be problematic. When done unconsciously, we might begin to change our data in a manner that makes it easy to validate our hypotheses (and therefore invalidate our research). When done consciously, we can create new realities.
 
 One goal in this course is to make you aware of the need to deal with noise in your data sets, understand that it is difficult to do it well, and gain some experience in cleaning a data set. Many computational techniques exist for properly cleaning different kinds of data sets. The space is large, and this is just an introduction.
 
-**A process for eliminating photobombing.** While thinking about noise and removing it can seem like necessary and tedious work, you'll start building your skills in this large space by working something that's particularly satisfying to remove.
+## A process for eliminating photobombing
+
+While thinking about noise and removing it can seem like necessary and tedious work, you'll start building your skills in this large space by working something that's particularly satisfying to remove.
 
 All of us have probably taken a picture in which we captured someone or something that we really wish hadn't been there. When someone jumps into the frame of our picture on purpose, we call it *photobombing*. We'll talk here about a general approach for removing this unwanted subject, and you'll get the opportunity to write a script that removes a photobombing person (or object) from an image in one of the chapter's active-learning exercises.
 
@@ -114,13 +128,17 @@ The script you'll write in the active learning exercises is a example of a filte
 
 As you can see in the three duck images, the duck is never in the same place. If you think about this, it means that, of the pixels from the three images at any location `(x,y)`, most of these pixels are what we want to see. To select this majority, we simply have to compute the median of the three pixels. Doing this across every pixel location in our images, we'll produce a new image without the duck. Even more impressive is that this approach works even if the photobombing subject overlaps with themself/itself in a minority of the images. With additional data (i.e., images), this approach is robust!
 
-**This data is not wrong, but ....** We'll now move from erasing a photobomb (i.e., eliminating incorrect data in our data set) to a new application involving images. This application takes advantage of the fact that data collection can be messy beyond the capturing of incorrect information. In particular, we also want to remove from our data set any duplicates and other types of irrelevant information. Instead of making our downstream analyses deal with these headaches, we can enhance our cleaning routines to deal with them.
+## This data is not wrong, but ...
+
+We'll now move from erasing a photobomb (i.e., eliminating incorrect data in our data set) to a new application involving images. This application takes advantage of the fact that data collection can be messy beyond the capturing of incorrect information. In particular, we also want to remove from our data set any duplicates and other types of irrelevant information. Instead of making our downstream analyses deal with these headaches, we can enhance our cleaning routines to deal with them.
 
 Digital images are a great example of the fact that, when we digitize the real world, we often capture it in more precision than our application demands or requires. Sometimes this additional precision is handy and useful, as we experience when we enlarge a portion of a digital photograph captured in high resolution. Our eyes cannot distinguish the extra precision in a high-resolution image, but it keeps the image looking great as we zoom in on a portion of it. Yet if the resolution of our original image is small, enlarging it results in *pixelation*, which the blocky look that occurs when we have no extra resolution to call upon and we're left with no choice but to enlarge a single pixel into a large square of that pixel's color.
 
 Despite this benefit of capturing extra resolution, sometimes too much precision in your data can cause pesky problems. Data scientists often use real-world data to train computer models and then use these models to predict what might (or will) happen on new inputs, as we'll do in Chapter 17. If during training we pay too much attention to specifics in the captured data, the models become *overtrained*. In other words, the model begins to pay too much attention to the specific details of the real-world situations your data captured and less to the properties of those situations that generalize to the broad class of situations your captured data is supposed to represent.
 
-**Zero out the unnecessary details.** Let's get a feel for the precision we don't need in a digital image that we have no plan on enlarging. In particular, let's inspect a pretty picture of Harvard Yard taken on a lovely September morning.
+## Zero out the unnecessary details
+
+Let's get a feel for the precision we don't need in a digital image that we have no plan on enlarging. In particular, let's inspect a pretty picture of Harvard Yard taken on a lovely September morning.
 
 ```{code-block} python
 ---
@@ -239,7 +257,9 @@ How many bits does it take to encode `14` in binary? Do you understand why this 
 
 Hopefully by now, you are starting to see that we're rounding the input numbers, as I hinted with the naming of the returned result in the earlier code examples. You practiced rounding base-10 numbers in grade school. What's `543` rounded down to the nearest 10? `540`. What's `543` rounded down to the nearest 100? `500`. What's `543` rounded down to the nearest 1000? `0`.  If you want to start thinking in hexadecimal, we rounded the formal parameter `x` in `zero_lowest_bits` down to the nearest `0x10` (or decimal 16). In other words, we dropped the least significant hexadecimal digit just like we can drop the lowest decimal digit.
 
-**No visible difference.** Now that you're on your way to becoming a person comfortable with numbers in multiple bases, we can use it to see if we can remove unnecessary information and not have the process result in any perceptible change to the image.
+## No visible difference
+
+Now that you're on your way to becoming a person comfortable with numbers in multiple bases, we can use it to see if we can remove unnecessary information and not have the process result in any perceptible change to the image.
 
 Read through the code for `zero_image_lowest_bits` below. You'll notice that it processes the image pixels in a fashion that we have seen repeatedly: a nested pair of for-statements that run over each dimension of the input data set. The body of the innermost loop simply grabs a specified pixel (specified by the current value of the loop indices) from the source image, manipulates it, and stores the resulting value into the same location in the destination image.
 
@@ -277,7 +297,9 @@ Now run the code cell above, and compare the image of Harvard Yard before and af
 Feel free to try this with your own JPEG and PNG images, but just make sure that they are encoded in `RGB` mode and not too large in size!
 ```
 
-**Image steganography.** This "data cleaning" has removed redundant information and given us space within the image that we can use for another purpose, if we so desire. Remember that our pixels still contain 8-bit values even if the lowest four bits of each are zeros.
+## Image steganography
+
+This "data cleaning" has removed redundant information and given us space within the image that we can use for another purpose, if we so desire. Remember that our pixels still contain 8-bit values even if the lowest four bits of each are zeros.
 
 Let's say our desire is to send an image to another person but not have anyone observing this transmission know what we're sending. We can accomplish this by sending one image hidden inside another. Let's call the outer, observable image *the envelope image*, and the inner, unseen image *the hidden image*. In general, we could hide any information in the envelope image, and this is called *image steganography*.
 
@@ -289,7 +311,9 @@ The specific process we'd use would be to "clean" a nondescript digital image to
 
 This process describes this chapter's programming problem set. It has you use this intriguing fact about digital images (i.e., we can delete some of the precision in them and not impact our enjoyment of them) to hide and then later recover a hidden image. To reiterate, this is not technique used in data science, but it will set us up to do something interesting and fun with the data exploration step of the general data science process.
 
-**Where is that pixel?** When we write a Python script to blend a hidden image into an envelope image, the two images might be the same size, and in this case, we're simply laying one image over the other. We could also place several small images in a large envelope image. In this, we'll want to say where in the envelope image we want to place each hidden image, and to do this, we need a coordinate system that uniquely identifies each pixel in an image.
+## Where is that pixel?
+
+When we write a Python script to blend a hidden image into an envelope image, the two images might be the same size, and in this case, we're simply laying one image over the other. We could also place several small images in a large envelope image. In this, we'll want to say where in the envelope image we want to place each hidden image, and to do this, we need a coordinate system that uniquely identifies each pixel in an image.
 
 We haven't needed to think about the coordinate system in images because all of the work we have done to this point has had us process each and every pixel. Using PIL's `getpixel` and `putpixel` methods, we indexed individual pixels in an image's two-dimensional array using a coordinate tuple `(x,y)`, but where in an image is a particular `(x,y)` coordinate?
 
@@ -299,11 +323,15 @@ To answer this question, we can look at [the Python Imaging Library documentatio
 If our data set was organized with more dimensions, our code would include a larger number of nested for-loops.
 ```
 
-**And how did we get there?** Similar to how we largely ignored the coordinate system in our images, we also haven't thought much about the particulars of our *traversal* of an image's pixels. Our scripts contained two nested for-loops, and we randomly picked one dimension for the outer for-loop (i.e., `src.size[0]`) and the other dimension fell to the inner for-loop (i.e., `src.size[1]`). We also choose, honestly randomly, to start each for-loop at index 0. These are choices, and by making different choices, we change our *order of traversal* of the elements in the data set.
+## And how did we get there?
+
+Similar to how we largely ignored the coordinate system in our images, we also haven't thought much about the particulars of our *traversal* of an image's pixels. Our scripts contained two nested for-loops, and we randomly picked one dimension for the outer for-loop (i.e., `src.size[0]`) and the other dimension fell to the inner for-loop (i.e., `src.size[1]`). We also choose, honestly randomly, to start each for-loop at index 0. These are choices, and by making different choices, we change our *order of traversal* of the elements in the data set.
 
 We can learn about an image's dimensions by looking at its `size` attribute. [The documentation says](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.size) that this attribute is "a 2-tuple (width, height)." This means that `src.size[0]` provides us with a measurement of the width of the image. In a Cartesian plane, this would correspond to the x-axis, which is often how we labeled the outer loop in our scripts. You can also think of this index as numbering the columns in our image (i.e., our data set). The other value, `src.size[1]` in our scripts, represents the height of the image, or the number of rows of pixels in it.
 
-**Visualizing a traversal.** To visualize an image's coordinate system, let's build a script that marks its moves partway through the image's pixels. To start, we'll have this script traverse an image from its origin (i.e., the upper left-hand corner) to a specified `(x,y)` coordinate of interest. The script's code would contain a nested for-loop structure that we've regularly used to traverse the pixels in an image. Let's choose to use the names `x` and `y` for our point of interest and `i` and `j` for the two loop variables. With these decisions made, a `traverse` function might look like the following:
+## Visualizing a traversal
+
+To visualize an image's coordinate system, let's build a script that marks its moves partway through the image's pixels. To start, we'll have this script traverse an image from its origin (i.e., the upper left-hand corner) to a specified `(x,y)` coordinate of interest. The script's code would contain a nested for-loop structure that we've regularly used to traverse the pixels in an image. Let's choose to use the names `x` and `y` for our point of interest and `i` and `j` for the two loop variables. With these decisions made, a `traverse` function might look like the following:
 
 ```{code-block} python
 ---
@@ -362,7 +390,9 @@ new_im = traverse(yard, 100, 100)
 new_im.save('images/new.png')
 ```
 
-**Inverting a pixel's color.** Our function is structured as we desire, but the helper function still doesn't change the value of the visited pixels. What might we do to create a path of visited pixels that is easy for us to see? How about we invert our image? It's easy to create an inverted video image by simply replacing the value of each color in each pixel with the result of the calculation: `256 - orig_color_value`.
+## Inverting a pixel's color
+
+Our function is structured as we desire, but the helper function still doesn't change the value of the visited pixels. What might we do to create a path of visited pixels that is easy for us to see? How about we invert our image? It's easy to create an inverted video image by simply replacing the value of each color in each pixel with the result of the calculation: `256 - orig_color_value`.
 
 The following code block does this by replacing our do-nothing `do_something` function with one that reverses the input pixel. Try it out, and then look at the resulting image.
 
@@ -380,7 +410,9 @@ inverted = traverse(yard, 100, 100)
 inverted.save('images/new.png')
 ```
 
-**Naming the traversal.** If you display the resulting image, zoom in, and find where the `(100,100)` point is, you'll see that our `traverse` function looks like it visited the pixels in the order shown on the left-hand side of {numref}`Figure %s<c08_fig1_ref>`.
+## Naming the traversal
+
+If you display the resulting image, zoom in, and find where the `(100,100)` point is, you'll see that our `traverse` function looks like it visited the pixels in the order shown on the left-hand side of {numref}`Figure %s<c08_fig1_ref>`.
 
 ```{figure} images/c08_fig1.png
 :name: c08_fig1_ref
@@ -422,7 +454,9 @@ As a simple example, consider a calendar, which is a 2D array. The columns are d
 
 This `traverse` function implements what is called a *row-major* traversal. In general, different traversals matter in different problem domains. 
 
-**Specifying the range sequence you want.** Each of our previous traversals started from the upper left-hand corner of the image. This is because each for-loop starts at 0. Of course, we don't have to start our traversal at the `(0,0)` corner of the image. We could start from any corner.
+## Specifying the range you want
+
+Each of our previous traversals started from the upper left-hand corner of the image. This is because each for-loop starts at 0. Of course, we don't have to start our traversal at the `(0,0)` corner of the image. We could start from any corner.
 
 How would we change our `traverse` function if we wanted to run a column-major traversal starting at the lower right-hand corner? Well, we'd want the sequence of integers produced by the range function in the outer for-loop to run from `im.size[0] - 1` down to `0` (inclusive). Similarly for the inner loop. Remember that the indices of the pixel elements in this 2-dimensional array run from 0 to one less than width or height!
 
@@ -447,7 +481,9 @@ my_range = [i for i in range(0, 10, 1)]
 my_range = [i for i in range(10 - 1, 0 - 1, -1)]
 ```
 
-**Storing a 2-dimensional array in memory.** I said that different analyses will naturally use different traversals of the different dimensions in your data set. When a programming language linearizes a multi-dimensional data set to store its individual values contiguously in the computer's memory, it also decides on an ordering of the dimensions. 
+## Storing a 2-dimensional array in memory
+
+I said that different analyses will naturally use different traversals of the different dimensions in your data set. When a programming language linearizes a multi-dimensional data set to store its individual values contiguously in the computer's memory, it also decides on an ordering of the dimensions. 
 
 Recall our discussion of hexdump in Chapter 6. The hexdump program displayed the contents of a file as a 2-dimensional array, but this was just for ease of display in a 2-dimensional computer window. Similarly, we like to think of our JPEG files as 2-dimensional images, and we display them that way, but the contents of these files are just a single long string of 8-bit numbers.
 
@@ -473,4 +509,24 @@ In the next act, we'll learn how to measure the performance of our programs, and
 
 Other programming languages, including Python, don't force your array data into row-major or column-major order. We've talked about arrays as if they are a fundamental data type in Python, like integers and lists, but they're not. We've used the abstractions in the Python Image Library, which allowed us to think about our images as 2-dimensional arrays. For general scientific computing, you'll probably use [Python's NumPy library](https://numpy.org/), which allows you (the programmer) to specify whether it should use row- or column-major ordering for its `numpy.array` type. If you don't specify a preferred ordering, this library will default to row-major ordering. It has to pick one in order to store your array in your computer's memory!
 
-\[Version 20230722\]
+```{admonition} End of Act I
+You have come to the end of the first act, and it's worth recognizing what you've learned and the skills you've developed. Both are significant.
+
+You can turn ideas into Python expressions and statements, using a variety of arithmetic (e.g., `+`), comparative (e.g., `>`), and Boolean operations (e.g., `and`). You can name the results of these statements using the assignment operator (`=`), and use them in subsequent computations. More importantly, you know how to use Python's documentation, its built-in functions like `help` and `type`, and even community resources like stackoverflow.com to aid you in this work. 
+
+You learned to string multiple statements together to perform complex calculations and solve non-trivial tasks. You can take a sequence of statements written for a specific purpose and make it the body of a function. Through careful thoughts about abstraction, your functions can operate on different kinds of objects that adhere to same abstraction. Of course, you know not only how to build your own functions, but to write scripts using functions built by others.
+
+Besides computing results, you know how to control the execution order of your statements and functions using control-flow statements. You know that if-statements test a condition and control which subsequent statements should execute. While-loops and for-loops do this too, but you understand how these statements keep our scripts short by allowing us to iterate on the same set of statements until some condition is met.
+
+Besides expressing what you want done, you also learned to think about the data manipulated by your scripts as coming in different, distinct types. You worked with simple strings and understand what makes them different from other sequence types (e.g., a Python list). You learned about operator overloading, and how the `+`-operator changes its function depending upon the types of the data to which it is applied. And you learned to use complex data types, like file and network objects. We know only rudimentary aspects of these data types and how they are constructed, but through a variety of interfaces and methods, you were able to employ them to solve non-trivial problems (i.e., query the contents of the Harvard Library and create your own networked game).
+
+Separate from these skills in computer programming, you've built a solid foundation for problem solving with computers. In fact, you can now use computer to solve not just an instance of a problem but to create a script capable of solving many similar problems.
+
+You repeatedly practiced starting with a general statement of a problem and then decomposing it into its constituent parts. You gained significant practice in a particular approach to problem solving called worklist processing, and by understanding how computers digitally encode and represent real-world ideas and information, you can manipulate real-world ideas and information.
+
+Importantly, you're comfortable with problem solving as an iterative process. All too often, our first attempt at a script fails to run without an error, or if it does run to completion, the script produces unexpected results. You understand that you should avoid certain types of problematic code structures (e.g., a file open without a file close) and anticipate the potential problems in other design patterns (e.g., variables that are aliases for each other). I hope you have grown skeptical and regularly check the form of your input data and the results of some computations before you start using them. And when things inevitably still go wrong, you've begun to understand the Python interpreter's error messages and to work through your scripts a step at a time to verify which parts work and where the failure likely resides.
+
+You are no longer a novice. You are now ready to learn to use computers to solve a more complex set of real-world problems.
+```
+
+\[Version 20230811\]

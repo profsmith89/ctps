@@ -14,11 +14,15 @@ An difficult question to answer is: _When does the work to make a script solve a
 There's no easy answer to this question. Throughout this book, we will write scripts that solve more than a single instance of a problem, and this will give you a good feel for the kinds of generality you should almost always add to the scripts you write. On the other hand, we will not add every new "feature" we can imagine to any individual script. Computer programs, as you have undoubtedly experienced in your life, can become large, buggy, and hard to use as they grow more "featuresome." Do what seems reasonable and then move on to a new problem and a new script. If you later discover you missed an important feature, you can always go back and modify your old scripts.
 ```
 
-**The script is the solution.** Writing scripts like this---so that they are useful in a range of situations---is what computer scientists strive to do. When we follow this approach, *the solution to our problem is not just the output of our script, but also the script itself*. The script is a solution because we can use it to easily solve lots of instances of our problem. You simply need to run the script, feed it the input appropriate for the current instance of the problem, and voila, the computer follows the script and computes your desired answer!
+## The script is the solution
+
+Writing scripts like this---so that they are useful in a range of situations---is what computer scientists strive to do. When we follow this approach, *the solution to our problem is not just the output of our script, but also the script itself*. The script is a solution because we can use it to easily solve lots of instances of our problem. You simply need to run the script, feed it the input appropriate for the current instance of the problem, and voila, the computer follows the script and computes your desired answer!
 
 In this chapter, we'll again start with a script that solves a specific type of problem and then expand it to solve any instance of the problem.
 
-**What do you want done when?** But there will be a new twist. We began in the last chapter with a problem that required us to work straight through a file's contents and print what we found. The active-learning exercises then asked you to do more. They had you *compute a piece of information* using the file's contents (i.e., its length) and use this information to add to the printed content. Finally, the chapter's problem set had you *compute several pieces of information* and *make two passes* over the content. 
+## What do you want done when?
+
+But there will be a new twist. We began in the last chapter with a problem that required us to work straight through a file's contents and print what we found. The active-learning exercises then asked you to do more. They had you *compute a piece of information* using the file's contents (i.e., its length) and use this information to add to the printed content. Finally, the chapter's problem set had you *compute several pieces of information* and *make two passes* over the content. 
 
 Now think about why the last script made two separate passes over the file. It was because each pass had a different goal, which required a correspondingly different set of actions. 
 
@@ -43,11 +47,15 @@ In this chapter, you will experience all 8-steps in our problem-solving process,
 There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 ```
 
-**A new problem.** Instead of decorating our input story around its edges, let's have the textual output of our script look quite different than its input. In particular, let's turn `CatInTheHat.txt` into a theatrical script that a couple of actors --- playing the narrator, the Cat, the Fish, Things One and Two, and the Mother --- could perform.
+## A new problem
+
+Instead of decorating our input story around its edges, let's have the textual output of our script look quite different than its input. In particular, let's turn `CatInTheHat.txt` into a theatrical script that a couple of actors --- playing the narrator, the Cat, the Fish, Things One and Two, and the Mother --- could perform.
 
 What would be the problem specification? It could be something as seemingly simple as: find the dialogue in the story and print it after the name of the character who says it.
 
-**Splitting the problem into smaller pieces.** One of the keys to successfully writing a computational script is to break a large problem into smaller pieces and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.
+## Splitting the problem into small pieces
+
+One of the keys to successfully writing a computational script is to break a large problem into small pieces and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.
 
 What are the primary pieces in our problem specification? Well, we have to:
 
@@ -65,7 +73,9 @@ With these decisions, {numref}`Figure %s <c02_fig1_ref>` shows how our script sh
 The start of our script's output given `CatInTheHat.txt` as the its input.
 ```
 
-**Reuse.** We just practiced the first four steps of our problem-solving process: specify-imagine-decompose-decide. Step 5 asks if we can jumpstart the writing of our script by reusing anything from a previously written script. To do this well, we have to think about the *similarities and differences* between our previous problems and this current problem. 
+## Reuse
+
+We just practiced the first four steps of our problem-solving process: specify-imagine-decompose-decide. Step 5 asks if we can jumpstart the writing of our script by reusing anything from a previously written script. To do this well, we have to think about the *similarities and differences* between our previous problems and this current problem. 
 
 Let's begin with our script that reads a text file, which I've reproduced below:
 
@@ -107,13 +117,17 @@ with open('txts/' + my_book) as my_open_book:
         # new pseudocode goes here
 ```
 
-**Switching between goals.** I put the comment about new pseudocode at the bottom of the while-loop because we need to do something with `the_line` before we loop back. One way to figure out what we want this pseudocode to do is to think about what our script should be doing when it first starts reading the story. In other words, what is our script's initial goal?
+## Switching between goals
+
+I put the comment about new pseudocode at the bottom of the while-loop because we need to do something with `the_line` before we loop back. One way to figure out what we want this pseudocode to do is to think about what our script should be doing when it first starts reading the story. In other words, what is our script's initial goal?
 
 As we begin, our initial goal is to find the start of the first piece of dialogue. Once we find the start of this dialogue, our script switches to a new goal: scan to the end of this dialogue and print out what was scanned.
 
 What happens then? We begin again searching to find the start of the next piece of dialogue, and this pattern repeats until the story ends.
 
-**Finite State Machines.** What we just described is formally called a *finite state machine (FSM)*. Each of our goals is a *state*, which consists of some work we want done while in that state. To move between states, our script looks for *events*. We start in some initial (or *start*) state, and we are done when the script enters one or possibly several *final* states.
+## Finite State Machines
+
+What we just described is formally called a *finite state machine (FSM)*. Each of our goals is a *state*, which consists of some work we want done while in that state. To move between states, our script looks for *events*. We start in some initial (or *start*) state, and we are done when the script enters one or possibly several *final* states.
 
 {numref}`Figure %s <c02_fig2_ref>` is a diagram of our finite state machine, where the states are represented as labeled circles (also called *nodes*) and *transitions between states* as directed arrows. Each arrow is labeled with the event that cause the transition. The start state is identified by the special transition labeled `Start`.
 
@@ -135,13 +149,17 @@ While you think about this, I'll tell you that the FSM in {numref}`Figure %s <c0
 
 Both deterministic and nondeterministic FSMs are mathematical models of computation. They are defined by the quintuple of an input alphabet of events, a set of all states, a start state, a transition function, and a set of (possibly empty) final sets. The start state and final states are included in (i.e., are a subset of) the set of all states.
 
-**Error handling in FSMs.** Hopefully by now you have realized that the FSM in {numref}`Figure %s <c02_fig2_ref>` assumes that the input story is *well-formed*, and by this we mean that every piece of dialogue in it starts and ends with a double-quote character. It doesn't have a transition from `S1` on encountering `EOF` because we don't expect our story to end while we are in the middle of a line of dialogue.
+## Error handling in FSMs
+
+Hopefully by now you have realized that the FSM in {numref}`Figure %s <c02_fig2_ref>` assumes that the input story is *well-formed*, and by this we mean that every piece of dialogue in it starts and ends with a double-quote character. It doesn't have a transition from `S1` on encountering `EOF` because we don't expect our story to end while we are in the middle of a line of dialogue.
 
 A FSM's transition function maps states and input events to states. For example, the transition function `f` for our FSM in {numref}`Figure %s <c02_fig2_ref>` would return `S1` when called with `f(S0,'"')`. A transition function does not have to be defined for all combinations of input symbols and states. If the transition function is not defined for some pairs of current state and input event, the implementation of the FSM should probably raise an error when such pairs occur. In other words, a script corresponding to our FSM might raise an error if it finds `EOF` while in state `S1`.
 
 We have just dipped our toes into the deep topic of FSMs. You will find that they are a great representation for modeling lots of mechanical, biological, and linguistic systems. But enough about the representation, let's see how we can use the diagram we've drawn to help us think about the code we want to write.
 
-**Encoding the state information.** The first thing to note about the FSM in {numref}`Figure %s <c02_fig2_ref>` is that it contains only three states, where the third state (`DONE`) represents the termination of our script. This means that our script has only to keep track of which of the first two states (`S0` and `S1`) it is in at any point in time, which we can do with a single *Boolean* variable. 
+## Encoding the state information
+
+The first thing to note about the FSM in {numref}`Figure %s <c02_fig2_ref>` is that it contains only three states, where the third state (`DONE`) represents the termination of our script. This means that our script has only to keep track of which of the first two states (`S0` and `S1`) it is in at any point in time, which we can do with a single *Boolean* variable. 
 
 ```{admonition} Definition
 A Boolean variable may contain only one of two values, which are called `True` and `False` in Python.
@@ -179,7 +197,9 @@ with open('txts/' + my_book) as my_open_book:
 
 Notice that we've pulled the processing that every state does (i.e., reading a line of characters from the input file) out of each state's work. We could have duplicated that code in each state, but that was unnecessary when we had already done it. We will talk more, in the next chapter, about the benefits of collecting commonly executed code together in one place.
 
-**This or that.** You'll also notice a new syntactic structure for the Python if-statement at the end of the code block. Earlier in the block, we used an if-statement to check for our infinite while-loop's exit condition, and we either hit this condition or continued on with the loop's work. We were checking for something exceptional, and the if-block and its controlling condition was all the structure we needed.
+## This or that
+
+You'll also notice a new syntactic structure for the Python if-statement at the end of the code block. Earlier in the block, we used an if-statement to check for our infinite while-loop's exit condition, and we either hit this condition or continued on with the loop's work. We were checking for something exceptional, and the if-block and its controlling condition was all the structure we needed.
 
 With `looking_for_open_quote`, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before continuing on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple `else`.
 
@@ -187,7 +207,9 @@ With `looking_for_open_quote`, we need to decide which of two pieces of work we 
 Why is an if-else-block better than two if-statements in this situation? Because the condition we're checking is either true or false. When it's not one, it must be the other. If you write two if-statements, you'll have to correctly write a condition and its complement. The if-else construct removes this unnecessary work (and potential error in logic or typing waiting to happen).
 ```
 
-**Fill in each state.** Let's expand our pseudocode for state `S0`. What does it need to do? For one thing, it can ignore any line that does not contain a double-quote character. But if the line contains a double-quote character, we know that the line, at least, is the beginning piece of a line of dialogue. I say "at least" because the dialogue that starts on this line may end on this line or extend to one or more following lines.
+## Fill in each state
+
+Let's expand our pseudocode for state `S0`. What does it need to do? For one thing, it can ignore any line that does not contain a double-quote character. But if the line contains a double-quote character, we know that the line, at least, is the beginning piece of a line of dialogue. I say "at least" because the dialogue that starts on this line may end on this line or extend to one or more following lines.
 
 I want to pause here and highlight the fact that we are using the word "line" in two different contexts that we must keep straight. A line from the file, which is completely contained in the object called `the_line`, and a line of dialogue from the story, which can start anywhere in a file line and continue to an arbitrary point in that or a later file line.
 
@@ -219,13 +241,17 @@ lineno-start: 17
 
 Notice that this pseudocode uses an if-statement to check for the event that causes the transition from `S0` to `S1`. This event is the presence of a double-quote character in `the_line`. So, how do we check for a double-quote character in the string object named `the_line`?
 
-**Strings as a sequence of characters.** To this point, I've been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the terminal. Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object. 
+## Strings as a sequence of characters
+
+To this point, I've been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the terminal. Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object. 
 
 Short answer: it does. A string in Python is a *sequence* of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we would like to manipulate in our scripts. The abstraction you should have in your mind for a sequence is *an ordered collection of items*. 
 
 It doesn't matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the `list` datatype in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python `list` containing a stuffed animal, a picture of my kids, this course's textbook, an old CD, and then some other books.
 
-**Membership test.** What makes a sequence a very useful abstraction is that there are commonly used operations that we can perform on any Python sequence. For example, Python sequences permit us to easily test whether an item is a member of a given sequence, and a membership test is exactly what we need to answer the question of whether the string named `the_line` contains a double-quote character! 
+## Membership test
+
+What makes a sequence a very useful abstraction is that there are commonly used operations that we can perform on any Python sequence. For example, Python sequences permit us to easily test whether an item is a member of a given sequence, and a membership test is exactly what we need to answer the question of whether the string named `the_line` contains a double-quote character! 
 
 With this knowledge, let's turn our pseudocode if-statement into Python code:
 
@@ -245,7 +271,9 @@ If I wanted to know that there was no double quote in `the_line`, I could have w
 
 Both `in` and `not in` are binary infix operators that test whether the object to its left is a member of the one to its right. The result is `True` when this membership check succeeds, and `False` otherwise.
 
-**Coding a transition.** To transition from state `S0` to state `S1`, we simply need to set our state variable appropriately, which in this case means setting `looking_for_open_quote` to `False`. Staying in `S0` is even easier: `looking_for_open_quote` stays `True`, and this means we can delete the entire `else` clause since there's no work to be done (i.e., it is already `True` in this code block!).
+## Coding a transition
+
+To transition from state `S0` to state `S1`, we simply need to set our state variable appropriately, which in this case means setting `looking_for_open_quote` to `False`. Staying in `S0` is even easier: `looking_for_open_quote` stays `True`, and this means we can delete the entire `else` clause since there's no work to be done (i.e., it is already `True` in this code block!).
 
 ```{code-block} python
 ---
@@ -257,7 +285,9 @@ lineno-start: 17
                 looking_for_open_quote = False
 ```
 
-**Indexing and slicing.** I left the comment "do some work" in the pseudocode because transitioning on seeing a double quote is not all the work we need to do. To capture and print each line of dialogue from the story, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this easy with a couple other common operations on sequences.
+## Indexing and slicing
+
+I left the comment "do some work" in the pseudocode because transitioning on seeing a double quote is not all the work we need to do. To capture and print each line of dialogue from the story, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this easy with a couple other common operations on sequences.
 
 Specifically, all Python sequence types permit us to identify a sequence item by its index and to slice a subsequence from a larger sequence by using two indices. Let's look at this using line 8 of the file `CatInTheHat.txt`, which reads '`And I said, "How I wish`'.
 
@@ -327,7 +357,9 @@ print(the_line[12:])
 
 But how do we know that the double quote sits at index 12 in this current string object? All that the `in` operator told us was that a double-quote character existed in `the_line`.
 
-**For loops.** Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I'm going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem in a programming language like C. This will introduce to you the other major looping construct in Python (and many other languages): the *for-loop*. More importantly, this introduction will help you to understand what takes place behind the scenes in the Python abstraction that we will eventually use.
+## For-loops
+
+Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I'm going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem in a programming language like C. This will introduce to you the other major looping construct in Python (and many other languages): the *for-loop*. More importantly, this introduction will help you to understand what takes place behind the scenes in the Python abstraction that we will eventually use.
 
 ```{margin} Fun!
 Here is [a fun article](https://www.wired.com/story/why-you-hate-media-technically-speaking/) on the difference between dialogue and dialog.
@@ -379,7 +411,9 @@ lineno-start: 17
 Make sure you understand why the logic in the code block above and the one before it are equivalent. Then write a simple for-loop that prints the integers from 0 to 10.
 ```
 
-**String find.** As promised, Python makes it easy for us to find the index of the first occurrence of a character in a string using the `str.find` method. In particular, much of the work of the above for-loop becomes: `i = the_line.find('"')`. 
+## String find
+
+As promised, Python makes it easy for us to find the index of the first occurrence of a character in a string using the `str.find` method. In particular, much of the work of the above for-loop becomes: `i = the_line.find('"')`. 
 
 I say "much" because you might ask what the method returns if the character we seek isn't in the current string, and the answer to this question is integer value `-1`. In other words, given a string `s` and a substring `c`, `s.find(c)` returns an integer between `0` and `len(s)-1` if `c` occurs within `s` and `-1` if not. 
 
@@ -398,7 +432,9 @@ lineno-start: 17
                 # FIXME! Need to handle short dialogue.
 ```
 
-**Design patterns for error handling.** When you been programming long enough, like any practiced skill, you'll start to see repeated patterns. This is one for error handling. A command, function, or method carves out one or more values in the range of its return value and distinguishes those values as error conditions. In our current example, `find` needs only the integers in the range `0` to `len(s)-1` to fully accomplish its stated functionality. The person who wrote the implementation of `find` was free to pick any value outside this range of valid results as an error condition. She might have picked several such values to indicate a number of different error conditions.
+## Design patterns for error handling
+
+When you been programming long enough, like any practiced skill, you'll start to see repeated patterns. This is one for error handling. A command, function, or method carves out one or more values in the range of its return value and distinguishes those values as error conditions. In our current example, `find` needs only the integers in the range `0` to `len(s)-1` to fully accomplish its stated functionality. The person who wrote the implementation of `find` was free to pick any value outside this range of valid results as an error condition. She might have picked several such values to indicate a number of different error conditions.
 
 ```{margin} Example Situation
 You might know that the error condition is impossible because of some processing you did immediately prior.
@@ -410,7 +446,9 @@ Unfortunately, just because a design pattern is commonly used doesn't mean it is
 
 While not an issue with the structure of the logic in our current script, many programmers also dislike this design pattern because it can break up your script's flow with lots of checks for uncommon error conditions. When you are constantly distracted by infrequently-true error checks, it can make it very hard for you and others reading your script to understand how the script performs its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.
 
-**Never go too long without testing.** We've made some great progress on our script, and now we have a choice of how to proceed. On the one hand, we can continue to write code to handle all the cases that might occur in state `S0` (e.g., the case we've flagged in our "FIXME!" comment). Our minds are focused on state `S0`, and it may be enticing to continue working on it until we've handled every case we can imagine. On the other hand, we could switch and start writing some code for state `S1`. In particular, we could write `S1` code that complements the code we just finished in `S0`. The benefit of this approach is that it would allow us to see if we can get our script to run on some subset of the possible inputs.
+## Never go too long without testing
+
+We've made some great progress on our script, and now we have a choice of how to proceed. On the one hand, we can continue to write code to handle all the cases that might occur in state `S0` (e.g., the case we've flagged in our "FIXME!" comment). Our minds are focused on state `S0`, and it may be enticing to continue working on it until we've handled every case we can imagine. On the other hand, we could switch and start writing some code for state `S1`. In particular, we could write `S1` code that complements the code we just finished in `S0`. The benefit of this approach is that it would allow us to see if we can get our script to run on some subset of the possible inputs.
 
 ```{tip}
 When you have the opportunity to test what you've written, take it. It's a good practice to build your script in pieces that you can regularly test. I like the feeling of accomplishment when I get another small piece of my larger problem to work. Plus, it is often efficient from an overall time perspective if you don't spend a lot of time coding a design that was doomed to failure based on one of your early design decisions. Regular testing will keep you from wasting a lot of time on doomed designs. The exercises and problem sets that come with this book are structured to encourage you to follow this approach.
@@ -448,7 +486,9 @@ lineno-start: 17
             # FIXME! Is this all the work in state S1?
 ```
 
-**Concatenation, overloading, and shorthands.** There are a number of interesting new things in the code for state `S1` (i.e., the else-block).
+## Concatenation, overloading, and shorthands
+
+There are a number of interesting new things in the code for state `S1` (i.e., the else-block).
 
 The first is that this code, unlike the code for state `S0`, does something for both the case of finding a double quote in `the_line` and not finding one. When the script finds a closing double quote, it adds the characters from the start of the line until that point to the variable `dialog`. By add, I of course mean concatenate. As we learned in Chapter 1's exercises, the `+` operator concatenates when its operands are strings and adds when its operands are numbers. This is called *overloading*: the operation of the operator depends on the type of its operands.
 
@@ -456,11 +496,15 @@ The `S1` code also adds all the characters in `the_line` when it doesn't find a 
 
 But wait, these two concatenation operations don't look quite like what we saw in the last chapter. What is the meaning of this `+=` operator where we expect the concatenation we just discussed to occur? Well, `+=` just a shorthand for a concatenation that is really an append. In other words, the statement `dialog += the_line` is equivalent to the statement: `dialog = dialog + the_line`.
 
-**Off-by-one and other potential errors.** Now look carefully at what we append to `dialog` when the script finds a double-quote character. Do you fully understand why `the_line[:i+1]` includes the ending double quote? If not, you may wish to read the documentation about the string method `find` and review how the indices in slicing work. If you left off the `+1` in `the_line[:i+1]`, this would be an example of what's called *an off-by-one error*. They are quite common in programming, and you should train yourself to be alert to situations where they can occur.
+## Off-by-one and other potential errors
+
+Now look carefully at what we append to `dialog` when the script finds a double-quote character. Do you fully understand why `the_line[:i+1]` includes the ending double quote? If not, you may wish to read the documentation about the string method `find` and review how the indices in slicing work. If you left off the `+1` in `the_line[:i+1]`, this would be an example of what's called *an off-by-one error*. They are quite common in programming, and you should train yourself to be alert to situations where they can occur.
 
 I added a comment at the end of the code for state `S1` to remind myself that we haven't carefully considered all the cases that can occur when looking for dialogue. We might have, but we have neither tested on a lot of different examples nor carefully thought through the cases we might encounter. But that's ok for now, since we simply want to see if we can get the script to work for the cases we think we have covered!
 
-**Testing.** Typically, you start testing with small inputs that exercise your script in a limited number of ways. This is a great method for incrementally learning what works and clearly seeing what doesn't. Being methodical may not be your style, but it makes testing and debugging less of a nightmare. 
+## Testing
+
+Typically, you start testing with small inputs that exercise your script in a limited number of ways. This is a great method for incrementally learning what works and clearly seeing what doesn't. Being methodical may not be your style, but it makes testing and debugging less of a nightmare. 
 
 Here's the full script we've developed to this point:
 
@@ -516,7 +560,9 @@ So far so good, but I said we had skipped the case of a story with a line of dia
 
 Hmmm, I guess we do. This test run failed to do what we expected; it prints a bunch of text that isn't dialogue and ends at the start of the second quote in the input file.
 
-**Beware of hidden assumptions.** Our script is short enough that we can probably analyze our problem with `HomeView3.txt` by thinking through the script's operation. This will not always be the case, and we will soon learn how to use print statements to help us understand the state of our script at any point in its execution.
+## Beware of hidden assumptions
+
+Our script is short enough that we can probably analyze our problem with `HomeView3.txt` by thinking through the script's operation. This will not always be the case, and we will soon learn how to use print statements to help us understand the state of our script at any point in its execution.
 
 Consider what happens when our script grabs line 1 of `HomeView3.txt`, i.e., the variable `the_line` holds the string: `'"Oh dear!" exclaimed Polly as she sat over in the corner by the window\n'`. Since the script just started, it is `looking_for_open_quote`, and it finds one at index `0` of `the_line` (i.e., the variable `i` will be `0`). Because `0` is not equal to `-1`, the script then sets the variable `dialog` to the contents of `the_line` (since `the_line[0:]` makes a copy the entire string). It also sets `looking_for_open_quote` to `False`, indicating a transition to state `S1`, and proceeds to the next iteration of the while-loop not realizing that it missed the close quote. While in state `S1`, it mistakenly recognizes the double quote on file line 3 as the missing close quote, and it thus prints much more than the actual first piece of dialogue. It then switches back to state `S0`, in which it finds the last double quote in the input file, but it prints nothing more because it finds the end of the file before any other double quotes.
 
@@ -528,7 +574,9 @@ Sometimes one choice is better than the other, but in this case, there's probabl
 
 Yes, this is a choice! The FSM diagram was meant to help us think about the problem. It was not meant to constrain our implementation.
 
-**Function composition.** Once we have thought through the problem and outlined a sensible solution, implementing it is fairly straightforward.
+## Function composition
+
+Once we have thought through the problem and outlined a sensible solution, implementing it is fairly straightforward.
 
 ```{code-block} python
 ---
@@ -609,9 +657,13 @@ short_dialog
 
 Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which necessary for the computation but not really important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.
 
-**Abstraction as information hiding.** As another example where we hid details to help with human understanding, recall how we replaced a for-loop and its associated code with an invocation of the `find` method on a string. Both computed a similar result, but we preferred the `find` string method over the for-loop implementation because it was both more concise and more expressive of what this step in our script was doing. In the next chapter, we will see how we can create our own compact representations---abstract away the details---so that each line of our script more closely resembles each step in the pseudocode we are trying to implement.
+## Abstraction as information hiding
 
-**There is no character.** Before we go, I want to correct something you may have come to believe. While I have used the term "character" to describe single items in the sequence known as a Python string, there is no distinguished thing that is a character in Python. What we think of as a character is just a Python string of length 1. In other words, when I earlier wrote that `the_line[0]` returns `'A'`, I was careful to write the result as a Python string. Go ahead and see what `type(the_line[0])` tells you about the type of the object returned from the string index method. We will talk more about types when we reach Act II.
+As another example where we hid details to help with human understanding, recall how we replaced a for-loop and its associated code with an invocation of the `find` method on a string. Both computed a similar result, but we preferred the `find` string method over the for-loop implementation because it was both more concise and more expressive of what this step in our script was doing. In the next chapter, we will see how we can create our own compact representations---abstract away the details---so that each line of our script more closely resembles each step in the pseudocode we are trying to implement.
+
+## There is no character
+
+Before we go, I want to correct something you may have come to believe. While I have used the term "character" to describe single items in the sequence known as a Python string, there is no distinguished thing that is a character in Python. What we think of as a character is just a Python string of length 1. In other words, when I earlier wrote that `the_line[0]` returns `'A'`, I was careful to write the result as a Python string. Go ahead and see what `type(the_line[0])` tells you about the type of the object returned from the string index method. We will talk more about types when we reach Act II.
 
 ```{code-block} none
 ---
@@ -623,4 +675,4 @@ emphasize-lines: 2, 3
 <class 'str'>
 ```
 
-\[Version 20230630\]
+\[Version 20230811\]

@@ -1,6 +1,8 @@
-# A Welcome #
+# A Welcome
 
-**Hello!** This book tells a story about computing, computational thinking, and computational approaches to problem solving. Computational thinking, paired with today's digital devices and the skill of computer programming that you'll learn in this book, will empower you with a new approach to solving the little problems you encounter in everyday life. 
+## Hello!
+
+This book tells a story about computing, computational thinking, and computational approaches to problem solving. Computational thinking, paired with today's digital devices and the skill of computer programming that you'll learn in this book, will empower you with a new approach to solving the little problems you encounter in everyday life. 
 
 Do you need to find the prime numbers between 1 and 100, convert a temperature in Fahrenheit to Centigrade, or use bisection search to approximate the square root of a number? No? Well, neither do I. The calculator on my smartphone computes square roots just fine, and a quick Google search will find the answers to the other two problems. Yet if you pick up most any other book on learning to code, it will subject you to a lengthy procession of tiny programs that solve basic math challenges. Such programs helped me to learn the syntactic rules of a new programming language, but they were not how I learned to use computation to solve the problems in my life.
 
@@ -10,7 +12,9 @@ Learning to program is a powerful skill when you simultaneously learn how to pro
 
 This book will introduce you to this community, which will be an invaluable resource for you when you inevitably have questions. But you'll find that this community can be much more. It can also be a source of promising approaches to your problems and pointers to rich resources on which you can build. And if you decide to use your new literacy and capabilities to tackle problems beyond those in your own backyard, you will find colleagues in this community with whom you can partner.
 
-**Learning goals.** A good story is not only fun to read, but it can expand your view of the world. I have tried hard to avoid making this book a tortuous march through a set of dry, disconnected topics. Every technical concept I cover is taught through a short story involving a problem-to-be-solved. I have then ordered and threaded these individual short stories together with an overarching storyline.
+## Learning goals
+
+A good story is not only fun to read, but it can expand your view of the world. I have tried hard to avoid making this book a tortuous march through a set of dry, disconnected topics. Every technical concept I cover is taught through a short story involving a problem-to-be-solved. I have then ordered and threaded these individual short stories together with an overarching storyline.
 
 I'll speak about this storyline in a moment, but you are probably thinking, "Wonderful, but what specifically will I gain from reading this collection of stories?" Great question. I hope you learn:
 
@@ -25,7 +29,9 @@ Don't worry if the technical terms in this list are unfamiliar to you. You will 
 
 I want to emphasize that this book isn't trying to turn you into a computer scientist or a professional software engineer. You can use it to become an individual in these professions, but I've written this book for *anyone* who finds that they need to understand computational thinking and have the skill of computer programming to accomplish their personal and professional aspirations. If that's you, keep reading!
 
-**The Python programming language.** The last of the listed learning goals mentions Python, which is the programming language you'll learn in this book. It is one of the most popular languages used by millions of people around the world, and it a great starting point for learning computer programming. Let me try to explain why with as few technical terms as possible.
+## The Python programming language
+
+The last of the listed learning goals mentions Python, which is the programming language you'll learn in this book. It is one of the most popular languages used by millions of people around the world, and it a great starting point for learning computer programming. Let me try to explain why with as few technical terms as possible.
 
 I chose to base this book on Python because it adheres to a fairly straightforward syntactic structure that *emphasizes readability*. I believe that you'll read more code than you'll ever write, which isn't that much different, if you think about your normal day, than our experiences with our native languages. You will read a lot of code in this book, and this will make you a better writer of code. In fact, when I do ask you to write Python code, I'll encourage you to write your scripts in a manner that makes them easy to read and understand.
 
@@ -33,11 +39,15 @@ Readability is important because code is dense, with lots of things typically ha
 
 Python is also one of the fastest growing languages in terms of popularity. What this means for us is that the growing community of Python users is constantly producing Python code that we can use in our projects. In other words, we don't have to write our code using only the primitive commands shipped in the core language. We can more quickly begin tackling hard problems because others have written and shared Python code that we will use as building blocks in our code. What do I exactly mean? Well, think about how hard it would be to build a wood-frame house if you had to not only construct the wood frame for the floors, walls, and roof, but you also had to chop down the trees and slice the logs into boards before you could construct the wood frame. The former work is hard and adding the latter makes the project something only a historical hobbyist would love. Working in a programming language with a growing and vibrant community matters, as we will discuss more in the chapters to come!
 
-**Beyond Python.** I want you to notice that the first five learning goals above don't mention Python, or any other particular programming language. This is because we need a programming language to help us to practice thinking in a computational manner, but once you've developed that skill, it's not that difficult to convert your Python scripts into a different language.
+## Beyond Python
+
+I want you to notice that the first five learning goals above don't mention Python, or any other particular programming language. This is because we need a programming language to help us to practice thinking in a computational manner, but once you've developed that skill, it's not that difficult to convert your Python scripts into a different language.
 
 In fact, the new language might not even be another traditional programming language. In the last chapter, I will show you how to take what you've learned about directing a machine in Python and apply this knowledge to create effective prompts in English for directing an AI chatbot to do your bidding.
 
-**Three acts.** I have chosen to structure these lessons about computers and computation as a theatrical drama in three acts. It is a drama in the full sense of the word. Each story (i.e., chapter) begins with a problem that we'll take apart and then solve.
+## Three acts
+
+I have chosen to structure these lessons about computers and computation as a theatrical drama in three acts. It is a drama in the full sense of the word. Each story (i.e., chapter) begins with a problem that we'll take apart and then solve.
 
 But I like the image of a drama for an additional reason. As some of you might already know, the word "drama" comes from the Greek word *dran*, which means to do, to act. And act you will.
 
@@ -45,13 +55,17 @@ I ask that you don't passively read each of the chapters that follow. If you're 
 
 I'm serious. Don't just read. Experiment. Try to break things. Try to make the code in this book do things that interest you.
 
-**Programmers and playwrights.** As you work your way through the code examples in this book, I'd like you to think of yourself as a programmer and a playwright. Paul Graham of Y Combinator fame wrote in 2003 that [hackers and painters](http://www.paulgraham.com/hp.html), seemingly different professions, are quite similar in that both groups hone their skills by doing. While I have great respect for Paul, I think programmers and playwrights are a more apt twosome. Why? It has to do with the immediacy of the feedback they receive on what they write. 
+## Programmers and playwrights
+
+As you work your way through the code examples in this book, I'd like you to think of yourself as a programmer and a playwright. Paul Graham of Y Combinator fame wrote in 2003 that [hackers and painters](http://www.paulgraham.com/hp.html), seemingly different professions, are quite similar in that both groups hone their skills by doing. While I have great respect for Paul, I think programmers and playwrights are a more apt twosome. Why? It has to do with the immediacy of the feedback they receive on what they write. 
 
 Playwrights, who test their early drafts with a theatrical troupe, receive immediate feedback on the success of what they write. Those playwrights are able to compare what they had in mind while writing to what results when the scripts are performed. Paying close attention to what works and what doesn't, they can build a masterpiece. 
 
 Likewise, the best computer scripts come not fully formed from a programmer's mind, but blossom over time as the programmer tries things and adjusts to feedback, from both the machine and their peers. Programming, like playwriting, is a craft that improves with feedback, practice, and community. 
 
-**The hump.** The skills in any worthwhile craft take work to develop and master. By opening this book, you've taken the first step toward developing the craft of solving problems with computation, a skill of growing importance in our modern world.
+## The hump
+
+The skills in any worthwhile craft take work to develop and master. By opening this book, you've taken the first step toward developing the craft of solving problems with computation, a skill of growing importance in our modern world.
 
 But I need to be honest with you: You will work hard to develop this skill. Yet like reading and writing in any language, you'll be amazed when things finally click.
 
@@ -59,7 +73,9 @@ This book will help you to get over the hump we all experience. On one side of t
 
 Besides helping you get started with programming, this book will teach you to interpret the immediate, often frustrating, feedback you'll get as the computer performs the first versions of your scripts. Knowing what to do when things fail will give you the tools you need to succeed.
 
-**Problem solving.** I strongly believe that doing is the best path to learning, but what you're asked to do can be engaging and inspiring, or it might just be dreadfully boring. Alfred Hitchcock has said that "Drama is life with the dull bits cut out," and this is my goal in teaching you the art and skill of computer programming.
+## Problem solving
+
+I strongly believe that doing is the best path to learning, but what you're asked to do can be engaging and inspiring, or it might just be dreadfully boring. Alfred Hitchcock has said that "Drama is life with the dull bits cut out," and this is my goal in teaching you the art and skill of computer programming.
 
 This book won't waste your time on a parade of programming language features, a dictionary of computer science concepts, and the small, typically mind-numbing code examples that demonstrate them. You can find ample examples online when you need them. 
 
@@ -67,7 +83,9 @@ Instead, we will spend our time together in each chapter developing solutions to
 
 Every computational concept and programming language feature I cover is taught within the context of a problem to be solved. I'll encourage you to work through each problem, and periodically, I'll give you the chance to practice what you've learned through a programming challenge, which builds upon the problem or problems we recently solved. These projects will both deepen your understanding of the concepts covered and develop your skills as someone capable of using computation to solve real-world problems.
 
-**Learning to problem solve in three acts.** Structurally, the book segments the problems into three acts. The acts correspond to the stages I see in your evolution from someone just learning to write your own scripts to someone that uses programming and computational thinking as skills in your everyday work.
+## Learning to problem solve in three acts
+
+Structurally, the book segments the problems into three acts. The acts correspond to the stages I see in your evolution from someone just learning to write your own scripts to someone that uses programming and computational thinking as skills in your everyday work.
 
 * **Act I** (the setup) assumes a novice status. It introduces you to the steps involved in problem solving with computers, and it illustrates these steps through the solving of nine, easy-to-understand challenges. Each challenge highlights a skill that you'll use often in working with computers. 
     * The problems in the chapters are ordered so that each builds upon the previous, introducing you to new computational ideas and concepts.
@@ -83,7 +101,9 @@ Every computational concept and programming language feature I cover is taught w
     * We can learn a lot about the right tool for a task by understanding how computational tools fail and what, if anything, we can do about these failures. In the final six problems, you'll use increasingly powerful computational tools and gain insights into their limitations.
     * Despite these limitations, finding the right computation tool is a matter of understanding and exploiting patterns. *Pattern recognition* is the final fundamental idea in computational thinking, and it is at the core of machine learning and generative AI. If you can recognize the patterns in your problem, you can identify the right computational tool to exploit those patterns. And if you understand how computational tools exploit pattern matching, you can avoid falling victim to their limitations.
 
-**Layering and illustrating connections.** Nowhere in this book will you find a single section on a programming structure like looping or an important computer-science concept like abstraction. Instead, the text will regularly return to previously introduced topics, and when it does, I will layer on new nuances and new connections.
+## Layering and illustrating connections
+
+Nowhere in this book will you find a single section on a programming structure like looping or an important computer-science concept like abstraction. Instead, the text will regularly return to previously introduced topics, and when it does, I will layer on new nuances and new connections.
 
 This layering will help you to grow from novice to skilled practitioner. It presents the basic ideas when they are first needed to solve a problem. It later reminds you of what you know when that knowledge can get us started on a new and more complex problem. It then builds upon your current understanding when a new problem demands that you understand some of the nuances or more powerful aspects of a programming structure or a computer science concept. 
 
@@ -91,4 +111,4 @@ Furthermore, by discussing programming language syntax and computer science conc
 
 This is what awaits you in this book. It is an approach that has engaged students intrinsically motivated to learn programming and those who thought they could never do it. No matter which you are, I'm glad that you picked up this book. You are about to experience the beauty and power of computational thinking to solve real-world problems, especially those that excite you. And as you learn to write your own scripts, I hope you will, like the best playwrights do, develop your own voice, your own unique style. Then what you do with this new and wondrous skill is up to you.
 
-\[Version 20230606\]
+\[Version 20230811\]

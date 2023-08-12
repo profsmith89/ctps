@@ -165,6 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -290,7 +291,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -306,6 +309,28 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-and-libraries">Packages and libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apis">APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-problem">A new problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-wikipedia">Searching Wikipedia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-client-server-programming-model">The client-server programming model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-transactions-and-protocols">Resources, transactions, and protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-url">The URL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-programmable-web">The Programmable Web</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-dictionaries">Python dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-http-response">An HTTP response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-response-header">The response header</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-and-the-response-body">JSON and the response body</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerating-answers-from-hollis">Enumerating answers from HOLLIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-printing">Beyond printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-and-non-blocking-function-calls">Blocking and non-blocking function calls</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -339,11 +364,16 @@ document.write(`
 <p class="sidebar-title">Definition</p>
 <p>A <em>package</em> is simply a set of modules that a Python programmer wishes to distribute all together.</p>
 </aside>
+<section id="packages-and-libraries">
 <p><strong>Packages and libraries.</strong> To access information out on the Internet, we will use the <code class="docutils literal notranslate"><span class="pre">requests</span></code> package. The <code class="docutils literal notranslate"><span class="pre">requests</span></code> package is one among many available through the <a class="reference external" href="https://pypi.org/">Python Package Index</a>, which is simply an online repository of software for the Python programming language.</p>
 <p>Another name you’ll often hear programmers use for a collection of modules is <em>library</em>. Programming languages like Python are typically distributed with what is called a <em>standard library</em>, which you can think of as the modules and packages available by default wherever the programming language is installed. The <a class="reference external" href="https://docs.python.org/3/library/">Python standard library</a> includes built-in constants (e.g., <code class="docutils literal notranslate"><span class="pre">True</span></code>), data types (e.g., <code class="docutils literal notranslate"><span class="pre">str</span></code>), and functions (e.g., the file I/O facilities) that we have repeatedly used in our scripts.</p>
+</section>
+<section id="apis">
 <p><strong>APIs.</strong> How do we use the functions and data structures in published packages and libraries to accelerate the development of our own scripts? We use their <em>application programming interface (API)</em>.</p>
 <p>An API begins with the functions and data structures defined in the package or library, but it doesn’t stop there. As we talked in the last chapter, the public interface for a function is often not enough for us to fully understand how to use the function, and so an API isn’t complete without well-written documentation, like the information we discussed putting in the docstring of the functions we write. To emphasize, an API refers to both the function interfaces and data structure definitions we can <code class="docutils literal notranslate"><span class="pre">import</span></code> into our scripts as well as the documentation for these interface and definitions that tell us how we can properly use them. You have already been using an API when you used Python’s built-in types (like strings), their methods (like string-find), and Python’s documentation (like the documentation on Python’s sequence types).</p>
 <p>As you’ve experienced, a module and its API simplifies the work we need to do in building solutions to the problems that interest us because we can use a module’s functions and data structures without having to write this functionality ourselves or even understand exactly how the functions and data structures operate. Because Python has a treasure trove of existing libraries, our scripts are now no longer limited by what’s built in the Python language or what we know how to build ourselves. This is incredibly powerful for it expands the limits of our dramatic stage and permits us to reach beyond our own laptops to take advantage of everything on the Internet. Let’s start doing that now.</p>
+</section>
+<section id="a-new-problem">
 <p><strong>A new problem.</strong> To date, we’ve affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here’s another seemingly simple question: Can I write a program to check if a book exists in Harvard’s library system? Maybe I want to know if there’s a copy of Dr. Seuss’s <em>The Cat in the Hat</em> somewhere in its miles of bookshelves.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Card Catalogs</p>
@@ -362,6 +392,8 @@ document.write(`
 <p>In the next chapter, we will peek under the covers of this API, just as we did with string-replace. We’ll also start solving problems that require more general communication between two networked computers. We won’t, however, go too deep, and if you want to know exactly how computers communicate over wired and wireless networks, find yourself a book or course on computing networking.</p>
 </aside>
 <p>This looks simple enough, as long as we can find libraries with APIs that make, for example, sending a request from one computer to another as simple as a function call. Think about this. There is almost certainly a boatload of work that needs to be done to send a message from our computer to some other computer, and we’d love it if someone else had figured out how that exactly works and has hidden that work behind the interface of a simple function call. Luckily, there is such an API, and we’ll use it to do something pretty amazing.</p>
+</section>
+<section id="searching-wikipedia">
 <p><strong>Searching Wikipedia.</strong> HOLLIS is programmed to provide its users with lots of information in response to their queries. You’d learn a book’s catalogue number, publisher, and publication date. You’d find a short description of its subject matter and any notes that a librarian attached to the entry. You’d also know exactly where you could find the book on Harvard’s shelves.</p>
 <p>Since we’ve learned that it’s best to start problem solving with a simple instance, let’s write most of what we need in our script while targeting a simple web resource. In particular, let’s ask whether Wikipedia has an entry for <em>The Cat in the Hat</em>. The pseudocode for this problem is the same as above, except we replace HOLLIS with <a class="reference external" href="http://wikipedia.org">wikipedia.org</a>.</p>
 <p>Here is one translation of that pseudocode into Python code:</p>
@@ -392,6 +424,8 @@ document.write(`
 <p>This script uses Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, which is described as “<a class="reference external" href="https://requests.readthedocs.io/en/master/">an elegant and simple HTTP library for Python, built for human beings.”</a> This library is not part of Python’s standard library, and you may have to follow a few steps explained in the library’s documentation to get it installed on your machine. Once installed, the API provided by this library makes it very simple to complete the middle two steps of our pseudocode, as illustrated by the single <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call on line 13.</p>
 <p>This call and its returned result hide all the hard and confusing parts of communicating across whatever network is connected to our computer. We do a small amount of work to set up the parameter to this call (lines 8-9), which involves a small amount of string processing, and the object returned by the <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call, which we’ve named <code class="docutils literal notranslate"><span class="pre">response</span></code>, will tell us if Wikipedia can provide an answer to our question.</p>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">qweb1.py</span></code> and it will respond that it successfully talked to a Wikipedia server.</p>
+</section>
+<section id="the-client-server-programming-model">
 <p><strong>The client-server programming model.</strong> Congratulations! You have successfully executed and generally understood your first network program. We all use network programs every day, from the web browsers running on our laptops to the bank apps running on our cell phones. Nearly every one of these network applications follows the same, straightforward programming model illustrated in <code class="docutils literal notranslate"><span class="pre">qweb1.py</span></code>. Before we dive deeper into its code, let’s take a moment and understand the basics of this client-server programming model.</p>
 <p>We have written a script that acts as a <em>client</em> in this client-server model. To complete its task, it makes a <em>request</em> of some other computational entity called a <em>server</em>. Typically, this server runs on some other computer, and the machines on which the client and server run are connected by a <em>computer network</em>. It is, however, possible that the client and the server are in fact running on the same machine, and we will take advantage of this ability in some of our upcoming examples.</p>
 <figure class="align-default" id="c04-fig1-ref">
@@ -403,7 +437,9 @@ document.write(`
 <p><a class="reference internal" href="#c04-fig1-ref"><span class="std std-numref">Figure 7</span></a> illustrates both of these cases. It is important to keep in mind that we’re talking about a script that becomes a running program when we talk about clients and (in next chapter) servers. While you might hear someone point to a computer and say that it is their server, they probably mean that they have reserved this computer to run one or more server programs that respond to the requests of one or more client programs.</p>
 <p>By the way, the computer science term for a running program (or more precisely a running instance of a script) is a <em>process</em>, and when the client and server processes exchange information, it is called <em>interprocess communication</em>. Two processes sending data across a computer network is one form of interprocess communication.</p>
 <p>Whether the client and server are running on two separate, networked computers or both on the same computer is a detail hidden by the abstraction of the client-server programming model. And when networks are involved, the model hides the details of whether it is a wired network, a wireless network, or some combination of networks using lots of different transport mechanisms and data exchange protocols!</p>
-<p><strong>Resources, transactions, and protocols (oh my).</strong> Getting back to the structure of the client-server programming model, a server program is responsible for managing some <em>resource</em> that client programs find useful. A web server, like <a class="reference external" href="http://wikipedia.org">wikipedia.org</a>, manages access to the files that comprise the articles in that online encyclopedia. An email server manages the transfer of email messages between email clients. A gaming server manages the shared state of the game and keeps each clients’ view of the game globally consistent.</p>
+</section>
+<section id="resources-transactions-and-protocols">
+<p><strong>Resources, transactions, and protocols.</strong> Getting back to the structure of the client-server programming model, a server program is responsible for managing some <em>resource</em> that client programs find useful. A web server, like <a class="reference external" href="http://wikipedia.org">wikipedia.org</a>, manages access to the files that comprise the articles in that online encyclopedia. An email server manages the transfer of email messages between email clients. A gaming server manages the shared state of the game and keeps each clients’ view of the game globally consistent.</p>
 <p>The signature operation that takes place repeatedly in the client-server programming model is a <em>transaction</em>. The Python <code class="docutils literal notranslate"><span class="pre">requests</span></code> library hides the four fundamental steps of a transaction between a client and a server behind the <code class="docutils literal notranslate"><span class="pre">requests.request</span></code> function interface, of which we have used a specific type of request in our network program. The four steps are: (1) the client sends a request to the server; (2) the server receives the request, interprets it, and manipulates the resource it controls in the requested manner (assuming it is a valid request); (3) the server sends a response to the client; and (4) the client receives the response and interprets it.</p>
 <figure class="align-default" id="c04-fig2-ref">
 <img alt="_images/c04_fig2.png" src="_images/c04_fig2.png" />
@@ -415,6 +451,8 @@ document.write(`
 <p>It’s now time to own up to something I mentioned when I introduced the Python <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, but have ignored throughout our discussion of the client-server programming model. The <code class="docutils literal notranslate"><span class="pre">requests</span></code> API does not allow us to do <em>any</em> type of client-server communication, but client-server communication using one specific <em>protocol</em> (i.e., the HTTP protocol).</p>
 <p>What is a protocol? It is a fancy way of saying that two communicating processes can’t communicate unless they use the same language. Sound familiar? Encoding standards and communication protocols are related concepts. Clients and servers cannot communicate unless they agree to use the same method and meanings for the packing and unpacking of the data that they exchange.</p>
 <p>In the Worldwide Web, browsers (i.e., clients) and web servers interact using a text-based protocol known as the <em>hypertext transfer protocol (HTTP)</em>. We see pieces of this protocol in the <code class="docutils literal notranslate"><span class="pre">url</span></code> string. In fact, HTTP defines a handful of methods that are the only ways that clients can ask servers to perform actions on their resources. One of these methods is GET, which simply asks the server to return a representation of the specified resource. The other popular HTTP method is POST, which essentially asks the server to accept the data accompanying the request as a new piece of the specified resource. Our script invokes the simpler GET method. That’s why the function name we use from the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library is <code class="docutils literal notranslate"><span class="pre">get</span></code>!</p>
+</section>
+<section id="the-url">
 <p><strong>The URL.</strong> When we “get” content from a web server, the data we receive comes in part from some file that the server manages, and as you might expect, each file on the server has a unique name. When we type a <em>URL (a universal resource locator)</em> in the address bar of a browser, this URL includes a <em>path</em> in the server’s file system to the file (i.e., resource) that interests us. The script <code class="docutils literal notranslate"><span class="pre">qweb2.py</span></code> rewrites the setup work we did in <code class="docutils literal notranslate"><span class="pre">qweb1.py</span></code> so that we can see the four main components of the URLs used in the HTTP protocol.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb2.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">requests</span>
@@ -453,6 +491,8 @@ document.write(`
 </aside>
 <p>The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we’d like. This path is specified in a form very similar to the paths we use in UNIX-like filesystems. This is not surprising since we are, in fact, specifying a file in the host’s filesystem.</p>
 <p>Finally, HTTP allows us to specify an optional query at the end of our URL. The question mark (<code class="docutils literal notranslate"><span class="pre">?</span></code>) character separates the path from the query. The query itself is a string comprised of name and value pairs, with each pair separated by an ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) character.</p>
+</section>
+<section id="the-programmable-web">
 <p><strong>The Programmable Web.</strong> You might wonder, how did I know to create this specific URL? If we point our browser to <a class="reference external" href="http://en.wikipedia.org">en.wikipedia.org</a> and type “The Cat in the Hat” in the search box there, the URL to which we’re directed is <a class="reference external" href="https://en.wikipedia.org/wiki/The_Cat_in_the_Hat">https://en.wikipedia.org/wiki/The_Cat_in_the_Hat</a> and not the one found in <code class="docutils literal notranslate"><span class="pre">qweb2.py</span></code>. That’s because we want to use the Web as a programmable platform, and to do that, we want to access the parts of the Web with published APIs.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Other API Directories</p>
@@ -462,6 +502,8 @@ document.write(`
 </aside>
 <p>To learn what Internet-based APIs existed, I visited the <a class="reference external" href="https://en.wikipedia.org/wiki/ProgrammableWeb">ProgrammableWeb</a>, which maintained a directory of these things until it shutdown in early 2023. That site pointed me to <a class="reference external" href="https://www.mediawiki.org/wiki/API:Main_page">MediaWiki’s API</a>, on which Wikipedia’s API is built. There I learned that the API endpoint for Wikipedia in English is <a class="reference external" href="https://en.wikipedia.org/w/api.php">https://en.wikipedia.org/w/api.php</a>.</p>
 <p>To converse with the server at this endpoint, we have to craft a <em>query string</em>. In this string, the MediaWiki site explained that we should set the parameter named <code class="docutils literal notranslate"><span class="pre">action</span></code> to the value <code class="docutils literal notranslate"><span class="pre">query</span></code> when we want to fetch data. If then we set the <code class="docutils literal notranslate"><span class="pre">list</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">search</span></code>, we can perform a full text search. Since we’re doing a search, we set the parameter <code class="docutils literal notranslate"><span class="pre">srsearch</span></code> with the value of our search string and the parameter <code class="docutils literal notranslate"><span class="pre">srlimt</span></code> to the number of page matches that we’d like returned. Finally, we set the parameter <code class="docutils literal notranslate"><span class="pre">format</span></code> to <code class="docutils literal notranslate"><span class="pre">json</span></code> so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we’ll discuss in a moment.</p>
+</section>
+<section id="python-dictionaries">
 <p><strong>Python dictionaries.</strong> It’s ugly and error prone to write out these cryptic query strings ourselves. You’ve undoubtedly noticed that we can’t use spaces in a query string and must replace each space character with a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>), as we did on line 11 in <code class="docutils literal notranslate"><span class="pre">qweb2.py</span></code>. But what if you wanted a search for a string containing a <code class="docutils literal notranslate"><span class="pre">+</span></code> character? We probably don’t want to become an expert in URL encoding to simply ask our question to Wikipedia. Luckily, we don’t have to because the author of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library realized this too!</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb3.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">requests</span>
@@ -544,6 +586,8 @@ document.write(`
 <p>Go ahead and create a code block in which you can experiment with these Python dictionary commands for yourself. Feel free to take a look at <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">the Python tutorial on dictionaries</a> for more examples.</p>
 <p>Another thing you might try is to print the actual URL used in our <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call. You can see this string if you print <code class="docutils literal notranslate"><span class="pre">response.url</span></code>, which is the URL that produced the response we received.</p>
 </div>
+</section>
+<section id="an-http-response">
 <p><strong>An HTTP response.</strong> So far we have spoken to a Web API, but we haven’t done much with the HTTP response. In fact, our current script simply looks at something called the <em>status code</em> on the response and checks to see if this code is equal to <code class="docutils literal notranslate"><span class="pre">200</span></code>. While surfing around the Internet, you may have seen the phrase <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> or <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code>. In general, the first is something good and the second isn’t. Unfortunately, the first, while good in some ways, may not mean we were completely successful in accomplishing what we hoped to do.</p>
 <p>Instead of acting upon the value of the <code class="docutils literal notranslate"><span class="pre">status_code</span></code> in our received response, let’s change our script for a moment and have it simply print the value of <code class="docutils literal notranslate"><span class="pre">status_code</span></code>. We will then manipulate the parameters to <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> and see which affect the status code. We’ll modify <code class="docutils literal notranslate"><span class="pre">qweb4.py</span></code> in our experiments.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb4.py</span>
@@ -603,6 +647,8 @@ document.write(`
 <p>Restore the good assignment to <code class="docutils literal notranslate"><span class="pre">hostname</span></code>. Now change the value for key <code class="docutils literal notranslate"><span class="pre">'srsearch'</span></code> in the definition for <code class="docutils literal notranslate"><span class="pre">query</span></code> from <code class="docutils literal notranslate"><span class="pre">'The</span> <span class="pre">'Cat</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">Hat'</span></code> to <code class="docutils literal notranslate"><span class="pre">'asdfghjasdfghj'</span></code>. Run this final version of <code class="docutils literal notranslate"><span class="pre">qweb4.py</span></code>.</p>
 </div>
 <p>It’s <code class="docutils literal notranslate"><span class="pre">200</span></code>. The same status code we got when we searched for <code class="docutils literal notranslate"><span class="pre">'The</span> <span class="pre">Cat</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">Hat'</span></code>. Why is that? You can verify for yourself that Wikipedia will tell you that it doesn’t contain a page with this particular string.</p>
+</section>
+<section id="the-response-header">
 <p><strong>The response header.</strong> To figure this out, we need to look at more than the response’s status code. Fortunately, HTTP request and response messages were designed to be human readable. Printing them can be instructional.</p>
 <p>Roughly speaking, these messages consist of a <em>header</em> and a <em>body</em>. We can think of the header as containing the information we might see on the outside of an envelope (e.g., who the letter is meant for and the date it was posted at the post office). The body is the contents of the letter sealed in the envelope. Or if you prefer email, the header contains information like the “from” and “subject” fields, while the body is what is written below the subject line in most email clients.</p>
 <aside class="margin sidebar">
@@ -645,6 +691,8 @@ document.write(`
 </pre></div>
 </div>
 <p>We’re not too concerned with most of the header, but one field that should interest us is the value of the key <code class="docutils literal notranslate"><span class="pre">'Content-Type'</span></code> for this indicates how the server has encoded the body of the response. The value of this key is <code class="docutils literal notranslate"><span class="pre">'application/json;</span> <span class="pre">charset=utf-8'</span></code>. As we learned in the last chapter, the Python interpreter we’re using defaults to <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> for character encodings and having the Wikipedia server return a response in this encoding format makes our lives easy. Beyond the encoding of the individual characters in the response’s body, this value tells us that the body is organized using the JSON data-interchange standard, which is what we asked it to do when we specified <code class="docutils literal notranslate"><span class="pre">'format':</span> <span class="pre">'json'</span></code> as one of our <code class="docutils literal notranslate"><span class="pre">query</span></code> parameters.</p>
+</section>
+<section id="json-and-the-response-body">
 <p><strong>JSON and the response body.</strong> JSON stands for <a class="reference external" href="http://json.org">JavaScript Object Notation</a>, and it is meant to be standard for exchanging structured data that is easy for machines to generate and parse, while also being relatively easy for humans to read and write.</p>
 <p>As we saw when we looked at the body of our <code class="docutils literal notranslate"><span class="pre">response</span></code>, JSON-structured data resembles a dictionary of key-value pairs. Some of the values might be singleton values like a string or an integer, and other values might themselves be lists (i.e., enclosed in square brackets) or dictionaries (i.e., enclosed in curly braces).</p>
 <p>By importing the <code class="docutils literal notranslate"><span class="pre">json</span></code> module, we can take advantage of someone else’s work to make it straightforward for us to read and write message bodies in JSON format.</p>
@@ -703,6 +751,8 @@ document.write(`
 <p class="sidebar-title">A New API</p>
 <p>To communicate with the Harvard Library system, <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> uses <a class="reference external" href="https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs">the LibraryCloud API</a>.</p>
 </aside>
+</section>
+<section id="enumerating-answers-from-hollis">
 <p><strong>Enumerating answers from HOLLIS.</strong> The <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> script below communicates not with Wikipedia, but (finally!) Harvard Library. You should recognize and understand every statement except for the details of the for-loop that processes the returned response.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb7.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">requests</span>
@@ -757,6 +807,8 @@ document.write(`
 <p>You can learn more about tuples in this chapter’s active-learning exercises.</p>
 </aside>
 <p>In this script, we have asked HOLLIS to return not just the top search result, but the top two results. The final lines of the script then dig down into the JSON-structured data to grab the Python list of results, and it passes that list to the Python built-in function <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>. This is a very useful little function when what you need is not just each value in a list, but each value paired with its list index. We pull this returned <em>tuple</em> apart (using multiple assignment) in the for-loop, placing the index in <code class="docutils literal notranslate"><span class="pre">i</span></code> and the dictionary that is the next value from the list in <code class="docutils literal notranslate"><span class="pre">item</span></code>. From this dictionary, we grab the information associated with the key <code class="docutils literal notranslate"><span class="pre">'titleInfo'</span></code> and print it.</p>
+</section>
+<section id="beyond-printing">
 <p><strong>Beyond printing.</strong> Now that we understand the basics of grabbing data off the Internet, we can start having some real fun. Printing pieces of the data we’ve collected has helped us see what we’ve been getting back from these Web APIs, but why should we recreate what the software engineers at Wikipedia and Harvard Library have already spent years thinking about how to display? Imagine that we wanted to develop a script that searched multiple different libraries for a particular book. When it finds the book we’re interested in, we instruct this script to open the result in a browser window. We can see how this might be done using the HOLLIS URL in the response we just received.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb8.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">requests</span>
@@ -832,6 +884,8 @@ document.write(`
 <p>The for-else-statement does away with this flag in this exact use case. The if-statement in the for-loop contains the condition we’d like to find <code class="docutils literal notranslate"><span class="pre">True</span></code>, and when the if-statement’s condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>, we break out of the for-loop. This is exactly what we’d like to think about this loop doing. But what if this loop iterates all the way through because we never found our desired item. Here’s where the else-clause of the for-statement executes, alerting us that we failed in our search. Now that, my friends, how you create a programming language feature for a common construct.</p>
 <p>And what did our script do when it found our desired book? It grabbed the HOLLIS URL for the book out of the matching record and launched a web browser (in this case, <code class="docutils literal notranslate"><span class="pre">Safari</span></code>) to display the resource at that URL.</p>
 <p>Did we have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the <code class="docutils literal notranslate"><span class="pre">webbrowser</span></code> library; I simply imported and used this library after spending only a few minutes with its API description.</p>
+</section>
+<section id="blocking-and-non-blocking-function-calls">
 <p><strong>Blocking and non-blocking function calls.</strong> Let’s pause for a moment and look at two of the wonderfully powerful function calls we made in <code class="docutils literal notranslate"><span class="pre">qweb8.py</span></code>. The <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call on line 18 and the <code class="docutils literal notranslate"><span class="pre">browser.open</span></code> call on line 56 are different in a fundamentally interesting way. I don’t mean that one returns a Python list and the other returns the special Python object <code class="docutils literal notranslate"><span class="pre">None</span></code>. No, I want you to think about when lines 21 and 57 execute.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -839,7 +893,8 @@ document.write(`
 </aside>
 <p>Line 21 can’t execute until we have completed the <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call and have a <code class="docutils literal notranslate"><span class="pre">response</span></code> object. This call <em>blocks</em> the further execution of our script until it completes. In particular, our script has to wait for some server process to do some work before the process running our script can continue. On the other hand, our script doesn’t care how long a process that runs the web browser takes to display the URL we asked it to render. Our script can merrily move on to the work in line 57 and beyond. The call to <code class="docutils literal notranslate"><span class="pre">webbrowser.open</span></code> is an example of a <em>non-blocking</em> call.</p>
 <p>This is your first taste of concurrency (also called parallelism), and it is a fascinating and tricky subject. For now, be aware whether the library call you’re making will block and think about the implications of that action on the rest of what you write in your script.</p>
-<p>[Version 20230706]</p>
+<p>[Version 20230811]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -900,6 +955,34 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-and-libraries">Packages and libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apis">APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-problem">A new problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-wikipedia">Searching Wikipedia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-client-server-programming-model">The client-server programming model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-transactions-and-protocols">Resources, transactions, and protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-url">The URL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-programmable-web">The Programmable Web</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-dictionaries">Python dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-http-response">An HTTP response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-response-header">The response header</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#json-and-the-response-body">JSON and the response body</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerating-answers-from-hollis">Enumerating answers from HOLLIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-printing">Beyond printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-and-non-blocking-function-calls">Blocking and non-blocking function calls</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

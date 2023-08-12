@@ -26,7 +26,9 @@ In this chapter, you will learn about character sets and functional abstraction 
 *   Begin to use Python modules in your coding projects [programming skills].
 ```
 
-**Internationalization.** I ended the last chapter with a disclosure: What we think of as an individual character is simply a Python string of length 1. This is a beautiful simplification that makes it easy to write a script that processes characters and strings. But you might wonder, "Strings in whose native tongue?" To create programs that solve the world's problems, our computers and the software that runs on them must handle the character sets of the world's many human languages.
+## Internationalization
+
+I ended the last chapter with a disclosure: What we think of as an individual character is simply a Python string of length 1. This is a beautiful simplification that makes it easy to write a script that processes characters and strings. But you might wonder, "Strings in whose native tongue?" To create programs that solve the world's problems, our computers and the software that runs on them must handle the character sets of the world's many human languages.
 
 The software community uses the term *internationalization* when it describes the process of building programs and systems that adapt to the multitude of human languages and dialects. You will also hear the software community talk about the process of *localization*, which takes internationalized software and configures it for a specific language and locale.
 
@@ -34,7 +36,9 @@ This might be a bit abstract, and so let's take a specific example. I'm writing 
 
 In this chapter, we are going to focus on just one piece of this large and complex problem of internationalization: computing with the multitude of characters in the world's many human languages. Lucky for us, much of the complexity in even this well-defined problem is hidden from you as a programmer. While we don't have to understand everything about *the problem of encoding* every character in every human language, we also can't be ignorant of it.
 
-**Encoding standards.** Let's begin with a demonstration of this encoding problem, using our now familiar `script32.py`. We'll feed a small excerpt from *The Cat in the Hat*, written not in English (`CatInTheHat-excerptE.txt`) but in Spanish (`CatInTheHat-excerptS.txt`) to this script. Notice that the Spanish version uses punctuation marks that appear in Spanish but not English. It also correctly includes accents that help readers distinguish the Spanish word *el* (meaning 'the') from the different word *él* (meaning 'he').
+## Encoding
+
+Let's begin with a demonstration of this encoding problem, using our now familiar `script32.py`. We'll feed a small excerpt from *The Cat in the Hat*, written not in English (`CatInTheHat-excerptE.txt`) but in Spanish (`CatInTheHat-excerptS.txt`) to this script. Notice that the Spanish version uses punctuation marks that appear in Spanish but not English. It also correctly includes accents that help readers distinguish the Spanish word *el* (meaning 'the') from the different word *él* (meaning 'he').
 
 ```{code-block} python
 ---
@@ -66,7 +70,9 @@ Back in the world of Python, we can specify what encoding the built-in function 
 Go ahead and try this by alternatively using each one of the three different with-as-statements included in `chap03/script32.py`.
 ```
 
-**Standards.** `utf-8` and `latin-1` are two of a large number of different encoding *standards*. You'll find standards all throughout our physical and virtual worlds. A standard is simply a documented and widely agreed-upon method for doing something.
+## Standards
+
+`utf-8` and `latin-1` are two of a large number of different encoding *standards*. You'll find standards all throughout our physical and virtual worlds. A standard is simply a documented and widely agreed-upon method for doing something.
 
 ```{margin} References
 [https://en.wikipedia.org/wiki/Road_surface_marking](https://en.wikipedia.org/wiki/Road_surface_marking)
@@ -84,11 +90,15 @@ While the individual states eventually agreed upon today's standard, this U.S. s
 
 By the way, if you're interested, you can begin an exploration of the checkered history of encoding standards by reading about Unicode, the standard we use and explore next.
 
-**Unicode.** The Unicode standard maps each language character to a unique *code point* in a *codespace*. This approach attempts to take every character in every language in the world and maps them into a rigorously defined space of values. For example, the code point for the capital letter "A" is `U+0041`, while the code point for the division sign "÷" is `U+00F7`. The four digits at the end of each of these two code points represent a hexadecimal number, which we will learn more about in a later chapter. For now, we simply need to know the code point number for each character we want to specify.
+## Unicode
+
+The Unicode standard maps each language character to a unique *code point* in a *codespace*. This approach attempts to take every character in every language in the world and maps them into a rigorously defined space of values. For example, the code point for the capital letter "A" is `U+0041`, while the code point for the division sign "÷" is `U+00F7`. The four digits at the end of each of these two code points represent a hexadecimal number, which we will learn more about in a later chapter. For now, we simply need to know the code point number for each character we want to specify.
 
 You should notice a couple of things here. First, code points simply tell you the character. A code point does not tell you what font to use for that character. Nor does it tell you whether the character should be displayed in bold or italics, or even in what color. What sounds simple --- display a capital "A" please --- is actually a complex system of standards and interacting systems, each with their own special purpose and function. While we will later discuss some of this, let's stick for the time being with the goal of how to specify different characters.
 
-**A new problem.** The other interesting thing about Unicode is that it includes not only letters, but symbols. In fact, the concept of a character is quite liberal, encompassing even emoji. For instance, the cat-with-wry-smile emoji (😼) is codepoint `U+1F63C`. Let's use that to make the stories our scripts read a bit more fanciful.
+## A new problem
+
+The other interesting thing about Unicode is that it includes not only letters, but symbols. In fact, the concept of a character is quite liberal, encompassing even emoji. For instance, the cat-with-wry-smile emoji (😼) is codepoint `U+1F63C`. Let's use that to make the stories our scripts read a bit more fanciful.
 
 In particular, let's start our work with the script from Chapter 1 (slightly improved and listed just below), which reads a specified children's book.
 
@@ -113,7 +123,9 @@ with open('txts/' + my_book) as my_open_book:
 
 What we eventually want this script to do is to *replace* some of the words with emoji characters as it prints out the book's text. Which words? Let's replace every instance of "Cat" with 😼 and "Hat" with 🎩.
 
-**Decomposition to reduce the problem's complexity.** Before we try to solve this entire challenge in one go, let's ask if we can break it into simpler pieces. What do you think?
+## Decomposition to reduce the problem's complexity
+
+Before we try to solve this entire challenge in one go, let's ask if we can break it into simpler pieces. What do you think?
 
 ```{margin} Break It Down
 Remember! Decompose complex problems in a sequence of simple steps and you'll solve your challenges every time!
@@ -121,7 +133,9 @@ Remember! Decompose complex problems in a sequence of simple steps and you'll so
 
 Of course we can. Forgetting about emojis for a moment, we might start by asking how we replace *one word with another* in a Python string. If we can accomplish this, then we can move to replacing *one word with an emoji*, which involves understanding how to print code points in a Unicode string. From there, we can move to replacing *every instance of a word in a line*, and ultimately *every instance of multiple different words*. Then bam, we've solved our problem!
 
-**Strings as immutable sequences.** We'll begin by learning how to replace one word with another. We could code this functionality ourselves, but we have already seen that Python provides a number of useful methods that operate on sequences and Python strings are sequences. Before reading on, skim at the [Python documentation](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range) that lists the pre-programmed operations for sequences.
+## Strings as immutable sequences
+
+We'll begin by learning how to replace one word with another. We could code this functionality ourselves, but we have already seen that Python provides a number of useful methods that operate on sequences and Python strings are sequences. Before reading on, skim at the [Python documentation](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range) that lists the pre-programmed operations for sequences.
 
 We have used a number of these operations in our previous scripts, but nothing in this list helps us replace part of a sequence with another sequence.
 
@@ -189,7 +203,9 @@ s = 'Just me. Just me. Just me.'
 s.replace('me', 'you')
 ```
 
-**Encode an emoji in Unicode.** Onto the second step, which has us substitute the string `'Gato'` with the Unicode code point for the cat-with-wry-smile emoji. You've already done something like this when we talked about how to express a carriage return. We used the special character sequence `'\n'` where the `'\'` told the Python interpreter that the next character wasn't a simple `'n'` but an encoding of something we couldn't express in a single printable character. We will do the same thing here.
+## Encode an emoji in Unicode
+
+Onto the second step, which has us substitute the string `'Gato'` with the Unicode code point for the cat-with-wry-smile emoji. You've already done something like this when we talked about how to express a carriage return. We used the special character sequence `'\n'` where the `'\'` told the Python interpreter that the next character wasn't a simple `'n'` but an encoding of something we couldn't express in a single printable character. We will do the same thing here.
 
 Python provides two ways to specify Unicode code points: We can use '`\u`' followed by four hexadecimal characters, if the character we want is at the start of the Unicode code space, like the letter 'G'.
 
@@ -251,7 +267,9 @@ with open('txts/' + my_book) as my_open_book:
             break
 ```
 
-**Multiple different replacements.** Let's now extend our script so that it makes replacements for "Cat" and "Hat". This task is fairly straightforward because the two substitutions are independent, and by that I mean that one substitution doesn't insert something that the other is expected to replace. As such, we simply need to run every replacement on every line we read.
+## Multiple different replacements
+
+Let's now extend our script so that it makes replacements for "Cat" and "Hat". This task is fairly straightforward because the two substitutions are independent, and by that I mean that one substitution doesn't insert something that the other is expected to replace. As such, we simply need to run every replacement on every line we read.
 
 ```{code-block} python
 ---
@@ -277,13 +295,17 @@ with open('txts/' + my_book) as my_open_book:
             break
 ```
 
-**Feeling overwhelmed?** While you should feel a real sense of accomplishment for all that you've learned, you might also be feeling a bit overwhelmed. How do you know if a programming language provides you with a piece of functionality like `replace`? And even if you know that it does, how do you know the name the language designer chose for that functionality? 
+## Feeling overwhelmed?
+
+While you should feel a real sense of accomplishment for all that you've learned, you might also be feeling a bit overwhelmed. How do you know if a programming language provides you with a piece of functionality like `replace`? And even if you know that it does, how do you know the name the language designer chose for that functionality? 
 
 The simple answer is, you don't. Python provides us with a pretty decent set of documentation pages, and we are fortunate to live in a world where sensible questions fed to a search engine or chatbot will often produce a great start on a set of possibly helpful answers.
 
 Of course, if you don't realize that the functionality you need already exists, you can always build the functionality yourself. Let's see how this is done.  
 
-**Functions.** Let's pretend that there is no string-replace method built into Python. How would we write a script that does what `replace4.py` does? Without access to Python's `replace` method, we would probably write some pseudocode that looks as follows. 
+## Functions
+
+Let's pretend that there is no string-replace method built into Python. How would we write a script that does what `replace4.py` does? Without access to Python's `replace` method, we would probably write some pseudocode that looks as follows. 
 
 ```{code-block} python
 ---
@@ -315,7 +337,9 @@ Probably not. Think about what happens if you find a mistake. You'd have to fix 
 
 Yes it would. Programming language support for *functions* (also called *procedures* and *methods*) provides us with exactly this ability. By separating the implementation of a function from the possibly many places where you invoke it, you make it easy to fix a function's implementation if it contains a mistake or if you find some aspect of its behavior (e.g., how fast it runs, as we'll discuss in later chapters) is not what you hoped it would be.
 
-**Function definitions.** We are ready to expand our pseudocode to include the concept of a function definition. When you define a function, you should think about creating two important pieces: a *public interface* and a *hidden implementation*. 
+## Function definitions
+
+We are ready to expand our pseudocode to include the concept of a function definition. When you define a function, you should think about creating two important pieces: a *public interface* and a *hidden implementation*. 
 
 ```{code-block} python
 ---
@@ -355,7 +379,9 @@ The rest of the function definition is its concrete implementation. An implement
 
 In general, you can think of a function as a script that performs a specific action using data you send it. And just as we have been running our scripts numerous times, you can run this new function numerous times with different data and get back possibly different results.
 
-**The actual function definition and its invocations.** Let's now fill in our pseudocode with actual Python code.
+## The actual function definition and its invocation
+
+Let's now fill in our pseudocode with actual Python code.
 
 ```{code-block} python
 ---
@@ -415,7 +441,9 @@ When a function call is executed by the Python interpreter, each actual paramete
 
 In plain English, what does this binding mean? It means that we give another name to each object in the actual parameter list. For example, `the_line` names a string object, and as part of the invocation of the `my_replace` function when the Python interpreter executes line 26, that string object will also be given the name `s`.
 
-**Function execution.** It's important to realize that we have switched from talking about writing a function to a discussion of what happens when it executes. It might be helpful to state all together what happens when we tell the Python interpreter to execute `replace7.py`, which includes a function call. 
+## Function execution
+
+It's important to realize that we have switched from talking about writing a function to a discussion of what happens when it executes. It might be helpful to state all together what happens when we tell the Python interpreter to execute `replace7.py`, which includes a function call. 
 
 We start at the beginning of our script's execution, i.e., immediately after we have typed `python3 replace7.py` and hit return. Like a script reading a plaintext file, the Python interpreter starts reading from line 1. Our script's first line is a comment, and the interpreter moves to line 2. The statement on line 2 is a function definition, and like a new variable definition, it causes the Python interpreter to add the name `my_replace` to the currently active namespace and associate this new name with the list of statements in the function's body. To be clear, none of the statements in the function's body are themselves executed at this point.
 
@@ -437,7 +465,9 @@ Continuing our example, the function call on line 26 returns a new string object
 A function returns if the interpreter reaches the end of the function body without encountering a return-statement. The result returned is the special object `None`, which is also the result when a return-statement has no expression.
 ```
 
-**Abstraction, decomposition, and algorithms.** Let's pause for a moment and rise above the details of building a function and learning how it executes. Our goal was to print a story from a file to our terminal screen while replacing occurrences of some words with some funny emoji. This short description pretty well sums up what our script does. It describes *the script's purpose*. 
+## Abstraction, decomposition, and algorithms
+
+Let's pause for a moment and rise above the details of building a function and learning how it executes. Our goal was to print a story from a file to our terminal screen while replacing occurrences of some words with some funny emoji. This short description pretty well sums up what our script does. It describes *the script's purpose*. 
 
 While writing the Python code, we learned a couple of different ways to replace a portion of a string with another string, with the last version of our script implementing our own string replace. Notice that the script's purpose doesn't include this level of detail. The Python interpreter needs these details (i.e., how it should replace words in a string), but in solving the problem, we don't particularly care if the interpreter uses `my_replace` or Python's built-in `str.replace` method.
 
@@ -447,7 +477,9 @@ Abstraction is a big idea in computer science, but don't let that frighten you. 
 
 The result of all this abstraction and decomposition is an *algorithm*. An algorithm is simply a sequence of well-specified steps that when executed allow a computer (or us acting like a computer) to solve a problem. Lines 3-15 are an algorithm for replacing all occurrences of the `old` substring in string `s` with the `new` substring. Lines 18-34 are an algorithm for reading a story from a file, replacing each occurrence of `'Cat'` and `'Hat'` with some fun emoji and printing the modified story to the terminal screen.
 
-**Definition before use.** I said, "a sequence of well-specified steps" when defining an algorithm, and by "well-specified" I mean that the Python interpreter (or a computer in general) needs to know how to execute each specified statement it encounters. In `replace7.py`, the interpreter knows how to execute line 23, for example, because `readline` is a piece of built-in functionality. It knows how to execute line 26 because the Python interpreter had earlier encountered the definition of `my_replace`.
+## Definition before use
+
+I said, "a sequence of well-specified steps" when defining an algorithm, and by "well-specified" I mean that the Python interpreter (or a computer in general) needs to know how to execute each specified statement it encounters. In `replace7.py`, the interpreter knows how to execute line 23, for example, because `readline` is a piece of built-in functionality. It knows how to execute line 26 because the Python interpreter had earlier encountered the definition of `my_replace`.
 
 What would happen if we placed the definition of `my_replace` (lines 2-15) at the end of our script instead of at its beginning? In this case, the interpreter would encounter the name `my_replace` before seeing its definition, and it would exit with the message: `NameError: name 'my_replace' is not defined`. "But it is!" you would say. "But it isn't when I read the script from start (top) to end (bottom)," the interpreter would reply.
 
@@ -455,7 +487,9 @@ What would happen if we placed the definition of `my_replace` (lines 2-15) at th
 Computer programs are not mystery novels. Computers do not like ambiguity and do not understand suspense. Make sure you give definitions to the names you use before you use them.
 ```
 
-**Python's special variables.** A design pattern that we will frequently use to avoid this sort of problem is illustrated in `replace32.py` below. Pay particular attention to the two statements I appended to the very end of the script, and what I did to the statements that described the main action of the script. 
+## Python's special variables
+
+A design pattern that we will frequently use to avoid this sort of problem is illustrated in `replace32.py` below. Pay particular attention to the two statements I appended to the very end of the script, and what I did to the statements that described the main action of the script. 
 
 ```{code-block} python
 ---
@@ -511,13 +545,17 @@ In addition, I wrapped the "main" part of our script (formally lines 18-34 of `r
 Use this design pattern of wrapping your script's "main" work in a function called `main`, and protect its invocation with: `if __name__ == '__main__'`. You can then place `main` anywhere in your script. Some people like to start their Python scripts with the `main` routine, as everything after it are just details!
 ```
 
-**Docstrings.** We added one other new line to `replace32.py`, and that is the funny-looking string on line 4. This is called a *docstring*, and it is simply a string literal that, as [PEP 257](https://www.python.org/dev/peps/pep-0257/) states, "occurs as the first statement in a module, function, class, or method definition." Its purpose is to explain what the function's interface leaves unsaid that is important in order for you or someone else to use this function in their code.
+## Docstrings
+
+We added one other new line to `replace32.py`, and that is the funny-looking string on line 4. This is called a *docstring*, and it is simply a string literal that, as [PEP 257](https://www.python.org/dev/peps/pep-0257/) states, "occurs as the first statement in a module, function, class, or method definition." Its purpose is to explain what the function's interface leaves unsaid that is important in order for you or someone else to use this function in their code.
 
 For example, the interface to `my_replace` indicates that we need to call it with three input parameters, but it provides no clues as to what value will be returned from the function's execution. A docstring should tell us what's returned. We might also use the docstring to say a bit more than the function's name tells us about its purpose. 
 
 More generally, a docstring does not have to be a single line in length. You should think of the docstring as its formal specification. It outlines the contract between the person who wrote the function and the many people who will use it. John Guttag in his book on Python helpfully describes a function specification as having two primary pieces: (1) a description of the *assumptions* that the function makes about, for instance, its input parameters; and (2) the *guarantees* that the function provides if the assumptions are met.
 
-**Getting a feel for abstraction.** Functions provide us with a particularly useful abstraction. With experience, you'll gain an intuitive sense for what makes a good procedure, i.e., a useful procedural abstraction. Let's start you on this experiential journey.
+## Getting a feel for abstraction
+
+Functions provide us with a particularly useful abstraction. With experience, you'll gain an intuitive sense for what makes a good procedure, i.e., a useful procedural abstraction. Let's start you on this experiential journey.
 
 Some software engineers argue that a function should have a single, well-defined job. Our `my_replace` function is a good example of this. As we develop programs that solve more complex problems than the ones we have seen to date, we will begin to understand why these engineers say that if a script performs a number of distinct tasks in sequence, you should create a procedure for each of those tasks. Of course, in programs that solve quite complex tasks, you may sensibly choose to gather a sequence of procedure calls into the body of a procedure that itself describes a coarser-grained action. This, again, is decomposition at work.
 
@@ -537,7 +575,9 @@ Abstraction and decomposition are more art than science. You should take anyone'
 
 On top of considerations of readability, understanding, and maintainability to which we have alluded, the particular abstractions employed by software designers are sometimes also influenced by other considerations, like performance and security. Take the Python built-in function `pow` that takes three formal parameters: a base, an exponent, and an optional modulus. It's not obvious to first-time programmers why `pow(base, exp, mod)` is a useful abstraction. Well, this abstraction exists because the computer will be quicker to compute `pow(base, exp, mod)` than the semantically equivalent `pow(base, exp) % mod` expression, based on some tricks hidden in Python's implementation of `pow`. 
 
-**Another kind of abstraction.** Let's return to our `my_replace` function and think about it in terms of these abstraction and decomposition guidelines. As mentioned earlier, `my_replace` has a single, well-defined job: it makes a copy of the input string `s`, finds all occurrences of `old` substring in this copy, replaces these occurrences with the `new` substring, and returns the modified copy.
+## Another kind of abstraction
+
+Let's return to our `my_replace` function and think about it in terms of these abstraction and decomposition guidelines. As mentioned earlier, `my_replace` has a single, well-defined job: it makes a copy of the input string `s`, finds all occurrences of `old` substring in this copy, replaces these occurrences with the `new` substring, and returns the modified copy.
 
 Now let's ask, does `my_replace` work only on string objects? Our docstring says so, but that's just documentation. What we want to know, in the words of the second principle mentioned above, is it more general?  In other words, will it execute successfully with any sequence object, which strings are simply one particular kind? For example, we discussed my office bookshelf as another example of a sequence object. Can we use `my_replace` to replace a subsequence in a bookshelf object?
 
@@ -549,7 +589,9 @@ Data abstraction allows us to think about a piece of data without having to have
 
 Is `my_replace` one such function? Does it operate not on string objects per se, but any sequence object? Is its single, well-defined job to make a copy of the input sequence `s`, find all occurrences of the `old` subsequence in this copy, replace these occurrences with the `new` subsequence, and return the modified copy? There's one way to find out. Let's try it!
 
-**Lists are sequence objects.** I've copied our `my_replace` function into `bookshelf1.py`. The first block of code in `main` (lines 21-25) uses `my_replace` as a function that processes string objects, as we did in `replace32.py`. Unsurprisingly, this call to `my_replace` should work, and we include it simply to reassure ourselves that no slight-of-hand is taking place.
+## Lists are sequence objects
+
+I've copied our `my_replace` function into `bookshelf1.py`. The first block of code in `main` (lines 21-25) uses `my_replace` as a function that processes string objects, as we did in `replace32.py`. Unsurprisingly, this call to `my_replace` should work, and we include it simply to reassure ourselves that no slight-of-hand is taking place.
 
 ```{code-block} python
 ---
@@ -623,7 +665,9 @@ The Cat in the 🎩!
 
 It worked! Our docstring and comments are misleading. We should replace the word "string" in them with the word "sequence".
 
-**Abstraction barriers.** We'll expand our discussion of abstraction, its beauty, and its power in Act II, but before leaving this topic, I want to put in a word of warning about building abstractions. Of all the statements in `my_replace`, the one that's easiest to get "wrong" is: `new_s = s[0:0]`.
+## Abstraction barriers
+
+We'll expand our discussion of abstraction, its beauty, and its power in Act II, but before leaving this topic, I want to put in a word of warning about building abstractions. Of all the statements in `my_replace`, the one that's easiest to get "wrong" is: `new_s = s[0:0]`.
 
 ```{margin} Exposing What's Behind the Curtain
 See [https://www.youtube.com/watch?v=YWyCCJ6B2WE](https://www.youtube.com/watch?v=YWyCCJ6B2WE).
@@ -641,7 +685,9 @@ Yet yet! We also cannot have `my_replace` return just any kind of sequence objec
 Abstraction is a very powerful technique, but it is harder to build and abide by an abstraction than you might at first think.
 ```
 
-**Methods.** You may have wondered as we went through this exercise why the statement that used the built-in string-replace method looked like this:
+## Methods
+
+You may have wondered as we went through this exercise why the statement that used the built-in string-replace method looked like this:
 
 ```{code-block} python
 ---
@@ -669,7 +715,9 @@ The syntax of a method call, on the other hand, tells us something quite specifi
 
 We will peel back more of this magic in Act II, when we talk about object-oriented programming. For now, just mentally translate the first syntax into the second if you're ever confused about what is happening in a particular Python statement.
 
-**Modules.** When we wrote our short `bookshelf1.py` script, we used our `my_replace` function from `replace32.py`. To do this, we copied the function definition (including its body) and pasted it into `bookshelf1.py`. Yet, we just finished talking about invoking the function numerous times while defining it only once. Why can't we use that single definition from `replace32.py` in `bookshelf1.py` instead of making another copy of it, continuing our desire to avoid the problems of maintaining multiple copies of the same operation?
+## Modules
+
+When we wrote our short `bookshelf1.py` script, we used our `my_replace` function from `replace32.py`. To do this, we copied the function definition (including its body) and pasted it into `bookshelf1.py`. Yet, we just finished talking about invoking the function numerous times while defining it only once. Why can't we use that single definition from `replace32.py` in `bookshelf1.py` instead of making another copy of it, continuing our desire to avoid the problems of maintaining multiple copies of the same operation?
 
 Well, we can! Python allows you to reference definitions contained in other `.py` files using what it calls *modules*. Since a module is nothing more than a file just like the scripts we have been writing, the script we should have written that doesn't duplicate the definition of `my_replace` is as follows:
 
@@ -747,7 +795,9 @@ The syntax of the function invocation should look familiar. Does it remind you o
 
 There are other forms of the import-statement that you can use (and ones you should not). Take a look at the [Python documentation on modules](https://docs.python.org/3/tutorial/modules.html) to learn more about them and when to use (or why not to use) them.
 
-**Revisiting** `'__main__'`**.** A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you'll recall, is a statement that starts with the keyword `def`, as we did when we defined our `my_replace` function. These definitions are typically what we want to import from a module (i.e., another Python script).
+## **Revisiting** `'__main__'`
+
+A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you'll recall, is a statement that starts with the keyword `def`, as we did when we defined our `my_replace` function. These definitions are typically what we want to import from a module (i.e., another Python script).
 
 ```{margin} Top-level Statements
 In a script, the Python interpreter executes each non-indented (i.e., top-level) statement it comes across, in order starting with the ones at the start of the file.
@@ -757,10 +807,12 @@ Did you wonder why we didn't see any of the work in the `main` function of `repl
 
 When the Python interpreter executes the if-statement at the bottom of `replace32.py`, it is doing it after processing of the `import` statement at the top of `bookshelf3.py`. On of the things that occurred during this processing is that the interpreter set `__name__` to the name of the imported module. As such, `__name__ == '__main__'` evaluates to `False`, giving us access to just the definitions in `replace32.py`!
 
-**Pure functions.** Let's go a little deeper here. We needed only the definition of `my_replace` in our `bookshelf` scripts, and `my_replace` is what computer scientists call a *pure function*. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.
+## Pure functions
+
+Let's go a little deeper here. We needed only the definition of `my_replace` in our `bookshelf` scripts, and `my_replace` is what computer scientists call a *pure function*. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.
 
 We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement. 
 
 An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same "random" number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.
 
-\[Version 20230705\]
+\[Version 20230811\]
