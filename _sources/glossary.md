@@ -1,5 +1,7 @@
 # Glossary
 
+**abstract data type:** a data type where we focus solely on what it does for us and pay no attention to how it is implemented. This means that we don't know anything about the performance of its methods.
+
 **abstraction:** a description of an object where we focus on a coherent set of its characteristics, ignoring the rest of its details. Seemingly different objects (e.g., a string and a list) can share the same abstraction. Abstraction is a fundamental idea in computer science.
 
 **abstraction barrier:** the separation we maintain between operations that adhere to the abstraction we've built and operations that violate that abstraction. Abstractions work best when both the client using the abstraction and the implementor of the abstraction adhere to the abstraction barrier.
@@ -10,11 +12,15 @@
 
 **algorithm (Chapter 3):** a sequence of well-specified steps that a computer can execute.
 
+**algorithm (Chapter 9):** a sequence of well-specified steps that a computer can execute, which implements a **specification** and is backed by a proof that the implementation matches this specification.
+
 **aliases:** what we call two names that refer to the same object.
 
 **API:** an application programming interface is the definitions (i.e., variables, constants, classes, and functions) in a module, package, or library that they make available for programmers to use.
 
 **array:** a sequence of items of the same type, which are stored compactly in the computer's memory, i.e., sequentially one after the other. A string is a 1-dimensional array of characters, and an image is a 2-dimensional array of pixels.
+
+**associative arrays** or **associative memories:** an abstract data type that supports the mapping of keys to values. Python's dictionary (dict) data type is one implementation of an associative array. Hash tables are another concrete implementation of an associative array.
 
 **attributes:** Python objects can be complex things with many different pieces to them. These object pieces are what computer scientists call attributes.
 
@@ -34,6 +40,8 @@
 
 **blocking** and **non-blocking calls:** in a blocking call, your script doesn't continue its execution until the work in the call is complete. This is the type of function call we have learned to build. A non-blocking function call is our introduction to concurrency in computation. The call doesn't finish its work before returning to the caller. It causes two processes to run concurrently!
 
+**brute-force algorithm:** a straightforward, exhaustive search of the space of possible solutions.
+
 **byte:** eight bits grouped together. This is typically the smallest unit of data that you can access given a memory (or other type of) **address**.
 
 **class:** see **type** (until Act II).
@@ -42,11 +50,15 @@
 
 **comments:** text following a `#` in Python. We use them to capture our pseudocode, and then after we have written some Python statements, we use them to explain what blocks of our code do.
 
+**computational complexity:** an area of computer science that quantifies the efficiency of algorithms without needing to measure any implementation of those algorithms in any particular programming language or on any particular machine. Execution time and memory consumed during execution are often the efficiency measures of interest. We use this type of analysis to understand whether an algorithm is a reasonable solution to our problem.
+
 **computer architecture:** the structure of a computer as seen from the collection of its components and interconnection of those components. This includes components like the computer's processor and memory system, and how the processor is connected to the memory system.
 
 **connection:** the abstraction that allows two software entities to communication. To move data through the connection, it might involve moving data around in a computer's memory as well as sending data across a communication link like wifi.
 
 **data science:** a discipline that uses data collected about the world to extract meaningful insights and generate new knowledge.
+
+**decomposition:** the process of breaking a problem into a set of small tasks, which are easier or more obvious to solve. You might further decompose these tasks into yet smaller components.
 
 **design pattern:** an approach to solving some programming problem that you'll see in many pieces of code.
 
@@ -57,6 +69,10 @@
 **digital abstraction:** the bits we store and manipulate represent something in our physical world. They might be a voltage value, or the presence or absence of current flowing. They might be a burnt spot on a CD, or the lack of a burnt spot. They might be the presence or absence of light. When we talk about the digital abstraction, we're saying we don't care how you've represented a logical one or logical zero. We just want to know whether the physical phenomenon represents a one or a zero.
 
 **docstrings:** strings that we add immediately after a function definition that provide more information about the purpose, inputs, outputs, and assumptions of the function.
+
+**edge cases:** when testing a script, we often think of the set of commonly used inputs. Our designs are often structured to handle these common cases well. What we often forget the uncommon cases, which are sometimes called edge cases. E.g., if our script processes lists, what will it do if passed a list with no elements in it?
+
+**encapsulation:** is related to **abstraction**, as it is the act of information hiding. Using it, we bundle the complexity of a procedure or an object behind a simple interface. Through encapsulation, we allow others to do a complicated task we've designed or interact with a complicated object we built without having to understand its details.
 
 **encoding (Chapter 2):** taking a countable number of something and associating a number with each something, typically a dense manner (e.g., if we had 8 things, we would number them 0 to 7).
 
@@ -81,6 +97,10 @@
 **function (Chapter 3):** with **method** and **procedure**, ways to implement code abstraction, where we hide the implementation of some command behind a carefully designed interface, which tells you what inputs are required and what result will be produced.
 
 **function composition:** every programming language has a set of rules for how it evaluates expressions built from a number of simple functions. Python evaluates nested functions (i.e., ones nested inside parentheses) innermost first, which should feel natural as it mimics what we do in basic algebra. You will also see a string of function applications (typically as method applications), and Python evaluates these in a left-to-right manner.
+
+**hash:** a number from a small range of numbers that is a fingerprint for a string or larger set of numbers. Hashing is the process of deterministically turning any length string or block of numbers into one of a small range of numbers. The hash is called a fingerprint, because it is algorithmically related to the original string or block of numbers.
+
+**hash collision:** because a hash doesn't represent all the information in the value input to the hashing function, this function will infrequently produce the same hash for two different inputs. This is called a collision because most techniques that rely on hashing do not want two values to produce the same hash when the values are not the same. 
 
 **header:** if we think of the main content of a file or message as the **body**, the header is data about the main content. It might, for example, contain the name of the file or the recipient of the message.
 
@@ -107,6 +127,8 @@
 **localhost:** the generic name given to the machine on which a program runs.
 
 **localization:** specializing an internationalized piece of software for the user's native language. See **internationalization**.
+
+**loop invariant:** a characteristic of a name (variable) that we find used in a loop body, but whose value remains unchanged on every iteration of the loop.
 
 **loopback address:** the **IP address** 127.0.0.1 that means the **localhost**.
 
@@ -170,7 +192,11 @@
 
 **socket:** a software representation of a communication endpoint. We bind sockets to a software port number.
 
+**specification:** a precise description of the task we'd like to done. Specifications describe *what* we'd like done, but not necessarily *how* it is done. They describe the behavior we would like our algorithm or script to exhibit.
+
 **standard:** a documented and widely agreed-upon method for doing something.
+
+**standard input / standard output:** these are the default locations where a script reads input (i.e., via the `input` function in Python) and writes its output (via the print function in most programming languages). You can change this default, but often the default is to read and write to the Shell.
 
 **state:** information that describes the current context. A machine keeps state to help it remember what it is doing.
 
@@ -206,4 +232,4 @@
 
 **while-loop:** a type of looping statement in Python that works particularly well for iterating until you hit some exit condition. Contrast with **for-loop**.
 
-\[Version 20230710 --- through Chapter 6\]
+\[Version 20230817\]

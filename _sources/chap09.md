@@ -29,7 +29,7 @@ This is actually quite a hard problem. It involves [natural language processing 
 We'll get to many of these issues in this act, but to begin, let's simplify and focus where Google started: *how do we make it easy to find the web pages that mention a particular word or phrase?* We won't build our own web search function, but we will determine what it would take to write a script that finds and returns a listing of all pages on the World Wide Web containing our search phrase, as illustrated in {numref}`Figure %s<c09_fig1_ref>`.
 
 ```{admonition} Learning Outcomes
-In this chapter, you will learn about the ubiquity of search problems and dive into the details of Google search. You will understand the difference between algorithms and formal specifications. You'll investigate several ways to do string matching and measure the performance of each. You'll learn to evaluate an algorithm without having to run it by roughly calculating its computational complexity.
+In this chapter, you will learn about the ubiquity of search problems and dive into the details of Google search. You will understand the difference between algorithms and formal specifications. You'll investigate several ways to do string matching and measure the performance of each. You'll learn to evaluate an algorithm without having to run it by roughly calculating its computational complexity. By the end of the chapter, you will be able to:
 
 *   Learn to estimate the size of your problem [design];
 *   Understand the different, formal aspects of an algorithm [design and CS concepts];
@@ -438,6 +438,8 @@ If we want a script that solves our problem significantly faster, the first thin
 
 ```{tip}
 If your script runs too slow, think about using a different algorithm.
+
+But coming up with new, efficient algorithms is hard and most of us never try. What happens instead is that we attempt to reduce the most complex pieces of our programs to previously solved problems. This means that you should start your work by attempting to solve your problem in the most straightforward manner possible. Then instrument your script, and for the pieces that need to run faster, search for known algorithms that you can use to speed them up.
 ```
 
 I said earlier that string matching is a well-studied problem in computer science, and some very smart people have come up with algorithms that are significantly faster than our brute-force technique. The following is a Python implementation of one called the [Rabin-Karp algorithm](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm). You don't have to understand the algorithm at this point; we'll discuss its operation in the next chapter. Right now, I just want you to notice that its implementation takes more statements than our brute-force method. This raises the interesting question: What additional work have Rabin and Karp identified that creates an algorithm that runs faster than the brute-force approach?
@@ -578,7 +580,7 @@ To this point in our analysis, `bf_strmatch` looks like it is going to be faster
 
 Let's turn this English into an arithmetic expression. Let's say that a reasonable amount of straight-line work is proportional to one unit of execution time. A loop body without any loops in it (i.e., just straight-line code) would therefore also have a cost proportional to one unit of execution time. The cost of a loop and its body would simply be the execution-time cost of its body times the number of iterations we estimate that it will make.
 
-With these simple rules, the estimated execution time of `bf_strmatch` would be proportional to `1 + n * something`, where `something` represents the cost of the matching loop body, which we haven't estimated yet. The estimated execution time of `rk_strmatch` would be proportional to `1 + (m-1) * 1 + m * 1 + n * a_different_something`. Simplifying the expressions and dropping the "`1 +`"  and "`- 1`" terms, which are swamped in the worst case by large m and n values, we get the estimated, worst-case execution time of `bf_strmatch` to be proportional to `n * something` and of `rk_strmatch` to be proportional to `2 * m + n * a_different_something`.
+With these simple rules, the estimated execution time of `bf_strmatch` would be proportional to `1 + n * something`, where `something` represents the cost of the matching loop body, which we haven't estimated yet. The estimated execution time of `rk_strmatch` would be proportional to `1 + (m-1) * 1 + m * 1 + n * a_different_something`. Simplifying the expressions and dropping the "`1 +`"  and "`- 1`" terms, which are swamped in the worst case by large `m` and `n` values, we get the estimated, worst-case execution time of `bf_strmatch` to be proportional to `n * something` and of `rk_strmatch` to be proportional to `2 * m + n * a_different_something`.
 
 Now, what are the estimated costs of the body of each algorithm's matching loop? The body of the matching loop in `bf_strmatch` contains a loop with a simple body, and as such, `something` is `m * 1`, or just `m`, in the worst case. Remember that the `==`-operator is doing work equivalent to the for-i loop in `bf_strmatch2`!
 
@@ -750,4 +752,4 @@ We've come to the end of the chapter, and we haven't yet solved our problem: how
 
 In the next chapter, we'll explore these details and learn about a technique called *hashing*, which is how Rabin-Karp beats brute force. Hashing will lead us to *hash tables*, a widely-used data structure, which just happens to be at the heart of Python's dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach!
 
-\[Version 20230812\]
+\[Version 20230817\]
