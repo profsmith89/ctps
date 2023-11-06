@@ -823,7 +823,7 @@ def search(my_map):
 ```
 
 ```{admonition} You Try It
-Run `search` on the map from {numref}`Figure %s<c11_fig1_ref>`. You can do this by running the next code block if you're reading this chapter as an interactive Python notebook, or by executing `python3 directions0.py` in the Shell, if you've grabbed the code distributed with this chapter.
+Run `search` on the map from {numref}`Figure %s<c11_fig1_ref>`. You can do this by running the next code block if you're reading this chapter as an interactive Python notebook, or by executing `python3 directions0.py` in the shell, if you've grabbed the code distributed with this chapter.
 
 You should see an output map with blue stars on all explored locations and green f-characters on locations that were added to the frontier list but never explored.
 ```
@@ -1028,4 +1028,4 @@ In general, prioritizing our possible search moves is the job of a *heuristic fu
 
 There are many heuristics in the domain of search. I asked you to imagine a common one (called *greedy*), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point's heuristic (called *A\* search*). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems!
 
-\[Version 20230915\]
+\[Version 20231102\]

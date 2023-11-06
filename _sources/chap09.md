@@ -326,8 +326,8 @@ Part of the problem here is that my computer is fast and the program doesn't mak
 
 That's right. The script will run longer if we give it more text to search.
 
-```{margin} Capabilities of the Shell
-We'll talk more about the Shell and the redirecting of our script's inputs and outputs in Chapter 13.
+```{margin} Capabilities of the shell
+We'll talk more about the shell and the redirecting of our script's inputs and outputs in Chapter 13.
 ```
 
 Since we probably don't want to type all of (say) *War and Peace* by Tolstoy just to stress our computers, we can modify our two scripts so that they fill the variables `t` and `p` in a new way. Beside from user input and from strings included in the command line, we can create an option that grabs the text (i.e., `t`) from *standard input (stdin)*, which we'll feed with the contents of a file. In Python, `sys.stdin` is a file object like those we created with the `open` command, and on which, we can perform operations like `read` and `readline`. Here's what this looks like in `bf_strmatch.py`, paying particular attention to lines 20-23; `bf_strmatch2.py` contains similar code.
@@ -752,4 +752,4 @@ We've come to the end of the chapter, and we haven't yet solved our problem: how
 
 In the next chapter, we'll explore these details and learn about a technique called *hashing*, which is how Rabin-Karp beats brute force. Hashing will lead us to *hash tables*, a widely-used data structure, which just happens to be at the heart of Python's dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach!
 
-\[Version 20230817\]
+\[Version 20231102\]

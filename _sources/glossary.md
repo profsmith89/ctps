@@ -196,7 +196,7 @@
 
 **standard:** a documented and widely agreed-upon method for doing something.
 
-**standard input / standard output:** these are the default locations where a script reads input (i.e., via the `input` function in Python) and writes its output (via the print function in most programming languages). You can change this default, but often the default is to read and write to the Shell.
+**standard input / standard output:** these are the default locations where a script reads input (i.e., via the `input` function in Python) and writes its output (via the print function in most programming languages). You can change this default, but often the default is to read and write to the shell.
 
 **state:** information that describes the current context. A machine keeps state to help it remember what it is doing.
 
@@ -232,4 +232,4 @@
 
 **while-loop:** a type of looping statement in Python that works particularly well for iterating until you hit some exit condition. Contrast with **for-loop**.
 
-\[Version 20230817\]
+\[Version 20231102\]

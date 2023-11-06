@@ -654,7 +654,7 @@ We are now ready to run our little experiment.
 ---
 emphasize-lines: 2
 ---
-### Run the highlighted command in the Shell
+### Run the highlighted command in the shell
 > python3 bookshelf1.py 
 The Cat in the Hat!
 The Cat in the 🎩!
@@ -815,4 +815,4 @@ We might, however, want to use a non-pure function defined in a module. This fun
 
 An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same "random" number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.
 
-\[Version 20230811\]
+\[Version 20231102\]

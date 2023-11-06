@@ -169,6 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -1008,7 +1009,7 @@ lineno-start: 28
 </div>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">search</span></code> on the map from <a class="reference internal" href="#c11-fig1-ref"><span class="std std-numref">Figure 21</span></a>. You can do this by running the next code block if you’re reading this chapter as an interactive Python notebook, or by executing <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">directions0.py</span></code> in the Shell, if you’ve grabbed the code distributed with this chapter.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">search</span></code> on the map from <a class="reference internal" href="#c11-fig1-ref"><span class="std std-numref">Figure 21</span></a>. You can do this by running the next code block if you’re reading this chapter as an interactive Python notebook, or by executing <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">directions0.py</span></code> in the shell, if you’ve grabbed the code distributed with this chapter.</p>
 <p>You should see an output map with blue stars on all explored locations and green f-characters on locations that were added to the frontier list but never explored.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">54</span><span class="c1">### chap11/directions0.py -- Finding driving directions (first try)</span>
@@ -1177,7 +1178,7 @@ lineno-start: 28
 <p>The as-the-crow-flies distance to the goal isn’t a set of driving directions (i.e., we’re not following the map!), but it does indicate which of two moves would bring us closer to the goal. Imagine using this distance to select the search algorithm’s next location from the frontier list. We’re using the distance to put the frontier list locations in a priority order. The higher the priority, the more likely that location will get us to the goal.</p>
 <p>In general, prioritizing our possible search moves is the job of a <em>heuristic function.</em> The heuristic we use, of course, might be wrong. For example, we might have to drive in a direction away from the goal to find the road that will get us to it. Heuristics don’t guarantee that we’ll do better, but good ones, on average, find a near-optimal solution more quickly than our two uninformed solutions.</p>
 <p>There are many heuristics in the domain of search. I asked you to imagine a common one (called <em>greedy</em>), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point’s heuristic (called <em>A* search</em>). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems!</p>
-<p>[Version 20230915]</p>
+<p>[Version 20231102]</p>
 </section>
 </section>
 

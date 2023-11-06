@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -571,8 +572,8 @@ Pattern occurs with shift 22
 <p>Part of the problem here is that my computer is fast and the program doesn’t make it work too hard. How can we make it work harder to see if one script is actually faster?</p>
 <p>That’s right. The script will run longer if we give it more text to search.</p>
 <aside class="margin sidebar">
-<p class="sidebar-title">Capabilities of the Shell</p>
-<p>We’ll talk more about the Shell and the redirecting of our script’s inputs and outputs in Chapter 13.</p>
+<p class="sidebar-title">Capabilities of the shell</p>
+<p>We’ll talk more about the shell and the redirecting of our script’s inputs and outputs in Chapter 13.</p>
 </aside>
 <p>Since we probably don’t want to type all of (say) <em>War and Peace</em> by Tolstoy just to stress our computers, we can modify our two scripts so that they fill the variables <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> in a new way. Beside from user input and from strings included in the command line, we can create an option that grabs the text (i.e., <code class="docutils literal notranslate"><span class="pre">t</span></code>) from <em>standard input (stdin)</em>, which we’ll feed with the contents of a file. In Python, <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> is a file object like those we created with the <code class="docutils literal notranslate"><span class="pre">open</span></code> command, and on which, we can perform operations like <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">readline</span></code>. Here’s what this looks like in <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code>, paying particular attention to lines 20-23; <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code> contains similar code.</p>
 <aside class="margin sidebar">
@@ -918,7 +919,7 @@ For p = 5242880 bytes, t = 20925568 bytes
 <section id="problem-unsolved">
 <p><strong>Problem unsolved.</strong> We’ve come to the end of the chapter, and we haven’t yet solved our problem: how do we make it easy to find the web pages that mention a particular word or phrase? And by easy, we’ve learned that our biggest challenge in this problem is to do it quickly. While Rabin-Karp is faster than brute-force string matching, it alone isn’t fast enough to power Google search. But the technical details of Rabin-Karp give us the key to running web searches quickly.</p>
 <p>In the next chapter, we’ll explore these details and learn about a technique called <em>hashing</em>, which is how Rabin-Karp beats brute force. Hashing will lead us to <em>hash tables</em>, a widely-used data structure, which just happens to be at the heart of Python’s dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach!</p>
-<p>[Version 20230817]</p>
+<p>[Version 20231102]</p>
 </section>
 </section>
 

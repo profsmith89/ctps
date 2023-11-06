@@ -169,6 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -849,7 +850,7 @@ document.write(`
 <p>The simplest way to create a new Python list is to enclose a list of Python objects in square brackets, as we have done on line 35. The second and third parameters in the call to <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> on line 39 are also Python lists, albeit with only a single item in each of the constructed lists. What this call does then is invoke <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with three Python list objects. During the call, the formal parameter <code class="docutils literal notranslate"><span class="pre">s</span></code> provides another name for the Python list object named <code class="docutils literal notranslate"><span class="pre">shelf</span></code>, and <code class="docutils literal notranslate"><span class="pre">old</span></code> and <code class="docutils literal notranslate"><span class="pre">new</span></code> name the previously unnamed Python lists <code class="docutils literal notranslate"><span class="pre">[textbook]</span></code> and <code class="docutils literal notranslate"><span class="pre">['\N{open</span> <span class="pre">book}']</span></code>.</p>
 <p>If everything goes well, <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> will operate on these formal parameters (i.e., these Python lists) using only their sequence object abstractions. And it will return to line 39 a new Python list object that looks a lot like the original <code class="docutils literal notranslate"><span class="pre">shelf</span></code>, but with an open book emoji replacing the name of the file in which I’m writing this textbook.</p>
 <p>We are now ready to run our little experiment.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted command in the Shell
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted command in the shell
 <span class="hll">&gt; python3 bookshelf1.py 
 </span>The Cat in the Hat!
 The Cat in the 🎩!
@@ -969,7 +970,7 @@ The Cat in the 🎩!
 <p><strong>Pure functions.</strong> Let’s go a little deeper here. We needed only the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in our <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code> scripts, and <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is what computer scientists call a <em>pure function</em>. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.</p>
 <p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
 <p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
-<p>[Version 20230811]</p>
+<p>[Version 20231102]</p>
 </section>
 </section>
 
