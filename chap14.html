@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 14: The Dream of Automatic Bug Fixing &#8212; Computational Thinking and Problem Solving</title>
+    <title>Chapter 14: The Dream of Bug Fixing &#8212; Computational Thinking and Problem Solving</title>
   
   
   
@@ -170,7 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 14: The Dream of Automatic Bug Fixing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -309,7 +309,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 14: The Dream of Automatic Bug Fixing</h1>
+    <h1>Chapter 14: The Dream of Bug Fixing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -343,8 +343,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-14-the-dream-of-automatic-bug-fixing">
-<h1>Chapter 14: The Dream of Automatic Bug Fixing<a class="headerlink" href="#chapter-14-the-dream-of-automatic-bug-fixing" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-14-the-dream-of-bug-fixing">
+<h1>Chapter 14: The Dream of Bug Fixing<a class="headerlink" href="#chapter-14-the-dream-of-bug-fixing" title="Permalink to this heading">#</a></h1>
 <p>While we may not like the Python interpreter’s error messages, at least they give us a clue to the specific syntax or runtime errors it finds. These messages are a starting point for our efforts to fix our script and get the machine to do what we want. In contrast, it’s harder for us to diagnose design errors (i.e., solving your problem incorrectly) and subtle coding errors (e.g., writing a script with an infinite loop or multiplying a value by the wrong constant). To check for these kinds of errors, we must test our scripts across a range of inputs, verifying that they produce the expected output in each instance. But what do you do when they enviably don’t?</p>
 <p>You’ve been here with your own scripts, and you know that you need to dig into each script’s execution and determine which of its tasks are correct and which went awry. The tool you’ve largely used to this point has been the print-statement. You inserted <em>debugging print-statements</em> at strategic points to see: (1) if the script’s execution got to that point; and (2) if it did, what were the values of some important variables. Through this information gathering, you generated a hypothesis of what went wrong, and then inserted more debugging print-statements to test that hypothesis. It was slow and painful work.</p>
 <aside class="margin sidebar">
