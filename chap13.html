@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap13';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Active-Learning Exercises" href="ales.html" />
+    <link rel="next" title="Chapter 14: The Dream of Automatic Bug Fixing" href="chap14.html" />
     <link rel="prev" title="Chapter 12: Divide and Conquer" href="chap12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -170,6 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Automatic Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -369,7 +370,7 @@ document.write(`
 <ol class="arabic simple">
 <li><p>We sometimes write statements that <strong>aren’t legal Python</strong>. These are <em>syntax errors</em> that stop the interpreter dead in its tracks. “What did you say?” it will ask. “I don’t understand you.”</p></li>
 <li><p>We sometimes write statements that <strong>are legal Python</strong>, but what these statements ask the interpreter to do with the data we give it <strong>isn’t something it can do</strong> (e.g., convert the word <code class="docutils literal notranslate"><span class="pre">&quot;junk&quot;</span></code> into an integer). These are <em>runtime errors</em> that stop the interpreter, again, dead in its tracks. “I can’t do that,” it’ll say, occasionally in really-hard-to-understand error messages.</p></li>
-<li><p>We sometimes write statements that <strong>are legal Python and something the interpreter can do</strong>, but <strong>the result it produces makes no sense</strong>. These are <em>design errors</em> that are quite hard to diagnose and correct. We’ll have to find ways to verify which parts of the script (including our data structures) are operating correctly and which parts are failing.</p></li>
+<li><p>We sometimes write statements that <strong>are legal Python and something the interpreter can do</strong>, but <strong>the result it produces makes no sense</strong>. These are <em>design errors</em> (i.e., solving your problem incorrectly) and <em>subtle coding errors</em> (e.g., writing a script with an infinite loop or multiplying a value by the wrong constant) that are quite hard to diagnose and correct. We’ll have to find ways to verify which parts of the script (including our data structures) are operating correctly and which incorrectly.</p></li>
 <li><p>We sometimes write a script that <strong>produces a sensible answer</strong>, but it <strong>takes too long</strong> to run to completion (e.g., our script uses a brute-force approach on a problem with a very large input) or in some other way <strong>misses an important problem constraint</strong> (e.g., our script uses too much memory). These are <em>missed constraints</em>. They often requires us to be smarter in our problem-solving approach, typically in the selection of an algorithm, as we discussed in the last act.</p></li>
 </ol>
 </section>
@@ -909,7 +910,7 @@ NameError: name &#39;undef_name&#39; is not defined. Did you mean: &#39;f_undef_
 <p><code class="docutils literal notranslate"><span class="pre">#!/usr/bin/env</span> <span class="pre">python3</span></code></p>
 <p>This line starts with <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)">a “shebang” sequence</a> (i.e., <code class="docutils literal notranslate"><span class="pre">#!</span></code>), and the rest of it is the interpreter program that should be used with the text file. With this information, the shell turns <code class="docutils literal notranslate"><span class="pre">./python32</span></code> back into <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">python32.py</span></code>. We type one command and the script we want run with our error-message rewriting facility, and the shell and our scripts do all the work!</p>
 <p>We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter’s error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute <code class="docutils literal notranslate"><span class="pre">rewrite.py</span></code>, and one of them turned out to be an elegant solution to our problem.</p>
-<p>[Version 20231105]</p>
+<p>[Version 20231116]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -963,11 +964,11 @@ NameError: name &#39;undef_name&#39; is not defined. Did you mean: &#39;f_undef_
       </div>
     </a>
     <a class="right-next"
-       href="ales.html"
+       href="chap14.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Active-Learning Exercises</p>
+        <p class="prev-next-title">Chapter 14: The Dream of Automatic Bug Fixing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

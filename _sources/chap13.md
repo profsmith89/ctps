@@ -27,7 +27,7 @@ There are basically four types of errors we make, which are classified based on 
 
 1. We sometimes write statements that **aren't legal Python**. These are *syntax errors* that stop the interpreter dead in its tracks. "What did you say?" it will ask. "I don't understand you."
 2. We sometimes write statements that **are legal Python**, but what these statements ask the interpreter to do with the data we give it **isn't something it can do** (e.g., convert the word `"junk"` into an integer). These are *runtime errors* that stop the interpreter, again, dead in its tracks. "I can't do that," it'll say, occasionally in really-hard-to-understand error messages.
-3. We sometimes write statements that **are legal Python and something the interpreter can do**, but **the result it produces makes no sense**. These are *design errors* that are quite hard to diagnose and correct. We'll have to find ways to verify which parts of the script (including our data structures) are operating correctly and which parts are failing.
+3. We sometimes write statements that **are legal Python and something the interpreter can do**, but **the result it produces makes no sense**. These are *design errors* (i.e., solving your problem incorrectly) and *subtle coding errors* (e.g., writing a script with an infinite loop or multiplying a value by the wrong constant) that are quite hard to diagnose and correct. We'll have to find ways to verify which parts of the script (including our data structures) are operating correctly and which incorrectly.
 4. We sometimes write a script that **produces a sensible answer**, but it **takes too long** to run to completion (e.g., our script uses a brute-force approach on a problem with a very large input) or in some other way **misses an important problem constraint** (e.g., our script uses too much memory). These are *missed constraints*. They often requires us to be smarter in our problem-solving approach, typically in the selection of an algorithm, as we discussed in the last act.
 
 ## Our problem-to-be-solved
@@ -776,7 +776,7 @@ This line starts with [a "shebang" sequence](https://en.wikipedia.org/wiki/Sheba
 
 We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter's error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute `rewrite.py`, and one of them turned out to be an elegant solution to our problem.
 
-\[Version 20231105\]
+\[Version 20231116\]
 
 [^fn1]: It will list any file ending in \`.py\` as long as the string before these last three characters contains at least one instance of the letter \`e\`.
 
