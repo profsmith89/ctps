@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 17: Build Prediction Models (Incomplete) &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap17';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 18: Using Generative AI in Your Life (incomplete)" href="chap18.html" />
+    <link rel="prev" title="Chapter 16: Catch Them Early" href="chap16.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    A Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 17: Build Prediction Models (Incomplete)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap17.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 17: Build Prediction Models (Incomplete)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-home-prices">Predicting home prices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-sister-s-data">Your sister’s data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-to-solve-this-problem-ourselves">Trying to solve this problem ourselves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeled-training-data">Labeled training data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-workflow">ML workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-feel-for-the-data">Getting a feel for the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-prediction-target">Set the prediction target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-some-features">Pick some features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-model-to-our-data">Fit the model to our data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-unseen-data">Predicting unseen data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation">Model validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-fit-just-right">Making the fit just right</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-ml">Bias in ML</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-17-build-prediction-models-incomplete">
+<h1>Chapter 17: Build Prediction Models (Incomplete)<a class="headerlink" href="#chapter-17-build-prediction-models-incomplete" title="Permalink to this heading">#</a></h1>
+<p>Computational tools help us to automate away the drudgery involved in our work. They do this best when there are clear patterns in the work we do. If we can recognize them, we can build a script to repeatedly perform the work associated with each pattern. This is what we did in Chapter 2, when we hand-built a script to grab the dialogue in a story, and Chapter 13, when we used the regular-expression library to describe the more complicated patterns we saw in the Python interpreter’s error messages and rewrite them into a form easier for us to digest.</p>
+<p>Pattern matching is a broadly applicable technique, and in this chapter, I’ll introduce you to one of its most powerful uses: the building of predictive models. This returns us to the data science process introduced in Chapter 8, where we covered its first steps (i.e., data collection, data cleaning, and data exploration). I promised you that we’d return to cover its last steps (i.e., pattern detection and model building), and that time is now!</p>
+<p>However, unlike our earlier work, this time we won’t have to identify the patterns we wish to exploit. Because data scientists often work with data sets that are too large for humans to analyze, they need tools that can help to identify and exploit the patterns in these data sets. The design of these tools exist in a branch of artificial intelligence called <em>machine learning (ML)</em>, and we’ll look at one popular library for it called <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. With such a library, it is very easy to mine a data set for patterns and create a model that uses the patterns it learned to make predictions about new data. In effect, we’re asking the computer to analyze a data set and build an algorithm that we would find too difficult to build for ourselves.</p>
+<p>We’ll explore two real-world problems in this space: (1) the predicting of housing prices based on a home’s characteristics (e.g., number of bedrooms and bathrooms); and (2) the labeling of online comments as toxic or not. The first is classical and fairly straightforward ML application. We’ll use it as an introduction to ML tools and techniques. The second is a more difficult problem, and it will open our eyes to the dangers of bias in the ML models we build. I’ll mention the many ways in which bias can creep into a model so that you can check begin checking your own. Unfortunately, eliminating bias in ML models remains a hard problem, and sometimes, when the harms a model creates are greater than its benefits, you simply shouldn’t deploy it.</p>
+<div class="admonition-learning-outcomes admonition">
+<p class="admonition-title">Learning Outcomes</p>
+<p>Learn to use machine learning (ML) as a tool for discovering and exploiting correlations. You will perform supervised learning to build a decision-tree model that makes real-world predictions. You’ll practice with pandas and data frames, i.e., a table data structure. In addition to a focus on model accuracy, you’ll grapple with questions of bias in ML. After completing this chapter, you will be able to:</p>
+<ul class="simple">
+<li><p>TBW.</p></li>
+</ul>
+</div>
+<section id="predicting-home-prices">
+<p><strong>Predicting home prices.</strong> Imagine that your sister is a realtor in Iowa, and she’s found that she’s drowning each month in data about the housing market. This sounds like a problem that could be solved with computational thinking and a bit of programming, and so you say, “Don’t worry, sis! I’ve practiced computational thinking and problem solving. Send me the data, and I’ll build you a computational model based on past home sales. When a new seller calls you, just ask them to tell you about a few features of their home, feed that information into the model, and it will instantly spit out a market-appropriate price of their home.” She breaks into a huge smile and says that you’re now her favorite sibling.</p>
+<p>This is our first problem to be solved, and it has three pieces:</p>
+<ol class="arabic simple">
+<li><p>building a computational model that considers the features of a home and uses those features to predict a selling price;</p></li>
+<li><p>tuning the model to produce good predictions; and</p></li>
+<li><p>using the tuned model to predict the prices of previously unseen homes in a business setting.</p></li>
+</ol>
+<p>We’ll focus on the first two pieces, and your sister will use our tuned model in her business.</p>
+</section>
+<section id="your-sister-s-data">
+<p><strong>Your sister’s data.</strong> Let’s assume that your sister lives in Ames, Iowa. In 2011, Dean De Cock published a data set describing the housing sales in this area from 2006 to 2010. He published it for use in undergraduate regression courses, and it has since become a popular data set for learning about ML. We’ll grab a copy of this data set from the online platform <a class="reference external" href="http://kaggle.com">kaggle.com</a>, where you can join a community of ML enthusiasts and peruse a repository of community-published data sets and ML models.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">References</p>
+<p>You can read De Cock’s original paper in the <a class="reference external" href="https://jse.amstat.org/v19n3/decock.pdf">Journal of Statistics Education, Volume 19, Number 3 (2011)</a>. The copy of the Ames, Iowa Housing Data I use in this chapter is from <a class="reference external" href="https://www.kaggle.com/datasets/marcopale/housing">Marco Palermo’s Kaggle site</a>. Normally, as we discussed in Chapter 8, we’d want to inspect and clean a data set before we try to use it to build a prediction model, but De Cock has already done the cleaning for us.</p>
+</aside>
+<p>The Ames-Iowa-Housing data is one large CSV file. Recall that a CSV is a text file that contains row after row of comma-separated values. It is tabular data that you could read into a spreadsheet application, but let’s practice our Python and write a small script (<code class="docutils literal notranslate"><span class="pre">head.py</span></code>) to look at the first five rows of this data set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap17/head.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">csv</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: head.py input.csv&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+<span class="linenos">10</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+<span class="linenos">11</span>            <span class="c1"># Just print the first 5 rows</span>
+<span class="linenos">12</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">13</span>                <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="k">break</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">18</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This script uses the <code class="docutils literal notranslate"><span class="pre">csv</span></code> library and its <code class="docutils literal notranslate"><span class="pre">DictReader</span></code> function, which takes a table’s column headings and uses them as dictionary keys. When you run <code class="docutils literal notranslate"><span class="pre">head.py</span></code> on your copy of the Ames-Iowa-Housing CSV file, you should see the first five data rows of the file printed as dictionaries. Each row is a home sale, which lists a lot of information. My copy of the data set contained 82 different pieces of information about each home sale, including <code class="docutils literal notranslate"><span class="pre">'Year</span> <span class="pre">Built'</span></code> and <code class="docutils literal notranslate"><span class="pre">'SalePrice'</span></code>. We now know why your sister asked for help.</p>
+</section>
+<section id="trying-to-solve-this-problem-ourselves">
+<p><strong>Trying to solve this problem ourselves.</strong> We don’t know much about selling houses, but your sister has said that homes with more bedrooms sell for more money. Ok, we know about making decisions like this: we simply need to use some if-statements. Maybe we can write something like the following, where I’ve indicated the relationship between the predicted prices but didn’t specify their actual values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### Pseudocode implementing a simple decision tree</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># Grab data about new seller&#39;s home</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1"># Predict price based on number of bedrooms</span>
+<span class="linenos">6</span><span class="c1"># if home.bedrooms &gt; 2:</span>
+<span class="linenos">7</span><span class="c1">#     print(&#39;Predicted price:&#39;, A_BIG_NUMBER)</span>
+<span class="linenos">8</span><span class="c1"># else:</span>
+<span class="linenos">9</span><span class="c1">#     print(&#39;Predicted price:&#39;, A_SMALL_NUMBER)</span>
+</pre></div>
+</div>
+<p>To figure out what the predicted prices should be, let’s write a Python script that analyzes the Ames-Iowa-Housing data. This script, which I’ve called <code class="docutils literal notranslate"><span class="pre">avg_pbbr.py</span></code> (i.e., average price by bedroom), buckets the previously sold homes by their number of bedrooms and then calculates and prints each bucket’s average sale price. Because it uses a fixed size array, it is careful to verify that there are no homes in the data set with more than nine bedrooms. It also demonstrates yet another way to do some formatted printing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap17/avg_pbbr.py</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">csv</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Each `homes` element is a tuple with these elements:</span>
+<span class="linenos"> 5</span><span class="c1"># 1. count of homes with a number of bedrooms equal to the index</span>
+<span class="linenos"> 6</span><span class="c1"># 2. total sales price for all such homes</span>
+<span class="linenos"> 7</span><span class="n">MAX_BEDROOMS</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="linenos"> 8</span><span class="n">homes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 9</span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="linenos">10</span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="linenos">11</span>    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="linenos">12</span><span class="p">]</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">15</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">16</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: avg_pbbr.py input.csv&#39;</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+<span class="linenos">19</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+<span class="linenos">21</span>            <span class="c1"># Grab this entry&#39;s number of bedrooms</span>
+<span class="linenos">22</span>            <span class="n">num_bedrooms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bedroom AbvGr&#39;</span><span class="p">])</span>
+<span class="linenos">23</span>            <span class="k">assert</span> <span class="n">num_bedrooms</span> <span class="o">&lt;=</span> <span class="n">MAX_BEDROOMS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;We need a bigger list (</span><span class="si">{</span><span class="n">num_bedrooms</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>            <span class="c1"># Grab its sales price</span>
+<span class="linenos">26</span>            <span class="n">price</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>            <span class="c1"># Update the right tuple in `bedrooms`</span>
+<span class="linenos">29</span>            <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">30</span>                <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+<span class="linenos">31</span>                <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">price</span>
+<span class="linenos">32</span>            <span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>        <span class="c1"># Print out the results</span>
+<span class="linenos">35</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">homes</span><span class="p">):</span>
+<span class="linenos">36</span>            <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">37</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Avg. sale price of </span><span class="si">{</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;</span><span class="si">{</span><span class="mi">4</span><span class="si">}}</span><span class="s1"> homes with </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> bedrooms: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;$&#39;</span><span class="p">)</span>
+<span class="linenos">38</span>                <span class="nb">print</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;.2f&#39;</span><span class="p">))</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">41</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">avg_pbbr.py</span></code>, and you’ll see that there’s no observable pattern in the printed averages.</p>
+</div>
+<p>Perhaps a pattern will emerge if we include additional home features, like lot size. We’d extend our earlier pseudocode as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### Pseudocode with a larger decision tree</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># Grab data about new seller&#39;s home</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># Predict price based on number of bedrooms and lot size</span>
+<span class="linenos"> 6</span><span class="c1"># if home.bedrooms &gt; 2:</span>
+<span class="linenos"> 7</span><span class="c1">#     if home.lotarea &gt; 12000: </span>
+<span class="linenos"> 8</span><span class="c1">#         print(&#39;Predicted price:&#39;, A_BIG_NUMBER)</span>
+<span class="linenos"> 9</span><span class="c1">#     else:</span>
+<span class="linenos">10</span><span class="c1">#         print(&#39;Predicted price:&#39;, A_NOT_AS_BIG_NUMBER)</span>
+<span class="linenos">11</span><span class="c1"># else:</span>
+<span class="linenos">12</span><span class="c1">#     if home.lotarea &gt; 12000: </span>
+<span class="linenos">13</span><span class="c1">#         print(&#39;Predicted price:&#39;, A_SMALL_NUMBER)</span>
+<span class="linenos">14</span><span class="c1">#     else:</span>
+<span class="linenos">15</span><span class="c1">#         print(&#39;Predicted price:&#39;, A_SMALLER_NUMBER)</span>
+</pre></div>
+</div>
+<p>What we’re building is called a <em>decision tree</em>. For each characteristic we think is important in determining the predicted price, we include a node in the tree (i.e., an if-statement) that directs us toward a subtree (i.e., subsequent if-statements) where that characteristic is true. When we get to the leaves of the tree (i.e., we run out of conditions to check), we print the predicted price for a house with those characteristics. In our pseudocode, for instance, <code class="docutils literal notranslate"><span class="pre">A_SMALL_NUMBER</span></code> is the predicted price for a home with two or fewer bedrooms on a lot of more than 12,000 square feet.</p>
+<p>Unfortunately, even if we were patient enough to figure out what buckets of lot sizes to use, we’d still find that this decision tree doesn’t use enough of the data to create a good predictor. We need to a smarter approach. We need <em>machine learning</em>.</p>
+</section>
+<section id="machine-learning">
+<p><strong>Machine learning.</strong> We’ve been trying to suss out a pattern in the Ames-Iowa-Housing data that we could use as the foundation for a good predictor, and we were using your sister’s experience in real estate as a starting point in this search. This wasn’t a bad idea since we know that evolution has made humans into good pattern recognizers. For example, as we discussed in Chapter 1, the accumulation of experience turns good programmers into great ones (i.e., individuals that seem to quickly jump to the “right” structure for a script to solve a new problem). But we don’t have your sister’s experience and the patterns in the Ames-Iowa-Housing data might be quite subtle. ML is a computational approach that enables computers, through the use of <em>statistical techniques</em> and <em>a large training data set</em>, to build <em>models</em> that perform like an experienced human. They allow everyone of us to become instant experts in a new domain!</p>
+<p>The statistical technique we used a moment ago was a decision tree. Statisticians recommend this approach when the relationship between the <em>features</em> (i.e., the characteristics of a home such as its number of bedrooms and lot size) and the <em>target variable</em> (i.e., the home’s selling price) is complex. For those of you that know a bit about statistical analysis, this often means that the relationship is non-linear or includes important outliers.</p>
+<p>Decision trees produce fine predictors of home prices, and yet there are other statistical techniques that yield more accurate predictions (e.g., see ALE 17.??). Despite this, we’ll continue using decision trees, since they are a great starting place for learning how to do ML because they are: (1) easy to understand; and (2) they form the basic building block of several better techniques.</p>
+</section>
+<section id="labeled-training-data">
+<p><strong>Labeled training data.</strong> I said that ML relies on statistical techniques and a <em>large training</em> data set. We have been using the prices for past home sales in Ames, Iowa as accurate indicators of the prices of future home sales in that area. In other words, these past home sales are the experience we need to predict future home sales, and we can therefore use these past home sales to <em>train</em> our ML model. You’ll often see this described as <em>fitting</em> the model to the training data.</p>
+<p>When there is a strong correlation between a feature (e.g., number of bedrooms) and the target variable (e.g., selling price), we might need to see very few training examples to build a good prediction model. However, we learned using <code class="docutils literal notranslate"><span class="pre">avg_pbbr.py</span></code> that there isn’t a strong correlation between the number of bedrooms and selling price in the Ames-Iowa-Housing data. But since the real estate industry uses comparable houses to set asking prices, there must be some correlation between the features of a home and its sale price. We simply need a large enough data set to discover that correlation, to identify the patterns in the data.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When the patterns are hard to see, you’ll need a large training set to have ML create a good predictor.</p>
+</div>
+<p>There’s one other characteristic of the Ames-Iowa-Housing data that doesn’t have to be true in every ML problem: this data set is <em>labeled</em>. This term means that the data set includes the answers, i.e., the value of the <em>target variable</em>, which for our problem is the selling price. In other words, we know not only the values of the features for each of the homes, but we also know their true selling prices. When using labeled training data, it is called <em>supervised learning</em>.</p>
+<p>But not every type of ML requires labeled training data. When we want to analyze a data set for any kind of pattern, it is called <em>unsupervised learning</em>. We won’t talk about further about this type of ML except to say that you should investigate it if you’re interested in problems such as natural language processing, object recognition, customer segmentation (e.g., recommendation engines), or exploratory data analysis.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The discipline of ML includes a dizzying number of statistical techniques under the headings of supervised and unsupervised learning. As you work in this area, you’ll learn that there is no single best method, and you’ll find that no one can accurately predict whether a particular approach will be successful. Experience will help limit the amount of trial and error you’ll do, but be prepared to try lots of different approaches until you find one that works well.</p>
+</div>
+</section>
+<section id="ml-workflow">
+<p><strong>ML workflow.</strong> We’re about ready to dig into two ML libraries and solve our sister’s problem, but before we discuss the particulars of either, I want to describe in general how we’re moving work off our plates and on to the machine’s. At the start of the chapter, we tried to follow a process like this:</p>
+<ol class="arabic simple">
+<li><p>We looked at the data and picked one or more features we thought might correlate well with the target variable.</p></li>
+<li><p>We wrote a script (e.g., <code class="docutils literal notranslate"><span class="pre">avg_pbbr.py</span></code>) that analyzed the data in the data set to see if a pattern existed between the features and the target variable. If not, we returned to step 1.</p></li>
+<li><p>Using what we learned from the analysis script, we would have filled in the unknown numbers in our decision-tree pseudocode and written a script that takes as input a set of feature values and outputs a predicted target value. This would have been the “model” we would have sent to your sister.</p></li>
+</ol>
+<p>In using our model, your sister probably would find that it didn’t do a terrific job of predicting the selling price of a new home coming on the market. This is because the steps we took didn’t involve looking for the <em>best</em> model we could have built; we simply built <em>a</em> model based on the first pattern we found. An experienced data scientist would iterate and ask, “Ok, my first model works, but is there a better selection of features (or even a superior statistical approach) that produces a better predictor?”</p>
+<p>A good ML library automates much of steps 2 and 3 for you. We’ll use the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> libraries, and with their help, this process turns into the following:</p>
+<ol class="arabic simple">
+<li><p>Review and analyze our data set using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library, and pick one or more features we think might correlate well with the target variable.</p></li>
+<li><p>Select the type of statistical analysis we want to use. We’ll use the <code class="docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code> class in <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Besides decision trees, this library supports many other statistical techniques, and we’ll select a different one when we later build a predictor for the toxicity of online comments.</p></li>
+<li><p>Create an instance of the <code class="docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code> class and call the resulting object’s <code class="docutils literal notranslate"><span class="pre">fit</span></code> method, giving it the set of features and the target variable we want it to use from our training data.</p></li>
+<li><p>Test this object, which is a model fit to our training data, against some previously unseen data, and evaluate whether this model is a good one. If it is not, we’ll return to an earlier step, changing perhaps the features included or the type of statistical analysis performed.</p></li>
+<li><p>Share our best model with your sister.</p></li>
+</ol>
+<aside class="margin sidebar">
+<p class="sidebar-title">Selecting the Best Features</p>
+<p>Even the task of choosing the features (step 1) can be partially automated; if you take a ML course, you’ll learn about statistical techniques that will automatically prioritize the features in your data set.</p>
+</aside>
+<p>Notice that we no longer need to write the code that implements a statistical analysis (step 2) or the model that fits to the training data (step 3), as we tried to do earlier. Using powerful ML libraries like <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, our scripts need make only a few function calls.</p>
+</section>
+<section id="getting-a-feel-for-the-data">
+<p><strong>Getting a feel for the data.</strong> With this foundation, you are ready to start using the tools of a data scientist. We’ll begin with <a class="reference external" href="https://pandas.pydata.org/">the pandas library, which “is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.”</a> It provides data structures and functions that allow us to quickly explore a data set.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Many data scientists work in interactive Python notebooks (i.e., <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> files) when doing ML, and we’ll do the same in the rest of this chapter. They also commonly refer to the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library with the abbreviation <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 2nd code block</span>
+<span class="linenos">2</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Terminology</p>
+<p>Each column in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is a <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> data structure, and data scientists will often refer to a column as a series.</p>
+</aside>
+<p>The most important data structure in the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library is the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. You can think of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> as resembling a table, like a worksheet in Excel notebook. The <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library provides input/output functions, like <code class="docutils literal notranslate"><span class="pre">pandas.read_csv</span></code>, that allow you to pour data into and pull data out of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. And once your data is in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, you can apply many of the library’s powerful functions, such as <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame.describe</span></code> that creates a summary description of the data in each column. The following code block shows how we can use the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library to begin exploring the data set containing home sales in Ames, Iowa.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 1st and 3rd code blocks</span>
+<span class="linenos">2</span><span class="c1"># Specify the input CSV file for building and testing the model</span>
+<span class="linenos">3</span><span class="n">csv_file</span> <span class="o">=</span> <span class="s1">&#39;AmesIowaHousingData/AmesHousing.csv&#39;</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1"># Read the CSV data into a DataFrame</span>
+<span class="linenos">6</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="c1"># Print a summary of the data</span>
+<span class="linenos">9</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Remember that the interactive Python interpreter will print the result of the last statement in a code block when you execute it in a <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> file. Make sure you run the two previous code blocks, adjusting the pathname in the <code class="docutils literal notranslate"><span class="pre">csv_file</span></code> string to match where you placed the housing data set. You’ll need to see the returned result for <code class="docutils literal notranslate"><span class="pre">df.describe()</span></code> to follow the explanation that comes next.</p>
+</div>
+<p>The results of our call to <code class="docutils literal notranslate"><span class="pre">df.describe()</span></code> list eight numbers for a large number of our data set’s columns. The <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library decided that each of these columns is a <em>numeric</em> series, and the numbers under the series name tell you some statistical facts about each of these columns. Here’s a short summary of the meaning of each row in the table returned by <code class="docutils literal notranslate"><span class="pre">describe</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> reports the number of rows (in the indicated column from the data set) with <em>non-missing values</em>. As we discussed in Chapter 8, there are many reasons why a data set may contain missing values. In our data set, for example, two of the home sales don’t report any value for <code class="docutils literal notranslate"><span class="pre">'Bsmt</span> <span class="pre">Full</span> <span class="pre">Bath'</span></code>, which might have occurred because the person filling out the data did’t think that they needed to fill out this column in a house without a basement.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mean</span></code> is the arithmetic average of the non-missing values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std</span></code> is the standard deviation of the non-missing values, and it provides a measure of the values’ numerical spread.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">25%</span></code>, <code class="docutils literal notranslate"><span class="pre">50%</span></code>, <code class="docutils literal notranslate"><span class="pre">75%</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> are best considered together. If you were to sort the non-missing values in the column from the smallest number to the largest, the first number in the sort is <code class="docutils literal notranslate"><span class="pre">min</span></code> and the last is <code class="docutils literal notranslate"><span class="pre">max</span></code>. Then imagine drawing three lines that split the sorted list into four equal-sized buckets. The number at these three split points are the values at the 25th percentile (25%), the 50th percentile (50%), and the 75th percentile (75%). Intuitively, the 25th percentile is the number that is bigger than a quarter of the column’s values and smaller than the other three-quarters.</p></li>
+</ul>
+<p>Knowing this, I can see that my copy of the Ames-Iowa-Housing data contains 2930 entries and the average home sale price between 2006 and 2010 was approximately 180,800 dollars, with the cheapest home selling for just under 80,000 dollars and the most expensive one for 755,000 dollars.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library limits the number of <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> columns and rows it displays, and if we wanted to see the statistics about bedrooms above ground (<code class="docutils literal notranslate"><span class="pre">'Bedroom</span> <span class="pre">AbvGr'</span></code>) that we analyzed with our own script earlier, we’d either have to change the maximum number of columns that <code class="docutils literal notranslate"><span class="pre">pandas</span></code> displays or slice that series from the result of the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method call. Let’s choose the latter approach:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 5th code block</span>
+<span class="linenos">2</span><span class="c1"># Review only the statistics for number of bedrooms</span>
+<span class="linenos">3</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()[</span><span class="s1">&#39;Bedroom AbvGr&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>From this result, we can see that 2- and 3-bedroom houses are common, and that we didn’t need to worry about tracking houses with more than eight bedrooms.</p>
+</section>
+<section id="set-the-prediction-target">
+<p><strong>Set the prediction target.</strong> We’re now ready to define the setup we’ll use in configuring our prediction model. Let’s start with the model’s output, which is the variable we want to predict. The series labeled <code class="docutils literal notranslate"><span class="pre">'SalePrice'</span></code> is this target variable, and by convention, data scientists call it <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>To set what <code class="docutils literal notranslate"><span class="pre">y</span></code> names, we can grab that series from our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> using one of two notations: (1) square brackets to slice it out, as we’ve done with other sequences; or (2) what’s called <em>dot notation</em> in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. The former always works, while the latter is a nice shorthand when the series name doesn’t contain spaces or conflict with another attribute name in the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library. The following code block illustrates both methods while using the latter since this label mets the requirements for using the shorthand.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 6th code block</span>
+<span class="linenos">2</span><span class="c1"># Setting the prediction target</span>
+<span class="linenos">3</span><span class="c1"># y = df[&#39;SalePrice&#39;]</span>
+<span class="linenos">4</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">SalePrice</span>
+<span class="linenos">5</span><span class="n">y</span>
+</pre></div>
+</div>
+</section>
+<section id="pick-some-features">
+<p><strong>Pick some features.</strong> As we did when we tried to solve this problem by writing our own code, we need to choose which data set features we think will correlate nicely with our target variable. Almost every series is a candidate except the first, which in my copy of the data set is called <code class="docutils literal notranslate"><span class="pre">'Order'</span></code>, and the last, which is the target variable. I eliminate the first series from contention since it is nothing more than each record’s index in the data set. You’d want to eliminate anything like it when it’s clear that that series could not possibly correlate with the target variable.</p>
+<p>To choose among the others, let’s interrogate the <code class="docutils literal notranslate"><span class="pre">columns</span></code> attribute on a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which prints all the column labels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 7th code block</span>
+<span class="linenos">2</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+<p>As you’ll find in many big data sets, there are a lot of columns to consider. While it might be tempting to include all the eligible columns in your model, it’s not always the best choice. Let’s begin with just a few as we can always later change the list of features included and compare the performance of our different models.</p>
+<p>In the next code block, we build a list of column names that’ll represent the features we want included in our model, and then slice those series out of our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. Again, by convention, these data are called <code class="docutils literal notranslate"><span class="pre">X</span></code>. This and the following code block invoke the <code class="docutils literal notranslate"><span class="pre">describe</span></code> and <code class="docutils literal notranslate"><span class="pre">head</span></code> methods on the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> called <code class="docutils literal notranslate"><span class="pre">X</span></code> to check what we’ve done.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 8th code block</span>
+<span class="linenos">2</span><span class="c1"># The model&#39;s input features</span>
+<span class="linenos">3</span><span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Lot Area&quot;</span><span class="p">,</span> <span class="s2">&quot;Year Built&quot;</span><span class="p">,</span> <span class="s2">&quot;1st Flr SF&quot;</span><span class="p">,</span> <span class="s2">&quot;2nd Flr SF&quot;</span><span class="p">,</span> <span class="s2">&quot;Full Bath&quot;</span><span class="p">,</span> <span class="s2">&quot;Bedroom AbvGr&quot;</span><span class="p">,</span> <span class="s2">&quot;TotRms AbvGrd&quot;</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span>
+<span class="linenos">5</span><span class="n">X</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap17/ames.ipynb, 9th code block</span>
+<span class="linenos">2</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As we’ve learned, frequent checks of our script’s state help us to find the mistakes in our logic before we done too much work. These sorts of checks are even more important in the work of a data scientist, since it is harder to spot a model built from non-sensical data. Check the contents of your data frames frequently!</p>
+</div>
+</section>
+<section id="fit-the-model-to-our-data">
+<p><strong>Fit the model to our data.</strong> We chose to use a decision tree, which the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library provides through the <code class="docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code> class. Instantiating an instance of this class is the first step in creating a model that uses decision trees.</p>
+<p>Hidden in this creation step, however, is a bit of randomness, which many ML libraries use as a best practice. Since we want to compare the models we build against each other, we want to eliminate this randomness as a potential cause of any difference in the performance of our models. We can accomplish this by specifying the random seed that the model should use each time it creates a new instance for us. This is the purpose of the <code class="docutils literal notranslate"><span class="pre">random_state</span></code> assignment in the constructor call in the following code block. You can choose any number you’d like as long as you consistently use it in all your constructor calls.</p>
+<p>```{margin} Coding with <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>
+The Python module you want to import to use the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library is called <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap17/ames.ipynb, 10th code block
+from sklearn.tree import DecisionTreeRegressor
+
+# Create an untrained model
+my_model = DecisionTreeRegressor(random_state=42)
+
+# Fit the model to the specified portion of the training data
+my_model.fit(X, y)
+</pre></div>
+</div>
+<p>Given a newly created instance of <code class="docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code>, we simply pass our <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> variables to this object’s <code class="docutils literal notranslate"><span class="pre">fit</span></code> method, and it updates the model. We can now use this object to make predictions!</p>
+</section>
+<section id="predicting-unseen-data">
+<p><strong>Predicting unseen data.</strong> To make a prediction using this fitted model, we need a set of values for the model’s input features. Inputting these feature values will cause the model to return a prediction for the target variable. In other words, have someone tell us about a house we haven’t yet seen, and for that house, give us its lot size, year it was built, square feet of living space in the first and second floors, and the number of full bathrooms, bedrooms above ground, and total rooms above ground. That’s the list of features we used to train our model to predict selling prices.</p>
+<p>Ok, but we used all the data we had about home sales in Ames, Iowa to create the model. We could go back to your sister for more data, but there’s another way: data scientists take a given data set and split it in two. One part of this split is designated the <em>training set</em> and the other is the <em>test set</em>. We’ll use the former to create our model and the latter to check its performance.</p>
+<p>There are many ways to poorly split a data set, and to avoid these pitfalls, the train-test split routines in ML libraries like <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> employ randomness. Again, we want to control the random seed used by these functions so that we can ensure that all the models we build are fed the same training and testing data sets.</p>
+<p>The code block below retrains our model using the <code class="docutils literal notranslate"><span class="pre">train_X</span></code> and <code class="docutils literal notranslate"><span class="pre">train_y</span></code> data sets produced by the <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> function in the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library. It then illustrates how to use the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method on our model object, into which we feed the <code class="docutils literal notranslate"><span class="pre">text_X</span></code> data set. The resulting <code class="docutils literal notranslate"><span class="pre">predictions</span></code> are what we want to compare against the actual sale prices stored in <code class="docutils literal notranslate"><span class="pre">test_y</span></code>. I’ve written a little loop that does this comparison, converting a few data types along the way (i.e.., the <code class="docutils literal notranslate"><span class="pre">Series</span></code> in <code class="docutils literal notranslate"><span class="pre">test_y</span></code> into a Python list and each <code class="docutils literal notranslate"><span class="pre">float</span></code> in <code class="docutils literal notranslate"><span class="pre">predictions</span></code> into an <code class="docutils literal notranslate"><span class="pre">int</span></code>).</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Don’t Test with Your Training Data</p>
+<p>A model’s utility is defined by its ability to make accurate predictions on data it hasn’t previously seen, which are called the <em>validation data</em>. It’s not hard to get good predictions from a model’s training data. Try it by calling <code class="docutils literal notranslate"><span class="pre">predict</span></code> with <code class="docutils literal notranslate"><span class="pre">train_X.head()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">test_X</span></code>.</p>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap17/ames.ipynb, 11th code block</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Split both features and target data into training and validation sets</span>
+<span class="linenos"> 5</span><span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Fit the model using the training data</span>
+<span class="linenos"> 8</span><span class="n">my_model</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">my_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1"># Feed the model the test data and capture the resulting predictions</span>
+<span class="linenos">12</span><span class="n">predictions</span> <span class="o">=</span> <span class="n">my_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># Compare first 5 predictions against actual sale prices</span>
+<span class="linenos">15</span><span class="n">actuals</span> <span class="o">=</span> <span class="n">test_y</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="linenos">16</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">18</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">actuals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">19</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">a</span>
+<span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;prediction = $</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">; actual = $</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">; diff = $</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s1">&gt;6</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Run the code above. Are you happy with the resulting predictions?</p>
+</div>
+</section>
+<section id="model-validation">
+<p><strong>Model validation.</strong> To be written.</p>
+</section>
+<section id="making-the-fit-just-right">
+<p><strong>Making the fit just right.</strong> To be written.</p>
+</section>
+<section id="bias-in-ml">
+<p><strong>Bias in ML.</strong> To be written.</p>
+<p>[Version 20240101]</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap16.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 16: Catch Them Early</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap18.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 18: Using Generative AI in Your Life (incomplete)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-home-prices">Predicting home prices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-sister-s-data">Your sister’s data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-to-solve-this-problem-ourselves">Trying to solve this problem ourselves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeled-training-data">Labeled training data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-workflow">ML workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-feel-for-the-data">Getting a feel for the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-prediction-target">Set the prediction target</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pick-some-features">Pick some features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-model-to-our-data">Fit the model to our data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-unseen-data">Predicting unseen data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation">Model validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-fit-just-right">Making the fit just right</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-ml">Bias in ML</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

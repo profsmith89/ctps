@@ -17,7 +17,7 @@ Toward the end of this book, we will explore the model building portion of the d
 Acting like a data scientist is a perfect way for us to wrap up our discussion of numbers, since so much of a data scientist's work is statistical in nature. In this chapter, we'll focus on the initial steps in every data science process and the domain-agnostic aspects of these steps. In particular, we will focus on these two sub-questions of our motivating question: (1) Once we have collected some data, why it is important to clean the data in our data set before we try to analyze them? And (2) once we've cleaned the data, what programming techniques are generally helpful in doing data exploration and pattern detection. We'll practice both of these skills through two applications on images: (1) a technique for removing a photobombing person from an image (i.e., data set cleaning); and (2) a technique for hiding information inside an image (i.e., data exploration and pattern detection).
 
 ```{admonition} Learning Outcomes
-In this chapter, you will be introduced to the field of data science and learn how you can use computation to analyze data and discover new knowledge. We focus on the initial steps in every data-science problem (i.e., data collection, data cleaning, and data exploration) using images as our big dataset.
+In this chapter, you will be introduced to the field of data science and learn how you can use computation to analyze data and discover new knowledge. We focus on the initial steps in every data-science problem (i.e., data collection, data cleaning, and data exploration) using images as our big data set.
 
 *   Enumerate the major steps in every data-science problem [CS concepts];
 *   Explain why data cleaning is necessary and important [design and CS concepts];
@@ -529,4 +529,4 @@ Importantly, you're comfortable with problem solving as an iterative process. Al
 You are no longer a novice. You are now ready to learn to use computers to solve a more complex set of real-world problems.
 ```
 
-\[Version 20230811\]
+\[Version 20231220\]
