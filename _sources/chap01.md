@@ -1,4 +1,4 @@
-# Chapter 1: Read a Children's Book
+# Chapter 1: Read a Children's Book #
 
 I love a good story that opens with action and suspense. The action in this opening chapter will be to *solve our first computational problem* and *write our first Python script*. These two things are linked. The goal of a Python script is to get a computer to act in a certain way, to perform one or more specific computations. And if we correctly do the problem-solving work that sets up the writing of such a script, the computations that result will be a solution to our problem.
 

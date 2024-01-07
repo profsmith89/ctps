@@ -1,4 +1,4 @@
-# Chapter 17: Build Prediction Models (Incomplete)
+# Chapter 17: Build Prediction Models (Incomplete) #
 
 Computational tools help us to automate away the drudgery involved in our work. They do this best when there are clear patterns in the work we do. If we can recognize them, we can build a script to repeatedly perform the work associated with each pattern. This is what we did in Chapter 2, when we hand-built a script to grab the dialogue in a story, and Chapter 13, when we used the regular-expression library to describe the more complicated patterns we saw in the Python interpreter's error messages and rewrite them into a form easier for us to digest.
 

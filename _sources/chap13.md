@@ -1,4 +1,4 @@
-# Chapter 13: Rewrite the Error Messages
+# Chapter 13: Rewrite the Error Messages #
 
 The last act began with the recognition that our world is wondrously complex, and we ended it with the realization that this complexity is sometimes disturbingly simple to overcome with the right tool. For example, a divide-and-conquer approach was exactly what we needed in Chapter 12 to tackle Beckett's Challenge and recursion was the right technique for coding a short solution. Finding the right computational tool for your task is the theme of this final act. With the right tool, solving your problems becomes straightforward.
 

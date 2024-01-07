@@ -1,4 +1,4 @@
-# Chapter 14: The Dream of Bug Fixing
+# Chapter 14: The Dream of Bug Fixing #
 
 While we may not like the Python interpreter's error messages, at least they give us a clue to the specific syntax or runtime errors it finds. These messages are a starting point for our efforts to fix our script and get the machine to do what we want. In contrast, it's harder for us to diagnose design errors (i.e., solving your problem incorrectly) and subtle coding errors (e.g., writing a script with an infinite loop or multiplying a value by the wrong constant). To check for these kinds of errors, we must test our scripts across a range of inputs, verifying that they produce the expected output in each instance. But what do you do when they enviably don't?
 

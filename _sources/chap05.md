@@ -1,4 +1,4 @@
-# Chapter 5: Play Guess-a-number with a Friend
+# Chapter 5: Play Guess-a-number with a Friend #
 
 You have learned to write client applications for the client-server model, and although we have seen how powerful this can be, we'd like to understand (and be able to code) both sides of this model. To bring in the server side, we are going to focus on networked scripts that allow us to connect a human on one computer with a human on another. In particular, we will demonstrate this capability through the development of a networked game.
 

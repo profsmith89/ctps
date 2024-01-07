@@ -1,4 +1,4 @@
-# Chapter 10: Build an Index
+# Chapter 10: Build an Index #
 
 We discovered in the last chapter that the choice of algorithm can make a huge difference in the running time of our script as the size of our problem grows. Or stated more bluntly, a brute-force approach doesn't work in all contexts. Under some especially stressful conditions, it fails spectacularly to deliver an answer in a reasonable amount of time.
 

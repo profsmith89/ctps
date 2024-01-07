@@ -1,4 +1,4 @@
-# Chapter 2: Grab the Dialogue
+# Chapter 2: Grab the Dialogue #
 
 Did you try running other text files through the script we developed together in the last chapter? If you haven't, please do try it. Curiosity and experimentation are attitudes to nurture for they will make you a better problem solver.
 
@@ -247,7 +247,7 @@ To this point, I've been relying on your intuition for what constitutes a string
 
 Short answer: it does. A string in Python is a *sequence* of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we would like to manipulate in our scripts. The abstraction you should have in your mind for a sequence is *an ordered collection of items*. 
 
-It doesn't matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the `list` datatype in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python `list` containing a stuffed animal, a picture of my kids, this course's textbook, an old CD, and then some other books.
+It doesn't matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the `list` data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python `list` containing a stuffed animal, a picture of my kids, this course's textbook, an old CD, and then some other books.
 
 ## Membership test
 
@@ -675,4 +675,4 @@ emphasize-lines: 2, 3
 <class 'str'>
 ```
 
-\[Version 20230811\]
+\[Version 20230902\]

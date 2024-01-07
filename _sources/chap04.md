@@ -1,4 +1,4 @@
-# Chapter 4: Query a Web Resource
+# Chapter 4: Query a Web Resource #
 
 Now that we know the basics about functions and modules, we can use them as our ticket into the worldwide community of software developers. While we might begin by building our own reusable components (i.e., functions) and sharing them with the Python community, in this chapter we'll learn how to write a script using functions others have built and shared. In particular, we'll use their functions to access information available on the Internet. It's time to use what we know to interact with the world!
 
@@ -251,7 +251,7 @@ This third version of our script employs a simpler way to specify the query. It 
 While the dictionary _abstraction_ doesn't force an ordering on its elements, Python's _implementation_ of the dictionary data type does guarantee the elements to be in insertion order, as of version 3.7. Personally, I would suggest you forget this "feature."  This implementation detail might change in a later release, as it doesn't flow from the dictionary abstraction. Plus, what is the insertion order after you've updated some elements and deleted a few? I don't know and don't care to figure it out since it isn't core to the dictionary abstraction. Of course, this is just my personal opinion.
 ```
 
-Don't confuse Python dictionaries with Python's sequence datatypes. Both use the index operator (i.e., `[]`) to access a particular entry, but the dictionary abstraction doesn't enforce an ordering on its elements as the sequence abstraction does. Since we cannot specify which entry we want in a dictionary by specifying its position in the data structure, dictionaries associate each entry with a *key*, which Python requires to be of an immutable type. Recall that strings are immutable, and so we can use them as keys in our dictionary. We can also use numbers as keys, since they too are immutable objects in Python, which means you could make a dictionary object look like a list object, but let's get back to our example.
+Don't confuse Python dictionaries with Python's sequence data types. Both use the index operator (i.e., `[]`) to access a particular entry, but the dictionary abstraction doesn't enforce an ordering on its elements as the sequence abstraction does. Since we cannot specify which entry we want in a dictionary by specifying its position in the data structure, dictionaries associate each entry with a *key*, which Python requires to be of an immutable type. Recall that strings are immutable, and so we can use them as keys in our dictionary. We can also use numbers as keys, since they too are immutable objects in Python, which means you could make a dictionary object look like a list object, but let's get back to our example.
 
 Python dictionaries create a mapping from keys to values, and we initialize a dictionary with a set of `key:value` pairs such as `'action':'query'` and `'srlimit':1`. 
 
@@ -679,4 +679,4 @@ Line 21 can't execute until we have completed the `requests.get` call and have a
 
 This is your first taste of concurrency (also called parallelism), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
 
-\[Version 20230811\]
+\[Version 20230902\]

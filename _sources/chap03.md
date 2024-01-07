@@ -1,4 +1,4 @@
-# Chapter 3: Replace Text With Emoji
+# Chapter 3: Replace Text With Emoji #
 
 To this point, we have written scripts using the core of the Python language. These scripts were for us. We adorned them with comments and variable names indicative of the code's purpose, but we didn't expect anyone else to read them. And while we have learned how to direct a computer like an actor, the world for which we programmed was small: our dramatic stage limited to the machine in front of us. This is a proven way to get started, but also terribly dull and constraining.
 
@@ -795,7 +795,7 @@ The syntax of the function invocation should look familiar. Does it remind you o
 
 There are other forms of the import-statement that you can use (and ones you should not). Take a look at the [Python documentation on modules](https://docs.python.org/3/tutorial/modules.html) to learn more about them and when to use (or why not to use) them.
 
-## **Revisiting** `'__main__'`
+## Revisiting '\_\_main\_\_'
 
 A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you'll recall, is a statement that starts with the keyword `def`, as we did when we defined our `my_replace` function. These definitions are typically what we want to import from a module (i.e., another Python script).
 
@@ -815,4 +815,4 @@ We might, however, want to use a non-pure function defined in a module. This fun
 
 An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same "random" number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.
 
-\[Version 20231102\]
+\[Version 20240106\]

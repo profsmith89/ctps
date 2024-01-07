@@ -1,4 +1,4 @@
-# Chapter 6: Do You See My Dog?
+# Chapter 6: Do You See My Dog? #
 
 To this point, we have written code that required us to understand little more than the abstractions presented to us. Yet at times, we saw realities of the underlying machine through these abstractions. We learned, for example, that letters and symbols can be understood only if all parties agree on how they're encoded. We also learned that network messages aren't transmitted and received as an abstract whole, but are passed around in fixed-sized buffers. This need for fixed-size buffers shouldn't be too surprising as writing a letter before the invention of email required the use of one or more fixed-sized pieces of paper. We need to remember that computers are simply tools --- wonderfully flexible tools, but tools nonetheless. And as such, they do not directly manipulate our abstract ideas, but concrete *digital* representations of them.
 

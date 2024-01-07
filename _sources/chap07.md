@@ -1,4 +1,4 @@
-# Chapter 7: Many Numbers But Not Any Number
+# Chapter 7: Many Numbers But Not Any Number #
 
 In the last chapter, we heard from Jill Lepore that counting was a key metric in industrialization and measurement a key driver of science, but we looked mostly at the computational data type for counting: the integer.
 
@@ -8,12 +8,12 @@ If we're going to use computers to help us do creative things and generate new k
 
 ## Floating-point numbers and numerical computing
 
-Measurements with fractional units, like 6.574 seconds, are described as *real numbers*, and Python uses a datatype called `float` to represent such numbers. This name is a shorthand for *floating point (FP)*, [a standardized representation and a type of computational arithmetic.](https://standards.ieee.org/standard/754-2019.html)
+Measurements with fractional units, like 6.574 seconds, are described as *real numbers*, and Python uses a data type called `float` to represent such numbers. This name is a shorthand for *floating point (FP)*, [a standardized representation and a type of computational arithmetic.](https://standards.ieee.org/standard/754-2019.html)
 
 There are many details involved in this standard and peculiarities involved in using FP numbers to solve your problems. There are entire courses that will teach you how to use a computer to accurately solve problems involving continuous variables, like time and distance. This area of computer science comes under many names, including *numerical computing* and *scientific computing*, and the techniques taught will help you to use computers to study the range of physical and social phenomena in the world around us.
 
 ```{admonition} Learning Outcomes
-In this chapter, you will learn how computers represent numbers with fractional components, which is an important datatype if you're going write script that help you solve problems involving measured values. By the end of the chapter, you will be able to:
+In this chapter, you will learn how computers represent numbers with fractional components, which is an important data type if you're going write script that help you solve problems involving measured values. By the end of the chapter, you will be able to:
 
 *   Understand the floating-point (FP) number standard and how computers use it to represent real numbers [CS concepts];
 *   Explain the difference between applications that require integers and those that require FP numbers [design and CS concepts];
@@ -26,7 +26,7 @@ We won't attempt to cover the breadth of numerical algorithms, but answer a fund
 
 While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between *range* (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and *precision* (i.e., how close is a real number we can represent to the real number we want to represent?).
 
-We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language's physical representation. While Python doesn't place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer datatypes. And for FP numbers, the same is true in Python.
+We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language's physical representation. While Python doesn't place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer data types. And for FP numbers, the same is true in Python.
 
 Python adheres to the FP standard representation IEEE 754. As we'll see in a moment, the range defined by this standard, while not infinite, is comfortably big. In other words, most of us won't write scripts involving real numbers that will overflow this FP representation.
 
@@ -214,4 +214,4 @@ If your script operates with floating-point numbers and you need the results to 
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20230811\]
+\[Version 20230902\]

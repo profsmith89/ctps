@@ -1,4 +1,4 @@
-# Chapter 9: Find a Phrase
+# Chapter 9: Find a Phrase #
 
 The first act introduced fundamental ideas in problem solving with computers, and it set the stage for the conflict revealed in this second act: The world is a wondrously complex place. If you do not manage this complexity in a systematic way, it will overwhelm you.
 

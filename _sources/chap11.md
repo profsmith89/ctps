@@ -1,4 +1,4 @@
-# Chapter 11: Discover Driving Directions
+# Chapter 11: Discover Driving Directions #
 
 We began this act with a search problem that asked us to create a listing of all web pages that mention a particular keyword or phrase. Search was effectively a question of matching. Are there problems that we think of as search that more than just matching against a pattern? Google definitely thinks about search much more broadly. It searches over many different sources of digital information seeking answers to our questions.
 

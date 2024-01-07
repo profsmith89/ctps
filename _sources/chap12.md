@@ -1,4 +1,4 @@
-# Chapter 12: Divide and Conquer
+# Chapter 12: Divide and Conquer #
 
 The last chapter ended with a suggestion that we add a heuristic into our goal-directed search algorithm. Without a heuristic, every item on the frontier appears equally good. But with one, our search algorithm explores first the frontier list's potentially most fruitful item. You can think of the heuristic calculation as solving a simple version of the problem (e.g., which direction would a crow fly to get to our driving goal). While not guaranteed to lead to an optimal solution, good heuristics are fast to compute and likely to prioritize the right frontier items, which can get the search algorithm to a near-optimal solution quickly.
 

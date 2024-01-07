@@ -1,4 +1,4 @@
-# Glossary
+## Glossary ##
 
 **abstract data type:** a data type where we focus solely on what it does for us and pay no attention to how it is implemented. This means that we don't know anything about the performance of its methods.
 

@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -131,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="welcome.html">
+<a class="navbar-brand logo" href="ctps.html">
   
   
   
@@ -151,12 +152,13 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="welcome.html">
-                    A Welcome
+                <a class="reference internal" href="ctps.html">
+                    Title Page
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
@@ -175,7 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models (Incomplete)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
@@ -548,7 +559,7 @@ document.write(`
 <section id="strings-as-a-sequence-of-characters">
 <p><strong>Strings as a sequence of characters.</strong> To this point, I’ve been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the terminal. Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object.</p>
 <p>Short answer: it does. A string in Python is a <em>sequence</em> of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we would like to manipulate in our scripts. The abstraction you should have in your mind for a sequence is <em>an ordered collection of items</em>.</p>
-<p>It doesn’t matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the <code class="docutils literal notranslate"><span class="pre">list</span></code> datatype in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> containing a stuffed animal, a picture of my kids, this course’s textbook, an old CD, and then some other books.</p>
+<p>It doesn’t matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the <code class="docutils literal notranslate"><span class="pre">list</span></code> data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> containing a stuffed animal, a picture of my kids, this course’s textbook, an old CD, and then some other books.</p>
 </section>
 <section id="membership-test">
 <p><strong>Membership test.</strong> What makes a sequence a very useful abstraction is that there are commonly used operations that we can perform on any Python sequence. For example, Python sequences permit us to easily test whether an item is a member of a given sequence, and a membership test is exactly what we need to answer the question of whether the string named <code class="docutils literal notranslate"><span class="pre">the_line</span></code> contains a double-quote character!</p>
@@ -857,7 +868,7 @@ document.write(`
 </span>&lt;class &#39;str&#39;&gt;
 </pre></div>
 </div>
-<p>[Version 20230811]</p>
+<p>[Version 20230902]</p>
 </section>
 </section>
 

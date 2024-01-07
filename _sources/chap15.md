@@ -1,4 +1,4 @@
-# Chapter 15: Embrace Runtime Debugging
+# Chapter 15: Embrace Runtime Debugging #
 
 Does this quote by Brian Kernighan and P.J. Plauger resonate with you?
 

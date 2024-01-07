@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -131,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="welcome.html">
+<a class="navbar-brand logo" href="ctps.html">
   
   
   
@@ -151,12 +152,13 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="welcome.html">
-                    A Welcome
+                <a class="reference internal" href="ctps.html">
+                    Title Page
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3: Replace Text With Emoji</a></li>
@@ -175,7 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models (Incomplete)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
@@ -347,7 +358,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-barriers">Abstraction barriers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main"><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main">Revisiting ‘__main__’</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-functions">Pure functions</a></li>
 </ul>
             </nav>
@@ -963,7 +974,7 @@ The Cat in the 🎩!
 <p>There are other forms of the import-statement that you can use (and ones you should not). Take a look at the <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">Python documentation on modules</a> to learn more about them and when to use (or why not to use) them.</p>
 </section>
 <section id="revisiting-main">
-<p><strong><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>.</strong> A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you’ll recall, is a statement that starts with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>, as we did when we defined our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function. These definitions are typically what we want to import from a module (i.e., another Python script).</p>
+<p><strong>Revisiting ‘__main__’.</strong> A module is just another name for a Python script, which contains definitions and other Python statements. A definition, you’ll recall, is a statement that starts with the keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>, as we did when we defined our <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> function. These definitions are typically what we want to import from a module (i.e., another Python script).</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Top-level Statements</p>
 <p>In a script, the Python interpreter executes each non-indented (i.e., top-level) statement it comes across, in order starting with the ones at the start of the file.</p>
@@ -975,7 +986,7 @@ The Cat in the 🎩!
 <p><strong>Pure functions.</strong> Let’s go a little deeper here. We needed only the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in our <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code> scripts, and <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is what computer scientists call a <em>pure function</em>. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.</p>
 <p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
 <p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
-<p>[Version 20231102]</p>
+<p>[Version 20240106]</p>
 </section>
 </section>
 
@@ -1070,7 +1081,7 @@ The Cat in the 🎩!
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-barriers">Abstraction barriers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main"><strong>Revisiting</strong> <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-main">Revisiting ‘__main__’</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-functions">Pure functions</a></li>
 </ul>
   </nav></div>

@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -131,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="welcome.html">
+<a class="navbar-brand logo" href="ctps.html">
   
   
   
@@ -151,12 +152,13 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="welcome.html">
-                    A Welcome
+                <a class="reference internal" href="ctps.html">
+                    Title Page
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
@@ -175,7 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models (Incomplete)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ales.html">Active-Learning Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
@@ -348,11 +359,11 @@ document.write(`
 <p>Clearly, counting isn’t the only thing we do with numbers, and the world isn’t nicely discrete in everything we do. In fact, we perceive the world as mostly <em>continuous</em>. For example, time doesn’t just move forward in discrete seconds, but also in tenths, hundredths, and infinitely small pieces of a second. Similarly, we don’t solely measure distance in an integral number of meters, but also in centimeters, millimeters, and infinitely small pieces of a meter. The same logic applies to measuring volume and weight and force and pretty much anything else we measure.</p>
 <p>If we’re going to use computers to help us do creative things and generate new knowledge in our physical world, we’re going to need to represent and manipulate <em>measured values</em>. For instance, we will soon measure the running time of our scripts, and in this, we will look at not just the time in seconds, but also fractions of a second.</p>
 <section id="floating-point-numbers-and-numerical-computing">
-<p><strong>Floating-point numbers and numerical computing.</strong> Measurements with fractional units, like 6.574 seconds, are described as <em>real numbers</em>, and Python uses a datatype called <code class="docutils literal notranslate"><span class="pre">float</span></code> to represent such numbers. This name is a shorthand for <em>floating point (FP)</em>, <a class="reference external" href="https://standards.ieee.org/standard/754-2019.html">a standardized representation and a type of computational arithmetic.</a></p>
+<p><strong>Floating-point numbers and numerical computing.</strong> Measurements with fractional units, like 6.574 seconds, are described as <em>real numbers</em>, and Python uses a data type called <code class="docutils literal notranslate"><span class="pre">float</span></code> to represent such numbers. This name is a shorthand for <em>floating point (FP)</em>, <a class="reference external" href="https://standards.ieee.org/standard/754-2019.html">a standardized representation and a type of computational arithmetic.</a></p>
 <p>There are many details involved in this standard and peculiarities involved in using FP numbers to solve your problems. There are entire courses that will teach you how to use a computer to accurately solve problems involving continuous variables, like time and distance. This area of computer science comes under many names, including <em>numerical computing</em> and <em>scientific computing</em>, and the techniques taught will help you to use computers to study the range of physical and social phenomena in the world around us.</p>
 <div class="admonition-learning-outcomes admonition">
 <p class="admonition-title">Learning Outcomes</p>
-<p>In this chapter, you will learn how computers represent numbers with fractional components, which is an important datatype if you’re going write script that help you solve problems involving measured values. By the end of the chapter, you will be able to:</p>
+<p>In this chapter, you will learn how computers represent numbers with fractional components, which is an important data type if you’re going write script that help you solve problems involving measured values. By the end of the chapter, you will be able to:</p>
 <ul class="simple">
 <li><p>Understand the floating-point (FP) number standard and how computers use it to represent real numbers [CS concepts];</p></li>
 <li><p>Explain the difference between applications that require integers and those that require FP numbers [design and CS concepts];</p></li>
@@ -363,7 +374,7 @@ document.write(`
 <section id="computers-struggle-with-arithmetic">
 <p><strong>Computers struggle with arithmetic?</strong> We won’t attempt to cover the breadth of numerical algorithms, but answer a fundamental question at the heart of numerical computing and in line with our efforts to understand how computers operate: <em>If computers see everything in the world as a collection of numbers and they’ve been constructed to do computation on numbers, why are some types of computation hard to do on a computer?</em></p>
 <p>While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between <em>range</em> (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and <em>precision</em> (i.e., how close is a real number we can represent to the real number we want to represent?).</p>
-<p>We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language’s physical representation. While Python doesn’t place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer datatypes. And for FP numbers, the same is true in Python.</p>
+<p>We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language’s physical representation. While Python doesn’t place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer data types. And for FP numbers, the same is true in Python.</p>
 <p>Python adheres to the FP standard representation IEEE 754. As we’ll see in a moment, the range defined by this standard, while not infinite, is comfortably big. In other words, most of us won’t write scripts involving real numbers that will overflow this FP representation.</p>
 <p>Unfortunately, the same cannot be said of precision. You’ll almost certainly write scripts that will have to deal with the issue of FP precision. Precision is, informally, a measure of how close the computer’s representation of a real number is to its mathematical value. Sometimes the two are the same, but too often they’re not.</p>
 <p>I’ll demonstrate with a computation we all learned to do when we were around 8 years old: What is the square of 0.1? You and I know the answer to be 0.01, but let’s ask Python to do this computation for us:</p>
@@ -506,7 +517,7 @@ document.write(`
 <p><strong>FP errors accumulate.</strong> Unfortunately, precision doesn’t just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why <code class="docutils literal notranslate"><span class="pre">0.1</span> <span class="pre">*</span> <span class="pre">0.1</span></code> doesn’t equal <code class="docutils literal notranslate"><span class="pre">0.01</span></code>. A slightly inaccurate FP representation of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself produces a result with more inaccuracy than the conversion of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> into a FP number. Or stated another way, the computer doesn’t know if you were trying to multiple <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself or <code class="docutils literal notranslate"><span class="pre">0.10000002384185791</span></code> times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.</p>
 <p>If your script operates with floating-point numbers and you need the results to be precise, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems">accuracy problems in floating-point arithmetic</a> can get you started on this tricky subject.</p>
 <p>As if it wasn’t hard enough to write a correct program!</p>
-<p>[Version 20230811]</p>
+<p>[Version 20230902]</p>
 </section>
 </section>
 

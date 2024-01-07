@@ -1,4 +1,4 @@
-# Chapter 16: Catch Them Early
+# Chapter 16: Catch Them Early #
 
 A debugger helps us to understand and correct runtime errors, but to use it, you must have hit an error while running your script. If you're lucky, the bug appears during one of your testing runs. If you're unlucky, none of your tests exercise the execution path containing the bug, and you hit it while using your script to get some important work done. Even worse is when the bug remains hidden until one of your users hits it when they're trying to get something done. No one likes to hear from angry users.
 

@@ -1,6 +1,6 @@
-# A Welcome
+# Introduction #
 
-## Hello!
+## Welcome!
 
 This book tells a story about computing, computational thinking, and computational approaches to problem solving. Computational thinking, paired with today's digital devices and the skill of computer programming that you'll learn in this book, will empower you with a new approach to solving the little problems you encounter in everyday life. 
 
@@ -111,4 +111,4 @@ Furthermore, by discussing programming language syntax and computer science conc
 
 This is what awaits you in this book. It is an approach that has engaged students intrinsically motivated to learn programming and those who thought they could never do it. No matter which you are, I'm glad that you picked up this book. You are about to experience the beauty and power of computational thinking to solve real-world problems, especially those that excite you. And as you learn to write your own scripts, I hope you will, like the best playwrights do, develop your own voice, your own unique style. Then what you do with this new and wondrous skill is up to you.
 
-\[Version 20231004\]
+\[Version 20240106\]

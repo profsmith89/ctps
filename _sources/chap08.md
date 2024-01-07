@@ -1,4 +1,4 @@
-# Chapter 8: What Is My Problem?
+# Chapter 8: What Is My Problem? #
 
 To conclude this act, we'll tackle what to do when we know we have a problem, but we don't know exactly what the problem is. This may sound silly, but it is often true. Imagine, for example, that we have a small business operating at a small profit, and we wonder whether it could be generating more profit. What types of customers is our business not reaching? Where could our business operate at less cost? These types of questions lead us to this chapter's motivating question: *How can I use computers to discover what problem(s) we have that we need to solve?*
 
