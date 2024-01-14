@@ -1,4 +1,4 @@
-# Chapter 4 #
+## Chapter 4 ##
 
 ## ALE 4.1: This and that
 
@@ -326,7 +326,7 @@ Don't ever write your private information as a literal in the scripts you develo
 
 ## ALE 4.5: JSON makes my eyes ache
 
-The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss*.* But this script printed only the titles of each resource in the response.
+The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response.
 
 I've copied `qweb7.py` below, except that it asks for the top 4 results. See if you can extend the code in the following ways. Each will require you to read through the dumped JSON response and figure out the sequence of indexing operations you need to do to access the information you need to print. Be careful as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field.
 
@@ -386,4 +386,4 @@ if __name__ == '__main__':
     main()
 ```
 
-\[Version 20230709\]
+\[Version 20240111\]

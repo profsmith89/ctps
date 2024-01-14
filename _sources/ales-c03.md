@@ -1,4 +1,4 @@
-# Chapter 3 #
+## Chapter 3 ##
 
 ## ALE 3.1: Two kinds of loops
 
@@ -201,7 +201,7 @@ i = a_list.find(10)
 print(i)
 ```
 
-What is the equivalent to string-find with a list? Search the online documentation for this answer and try it out on `a_list` (i.e., fix the broken statement containing `a_list.find(10)`.
+What is the equivalent to string-find with a list? Search the online documentation for this answer and try it out on `a_list` (i.e., fix the broken statement containing `a_list.find(10)`).
 
 ## ALE 3.6: What happens when?
 
@@ -401,4 +401,4 @@ The only time in this book that you'll be encouraged to use a global variable is
 
 If you want to know more about scope and the scope rules in Python, I recommend [this Real Python tutorial](https://realpython.com/python-scope-legb-rule/).
 
-\[Version 20240106\]
+\[Version 20240111\]

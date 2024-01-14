@@ -175,13 +175,26 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models (Incomplete)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 3</a></li>
+
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
@@ -334,15 +347,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -353,10 +368,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3">
+  <section id="chapter-3">
 <h1>Chapter 3<a class="headerlink" href="#chapter-3" title="Permalink to this heading">#</a></h1>
+</section>
 <section id="ale-3-1-two-kinds-of-loops">
-<h2>ALE 3.1: Two kinds of loops<a class="headerlink" href="#ale-3-1-two-kinds-of-loops" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.1: Two kinds of loops<a class="headerlink" href="#ale-3-1-two-kinds-of-loops" title="Permalink to this heading">#</a></h1>
 <p>Here are a few rules-of-thumb for deciding which type of loop to use:</p>
 <ul class="simple">
 <li><p>Use while-loops when you want to loop until you hit a some exit condition.</p></li>
@@ -395,7 +411,7 @@ document.write(`
 <p><strong>Step 4.</strong> Create a code block that tests your <code class="docutils literal notranslate"><span class="pre">find_w</span></code> function.</p>
 </section>
 <section id="ale-3-2-getting-comfortable-with-range">
-<h2>ALE 3.2: Getting comfortable with `range`<a class="headerlink" href="#ale-3-2-getting-comfortable-with-range" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.2: Getting comfortable with `range`<a class="headerlink" href="#ale-3-2-getting-comfortable-with-range" title="Permalink to this heading">#</a></h1>
 <p>What is that <code class="docutils literal notranslate"><span class="pre">range</span></code> command? We discussed it as a function that produces an integer sequence whose length is its input parameter. Used in a for-loop, the loop can then assign each element of the generated sequence to its loop variable (e.g., variable <code class="docutils literal notranslate"><span class="pre">i</span></code> in the example below) and execute the loop body for each element.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -409,7 +425,7 @@ document.write(`
 <p>Feel free to change the code block above as you answer these questions!</p>
 </section>
 <section id="ale-3-3-return-with-something">
-<h2>ALE 3.3: Return with something<a class="headerlink" href="#ale-3-3-return-with-something" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.3: Return with something<a class="headerlink" href="#ale-3-3-return-with-something" title="Permalink to this heading">#</a></h1>
 <p>Python functions always return a value. Whether you explicitly use a return-statement without an expression or end your function without a return statement, the Python interpreter will return the special object <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Execute the following code block, which illustrates the ways we can end a function’s execution.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">my_f1</span><span class="p">():</span>
@@ -432,7 +448,7 @@ document.write(`
 <p>Make sure you can explain why each function returns the value that was printed.</p>
 </section>
 <section id="ale-3-4-visualize-a-function-call">
-<h2>ALE 3.4: Visualize a function call<a class="headerlink" href="#ale-3-4-visualize-a-function-call" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.4: Visualize a function call<a class="headerlink" href="#ale-3-4-visualize-a-function-call" title="Permalink to this heading">#</a></h1>
 <p>Understanding the execution of a program with functions can be confusing at first, and sometimes it helps to watch a step-by-step visualization of a script’s execution. We talked through the execution of <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code> in the chapter, and now we’d like you to review this execution with the help of a nifty online tool called <a class="reference external" href="https://pythontutor.com/">Python Tutor</a>.</p>
 <p>I’ve used the site to configure a simplified version of our <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code> script. By “simplified” I mean that I ripped out the code that read the text from a file and we greatly reduced the amount of input text. In a moment, you’ll see that this simplified script still requires 324 steps to fully execute. After you start stepping around in this code, you’ll begin to appreciate, even at a mere 324 steps, why we humans are glad to let computers keep track of the work in every step of our scripts. It’s tedious work!</p>
 <p><strong>Step 1.</strong> <a class="reference external" href="https://pythontutor.com/visualize.html#code=def%20my_replace(s,%20old,%20new):%0A%20%20%20%20i%20=%200%20%20%20%20%20%20%20%20%20%20%20%23%20tracks%20where%20we%20are%20in%20the%20input%20string%0A%20%20%20%20j%20=%20len(old)%20%20%20%20%23%20skip-ahead%20amount%20for%20index%20calculations%0A%20%20%20%20new_s%20=%20s%5B0:0%5D%20%20%23%20the%20new%20string%20we're%20building%0A%0A%20%20%20%20while%20i%20%3C%20len(s):%0A%20%20%20%20%20%20%20%20if%20s%5Bi:i+j%5D%20==%20old:%0A%20%20%20%20%20%20%20%20%20%20%20%20new_s%20=%20new_s%20+%20new%0A%20%20%20%20%20%20%20%20%20%20%20%20i%20+=%20j%0A%20%20%20%20%20%20%20%20else:%0A%20%20%20%20%20%20%20%20%20%20%20%20new_s%20=%20new_s%20+%20s%5Bi:i+1%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20i%20+=%201%0A%0A%20%20%20%20return%20new_s%0A%0Amy_open_book%20=%20%5B%0A%20%20%20%20'And%20...',%0A%20%20%20%20'The%20Cat%20in%20the%20Hat!',%0A%20%20%20%20'And%20...',%0A%20%20%20%20''%0A%20%20%20%20%5D%0Awhile%20True:%0A%20%20%20%20the_line%20=%20my_open_book.pop(0)%0A%0A%20%20%20%20%23%20Having%20some%20fun%20with%20text%20substitution%0A%20%20%20%20the_line%20=%20my_replace(the_line,%20'Cat',%20'%5CN%7Bcat%20face%20with%20wry%20smile%7D')%0A%20%20%20%20the_line%20=%20my_replace(the_line,%20'Hat',%20'%5CN%7Btop%20hat%7D')%0A%0A%20%20%20%20print(the_line)%0A%0A%20%20%20%20if%20the_line%20==%20'':%0A%20%20%20%20%20%20%20%20%23%20We've%20read%20the%20entire%20book!%0A%20%20%20%20%20%20%20%20print(%22%5CnThe%20End.%22)%0A%20%20%20%20%20%20%20%20break&amp;cumulative=false&amp;heapPrimitives=nevernest&amp;mode=edit&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">Click this link</a>. It will take you to Python Tutor’s visualization page, which is preloaded with our simplified script. Scroll up and down in the leftmost panel and make sure you recognize the code. The variable <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code> has become a list of text lines from which we pop one line at a time for the processing that takes place in our infinite loop. You should otherwise recognize all the code.</p>
@@ -444,7 +460,7 @@ document.write(`
 <p>Go ahead and use the slider to move around in the code and see what happens at different parts of its execution. Feel free to edit the code (click the link below the script’s listing) and then click “Visualize Execution” to return to the visualization mode. You can even put in your own example scripts. Just keep them short and self-contained (i.e., no file I/O)!</p>
 </section>
 <section id="ale-3-5-two-different-sequences">
-<h2>ALE 3.5: Two different sequences<a class="headerlink" href="#ale-3-5-two-different-sequences" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.5: Two different sequences<a class="headerlink" href="#ale-3-5-two-different-sequences" title="Permalink to this heading">#</a></h1>
 <p>We’ve discussed two different types of objects that adhere to the Python sequence abstraction: strings and lists. The following code block defines one of each of these objects.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Two sequences</span>
 <span class="linenos">2</span><span class="n">a_string</span> <span class="o">=</span> <span class="s1">&#39;Cosmo the dog&#39;</span>
@@ -484,10 +500,10 @@ document.write(`
 <span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>What is the equivalent to string-find with a list? Search the online documentation for this answer and try it out on <code class="docutils literal notranslate"><span class="pre">a_list</span></code> (i.e., fix the broken statement containing <code class="docutils literal notranslate"><span class="pre">a_list.find(10)</span></code>.</p>
+<p>What is the equivalent to string-find with a list? Search the online documentation for this answer and try it out on <code class="docutils literal notranslate"><span class="pre">a_list</span></code> (i.e., fix the broken statement containing <code class="docutils literal notranslate"><span class="pre">a_list.find(10)</span></code>).</p>
 </section>
 <section id="ale-3-6-what-happens-when">
-<h2>ALE 3.6: What happens when?<a class="headerlink" href="#ale-3-6-what-happens-when" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.6: What happens when?<a class="headerlink" href="#ale-3-6-what-happens-when" title="Permalink to this heading">#</a></h1>
 <p>Modules are a powerful way of building off code that others have written and published. However, it often isn’t obvious what the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> design pattern is doing for us. To better understand this pattern, consider these two silly scripts:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/module32.py</span>
 <span class="linenos"> 2</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;module32.py: At start of script&quot;</span><span class="p">)</span>
@@ -530,7 +546,7 @@ document.write(`
 <p>Compare this output to the last, focusing on the lines that start with <code class="docutils literal notranslate"><span class="pre">module32.py</span></code>. Remember that modules in Python are just scripts that we import to get access to some functions and objects we don’t want to write for ourselves!</p>
 </section>
 <section id="ale-3-7-imports-and-the-namespace">
-<h2>ALE 3.7: Imports and the namespace?<a class="headerlink" href="#ale-3-7-imports-and-the-namespace" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.7: Imports and the namespace?<a class="headerlink" href="#ale-3-7-imports-and-the-namespace" title="Permalink to this heading">#</a></h1>
 <p>Let’s use the scripts from ALE 3.6 to see what happens to the global namespace as we use two different forms of the import-statement.</p>
 <p><strong>Step 1.</strong> In the same directory that you placed <code class="docutils literal notranslate"><span class="pre">import.py</span></code> and <code class="docutils literal notranslate"><span class="pre">module32.py</span></code>, start the interactive Python interpreter (i.e., run <code class="docutils literal notranslate"><span class="pre">python3</span></code> at the Shell prompt).</p>
 <p>At the interactive Python interpreter prompt, run: <code class="docutils literal notranslate"><span class="pre">dir()</span></code></p>
@@ -548,7 +564,7 @@ document.write(`
 <p><strong>Step 4.</strong> Quit the interactive Python interpreter as you’re done!</p>
 </section>
 <section id="ale-3-8-scope-and-the-danger-of-globals">
-<h2>ALE 3.8: Scope and the Danger of Globals<a class="headerlink" href="#ale-3-8-scope-and-the-danger-of-globals" title="Permalink to this heading">#</a></h2>
+<h1>ALE 3.8: Scope and the Danger of Globals<a class="headerlink" href="#ale-3-8-scope-and-the-danger-of-globals" title="Permalink to this heading">#</a></h1>
 <p>Computer scientists talk <em>scope rules</em> when they explain how the interpreter knows which version of a name (i.e., a variable or function) you mean at some point in your script. Scope is a concept closely related to namespaces, which we’ve been discussing since the first chapter. I’ve put off a discussion of scope because it gets … complicated. However, now that you know how to build your own functions, it is time to say a few words about scope.</p>
 <p>When we started writing our scripts, we wrote statements without enclosing them in a function, as illustrated with this short script from Chapter 1:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the book so we can read it</span>
@@ -627,8 +643,7 @@ document.write(`
 <p>The script dies with an <code class="docutils literal notranslate"><span class="pre">UnboundLocalError</span></code> on line 6, where we tried to update the global variable within the function <code class="docutils literal notranslate"><span class="pre">my_print</span></code>. Python gives you a way to fix this with a global-statement, but you’re just heading down dark and bumpy road with more problems to come. For example, did you really want to update the global variable or just a local copy of it?</p>
 <p>The only time in this book that you’ll be encouraged to use a global variable is in situations like we saw with <code class="docutils literal notranslate"><span class="pre">capitalize</span></code>. Think about how we’re using this name: We set it once at the start of the script and then only ever reference its value. We never try to change it. Global variables are great things to read, and a real pain to update. You’ll feel this pain if you ever have to debug a global variable that you read and write all over your (probably long) script.</p>
 <p>If you want to know more about scope and the scope rules in Python, I recommend <a class="reference external" href="https://realpython.com/python-scope-legb-rule/">this Real Python tutorial</a>.</p>
-<p>[Version 20240106]</p>
-</section>
+<p>[Version 20240111]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -698,15 +713,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
