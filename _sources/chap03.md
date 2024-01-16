@@ -240,7 +240,7 @@ print('G', '\N{cat face with wry smile}')
 Be careful not to confuse `\n` and `\N{emoji_name}`. 
 ```
 
-If you want to learn more about Unicode and play with different emojis in your programs, please see Python's [Unicode HOWTO](https:/docs.python.org/3/howto/unicode.html) page, the homepage for [unicode.org](http://unicode.org), and info about the [cat-with-wry-smile emoji](https://emojipedia.org/emoji/%F0%9F%98%BC/).
+If you want to learn more about Unicode and play with different emojis in your programs, please see Python's [Unicode HOWTO](https://docs.python.org/3/howto/unicode.html) page, the homepage for [unicode.org](https://home.unicode.org), and info about the [cat-with-wry-smile emoji](https://emojipedia.org/cat-with-wry-smile).
 
 Using all this new knowledge, we can code a solution for steps 2 and 3:
 
@@ -815,4 +815,4 @@ We might, however, want to use a non-pure function defined in a module. This fun
 
 An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same "random" number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.
 
-\[Version 20240106\]
+\[Version 20240116\]

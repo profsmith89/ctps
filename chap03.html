@@ -558,7 +558,7 @@ document.write(`
 <p class="admonition-title">Tip</p>
 <p>Be careful not to confuse <code class="docutils literal notranslate"><span class="pre">\n</span></code> and <code class="docutils literal notranslate"><span class="pre">\N{emoji_name}</span></code>.</p>
 </div>
-<p>If you want to learn more about Unicode and play with different emojis in your programs, please see Python’s <a class="reference external" href="https:/docs.python.org/3/howto/unicode.html">Unicode HOWTO</a> page, the homepage for <a class="reference external" href="http://unicode.org">unicode.org</a>, and info about the <a class="reference external" href="https://emojipedia.org/emoji/%F0%9F%98%BC/">cat-with-wry-smile emoji</a>.</p>
+<p>If you want to learn more about Unicode and play with different emojis in your programs, please see Python’s <a class="reference external" href="https://docs.python.org/3/howto/unicode.html">Unicode HOWTO</a> page, the homepage for <a class="reference external" href="https://home.unicode.org">unicode.org</a>, and info about the <a class="reference external" href="https://emojipedia.org/cat-with-wry-smile">cat-with-wry-smile emoji</a>.</p>
 <p>Using all this new knowledge, we can code a solution for steps 2 and 3:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace23.py</span>
 <span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
@@ -999,7 +999,7 @@ The Cat in the 🎩!
 <p><strong>Pure functions.</strong> Let’s go a little deeper here. We needed only the definition of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> in our <code class="docutils literal notranslate"><span class="pre">bookshelf</span></code> scripts, and <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is what computer scientists call a <em>pure function</em>. Pure functions are the computational analogue of mathematical functions in that the result of a pure function depends only on its current inputs. Pure functions maintain no state across invocations nor do they have other types of observable side effects. We will talk more about side effects later, but the canonical example of a side effect is the terminal printout that occurs when we execute a print-statement.</p>
 <p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
 <p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
-<p>[Version 20240106]</p>
+<p>[Version 20240116]</p>
 </section>
 </section>
 
