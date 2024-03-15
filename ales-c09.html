@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 9 &#8212; Computational Thinking and Problem Solving</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ales-c09';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 10" href="ales-c10.html" />
+    <link rel="prev" title="Chapter 8" href="ales-c08.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="ctps.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="ctps.html">
+                    Title Page
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 9</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ales-c10.html">Chapter 10</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ales-c09.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 9</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 9</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-1-adds-ands-and-algorithms">ALE 9.1: Adds, ands, and algorithms</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-2-which-runs-faster">ALE 9.2: Which runs faster?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-3-not-add-but-multiply">ALE 9.3: Not add, but multiply</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="chapter-9">
+<h1>Chapter 9<a class="headerlink" href="#chapter-9" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="ale-9-1-adds-ands-and-algorithms">
+<h1>ALE 9.1: Adds, ands, and algorithms<a class="headerlink" href="#ale-9-1-adds-ands-and-algorithms" title="Permalink to this heading">#</a></h1>
+<p>In Chapter 8, you learned that both arithmetic and bitwise operations operate on integers, but you probably wondered how these two operations differed. To understand the difference, let’s think about each operation algorithmically.</p>
+<p><strong>Step 1.</strong> <strong>Bitwise operators, algorithmically.</strong> Bitwise operations, such as <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code>, perform for each bit in its inputs an <em>independent</em> computation. Because of this independence, you can think of these as <em>n</em> simultaneous computations for two <em>n</em>-bit input numbers.</p>
+<p>For example, the following code block performs a bitwise-or on two 4-bit quantities.  The block sets <code class="docutils literal notranslate"><span class="pre">i</span></code> to the value <code class="docutils literal notranslate"><span class="pre">12</span></code> in binary and <code class="docutils literal notranslate"><span class="pre">j</span></code> to <code class="docutils literal notranslate"><span class="pre">10</span></code>, and then prints the bitwise-or of these two quantities, which yields the value <code class="docutils literal notranslate"><span class="pre">14</span></code> (again, printed in binary).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap09/ale01.py</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># Example of bitwise OR on a sequence of bits</span>
+<span class="linenos">4</span><span class="n">i</span> <span class="o">=</span> <span class="mb">0b1100</span>
+<span class="linenos">5</span><span class="n">j</span> <span class="o">=</span> <span class="mb">0b1010</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;j     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">8</span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i | j = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Algorithmically, each bit in one variable is OR-ed with its column pair in the other variable. Line up the two input numbers as binary values and think of each vertical pair bits as a column. A two-bit OR operation outputs a <code class="docutils literal notranslate"><span class="pre">1</span></code> only when both of its inputs are <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise. Notice that each column computation is independent, i.e., its inputs come only from the column.</p>
+<p><strong>Step 2.</strong> <strong>Arithmetic operators, algorithmically.</strong> Arithmetic operations like add (<code class="docutils literal notranslate"><span class="pre">+</span></code>) operate differently. When we add two integers, we certainly add the value of the digit at each location in one variable to the value of the digit in the corresponding location in the other variable, but the result is not necessarily a single digit. We might add two single-digit numbers and generate a two-digit result.</p>
+<p>For example, add 38 to 69. We add the one’s digits first (i.e., 8 plus 9) and get the result 17. With this result, the 7 goes in the column with the 8 and 9, which we’ll call the <em>column sum</em>. The 1 is called the <em>carry</em>; we carry it from the one’s column and place it at the top of the ten’s column. It becomes part of that column’s addition (i.e., 1 plus 3 plus 6), which produces its own column sum and carry.</p>
+<p>Notice that the computation in a column <em>can affect</em> the computation in the columns to its left. Do a couple of long-hand addition problems to see this algorithm in action.</p>
+<p><strong>Step 3. Arithmetic on binary numbers.</strong> Adding two binary numbers is algorithmically no different than adding two base-10 numbers. It involves a sum digit and a carry digit.</p>
+<p>If you do some examples of addition on binary numbers you’ll soon learn that the column sum of two binary digits is a <code class="docutils literal notranslate"><span class="pre">1</span></code> if either, but not both input bits, are a <code class="docutils literal notranslate"><span class="pre">1</span></code>. In general, a sum of multiple bits is a <code class="docutils literal notranslate"><span class="pre">1</span></code> if an odd number of the inputs are <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.</p>
+<p>The <em>exclusive-or</em> operator (<code class="docutils literal notranslate"><span class="pre">^</span></code>) is what we need to calculate the column sum of two bits. It is a bitwise operator. The code block below computes the column sum we need for arithmetic on binary numbers using this bitwise operator. Notice that the block prints the result in a manner that forces leading zeros.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="c1">### chap09/ale01.py</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># Example of bitwise EXCLUSIVE-OR on a sequence of bits</span>
+<span class="linenos">13</span><span class="n">i</span> <span class="o">=</span> <span class="mb">0b1100</span>
+<span class="linenos">14</span><span class="n">j</span> <span class="o">=</span> <span class="mb">0b1010</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;j     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i ^ j = 0b</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What about the carry of an add operation on two single-bit inputs? Well, when does an add with two 1-bit inputs generate a carry? Only when we add two ones: <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">2</span></code>, and <code class="docutils literal notranslate"><span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">0b10</span></code>, a two-bit number with <code class="docutils literal notranslate"><span class="pre">0</span></code> as its column sum and <code class="docutils literal notranslate"><span class="pre">1</span></code> as its carry.</p>
+<p>So, a carry occurs when both inputs are <code class="docutils literal notranslate"><span class="pre">1</span></code>, and if either input is a <code class="docutils literal notranslate"><span class="pre">0</span></code>, then the carry is a <code class="docutils literal notranslate"><span class="pre">0</span></code>.  This description is the same as the description of bitwise-and!</p>
+<p>The following code block computes sum and carry for each column in our input numbers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="c1">### chap09/ale01.py</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># The two components of an add for each digit column</span>
+<span class="linenos">22</span><span class="n">i</span> <span class="o">=</span> <span class="mb">0b1100</span>
+<span class="linenos">23</span><span class="n">j</span> <span class="o">=</span> <span class="mb">0b1010</span>
+<span class="linenos">24</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;j     = </span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">26</span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
+<span class="linenos">27</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sum   = 0b</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">28</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;carry = 0b</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="si">:</span><span class="s1">04b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But in an add operation, the work in one column isn’t independent of the work in all other columns. We saw that in our long-hand addition example. To complete the add algorithm then, given two consecutive columns, we have to integrate the carry from the one on the right with the sum and carry calculations of the one on the left. This turns <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">carry</span></code> from computations on two bits to computations on three bits:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sum</span></code> continues to use the exclusive-or operator, since it does what we want. The exclusive-or of three bits is <code class="docutils literal notranslate"><span class="pre">1</span></code> only when there are an odd number of <code class="docutils literal notranslate"><span class="pre">1</span></code> inputs. See line 49 of the next code block.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">carry</span></code> becomes a more complex computation as we want to know if any two of the three input values are <code class="docutils literal notranslate"><span class="pre">1</span></code>. See line 50 of the next code block.</p></li>
+</ul>
+<p>You now know what we need to do for each bit column when adding two <em>n</em>-bit numbers. We simply need to do this for every pair of consecutive columns, just as we did in long-hand addition. And we can use this same column logic for the right-most column (i.e., the ones column in long-hand addition) if we set <code class="docutils literal notranslate"><span class="pre">carry_in</span></code> to be <code class="docutils literal notranslate"><span class="pre">0</span></code> initially.</p>
+<p>The next code block shows what it takes to implement addition (via the <code class="docutils literal notranslate"><span class="pre">add</span></code> function) without ever using Python’s add operator! This function uses only bitwise operations and some “wiring” between the columns as we’ve described. This “wiring” (or the use of one column’s result in the computation of the next column’s result) makes addition and the other arithmetic operators different than bitwise operators.</p>
+<p>Go through each line of this <code class="docutils literal notranslate"><span class="pre">add</span></code> function and make sure you understand the purpose and operation of each. Draw pictures and follow through the code with an example input (e.g., <code class="docutils literal notranslate"><span class="pre">a=3</span></code> and <code class="docutils literal notranslate"><span class="pre">b=6</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">29</span><span class="c1">### chap09/ale01.py</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="c1"># Perform addition without using the `+` operator</span>
+<span class="linenos">32</span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">33</span>    <span class="c1"># adds two 8-bit numbers</span>
+<span class="linenos">34</span>    <span class="k">assert</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">256</span>
+<span class="linenos">35</span>    <span class="k">assert</span> <span class="n">b</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">256</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="c1"># turn input integers into binary strings with leading 0s</span>
+<span class="linenos">38</span>    <span class="n">a</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s1">08b</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos">39</span>    <span class="n">b</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s1">08b</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>    <span class="c1"># setup for the addition</span>
+<span class="linenos">42</span>    <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>        <span class="c1"># the answer, eventually</span>
+<span class="linenos">43</span>    <span class="n">carry_in</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the initial carry in</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span>    <span class="c1"># add without the `+` operator, which starts at the rightmost bit!</span>
+<span class="linenos">46</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">47</span>        <span class="c1"># get the integer value of the next bits to add</span>
+<span class="linenos">48</span>        <span class="n">a_i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">49</span>        <span class="n">b_i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>        <span class="c1"># do the sum and carry logic</span>
+<span class="linenos">52</span>        <span class="nb">sum</span> <span class="o">=</span> <span class="n">carry_in</span> <span class="o">^</span> <span class="n">a_i</span> <span class="o">^</span> <span class="n">b_i</span>
+<span class="linenos">53</span>        <span class="n">carry</span> <span class="o">=</span> <span class="p">(</span><span class="n">carry_in</span> <span class="o">&amp;</span> <span class="n">a_i</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">carry_in</span> <span class="o">&amp;</span> <span class="n">b_i</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">a_i</span> <span class="o">&amp;</span> <span class="n">b_i</span><span class="p">)</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>        <span class="c1"># concatenate this sum to our growing answer</span>
+<span class="linenos">56</span>        <span class="n">c</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span>    <span class="c1"># string concatentation!</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>        <span class="c1"># setup for next bit location</span>
+<span class="linenos">59</span>        <span class="n">carry_in</span> <span class="o">=</span> <span class="n">carry</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 4. Test our adder.</strong> Does the function <code class="docutils literal notranslate"><span class="pre">add</span></code> work correctly? Let’s test it!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">61</span><span class="c1">### chap09/ale01.py</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="c1"># Test the `add` function</span>
+<span class="linenos">64</span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="linenos">65</span><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="linenos">66</span><span class="n">c</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">67</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">68</span><span class="k">assert</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s2">&quot;`add` failed&quot;</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="n">a</span> <span class="o">=</span> <span class="mi">38</span>
+<span class="linenos">71</span><span class="n">b</span> <span class="o">=</span> <span class="mi">69</span>
+<span class="linenos">72</span><span class="n">c</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">73</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">74</span><span class="k">assert</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s2">&quot;`add` failed&quot;</span>
+</pre></div>
+</div>
+<p>That’s addition using only bitwise operators, which is all we have in hardware!</p>
+</section>
+<section id="ale-9-2-which-runs-faster">
+<h1>ALE 9.2: Which runs faster?<a class="headerlink" href="#ale-9-2-which-runs-faster" title="Permalink to this heading">#</a></h1>
+<p>Now that you know how the hardware in our computers performs an add operation using nothing but simple bitwise operations and a bit of wiring between bit locations, let’s focus on the major algorithmic differences between arithmetic and bitwise operators, and then think about the computational complexity of each.</p>
+<ul class="simple">
+<li><p>Bitwise operations (e.g., <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) on multi-bit numbers can compute each bit location in parallel. No column’s computation depends upon the result of another column’s.</p></li>
+<li><p>Arithmetic operations (e.g., <code class="docutils literal notranslate"><span class="pre">+</span></code>) on multi-bit numbers canNOT compute each bit location in parallel. The results in one column <em>possibly</em> depend upon the results of the columns to its right. We see this through the <code class="docutils literal notranslate"><span class="pre">carry</span></code> calculation, where the <code class="docutils literal notranslate"><span class="pre">carry</span></code> in one column becomes the <code class="docutils literal notranslate"><span class="pre">carry_in</span></code> in the next to the left.</p></li>
+</ul>
+<p>Can you state the computational complexity of the algorithms behind the bitwise-and (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) and addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>) operators based on the size of their inputs in bits? Assuming that the inputs are of length <span class="math notranslate nohighlight">\(n\)</span> bits:</p>
+<ul class="simple">
+<li><p>Is the algorithm for bitwise-and  <span class="math notranslate nohighlight">\(O(1)\)</span> or <span class="math notranslate nohighlight">\(O(n)\)</span>?</p></li>
+<li><p>Is the algorithm for addition <span class="math notranslate nohighlight">\(O(1)\)</span> or <span class="math notranslate nohighlight">\(O(n)\)</span>?</p></li>
+</ul>
+<p>When you figure it out, given the same integer inputs, you’ll see that bitwise operations are faster than arithmetic operations for large values of <span class="math notranslate nohighlight">\(n\)</span>. We don’t experience that when our computers operate on the values in our scripts because <span class="math notranslate nohighlight">\(n\)</span> is small for the integers we typically use.</p>
+</section>
+<section id="ale-9-3-not-add-but-multiply">
+<h1>ALE 9.3: Not add, but multiply<a class="headerlink" href="#ale-9-3-not-add-but-multiply" title="Permalink to this heading">#</a></h1>
+<p>While addition is more complex than bitwise-and, multiplication is much more complex than addition. Let’s think about the work involved in multiplying two integers.</p>
+<p><strong>Step 1.</strong> Do the long-hand multiplication of two 3-digit integers by hand, and then pictorially compare that to the work in adding those same two integers.</p>
+<p><strong>Step 2.</strong> Now look at the work you did and imagine an algorithm for multiplication that mimics your long-hand work.</p>
+<p>If you learned to do long-hand multiplication like I did, you multiplied each digit in one number by each digit in the other. Each multiplication possibly included the addition of a carry, if the previous pair of digits generated a result with a tens-digit. This produced <span class="math notranslate nohighlight">\(n\)</span> partial products given two inputs of length <span class="math notranslate nohighlight">\(n\)</span> bits. To complete the multiplication, you have to add together these <span class="math notranslate nohighlight">\(n\)</span> partial products.</p>
+<p>Is this algorithm <span class="math notranslate nohighlight">\(O(1)\)</span>, <span class="math notranslate nohighlight">\(O(n)\)</span> , or <span class="math notranslate nohighlight">\(O(n^2)\)</span>?</p>
+<p>A lot of work has been done over the years to make multiplication fast, but you now have an intuitive understanding how the hardware in our computing systems does the work of our most basic abstractions like addition and multiplication!</p>
+<p>[Version 20240314]</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ales-c08.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 8</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ales-c10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 10</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 9</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-1-adds-ands-and-algorithms">ALE 9.1: Adds, ands, and algorithms</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-2-which-runs-faster">ALE 9.2: Which runs faster?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-9-3-not-add-but-multiply">ALE 9.3: Not add, but multiply</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023 by Michael D. Smith. All rights reserved.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
