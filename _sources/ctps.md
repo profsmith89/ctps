@@ -1,5 +1,5 @@
-## Title Page ##
-
+<br/>
+<br/>
 
 <h1 style="text-align: center;">
 Computational Thinking and<br/>
@@ -22,5 +22,5 @@ Michael D. Smith
 </p>
 
 <p style="text-align: center;">
-Version 20240127
+Version 20240521
 </p>

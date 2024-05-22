@@ -155,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="ctps.html">
-                    Title Page
+                    <no title>
                 </a>
             </li>
         </ul>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Using Generative AI in Your Life (incomplete)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Use Generative AI</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
@@ -208,7 +208,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 12</a></li>
-
 
 
 
@@ -364,8 +363,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 12</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-1-a-shell-game">ALE 12.1: A shell game</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-2-taco-cat">ALE 12.2: Taco cat</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-3-fib-forever">ALE 12.3: Fib forever</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-4-computing-to-the-end-of-time">ALE 12.4: Computing to the end of time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-3-fib-frequently-and-forever">ALE 12.3: Fib frequently and forever</a></li>
 </ul>
 
             </nav>
@@ -568,7 +566,7 @@ document.write(`
 <span class="linenos"> 3</span><span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Returns True if s is a palindrome&#39;&#39;&#39;</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span>    <span class="c1"># Strip punctuation and spacing</span>
+<span class="linenos"> 6</span>    <span class="c1"># Strip prefix/suffix punctuation and spacing</span>
 <span class="linenos"> 7</span>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; </span><span class="se">\t\n\&#39;</span><span class="s1">&quot;~!@#$%^&amp;*()-_+=</span><span class="si">{}</span><span class="s1">[]</span><span class="se">\\</span><span class="s1">|;:&lt;&gt;,.?/&#39;</span><span class="p">)</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span>    <span class="c1"># REPLACE THIS COMMENT AND THE NEXT RETURN WITH YOUR CODE</span>
@@ -636,14 +634,100 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="ale-12-3-fib-forever">
-<h1>ALE 12.3: Fib forever<a class="headerlink" href="#ale-12-3-fib-forever" title="Permalink to this heading">#</a></h1>
-<p>INSERT: Fibonacci example to show how a short, simple program can take infinitely long to execute.</p>
-</section>
-<section id="ale-12-4-computing-to-the-end-of-time">
-<h1>ALE 12.4: Computing to the end of time<a class="headerlink" href="#ale-12-4-computing-to-the-end-of-time" title="Permalink to this heading">#</a></h1>
-<p>INSERT: Pitfalls of recursion. A seemingly simple problem (Towers of Hanoi) that can take till the end of the world to complete. Raises the issue of tractable and intractable problems; intractable ones are ones where we only know long-running scripts for large N problems.</p>
-<p>[Version 20240403]</p>
+<section id="ale-12-3-fib-frequently-and-forever">
+<h1>ALE 12.3: Fib frequently and forever<a class="headerlink" href="#ale-12-3-fib-frequently-and-forever" title="Permalink to this heading">#</a></h1>
+<p>If you enjoy building or graphic design, you’ve probably heard about <a class="reference external" href="https://en.wikipedia.org/wiki/Golden_ratio">the Golden ratio</a>, which is said to make such designs pleasing to the human eye. Definitionally, values <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> satisfy the Golden ratio if <code class="docutils literal notranslate"><span class="pre">a/b</span> <span class="pre">==</span> <span class="pre">(a+b)/a</span></code>, where <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>. This ratio is an irrational number, which means that there are no integers <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> that produce it. However, there are sequences produced by simple algorithms that approach its value (1.618033988749…), and one of these sequences is called the <em>Fibonacci numbers</em>.</p>
+<p>This is the beginning of the Fibonacci sequence:</p>
+<p>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, …</p>
+<p>You obtain the next number in the sequence by computing the sum of the previous two numbers. For example, <code class="docutils literal notranslate"><span class="pre">144</span></code> follows <code class="docutils literal notranslate"><span class="pre">89</span></code> because it is the <code class="docutils literal notranslate"><span class="pre">55+89</span></code>.</p>
+<p>This sequence is related to the Golden ratio because each pair of consecutive Fibonacci numbers (call the smaller of the pair <code class="docutils literal notranslate"><span class="pre">a</span></code> and the larger <code class="docutils literal notranslate"><span class="pre">b</span></code>) approximates this ratio. As the Fibonacci numbers increase in magnitude, these approximations approach the Golden ratio (e.g., 89/55 is a better approximation than 55/34).</p>
+<p><strong>Step 1.</strong> If we think of the Fibonacci numbers as a Python sequence, we can design a recursive function <code class="docutils literal notranslate"><span class="pre">fib</span></code> that produces any number in this sequence. Our routine takes a single parameter <code class="docutils literal notranslate"><span class="pre">n</span></code>, which is a zero-based index into the Fibonacci numbers, and then computes the value of the number at that index. For instance, <code class="docutils literal notranslate"><span class="pre">fib(4)</span></code> should return <code class="docutils literal notranslate"><span class="pre">3</span></code>, and the result of <code class="docutils literal notranslate"><span class="pre">fib(12)</span></code> should be <code class="docutils literal notranslate"><span class="pre">144</span></code>.</p>
+<ul class="simple">
+<li><p>The recursive part of <code class="docutils literal notranslate"><span class="pre">fib</span></code> comes directly from the statement earlier that described how we compute the next number in the Fibonacci sequence: sum the previous two numbers. This means that if we knew <code class="docutils literal notranslate"><span class="pre">fib(n-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">fib(n-2)</span></code>, we could quickly compute and return <code class="docutils literal notranslate"><span class="pre">fib(n)</span></code>.</p></li>
+<li><p>The base cases of <code class="docutils literal notranslate"><span class="pre">fib</span></code> are the first two numbers in the Fibonacci sequence, since the recursive step looked back at the previous two numbers.</p></li>
+</ul>
+<p>With this description, write the body of the function fib in the next code block and test it with the statements in the subsequent block.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap12/ale03.py</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">4</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Return the Fibonacci number at 0-based index n&#39;&#39;&#39;</span>
+<span class="linenos">5</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Fibonacci is defined only for positive n&#39;</span><span class="p">)</span>
+<span class="linenos">7</span>    
+<span class="linenos">8</span>    <span class="c1"># INSERT BASE CASES AND THE RECURSIVE CALL</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># and REMOVE THIS</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="c1">### chap12/ale03.py</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># Test code</span>
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Testing fib ...&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 0&#39;</span>
+<span class="linenos">15</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 1&#39;</span>
+<span class="linenos">16</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 2&#39;</span>
+<span class="linenos">17</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 3&#39;</span>
+<span class="linenos">18</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 4&#39;</span>
+<span class="linenos">19</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 5&#39;</span>
+<span class="linenos">20</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 6&#39;</span>
+<span class="linenos">21</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 8&#39;</span>
+<span class="linenos">22</span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="mi">144</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 12&#39;</span>
+<span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PASSED our unit tests!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 2.</strong> It is easy to write the body of the recursive function <code class="docutils literal notranslate"><span class="pre">fib</span></code> from the recurrence relation that defines the Fibonacci sequence: <code class="docutils literal notranslate"><span class="pre">fib(n)</span> <span class="pre">=</span> <span class="pre">fib(n-1)</span> <span class="pre">+</span> <span class="pre">fib(n-2)</span></code>. The function <code class="docutils literal notranslate"><span class="pre">ifib</span></code> defined in the next code block is an iterative implementation. Run its tests to verify that it works correctly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap12/ale03.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">def</span> <span class="nf">ifib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Return the Fibonacci number at 0-based index n&#39;&#39;&#39;</span>
+<span class="linenos"> 5</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Fibonacci is defined only for positive n&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="mi">1</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="n">ra</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># fib(0) </span>
+<span class="linenos">13</span>    <span class="n">rb</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c1"># fib(1)</span>
+<span class="linenos">14</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">15</span>        <span class="c1"># Use last two fib numbers to compute fib(i)</span>
+<span class="linenos">16</span>        <span class="n">ra</span><span class="p">,</span> <span class="n">rb</span> <span class="o">=</span> <span class="n">rb</span><span class="p">,</span> <span class="n">ra</span> <span class="o">+</span> <span class="n">rb</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="k">return</span> <span class="n">rb</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="c1">### chap12/ale03.py</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># Test code</span>
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Testing ifib ...&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 0&#39;</span>
+<span class="linenos">15</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 1&#39;</span>
+<span class="linenos">16</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 2&#39;</span>
+<span class="linenos">17</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 3&#39;</span>
+<span class="linenos">18</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 4&#39;</span>
+<span class="linenos">19</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 5&#39;</span>
+<span class="linenos">20</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 6&#39;</span>
+<span class="linenos">21</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 8&#39;</span>
+<span class="linenos">22</span><span class="k">assert</span> <span class="n">ifib</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="mi">144</span><span class="p">,</span> <span class="s1">&#39;Failed for n = 12&#39;</span>
+<span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PASSED our unit tests!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 3.</strong> While the recursive implementation is easy to read and understand compared to the iterative implementation, this easy-of-coding quality comes at a price. In the case of <code class="docutils literal notranslate"><span class="pre">fib</span></code>, it is a big price. Run the next code block and notice, for a large <code class="docutils literal notranslate"><span class="pre">n</span></code>, how quickly <code class="docutils literal notranslate"><span class="pre">ifib</span></code> completes its work compared to <code class="docutils literal notranslate"><span class="pre">fib</span></code>. Feel free to experiment with different values of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="c1">### chap12/ale03.py</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="c1"># Run with a bigger n</span>
+<span class="linenos">13</span>    <span class="n">n</span> <span class="o">=</span> <span class="mi">38</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running ifib(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">) = &#39;</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="n">ifib</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running fib(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">) = &#39;</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>    
+</pre></div>
+</div>
+<p>What’s the issue that causes this large increase in the running time of such a simple, short function? While it does take longer to execute a function call (i.e., evaluate <code class="docutils literal notranslate"><span class="pre">fib(n-2)</span></code> in <code class="docutils literal notranslate"><span class="pre">fib</span></code>) than to look up a value (i.e., <code class="docutils literal notranslate"><span class="pre">ra</span></code> in <code class="docutils literal notranslate"><span class="pre">ifib</span></code>), this isn’t the real problem. The real culprit is duplicated work.</p>
+<p>In computing <code class="docutils literal notranslate"><span class="pre">ifib(38)</span></code>, the interpreter computes, say, the Fibonacci number at index 5 just once, when <code class="docutils literal notranslate"><span class="pre">i</span></code> in the for-loop is set to <code class="docutils literal notranslate"><span class="pre">5</span></code>. How many times does the interpreter compute this same number when we call <code class="docutils literal notranslate"><span class="pre">fib(38)</span></code>? Not once, but many times.</p>
+<p>How many times? It’s a cool answer. With <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">38</span></code>, we recursively call <code class="docutils literal notranslate"><span class="pre">fib(36)</span></code> and <code class="docutils literal notranslate"><span class="pre">fib(37)</span></code>. Each of those calls also make recursive calls: <code class="docutils literal notranslate"><span class="pre">fib(36)</span></code> invokes <code class="docutils literal notranslate"><span class="pre">fib(34)</span></code> and <code class="docutils literal notranslate"><span class="pre">fib(35)</span></code>; <code class="docutils literal notranslate"><span class="pre">fib(37)</span></code> invokes <code class="docutils literal notranslate"><span class="pre">fib(35)</span></code> and <code class="docutils literal notranslate"><span class="pre">fib(36)</span></code>. Draw these calls as a tree rooted at <code class="docutils literal notranslate"><span class="pre">fib(38)</span></code>, and you’ll notice (when you draw more of the tree) that there’s one <code class="docutils literal notranslate"><span class="pre">fib(38)</span></code> call, one <code class="docutils literal notranslate"><span class="pre">fib(37)</span></code> call, two <code class="docutils literal notranslate"><span class="pre">fib(36)</span></code> calls, three <code class="docutils literal notranslate"><span class="pre">fib(35)</span></code> calls, five <code class="docutils literal notranslate"><span class="pre">fib(34)</span></code> calls, eight <code class="docutils literal notranslate"><span class="pre">fib(33)</span></code> calls, and so forth. 1, 1, 2, 3, 5, 8 calls. The Fibonacci sequence again!</p>
+<p>So how many times is <code class="docutils literal notranslate"><span class="pre">fib(5)</span></code> called in computing <code class="docutils literal notranslate"><span class="pre">fib(38)</span></code>? If <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">38</span></code> is index 1 and <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">37</span></code> is index 2 in the Fibonacci sequence, what is <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">5</span></code>? Right, <code class="docutils literal notranslate"><span class="pre">38</span> <span class="pre">-</span> <span class="pre">5</span> <span class="pre">+</span> <span class="pre">1</span></code>, or index 34. The Fibonacci number at that index is 5,720,887. That’s a lot of times to calculate <code class="docutils literal notranslate"><span class="pre">fib(5)</span> <span class="pre">=</span> <span class="pre">5</span></code>., and we similar duplicative work for every number between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">n-2</span></code>.</p>
+<p>Our computers are fast, but it is possible to overwhelm them with some very simple scripts.</p>
+<p>[Version 20240404]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -716,8 +800,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 12</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-1-a-shell-game">ALE 12.1: A shell game</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-2-taco-cat">ALE 12.2: Taco cat</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-3-fib-forever">ALE 12.3: Fib forever</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-4-computing-to-the-end-of-time">ALE 12.4: Computing to the end of time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-12-3-fib-frequently-and-forever">ALE 12.3: Fib frequently and forever</a></li>
 </ul>
 
   </nav></div>

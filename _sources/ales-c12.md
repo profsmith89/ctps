@@ -242,7 +242,7 @@ lineno-start: 1
 def is_palindrome(s):
     '''Returns True if s is a palindrome'''
 
-    # Strip punctuation and spacing
+    # Strip prefix/suffix punctuation and spacing
     s = s.strip(' \t\n\'"~!@#$%^&*()-_+={}[]\\|;:<>,.?/')
 
     # REPLACE THIS COMMENT AND THE NEXT RETURN WITH YOUR CODE
@@ -320,12 +320,130 @@ check('Alli trota la tortilla.')
 check(poem)
 ```
 
-## ALE 12.3: Fib forever
+## ALE 12.3: Fib frequently and forever
 
-INSERT: Fibonacci example to show how a short, simple program can take infinitely long to execute.
+If you enjoy building or graphic design, you've probably heard about [the Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio), which is said to make such designs pleasing to the human eye. Definitionally, values `a` and `b` satisfy the Golden ratio if `a/b == (a+b)/a`, where `a > b > 0`. This ratio is an irrational number, which means that there are no integers `a` and `b` that produce it. However, there are sequences produced by simple algorithms that approach its value (1.618033988749...), and one of these sequences is called the *Fibonacci numbers*.
 
-## ALE 12.4: Computing to the end of time
+This is the beginning of the Fibonacci sequence:
 
-INSERT: Pitfalls of recursion. A seemingly simple problem (Towers of Hanoi) that can take till the end of the world to complete. Raises the issue of tractable and intractable problems; intractable ones are ones where we only know long-running scripts for large N problems.
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
 
-\[Version 20240403\]
+You obtain the next number in the sequence by computing the sum of the previous two numbers. For example, `144` follows `89` because it is the `55+89`.
+
+This sequence is related to the Golden ratio because each pair of consecutive Fibonacci numbers (call the smaller of the pair `a` and the larger `b`) approximates this ratio. As the Fibonacci numbers increase in magnitude, these approximations approach the Golden ratio (e.g., 89/55 is a better approximation than 55/34).
+
+**Step 1.** If we think of the Fibonacci numbers as a Python sequence, we can design a recursive function `fib` that produces any number in this sequence. Our routine takes a single parameter `n`, which is a zero-based index into the Fibonacci numbers, and then computes the value of the number at that index. For instance, `fib(4)` should return `3`, and the result of `fib(12)` should be `144`.
+
+* The recursive part of `fib` comes directly from the statement earlier that described how we compute the next number in the Fibonacci sequence: sum the previous two numbers. This means that if we knew `fib(n-1)` and `fib(n-2)`, we could quickly compute and return `fib(n)`.
+* The base cases of `fib` are the first two numbers in the Fibonacci sequence, since the recursive step looked back at the previous two numbers.
+
+With this description, write the body of the function fib in the next code block and test it with the statements in the subsequent block.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap12/ale03.py
+
+def fib(n):
+    '''Return the Fibonacci number at 0-based index n'''
+    if n < 0:
+        raise ValueError('Fibonacci is defined only for positive n')
+    
+    # INSERT BASE CASES AND THE RECURSIVE CALL
+    return 0  # and REMOVE THIS
+```
+
+```{code-block} python
+---
+lineno-start: 10
+---
+### chap12/ale03.py
+
+# Test code
+print('Testing fib ...')
+assert fib(0) == 0, 'Failed for n = 0'
+assert fib(1) == 1, 'Failed for n = 1'
+assert fib(2) == 1, 'Failed for n = 2'
+assert fib(3) == 2, 'Failed for n = 3'
+assert fib(4) == 3, 'Failed for n = 4'
+assert fib(5) == 5, 'Failed for n = 5'
+assert fib(6) == 8, 'Failed for n = 6'
+assert fib(8) == 21, 'Failed for n = 8'
+assert fib(12) == 144, 'Failed for n = 12'
+print('PASSED our unit tests!')
+```
+
+**Step 2.** It is easy to write the body of the recursive function `fib` from the recurrence relation that defines the Fibonacci sequence: `fib(n) = fib(n-1) + fib(n-2)`. The function `ifib` defined in the next code block is an iterative implementation. Run its tests to verify that it works correctly.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap12/ale03.py
+
+def ifib(n):
+    '''Return the Fibonacci number at 0-based index n'''
+    if n < 0:
+        raise ValueError('Fibonacci is defined only for positive n')
+    elif n == 0:
+        return 0
+    elif n == 1:
+        return 1
+
+    ra = 0    # fib(0) 
+    rb = 1    # fib(1)
+    for i in range(2, n + 1):
+        # Use last two fib numbers to compute fib(i)
+        ra, rb = rb, ra + rb
+
+    return rb
+```
+
+```{code-block} python
+---
+lineno-start: 10
+---
+### chap12/ale03.py
+
+# Test code
+print('Testing ifib ...')
+assert ifib(0) == 0, 'Failed for n = 0'
+assert ifib(1) == 1, 'Failed for n = 1'
+assert ifib(2) == 1, 'Failed for n = 2'
+assert ifib(3) == 2, 'Failed for n = 3'
+assert ifib(4) == 3, 'Failed for n = 4'
+assert ifib(5) == 5, 'Failed for n = 5'
+assert ifib(6) == 8, 'Failed for n = 6'
+assert ifib(8) == 21, 'Failed for n = 8'
+assert ifib(12) == 144, 'Failed for n = 12'
+print('PASSED our unit tests!')
+```
+
+**Step 3.** While the recursive implementation is easy to read and understand compared to the iterative implementation, this easy-of-coding quality comes at a price. In the case of `fib`, it is a big price. Run the next code block and notice, for a large `n`, how quickly `ifib` completes its work compared to `fib`. Feel free to experiment with different values of `n`.
+
+```{code-block} python
+---
+lineno-start: 10
+---
+### chap12/ale03.py
+
+    # Run with a bigger n
+    n = 38
+    print(f'Running ifib({n}) = ')
+    print(ifib(n))
+    print(f'Running fib({n}) = ')
+    print(fib(n))    
+```
+
+What's the issue that causes this large increase in the running time of such a simple, short function? While it does take longer to execute a function call (i.e., evaluate `fib(n-2)` in `fib`) than to look up a value (i.e., `ra` in `ifib`), this isn't the real problem. The real culprit is duplicated work.
+
+In computing `ifib(38)`, the interpreter computes, say, the Fibonacci number at index 5 just once, when `i` in the for-loop is set to `5`. How many times does the interpreter compute this same number when we call `fib(38)`? Not once, but many times.
+
+How many times? It's a cool answer. With `n = 38`, we recursively call `fib(36)` and `fib(37)`. Each of those calls also make recursive calls: `fib(36)` invokes `fib(34)` and `fib(35)`; `fib(37)` invokes `fib(35)` and `fib(36)`. Draw these calls as a tree rooted at `fib(38)`, and you'll notice (when you draw more of the tree) that there's one `fib(38)` call, one `fib(37)` call, two `fib(36)` calls, three `fib(35)` calls, five `fib(34)` calls, eight `fib(33)` calls, and so forth. 1, 1, 2, 3, 5, 8 calls. The Fibonacci sequence again!
+
+So how many times is `fib(5)` called in computing `fib(38)`? If `n = 38` is index 1 and `n = 37` is index 2 in the Fibonacci sequence, what is `n = 5`? Right, `38 - 5 + 1`, or index 34. The Fibonacci number at that index is 5,720,887. That's a lot of times to calculate `fib(5) = 5`., and we similar duplicative work for every number between `0` and `n-2`.
+
+Our computers are fast, but it is possible to overwhelm them with some very simple scripts.
+
+\[Version 20240404\]
