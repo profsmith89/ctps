@@ -1,4 +1,4 @@
-# Chapter 13: Rewrite the Error Messages #
+# Chapter 13: Rewrite the Error Message #
 
 The last act began with the recognition that our world is wondrously complex, and we ended it with the realization that this complexity is sometimes disturbingly simple to overcome with the right tool. For example, a divide-and-conquer approach was exactly what we needed in Chapter 12 to tackle Beckett's Challenge and recursion was the right technique for coding a short solution. Finding the right computational tool for your task is the theme of this final act. With the right tool, solving your problems becomes straightforward.
 
@@ -776,7 +776,7 @@ This line starts with [a "shebang" sequence](https://en.wikipedia.org/wiki/Sheba
 
 We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter's error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute `rewrite.py`, and one of them turned out to be an elegant solution to our problem.
 
-\[Version 20231116\]
+\[Version 20240605\]
 
 [^fn1]: It will list any file ending in \`.py\` as long as the string before these last three characters contains at least one instance of the letter \`e\`.
 

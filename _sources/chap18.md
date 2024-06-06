@@ -496,7 +496,7 @@ The hardest task in this decomposition is grabbing the names from each line. So 
 ---
 lineno-start: 1
 ---
-### chap18/check_chain.py
+### chap18/remove_names.py
 import re
 
 def remove_names_from_line(line):
@@ -542,8 +542,6 @@ Still, ChatGPT gave us a starting point for a solution and an explanation of wha
 > This function will specifically work well under the constraints of the provided example and similar structures. If your sentences vary significantly or have different structures, the regex pattern might need adjustments to better suit those variations.
 >
 > 
->
->  
 >
 ## > > **Writing good prompts**
 
@@ -633,4 +631,4 @@ When all is said and done, problem solving with GAI is still the same process I 
 
 Happy problem solving!
 
-\[Version 20240521\]
+\[Version 20240605\]

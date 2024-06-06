@@ -104,7 +104,7 @@ In summary, the script we will write will take the contents of the file named `C
 
 ## Sketch using computational thinking
 
-Given that this is our first computational problem, we will skip over Steps 3 through 5 of our problem-solving process. These three steps become important as you gain experience. With experience (and in subsequent chapters), you will start to see problems that you have already solved as pieces of the problem you are currently trying to solve. But since we can't yet plumb such experience, we will jump directly to Step 6 and sketch out the sequence of actions that will get the computer to read our book to us.
+Given that this is our first computational problem, we will skip over Steps 3 through 5 of our problem-solving process. These three steps become important as you gain experience. For example, in subsequent chapters, you will start to see problems that you have already solved as pieces of the problem you are currently trying to solve. But since we can't yet plumb such experience, we will jump directly to Step 6 and sketch out the sequence of actions that will get the computer to read our book to us.
 
 Remember that our goal in this step is a sketch. Although our script must eventually be written in a programming language, Step 6 is not about programming, but about *computational thinking*. This step is not programming because we are not trying to say something *in* a programming language like Python. This means that you don't need to know Python or any other programming language to create a sketch. You can use any language you would like to capture the sequence of actions in your sketch.
 
@@ -952,4 +952,4 @@ While the context and storyline in which I wrapped this chapter's problem may no
 
 Like this first problem-to-be-solved, I chose the problems in each chapter of this book for two reasons: (1) each builds upon the knowledge you've gained in previous chapters to teach you new design techniques, CS concepts, and programming skills; and (2) because each problem is an instance of a more generally applicable problem. In other words, my selection of our problems-to-be-solved is not frivolous, but builds in you a competency to attack many similar problems.
 
-\[Version 20230811\]
+\[Version 20240524\]

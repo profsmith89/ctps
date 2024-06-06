@@ -360,7 +360,7 @@ Saturation is one way of "correcting" these situations. In our current problem-t
 
 More generally, a running program may not know that a variable represents an 8-bit, black-and-white pixel, but only that the variable's physical representation is an unsigned byte. In this case, saturation may not be the right action to take. Instead, a better action might be to raise an exception.
 
-We've seen several types of exceptions to this point, and they are ways for a running programming to indicate that something happened that it doesn't know how to handle. If your script doesn't doesn't register a way to handle an exceptional event, the event will terminate the running instance of your script.
+We've seen several types of exceptions, and they are ways for a running program to indicate that something happened that it doesn't know how to handle. If your script doesn't register a way to handle an exceptional event, the event will terminate the running instance of your script.
 
 Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C's unsigned add is that you perform the addition and then lop off the most significant bits that don't fit in the physical representation. All of these, of course, are just different ways of describing the concept of modulo arithmetic.
 ```
@@ -435,7 +435,7 @@ The only other situation of interest is the case when the leftmost two columns o
 
 Run `edge3.py`, and you'll see that the filtered image contains a white line where the edge between the black and white regions were in the original image. This is all that the `ImageFilter` library did when our code in `edges.py` applied a `CONTOUR` filter. In this way, the computer can highlight the dog-shaped blob in `cosmo.jpg`. Knowing that that blob looks like a dog requires machine learning, a topic for later.
 
-\[Version 20230811\]
+\[Version 20240523\]
 
 [^fn1]: The date starts at offset 000000CC. The picture was taken at 3:39pm on May 19, 2020.
 

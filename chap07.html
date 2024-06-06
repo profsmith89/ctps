@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 7: Many Numbers But Not Any Number &#8212; Computational Thinking and Problem Solving</title>
+    <title>Chapter 7: Many But Not Any Number &#8212; Computational Thinking and Problem Solving</title>
   
   
   
@@ -163,15 +163,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7: Many But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Message</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
@@ -348,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 7: Many Numbers But Not Any Number</h1>
+    <h1>Chapter 7: Many But Not Any Number</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,8 +377,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-7-many-numbers-but-not-any-number">
-<h1>Chapter 7: Many Numbers But Not Any Number<a class="headerlink" href="#chapter-7-many-numbers-but-not-any-number" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-7-many-but-not-any-number">
+<h1>Chapter 7: Many But Not Any Number<a class="headerlink" href="#chapter-7-many-but-not-any-number" title="Permalink to this heading">#</a></h1>
 <p>In the last chapter, we heard from Jill Lepore that counting was a key metric in industrialization and measurement a key driver of science, but we looked mostly at the computational data type for counting: the integer.</p>
 <p>Clearly, counting isn’t the only thing we do with numbers, and the world isn’t nicely discrete in everything we do. In fact, we perceive the world as mostly <em>continuous</em>. For example, time doesn’t just move forward in discrete seconds, but also in tenths, hundredths, and infinitely small pieces of a second. Similarly, we don’t solely measure distance in an integral number of meters, but also in centimeters, millimeters, and infinitely small pieces of a meter. The same logic applies to measuring volume and weight and force and pretty much anything else we measure.</p>
 <p>If we’re going to use computers to help us do creative things and generate new knowledge in our physical world, we’re going to need to represent and manipulate <em>measured values</em>. For instance, we will soon measure the running time of our scripts, and in this, we will look at not just the time in seconds, but also fractions of a second.</p>
@@ -541,7 +541,7 @@ document.write(`
 <p><strong>FP errors accumulate.</strong> Unfortunately, precision doesn’t just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why <code class="docutils literal notranslate"><span class="pre">0.1</span> <span class="pre">*</span> <span class="pre">0.1</span></code> doesn’t equal <code class="docutils literal notranslate"><span class="pre">0.01</span></code>. A slightly inaccurate FP representation of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself produces a result with more inaccuracy than the conversion of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> into a FP number. Or stated another way, the computer doesn’t know if you were trying to multiple <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself or <code class="docutils literal notranslate"><span class="pre">0.10000002384185791</span></code> times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.</p>
 <p>If your script operates with floating-point numbers and you need the results to be precise, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems">accuracy problems in floating-point arithmetic</a> can get you started on this tricky subject.</p>
 <p>As if it wasn’t hard enough to write a correct program!</p>
-<p>[Version 20230902]</p>
+<p>[Version 20240605]</p>
 </section>
 </section>
 

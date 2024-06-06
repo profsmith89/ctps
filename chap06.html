@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap06';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 7: Many Numbers But Not Any Number" href="chap07.html" />
-    <link rel="prev" title="Chapter 5: Play Guess-a-number with a Friend" href="chap05.html" />
+    <link rel="next" title="Chapter 7: Many But Not Any Number" href="chap07.html" />
+    <link rel="prev" title="Chapter 5: Play Guess-a-number" href="chap05.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -165,15 +165,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 6: Do You See My Dog?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Message</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
@@ -646,7 +646,7 @@ document.write(`
 <p>Take, for example, the situation with which we’ve been dealing: the addition of two 8-bit, black-and-white pixels. As we’ve learned, this addition might produce a value greater than 255, for which we have no 8-bit representation. In general, computer scientists say that the addition <em>overflowed</em> its representation (or just overflowed for short). Similarly, a subtraction may <em>underflow</em>, by producing a value less than the smallest allowed representation.
 Saturation is one way of “correcting” these situations. In our current problem-to-be-solved, it is a sensible solution because we’re working with image pixels and there’s nothing blacker than black or whiter than white.</p>
 <p>More generally, a running program may not know that a variable represents an 8-bit, black-and-white pixel, but only that the variable’s physical representation is an unsigned byte. In this case, saturation may not be the right action to take. Instead, a better action might be to raise an exception.</p>
-<p>We’ve seen several types of exceptions to this point, and they are ways for a running programming to indicate that something happened that it doesn’t know how to handle. If your script doesn’t doesn’t register a way to handle an exceptional event, the event will terminate the running instance of your script.</p>
+<p>We’ve seen several types of exceptions, and they are ways for a running program to indicate that something happened that it doesn’t know how to handle. If your script doesn’t register a way to handle an exceptional event, the event will terminate the running instance of your script.</p>
 <p>Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C’s unsigned add is that you perform the addition and then lop off the most significant bits that don’t fit in the physical representation. All of these, of course, are just different ways of describing the concept of modulo arithmetic.</p>
 </div>
 </section>
@@ -706,7 +706,7 @@ Saturation is one way of “correcting” these situations. In our current probl
 </aside>
 <p>The only other situation of interest is the case when the leftmost two columns of our window are black and the rightmost column is white. In this case, the computation produces the value -765, which the saturation logic drives to <code class="docutils literal notranslate"><span class="pre">0</span></code> (black).</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">edge3.py</span></code>, and you’ll see that the filtered image contains a white line where the edge between the black and white regions were in the original image. This is all that the <code class="docutils literal notranslate"><span class="pre">ImageFilter</span></code> library did when our code in <code class="docutils literal notranslate"><span class="pre">edges.py</span></code> applied a <code class="docutils literal notranslate"><span class="pre">CONTOUR</span></code> filter. In this way, the computer can highlight the dog-shaped blob in <code class="docutils literal notranslate"><span class="pre">cosmo.jpg</span></code>. Knowing that that blob looks like a dog requires machine learning, a topic for later.</p>
-<p>[Version 20230811]</p>
+<p>[Version 20240523]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -760,7 +760,7 @@ Saturation is one way of “correcting” these situations. In our current probl
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 5: Play Guess-a-number with a Friend</p>
+        <p class="prev-next-title">Chapter 5: Play Guess-a-number</p>
       </div>
     </a>
     <a class="right-next"
@@ -768,7 +768,7 @@ Saturation is one way of “correcting” these situations. In our current probl
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 7: Many Numbers But Not Any Number</p>
+        <p class="prev-next-title">Chapter 7: Many But Not Any Number</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

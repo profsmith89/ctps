@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 13: Rewrite the Error Messages &#8212; Computational Thinking and Problem Solving</title>
+    <title>Chapter 13: Rewrite the Error Message &#8212; Computational Thinking and Problem Solving</title>
   
   
   
@@ -163,15 +163,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 13: Rewrite the Error Message</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap15.html">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
@@ -348,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 13: Rewrite the Error Messages</h1>
+    <h1>Chapter 13: Rewrite the Error Message</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -388,8 +388,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-13-rewrite-the-error-messages">
-<h1>Chapter 13: Rewrite the Error Messages<a class="headerlink" href="#chapter-13-rewrite-the-error-messages" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-13-rewrite-the-error-message">
+<h1>Chapter 13: Rewrite the Error Message<a class="headerlink" href="#chapter-13-rewrite-the-error-message" title="Permalink to this heading">#</a></h1>
 <p>The last act began with the recognition that our world is wondrously complex, and we ended it with the realization that this complexity is sometimes disturbingly simple to overcome with the right tool. For example, a divide-and-conquer approach was exactly what we needed in Chapter 12 to tackle Beckett’s Challenge and recursion was the right technique for coding a short solution. Finding the right computational tool for your task is the theme of this final act. With the right tool, solving your problems becomes straightforward.</p>
 <p>Well, almost. Even if you pick the right tool, you still need to get it to do what you want. In the previous two acts, you became proficient at problem solving by writing scripts, and that’s half the battle when using computational tools. The other half is knowing what to do when your script fails to direct a tool in the way you’d like. My goal for you in this act is to have you become more skilled at understanding how your script can fail and more proficient at fixing these failures. And the best way I’ve learned to achieve this is to collect together the types of mistakes we make in our scripts and then categorize how these mistakes manifest themselves in our computational tools. In a moment, I’ll present such a categorization, and then we’ll explore its implications in this and the next few chapters.</p>
 <p>Beyond our own human propensity for errors, we also need to understand the limitations of our tools. Just like you, computational tools are good at some things and not so good at others. You can often force a computational tool to do an unnatural task (e.g., use a for- or while-loop to solve a problem that’s more elegantly solved with recursion), but the work required and the errors that arise are often daunting. Sometimes it is not even possible to force a tool to do what you want, as we’ll see in the next chapter.</p>
@@ -949,7 +949,7 @@ NameError: name &#39;undef_name&#39; is not defined. Did you mean: &#39;f_undef_
 <p><code class="docutils literal notranslate"><span class="pre">#!/usr/bin/env</span> <span class="pre">python3</span></code></p>
 <p>This line starts with <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)">a “shebang” sequence</a> (i.e., <code class="docutils literal notranslate"><span class="pre">#!</span></code>), and the rest of it is the interpreter program that should be used with the text file. With this information, the shell turns <code class="docutils literal notranslate"><span class="pre">./python32</span></code> back into <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">python32.py</span></code>. We type one command and the script we want run with our error-message rewriting facility, and the shell and our scripts do all the work!</p>
 <p>We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter’s error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute <code class="docutils literal notranslate"><span class="pre">rewrite.py</span></code>, and one of them turned out to be an elegant solution to our problem.</p>
-<p>[Version 20231116]</p>
+<p>[Version 20240605]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

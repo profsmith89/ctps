@@ -163,15 +163,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2: Grab the Dialogue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number with a Friend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many Numbers But Not Any Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7: Many But Not Any Number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8: What Is My Problem?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9: Find a Phrase</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10: Build an Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11: Discover Driving Directions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12: Divide and Conquer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13: Rewrite the Error Message</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap14.html">Chapter 14: The Dream of Bug Fixing</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 15: Embrace Runtime Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
@@ -424,10 +424,10 @@ document.write(`
 <p>Both are files containing text. Both sit in the memories of our computing systems. However, we think of one as a script, or code, and the other as data. But what exactly is code? What distinguishes it from data?</p>
 <p>In plain English, code is a set of instructions we expect the computer to follow, while data is what we tell, through our instructions, the computer to manipulate. But inside the machine, when we strip away these interpretations, both code and data are just sequences of bits stored somewhere in our computer’s memory. The only difference between these bit sequences is in how we tell the machine to treat them.</p>
 <p>This highlights the key insight to understanding debuggers: Because code and data are both just sequences of bits, <em>the same sequence of bits can sometimes be treated as code and other times as data</em>. This is called the <em>duality of code and data</em> in modern computing systems.</p>
-<p>For example, sometimes we use a Python script as a set of instructions to direct our computer to complete some task for us, with help from the Python interpreter. Other times, we tell a program (e.g., the editor in our IDE) to read and write our Python script as data.</p>
+<p>For example, sometimes we use a Python script as a set of instructions to direct our computer to complete some task for us, with help from the Python interpreter. Other times, we tell a program (e.g., the editor in our IDE) to read and write our Python script as data. A debugger plays both these roles.</p>
 </section>
 <section id="breakpoints-and-runtime-state">
-<p><strong>Breakpoints and runtime state.</strong> A debugger plays both these roles. The following is a typical way to use a debugger:</p>
+<p><strong>Breakpoints and runtime state.</strong> The following is a typical way to use a debugger:</p>
 <ol class="arabic simple">
 <li><p>Start the debugger and ask it to open your script. Your script is being treated as data.</p></li>
 <li><p>Tell the debugger where you want to place a <em>breakpoint</em>, which is a point (e.g., a file line) in your script where you’d like to pause its execution. The debugger is still treating your script like data, and I’ll explain in a moment what exactly a breakpoint is and how the debugger modifies your script.</p></li>
@@ -442,7 +442,7 @@ document.write(`
 <p><strong>Inserting a breakpoint.</strong> Let’s drive home these concepts by building our own minimal debugger using nothing but Python statements. As we’ve practiced throughout this book, we’ll start simply: the first version of our debugger will read the script we want debugged, insert a breakpoint, and write out the edited script. The following is some pseudocode to get us started:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### Pseudocode for our Python script debugger</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="c1"># Grab the name of the script to debug from the user</span>
+<span class="linenos">3</span><span class="c1"># Ask for the name of the script to be debugged</span>
 <span class="linenos">4</span><span class="c1"># Call our debugging routine with this script name</span>
 <span class="linenos">5</span><span class="c1"># .. Read in the original script</span>
 <span class="linenos">6</span><span class="c1"># .. Ask for the line on which to place a breakpoint</span>
@@ -452,145 +452,151 @@ document.write(`
 </pre></div>
 </div>
 <p>Notice that our script’s pseudocode separates the prompting of the user for the script-to-be-debugged from the function that will implement the debugger’s functionality. The indented pseudocode statements represent the tasks done by the debugging function, and instead of running the modified script with the inserted breakpoint, we’ll write it out so that we can examine it.</p>
-<p>We can steal from prior scripts the work described in all but line 7, which adds the breakpoint to the script we want debugged. The next code block implements all the pseudocode except this line.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pdb0.py</span>
+<p>We can steal from prior scripts the work described in all but line 7, which adds the breakpoint to the script we want debugged. The next code block implements all the pseudocode except this line. Notice that the code encapsulates a number of our pseudocode tasks in functions and provides an ability to print the edited script as well as write it to a file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pdb1.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">my_pdb</span><span class="p">(</span><span class="n">script</span><span class="p">):</span>
-<span class="linenos"> 5</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
-<span class="linenos"> 8</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-<span class="linenos"> 9</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">10</span>            <span class="n">line</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">11</span>            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-<span class="linenos">12</span>                <span class="k">break</span>    <span class="c1"># finished reading the script</span>
-<span class="linenos">13</span>            <span class="n">edited_script</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="linenos">14</span>    <span class="n">lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
-<span class="linenos">15</span>
-<span class="linenos">16</span>    <span class="c1"># Ask for the line on which to place the breakpoint (with error checking)</span>
-<span class="linenos">17</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">18</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">19</span>            <span class="n">breakpt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Line number in script? &#39;</span><span class="p">))</span>
-<span class="linenos">20</span>            <span class="n">breakpt</span> <span class="o">-=</span> <span class="mi">1</span>   <span class="c1"># convert from a line number to a list index</span>
-<span class="linenos">21</span>            <span class="k">if</span> <span class="n">breakpt</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">breakpt</span> <span class="o">&gt;=</span> <span class="n">lines</span><span class="p">:</span>
-<span class="linenos">22</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be in the interval [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
-<span class="linenos">23</span>                <span class="k">continue</span>
-<span class="linenos">24</span>            <span class="k">break</span>
-<span class="linenos">25</span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">26</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The line number must be an integer&#39;</span><span class="p">)</span>
-<span class="linenos">27</span>
-<span class="linenos">28</span>    <span class="c1"># Edit it to add the breakpoint</span>
-<span class="linenos">29</span>    <span class="c1"># TO BE WRITTEN</span>
-<span class="linenos">30</span>
-<span class="linenos">31</span>    <span class="c1"># Return the edited script</span>
-<span class="linenos">32</span>    <span class="k">return</span> <span class="n">edited_script</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span>
-<span class="linenos">35</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">36</span>    <span class="c1"># Grab the name of the script to debug from the user</span>
-<span class="linenos">37</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">38</span>        <span class="n">script</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
-<span class="linenos">39</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">40</span>        <span class="n">script</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">41</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">42</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb0.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
-<span class="linenos">43</span>
-<span class="linenos">44</span>    <span class="c1"># Call our debugging routine with this script name</span>
-<span class="linenos">45</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">my_pdb</span><span class="p">(</span><span class="n">script_fname</span><span class="p">):</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="sd">&#39;&#39;&#39; First attempt at our debugger</span>
+<span class="linenos"> 6</span><span class="sd">        Input:   filename of script to be debugged</span>
+<span class="linenos"> 7</span><span class="sd">        Returns: edited script as list of lines</span>
+<span class="linenos"> 8</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos"> 9</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
+<span class="linenos">12</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+<span class="linenos">13</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="c1"># Grab line number where we&#39;ll place the breakpoint</span>
+<span class="linenos">16</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="c1"># Convert breakpoint number into a list index</span>
+<span class="linenos">19</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="c1"># Add the breakpoint</span>
+<span class="linenos">22</span>    <span class="c1"># TO BE WRITTEN</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="k">return</span> <span class="n">edited_script</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">def</span> <span class="nf">get_lineno</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+<span class="linenos">27</span><span class="w">    </span><span class="sd">&#39;&#39;&#39; Asks for the user for a line number</span>
+<span class="linenos">28</span><span class="sd">        Input:   number of lines in script</span>
+<span class="linenos">29</span><span class="sd">        Returns: user&#39;s line number</span>
+<span class="linenos">30</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">31</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">32</span>        <span class="k">try</span><span class="p">:</span>
+<span class="linenos">33</span>            <span class="n">lineno</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Line number in script? &#39;</span><span class="p">))</span>
+<span class="linenos">34</span>            <span class="k">if</span> <span class="n">lineno</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">lineno</span> <span class="o">&gt;=</span> <span class="n">lines</span><span class="p">:</span>
+<span class="linenos">35</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be in the interval [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="linenos">36</span>                <span class="k">continue</span>
+<span class="linenos">37</span>            <span class="k">return</span> <span class="n">lineno</span>
+<span class="linenos">38</span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="linenos">39</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The line number must be an integer&#39;</span><span class="p">)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">def</span> <span class="nf">print_it</span><span class="p">(</span><span class="n">edited_script</span><span class="p">):</span>
+<span class="linenos">42</span><span class="w">    </span><span class="sd">&#39;&#39;&#39; Print out edited script with line numbers &#39;&#39;&#39;</span>
+<span class="linenos">43</span>    <span class="n">cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)))</span>
+<span class="linenos">44</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edited_script</span><span class="p">):</span>
+<span class="linenos">45</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s1">&gt;</span><span class="si">{</span><span class="n">cols</span><span class="si">}}</span><span class="s1"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="linenos">46</span>
-<span class="linenos">47</span>    <span class="c1"># Write out the edited script</span>
-<span class="linenos">48</span>    <span class="n">output_script</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">,</span> <span class="s1">&#39;-db.py&#39;</span><span class="p">)</span>
-<span class="linenos">49</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_script</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-<span class="linenos">50</span>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">:</span>
-<span class="linenos">51</span>            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="linenos">52</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrote </span><span class="si">{</span><span class="n">output_script</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">47</span><span class="k">def</span> <span class="nf">write_it</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">orig_fname</span><span class="p">):</span>
+<span class="linenos">48</span><span class="w">    </span><span class="sd">&#39;&#39;&#39; Write edited script to a file with a `-db.py` suffix &#39;&#39;&#39;</span>
+<span class="linenos">49</span>    <span class="n">output_fname</span> <span class="o">=</span> <span class="n">orig_fname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">,</span> <span class="s1">&#39;-db.py&#39;</span><span class="p">)</span>
+<span class="linenos">50</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+<span class="linenos">51</span>        <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
+<span class="linenos">52</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrote </span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">53</span>
-<span class="linenos">54</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos">55</span>    <span class="n">main</span><span class="p">()</span>
+<span class="linenos">54</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">55</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">56</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">57</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
+<span class="linenos">58</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">59</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">60</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">61</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb0-soln.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>    <span class="n">print_it</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
+<span class="linenos">66</span>    <span class="c1"># write_it(edited_script, fname)</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">69</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>If you run <code class="docutils literal notranslate"><span class="pre">pdb0.py</span></code>, giving it a script-to-be-debugged either on the command line or through the prompt, you’ll see that it asks for a line on which to place a breakpoint, but it doesn’t actually edit the script. Let’s change the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> to insert a breakpoint.</p>
+<p>If you run <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>, giving it a script-to-be-debugged either on the command line or through the prompt, you’ll see that it asks for a line on which to place a breakpoint, but it doesn’t actually edit the script. Let’s change the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> to insert a breakpoint.</p>
 </section>
 <section id="inserting-a-new-statement">
 <p><strong>Inserting a new statement.</strong> A breakpoint is nothing more than the raising of a Python exception, which will give control back to our debugger if it catches all exceptions raised by the script-to-be-debugged. We can create our own Python exception and raise it as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)</span></code></p>
-<p>Let’s assume our script-to-be-debugged is <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> from Chapter 5, and we’d like to put this breakpoint before line 14 in this script. This line is where the user is asked for their guess. Notice that I said “before line 14.” I don’t mean any point before line 14, but the point immediately before this line. In other words, line 13 (and everything before it at runtime) should have executed, but line 14 (and everything after it at runtime) should not have.</p>
-<p>How we insert the raise-statement into <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> between lines 13 and 14 depends on whether we are able to <em>stretch the script without breaking it</em>. In other words, is the script that we give the debugger more like:</p>
+<p>Let’s assume our script-to-be-debugged is <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> from Chapter 5, and we’d like to put this breakpoint before line 24 in this script. This line compares the user’s guess against the secret. Notice that I said “before line 24.” I don’t mean any point before line 24, but the point immediately before this line. In other words, line 23 (and everything before it at runtime) should have executed, but line 24 (and everything after it at runtime) should not have.</p>
+<p>How we insert the raise-statement into <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> between lines 23 and 24 depends on whether we are able to <em>stretch the script without breaking it</em>. In other words, is the script that we give the debugger more like:</p>
 <ul class="simple">
 <li><p>a Python list, which is a data structure that makes it easy to stretch and then insert a new element; or</p></li>
 <li><p>an image file, which is a data structure in which we can change some of the image bits, but not add or remove bits?</p></li>
 </ul>
-<p>Neither case is hard, but you have to know which kind of data structure is holding the script’s statements (or more generally instructions). In <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code>, where we’re reading the script from a text file and creating our own list of file lines, inserting a new statement is easy, as I’ll illustrate in a moment.</p>
+<p>Neither case is hard, but you have to know which kind of data structure is holding the script’s statements (or more generally instructions). In <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code>, where we’re reading the script from a text file using <code class="docutils literal notranslate"><span class="pre">readlines</span></code>, inserting a new statement is easy, as I’ll illustrate in a moment.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">When Instructions Vary in Length</p>
 <p>While I made it sound like this operation is a one-for-one replacement, it isn’t always the case. In general, you need to remove and save enough of the original text to fit the encoding of a breakpoint exception.</p>
 </aside>
-<p>However, some debuggers work with the script’s instructions in a data structure that resembles an image file. Since we cannot easily stretch the bit array in an image file, the debugger instead saves a copy of the statement that will execute after the breakpoint (i.e., line 14 in our example) and then overwrites this statement in the image file with the breakpoint statement. If the user wants to continue the script’s execution, the debugger will first replace the breakpoint statement with the saved statement and then continue execution.</p>
+<p>However, some debuggers work with the script’s instructions in a data structure that resembles an image file. Since we cannot easily stretch the bit array in an image file, the debugger instead saves a copy of the statement that will execute after the breakpoint (i.e., line 24 in our example) and then overwrites this statement in the image file with the breakpoint statement. If the user wants to continue the script’s execution, the debugger will first replace the breakpoint statement with the saved statement and then continue execution.</p>
 </section>
 <section id="indenting-that-statement">
-<p><strong>Indenting that statement.</strong> Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply have to remember that indexing into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 21 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
-<p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt,</span> <span class="pre">'raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)\n')</span></code></p>
+<p><strong>Indenting that statement.</strong> Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply have to remember that indexing into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 19 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
+<p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt_index,</span> <span class="pre">'raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)\n')</span></code></p>
 <p>But there’s a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Multiple Arguments</p>
-<p>You’ll notice that I added an additional argument to the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object created on line 39, which we’ll use in a moment. The first argument is our name for the exception and the second is the line number where we placed the breakpoint. You can add as many arguments as you’d like when you create an <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object. We could also create our own exception class that derives from <code class="docutils literal notranslate"><span class="pre">Exception</span></code>, but the current approach is good enough for learning about debugging.</p>
+<p>You’ll notice that I added an additional argument to the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object created on line 32, which we’ll use in a moment. The first argument is our name for the exception and the second is the line number where we placed the breakpoint. You can add as many arguments as you’d like when you create an <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object. We could also create our own exception class that derives from <code class="docutils literal notranslate"><span class="pre">Exception</span></code>, but the current approach is good enough for learning about debugging.</p>
 </aside>
-<p>If you think about this, you’ll realize that it is the indentation of the line we’re replacing (i.e., line 14 in our example). We need to grab the whitespace at the start of this line and add it to the start of our new statement. We could do this using a regular expression, but this work is simple enough that we could also just build a loop with an if-else-statement. The next code block is an updated version of  the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> that calculates the whitespace we need and then inserts the correctly-indented breakpoint statement.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pdb1.py</span>
+<p>If you think about this, you’ll realize that it is the indentation of the line we’re replacing (i.e., line 24 in our example). We need to grab the whitespace at the start of this line and add it to the start of our new statement. We could do this using a regular expression, but this work is simple enough that we could also just build a loop with an if-else-statement. The next code block is an updated version of  the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> that calculates the whitespace we need and then inserts the correctly-indented breakpoint statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pdb2.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">string</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">my_pdb</span><span class="p">(</span><span class="n">script</span><span class="p">):</span>
-<span class="linenos"> 6</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
-<span class="linenos"> 9</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-<span class="linenos">10</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">11</span>            <span class="n">line</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">12</span>            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-<span class="linenos">13</span>                <span class="k">break</span>    <span class="c1"># finished reading the script</span>
-<span class="linenos">14</span>            <span class="n">edited_script</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="linenos">15</span>    <span class="n">lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
-<span class="linenos">16</span>
-<span class="linenos">17</span>    <span class="c1"># Ask for the line on which to place the breakpoint (with error checking)</span>
-<span class="linenos">18</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">19</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">20</span>            <span class="n">breakpt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Line number in script? &#39;</span><span class="p">))</span>
-<span class="linenos">21</span>            <span class="n">breakpt</span> <span class="o">-=</span> <span class="mi">1</span>   <span class="c1"># convert from a line number to a list index</span>
-<span class="linenos">22</span>            <span class="k">if</span> <span class="n">breakpt</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">breakpt</span> <span class="o">&gt;=</span> <span class="n">lines</span><span class="p">:</span>
-<span class="linenos">23</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be in the interval [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
-<span class="linenos">24</span>                <span class="k">continue</span>
-<span class="linenos">25</span>            <span class="k">break</span>
-<span class="linenos">26</span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">27</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The line number must be an integer&#39;</span><span class="p">)</span>
-<span class="linenos">28</span>
-<span class="linenos">29</span>    <span class="c1"># Edit it to add the breakpoint</span>
-<span class="linenos">30</span>    <span class="c1"># .. grab the whitespace so we get the right indentation</span>
-<span class="linenos">31</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="linenos">32</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">[</span><span class="n">breakpt</span><span class="p">]:</span>
-<span class="linenos">33</span>        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span><span class="p">:</span>
-<span class="linenos">34</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
-<span class="linenos">35</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">36</span>            <span class="k">break</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span>    <span class="n">breakpt_statement</span> <span class="o">=</span> <span class="n">my_whitespace</span> <span class="o">+</span> \
-<span class="linenos">39</span>        <span class="sa">f</span><span class="s1">&#39;raise Exception(&quot;My breakpoint&quot;, </span><span class="si">{</span><span class="n">breakpt</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="linenos">40</span>
-<span class="linenos">41</span>    <span class="c1"># .. insert a raise statement as our breakpoint</span>
-<span class="linenos">42</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt</span><span class="p">,</span> <span class="n">breakpt_statement</span><span class="p">)</span>
-<span class="linenos">43</span>
-<span class="linenos">44</span>    <span class="c1"># Return the edited script</span>
-<span class="linenos">45</span>    <span class="k">return</span> <span class="n">edited_script</span>
-<span class="linenos">46</span>
-<span class="linenos">47</span><span class="c1"># main is unchanged from pdb0.py</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">my_pdb</span><span class="p">(</span><span class="n">script_fname</span><span class="p">):</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="sd">&#39;&#39;&#39; First attempt at our debugger</span>
+<span class="linenos"> 7</span><span class="sd">        Input:   filename of script to be debugged</span>
+<span class="linenos"> 8</span><span class="sd">        Returns: edited script as list of lines</span>
+<span class="linenos"> 9</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">10</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
+<span class="linenos">13</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="c1"># Grab line number where we&#39;ll place the breakpoint</span>
+<span class="linenos">17</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="c1"># Convert breakpoint number into a list index</span>
+<span class="linenos">20</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># Add the breakpoint</span>
+<span class="linenos">23</span>    <span class="c1"># .. grab the whitespace so we get the right indentation</span>
+<span class="linenos">24</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos">25</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">[</span><span class="n">breakpt_index</span><span class="p">]:</span>
+<span class="linenos">26</span>        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span><span class="p">:</span>
+<span class="linenos">27</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
+<span class="linenos">28</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">29</span>            <span class="k">break</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>    <span class="n">breakpt_statement</span> <span class="o">=</span> <span class="n">my_whitespace</span> <span class="o">+</span> \
+<span class="linenos">32</span>        <span class="sa">f</span><span class="s1">&#39;raise Exception(&quot;My breakpoint&quot;, </span><span class="si">{</span><span class="n">breakpt</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>    <span class="c1"># .. insert a raise statement as our breakpoint</span>
+<span class="linenos">35</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt_index</span><span class="p">,</span> <span class="n">breakpt_statement</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="k">return</span> <span class="n">edited_script</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="c1"># the other functions and main are unchanged from pdb1.py</span>
 </pre></div>
 </div>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code> on <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> adding a breakpoint at line 14. Take a look at the output file (<code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code>) and make sure that we inserted the breakpoint statement correctly. Go ahead and run <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code>.</p>
-<p>You might even try commenting out lines 32-36, which calculates the correct amount of whitespace needed at the start of the breakpoint statement, rebuild <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code> using this changed version of <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>, and run this new <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code> to see how the error message changes.</p>
-<p>Don’t forget to restore lines 32-36 before reading on!</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code> on <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> adding a breakpoint at line 24. Take a look at the output file (<code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code>) and make sure that we inserted the breakpoint statement correctly. Go ahead and run <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code>.</p>
+<p>You might even try commenting out lines 24-29, which calculates the correct amount of whitespace needed at the start of the breakpoint statement, rebuild <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code> using this changed version of <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code>, and run this new <code class="docutils literal notranslate"><span class="pre">guess32-db.py</span></code> to see how the error message changes.</p>
+<p>Don’t forget to restore lines 24-29 before reading on!</p>
 </div>
 </section>
 <section id="launching-a-script-from-within-a-script">
@@ -617,44 +623,46 @@ document.write(`
 <p>Now run the second of the code blocks. It prints nothing because we only defined the function <code class="docutils literal notranslate"><span class="pre">hello</span></code>. To verify this, type <code class="docutils literal notranslate"><span class="pre">hello(&quot;world&quot;)</span></code> at the interpreter’s prompt. It runs because <code class="docutils literal notranslate"><span class="pre">hello</span></code> is in the global namespace.</p>
 <p>Continue experimenting with other examples.</p>
 </div>
-<p>Let’s use this new knowledge to launch an edited script within our debugger. This requires us to call <code class="docutils literal notranslate"><span class="pre">exec</span></code> with an argument that is the string that represents the edited script. The next code block rewrites <code class="docutils literal notranslate"><span class="pre">main</span></code> in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code> (the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> is unchanged) to remove the writing of <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> to a file and instead to call <code class="docutils literal notranslate"><span class="pre">exec</span></code> within a try-except-statement.</p>
+<p>Let’s use this new knowledge to launch an edited script within our debugger. This requires us to call <code class="docutils literal notranslate"><span class="pre">exec</span></code> with an argument that is the string that represents the edited script. The next code block rewrites <code class="docutils literal notranslate"><span class="pre">main</span></code> in <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code> (the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> is unchanged) to remove the writing of <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> to a file and instead to call <code class="docutils literal notranslate"><span class="pre">exec</span></code> within a try-except-statement.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Joining Strings</p>
 <p>I use the <code class="docutils literal notranslate"><span class="pre">join</span></code> method on an empty string to convert the many strings in <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> into one continuous string; this is an often-used trick in Python scripts.</p>
 </aside>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">42</span><span class="c1">### chap15/pdb2.py</span>
-<span class="linenos">43</span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="linenos">44</span>
-<span class="linenos">45</span><span class="c1"># my_pdb is unchanged from pdb1.py</span>
-<span class="linenos">46</span>
-<span class="linenos">47</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">48</span>    <span class="c1"># Grab the name of the script to debug from the user</span>
-<span class="linenos">49</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">50</span>        <span class="n">script</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
-<span class="linenos">51</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">52</span>        <span class="n">script</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">53</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">54</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb2.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
-<span class="linenos">55</span>
-<span class="linenos">56</span>    <span class="c1"># Call our debugging routine with this script name</span>
-<span class="linenos">57</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
-<span class="linenos">58</span>
-<span class="linenos">59</span>    <span class="c1"># Run the edited script and catch our breakpoint exception.</span>
-<span class="linenos">60</span>    <span class="c1"># Remember to turn the list of strings into one big string.</span>
-<span class="linenos">61</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">62</span>        <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">),</span> <span class="nb">globals</span><span class="p">())</span>
-<span class="linenos">63</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
-<span class="linenos">64</span>        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;My breakpoint&#39;</span><span class="p">:</span>
-<span class="linenos">65</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;pdb2: Breakpoint at line </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">66</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">67</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pdb2: script died with non-breakpoint exception&#39;</span><span class="p">)</span>
-<span class="linenos">68</span>            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">62</span><span class="c1">### chap15/pdb3.py</span>
+<span class="linenos">63</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span><span class="c1"># my_pdb is unchanged from pdb2.py</span>
+<span class="linenos">66</span>
+<span class="linenos">67</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">68</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">69</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">70</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
+<span class="linenos">71</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">72</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">73</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">74</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb3.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
+<span class="linenos">75</span>
+<span class="linenos">76</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="linenos">77</span>
+<span class="linenos">78</span>    <span class="c1"># print_it(edited_script)</span>
+<span class="linenos">79</span>    <span class="c1"># write_it(edited_script, fname)</span>
+<span class="linenos">80</span>
+<span class="linenos">81</span>    <span class="c1"># Run the edited script and catch our breakpoint exception.</span>
+<span class="linenos">82</span>    <span class="c1"># Remember to turn the list of strings into one big string.</span>
+<span class="linenos">83</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">84</span>        <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">),</span> <span class="nb">globals</span><span class="p">())</span>
+<span class="linenos">85</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+<span class="linenos">86</span>        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;My breakpoint&#39;</span><span class="p">:</span>
+<span class="linenos">87</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;pdb3: Breakpoint at line </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">88</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">89</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pdb3: script died with non-breakpoint exception&#39;</span><span class="p">)</span>
+<span class="linenos">90</span>            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It’s worth pointing out two other interesting aspects of the try-except-statement and the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call used in this code block:</p>
 <ol class="arabic simple">
-<li><p>In an except clause, we can declare a variable after the exception name (inserting the keyword <code class="docutils literal notranslate"><span class="pre">as</span></code> in-between). This variable (<code class="docutils literal notranslate"><span class="pre">msg</span></code> in the code block) is another name for the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object that was caught, and with it, we can access the arguments we specified when creating the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object (back on line 39 in the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code>). We access them using the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object’s <code class="docutils literal notranslate"><span class="pre">args</span></code> attribute, which acts like a list.</p></li>
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call on line 63, we explicitly defined one of its optional parameters, which is the dictionary where global names should be placed. We want this to be the same dictionary as our current global namespace, which we can access with the built-in function <code class="docutils literal notranslate"><span class="pre">globals</span></code>. We need this extra argument here and not in our earlier examples because there’s an import-statement in <code class="docutils literal notranslate"><span class="pre">edited_script</span></code>. If you remove this argument from the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call, you’ll see that the debugging run of <code class="docutils literal notranslate"><span class="pre">guess32</span></code> dies saying that the name <code class="docutils literal notranslate"><span class="pre">random</span></code> is not defined (i.e., this module was imported into the wrong namespace).</p></li>
+<li><p>In an except clause, we can declare a variable after the exception name (inserting the keyword <code class="docutils literal notranslate"><span class="pre">as</span></code> in-between). This variable (<code class="docutils literal notranslate"><span class="pre">msg</span></code> in the code block) is another name for the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object that was caught, and with it, we can access the arguments we specified when creating the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object. We access them using the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> object’s <code class="docutils literal notranslate"><span class="pre">args</span></code> attribute, which acts like a list.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call on line 84, we explicitly defined one of its optional parameters, which is the dictionary where global names should be placed. We want this to be the same dictionary as our current global namespace, which we can access with the built-in function <code class="docutils literal notranslate"><span class="pre">globals</span></code>. We need this extra argument here and not in our earlier examples because there’s an import-statement in <code class="docutils literal notranslate"><span class="pre">edited_script</span></code>. If you remove this argument from the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call, you’ll see that the debugging run of <code class="docutils literal notranslate"><span class="pre">guess32</span></code> dies saying that the name <code class="docutils literal notranslate"><span class="pre">random</span></code> is not defined (i.e., this module was imported into the wrong namespace).</p></li>
 </ol>
 <p>These details make our debugger into a useful and well-structured tool. More importantly, I hope that you see how we can build a debugger, which is nothing more than a program that reads a script as data, modifies it as it would any other data file, and then tells the machine to treat this data as code. By launching the script within a try-except-statement, the debugger can regain control of the machine on a breakpoint or any other error inside the script. First mystery solved!</p>
 <div class="admonition-you-try-it admonition">
@@ -663,114 +671,103 @@ document.write(`
 </div>
 </section>
 <section id="instrumenting-a-script">
-<p><strong>Instrumenting a script.</strong> We could go on and implement what needs to be done to look at the state of the running script, but then we’d just be reimplementing what we already have in the Python debugger <code class="docutils literal notranslate"><span class="pre">pdb</span></code>. Instead, let’s get a feel for accessing another script’s runtime state by modifying <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code> so that it <em>instruments</em> this other script. What does this mean? Basically, we’ll build a script that allows us to specify:</p>
+<p><strong>Instrumenting a script.</strong> We could go on and implement what needs to be done to look at the state of the running script, but then we’d just be reimplementing what we already have in the Python debugger <code class="docutils literal notranslate"><span class="pre">pdb</span></code>. Instead, let’s get a feel for accessing another script’s runtime state by modifying <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code> so that it <em>instruments</em> this other script. What does this mean? Basically, we’ll build a script that allows us to specify:</p>
 <ol class="arabic simple">
 <li><p>Where to put print statements in a script; and</p></li>
 <li><p>What we want those print statements to say.</p></li>
 </ol>
-<p>We’ve been doing this by hand and messing up our scripts along the way. An instrumentation tool could be a much cleaner approach. And it is trivial to do that now that we have <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code>! We simply have to:</p>
+<p>We’ve been doing this by hand and messing up our scripts along the way. An instrumentation tool could be a much cleaner approach. And it is trivial to do that now that we have <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code>! We simply have to:</p>
 <ol class="arabic simple">
 <li><p>Replace our breakpoint statement with a print statement; and</p></li>
 <li><p>Have the user specify what they’d like printed.</p></li>
 </ol>
-<p>The code in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> below should look very similar to the code in <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code>. I’ve renamed the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> to be <code class="docutils literal notranslate"><span class="pre">my_pin</span></code>, and I’ve added a parameter to it, which I’ll explain in a moment. I’ve also stripped away the try-except-statement that was surrounding the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call in <code class="docutils literal notranslate"><span class="pre">main</span></code>. Since we’re adding a print-statement rather than raise-statement, there’s no longer any need to catch exceptions.</p>
+<p>The code in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> below should look very similar to the code in <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code>. I’ve renamed the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> to be <code class="docutils literal notranslate"><span class="pre">my_pin</span></code>, and I’ve added a parameter to it, which I’ll explain in a moment. I’ve also stripped away the try-except-statement that was surrounding the <code class="docutils literal notranslate"><span class="pre">exec</span></code> call in <code class="docutils literal notranslate"><span class="pre">main</span></code>. Since we’re adding a print-statement rather than raise-statement, there’s no longer any need to catch exceptions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pin32.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">string</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">insert_print</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">breakpt</span><span class="p">,</span> <span class="n">ws</span><span class="p">):</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">insert_print</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">breakpt_index</span><span class="p">,</span> <span class="n">ws</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Inserts a user-defined print statement in `edited_script`,</span>
-<span class="linenos"> 7</span><span class="sd">       which is a list of Python statements, at the index specified</span>
-<span class="linenos"> 8</span><span class="sd">       By `breakpt`, and with the indentation from `ws`.&#39;&#39;&#39;</span>
-<span class="linenos"> 9</span>    <span class="c1"># Ask for the print-statement argument</span>
-<span class="linenos">10</span>    <span class="n">printarg</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is print&#39;s argument? &quot;</span><span class="p">)</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="n">print_statement</span> <span class="o">=</span> <span class="n">ws</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;print(f&quot;</span><span class="si">{</span><span class="n">printarg</span><span class="si">}</span><span class="s1">&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="linenos">13</span>
-<span class="linenos">14</span>    <span class="c1"># Insert our print statement</span>
-<span class="linenos">15</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt</span><span class="p">,</span> <span class="n">print_statement</span><span class="p">)</span>
-<span class="linenos">16</span>
+<span class="linenos"> 7</span><span class="sd">       which is a list of Python statements, at the index</span>
+<span class="linenos"> 8</span><span class="sd">       specified, and with the indentation from `ws`.</span>
+<span class="linenos"> 9</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">10</span>    <span class="c1"># Ask for the print-statement argument</span>
+<span class="linenos">11</span>    <span class="n">printarg</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is print&#39;s argument? &quot;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="n">print_statement</span> <span class="o">=</span> <span class="n">ws</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;print(f&quot;</span><span class="si">{</span><span class="n">printarg</span><span class="si">}</span><span class="s1">&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="c1"># Insert our print statement</span>
+<span class="linenos">16</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt_index</span><span class="p">,</span> <span class="n">print_statement</span><span class="p">)</span>
 <span class="linenos">17</span>
-<span class="linenos">18</span><span class="k">def</span> <span class="nf">my_pin</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">insert_code</span><span class="p">):</span>
-<span class="linenos">19</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Adds code to `script` at a user-specified line number.</span>
-<span class="linenos">20</span><span class="sd">       The `insert_code` function is responsible for creating</span>
-<span class="linenos">21</span><span class="sd">       the code that is inserted at this point. This function</span>
-<span class="linenos">22</span><span class="sd">       returns a modified list of statements.&#39;&#39;&#39;</span>
-<span class="linenos">23</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
-<span class="linenos">26</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-<span class="linenos">27</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">28</span>            <span class="n">line</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">29</span>            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-<span class="linenos">30</span>                <span class="k">break</span>    <span class="c1"># finished reading the script</span>
-<span class="linenos">31</span>            <span class="n">edited_script</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-<span class="linenos">32</span>    <span class="n">lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span>    <span class="c1"># Ask for the line on which to insert some code (with error checking)</span>
-<span class="linenos">35</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">36</span>        <span class="k">try</span><span class="p">:</span>
-<span class="linenos">37</span>            <span class="n">breakpt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Line number in script? &#39;</span><span class="p">))</span>
-<span class="linenos">38</span>            <span class="n">breakpt</span> <span class="o">-=</span> <span class="mi">1</span>   <span class="c1"># convert from a line number to a list index</span>
-<span class="linenos">39</span>            <span class="k">if</span> <span class="n">breakpt</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">breakpt</span> <span class="o">&gt;=</span> <span class="n">lines</span><span class="p">:</span>
-<span class="linenos">40</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be in the interval [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
-<span class="linenos">41</span>                <span class="k">continue</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">my_pin</span><span class="p">(</span><span class="n">script_fname</span><span class="p">,</span> <span class="n">insert_code</span><span class="p">):</span>
+<span class="linenos">19</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Adds code at a user-specified line number.</span>
+<span class="linenos">20</span><span class="sd">        Inputs:  filename of script to be debugged</span>
+<span class="linenos">21</span><span class="sd">                 function responsible for inserted code</span>
+<span class="linenos">22</span><span class="sd">        Returns: edited script as list of lines</span>
+<span class="linenos">23</span><span class="sd">    &#39;&#39;&#39;</span>
+<span class="linenos">24</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
+<span class="linenos">27</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+<span class="linenos">28</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="c1"># Grab line number where we&#39;ll place some new code</span>
+<span class="linenos">31</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="c1"># Convert breakpoint number into a list index</span>
+<span class="linenos">34</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>    <span class="c1"># Compute the leading whitespace at `breakpt_index`</span>
+<span class="linenos">37</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos">38</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">[</span><span class="n">breakpt_index</span><span class="p">]:</span>
+<span class="linenos">39</span>        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span><span class="p">:</span>
+<span class="linenos">40</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
+<span class="linenos">41</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">42</span>            <span class="k">break</span>
-<span class="linenos">43</span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">44</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The line number must be an integer&#39;</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>    <span class="n">insert_code</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">breakpt_index</span><span class="p">,</span> <span class="n">my_whitespace</span><span class="p">)</span>
 <span class="linenos">45</span>
-<span class="linenos">46</span>    <span class="c1"># Duplicate the whitespace so we get the right indentation</span>
-<span class="linenos">47</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="linenos">48</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">[</span><span class="n">breakpt</span><span class="p">]:</span>
-<span class="linenos">49</span>        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">whitespace</span><span class="p">:</span>
-<span class="linenos">50</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
-<span class="linenos">51</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">52</span>            <span class="k">break</span>
-<span class="linenos">53</span>
-<span class="linenos">54</span>    <span class="n">insert_code</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">breakpt</span><span class="p">,</span> <span class="n">my_whitespace</span><span class="p">)</span>
-<span class="linenos">55</span>
-<span class="linenos">56</span>    <span class="c1"># Return the edited script</span>
-<span class="linenos">57</span>    <span class="k">return</span> <span class="n">edited_script</span>
+<span class="linenos">46</span>    <span class="k">return</span> <span class="n">edited_script</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="c1"># get_lineno, print_it, and write_it are unchanged from pdb3.py</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">51</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">52</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">53</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to instrument? &#39;</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">55</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">56</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">57</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pin32.py [script_to_be_instrumented]&#39;</span><span class="p">)</span>
 <span class="linenos">58</span>
-<span class="linenos">59</span>
-<span class="linenos">60</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">61</span>    <span class="c1"># Grab the name of the script to instrument from the user</span>
-<span class="linenos">62</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">63</span>        <span class="n">script</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to instrument? &#39;</span><span class="p">)</span>
-<span class="linenos">64</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="linenos">65</span>        <span class="n">script</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="linenos">66</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">67</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pin32.py [script_to_be_instrumented]&#39;</span><span class="p">)</span>
-<span class="linenos">68</span>
-<span class="linenos">69</span>    <span class="c1"># Call our instrumentation routine</span>
-<span class="linenos">70</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pin</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="n">insert_print</span><span class="p">)</span>
-<span class="linenos">71</span>
-<span class="linenos">72</span>    <span class="c1"># Run the edited script, remembering to turn the list</span>
-<span class="linenos">73</span>    <span class="c1"># of strings into one big string.</span>
-<span class="linenos">74</span>    <span class="n">edited_script_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
-<span class="linenos">75</span>    <span class="n">exec</span><span class="p">(</span><span class="n">edited_script_str</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
-<span class="linenos">76</span>
-<span class="linenos">77</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pin32: All done!&#39;</span><span class="p">)</span>
-<span class="linenos">78</span>
-<span class="linenos">79</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos">80</span>    <span class="n">main</span><span class="p">()</span>
+<span class="linenos">59</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pin</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">insert_print</span><span class="p">)</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span>    <span class="c1"># Run the instrumented script</span>
+<span class="linenos">62</span>    <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">),</span> <span class="nb">globals</span><span class="p">())</span>
+<span class="linenos">63</span>    
+<span class="linenos">64</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pin32: All done!&#39;</span><span class="p">)</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">67</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The function <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> is nearly an exact duplicate of <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code>; the only two differences between them are: (1) the extra parameter <code class="docutils literal notranslate"><span class="pre">insert_code</span></code>; and (2) the lines 38-42 in <code class="docutils literal notranslate"><span class="pre">pdb2.py</span></code> that became a call to <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> on line 54 in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>. The point of these two changes is to remove what we want inserted from the work to set up the insertion. The function <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> sets up for an insertion of new Python statements, and the passed-in function <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> is responsible for inserting whatever new statements we want in the edited script.</p>
-<p>If you look at the function <code class="docutils literal notranslate"><span class="pre">insert_print</span></code> in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>, you’ll see that I no longer insert a statement that raises an exception. This function inserts a print-statement whose argument is defined by the user of our tool. I’ve factored the code like this because an instrumentation function (<code class="docutils literal notranslate"><span class="pre">my_pin</span></code>) is a very useful tool, and we’ll play with a different <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> function in a moment. First, however, let’s try <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> is nearly an exact duplicate of <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code>; the only two differences between them are: (1) the extra parameter <code class="docutils literal notranslate"><span class="pre">insert_code</span></code>; and (2) the lines 31-35 in <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code> that became a call to <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> on line 44 in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>. The point of these two changes is to remove what we want inserted from the work to set up the insertion. The function <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> sets up for an insertion of new Python statements, and the passed-in function <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> is responsible for inserting whatever new statements we want in the edited script.</p>
+<p>If you look at the function <code class="docutils literal notranslate"><span class="pre">insert_print</span></code> in <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>, you’ll see that I no longer insert a statement that raises an exception. This function inserts a print-statement whose argument is defined by the user of our tool. I’ve factored the code like this because an instrumentation function (<code class="docutils literal notranslate"><span class="pre">my_pin</span></code>) is a very useful tool, and we’ll play with a different <code class="docutils literal notranslate"><span class="pre">insert_code</span></code> function in a moment. First, however, try <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted command in the shell
 <span class="hll">Chap15$ python3 pin32.py guess32.py
-</span>Line number on which to place the print? 14
+</span>Line number on which to place the print? 24
 What is print&#39;s argument? The secret is {secret}
 ## Welcome to GUESS THE NUMBER! ##
+Please input your guess: 33
 The secret is 61
+Too small!
 Please input your guess: 61
+The secret is 61
 Exactly! You win!
 pin32: All done!
 </pre></div>
 </div>
-<p>Yes, I stuck the print-statement right before <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> asked me for my guess. The program had already generated its secret number, and I just asked to see its value. I then used what I had learned to cheat.</p>
-<p>Cheating wasn’t our goal, but I hope you see that we could insert a debugging print using <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> anywhere in any script that wasn’t working right. No longer do we have to edit our scripts to insert debugging prints!</p>
+<p>To be even more efficient in my cheating, I could have stuck the print-statement right before <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> asked me for my guess, i.e., line 8. Cheating isn’t our goal, but I hope you see that we could insert a debugging print using <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> anywhere in any script that wasn’t working right. No longer do we have to edit our scripts to insert debugging prints!</p>
 <p>I hope you also noticed that <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> regained control after the exec-statement (i.e., the transcript includes the “pin32: All done!”). This means that when an <code class="docutils literal notranslate"><span class="pre">exec</span></code> statement completes, execution continues in the script that called <code class="docutils literal notranslate"><span class="pre">exec</span></code>. It is a blocking call.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
@@ -812,10 +809,15 @@ pin32: All done!
 <span class="linenos">23</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> script uses the <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> function from <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> to handle the boilerplate work involved in instrumenting a script. It just provides the function (i.e., <code class="docutils literal notranslate"><span class="pre">insert_repl</span></code>) that specializes the work on the <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> instrumentation routine, and <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> starts all this work with the call:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> script uses the <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> function from <code class="docutils literal notranslate"><span class="pre">pin32.py</span></code> to handle the boilerplate work involved in instrumenting a script. It just provides the function (i.e., <code class="docutils literal notranslate"><span class="pre">insert_repl</span></code>) that specializes the work of the <code class="docutils literal notranslate"><span class="pre">my_pin</span></code> instrumentation routine, and <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> starts all this work with the call:</p>
 <p><code class="docutils literal notranslate"><span class="pre">edited_script</span> <span class="pre">=</span> <span class="pre">my_pin(script,</span> <span class="pre">insert_repl)</span></code></p>
-<p>And it starts the instrumented script (<code class="docutils literal notranslate"><span class="pre">edited_script</span></code>) running with an <code class="docutils literal notranslate"><span class="pre">exec</span></code> call. We’ve built ourselves a powerful and flexible tool with which we can investigate the state of a running program. We’ve also built ourselves an interpreter than uses a script’s interrupted execution context as its environment. You now have several tools with which you can slow down a program’s execution so that you can better understand its behavior and more quickly fix the bugs within it. Happy bug squashing!</p>
-<p>[Version 20231201]</p>
+<p>We’ve built ourselves a powerful and flexible tool with which we can investigate the state of a running program. We’ve also built ourselves an interpreter than uses a script’s interrupted execution context as its environment.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">repl32.py</span> <span class="pre">guess32.py</span></code> and answer <code class="docutils literal notranslate"><span class="pre">24</span></code> to the line-number question. Input a guess and then at the <code class="docutils literal notranslate"><span class="pre">repl&gt;</span></code> prompt, type <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4</span></code>. At the next prompt, type <code class="docutils literal notranslate"><span class="pre">secret</span></code> or <code class="docutils literal notranslate"><span class="pre">guess</span></code>. You might also type something like <code class="docutils literal notranslate"><span class="pre">secret</span> <span class="pre">==</span> <span class="pre">guess</span></code>. Experiment with your own input script!</p>
+</div>
+<p>You now have several tools with which you can slow down a program’s execution so that you can better understand its behavior and more quickly fix the bugs within it. Happy bug squashing!</p>
+<p>[Version 20240605]</p>
 </section>
 </section>
 

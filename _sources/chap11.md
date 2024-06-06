@@ -666,7 +666,7 @@ These changes aren't all we need. What's missing is the tracking we discussed, w
 
 ## Maintaining a frontier
 
-Let's tackle the first tracking change we mentioned: keeping a list of all the places we haven't explored. Each time through the current while-loop body, lines 12-22 generate a list of available `moves`, which are directions to new locations that we haven't explored. The script then randomly makes one of these moves and on the next loop iteration discards the others, which was fine when we were happy to hit a dead-end and end the current simulation round. But now we should exit the while-loop by the if-statement on line 24 only when there isn't *any* path in the map from start to goal. This means we need to lift the zeroing of the `moves` list (currently line 14) to a point before the while-loop so that the while-loop can maintain the list of *every* unexplored path.
+Let's continue our fixes by keeping a list of all the places we haven't explored. Recall that each time through the current while-loop body, lines 12-22 generate a list of available `moves`, which are directions to new locations that we haven't explored. We then randomly makes one of these moves and discard the others. Discarding our other choices was fine when we were happy to hit a dead-end and end the current simulation round, but now we should exit the while-loop by the if-statement on line 24 only when there isn't *any* path in the map from start to goal. This means we need to lift the zeroing of the `moves` list (currently line 14) to a point before the while-loop so that the while-loop can maintain the list of *every* unexplored path.
 
 In goal-directed search algorithms, this `moves` list is what is typically called the *frontier*, and we'll rename `moves` to `frontier` throughout. On this frontier list, we'll place unexplored locations (rather than directions) since we'll need to jump in our map from a `loc` which is a dead-end to one of these frontier-recorded, unexplored locations. Recording a direction is not enough information to make this jump.
 
@@ -687,11 +687,7 @@ lineno-start: 15
 Two paths from start that reach location (1,8). Our script should add this location to the frontier list only once.
 ```
 
-```{margin} Why `random.choice` Worked
-Even `sim` needed to maintain its `moves` list, but recall that it also zeroed and rebuilt the `moves` list on every loop iteration.
-```
-
-And when we put unexplored locations on the frontier list, choosing a next location to explore (lines 28-39) means that we just grab one of these locations off the list. The new code is much simpler, but notice that we no longer use `random.choice`, since that function doesn't remove an item from its input list. We replace it with `list.pop` for now, which you can think of as making a random choice because we aren't paying attention to what's at the end of list. Later in this chapter, I'll explain how the different choices you make here affect the running of the search.
+When we put unexplored locations on the frontier list, choosing a next location to explore (lines 28-39) means that we just grab one of these locations off the list. The new code is much simpler, but notice that we no longer use `random.choice`, since that function doesn't remove an item from its input list. We replace it with `list.pop` for now, which you can think of as making a random choice because we aren't paying attention to what's at the end of list. Later in this chapter, I'll explain how the different choices you make here affect the running of the search.
 
 ```{code-block} python
 ---
@@ -1028,4 +1024,4 @@ In general, prioritizing our possible search moves is the job of a *heuristic fu
 
 There are many heuristics in the domain of search. I asked you to imagine a common one (called *greedy*), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point's heuristic (called *A\* search*). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems!
 
-\[Version 20231102\]
+\[Version 20240523\]

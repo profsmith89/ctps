@@ -1,4 +1,4 @@
-# Chapter 7: Many Numbers But Not Any Number #
+# Chapter 7: Many But Not Any Number #
 
 In the last chapter, we heard from Jill Lepore that counting was a key metric in industrialization and measurement a key driver of science, but we looked mostly at the computational data type for counting: the integer.
 
@@ -214,4 +214,4 @@ If your script operates with floating-point numbers and you need the results to 
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20230902\]
+\[Version 20240605\]
