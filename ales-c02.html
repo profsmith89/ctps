@@ -180,6 +180,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 2</a></li>
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
 
 
@@ -358,14 +365,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-1-counting-stuff">ALE 2.1: Counting stuff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-2-counting-lines">ALE 2.2: Counting lines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-3-counting-characters">ALE 2.3: Counting characters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-4-counting-words">ALE 2.4: Counting words</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-1-counting-stuff">ALE 2.1: Counting stuff</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-2-counting-lines">ALE 2.2: Counting lines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-3-counting-characters">ALE 2.3: Counting characters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-4-counting-words">ALE 2.4: Counting words</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -376,10 +385,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2">
+  <section id="chapter-2">
 <h1>Chapter 2<a class="headerlink" href="#chapter-2" title="Permalink to this heading">#</a></h1>
+</section>
 <section id="ale-2-1-counting-stuff">
-<h2>ALE 2.1: Counting stuff<a class="headerlink" href="#ale-2-1-counting-stuff" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.1: Counting stuff<a class="headerlink" href="#ale-2-1-counting-stuff" title="Permalink to this heading">#</a></h1>
 <p>The solutions to many problems employ sequence and string processing. We learned that Python strings are a type of Python sequence (i.e., an ordered collection of items, and for strings, the items are characters). In the first several exercises, you’ll gain experience with the methods on sequences and on strings, which will also prepare you for the second programming problem set.</p>
 <p>Exercises 1-5 use the following code (<code class="docutils literal notranslate"><span class="pre">chap02/count32.py</span></code>), which runs but doesn’t count anything correctly.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/count32.py</span>
@@ -448,7 +458,7 @@ document.write(`
 <p><strong>More bonus information.</strong> Look at the body of the else-statement. To this point, we have only ever exited our scripts by having the Python interpreter run off the bottom of the script. If you ever need to exit your script without running off the bottom of it, you should call <code class="docutils literal notranslate"><span class="pre">sys.exit()</span></code>. You might read about other methods to end the execution of your Python script, but I recommend that you use this approach. It safely cleans up the execution state of your script so you don’t encounter any strangeness. You probably feel everything is strange enough already!</p>
 </section>
 <section id="ale-2-2-counting-lines">
-<h2>ALE 2.2: Counting lines<a class="headerlink" href="#ale-2-2-counting-lines" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.2: Counting lines<a class="headerlink" href="#ale-2-2-counting-lines" title="Permalink to this heading">#</a></h1>
 <p>Let’s count things! We’ll start with another way to count the lines in a file, or in our case now <code class="docutils literal notranslate"><span class="pre">blurb</span></code>. To make this more interesting, we’ll make <code class="docutils literal notranslate"><span class="pre">count32.py</span></code> count non-blank lines. What is a blank line? A line containing only a <code class="docutils literal notranslate"><span class="pre">\n</span></code> character.</p>
 <p>You are going to replace the first comment that says <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">REPLACE</span> <span class="pre">ME</span> <span class="pre">with</span> <span class="pre">a</span> <span class="pre">for-loop</span></code> with a for-loop. Ideally, the sequence in this for-loop would be an ordered collection of the lines in the blurb.</p>
 <p>How do we turn <code class="docutils literal notranslate"><span class="pre">blurb</span></code> into a sequence where each element is a line in the blurb? We will use the Python string <code class="docutils literal notranslate"><span class="pre">split</span></code> method. If the blurb was <code class="docutils literal notranslate"><span class="pre">'1,22,333'</span></code> and I asked the Python interpreter to give me the result of <code class="docutils literal notranslate"><span class="pre">blurb.split(',')</span></code>, it would return <code class="docutils literal notranslate"><span class="pre">['1',</span> <span class="pre">'22',</span> <span class="pre">'333']</span></code>. The interpreter found each comma in the blurb and made the strings to the left and right of each comma into elements in the resulting sequence. Notice that the commas do not appear in the resulting list of strings.</p>
@@ -456,20 +466,20 @@ document.write(`
 <p><strong>Step 2.</strong> Update <code class="docutils literal notranslate"><span class="pre">count32.py</span></code> so that it counts the non-blank lines in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>. What character do you want to split on? What condition will you test before incrementing the variable <code class="docutils literal notranslate"><span class="pre">lines</span></code>?</p>
 </section>
 <section id="ale-2-3-counting-characters">
-<h2>ALE 2.3: Counting characters<a class="headerlink" href="#ale-2-3-counting-characters" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.3: Counting characters<a class="headerlink" href="#ale-2-3-counting-characters" title="Permalink to this heading">#</a></h1>
 <p>Next, we will count the number of English alphabet characters in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>. This again has us practice writing a for-loop, but the for-loop sequence this time should contain the numbers from <code class="docutils literal notranslate"><span class="pre">0</span></code> to one less than the length of the blurb. Recall that the chapter used the <code class="docutils literal notranslate"><span class="pre">range</span></code> function to produce such a sequence.</p>
 <p>You’ll also need to know how to test to see if a character is from the set of characters in the English alphabet. You can do this in Python with the string method called <code class="docutils literal notranslate"><span class="pre">isalpha</span></code>, which takes no input parameters.</p>
 <p><strong>Step 1.</strong> Try <code class="docutils literal notranslate"><span class="pre">'b'.isalpha()</span></code> and <code class="docutils literal notranslate"><span class="pre">'a2c'[1].isalpha()</span></code> in the interactive Python interpreter. Make sure you can explain what takes place in the second of these examples. Try a few other examples.</p>
 <p><strong>Step 2.</strong> Update <code class="docutils literal notranslate"><span class="pre">count32.py</span></code> (i.e., replace the second <code class="docutils literal notranslate"><span class="pre">REPLACE</span> <span class="pre">ME</span></code> comment) so that it counts the English alphabet characters in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>.</p>
 </section>
 <section id="ale-2-4-counting-words">
-<h2>ALE 2.4: Counting words<a class="headerlink" href="#ale-2-4-counting-words" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.4: Counting words<a class="headerlink" href="#ale-2-4-counting-words" title="Permalink to this heading">#</a></h1>
 <p>Now, let’s count the number of words in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>, where a word is defined like the Shell defined words above. Amazingly, we can do this in one short expression that uses <code class="docutils literal notranslate"><span class="pre">len</span></code> and <code class="docutils literal notranslate"><span class="pre">split</span></code>.</p>
 <p><strong>Step 1.</strong> Read <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html">the Python documentation about the string split method</a> (search the webpage for <code class="docutils literal notranslate"><span class="pre">str.split</span></code> and pay attention to what it does when you don’t provide an input parameter to <code class="docutils literal notranslate"><span class="pre">split</span></code>). Try it on a few examples in the interactive Python interpreter.</p>
 <p><strong>Step 2.</strong> Update <code class="docutils literal notranslate"><span class="pre">count32.py</span></code> (i.e., replace the <code class="docutils literal notranslate"><span class="pre">REPLACE</span> <span class="pre">THE</span> <span class="pre">0</span></code> comment) so that it counts the number of words in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>.</p>
 </section>
 <section id="ale-2-5-counting-sentences">
-<h2>ALE 2.5: Counting sentences<a class="headerlink" href="#ale-2-5-counting-sentences" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.5: Counting sentences<a class="headerlink" href="#ale-2-5-counting-sentences" title="Permalink to this heading">#</a></h1>
 <p>Finally, let’s try counting the number of sentences in <code class="docutils literal notranslate"><span class="pre">blurb</span></code>. What constitutes a sentence in English can be quite tricky to define. For this exercise, we will keep it simple: any sequence of characters and whitespace that ends in a <code class="docutils literal notranslate"><span class="pre">'.'</span></code>, <code class="docutils literal notranslate"><span class="pre">'?'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'!'</span></code> is a sentence. This means that your script will incorrectly report that the string <code class="docutils literal notranslate"><span class="pre">'Mr.</span> <span class="pre">and</span> <span class="pre">Mrs.</span> <span class="pre">Smith</span> <span class="pre">left</span> <span class="pre">for</span> <span class="pre">vacation.'</span></code> contains three sentences. We will avoid this shortcoming by never passing your script any tricky input.</p>
 <p>You may be tempted to dive right in and start writing some Python code. You might try to use the <code class="docutils literal notranslate"><span class="pre">split</span></code> method. A bit of advice, don’t do either.</p>
 <p><strong>Step 1.</strong> Take a moment and think about the problem as stated. Think in pseudocode about what you need to do. <strong>HINT:</strong> Why does the string <code class="docutils literal notranslate"><span class="pre">'Mr.</span> <span class="pre">and</span> <span class="pre">Mrs.</span> <span class="pre">Smith</span> <span class="pre">left</span> <span class="pre">for</span> <span class="pre">vacation.'</span></code> contain three sentences? Is there <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">a method common to all sequences</a> that might help you simply solve this problem?</p>
@@ -495,19 +505,19 @@ document.write(`
 </div>
 </section>
 <section id="ale-2-6-abstractions">
-<h2>ALE 2.6: Abstractions<a class="headerlink" href="#ale-2-6-abstractions" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.6: Abstractions<a class="headerlink" href="#ale-2-6-abstractions" title="Permalink to this heading">#</a></h1>
 <p>Let’s take some time to understand that <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">the set of common operations on sequences</a> is different than <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#string-methods">the set of methods available on Python strings</a>. Every string is a Python sequence, but not every Python sequence is a string (i.e., able to use the Python string methods). Explain to a friend (or member of the teaching staff) how this connects to the idea of abstraction.</p>
 </section>
 <section id="ale-2-7-problem-not-solved">
-<h2>ALE 2.7: Problem not solved!<a class="headerlink" href="#ale-2-7-problem-not-solved" title="Permalink to this heading">#</a></h2>
+<h1>ALE 2.7: Problem not solved!<a class="headerlink" href="#ale-2-7-problem-not-solved" title="Permalink to this heading">#</a></h1>
 <p>Although we made great progress in this chapter to create a Python script that converts a story into a theatrical script, we didn’t completely solve the problem. While this was on purpose (i.e., we were practicing solving a few instances of the problem before writing a script to solve any instance), it is important to understand which cases of dialogue across file lines that the chapter’s script does and doesn’t handle.</p>
-<p>Let’s review the test inputs that the chapter’s last script (<code class="docutils literal notranslate"><span class="pre">chap02/script4.py</span></code>) does handle correctly:</p>
+<p>Let’s review the test inputs that the chapter’s last script (<code class="docutils literal notranslate"><span class="pre">chap02/script9.py</span></code>) does handle correctly:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Talkative1.txt</span></code>: This blurb of text has at most one double-quote character on a file line. And it contains only one line of dialogue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Talkative2.txt</span></code>: This blurb of text also has at most one double-quote character on a file line, but it contains two lines of dialogue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">HomeView3.txt</span></code>: In this blurb, a line of dialogue can start and stop on a single file line, but there’s at most two double-quote characters on a file line. It continues to handle multiple lines of dialogue in the input file.</p></li>
 </ul>
-<p>What happens if a file line contains more than two double-quote characters? Let’s try with a cleaned-up version of <code class="docutils literal notranslate"><span class="pre">script4.py</span></code> that we will call <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>. If you look at <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>, you’ll notice that it:</p>
+<p>What happens if a file line contains more than two double-quote characters? Let’s try with a cleaned-up version of <code class="docutils literal notranslate"><span class="pre">script9.py</span></code> that we will call <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>. If you look at <code class="docutils literal notranslate"><span class="pre">script32.py</span></code>, you’ll notice that it:</p>
 <ul class="simple">
 <li><p>Takes the input filename from the command line to make it a bit easier to test the script with multiple different input files (i.e., it removes the need for the script to prompt the user for the input file).</p></li>
 <li><p>Cleans up the comments so that it is a bit easier to understand what the different blocks of statements do.</p></li>
@@ -536,8 +546,7 @@ document.write(`
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">&quot;Wait!&quot;</span> <span class="pre">and</span> <span class="pre">you</span> <span class="pre">shake</span> <span class="pre">your</span> <span class="pre">head.</span> <span class="pre">&quot;Will</span> <span class="pre">this</span> <span class="pre">end?&quot;\n</span></code></p>
 <p>These examples ask you to label the text on either side of a double-quote character as if you split the file line on this character. Did you spot the pattern that emerges? Understanding this pattern is the key to writing code that processes a file line with any number of double quotes in it!</p>
-<p>[Version 20230709]</p>
-</section>
+<p>[Version 20240712]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -607,14 +616,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-1-counting-stuff">ALE 2.1: Counting stuff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-2-counting-lines">ALE 2.2: Counting lines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-3-counting-characters">ALE 2.3: Counting characters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-4-counting-words">ALE 2.4: Counting words</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-1-counting-stuff">ALE 2.1: Counting stuff</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-2-counting-lines">ALE 2.2: Counting lines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-3-counting-characters">ALE 2.3: Counting characters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-4-counting-words">ALE 2.4: Counting words</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>

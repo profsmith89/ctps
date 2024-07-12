@@ -1,4 +1,4 @@
-# Chapter 2 #
+## Chapter 2 ##
 
 ## ALE 2.1: Counting stuff
 
@@ -166,13 +166,13 @@ Let's take some time to understand that [the set of common operations on sequenc
 
 Although we made great progress in this chapter to create a Python script that converts a story into a theatrical script, we didn't completely solve the problem. While this was on purpose (i.e., we were practicing solving a few instances of the problem before writing a script to solve any instance), it is important to understand which cases of dialogue across file lines that the chapter's script does and doesn't handle. 
 
-Let's review the test inputs that the chapter's last script (`chap02/script4.py`) does handle correctly:
+Let's review the test inputs that the chapter's last script (`chap02/script9.py`) does handle correctly:
 
 * `Talkative1.txt`: This blurb of text has at most one double-quote character on a file line. And it contains only one line of dialogue.
 * `Talkative2.txt`: This blurb of text also has at most one double-quote character on a file line, but it contains two lines of dialogue.
 * `HomeView3.txt`: In this blurb, a line of dialogue can start and stop on a single file line, but there's at most two double-quote characters on a file line. It continues to handle multiple lines of dialogue in the input file.
 
-What happens if a file line contains more than two double-quote characters? Let's try with a cleaned-up version of `script4.py` that we will call `script32.py`. If you look at `script32.py`, you'll notice that it:
+What happens if a file line contains more than two double-quote characters? Let's try with a cleaned-up version of `script9.py` that we will call `script32.py`. If you look at `script32.py`, you'll notice that it:
 
 * Takes the input filename from the command line to make it a bit easier to test the script with multiple different input files (i.e., it removes the need for the script to prompt the user for the input file).
 * Cleans up the comments so that it is a bit easier to understand what the different blocks of statements do. 
@@ -209,4 +209,4 @@ Recall that we started Chapter 2 talking about the desire to make our scripts ha
 
 These examples ask you to label the text on either side of a double-quote character as if you split the file line on this character. Did you spot the pattern that emerges? Understanding this pattern is the key to writing code that processes a file line with any number of double quotes in it!
 
-\[Version 20230709\]
+\[Version 20240712\]
