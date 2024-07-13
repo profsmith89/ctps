@@ -648,12 +648,12 @@ Before we go, I want to correct something you may have come to believe. While I 
 emphasize-lines: 2, 3
 ---
 ### Run the highlighted statements in the interactive interpreter
-> the_line = 'And said, "At least I\'ll try."' 
-> type(the_line[0])
+>>> the_line = 'And said, "At least I\'ll try."' 
+>>> type(the_line[0])
 <class 'str'>
 ```
 
-\[Version 20240712\]
+\[Version 20240713\]
 
 [^fn1]: There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 
