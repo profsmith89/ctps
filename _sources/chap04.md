@@ -1,6 +1,6 @@
 # Chapter 4: Query a Web Resource #
 
-Now that we know the basics about functions and modules, we can use them as our ticket into the worldwide community of software developers. While we might begin by building our own reusable components (i.e., functions) and sharing them with the Python community, in this chapter we'll learn how to write a script using functions others have built and shared. In particular, we'll use their functions to access information available on the Internet. It's time to use what we know to interact with the world!
+Now that we know the basics about functions and modules, we can use them as our ticket into the worldwide community of software developers. While we might begin by building our own reusable components (i.e., functions) and sharing them with the Python community, in this chapter we'll learn how to write a script using functions others have built and shared. In particular, we'll use functions to access information available on the Internet. It's time to use what we know to interact with the world!
 
 ```{admonition} Learning Outcomes
 In this chapter, you will learn how to query networked resources through their application programming interface and the use libraries built by others. The scripts we'll write will give us access to the collective knowledge of the world. In particular, by the end of the chapter, you will be able to:
@@ -17,13 +17,9 @@ In this chapter, you will learn how to query networked resources through their a
 *   Explain the difference between blocking and non-blocking function calls [CS concepts].
 ```
 
-```{margin} Definition
-A _package_ is simply a set of modules that a Python programmer wishes to distribute all together.
-```
-
 ## Packages and libraries
 
-To access information out on the Internet, we will use the `requests` package. The `requests` package is one among many available through the [Python Package Index](https://pypi.org/), which is simply an online repository of software for the Python programming language.
+To access information out on the Internet, we will use the `requests` package. A *package* is simply a set of modules that a Python programmer distributes all together. The `requests` package is one of many available through the [Python Package Index](https://pypi.org/), which is an online repository of software for the Python programming language.
 
 Another name you'll often hear programmers use for a collection of modules is *library*. Programming languages like Python are typically distributed with what is called a *standard library*, which you can think of as the modules and packages available by default wherever the programming language is installed. The [Python standard library](https://docs.python.org/3/library/) includes built-in constants (e.g., `True`), data types (e.g., `str`), and functions (e.g., the file I/O facilities) that we have repeatedly used in our scripts. 
 
@@ -31,21 +27,17 @@ Another name you'll often hear programmers use for a collection of modules is *l
 
 How do we use the functions and data structures in published packages and libraries to accelerate the development of our own scripts? We use their *application programming interface (API)*.
 
-An API begins with the functions and data structures defined in the package or library, but it doesn't stop there. As we talked in the last chapter, the public interface for a function is often not enough for us to fully understand how to use the function, and so an API isn't complete without well-written documentation, like the information we discussed putting in the docstring of the functions we write. To emphasize, an API refers to both the function interfaces and data structure definitions we can `import` into our scripts as well as the documentation for these interface and definitions that tell us how we can properly use them. You have already been using an API when you used Python's built-in types (like strings), their methods (like string-find), and Python's documentation (like the documentation on Python's sequence types).
+An API begins with the functions and data structures defined in the package or library, but it doesn't stop there. As we discussed in the previous chapter, the public interface for a function is often not enough to fully understand how to use it, and so an API isn't complete without well-written documentation, like the information we discussed putting in the docstring of the functions we write. To emphasize, an API refers to both the function interfaces and data structure definitions we can `import` into our scripts as well as the documentation for these interface and definitions that tell us how we can properly use them. You have already been using an API when you used Python's built-in types (like strings), their methods (like string-find), and Python's documentation (like the documentation on Python's sequence types).
 
 As you've experienced, a module and its API simplifies the work we need to do in building solutions to the problems that interest us because we can use a module's functions and data structures without having to write this functionality ourselves or even understand exactly how the functions and data structures operate. Because Python has a treasure trove of existing libraries, our scripts are now no longer limited by what's built in the Python language or what we know how to build ourselves. This is incredibly powerful for it expands the limits of our dramatic stage and permits us to reach beyond our own laptops to take advantage of everything on the Internet. Let's start doing that now.
 
 ## A new problem
 
-To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in Harvard's library system? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in its miles of bookshelves.
+To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in my local library? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in Harvard Library's miles of bookshelves.
 
-```{margin} Card Catalogs
-[https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/](https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/)
-```
+We all know how to do this work ourselves. We'd simply look up the book's title in the library's card catalog. At Harvard, what used to be a physically imposing room full of cabinets with drawers of index cards[^fn1] is now an online resource called [HOLLIS](https://library.harvard.edu/services-tools/hollis). So, my question really is: Can I write a script that sends a query from my computer to some computer running HOLLIS? And I had better know how to craft a query that the computer running HOLLIS will understand, and my program had better be able to interpret whatever response it gets back.
 
-We all know how to do this work ourselves. We'd simply look up the book's title in Harvard's card catalog. Today, what used to be a physically imposing room full of cabinets with drawers of index cards is now an online resource called [HOLLIS](https://library.harvard.edu/services-tools/hollis). So, our question really is: Can I write a script that sends a query from my computer to some computer running HOLLIS? And I had better know how to craft a query that the computer running HOLLIS will understand, and my program had better be able to interpret whatever response it gets back.
-
-Notice that we have started to decompose our question into smaller problems that we need to accomplish. Here's some pseudocode that enumerates the steps we've discussed so far:
+Notice that we have started to decompose the question into smaller problems that we need to accomplish. Here's some pseudocode that enumerates the steps we've discussed so far:
 
 ```{code-block} python
 ---
@@ -57,11 +49,7 @@ lineno-start: 1
 # Print the answer to our question
 ```
 
-```{margin} Computer Networking
-In the next chapter, we will peek under the covers of this API, just as we did with string-replace. We'll also start solving problems that require more general communication between two networked computers. We won't, however, go too deep, and if you want to know exactly how computers communicate over wired and wireless networks, find yourself a book or course on computing networking.
-```
-
-This looks simple enough, as long as we can find libraries with APIs that make, for example, sending a request from one computer to another as simple as a function call. Think about this. There is almost certainly a boatload of work that needs to be done to send a message from our computer to some other computer, and we'd love it if someone else had figured out how that exactly works and has hidden that work behind the interface of a simple function call. Luckily, there is such an API, and we'll use it to do something pretty amazing.
+This looks simple enough, as long as we can find libraries with APIs that make, for example, sending a request from one computer to another as simple as a function call. Think about this. There is almost certainly a boatload of work that needs to be done to send a message from our computer to some other computer, and we'd love it if someone else had figured out how that exactly works and has hidden that work behind the interface of a simple function call. Luckily, there is such an API, and we'll use it to do something pretty amazing.[^fn2]
 
 ## Searching Wikipedia
 
@@ -101,9 +89,11 @@ if __name__ == '__main__':
 
 This script uses Python's `requests` library, which is described as "[an elegant and simple HTTP library for Python, built for human beings."](https://requests.readthedocs.io/en/master/) This library is not part of Python's standard library, and you may have to follow a few steps explained in the library's documentation to get it installed on your machine. Once installed, the API provided by this library makes it very simple to complete the middle two steps of our pseudocode, as illustrated by the single `requests.get` call on line 13.
 
-This call and its returned result hide all the hard and confusing parts of communicating across whatever network is connected to our computer. We do a small amount of work to set up the parameter to this call (lines 8-9), which involves a small amount of string processing, and the object returned by the `requests.get` call, which we've named `response`, will tell us if Wikipedia can provide an answer to our question.
+This call and its returned result hide all the hard and confusing parts of communicating across whatever network is connected to your computer. Lines 8-9 do a small amount of string-processing work to set up the parameter to this call (lines 8-9). Lines 16-19 inspect the object returned by `requests.get` to determine whether Wikipedia understood our question.
 
-Run the `qweb1.py` and it will respond that it successfully talked to a Wikipedia server.
+```{admonition} You Try It
+Run the `qweb1.py` and it will respond that it successfully talked to a Wikipedia server. You may need to install the `requests` package in your IDE.
+```
 
 ## The client-server programming model
 
@@ -184,25 +174,15 @@ Whenever possible, you should use HTTPS rather than HTTP to thwart someone snoop
 
 The next major piece of a URL is the *hostname* specified as an Internet Domain Name. If we want to communicate with a process on another machine, we have to be able to name that machine, and Internet Domain Names are a standardized way of doing just that. There's a whole interesting question of, given a valid hostname, how do you actually route messages through computer networks to the computer with that hostname, especially when that computer might be a mobile device that connects to different parts of a computer network at different times. We don't have to concern ourselves with this problem because it is hidden from us below the abstraction barrier, but you should realize that this is more complicated than putting a home address on an envelope, since most houses aren't mobile homes.
 
-```{margin} Filesystem Paths
-We'll discuss filesystem paths and their form in more detail in a later chapter.
-```
+The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we'd like. This path is specified in a form very similar to the paths we use in UNIX-like filesystems. This is not surprising since we are, in fact, specifying a file in the host's filesystem.[^fn3]
 
-The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we'd like. This path is specified in a form very similar to the paths we use in UNIX-like filesystems. This is not surprising since we are, in fact, specifying a file in the host's filesystem.
-
-Finally, HTTP allows us to specify an optional query at the end of our URL. The question mark (`?`) character separates the path from the query. The query itself is a string comprised of name and value pairs, with each pair separated by an ampersand (`&`) character.
+Finally, HTTP allows us to specify an optional query at the end of our URL. The question mark (`?`) separates the path from the query. The query itself is a string comprised of name and value pairs, with each pair separated by an ampersand (`&`) character.
 
 ## The Programmable Web
 
-You might wonder, how did I know to create this specific URL? If we point our browser to [en.wikipedia.org](http://en.wikipedia.org) and type "The Cat in the Hat" in the search box there, the URL to which we're directed is <https://en.wikipedia.org/wiki/The_Cat_in_the_Hat> and not the one found in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we want to access the parts of the Web with published APIs.
+You might wonder, how did I know to create this specific URL? If we point our browser to [en.wikipedia.org](http://en.wikipedia.org) and type "The Cat in the Hat" in the search box there, the URL to which we're directed is <https://en.wikipedia.org/wiki/The_Cat_in_the_Hat> and not the one in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we need to access the parts of the Web with published APIs.
 
-```{margin} Other API Directories
-[Rapid API Hub](https://rapidapi.com/hub); 
-[API list](https://apilist.fun/);
-[Public APIs](https://github.com/public-apis/public-apis)
-```
-
-To learn what Internet-based APIs existed, I visited the [ProgrammableWeb](https://en.wikipedia.org/wiki/ProgrammableWeb), which maintained a directory of these things until it shutdown in early 2023. That site pointed me to [MediaWiki's API](https://www.mediawiki.org/wiki/API:Main_page), on which Wikipedia's API is built. There I learned that the API endpoint for Wikipedia in English is <https://en.wikipedia.org/w/api.php>.
+To learn what Internet-based APIs exist, I visited the [ProgrammableWeb](https://en.wikipedia.org/wiki/ProgrammableWeb), which maintained a directory of these things until it shut down in early 2023.[^fn4] That site pointed me to [MediaWiki's API](https://www.mediawiki.org/wiki/API:Main_page), on which Wikipedia's API is built. There I learned that the API endpoint for Wikipedia in English is <https://en.wikipedia.org/w/api.php>.
 
 To converse with the server at this endpoint, we have to craft a *query string*. In this string, the MediaWiki site explained that we should set the parameter named `action` to the value `query` when we want to fetch data. If then we set the `list` parameter to `search`, we can perform a full text search. Since we're doing a search, we set the parameter `srsearch` with the value of our search string and the parameter `srlimt` to the number of page matches that we'd like returned. Finally, we set the parameter `format` to `json` so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we'll discuss in a moment.
 
@@ -247,11 +227,7 @@ if __name__ == '__main__':
 
 This third version of our script employs a simpler way to specify the query. It pulls the `query` string out of `url` (line 11 of `qweb3.py`) and passes it in another form to the `params` parameter of the `requests.get` function (see line 21 of `qweb3.py`). This parameter expects a specific kind of data structure that we haven't yet encountered. It expects a Python [dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
 
-```{margin} Ordering in Python Dictionaries
-While the dictionary _abstraction_ doesn't force an ordering on its elements, Python's _implementation_ of the dictionary data type does guarantee the elements to be in insertion order, as of version 3.7. Personally, I would suggest you forget this "feature."  This implementation detail might change in a later release, as it doesn't flow from the dictionary abstraction. Plus, what is the insertion order after you've updated some elements and deleted a few? I don't know and don't care to figure it out since it isn't core to the dictionary abstraction. Of course, this is just my personal opinion.
-```
-
-Don't confuse Python dictionaries with Python's sequence data types. Both use the index operator (i.e., `[]`) to access a particular entry, but the dictionary abstraction doesn't enforce an ordering on its elements as the sequence abstraction does. Since we cannot specify which entry we want in a dictionary by specifying its position in the data structure, dictionaries associate each entry with a *key*, which Python requires to be of an immutable type. Recall that strings are immutable, and so we can use them as keys in our dictionary. We can also use numbers as keys, since they too are immutable objects in Python, which means you could make a dictionary object look like a list object, but let's get back to our example.
+Don't confuse Python dictionaries with Python's sequence data types. Both use the index operator (i.e., `[]`) to access a particular entry, but the dictionary abstraction doesn't enforce an ordering on its elements as the sequence abstraction does.[^fn5] Since we cannot specify which entry we want in a dictionary by specifying its position in the data structure, dictionaries associate each entry with a *key*, which Python requires to be of an immutable type. Recall that strings are immutable, and so we can use them as keys in our dictionary. We can also use numbers as keys, since they too are immutable objects in Python, which means you could make a dictionary object look like a list object, but let's get back to our example.
 
 Python dictionaries create a mapping from keys to values, and we initialize a dictionary with a set of `key:value` pairs such as `'action':'query'` and `'srlimit':1`. 
 
@@ -281,11 +257,10 @@ As another example, `query['srlimit']` would return `1`.
 query['srlimit']
 ```
 
-In initializing a dictionary, we enclose all the `key:value` pairs in a pair of curly braces (`{}`) and separate the `key:value` pairs with a comma. A pair of curly braces without any `key:value` pairs creates an empty dictionary.
+In initializing a dictionary, we enclose all the `key:value` pairs in a pair of curly braces (`{}`) and separate the `key:value` pairs with commas. A pair of curly braces without any `key:value` pairs creates an empty dictionary.
 
 ```{code-block} python
 an_empty_dictionary = {}
-an_empty_dictionary
 ```
 
 Many of Python's built-in functions work as well on dictionaries as they did with Python's other data structures. For example, `len(query)` would return `5` for our example, since there are 5 key-value pairs in `query`.
@@ -308,7 +283,7 @@ And `'rlimit' in query` returns `False` because our dictionary doesn't contain t
 'rlimit' in query
 ```
 
-If we want to remove a key and its value from a Python dictionary, we'd type `del d[key]` where `d` is our dictionary and `key` is the key to be removed. If you specify a key that isn't in the specified dictionary when indexing or using `del`, the Python interpreter will raise a `KeyError` exception.
+If we want to remove a key and its value from a Python dictionary, we type `del d[key]` where `d` is our dictionary and `key` is the key to be removed. If you specify a key that isn't in the specified dictionary when indexing or using `del`, the Python interpreter will raise a `KeyError` exception.
 
  
 
@@ -367,16 +342,12 @@ If you run the script as is, it reports a status code of 200. How can we make it
 If we search the Internet for "HTTP status 404 Not Found" we learn that it is a shorthand for "[the server cannot find the requested resource](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)." Recall that "requested resource" in this context refers to the path portion of our URL, which was supposed to take us to a resource controlled by this server. Ok, let's test that. What happens if we put garbage in the path? In particular, let's change this value from `'/w/api.php'` to `'/asdfghjasdfghj/api.php'` and rerun `qweb4.py`. 
 
 ```{admonition} You Try It
-Switch which assignment to `path` is commented out in `qweb4.py` and rerun it.
+Switch which assignment to `path` is commented out in `qweb4.py` and run it.
 ```
 
 Bingo! We got a 404 status code. This means that we were able to talk to a server with the hostname we specified and the server knew how to interpret an HTTP GET request, but this server didn't have any resource at the path `'/asdfghjasdfghj/api.php'`.
 
-```{margin} Be Careful!
-I badly mistype the hostname because you should always be careful with slightly mistyped hostnames in Internet URLs. Sometimes these sites are put up by nefarious people who want you to think you are at the correctly typed location, where they might (for example) encourage you to type in your bank account information.
-```
-
-What if we mistype the hostname of the server?
+What if we mistype the hostname of the server?[^fn6]
 
 ```{admonition} You Try It
 Restore the good assignment to `path`. Now change the assignment to `hostname` from `'en.wikipedia.org'` to `'en.wikipediaasdfghjasdfghj.org'`. Run this version of `qweb4.py`.
@@ -387,7 +358,7 @@ Our modified script dies with a large number of error messages. In this mess, yo
 As a last experiment, what do you think the status code will be if we use a good hostname, a valid path, but ask to search for a term that doesn't exist in Wikipedia?
 
 ```{admonition} You Try It
-Restore the good assignment to `hostname`. Now change the value for key `'srsearch'` in the definition for `query` from `'The 'Cat in the Hat'` to `'asdfghjasdfghj'`. Run this final version of `qweb4.py`.
+Restore the good assignment to `hostname`. Now change the value for key `'srsearch'` in the definition for `query` from `'The Cat in the Hat'` to `'asdfghjasdfghj'`. Run this final version of `qweb4.py`.
 ```
 
 It's `200`. The same status code we got when we searched for `'The Cat in the Hat'`. Why is that? You can verify for yourself that Wikipedia will tell you that it doesn't contain a page with this particular string.
@@ -398,11 +369,7 @@ To figure this out, we need to look at more than the response's status code. For
 
 Roughly speaking, these messages consist of a *header* and a *body*. We can think of the header as containing the information we might see on the outside of an envelope (e.g., who the letter is meant for and the date it was posted at the post office). The body is the contents of the letter sealed in the envelope. Or if you prefer email, the header contains information like the "from" and "subject" fields, while the body is what is written below the subject line in most email clients.
 
-```{margin} Multiple Assignment
-You can learn more about multiple assignment in this chapter's active-learning exercises.
-```
-
-The status code that we've been printing is just one part of the response header. We can inspect the other parts by printing `response.headers`, which consists of what looks like a dictionary of key-value pairs. The `qweb5.py` script uses a for-loop to print each key-value pair in `response.headers`. When we write this for-loop statement, we specify two iteration variables (i.e., `key` and `value`) separated by a comma so that the interpreter knows that we want each pair pulled apart. This is called *multiple assignment*.
+The status code that we've been printing is just one part of the response header. We can inspect the other parts by printing `response.headers`, which consists of what looks like a dictionary of key-value pairs. The `qweb5.py` script uses a for-loop to print each key-value pair in `response.headers`. When we write this for-loop statement, we specify two iteration variables (i.e., `key` and `value`) separated by a comma so that the interpreter knows that we want each pair pulled apart. This is called *multiple assignment*.[^fn7]
 
 ```{code-block} python
 ---
@@ -442,11 +409,11 @@ if __name__ == '__main__':
     main()
 ```
 
-We're not too concerned with most of the header, but one field that should interest us is the value of the key `'Content-Type'` for this indicates how the server has encoded the body of the response. The value of this key is `'application/json; charset=utf-8'`. As we learned in the last chapter, the Python interpreter we're using defaults to `utf-8` for character encodings and having the Wikipedia server return a response in this encoding format makes our lives easy. Beyond the encoding of the individual characters in the response's body, this value tells us that the body is organized using the JSON data-interchange standard, which is what we asked it to do when we specified `'format': 'json'` as one of our `query` parameters.
+We're not too concerned with most of the header, but we are interested in the value of the key `'Content-Type'` for this indicates how the server has encoded the body of the response. The value of this key is `'application/json; charset=utf-8'`. As we learned in the last chapter, the Python interpreter we're using defaults to `utf-8` for character encodings and having the Wikipedia server return a response in this encoding format makes our lives easy. Beyond the encoding of the individual characters in the response's body, this value tells us that the body is organized using the JSON data-interchange standard, which is what we asked it to do when we specified `'format': 'json'` as one of our `query` parameters.
 
 ## JSON and the response body
 
-JSON stands for [JavaScript Object Notation](http://json.org), and it is meant to be standard for exchanging structured data that is easy for machines to generate and parse, while also being relatively easy for humans to read and write.
+JSON stands for [JavaScript Object Notation](http://json.org), and it is meant to be a standard for exchanging structured data that is easy for machines to generate and parse, while also being relatively easy for humans to read and write.
 
 As we saw when we looked at the body of our `response`, JSON-structured data resembles a dictionary of key-value pairs. Some of the values might be singleton values like a string or an integer, and other values might themselves be lists (i.e., enclosed in square brackets) or dictionaries (i.e., enclosed in curly braces). 
 
@@ -497,7 +464,7 @@ if __name__ == '__main__':
     main()
 ```
 
-The `json` module defines a function called `dumps` that we use to convert JSON data into a string. Printing this string, we can see the structure of the data. In particular, we see that the value for the key `'query'` in our JSON-structured data is itself a dictionary. This dictionary tells us things about the search (i.e., the total number of hits that the server got when performing the search), and a list of `'search'` results. Since we limited the server to returning to us only the top hit (i.e., `'srlimit': 1` in our `query` parameters), this list contains only a single element, which itself is a dictionary describing some characteristics of the article it found. Reading the JSON, we can see that this is the book we were hoping to find in Wikipedia!
+The `json` module defines a function called `dumps` that we use to convert JSON data into a string. Printing this string, we can see the structure of the data. In particular, we see that the value for the key `'query'` in our JSON-structured data is itself a dictionary. This dictionary tells us things about the search (i.e., the total number of hits that the server got when performing the search), and a list of `'search'` results. Since we limited the server to returning only the top hit (i.e., `'srlimit': 1` in our `query` parameters), this list contains only a single element, which itself is a dictionary describing some characteristics of the article it found. Reading the JSON, we can see that this is the book we were hoping to find in Wikipedia!
 
 How would we access the title of the article returned in the JSON body? Well, following our description in the previous paragraph, we'd simply type:
 
@@ -511,15 +478,11 @@ And how would we change this to access the fifth character of the title string? 
 response.json()['query']['search'][0]['title'][4]
 ```
 
-While we will continue to play with JSON-structured response bodies, you may see (or desire) other types of responses. For instance, the default response format for the Harvard Library API is something that looks like JSON, but is actually another standard called XML. We can indicate to a Web API that we'd like a particular response encoding by changing the `Accept` value in the header. In other situations, might just want plain text (`text/html`) or an image (`image/jpeg`).
-
-```{margin} A New API
-To communicate with the Harvard Library system, `qweb7.py` uses [the LibraryCloud API](https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs).
-```
+While we will continue to play with JSON-structured response bodies, you may see (or desire) other types of responses. For instance, the default response format for the Harvard Library API is something that looks like JSON, but is actually another standard called XML. We can indicate to a Web API that we'd like a particular response encoding by changing the `Accept` value in the header. In other situations, we might want plain text (`text/html`) or an image (`image/jpeg`).
 
 ## Enumerating answers from HOLLIS
 
-The `qweb7.py` script below communicates not with Wikipedia, but (finally!) Harvard Library. You should recognize and understand every statement except for the details of the for-loop that processes the returned response.
+The `qweb7.py` script below communicates not with Wikipedia, but (finally!) Harvard Library.[^fn8] You should recognize and understand every statement except for the details of the for-loop that processes the returned response.
 
 ```{code-block} python
 ---
@@ -573,11 +536,7 @@ if __name__ == '__main__':
     main()
 ```
 
-```{margin} Tuples
-You can learn more about tuples in this chapter's active-learning exercises.
-```
-
-In this script, we have asked HOLLIS to return not just the top search result, but the top two results. The final lines of the script then dig down into the JSON-structured data to grab the Python list of results, and it passes that list to the Python built-in function `enumerate`. This is a very useful little function when what you need is not just each value in a list, but each value paired with its list index. We pull this returned *tuple* apart (using multiple assignment) in the for-loop, placing the index in `i` and the dictionary that is the next value from the list in `item`. From this dictionary, we grab the information associated with the key `'titleInfo'` and print it.
+In this script, we have asked HOLLIS to return not just the top search result, but the top two results. The script's final lines dig down into the JSON-structured data to grab the Python list of results, and they pass that list to the Python built-in function `enumerate`. This is a very useful little function when what you need is not just each value in a list, but each value paired with its list index. We pull this returned *tuple*[^fn9] apart (using multiple assignment) in the for-loop, placing the index in `i` and the dictionary that is the next value from the list in `item`. From this dictionary, we grab the information associated with the key `'titleInfo'` and print it.
 
 ## Beyond printing
 
@@ -651,32 +610,48 @@ if __name__ == '__main__':
     main()
 ```
 
-```{margin} Matching a Title
-When you run `qweb8.py`, be aware that it only checks the title you input against what HOLLIS considers the interesting part of the title. To match "The Cat in the Hat" you input "cat in the hat". You could extend `qweb8.py` with the title-printing logic in `qweb7.py`.
+```{admonition} You Try It
+To run `qweb8.py`, you'll need an IDE that is running locally on your machine (i.e., not in the cloud) so that you can launch a window running a web browser. In running `qweb8.py`, be aware that it only checks the title you input against what HOLLIS considers the interesting part of the title. To match "The Cat in the Hat" you input "cat in the hat". You could extend `qweb8.py` with the title-printing logic in `qweb7.py`.
 ```
 
 The script `qweb8.py` creates a function `h_lib` to hide the details of making a search query on HOLLIS. This should all look familiar except for the very end of the function, where we check for a response that contains no matches.
 
-The more interesting new code is in `main`, which uses the for-else-statement introduced in Chapter 3's active-learning exercises. We have a list in which we hope to find an item. However, if we iterate through this entire list and never find our desired item, the else-clause is run. 
+The more interesting new code is in `main`, which uses the for-else-statement introduced in Chapter 3's active-learning exercises. In this script, we receive back a list from `h_lib` in which we hope to find a matching item. If we iterate through this entire list and never find our desired item, we'd like to note this for the script's user. This is the purpose the else-clause indented at the same level as the for-statement.[^fn10] 
 
 Think about how we'd do that using just a for-statement. We'd probably set a boolean flag (e.g., `found = False`) before we began the loop. In the loop, we'd set that flag to `True` if we found our desired item. And then check the flag at the completion of the loop to see if we checked the entire list and didn't find our desired item. If you found that description confusing, you're not alone. If you write out that code, you'll see it isn't any easier to understand.
 
 The for-else-statement does away with this flag in this exact use case. The if-statement in the for-loop contains the condition we'd like to find `True`, and when the if-statement's condition is `True`, we break out of the for-loop. This is exactly what we'd like to think about this loop doing. But what if this loop iterates all the way through because we never found our desired item. Here's where the else-clause of the for-statement executes, alerting us that we failed in our search. Now that, my friends, how you create a programming language feature for a common construct.
 
-And what did our script do when it found our desired book? It grabbed the HOLLIS URL for the book out of the matching record and launched a web browser (in this case, `Safari`) to display the resource at that URL.
-
-Did we have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the `webbrowser` library; I simply imported and used this library after spending only a few minutes with its API description.
+And what did the script do when it found our desired book? It grabbed the HOLLIS URL for the book out of the matching record and launched a web browser (in this case, `Safari`) to display the resource at that URL. Did I have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the `webbrowser` library; I simply imported and used this library after spending only a few minutes with its API description.
 
 ## Blocking and non-blocking function calls
 
-Let's pause for a moment and look at two of the wonderfully powerful function calls we made in `qweb8.py`. The `requests.get` call on line 18 and the `browser.open` call on line 56 are different in a fundamentally interesting way. I don't mean that one returns a Python list and the other returns the special Python object `None`. No, I want you to think about when lines 21 and 57 execute.
+Let's pause for a moment and look at two of the powerful function calls we made in `qweb8.py`. The `requests.get` call on line 18 and the `browser.open` call on line 56 are different in a fundamentally interesting way. I don't mean that one returns a Python list and the other returns the special Python object `None`. No, I want you to think about when lines 21 and 57 execute.
 
-```{margin}
-For those paying close attention, `webbrowser.open` is non-blocking if you call a graphical browser. As [the documentation](https://docs.python.org/2/library/webbrowser.html) says, text-mode browsers, which presumably use the same terminal window as the executing script, will block.
-```
+Line 21 can't execute until we have completed the `requests.get` call and have a `response` object. This call *blocks* the further execution of our script until it completes. In particular, our script has to wait for some server process to do some work before the process running our script can continue. On the other hand, our script doesn't care how long a process that runs the web browser takes to display the URL we asked it to render. Our script can merrily move on to the work in line 57 and beyond. The call to `webbrowser.open` is an example of a *non-blocking* call.[^fn11]
 
-Line 21 can't execute until we have completed the `requests.get` call and have a `response` object. This call *blocks* the further execution of our script until it completes. In particular, our script has to wait for some server process to do some work before the process running our script can continue. On the other hand, our script doesn't care how long a process that runs the web browser takes to display the URL we asked it to render. Our script can merrily move on to the work in line 57 and beyond. The call to `webbrowser.open` is an example of a *non-blocking* call.
+This is your first taste of *concurrency* (also called *parallelism*), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
 
-This is your first taste of concurrency (also called parallelism), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
+\[Version 20240716\]
 
-\[Version 20230902\]
+[^fn1]: In case you're interested, here's an article titled ["The Evolving Card Catalog" by Karen Coyle](https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/) (January 4, 2016).
+
+[^fn2]: In the next chapter, we will peek under the covers of this API, just as we did with string-replace. We'll also start solving problems that require more general communication between two networked computers. We won't, however, go too deep, and if you want to know exactly how computers communicate over wired and wireless networks, find yourself a book or course on computing networking.
+
+[^fn3]: We'll discuss filesystem paths and their form in detail in Chapter 13.
+
+[^fn4]: Some other online API directories include: [Rapid API Hub](https://rapidapi.com/hub); [API list](https://apilist.fun/); and [Public APIs](https://github.com/public-apis/public-apis).
+
+[^fn5]: While the dictionary *abstraction* doesn't force an ordering on its elements, Python's *implementation* of the dictionary data type does guarantee the elements to be in insertion order, as of version 3.7. Personally, I would suggest you forget this "feature."  This implementation detail might change in a later release, as it doesn't flow from the dictionary abstraction. Plus, what is the insertion order after you've updated some elements and deleted a few? I don't know and don't care to figure it out since it isn't core to the dictionary abstraction. Of course, this is just my personal opinion.
+
+[^fn6]: Be careful! I badly mistype the hostname because you should always be careful with slightly mistyped hostnames in Internet URLs. Sometimes these sites are put up by nefarious people who want you to think you are at the correctly typed location, where they might (for example) encourage you to type in your bank account information.
+
+[^fn7]: You can learn more about multiple assignment in this chapter's active-learning exercises.
+
+[^fn8]: To communicate with the Harvard Library system, \`qweb7.py\` uses [the LibraryCloud API](https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs).
+
+[^fn9]: You can learn more about tuples in this chapter's active-learning exercises.
+
+[^fn10]: Note that this else-statement is not paired with the if-statement in the for-loop. We don't print if any one item doesn't match our desired book, but only if all items don't match.
+
+[^fn11]: For those paying close attention, \`webbrowser.open\` is non-blocking if you call a graphical browser. As [the documentation](https://docs.python.org/2/library/webbrowser.html) says, text-mode browsers, which presumably use the same terminal window as the executing script, will block.
