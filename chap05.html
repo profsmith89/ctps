@@ -180,6 +180,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
 
 
@@ -394,12 +401,8 @@ document.write(`
 <h1>Chapter 5: Play Guess-a-number<a class="headerlink" href="#chapter-5-play-guess-a-number" title="Permalink to this heading">#</a></h1>
 <p>You have learned to write client applications for the client-server model, and although we have seen how powerful this can be, we’d like to understand (and be able to code) both sides of this model. To bring in the server side, we are going to focus on networked scripts that allow us to connect a human on one computer with a human on another. In particular, we will demonstrate this capability through the development of a networked game.</p>
 <p>Games are useful platforms for learning for two simple reasons: (1) they typically have a well-defined set of legal actions and a clear goal, which constrains the amount of functionality we need implement; and (2) they can be, simultaneously, fun to play and difficult to test.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Types of Nondeterminism</p>
-<p>Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.</p>
-</aside>
-<p>The class of difficult-to-test games that we’ll build are those involving some aspect of randomness. Learning to write a stochastic program allows us to solve an amazingly wide range of problems. Debugging and testing a script with nondeterminism, however, can be a challenge, and our network game example will teach you some ways to deal with that challenge.</p>
-<p>Since we’ve learned to start with an easy instance of our problem-to-be-solved, we are going to build toward our networked game. We’ll first build a simple game involving randomness that runs on our computers and requires only a single person to play. We will then add a networking component to our game. Are you ready to build something educational and fun?</p>
+<p>The class of difficult-to-test games that we’ll build are those involving some aspect of randomness. Learning to write a stochastic program allows us to solve an amazingly wide range of problems. Debugging and testing a script with nondeterminism, however, can be a challenge, and our network game example will teach you some ways to deal with that challenge.<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<p>Since we’ve learned to start with an easy instance of our problem-to-be-solved, we are going to build toward a networked game. We’ll first build a simple game involving randomness that runs on our computers and requires only a single person to play. We will then add a networking component. Are you ready to build something educational and fun?</p>
 <div class="admonition-learning-outcomes admonition">
 <p class="admonition-title">Learning Outcomes</p>
 <p>This chapter moves away from our work with children’s books and focuses on building children’s games. Games typically have a well-defined set of legal actions and a clear goal, which simplifies the first two steps in our problem solving process (i.e., the need to precisely specify the problem and imagine specific instances of it). This allows you to spend more time on the last six steps, and using the knowledge you’ve gained in the previous chapters, you are now ready to practice these steps on your own. You may find it hard to apply what you’ve learned and you’ll undoubtedly make mistakes, but with practice will come competency.</p>
@@ -410,7 +413,7 @@ document.write(`
 <li><p>Describe the purpose of type conversion and know when to use it [CS concepts and programming skills];</p></li>
 <li><p>Understand the importance of input checking and failing gracefully, and recognize a couple of different error-handling patterns, including Python’s try-except-statement [design and programming skills];</p></li>
 <li><p>Split a non-networked script into a portion run on a client and the rest on a server [design];</p></li>
-<li><p>Draw sequence diagrams and use it to map out the sequence of network messages that will allow the client and server to accomplish a task [design];</p></li>
+<li><p>Draw sequence diagrams and use them to map out the sequence of network messages that will allow the client and server to accomplish a task [design];</p></li>
 <li><p>Evaluate the pros and cons of using libraries with similar functionality [design and programming skills];</p></li>
 <li><p>Explain the purpose of sockets in network programming and how to use them to create networked applications [CS concepts and programming skills];</p></li>
 <li><p>Write and run a client and server that can communicate by interprocess communication using sockets [design, CS concepts, and programming skills];</p></li>
@@ -419,103 +422,103 @@ document.write(`
 </ul>
 </div>
 <section id="guessing-a-number">
-<p><strong>Guessing a number.</strong> Let’s build an extremely simple (and silly) game involving randomness. This game will have the computer “think” of a number between 1 and 100, and then we will try to guess it.</p>
-<p>The core of this game is generating a secret number, and if we can figure out how to do that in Python, we can probably build the rest of the game based on stuff we’ve already learned (i.e., using loops and conditionals). Given our recent mentions about randomness, you’ve probably guessed that having a computer “think” of a number means that it should randomly select a number within a given range. As we have experienced lately, the Python library often has exactly the functionality we need, and it is true once again in this instance. We simply need to import <a class="reference external" href="https://docs.python.org/3/library/random.html">the <code class="docutils literal notranslate"><span class="pre">random</span></code> library</a> and invoke its <code class="docutils literal notranslate"><span class="pre">randint</span></code> function, specifying the range we desire.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Keep Playing</p>
-<p>Run this code block and try changing the parameters to the function on line 2.</p>
-</aside>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">random</span> 
-<span class="linenos">2</span><span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The secret number is </span><span class="si">{</span><span class="n">secret</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now that our computer can generate a secret number, we are ready to begin building the game. We can start <em>inside-out</em> or <em>outside-in</em>, which means deciding whether you think first about what takes place in a single game turn (i.e., inside-out) or by thinking about overall structure of the game (i.e., outside-in).  For this particular example, let’s begin with what takes place in a single game turn.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>It doesn’t matter whether you approach a problem inside-out or outside-in. Do whichever makes you most comfortable, or which seems to like the fastest way to get you started.</p>
-</div>
-<p>In any single turn of this simple game, the player makes a guess and the computer checks this guess against its secret number. We might write down this idea using the following pseudocode:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos">2</span><span class="c1"># Check guess against the secret</span>
-</pre></div>
-</div>
-<p>Is this all we need to do in a turn? No, this game wouldn’t be much fun if we didn’t let the player know the result of our comparison. Let’s fix that as we convert the check pseudocode into Python.</p>
+<p><strong>Guessing a number.</strong> Let’s build an extremely simple game involving randomness. This game will have the computer “think” of a number between 1 and 100, and then we will try to guess it.</p>
+<p>The core of this game is generating a secret number, and if we can figure out how to do that in Python, we can probably build the rest of the game based on stuff we’ve already learned (i.e., using loops and conditionals). Given our recent mentions about randomness, you’ve probably guessed that having a computer “think” of a number means that it should randomly select one within a given range. As we have experienced lately, the Python library often has exactly the functionality we need, and it is true once again. We simply need to import <a class="reference external" href="https://docs.python.org/3/library/random.html">the <code class="docutils literal notranslate"><span class="pre">random</span></code> library</a> and invoke its <code class="docutils literal notranslate"><span class="pre">randint</span></code> function, specifying the range we desire.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Don’t peek at the next code block, and try to write Python statements that implement line 2 in the previous code block. Make sure to print what you learn from your checks! You’ve seen all the Python that’s required in the previous chapters.</p>
+<p>Run the following code block and try changing the parameters to the function on line 2. You can develop your script using the frame in <code class="docutils literal notranslate"><span class="pre">guess.py</span></code>.</p>
 </div>
-<div class="admonition-executing-this-chapter-s-code-blocks admonition">
-<p class="admonition-title">Executing This Chapter’s Code Blocks</p>
-<p>To push the answer down a bit, I’ll take this opportunity to explain that I’ve tried to make as many of the code blocks in this chapter runnable without errors as possible, but you should be aware of a few things:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap05/guess.py</span>
+<span class="linenos">2</span><span class="kn">import</span> <span class="nn">random</span> 
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The secret number is </span><span class="si">{</span><span class="n">secret</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that our computer can generate a secret number, we are ready to begin building the game. We can start <em>inside-out</em> or <em>outside-in</em>, which means deciding whether you think first about what takes place in a single game turn (i.e., inside-out) or by thinking about the overall structure of the game (i.e., outside-in).  For this particular example, let’s begin with what takes place in a single game turn.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It doesn’t matter whether you approach a problem inside-out or outside-in. Do whichever makes you most comfortable, or which seems to like the fastest way to get started.</p>
+</div>
+<p>In any single turn of this simple game, the player makes a guess and the computer checks this guess against its secret number. We might write down this idea using the following pseudocode:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
+<span class="linenos">10</span><span class="c1"># Check guess against the secret</span>
+</pre></div>
+</div>
+<p>Is this all we need to do in a turn? No, this game wouldn’t be much fun if we didn’t let the player know the result of our comparison. Let’s fix that as we convert the pseudocode into Python.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Don’t peek at the next code block, and try to write Python statements that implement line 2 in the previous code block. Make sure to print what you learn from your checks! You’ve seen, in previous chapters, all the Python that’s required.</p>
+</div>
+<p>To push the answer down a bit, I’ll take a moment to explain that I’ve tried to make as many of this chapter’s code blocks runnable without errors as possible, but you should be aware of a few things:</p>
 <ol class="arabic simple">
 <li><p>Not every combination of pseudocode and Python code makes sense to run. For example, I sometimes use a variable name before I’ve converted the pseudocode that defines that variable name (e.g., in the next code block where it checks <code class="docutils literal notranslate"><span class="pre">guess</span></code> before I’ve written the code that defines it). Other times, a code block contains only part of a script. The text doesn’t call out such cases as I assume you can recognize them.</p></li>
 <li><p>More often, a code block fails because I’m demonstrating a common error (e.g., the need for a type conversion, as I illustrate in our first attempt to grab a player’s guess). I explicitly call these instances out in the text.</p></li>
-<li><p>Toward the middle of the chapter we begin writing client and server scripts, and you should know that it doesn’t make much sense to run a client script without a server script also running — they need to communicate! Don’t attempt to run any of the individual client and server scripts. This chapter’s final section titled “Run it!” provides you with instructions on how to run client and server scripts together.</p></li>
+<li><p>Toward the middle of the chapter we begin writing client and server scripts, and you should know that it doesn’t make much sense to run a client script without the server script also running—they need to communicate! Don’t attempt to run any of the individual client and server scripts. This chapter’s final section titled “Run it!” provides you with instructions on how to run client and server scripts together.</p></li>
 </ol>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="c1"># Check guess against the secret</span>
-<span class="linenos">4</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
-<span class="linenos">6</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">7</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
-<span class="linenos">8</span><span class="k">else</span><span class="p">:</span>
-<span class="linenos">9</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
+<p>And now a set of Python statements that implement the pseudocode in line 2 above. It doesn’t matter which two conditions you check and in what order as long as you handle all three.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1"># Check guess against the secret</span>
+<span class="linenos">12</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">17</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="the-player-s-guess">
 <p><strong>The player’s guess.</strong> Good work! Now, how do we grab the player’s guess? To this point, we’ve learned how to take input directly from a user, from a file, from the script’s command line, and from a network resource. Which is appropriate for this problem?</p>
 <p>Given that we’d like to build an interactive game, the first option is probably the most appropriate, and this means we’ll use Python’s built-in function <code class="docutils literal notranslate"><span class="pre">input</span></code> to grab something directly from the user. Like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos"> 2</span><span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">)</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="c1"># Check guess against the secret</span>
-<span class="linenos"> 5</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="k">else</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
+<span class="linenos">10</span><span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># Check guess against the secret</span>
+<span class="linenos">13</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">18</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Run the earlier code block that defined <code class="docutils literal notranslate"><span class="pre">secret</span></code> and then the code block above (or a script containing these two code blocks). You’ll find that the comparison between <code class="docutils literal notranslate"><span class="pre">guess</span></code> and <code class="docutils literal notranslate"><span class="pre">secret</span></code> fails with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>Run the earlier code block that defined <code class="docutils literal notranslate"><span class="pre">secret</span></code> and then the code block above (or run <code class="docutils literal notranslate"><span class="pre">script.py</span></code> where you’ve placed these two code blocks). You’ll find that the comparison between <code class="docutils literal notranslate"><span class="pre">guess</span></code> and <code class="docutils literal notranslate"><span class="pre">secret</span></code> fails with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <p>If you review <a class="reference external" href="https://docs.python.org/3/library/functions.html#input">the documentation for <code class="docutils literal notranslate"><span class="pre">input</span></code></a>, you’ll read that this function takes everything on the line typed by the player, except for the trailing newline character, and converts it to a string object. This means that our if-statements asked the Python interpreter to compare a string object (<code class="docutils literal notranslate"><span class="pre">guess</span></code>) against an integer object (<code class="docutils literal notranslate"><span class="pre">secret</span></code>). Such a comparison raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> exception because it makes no sense to compare these two things. The Python interpreter has no idea what you want it to do.</p>
 <p>No big deal. We simply need to convert something like <code class="docutils literal notranslate"><span class="pre">'42'</span></code> into <code class="docutils literal notranslate"><span class="pre">42</span></code>. The first is a string representation of a number, but the interpreter doesn’t know that. It simply knows that <code class="docutils literal notranslate"><span class="pre">'42'</span></code> is a string of characters.</p>
-<p>We can convert a string representing a number into an integer using Python’s built-in function <code class="docutils literal notranslate"><span class="pre">int</span></code>. We don’t need the string returned by <code class="docutils literal notranslate"><span class="pre">input</span></code> for any reason other than passing it to <code class="docutils literal notranslate"><span class="pre">int</span></code>, and so let’s pass its result directly to <code class="docutils literal notranslate"><span class="pre">int</span></code>. The following code block does this, and it executes without an error.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos"> 2</span><span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="c1"># Check guess against the secret</span>
-<span class="linenos"> 5</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="k">else</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
+<p>We can convert a string representing a number into an integer using Python’s built-in function <code class="docutils literal notranslate"><span class="pre">int</span></code>. We don’t need the string returned by <code class="docutils literal notranslate"><span class="pre">input</span></code> for any reason other than passing it to <code class="docutils literal notranslate"><span class="pre">int</span></code>, and so let’s pass it directly. The following code block does this, and it executes without an error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
+<span class="linenos">10</span><span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># Check guess against the secret</span>
+<span class="linenos">13</span><span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">18</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="type-conversion">
 <p><strong>Type conversion.</strong> What we have just done is known as <em>type conversion</em>. Type information helps the interpreter to know how it should interpret the bag of stuff you gave it and, if you instructed the interpreter to do something with this bag of stuff, manipulate it. What do I mean by “bag of stuff”? In the next chapter, we’ll learn how computers exactly represent an object like an <code class="docutils literal notranslate"><span class="pre">int</span></code> and a <code class="docutils literal notranslate"><span class="pre">str</span></code>, but for now, we can use an analogy.</p>
 <p>My dog and I are both living beings that can be thought of as a “bag of stuff,” i.e., collection of biological cells or molecules or atoms). We’ll soon learn that <code class="docutils literal notranslate"><span class="pre">'42'</span></code> and <code class="docutils literal notranslate"><span class="pre">42</span></code> are both a collection of <em>bits</em>. This is what people mean when they describe the physical world as the world of atoms and the digital world as the world of bits.</p>
-<p>While my dog and I are both a bag of cells, interesting things can happen in our world if my bag of cells are labeled with the type <code class="docutils literal notranslate"><span class="pre">man</span></code> and my dog’s bag of cells are labeled with the type <code class="docutils literal notranslate"><span class="pre">dog</span></code>. With my type label, I can, for example, enter a restaurant and order some food because the restaurant serves bags of cells with my type. The restaurant, on the other hand, would shoo the bag of cells that is my dog out the door because of its type label.</p>
+<p>While my dog and I are both a bag of cells, interesting things can happen in our world if my bag of cells is labeled with the type <code class="docutils literal notranslate"><span class="pre">man</span></code> and my dog’s bag of cells is labeled with the type <code class="docutils literal notranslate"><span class="pre">dog</span></code>. With my type label, I can, for example, enter a restaurant and order some food because the restaurant serves bags of cells with my type. The restaurant, on the other hand, would shoo the bag of cells that is my dog out the door because of its type label.</p>
 <p>Why doesn’t the Python interpreter allow us to compare a string to an integer despite the fact that both are a bag of bits? The interpreter looks at the type information and uses this information to decide if the two objects are comparable. Two integers are comparable, as we learned in math. We can also compare two strings to determine their alphabetical order. But the interpreter doesn’t know what to do if you ask it to compare a string and an integer because no one has defined what it means to compare objects of these different types.</p>
 <p>This brings us to the concept of type conversion. Sometimes two bags of stuff have different types, but they represent the same idea. When this is true, we can successfully perform a type conversion. A dog and a man in a dog suit have two different types (<code class="docutils literal notranslate"><span class="pre">dog</span></code> and <code class="docutils literal notranslate"><span class="pre">man</span></code>), but they represent the same idea (dog). The same thing happens with <code class="docutils literal notranslate"><span class="pre">42</span></code> and <code class="docutils literal notranslate"><span class="pre">'42'</span></code>. The string <code class="docutils literal notranslate"><span class="pre">'42'</span></code> is a string in an integer suit. It’s not the integer <code class="docutils literal notranslate"><span class="pre">42</span></code>, but we know that it represents the idea of the number 42.</p>
 </section>
 <section id="try-and-recover">
-<p><strong>Try and recover.</strong> Of course, not every string value is a string in an integer suit. What happens if the player types <code class="docutils literal notranslate"><span class="pre">garbage</span></code> at our input prompt? Well, <code class="docutils literal notranslate"><span class="pre">input</span></code> will return a string object with the value <code class="docutils literal notranslate"><span class="pre">'garbage'</span></code> and this object will be passed to <code class="docutils literal notranslate"><span class="pre">int</span></code>, which will try unsuccessfully to convert it into a integer value. This unsuccessful attempt will generate a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception and end our script.</p>
+<p><strong>Try and recover.</strong> Of course, not every string value is a string in an integer suit. What happens if the player types <code class="docutils literal notranslate"><span class="pre">garbage</span></code> at our input prompt? Well, <code class="docutils literal notranslate"><span class="pre">input</span></code> will return a string object with the value <code class="docutils literal notranslate"><span class="pre">'garbage'</span></code> and this object will be passed to <code class="docutils literal notranslate"><span class="pre">int</span></code>, which will try unsuccessfully to convert it into an integer value. This unsuccessful attempt will generate a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception and end our script.</p>
 <p>Perhaps that’s a fine action for a player silly enough to type <code class="docutils literal notranslate"><span class="pre">garbage</span></code> when we asked them for a number, but is that what we want to happen if the player simply mistypes their input? Perhaps I mean to type <code class="docutils literal notranslate"><span class="pre">42</span></code>, but on my way to the <code class="docutils literal notranslate"><span class="pre">return</span></code> key, I mistakenly swipe the apostrophe key and actually input <code class="docutils literal notranslate"><span class="pre">42'</span></code>. Could we make our script a bit more resilient?</p>
-<p>This is the purpose of Python’s <code class="docutils literal notranslate"><span class="pre">try-except</span></code> compound statement. If we wrap our type conversion inside one of these statements, our script can catch the <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception before it terminates our running script. Once caught, we can try and recover from the unsuccessful action. A good way to recover in this particular case is to wrap the <code class="docutils literal notranslate"><span class="pre">try-except</span></code> statement in an infinite loop, which continually asks the player for a guess until they submit a guess that is an actual integer. Here then is the final code for our line of pseudocode saying we should grab the player’s guess.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos">2</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">3</span>    <span class="k">try</span><span class="p">:</span>
-<span class="linenos">4</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
-<span class="linenos">5</span>        <span class="k">break</span>
-<span class="linenos">6</span>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">7</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
+<p>This is the purpose of Python’s <code class="docutils literal notranslate"><span class="pre">try-except</span></code> compound statement. If we wrap our type conversion inside one of these statements, our script can catch the <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception before it terminates our running script. Once caught, we can try and recover from the unsuccessful action. A good way to recover in this particular case is to wrap the try-except-statement in an infinite loop, which continually asks the player for a guess until they submit a guess that is an actual integer. Here then is the final code for our line of pseudocode saying we should grab the player’s guess.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
+<span class="linenos">10</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">11</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">12</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
+<span class="linenos">13</span>        <span class="k">break</span>
+<span class="linenos">14</span>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>How does this new statement work? There are two cases to consider:</p>
@@ -524,14 +527,10 @@ document.write(`
 <li><p>If <code class="docutils literal notranslate"><span class="pre">int</span></code> is unsuccessful and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception, the exception doesn’t terminate our script but redirects the interpreter to the code inside the except-clause, which prints a helpful message. Once this is done, we fall out of the try-except-statement and continues with the next iteration of the while-loop.</p></li>
 </ol>
 <p>Any statement within the try-block that raises an exception listed in the except-block will redirect the interpreter to the except-block. In later problems, we’ll change the kind of exception that our except-block catches.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">The Alternative</p>
-<p>Think about what it takes to check if a string is an integer. We need to visit and check each character, verifying that it is a number. Except that we probably don’t want leading zeros. And except that we should allow for a leading <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code> character, which may or may not be there. This is tricky code to write correctly. And why should we bother? Someone already did this work in <code class="docutils literal notranslate"><span class="pre">int</span></code>!</p>
-</aside>
-<p>By catching exceptions like this, we save ourselves some difficult coding work and create a program that <em>fails gracefully</em>. This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.</p>
+<p>By catching exceptions like this, we save ourselves some difficult coding work and create a program that <em>fails gracefully</em>.<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You <em>never</em> want to trust that the user provided your script with well-structured input. You should <em>always</em> have your script check that the user input is what you expect it to be. This is the first step in writing scripts with strong security guarantees. A try-except statement wrapped in an infinite loop is just one design pattern that accomplishes this.</p>
+<p>You <em>never</em> want to trust that the user provided your script with well-structured input. You should <em>always</em> have your script check that the user input is what you expect it to be. This is the first step in writing scripts with strong security guarantees. A try-except-statement wrapped in an infinite loop is just one design pattern that accomplishes this.</p>
 </div>
 </section>
 <section id="the-game-loop">
@@ -572,7 +571,7 @@ document.write(`
 </section>
 <section id="testing-our-proposed-solution">
 <p><strong>Testing our proposed solution.</strong> We have a solution, but how do we know if it works correctly? As we learned in earlier problems, we could run it with a range of inputs that together test the different sequences of statements (also called <em>code paths</em>) in our script. In particular, we’ll want to input integers and some garbage to test our grab-a-player’s-guess loop, and we’ll want to exercise each of the branches of the if-statement that compares the <code class="docutils literal notranslate"><span class="pre">guess</span></code> and the <code class="docutils literal notranslate"><span class="pre">secret</span></code>.</p>
-<p>But how, for example, can we input a guess that’s bigger than the secret if we don’t know the secret? The answer is simple: We remove the randomness while testing. This is the purpose of the print-statements in the script that are currently commented out. Removing the comment character allows us to see the secret and input an appropriate guess to test a selected code path. We may also want to print <code class="docutils literal notranslate"><span class="pre">guess</span></code> to reassure ourselves that the script is working with the value we think it should have grabbed.</p>
+<p>But how, for example, can we input a guess that’s bigger than the secret if we don’t know the secret? The answer is simple: We remove the randomness while testing. This is the purpose of the print-statements in the script that are currently commented out. Removing the comment character allows us to see the secret and input an appropriate guess to test a selected code path. We may also want to print <code class="docutils literal notranslate"><span class="pre">guess</span></code> to reassure ourselves that the script is working with the value it should have grabbed.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
 <p>Run some tests on <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code>. Make sure you believe it works as expected.</p>
@@ -605,7 +604,7 @@ document.write(`
 <span class="n">S</span> <span class="mi">20</span>          <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>I actually left an <code class="docutils literal notranslate"><span class="pre">S</span></code> off line 18 because that’s a piece of functionality we want to make sure that we run on the client. The <code class="docutils literal notranslate"><span class="pre">break</span></code> effectively says that the game is over, and when this is true, we want the client script to exit.</p>
+<p>I left an <code class="docutils literal notranslate"><span class="pre">S</span></code> off line 18 because that’s a piece of functionality we want to make sure that we run on the client. The <code class="docutils literal notranslate"><span class="pre">break</span></code> effectively says that the game is over, and when this is true, we want the client script to exit.</p>
 <p>Let’s look at the rest of the unmarked statements. Should any of these run <em>on the server</em> for added security or for some other reason? It doesn’t seem so.</p>
 <p>Ok, so let’s flip our question around and ask, “Which of the remaining statements must run <em>on the client</em>?” It seems like it would be easiest if the while-loop that grabs and validates the player’s guess ran where the player sits. This means we’d mark lines 7-12 with a <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="mi">1</span>  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
@@ -673,13 +672,9 @@ document.write(`
 <p><strong>When to use a new library.</strong> We have a complete design for our networked game, and our next task is to start coding the client and server scripts. In this, we need to use a library that allows us to send messages between separately running applications. Can we use the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, as we did in our last problem-to-be-solved?</p>
 <p>When we previously used the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, we didn’t think much about the network messages that were sent between the machine on which we ran our script and the server to which we were communicating. We simply specified a protocol (i.e., HTTP), the hostname of the server we wanted to contact, a path to a resource on that server (which we had to look up), and some parameters to help the server know what we wanted back.</p>
 <p>It might help if you think of our use of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library like a phone call to a business’s customer support line. This company publishes the number of its support line, and when we call it, we tell the company representative about the product we own and the questions we have. There’s a well-defined form to this conversation: ask a question; get a response.</p>
-<p>When we choose to write both the client and the server scripts, we might like to use a networking library that gives us more freedom in the form of the conversation that takes place. Instead of a call to a company’s customer support line, think about a call to a friend where one party might send a variable number of messages before the other party responds. The Python <code class="docutils literal notranslate"><span class="pre">socket</span></code> library gives us such freedom.</p>
-<p>An important functional difference between our use of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library and this new <code class="docutils literal notranslate"><span class="pre">socket</span></code> library is that the latter separates the act of sending a message from the act of receiving one, which provides us with the freedom to have a less-scripted form of a conversation. In fact, this separation of send and receive is exactly what a sequence diagram illustrates. We can draw multiple send lines from the client to the server before any response comes back from the server to the client.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">One Is Used To Build the Other</p>
-<p>In case you’re curious, the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library is similar to the networking primitives in most operating systems. The <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, in fact, uses the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library in its implementation!</p>
-</aside>
-<p>Now, if you look at the structure of the conversation in our particular sequence diagram, you’ll notice that we don’t need this extra freedom. Should we use the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library for our guess-the-number application? Well, this leads us to another distinction between the two libraries. If we used the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, we would have to write a server script that can parse HTTP messages, and if you look at what we wrote on the message lines in our sequence diagram, you’ll see that our messages are quite simple. We don’t need the complexity of HTTP messages. When we use the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, it makes no assumption about the form of the messages. To the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, our messages can be treated like short strings. This means that if we learn a little this new networking library, we can send very simple text messages between our client and our server.</p>
+<p>When we choose to write both the client and server scripts, we might like to use a networking library that gives us more freedom in the form of the conversation that takes place. Instead of a call to a company’s customer support line, think about a call to a friend where one party might send a variable number of messages before the other party responds. The Python <code class="docutils literal notranslate"><span class="pre">socket</span></code> library gives us such freedom.</p>
+<p>An important functional difference between our use of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library and this new <code class="docutils literal notranslate"><span class="pre">socket</span></code> library is that the latter separates the act of sending a message from the act of receiving one, which provides us with the freedom to have a less-scripted conversation.<a class="footnote-reference brackets" href="#fn3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> In fact, this separation of send and receive is exactly what a sequence diagram illustrates. We can draw multiple send lines from the client to the server before any response comes back from the server to the client.</p>
+<p>Now, if you look at the structure of the conversation in our particular sequence diagram, you’ll notice that we don’t need this extra freedom. Should we use the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library for our guess-the-number application? Well, this leads us to another distinction between the two libraries. If we used the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, we would have to write a server script that can parse HTTP messages, and if you look at what we wrote on the message lines in our sequence diagram, you’ll see that our messages are quite simple. We don’t need the complexity of HTTP messages. When we use the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, it makes no assumption about the form of the messages. To the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, our messages can be treated like short strings. This means that if we learn a little about this new networking library, we can send very simple text messages between our client and our server.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Python, like many programming languages, has lots of libraries with overlapping functionality. In problem solving, it is worth your time to find the right library for your task at hand.</p>
@@ -721,135 +716,126 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="c1"># Addressing information for the server</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="c1"># Create a socket and call it s</span>
-<span class="linenos"> 9</span><span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="c1"># Connect s to the server</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="c1"># REST OF SCRIPT</span>
+<span class="linenos"> 6</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="c1"># Create a socket and call it s</span>
+<span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="c1"># Connect s to the server</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title">TCP/IPv4</p>
-<p>There are many resources available on the Internet where you can learn about this protocol. You won’t need to know any details to code and run our scripts.</p>
-</aside>
-<p>Just as we had to tell <code class="docutils literal notranslate"><span class="pre">open</span></code> some configuration parameters (e.g., are we opening a file for reading or writing?), we have to pass <code class="docutils literal notranslate"><span class="pre">socket.socket</span></code> some configuration parameters so that it creates for us a particular <code class="docutils literal notranslate"><span class="pre">socket</span></code> object. We won’t dive into the many different types of sockets that are possible. It is sufficient for us to know that the parameters in our partial script will create a socket that uses TCP/IPv4, which is a common protocol used for transporting messages around the Internet. Using different parameters to create another kind of socket object is like choosing to use a different messaging app (e.g., Slack versus Message) in our smartphone analogy.</p>
+<p>Just as we had to tell <code class="docutils literal notranslate"><span class="pre">open</span></code> some configuration parameters (e.g., are we opening a file for reading or writing?), we have to pass <code class="docutils literal notranslate"><span class="pre">socket.socket</span></code> some configuration parameters so that it creates for us a particular <code class="docutils literal notranslate"><span class="pre">socket</span></code> object. We won’t dive into the many different types of sockets that are possible. It is sufficient for us to know that the parameters in our partial script will create a socket that uses TCP/IPv4, which is a common protocol used for transporting messages around the Internet.<a class="footnote-reference brackets" href="#fn4" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> Using different parameters to create another kind of socket object is like choosing to use a different messaging app (e.g., Slack versus Message) in our smartphone analogy.</p>
 </section>
 <section id="specifying-the-other-party">
 <p><strong>Specifying the other party.</strong> So far, we’ve selected the channel that we will use to communicate, and the next step is to specify to whom we want to communicate. A client script does this with a call to <code class="docutils literal notranslate"><span class="pre">socket.connect</span></code>, in which we specify a tuple consisting of a <em>hostname</em> (or the IP address corresponding to that hostname) and a <em>port</em> on that host.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Software ports</p>
-<p>Although the imagery in the text talks about a friend with multiple cell phones, the ports we’re talking about are not the hardware ports that you can find, for example, on the side of your laptop. Software ports are a way to separate the stream of messages coming in on your laptop’s network connection into several different logical streams. It’s like what you probably do when you separate your real mail from your junk mail.</p>
-</aside>
-<p>It probably makes sense to you that we need to specify the name of the entity to which we want to communicate, but what need are we satisfying by specifying a port? Well, networked computers have a number of software ports, and this is like a friend that has multiple phone numbers. You can send a text message to this friend on any of their numbers, but you have to pick one.</p>
+<p>It probably makes sense to you that we need to specify the name of the entity to which we want to communicate, but what need are we satisfying by specifying a port? Well, networked computers have a number of software ports, and this is like a friend that has multiple phone numbers. You can send a text message to this friend on any of their numbers, but you have to pick one.<a class="footnote-reference brackets" href="#fn5" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a></p>
 <p>In computer networking, some port numbers have well-defined and widely agreed-upon uses. For example, HTTP uses port 80 to send and receive messages; HTTPS uses port 443; and the older File Transfer Protocol (FTP) uses ports 20 and 21. As another example, there are numerous ways to send email across the network: the Simple Mail Transfer Protocol (SMTP) uses port 25;  the Post Office Protocol 3 (POP3) uses port 110; and the Internet Message Access Protocol (IMAP4) uses port 143.</p>
-<p>In the client script we’re building, we’re going to use a big number for the port, which will place it far away from the port numbers used by the common services on our machine. We would rather not disrupt these important services with our messages.</p>
+<p>In the client script we’re building, we’re going to use a big number<a class="footnote-reference brackets" href="#fn6" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> for the port, which will place it far away from the port numbers used by the common services on our machine. We would rather not disrupt these important services with our messages.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-client-noabstractions.py (INCOMPLETE)</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">socket</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># The server&#39;s hostname or IP address</span>
 <span class="linenos"> 5</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>        <span class="c1"># The port used by the server</span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="c1"># REST OF SCRIPT</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
 <p>Our script specifies the hostname (<code class="docutils literal notranslate"><span class="pre">HOST</span></code>) as an IP address. Every computer connected to the Internet has an IP address, and to get started with our client and server scripts, we’re going to use a special one. The IP address <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> is recognized by most all networked machines as a way of saying you’re talking about the machine on which you’re logged in, which in computer parlance is called the <em>localhost</em>. Just as each of us has a name, we also know we’re talking about ourselves when we say “self.”</p>
-<p>You’ll also hear people talking about <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> as the <em>loopback address</em>. The idea is that we send out a message and it loops right back to us. By using this loopback address, we can run our client and server scripts on the same machine!</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>Both these methods are blocking calls, e.g., <code class="docutils literal notranslate"><span class="pre">socket.sendall</span></code> blocks until the entire message is sent (or an error occurs). For short messages in an application like ours, where our server serves only one client, this is a reasonable thing to do.</p>
-</aside>
+<p>You’ll also hear people talking about <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> as the <em>loopback address</em>. The idea is that we send out a message and it loops right back to us. By using this loopback address, we can run our client and server scripts on the same machine.</p>
 </section>
 <section id="sending-and-receiving-messages">
-<p><strong>Sending and receiving messages.</strong> With a socket created and configured, we are ready to start sending and receiving messages. There are numerous different methods for sending and receiving messages in the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, and we’re going to use two fairly simple ones: <code class="docutils literal notranslate"><span class="pre">socket.sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">socket.recv</span></code>.</p>
-<p>Roughly speaking, <code class="docutils literal notranslate"><span class="pre">socket.sendall</span></code> takes the string we want to send and sends it over the network, and <code class="docutils literal notranslate"><span class="pre">socket.recv</span></code> returns a message that was sent to us. But because the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library is closer to the primitives in the machine than the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, it asks us to specify the size of the buffers we’ll use to send and receive messages and the character encodings used in these messages. So many details!</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Shims</p>
-<p>While we use a shim to simplify the interface to a library with more functionality than we need, shim libraries solve numerous software engineering problems. For example, you could use a shim library to keep an application running while the software libraries on which it depends are slowly upgraded. The shim translates between the new and old versions of an API. You can think of this as keeping a plane aloft while you sequentially upgrade each of its systems!</p>
-</aside>
-<p>Perhaps you’re starting to see why the filename I’ve used in the opening comment of our current script is <code class="docutils literal notranslate"><span class="pre">guess-client-noabstractions.py</span></code>. In directly using the socket library, we have to deal with a lot of networking details that we mostly ignored in our use of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library. In a moment, we’ll start using our own <code class="docutils literal notranslate"><span class="pre">socket32</span></code> library, which is a <em>shim</em> between our script and the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library. This shim library simplifies the <code class="docutils literal notranslate"><span class="pre">socket</span></code> API and creates easier-to-use abstractions for simple networking applications like ours.</p>
-<p>The following code block contains our entire, “no abstractions” client script. The next two sections discuss two details needed by the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library that that we will soon hide behind our own <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim.</p>
+<p><strong>Sending and receiving messages.</strong> With a socket created and configured, we are ready to start sending and receiving messages. There are numerous different methods for sending and receiving messages in the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, and we’re going to use two fairly simple ones: <code class="docutils literal notranslate"><span class="pre">socket.sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">socket.recv</span></code>.<a class="footnote-reference brackets" href="#fn7" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
+<p>Roughly speaking, <code class="docutils literal notranslate"><span class="pre">socket.sendall</span></code> takes the string we want to send and transmits it over the network, and <code class="docutils literal notranslate"><span class="pre">socket.recv</span></code> returns a message that was sent to us. But because the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library is closer to the primitives in the machine than the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library, these functions ask us to specify the size of the buffers containing our messages and the character encodings used in these messages. So many details!</p>
+<p>Perhaps you’re starting to see why the filename I’ve used in the opening comment of our current script is <code class="docutils literal notranslate"><span class="pre">guess-client-noabstractions.py</span></code>. In directly using the socket library, we have to deal with a lot of networking details that we mostly ignored in our use of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library. In a moment, we’ll start using our own <code class="docutils literal notranslate"><span class="pre">socket32</span></code> library, which is a <em>shim</em> between our script and the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library. This shim library simplifies the <code class="docutils literal notranslate"><span class="pre">socket</span></code> API and creates easier-to-use abstractions for simple networking applications like ours.<a class="footnote-reference brackets" href="#fn8" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p>
+<p>While the following code block contains the entire “no abstractions” client script, the next two sections discuss two details needed by the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library that that we’ll hide behind our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-client-noabstractions.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">socket</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># The server&#39;s hostname or IP address</span>
 <span class="linenos"> 5</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>        <span class="c1"># The port used by the server</span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
-<span class="linenos">13</span>        <span class="c1"># Grab a guess from the player</span>
-<span class="linenos">14</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">15</span>          <span class="k">try</span><span class="p">:</span>
-<span class="linenos">16</span>              <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
-<span class="linenos">17</span>              <span class="k">break</span>
-<span class="linenos">18</span>          <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">19</span>              <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
-<span class="linenos">20</span>
-<span class="linenos">21</span>        <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="linenos">22</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="linenos">23</span>        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span>        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
-<span class="linenos">26</span>            <span class="k">break</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
+<span class="linenos">14</span>            <span class="c1"># Grab a guess from the player</span>
+<span class="linenos">15</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">17</span>                    <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
+<span class="linenos">18</span>                    <span class="k">break</span>
+<span class="linenos">19</span>                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="linenos">20</span>                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>            <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="linenos">23</span>            <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos">24</span>            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
+<span class="linenos">27</span>                <span class="k">break</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">30</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
 <section id="size-matters">
 <p><strong>Size matters.</strong> The first helpful abstraction in our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim is to ignore message size. In the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, send and receive methods operate on network buffers, and these buffers are of a fixed size. This means that we need to pay attention to how the sizes of our messages interact with the fixed size of the network buffers.</p>
 <p>In general, this is a messy problem that can result in some complicated code. You can read about some of the complicated situations in <a class="reference external" href="https://docs.python.org/3/howto/sockets.html#socket-howto">the Python documentation titled “Socket Programming HOWTO.”</a> This is an important issue for a production piece of code to handle, but we ignore it inside our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim since the messages in our current problem-to-be-solved are small in size and neither the client nor the server will send multiple messages before performing a receive.</p>
-<p>In particular, our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim specifies that we’ll use a buffer size of <code class="docutils literal notranslate"><span class="pre">1024</span></code>, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the <code class="docutils literal notranslate"><span class="pre">recv</span></code> call in the code block above. It’s not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your applications largest message size, assuming it is known. As you can imagine in these instances, you’d have to turn a simple receive call into a loop of receive calls.</p>
+<p>In particular, our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim specifies that we’ll use a buffer size of <code class="docutils literal notranslate"><span class="pre">1024</span></code>, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the <code class="docutils literal notranslate"><span class="pre">recv</span></code> call in the code block above. It’s not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your application’s largest message size, assuming it is known. As you can imagine in these instances, you’d have to turn a simple receive call into a loop of receive calls.</p>
 </section>
 <section id="encoding-again">
-<p><strong>Encoding again!</strong> The second abstraction we exploit with our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim is to use it in both our client and server scripts. By having our client and the server use this same shim, we guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.</p>
+<p><strong>Encoding again!</strong> The second detail of the <code class="docutils literal notranslate"><span class="pre">sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">recv</span></code> calls that well abstraction away deals with encoding. By having our client and the server use the same shim, we can guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.</p>
 <p>In some applications, clients and servers are written by different programmers. When this happens, we have to know the character encoding that the server will use and force our strings into that encoding. This is the work being done by the <code class="docutils literal notranslate"><span class="pre">str.encode</span></code> and <code class="docutils literal notranslate"><span class="pre">str.decode</span></code> methods in the code block above. In particular, the script encodes into a Python <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object, which is useful for holding and manipulating <em>binary data</em>. Binary data is a topic we’ll discuss soon, and for now, just think of this encoding work as transforming our string message into an agreed-upon encoding.</p>
 </section>
 <section id="a-simplified-networking-interface">
-<p><strong>A simplified networking interface.</strong> At this point, you shouldn’t worry about understanding all the reasons why <code class="docutils literal notranslate"><span class="pre">sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">recv</span></code> work the way that they do. In fact, <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> hides these details behind our shim library’s API and is the client script we’ll use for the rest of this chapter. Carefully compare each statement in <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> against its equivalent in <code class="docutils literal notranslate"><span class="pre">guess-client-noabstractions.py</span></code> and you’ll see what I mean by hiding details.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Line 22</p>
-<p>Notice that it is now easier to see that we have to convert the user’s integer <code class="docutils literal notranslate"><span class="pre">guess</span></code> into a string to be sent in the client’s message to the server. This type conversion is required because we’re sending strings, not integers in our messages!</p>
-</aside>
+<p><strong>A simplified networking interface.</strong> At this point, you shouldn’t worry about understanding all the reasons why <code class="docutils literal notranslate"><span class="pre">sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">recv</span></code> work the way that they do. Taking advantage of our shim library (in <code class="docutils literal notranslate"><span class="pre">socket32.py</span></code>), we can write a simpler client (<code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code>). Carefully compare each statement in <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> against its equivalent in <code class="docutils literal notranslate"><span class="pre">guess-client-noabstractions.py</span></code> and you’ll see what I mean by hiding details.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-client.py</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># The server&#39;s hostname or IP address</span>
 <span class="linenos"> 5</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>        <span class="c1"># The port used by the server</span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">10</span>    <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">13</span>        <span class="c1"># Grab a guess from the player</span>
-<span class="linenos">14</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos">15</span>            <span class="k">try</span><span class="p">:</span>
-<span class="linenos">16</span>                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
-<span class="linenos">17</span>                <span class="k">break</span>
-<span class="linenos">18</span>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-<span class="linenos">19</span>                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
-<span class="linenos">20</span>
-<span class="linenos">21</span>        <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
-<span class="linenos">22</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
-<span class="linenos">23</span>        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span>        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
-<span class="linenos">26</span>            <span class="k">break</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
+<span class="linenos">14</span>            <span class="c1"># Grab a guess from the player</span>
+<span class="linenos">15</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">16</span>                <span class="k">try</span><span class="p">:</span>
+<span class="linenos">17</span>                    <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Please input your guess: &#39;</span><span class="p">))</span>
+<span class="linenos">18</span>                    <span class="k">break</span>
+<span class="linenos">19</span>                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="linenos">20</span>                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>            <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
+<span class="linenos">23</span>            <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="linenos">24</span>            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
+<span class="linenos">27</span>                <span class="k">break</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">30</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Given the simplified networking primitives, it is easier to see that we must, on line 22, convert the user’s integer guess into a string so that the client can send it in a message to the server. This type conversion is required because we’re sending strings, not integers in our messages!</p>
 </section>
 <section id="the-server">
-<p><strong>The server.</strong> With our client complete, we can write pseudocode for the server script, taking the code parts of <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> we marked as belonging in the server. You’ll notice that the code block below pre-populates the server script with a call to create the server’s socket (line 11) and the address information the client uses to connect to the server (lines 5-6).</p>
+<p><strong>The server.</strong> With our client complete, we can write pseudocode for the server script, taking the code parts of <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> we marked as belonging in the server. You’ll notice that the code block below pre-populates the server script with a call to create the server’s socket (line 8) and the address information the client uses to connect to the server (lines 5-6).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-server-pseudocode.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
@@ -857,36 +843,35 @@ document.write(`
 <span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address (localhost)</span>
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="c1"># print(f&#39;The secret number is {secret}&#39;)</span>
+<span class="linenos"> 8</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos"> 9</span>    <span class="c1"># Bind socket to address and publish contact info</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">12</span>    <span class="c1"># Bind socket to address and publish contact info</span>
+<span class="linenos">11</span>    <span class="c1"># Answer incoming connection</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by &lt;client&gt;&#39;</span><span class="p">)</span>
 <span class="linenos">13</span>
-<span class="linenos">14</span>    <span class="c1"># Answer incoming connection</span>
-<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by &lt;client&gt;&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="c1"># Create a secret for this connection    </span>
+<span class="linenos">15</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span>    <span class="c1"># Send and receive messages through the connection</span>
-<span class="linenos">18</span>
-<span class="linenos">19</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
-<span class="linenos">20</span>            <span class="n">guess</span> <span class="o">=</span> <span class="c1"># recv guess from client</span>
-<span class="linenos">21</span>            <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
-<span class="linenos">22</span>
-<span class="linenos">23</span>            <span class="c1"># Check guess against secret and respond</span>
-<span class="linenos">24</span>            <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">25</span>                <span class="c1"># sendall(&#39;Too small!&#39;)</span>
-<span class="linenos">26</span>            <span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">27</span>                <span class="c1"># sendall(&#39;Exactly! You win!&#39;)</span>
-<span class="linenos">28</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">29</span>                <span class="c1"># sendall(&#39;Too big!&#39;)</span>
-<span class="linenos">30</span>
-<span class="linenos">31</span>    <span class="c1"># If we get here, client broke connection</span>
+<span class="linenos">18</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
+<span class="linenos">19</span>        <span class="n">guess</span> <span class="o">=</span> <span class="c1"># recv guess from client</span>
+<span class="linenos">20</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>        <span class="c1"># Check guess against secret and respond</span>
+<span class="linenos">23</span>        <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">24</span>            <span class="c1"># sendall(&#39;Too small!&#39;)</span>
+<span class="linenos">25</span>        <span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
+<span class="linenos">26</span>            <span class="c1"># sendall(&#39;Exactly! You win!&#39;)</span>
+<span class="linenos">27</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">28</span>            <span class="c1"># sendall(&#39;Too big!&#39;)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>    <span class="c1"># If we get here, client broke connection</span>
 </pre></div>
 </div>
 </section>
 <section id="a-connection">
-<p><strong>A connection.</strong> Inside the with-block, you’ll notice that this script doesn’t just create a socket. It introduces the idea of a <em>connection</em>. To understand this, we need to move away from our image of two people texting and think about a phone call. In a phone call, there’s an open line between the two parties for the entire length of the call. Even when both parties are silent (i.e., no one is sending a message), the phone line keeps the two parties connected. This is how a server works with messages sent to its sockets.</p>
-<p>Let’s see how we create such a connection. The next code block turns the pseudocode on line 12 of the previous code block into Python. It takes the socket the server created and manipulates it so that a client can message the server on this socket. In particular, the server script must <code class="docutils literal notranslate"><span class="pre">bind</span></code> the socket object to a host and port (line 13). This is equivalent to associating a cell phone (i.e., the socket) with a particular phone number (i.e., the host and port).</p>
+<p><strong>A connection.</strong> Inside the body of the with-statement, you’ll notice that this script doesn’t just create a socket. It introduces the idea of a <em>connection</em>. To understand this, we need to move away from our image of two people texting and think about a phone call. In a phone call, there’s an open line between the two parties for the entire length of the call. Even when both parties are silent (i.e., no one is sending a message), the phone line keeps the two parties connected. This is how a server works with messages sent to its sockets.</p>
+<p>Let’s see how we create such a connection. The next code block turns the pseudocode on line 9 of the previous code block into Python. It takes the socket the server created and manipulates it so that a client can message the server on this socket. In particular, the server script must <code class="docutils literal notranslate"><span class="pre">bind</span></code> the socket object to a host and port (line 11 below). This is equivalent to associating a cell phone (i.e., the socket) with a particular phone number (i.e., the host and port).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-server.py (INCOMPLETE)</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
@@ -894,45 +879,40 @@ document.write(`
 <span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address (localhost)</span>
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="c1"># print(f&#39;The secret number is {secret}&#39;)</span>
-<span class="linenos">10</span>
-<span class="linenos">11</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">12</span>    <span class="c1"># Bind socket to address and publish contact info</span>
-<span class="linenos">13</span>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
-<span class="linenos">14</span>    <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">16</span>
-<span class="linenos">17</span>    <span class="c1"># REST OF SCRIPT</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 9</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="c1"># Bind socket to address and publish contact info</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
-<p>To receive phone calls on that phone, we also have to publish the phone number, which lets people know we’ll answer it if they call it. This is the purpose of <code class="docutils literal notranslate"><span class="pre">listen</span></code> method (line 14), which we will always group with the call to <code class="docutils literal notranslate"><span class="pre">bind</span></code>.</p>
+<p>To receive phone calls on that phone, we also have to publish the phone number, which lets people know we’ll answer it if they call it. This is the purpose of <code class="docutils literal notranslate"><span class="pre">listen</span></code> method (line 12 above), which we will always group with the call to <code class="docutils literal notranslate"><span class="pre">bind</span></code>.</p>
 </section>
 <section id="picking-up-a-call">
-<p><strong>Picking up a call.</strong> With that configuration complete, the server can now await a <code class="docutils literal notranslate"><span class="pre">socket.connect</span></code> call from a client. The server does this with a call to <code class="docutils literal notranslate"><span class="pre">socket.accept</span></code> (line 18), which blocks the server script until the operating system notifies it that some client has asked for a connection. When this happens, the <code class="docutils literal notranslate"><span class="pre">accept</span></code> method returns a tuple consisting of a new <code class="docutils literal notranslate"><span class="pre">socket</span></code> object and an address tuple. This address tuple contains the client’s address information, which is in the form of host and port. The address information is like caller-id on your phone!</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1">### chap05/guess-server.py (INCOMPLETE)</span>
-<span class="linenos">10</span>
-<span class="linenos">11</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">12</span>    <span class="c1"># Bind socket to address and publish contact info</span>
-<span class="linenos">13</span>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
-<span class="linenos">14</span>    <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">16</span>
-<span class="linenos">17</span>    <span class="c1"># Answer incoming connection</span>
-<span class="linenos">18</span>    <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-<span class="linenos">19</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
-<span class="linenos">20</span>
-<span class="linenos">21</span>    <span class="c1"># REST OF SCRIPT</span>
+<p><strong>Picking up a call.</strong> With that configuration complete, the server can now await a <code class="docutils literal notranslate"><span class="pre">socket.connect</span></code> call from a client. The server does this with a call to <code class="docutils literal notranslate"><span class="pre">socket.accept</span></code> (line 16), which blocks the server script until the operating system notifies it that some client has asked for a connection. When this happens, the <code class="docutils literal notranslate"><span class="pre">accept</span></code> method returns a tuple consisting of a new <code class="docutils literal notranslate"><span class="pre">socket</span></code> object (<code class="docutils literal notranslate"><span class="pre">conn2client</span></code>) and an address tuple. This address tuple contains the client’s address information, which is in the form of host and port. The address information is like caller-id on your phone!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 6</span><span class="c1">### chap05/guess-server.py (INCOMPLETE)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 9</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="c1"># Bind socket to address and publish contact info</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="c1"># Answer incoming connection</span>
+<span class="linenos">16</span>        <span class="n">conn2client</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+<span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
 </section>
 <section id="the-conversation">
-<p><strong>The conversation.</strong> The returned socket (i.e., <code class="docutils literal notranslate"><span class="pre">conn</span></code>) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., <code class="docutils literal notranslate"><span class="pre">s</span></code> in our script) is how all clients reach the server to request a connection. When the server accepts a client’s connection, it converses with it through a separate socket, one dedicated to that client’s conversation. This separation of tasks is a very powerful problem-solving technique!</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">No as-clause</p>
-<p>There is no as-clause in the with-statement on line 22 because we previously created and named the object whose lifetime ends when the with-block is exited.</p>
-</aside>
-<p>In our completed server script (see the next code block), we’ll operate on this new socket inside a with-statement (line 22) so that it is properly closed when the server is done with it. The code inside this with-statement sits in an infinite loop waiting for the client to send its guesses. For each guess it receives, it compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">sendall</span></code>. It then awaits the next guess.</p>
+<p><strong>The conversation.</strong> The returned socket (<code class="docutils literal notranslate"><span class="pre">conn2client</span></code>) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., <code class="docutils literal notranslate"><span class="pre">s</span></code> in our script) is how all clients reach the server to request a connection. When the server accepts a client’s connection, it converses with it through a separate socket (our <code class="docutils literal notranslate"><span class="pre">conn2client</span></code>), which is dedicated to that client’s conversation. This separation of tasks is a very powerful problem-solving technique!</p>
+<p>In our completed server script, we’ll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> Inside this with-statement’s body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">conn2client.sendall</span></code>. It then awaits the next guess.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-server.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
@@ -941,33 +921,33 @@ document.write(`
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos"> 9</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos">10</span>    <span class="c1"># print(f&#39;The secret number is {secret}&#39;)</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<span class="linenos">13</span>        <span class="c1"># Bind socket to address and publish contact info</span>
-<span class="linenos">14</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
-<span class="linenos">15</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-<span class="linenos">16</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">17</span>
-<span class="linenos">18</span>        <span class="c1"># Answer incoming connection</span>
-<span class="linenos">19</span>        <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-<span class="linenos">20</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
-<span class="linenos">21</span>        
-<span class="linenos">22</span>        <span class="k">with</span> <span class="n">conn</span><span class="p">:</span>
+<span class="linenos"> 9</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="c1"># Bind socket to address and publish contact info</span>
+<span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="c1"># Answer incoming connection</span>
+<span class="linenos">16</span>        <span class="n">conn2client</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+<span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+<span class="linenos">18</span>        
+<span class="linenos">19</span>        <span class="k">with</span> <span class="n">conn2client</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="c1"># Create a secret for this connection    </span>
+<span class="linenos">21</span>            <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">22</span>
 <span class="linenos">23</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
-<span class="linenos">24</span>                <span class="n">guess</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="linenos">24</span>                <span class="n">guess</span> <span class="o">=</span> <span class="n">conn2client</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 <span class="linenos">25</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">guess</span><span class="p">:</span>
 <span class="linenos">26</span>                    <span class="k">break</span>
 <span class="linenos">27</span>                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
 <span class="linenos">28</span>
 <span class="linenos">29</span>                <span class="c1"># Check guess against secret and respond</span>
 <span class="linenos">30</span>                <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">31</span>                    <span class="n">conn</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
+<span class="linenos">31</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
 <span class="linenos">32</span>                <span class="k">elif</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">secret</span><span class="p">:</span>
-<span class="linenos">33</span>                    <span class="n">conn</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
+<span class="linenos">33</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
 <span class="linenos">34</span>                <span class="k">else</span><span class="p">:</span>
-<span class="linenos">35</span>                    <span class="n">conn</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
+<span class="linenos">35</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 <span class="linenos">36</span>
 <span class="linenos">37</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Disconnected&#39;</span><span class="p">)</span>
 <span class="linenos">38</span>
@@ -975,46 +955,80 @@ document.write(`
 <span class="linenos">40</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title">The Networking Problem</p>
-<p>If the server breaks the connection before the client, the connection won’t be shutdown properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
-</aside>
-<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem. Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
+<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn2client</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
 </section>
 <section id="programmer-beware">
-<p><strong>Programmer beware.</strong> The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we’d want to write them to catch and gracefully handle all these errors. But we just want our scripts to work assuming everything proceeds smoothly, and that means that our server script need gracefully handle only one networking condition: the client disconnected.</p>
-<p>The if-statement on line 25 is the code that recognizes when the client disconnects. It doesn’t look it does this, but here’s how it works: This if-statement checks the value of <code class="docutils literal notranslate"><span class="pre">guess</span></code> from the <code class="docutils literal notranslate"><span class="pre">recv</span></code> method call, and if this value is the empty string, it breaks us out of the infinite loop. It doesn’t matter whether the client finished its work (i.e., terminated cleanly) or it terminated prematurely. The networking protocol running below the socket library’s API knows when the client breaks the connection and it alerts the server’s operating system (OS). The OS then unblocks the server’s <code class="docutils literal notranslate"><span class="pre">recv</span></code> call, and since there was no client message, the returned result of the <code class="docutils literal notranslate"><span class="pre">recv</span></code> is the empty string. Our script sees this empty string and knows that the client has terminated.</p>
-<p>You might feel that there is a lot of networking setup for the server in our simple application. There is definitely more than in the client, but this setup supports the generation of very powerful servers that converse with many clients simultaneously. In fact, you use such servers everyday! As you try your own version of a networked game, your server script should copy lines 12-26 unchanged. You can change the name used for the result of the <code class="docutils literal notranslate"><span class="pre">conn.recv()</span></code> call on lines 24-25, but don’t change the order of the networking calls or move this cryptic if-statement. Networking is a complicated and tricky subject. Our goal in this chapter and its exercises is understand the basics of network programming and play a bit with the power of it.</p>
+<p><strong>Programmer beware.</strong> The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we’d want to write them to catch and gracefully handle all these errors. When we bypass this important work and assume everything proceeds smoothly, our server script needs to handle only one networking condition: client disconnects.</p>
+<p>The if-statement on line 25 is the code that recognizes when the client disconnects. It doesn’t look like it does this, but here’s how it works: This if-statement checks the value of <code class="docutils literal notranslate"><span class="pre">guess</span></code> from the <code class="docutils literal notranslate"><span class="pre">recv</span></code> method call, and if this value is the empty string, it breaks us out of the infinite loop. It doesn’t matter whether the client finished its work (i.e., terminated cleanly) or it terminated prematurely. The networking protocol running below the socket library’s API knows when the client breaks the connection and it alerts the server’s operating system (OS). The OS then unblocks the server’s <code class="docutils literal notranslate"><span class="pre">recv</span></code> call, and since there was no client message, the returned result of the <code class="docutils literal notranslate"><span class="pre">recv</span></code> is the empty string. Our script sees this empty string and knows that the client has terminated.</p>
+<p>You might feel that there is a lot of networking setup for the server in our simple application. There is definitely more than in the client, but this setup supports the generation of very powerful servers that converse with many clients simultaneously. In fact, you use such servers everyday! As you try your own version of a networked game, your server script should copy lines 9-19 and 23-26 unchanged. You can change the name used for the result of the <code class="docutils literal notranslate"><span class="pre">conn2client.recv()</span></code> call on lines 24-25, but don’t change the order of the networking calls or move this cryptic if-statement. Networking is a complicated and tricky subject. Our goal in this chapter and its exercises is understand the basics of network programming and play with the power of it without digging into the complexities.</p>
 </section>
 <section id="run-it">
-<p><strong>Run it!</strong> Are you ready to try running our client and server scripts? Terrific, here’s how! First, download <code class="docutils literal notranslate"><span class="pre">socket32.py</span></code>, <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> to your local machine from this book’s companion website. Then follow the directions in one of the bullets below; most of you will want to follow the instructions in the first bullet.</p>
+<p><strong>Run it!</strong> Are you ready to try running our client and server scripts? It’s a bit more complicated than running a single script but not terribly much. If you’re running with an IDE, follow either the first or second option below:</p>
 <ul class="simple">
-<li><p>A simplest approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell <em>before</em> the client script in the other.</p></li>
-<li><p>If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like this:</p></li>
+<li><p>IDE Option 1: A simplest approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell <em>before</em> the client script in the other. When the client script terminates, the server script should automatically terminate too.</p></li>
+<li><p>IDE Option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like this:</p></li>
 </ul>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Commands to run in a shell; NOT a Python script
 $ python3 guess-server.py &amp;
 $ python3 guess-client.py
 </pre></div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title">The nohup command</p>
-<p>The nohup command is a fun, infrequently used command that stands for “no hang up.” Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user’s running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won’t block us from running other code cells.</p>
-</aside>
-<ul class="simple">
-<li><p>If you’re reading this chapter as an interactive Python notebook within something like a Google Colab session, you emulate the previous bullet using the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.</p>
-<ul>
+<p>If you’re running this chapter’s scripts as code blocks in an interactive Python notebook, you’ll want to use the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> Here’s what you do:</p>
+<ol class="arabic simple">
 <li><p>Upload <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> into your notebook session.</p></li>
-<li><p>Run the code block below, which starts <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> in background. An exclamation point (<code class="docutils literal notranslate"><span class="pre">!</span></code>) in the first column of a code block tells the interpreter to pass the rest of the line to the shell.</p></li>
-<li><p>Run the earlier code block that contains <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> .</p></li>
-</ul>
-</li>
-</ul>
+<li><p>Create a code block like the one below and run it. It’ll start <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> in background. An exclamation point (<code class="docutils literal notranslate"><span class="pre">!</span></code>) in the first column of a code block tells the Python interpreter to pass the rest of the line to the shell.</p></li>
+<li><p>Finally, copy the <code class="docutils literal notranslate"><span class="pre">main</span></code> function from <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> into a code block and run it. You’ve effectively done what I called “IDE Option 2” above but inside an interactive Python notebook.</p></li>
+</ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!nohup python3 guess-server.py &amp;
 </pre></div>
 </div>
 <p>In each of these approaches, we’re not really using the network. Remember that we’re running these two scripts with the loopback interface, but we can’t easily tell that without looking at the code. Again, abstraction at work!</p>
-<p>[Version 20240604]</p>
+<p>[Version 20240717]</p>
+<hr class="footnotes docutils" />
+<aside class="footnote brackets" id="fn1" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.</p>
+</aside>
+<aside class="footnote brackets" id="fn2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Think about what it takes to check if a string is an integer. We need to visit and check each character, verifying that it is a number. Except that we probably don’t want leading zeros. And except that we should allow for a leading + or - character, which may or may not be there. This is tricky code to write correctly, and why should we bother? Someone already did this work in `int`!</p>
+</aside>
+<aside class="footnote brackets" id="fn3" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>In case you’re curious, the `socket` library is similar to the networking primitives in most operating systems. The `requests` library, in fact, uses the `socket` library in its implementation!</p>
+</aside>
+<aside class="footnote brackets" id="fn4" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>There are many resources available on the Internet where you can learn about the TCP/IPv4 protocol. You won’t need to know any details to code and run our scripts.</p>
+</aside>
+<aside class="footnote brackets" id="fn5" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p>Although the text talks about a friend with multiple cell phones, the ports I’m talking about are not the hardware ports that you can find, for example, on the side of your laptop. Software ports are a way to separate the stream of messages coming in on your laptop’s network connection into several different logical streams. It’s like what you probably do when you separate your real mail from your junk mail.</p>
+</aside>
+<aside class="footnote brackets" id="fn6" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p>You can have at most 65,536 ports, and so our “big number” will be somewhere close to the upper limit.</p>
+</aside>
+<aside class="footnote brackets" id="fn7" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Both these methods are blocking calls, e.g., `socket.sendall` blocks until the entire message is sent (or an error occurs). For short messages in an application like ours, where the server serves only one client, this is a reasonable thing to do.</p>
+</aside>
+<aside class="footnote brackets" id="fn8" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
+<p>While we use a shim to simplify the interface to a library with more functionality than we need, shim libraries solve numerous software engineering problems. For example, you could use a shim library to keep an application running while the software libraries on which it depends are slowly upgraded. The shim translates between the new and old versions of an API. You can think of this as keeping a plane aloft while you sequentially upgrade each of its systems!</p>
+</aside>
+<aside class="footnote brackets" id="fn9" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
+<p>There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.</p>
+</aside>
+<aside class="footnote brackets" id="fn10" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>If the server breaks the connection before the client, the connection won’t be shut down properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
+</aside>
+<aside class="footnote brackets" id="fn11" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>The nohup command is an infrequently used command that stands for “no hang up.” Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user’s running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won’t block us from running other code cells.</p>
+</aside>
 </section>
 </section>
 
