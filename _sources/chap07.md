@@ -24,11 +24,11 @@ In this chapter, you will learn how computers represent numbers with fractional 
 
 We won't attempt to cover the breadth of numerical algorithms, but answer a fundamental question at the heart of numerical computing and in line with our efforts to understand how computers operate: *If computers see everything in the world as a collection of numbers and they've been constructed to do computation on numbers, why are some types of computation hard to do on a computer?*
 
-While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between *range* (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and *precision* (i.e., how close is a real number we can represent to the real number we want to represent?).
+While this might seem paradoxical, this problem occurs because any compact representation of real numbers needs to make a tradeoff between *range* (i.e., how large is the difference between the biggest and smallest real numbers that we can represent?) and *precision* (i.e., how close is a real number we *can* represent to the real number we *want to* represent?).
 
 We first thought about the issue of range in an active-learning exercise in Chapter 6, when we investigated whether addition on Python integers would ever overflow the programming language's physical representation. While Python doesn't place a limit on the largest and smallest representable integer values (i.e., it has a dynamically expandable representation), most programming languages have a clearly stated limit on these values for each of their defined integer data types. And for FP numbers, the same is true in Python.
 
-Python adheres to the FP standard representation IEEE 754. As we'll see in a moment, the range defined by this standard, while not infinite, is comfortably big. In other words, most of us won't write scripts involving real numbers that will overflow this FP representation.
+Python adheres to the FP standard representation IEEE 754. As we'll see in a moment, the range defined by this standard, while not infinite, is comfortably big. In other words, most of us won't write scripts involving real numbers that will overflow this representation.
 
 Unfortunately, the same cannot be said of precision. You'll almost certainly write scripts that will have to deal with the issue of FP precision. Precision is, informally, a measure of how close the computer's representation of a real number is to its mathematical value. Sometimes the two are the same, but too often they're not.
 
@@ -42,7 +42,7 @@ n = 0.1
 n * n == 0.01
 ```
 
-When you run this code block, it should surprise you that the value you know to be n-squared for `n = 0.1` is not the result of the multiplication of that number with itself. How can our fancy computers get the wrong answer to this simple arithmetic problem?!? Well, let's find out by writing a script to understand how the FP standard represents real numbers like `0.1`.
+When you run this code block, it should surprise you that the value you know to be n-squared for `n = 0.1` is not the result of the multiplication of that number with itself. How can our computers get the wrong answer to this simple arithmetic problem? Well, let's find out by writing a script to understand how the FP standard represents real numbers like `0.1`.
 
 ## The range of a FP number
 
@@ -56,13 +56,19 @@ For example, we could encode 6.574 as follows:
 
 where `6574` is the significand, `-3` is the exponent, `10` is the assumed base, and the radix point is assumed to sit just to the right of the rightmost digit of the significand.
 
-The range of a FP representation depends on the range of integers we can store in that representation's exponent field. The IEEE 754 standard for *single-precision* FP numbers, for example, has an 8-bit exponent field, and the exponent field in its *double-precision* encoding is 11 bits. Clearly 11 is not twice 8, and the term "double precision" comes from the rough doubling of the size of the significand field (from 23 to 52 bits). Each encoding also includes a sign bit, which indicates the sign of the significand (not the exponent), and from this you can compute that double-precision FP numbers require twice as many bits as single-precision ones in the IEEE 754 standard.
+The range of a FP representation depends on the range of integers we can store in that representation's exponent field. The IEEE 754 standard for *single-precision* FP numbers, for example, has an 8-bit exponent field, and the exponent field in its *double-precision* encoding is 11 bits. Clearly 11 is not twice 8, and the term "double precision" comes from the rough doubling of the size of the significand field (from 23 to 52 bits). Each encoding also includes a sign bit, which indicates the sign of the significand (not the exponent), and from this you can compute that double-precision FP numbers require twice as many bits as single-precision ones in the IEEE 754 standard (as illustrated in {numref}`Figure %s<c07_fig1_ref>` ).
+
+```{figure} images/c07_fig1.png
+:name: c07_fig1_ref
+
+The layout and bit sizes of the different components of single- and double-precision FP numbers in the IEEE 754 standard. Notice that double-precision numbers take twice as many bits of storage as single-precision ones.
+```
 
 The range of these two representations is impressive. While the single-precision representation can't represent the estimated number of atoms in the known universe, which somewhere between `10**78` and `10**82`, the double-precision representation with a maximum base-10 exponent of 308 easily can. You can also measure things as microscopically small as this maximum number is astronomically large.
 
 ## Precision
 
-But what about precision? In base 10, we understand the fractional part of a real number as the group of digits to the right of the decimal point. The value of each of these digits to the total fraction is the digit multiplied by `10**-m`, where `m` is 1 for the digit immediately to the right of the decimal point, 2 for the next digit to the right, and so forth.
+But what about precision? In base 10, we recognize the fractional part of a real number as the group of digits to the right of the decimal point. The value of each of these digits to the total fraction is the digit multiplied by `10**-m`, where `m` is 1 for the digit immediately to the right of the decimal point, 2 for the next digit to the right, and so forth.
 
 This is that expansion for the decimal fraction 0.574:
 
@@ -70,24 +76,21 @@ This is that expansion for the decimal fraction 0.574:
 5 * 10**-1 + 7 * 10**-2 + 4 * 10**-3
 ```
 
-Run this code block, and you'll notice something strange. To explain, let's move from base-10 numbers to binary (base-2) numbers because jump is where things get difficult.
+Run this code block, and you'll notice something strange. To explain, let's move from base-10 numbers to binary (base-2) numbers because this jump is where things get difficult.
 
 A binary fraction can be expanded in the same way as a decimal fraction, except that we change the base from 10 to 2, and the coefficient of each term is either 0 or 1. Pulling these coefficients together creates the binary string that we'll use as the significand. And here's where precision comes into play: The difference between the significand we want in base-10 and the closest one we can represent in base-2 is a measure of precision in our format.
 
-```{margin} Notation
-The leading `0b` mimics the leading `0x` we saw on hexadecimal numbers. Following this prefix, we write a `0`, which indicates that there's no whole number here, and the radix point, which always proceeds the fractional part.
-```
-
 ## Illustrating this issue of precision
 
-We can get a sense for precision by writing a Python program that constructs the binary representation for a decimal fraction. Our script will prefix the answer we compute with the string `'0b0.'`, which will help us to remember that this is the binary representation of a fraction between 0 and 1.
+We can get a sense for precision by writing a Python program that constructs the binary representation for a decimal fraction. Our script will prefix the answer we compute with the string `'0b0.'`, which will help us to remember that this is the binary representation of a fraction between 0 and 1.[^fn1]
 
-Our script will expect two inputs. The first is the decimal fraction we want to represent and the second is the size in bits of our chosen FP representation's significand. If we wanted to mimic the precision of IEEE 754 single-precision, we'd input 23. The following script gets us started.
+Our script will expect two inputs. The first is the decimal fraction we want to represent and the second is the size in bits of our chosen FP representation's significand. If we wanted to mimic the precision of IEEE 754 single-precision, we'd input 23. The following script grabs and checks these inputs.
 
 ```{code-block} python
 ---
 lineno-start: 1
 ---
+### chap07/fbin.py
 '''Convert a decimal fraction into a binary string'''
 import sys
 
@@ -96,30 +99,32 @@ n = float(input("Decimal fraction to convert: "))
 bits = int(input("Size of significand in bits: "))
 
 # Error checking
-if n < 0. or n >= 1.:
-    sys.exit("ValueError: target must be in the range [0., 1.)")
+if n < 0.0 or n >= 1.0:
+    sys.exit("ValueError: target must be in the range [0.0, 1.0)")
 ```
 
-Notice that we have to use the Python `float` type to represent the inputted decimal fraction. The `float` function converts a string that looks like a real number into a `float`.
+Notice that we use the Python `float` type to represent the inputted decimal fraction. The `float` function (line 6) converts a string that looks like a real number into a `float`.
 
-To figure out what we need to do next, let's think about what we know at the start of our script:
+Line 10 verifies that the input value `n` is in the expected range (i.e., between 0 and 1, not including 1). This range check uses FP literals. Remember that `0` is a Python integer literal. `0.` and `0.0` both represent zero as a FP number.[^fn2]
 
-```{margin} FP Literals
-Notice that our error check in the script checks `n` against two FP literals. `0` is a Python integer. `0.` and `0.0` both represent zero as a FP number (and so is any number of zeros after the decimal point).
-```
+## Getting started
 
-1. We know that the number the user inputted is between 0 and 1, including the value of 0 and excluding the value of 1, as our error check asserts.
+To figure out what we need to do to get started solving this problem, consider the following:
+
+1. We know that the number `n` is between 0 and 1, including the value of 0 and excluding the value of 1, as our error check asserts.
 2. If we think about our best guess at the binary encoding of `n` given these bounds and no significand bits, we would choose 0, since we know that it can't be 1.
 
 This answer isn't precise, unless the user inputs the value `0.0`, but it's the best guess we have with zero significand bits in our FP representation. Hey, we have started to solve our problem! Let's write this in Python at the end of our growing script.
 
 ```{code-block} python
 ---
-lineno-start: 12
+lineno-start: 11
 ---
+### chap07/fbin.py
+
 # Initialize our bounds and our current best estimate
-upper = 1.
-lower = 0.
+upper = 1.0
+lower = 0.0
 best = lower  # with 0 bits used, our best estimate is 0
 encoding = ''
 ```
@@ -128,7 +133,7 @@ encoding = ''
 
 What would we do next if we wanted to add one bit to our significand? Since we have no bits in our significand, that bit would be the coefficient of the first term in the expansion we discussed earlier. Do we want this coefficient to be `0` or `1`? Well, which of these two values creates a new guess that is closer to the actual number `n` than our current guess? The one that is closer becomes our new best guess.
 
-If we're updating our best guess as we add bits to our significand, this starts to sound like we're building a loop. As we know, loops have exit conditions, and the exit condition in this case is when the best guess is exactly `n`. If our current best guess isn't exactly `n`, then we loop to again add new bit to the significand, which will bring us closer to the input decimal fraction. Of course, we also have to exit this loop if we run out of significand bits.
+If we're updating our best guess as we add bits to our significand, this starts to sound like we're building a loop. As we know, loops have exit conditions, and an exit condition in this case is when the best guess is exactly `n`. If our current best guess isn't exactly `n`, then we loop to again add new bit to the significand, which will bring us closer to the input decimal fraction. Of course, we also have to exit this loop if we run out of significand bits.
 
 ```{admonition} You Try It
 Before reading on, practice writing the pseudocode for the loop I just described. What type of loop might you use (i.e., a for- or a while-loop)? What's the condition we'll test that protects the break-statement in the loop?
@@ -155,12 +160,12 @@ n = float(input("Decimal fraction to convert: "))
 bits = int(input("Size of significand in bits: "))
 
 # Error checking
-if n < 0. or n >= 1.:
-    sys.exit("ValueError: target must be in the range [0., 1.)")
+if n < 0.0 or n >= 1.0:
+    sys.exit("ValueError: target must be in the range [0.0, 1.0)")
 
 # Initialize our bounds and our current best estimate
-upper = 1.
-lower = 0.
+upper = 1.0
+lower = 0.0
 best = lower  # with 0 bits used, our best estimate is 0
 encoding = ''
 
@@ -168,7 +173,7 @@ for i in range(1, bits+1):
     # Our new estimate always adds a least-significant one bit to the end
     # of our current lower bound, i.e., move up the value below the
     # target number.
-    new_guess = lower + (2. ** -i)
+    new_guess = lower + (2.0 ** -i)
 
     # Update the correct bound, depending upon whether the new estimate
     # overshot the target or not.
@@ -200,10 +205,10 @@ else:
 print(f"  which has a decimal value of {best}")
 ```
 
-Run this code block with the inputs of `0.574` and `23`, you'll see that the encoding for the significand is `'0b0.10010010111100011010100'`, which has a decimal value of `0.5740000009536743`. That's not `0.574`, but pretty close. The difference is the precision error.
+Run this code block with the inputs of `0.574` and `23`, and you'll see that the encoding for the significand is `'0b0.10010010111100011010100'`, which has a decimal value of `0.5740000009536743`. That's not `0.574`, but pretty close. The difference is the precision error.
 
-```{margin} Print Rounds
-If you set `n = 0.1` and then print `n` in the interactive Python interpreter, it will tell you that `n` is `0.1`. As [this tutorial page](https://docs.python.org/3/tutorial/floatingpoint.html) says, Python sometimes rounds what it prints. What it displays and what it stores may be different when dealing with FP numbers!
+```{admonition} You Try It
+Run `fbin.py` with `0.574` and `52`, and you'll match the answer we got earlier when we asked the interactive Python interpreter to compute `5 * 10**-1 + 7 * 10**-2 + 4 * 10**-3`. You now know what FP precision is Python's default!
 ```
 
 ## FP errors accumulate
@@ -214,4 +219,8 @@ If your script operates with floating-point numbers and you need the results to 
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20240605\]
+\[Version 20240718\]
+
+[^fn1]: The leading \`0b\` mimics the leading \`0x\` we saw on hexadecimal numbers. Following this prefix, we write a \`0\`, which indicates that there's no whole number here, and the radix point, which always precedes the fractional part.
+
+[^fn2]: It doesn't matter how many zeros you add after the decimal point; the value is still zero as a FP number. It's the decimal point that matters in making it a FP number. Whether you write \`0.\` or \`0.0\` is a matter of style.

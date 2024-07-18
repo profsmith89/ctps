@@ -180,6 +180,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
 
 
@@ -197,6 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c06.html">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c07.html">Chapter 7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c09.html">Chapter 9</a></li>
 
@@ -376,7 +384,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-1">
 <h1>Chapter 1<a class="headerlink" href="#chapter-1" title="Permalink to this heading">#</a></h1>
 <section id="ale-1-1-hello-world">
-<p><strong>ALE 1.1: Hello World.</strong> Using your chosen IDE, follow the steps below to practice with Python commands you learned in Chapter 1 and to become more comfortable creating named Python objects.</p>
+<h2>ALE 1.1: Hello World<a class="headerlink" href="#ale-1-1-hello-world" title="Permalink to this heading">#</a></h2>
+<p>Using your chosen IDE, follow the steps below to practice with Python commands you learned in Chapter 1 and to become more comfortable creating named Python objects.</p>
 <p><strong>Step 1.</strong> In your IDE, make a new Python project.</p>
 <p><strong>Step 2.</strong> In the editor pane, write a script that prints <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code> using only the <code class="docutils literal notranslate"><span class="pre">print</span></code> command. Run your script to make sure it executes correctly.</p>
 <p><strong>Step 3.</strong> Now change your script so that it assigns the string literal <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">World'</span></code> to the variable <code class="docutils literal notranslate"><span class="pre">exclamation</span></code>, and then have your script print <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code> using this variable. Run this updated script to make sure it executes correctly.</p>
@@ -390,7 +399,8 @@ document.write(`
 <p>If you’re interested in the history and lore behind the tradition of printing “Hello World” in your first program, please see <a class="reference external" href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">this wikipedia page</a>.</p>
 </section>
 <section id="ale-1-2-too-long">
-<p><strong>ALE 1.2: Too long?</strong> Let’s solve a new problem that continues to use the context of reading bedtime stories: My children loved the stories we read, and they would often grab another book immediately after we finished the current one. As night fell, I’d begin to consider the length of each book they brought me. If it was late, I wouldn’t start a long one.</p>
+<h2>ALE 1.2: Too long?<a class="headerlink" href="#ale-1-2-too-long" title="Permalink to this heading">#</a></h2>
+<p>Let’s solve a new problem that continues to use the context of reading bedtime stories: My children loved the stories we read, and they would often grab another book immediately after we finished the current one. As night fell, I’d begin to consider the length of each book they brought me. If it was late, I wouldn’t start a long one.</p>
 <p>So let’s write a script that makes this decision for us. It will count the number of lines in a book and then print “Let’s read this” if the book’s length is less than 20 lines and “We can’t read this” if it isn’t.</p>
 <p>To get started solving this problem, let’s practice Step 5 in our problem-solving process, which states that we should identify old scripts that can help us in writing our new one. Obviously, doing this can save us work, but more generally, this approach avoids the fears many of us have when we start a project by staring at a blank page.</p>
 <p><strong>Step 1.</strong> In your IDE, make a new Python project and paste into the editor pane the script we completed at the end of Chapter 1 (<code class="docutils literal notranslate"><span class="pre">anybook.py</span></code>).</p>
@@ -410,7 +420,8 @@ document.write(`
 <p><strong>Step 7.</strong> Write and test the complete script!</p>
 </section>
 <section id="ale-1-3-close-the-screen-door">
-<p><strong>ALE 1.3: Close the screen door!</strong> Create yourself yet another Python project, and again copy in the entire script from the end of Chapter 1 (<code class="docutils literal notranslate"><span class="pre">anybook.py</span></code>). For this exercise, we’re not going to change its functionality, but simply make it more <em>robust</em>.</p>
+<h2>ALE 1.3: Close the screen door!<a class="headerlink" href="#ale-1-3-close-the-screen-door" title="Permalink to this heading">#</a></h2>
+<p>Create yourself yet another Python project, and again copy in the entire script from the end of Chapter 1 (<code class="docutils literal notranslate"><span class="pre">anybook.py</span></code>). For this exercise, we’re not going to change its functionality, but simply make it more <em>robust</em>.</p>
 <p><strong>Step 1.</strong> A piece of this work involves creating a separate directory for its input files. By putting all the input text files in a subdirectory called <code class="docutils literal notranslate"><span class="pre">txts</span></code>, we’ll avoid mistakenly overwriting one of our scripts while performing file operations on the input texts. Look at the changes to the <code class="docutils literal notranslate"><span class="pre">open</span></code> parameter on line 2 below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="n">my_open_book</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span>
@@ -491,7 +502,8 @@ document.write(`
 <p>Update the code in your editor pane and run it. Everything should continue to work as before, but your code is more robust!</p>
 </section>
 <section id="ale-1-4-from-story-to-contract">
-<p><strong>ALE 1.4: From story to contract.</strong> Let’s turn an input story into a legal contract by numbering each paragraph, where a new paragraph is defined to start on a line of text that follows a blank line. Here is a specification for your solution script:</p>
+<h2>ALE 1.4: From story to contract<a class="headerlink" href="#ale-1-4-from-story-to-contract" title="Permalink to this heading">#</a></h2>
+<p>Let’s turn an input story into a legal contract by numbering each paragraph, where a new paragraph is defined to start on a line of text that follows a blank line. Here is a specification for your solution script:</p>
 <ul class="simple">
 <li><p>If you look at a legal contract, you’ll typically see that every paragraph in the document is numbered so that it is easy to refer to specific paragraphs in the negotiations surrounding the contract. The first paragraph in the contract is given the number 1, and the numbering continues sequentially until the last paragraph in the body.</p></li>
 <li><p>To make things simple, your script should print the string <code class="docutils literal notranslate"><span class="pre">'PARAGRAPH</span> <span class="pre">1\n'</span></code> when numbering the first paragraph in the text. In other words, <code class="docutils literal notranslate"><span class="pre">PARAGRAPH</span> <span class="pre">1</span></code> appears on its own line and then is followed by the first text line of the first paragraph. Follow this pattern for the rest of the paragraphs in the story.</p></li>

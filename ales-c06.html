@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ales-c06';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 8" href="ales-c08.html" />
+    <link rel="next" title="Chapter 7" href="ales-c07.html" />
     <link rel="prev" title="Chapter 5" href="ales-c05.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="ales-c05.html">Chapter 5</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ales-c07.html">Chapter 7</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c08.html">Chapter 8</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c09.html">Chapter 9</a></li>
 
@@ -386,7 +387,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-6">
 <h1>Chapter 6<a class="headerlink" href="#chapter-6" title="Permalink to this heading">#</a></h1>
 <section id="ale-6-1-capturing-color">
-<p><strong>ALE 6.1: Capturing color.</strong> We’ve learned that digital images are nothing more than large two-dimensional arrays of pixels, which we can load into a pixel array and manipulate. Except for the <code class="docutils literal notranslate"><span class="pre">edges.py</span></code> script in which we ran a prepackaged convolution filter on a color image of my dog, we limited ourselves to grayscale images containing 8-bit pixels. With 8 bits, we could represent 256 different shades of gray from black (<code class="docutils literal notranslate"><span class="pre">0x00</span></code>) to white (<code class="docutils literal notranslate"><span class="pre">0xff</span></code>).</p>
+<h2>ALE 6.1: Capturing color<a class="headerlink" href="#ale-6-1-capturing-color" title="Permalink to this heading">#</a></h2>
+<p>We’ve learned that digital images are nothing more than large two-dimensional arrays of pixels, which we can load into a pixel array and manipulate. Except for the <code class="docutils literal notranslate"><span class="pre">edges.py</span></code> script in which we ran a prepackaged convolution filter on a color image of my dog, we limited ourselves to grayscale images containing 8-bit pixels. With 8 bits, we could represent 256 different shades of gray from black (<code class="docutils literal notranslate"><span class="pre">0x00</span></code>) to white (<code class="docutils literal notranslate"><span class="pre">0xff</span></code>).</p>
 <p>While black-and-white photos can be quite artistic, more often most of us capture color images. I used to take color pictures with a digital single lens reflex (DSLR) camera, but now I take all my photos (and videos) with my cellphone. The manufacturer describes the camera on the back of my cellphone as containing a 12-megapixel sensor, where mega- means <span class="math notranslate nohighlight">\(10^6\)</span> or 1 million.</p>
 <p>The manufacturer-quoted number isn’t an exact measure. The sensor in my cellphone is actually a 2D array of size 4290 by 2800, and the color pictures taken with this camera produce just over 36 megabytes (MB) of image data (by “just over” I’m telling you that the 36MB measure also isn’t exact). Despite the inexactness of both numbers, you can use them to determine <strong>the size of each color pixel in bytes</strong>.</p>
 <div class="admonition-you-try-it admonition">
@@ -396,7 +398,8 @@ document.write(`
 <p>You should have found that the simplest color images (i.e., those that use <code class="docutils literal notranslate"><span class="pre">RGB</span></code> mode) use three 8-bit numbers to represent the color of a pixel. In Python, each RGB pixel is a tuple of three 8-bit numbers, where the first byte (i.e., 8-bit value) represents how much red is in the pixel. The next indicates how much green the pixel contains, and the last value is the amount of blue. Three zeros would indicate the absence of any of the three colors and would display as black; recall that 0 represents black in every mode. Three values of 255 would appear as a white pixel.</p>
 </section>
 <section id="ale-6-2-diagonal-fade-to-a-color">
-<p><strong>ALE 6.2: Diagonal fade to a color.</strong> In this chapter, the script <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> created a grayscale image containing a diagonal fade. For this exercise, you’ll change this script so that it fades not from black to white, but from black to one of red, green, or blue. To do this, we’ll need to change the mode of the image we create from <code class="docutils literal notranslate"><span class="pre">'L'</span></code> to <code class="docutils literal notranslate"><span class="pre">'RGB'</span></code>.</p>
+<h2>ALE 6.2: Diagonal fade to a color<a class="headerlink" href="#ale-6-2-diagonal-fade-to-a-color" title="Permalink to this heading">#</a></h2>
+<p>In this chapter, the script <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> created a grayscale image containing a diagonal fade. For this exercise, you’ll change this script so that it fades not from black to white, but from black to one of red, green, or blue. To do this, we’ll need to change the mode of the image we create from <code class="docutils literal notranslate"><span class="pre">'L'</span></code> to <code class="docutils literal notranslate"><span class="pre">'RGB'</span></code>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">HINT</p>
 <p><code class="docutils literal notranslate"><span class="pre">pixels[i,j]</span></code> no longer holds just a single integer. Focus on the color component you want and leave the other black (i.e., <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
@@ -425,7 +428,8 @@ document.write(`
 <p><strong>Step 2.</strong> Try not just a diagonal fade from black-to-red, but also create ones from black-to-green and black-to-blue.</p>
 </section>
 <section id="ale-6-3-creating-a-checkerboard">
-<p><strong>ALE 6.3: Creating a checkerboard.</strong> Starting again with <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, which creates an image containing a diagonal fade, change the body of the innermost for-loop in <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> so that it creates a checkerboard pattern. The checkerboard pattern should adhere to these rules:</p>
+<h2>ALE 6.3: Creating a checkerboard<a class="headerlink" href="#ale-6-3-creating-a-checkerboard" title="Permalink to this heading">#</a></h2>
+<p>Starting again with <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, which creates an image containing a diagonal fade, change the body of the innermost for-loop in <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code> so that it creates a checkerboard pattern. The checkerboard pattern should adhere to these rules:</p>
 <ul class="simple">
 <li><p>Each pixel contains either the color black or white; and</p></li>
 <li><p>The color of any pixel is not the same as its neighbors to the north, south, east, and west, i.e., if the current pixel is at <code class="docutils literal notranslate"><span class="pre">[i,j]</span></code>, the pixel to the north is at <code class="docutils literal notranslate"><span class="pre">[i,j-1]</span></code>, to the south <code class="docutils literal notranslate"><span class="pre">[i,j+1]</span></code>, to the east is <code class="docutils literal notranslate"><span class="pre">[i+1,j]</span></code>, and to the west is <code class="docutils literal notranslate"><span class="pre">[i-1,j]</span></code>. Don’t worry about neighbors that are not within the pixel array.</p></li>
@@ -454,7 +458,8 @@ document.write(`
 </div>
 </section>
 <section id="ale-6-4-counting-with-python-integers">
-<p><strong>ALE 6.4: Counting with Python integers.</strong> If you look carefully at the script named <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, you’ll see that it doesn’t do arithmetic on pixels, but on the loop indices <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>, which are values produced by the <code class="docutils literal notranslate"><span class="pre">range</span></code> function. If you pass these names to the built-in function <code class="docutils literal notranslate"><span class="pre">type</span></code>, it will tell you that these names refer to Python integers.</p>
+<h2>ALE 6.4: Counting with Python integers<a class="headerlink" href="#ale-6-4-counting-with-python-integers" title="Permalink to this heading">#</a></h2>
+<p>If you look carefully at the script named <code class="docutils literal notranslate"><span class="pre">edge1.py</span></code>, you’ll see that it doesn’t do arithmetic on pixels, but on the loop indices <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>, which are values produced by the <code class="docutils literal notranslate"><span class="pre">range</span></code> function. If you pass these names to the built-in function <code class="docutils literal notranslate"><span class="pre">type</span></code>, it will tell you that these names refer to Python integers.</p>
 <p>From experience, we know that Python integers can hold values greater than 255 and less than 0, and so it is not the addition in our script that overflows and forces the saturation, but the act of trying to store the result of this addition into a location in the array <code class="docutils literal notranslate"><span class="pre">pixels</span></code> that causes an issue. In particular, the PIL library checks to see if the value we’re trying to store overflows (or underflows) the 8-bit, unsigned representation used for each pixel in the <code class="docutils literal notranslate"><span class="pre">pixels</span></code> array.</p>
 <p>That’s great, but if we need to be careful with the values we put into the pixels of a black-and-white image, <strong>do we need to be careful about the values we put into a Python integer?</strong> In other words, <strong>will addition on Python integers ever overflow?</strong></p>
 <p>We could go read some documentation or google an answer to this question, but we can also experiment and see what happens.</p>
@@ -513,7 +518,8 @@ document.write(`
 <p>You can let <code class="docutils literal notranslate"><span class="pre">ale04_double.py</span></code> continue to run for a while, but at some point, kill its execution. This script clearly demonstrates that we can count pretty high in Python. In fact, Python does not restrict the size of an integer. As long as your computer has the storage necessary to hold whatever big number you can dream up, Python can handle it. This is a very nice feature of this language, and one that is not true in every other programming language.</p>
 </section>
 <section id="ale-6-5-color-the-duck-s-world">
-<p><strong>ALE 6.5: Color the duck’s world.</strong> Our earlier exercises created their own images. In this exercise, you will start learning how to modify an existing digital image. You’ll also learn a new set of methods for accessing and changing the value of a particular pixel in your open image.</p>
+<h2>ALE 6.5: Color the duck’s world<a class="headerlink" href="#ale-6-5-color-the-duck-s-world" title="Permalink to this heading">#</a></h2>
+<p>Our earlier exercises created their own images. In this exercise, you will start learning how to modify an existing digital image. You’ll also learn a new set of methods for accessing and changing the value of a particular pixel in your open image.</p>
 <p><strong>Step 1.</strong> In your favorite JPEG viewer, open the color image named <code class="docutils literal notranslate"><span class="pre">duck.jpg</span></code>, which you can find in <code class="docutils literal notranslate"><span class="pre">chap06/images</span></code> of the book’s GitHub repo. It should look like a perfectly normal picture that you might have taken with your own cellphone camera.</p>
 <p><strong>Step 2.</strong> The script <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> uses the Python PIL library to open, read, and recolor a single input image. Read through the script and then we’ll briefly discuss what’s new in it.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap06/ale05.py</span>
@@ -594,11 +600,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="ales-c08.html"
+       href="ales-c07.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 8</p>
+        <p class="prev-next-title">Chapter 7</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
