@@ -55,7 +55,7 @@ im.save('ale02.png')
 Starting again with `edge1.py`, which creates an image containing a diagonal fade, change the body of the innermost for-loop in `edge1.py` so that it creates a checkerboard pattern. The checkerboard pattern should adhere to these rules:
 
 * Each pixel contains either the color black or white; and
-* The color of any pixel is not the same as its neighbors to the north, south, east, and west, i.e., if the current pixel is at `(i,j)`, the pixel to the north is at `(i,j-1)`, to the south `(i,j+1)`, to the east is `(i+1,j)`, and to the west is `(i-1,j)`. Don't worry about neighbors that are not within the pixel array.
+* The color of any pixel is not the same as its neighbors to the north, south, east, and west, i.e., if the current pixel is at `[i,j]`, the pixel to the north is at `[i,j-1]`, to the south `[i,j+1]`, to the east is `[i+1,j]`, and to the west is `[i-1,j]`. Don't worry about neighbors that are not within the pixel array.
 
 You'll  only need to change line 17 in `ale03.py`. It currently sets every pixel in the `pixels` array to the color white.
 
@@ -126,7 +126,7 @@ Help! I Want It To Stop!
 
 I hope you tried running `ale04_count.py`, and at some point, you'll want it to stop. Here's how:
 
-*   If you started the script in a Shell, push the control-key and the letter-c-key at the same time, which we'll abbreviate as ctl+c. This key sequence tells the Shell to kill the execution of the currently running script.
+*   If you started the script in a Shell, push the control-key and the letter-c-key at the same time, which we'll abbreviate as Ctrl+C. This key sequence tells the Shell to kill the execution of the currently running script.
 *   If you clicked a play button in your IDE, the play button probably turned into a stop button, and if you click this stop button, the IDE will kill the execution of your running script.
 ```
 
@@ -204,11 +204,11 @@ An existing image contains a 2D image array just like we encountered when we bui
 
 How big is the image we opened? Well, we knew the size of the images we created because we specified them. Luckily, we can also ask an existing image for its width and height in pixels through the attribute called `size` because `Image.open` fills in this attribute. This attribute returns a 2-tuple of `(width,height)` over which we can iterate.
 
-The body of our innermost for-loop looks a bit different than what we've previously seen. It uses two new methods on the image object: `getpixel` and `putpixel`. These two methods each take a parameter, which is a 2-tuple representing the `(x,y)` coordinate of the pixel we wish to get or put. In the coordinate system of the images we manipulate, `x` indexes the columns (of which there are `width` columns) and `y` indexes the rows (of which there are `height` of them).
+The body of our innermost for-loop looks a bit different than what we've previously seen. It uses two new methods on the image object: `getpixel` and `putpixel`. These two methods each take a parameter, which is a 2-tuple representing the `[x,y]` coordinate of the pixel we wish to get or put. In the coordinate system of the images we manipulate, `x` indexes the columns (of which there are `width` columns) and `y` indexes the rows (of which there are `height` of them).
 
-So far, this should remind you of the x-y Cartesian plane you probably encountered at some point in your prior schooling. The only twist in the image world is that index `(0,0)` is the upper left corner of the image.
+So far, this should remind you of the x-y Cartesian plane you probably encountered at some point in your prior schooling. The only twist in the image world is that index `[0,0]` is the upper left corner of the image.
 
-With `getpixel`, the pixel comes back as a tuple, which we can pull apart with our assignment statement. To write a pixel using `putpixel`, we not only want to specify the `(x,y)` coordinate of the pixel in the image, but also the RGB tuple `(r,g,b)` we want to write.
+With `getpixel`, the pixel comes back as a tuple, which we can pull apart with our assignment statement. To write a pixel using `putpixel`, we not only want to specify the `[x,y]` coordinate of the pixel in the image, but also the RGB tuple `(r,g,b)` we want to write.
 
 I'll discuss the `//` operator in a moment.
 
@@ -228,4 +228,4 @@ The double forward-slash operator (`//`) is called *floor division* in Python, a
 The amount of time it takes to process an image is proportion to the size of the image in bytes. Why? Because the bigger your image is the more pixels it has, and the script has to read and write each one. I've been using images of 100-200 kilobytes. Don't use ones with many megabytes.
 ```
 
-\[Version 20230710\]
+\[Version 20240718\]
