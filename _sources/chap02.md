@@ -653,7 +653,7 @@ emphasize-lines: 2, 3
 <class 'str'>
 ```
 
-\[Version 20240713\]
+\[Version 20240719\]
 
 [^fn1]: There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 

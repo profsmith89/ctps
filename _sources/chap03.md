@@ -781,7 +781,7 @@ An example where this is needed is in a pseudorandom number generator, which use
 
 In this chapter, you've learned a lot about how to organize the code in your scripts. The topics covered are enough to move us into a new set of interesting problems, but probably not enough practice to make you comfortable in writing your own functions. For more practice, I encourage you to try this chapter's active-learning exercises on the companion website. They'll also explain the dangers of using global variables rather than the parameter-passing and value-return mechanisms of functions.
 
-\[Version 20240713\]
+\[Version 20240719\]
 
 [^fn1]: A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this \[short video\](https://www.youtube.com/watch?v=WGCaK-N2dsA) to learn more.
 

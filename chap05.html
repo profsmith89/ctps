@@ -793,10 +793,16 @@ document.write(`
 <section id="size-matters">
 <p><strong>Size matters.</strong> The first helpful abstraction in our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim is to ignore message size. In the <code class="docutils literal notranslate"><span class="pre">socket</span></code> library, send and receive methods operate on network buffers, and these buffers are of a fixed size. This means that we need to pay attention to how the sizes of our messages interact with the fixed size of the network buffers.</p>
 <p>In general, this is a messy problem that can result in some complicated code. You can read about some of the complicated situations in <a class="reference external" href="https://docs.python.org/3/howto/sockets.html#socket-howto">the Python documentation titled “Socket Programming HOWTO.”</a> This is an important issue for a production piece of code to handle, but we ignore it inside our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim since the messages in our current problem-to-be-solved are small in size and neither the client nor the server will send multiple messages before performing a receive.</p>
-<p>In particular, our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim specifies that we’ll use a buffer size of <code class="docutils literal notranslate"><span class="pre">1024</span></code>, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the <code class="docutils literal notranslate"><span class="pre">recv</span></code> call in the code block above. It’s not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your application’s largest message size, assuming it is known. As you can imagine in these instances, you’d have to turn a simple receive call into a loop of receive calls.</p>
+<p>In particular, our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim specifies that we’ll use a buffer size of <code class="docutils literal notranslate"><span class="pre">1024</span></code>, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the <code class="docutils literal notranslate"><span class="pre">recv</span></code> call in the code block above.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> <a class="reference internal" href="#c05-fig2-ref"><span class="std std-numref">Figure 10</span></a> illustrates how our <code class="docutils literal notranslate"><span class="pre">socket32</span></code> shim will hide the need to specify the receive buffer size when we write our <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> script (coming below).</p>
+<figure class="align-default" id="c05-fig2-ref">
+<img alt="_images/c05_fig2.png" src="_images/c05_fig2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">An illustration of how our <code class="docutils literal notranslate"><span class="pre">socket32.py</span></code> shim library slips between our client script and the Python <code class="docutils literal notranslate"><span class="pre">socket</span></code> library to simplify the interface on the networking functions we use.</span><a class="headerlink" href="#c05-fig2-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="encoding-again">
-<p><strong>Encoding again!</strong> The second detail of the <code class="docutils literal notranslate"><span class="pre">sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">recv</span></code> calls that well abstraction away deals with encoding. By having our client and the server use the same shim, we can guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.</p>
+<p><strong>Encoding again!</strong> The second detail of the <code class="docutils literal notranslate"><span class="pre">sendall</span></code> and <code class="docutils literal notranslate"><span class="pre">recv</span></code> calls that we’ll abstract away deals with encoding. By having our client and the server use the same shim, we can guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.</p>
 <p>In some applications, clients and servers are written by different programmers. When this happens, we have to know the character encoding that the server will use and force our strings into that encoding. This is the work being done by the <code class="docutils literal notranslate"><span class="pre">str.encode</span></code> and <code class="docutils literal notranslate"><span class="pre">str.decode</span></code> methods in the code block above. In particular, the script encodes into a Python <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object, which is useful for holding and manipulating <em>binary data</em>. Binary data is a topic we’ll discuss soon, and for now, just think of this encoding work as transforming our string message into an agreed-upon encoding.</p>
 </section>
 <section id="a-simplified-networking-interface">
@@ -913,7 +919,7 @@ document.write(`
 </section>
 <section id="the-conversation">
 <p><strong>The conversation.</strong> The returned socket (<code class="docutils literal notranslate"><span class="pre">conn2client</span></code>) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., <code class="docutils literal notranslate"><span class="pre">s</span></code> in our script) is how all clients reach the server to request a connection. When the server accepts a client’s connection, it converses with it through a separate socket (our <code class="docutils literal notranslate"><span class="pre">conn2client</span></code>), which is dedicated to that client’s conversation. This separation of tasks is a very powerful problem-solving technique!</p>
-<p>In our completed server script, we’ll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> Inside this with-statement’s body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">conn2client.sendall</span></code>. It then awaits the next guess.</p>
+<p>In our completed server script, we’ll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Inside this with-statement’s body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">conn2client.sendall</span></code>. It then awaits the next guess.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-server.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
@@ -956,7 +962,7 @@ document.write(`
 <span class="linenos">40</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn2client</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
+<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn2client</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
 </section>
 <section id="programmer-beware">
 <p><strong>Programmer beware.</strong> The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we’d want to write them to catch and gracefully handle all these errors. When we bypass this important work and assume everything proceeds smoothly, our server script needs to handle only one networking condition: client disconnects.</p>
@@ -974,7 +980,7 @@ $ python3 guess-server.py &amp;
 $ python3 guess-client.py
 </pre></div>
 </div>
-<p>If you’re running this chapter’s scripts as code blocks in an interactive Python notebook, you’ll want to use the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> Here’s what you do:</p>
+<p>If you’re running this chapter’s scripts as code blocks in an interactive Python notebook, you’ll want to use the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.<a class="footnote-reference brackets" href="#fn12" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> Here’s what you do:</p>
 <ol class="arabic simple">
 <li><p>Upload <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> into your notebook session.</p></li>
 <li><p>Create a code block like the one below and run it. It’ll start <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> in background. An exclamation point (<code class="docutils literal notranslate"><span class="pre">!</span></code>) in the first column of a code block tells the Python interpreter to pass the rest of the line to the shell.</p></li>
@@ -984,7 +990,7 @@ $ python3 guess-client.py
 </pre></div>
 </div>
 <p>In each of these approaches, we’re not really using the network. Remember that we’re running these two scripts with the loopback interface, but we can’t easily tell that without looking at the code. Again, abstraction at work!</p>
-<p>[Version 20240717]</p>
+<p>[Version 20240719]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -1020,14 +1026,18 @@ $ python3 guess-client.py
 </aside>
 <aside class="footnote brackets" id="fn9" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
-<p>There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.</p>
+<p>It’s not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your application’s largest message size, assuming it is known. As you can imagine in these instances, you’d have to turn a simple receive call into a loop of receive calls.</p>
 </aside>
 <aside class="footnote brackets" id="fn10" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
-<p>If the server breaks the connection before the client, the connection won’t be shut down properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
+<p>There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.</p>
 </aside>
 <aside class="footnote brackets" id="fn11" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>If the server breaks the connection before the client, the connection won’t be shut down properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
+</aside>
+<aside class="footnote brackets" id="fn12" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">12</a><span class="fn-bracket">]</span></span>
 <p>The nohup command is an infrequently used command that stands for “no hang up.” Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user’s running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won’t block us from running other code cells.</p>
 </aside>
 </section>

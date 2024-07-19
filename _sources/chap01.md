@@ -57,7 +57,7 @@ Putting this all together, the following is a brief description of each of the e
 Don't feel you need to memorize these eight steps or fully understand the italicized terms in them. Through repeated practice in this book's chapters, these steps will soon become second nature. And before you know it, you won't just be acting like an experienced problem solver, you will be one.
 
 ```{admonition} Learning Outcomes
-While solving each chapter's problem, you will gain practice in design, new knowledge of computer science (CS) concepts, and specific skills in Python programming. To help you understand how you will grow in these three areas, I begin each chapter with a list of its learning outcomes. By the end of this first chapter, you will be able to:
+While solving each chapter's problem, you will gain practice in design, new knowledge of computer science (CS) concepts, and specific skills in Python programming. To help you understand how you will grow in these three areas, each chapter begins with a list of its learning outcomes. By the end of this first chapter, you will be able to:
 
 *   Describe the general process involved in problem solving with computation [design];
 *   Take the first steps in this process [design and programming skills];
@@ -561,7 +561,7 @@ When we ask the interactive interpreter for the type of `'CatInTheHat.txt'` and 
 You create a particular string value in Python, called a *literal string value*, by enclosing your desired characters in either single or double quotes. I used single quotes in `'CatInTheHat.txt'`, but I could also have used double quotes. We need these delimiting characters so that we can include spaces in our strings. Because Python allows both a matching pair of single or double quote characters as the delimiter, I can easily create the string `"Mike's dog"`.
 
 ```{admonition} You Try It
-Feed `type("Mike's dog")` to the interactive interpreter. Try replacing `"Mike's dog"` with other strings. What happens if you leave off the starting or ending delimiter? What happens if the delimiter you use is a character in your string? What happens if your starting quote character doesn't match the ending one?
+Feed `type("Mike's dog")` to the interactive interpreter. Try replacing `" Mike's dog"` with other strings. What happens if you leave off the starting or ending delimiter? What happens if the delimiter you use is a character in your string? What happens if your starting quote character doesn't match the ending one?
 ```
 
 Both `'CatInTheHat.txt'` and `"Mike's dog"` are string *literals* because they represent a single, specific value. Their value is literally what you type within the quotes.
@@ -1012,7 +1012,7 @@ Although Wing doesn't provide a single definition for computational thinking in 
 
 More recently, the work by Wing, Aho, and others has been synthesized into the following definition: computational thinking is the "thought processes involved in formulating problems and their solutions so that the solutions are represented in a form that can be effectively carried out by an information-processing agent." In their 2021 *Science & Education* article, Michael Lodi and Simone Martini call this the Aho-Cuny-Snyder-Wing definition, in recognition of the contributions from these four particularly influential individuals.[^fn18]
 
-\[Version 20240623\]
+\[Version 20240719\]
 
 [^fn1]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
 

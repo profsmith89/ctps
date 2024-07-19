@@ -508,11 +508,17 @@ The first helpful abstraction in our `socket32` shim is to ignore message size. 
 
 In general, this is a messy problem that can result in some complicated code. You can read about some of the complicated situations in [the Python documentation titled "Socket Programming HOWTO."](https://docs.python.org/3/howto/sockets.html#socket-howto) This is an important issue for a production piece of code to handle, but we ignore it inside our `socket32` shim since the messages in our current problem-to-be-solved are small in size and neither the client nor the server will send multiple messages before performing a receive.
 
-In particular, our `socket32` shim specifies that we'll use a buffer size of `1024`, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the `recv` call in the code block above. It's not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your application's largest message size, assuming it is known. As you can imagine in these instances, you'd have to turn a simple receive call into a loop of receive calls.
+In particular, our `socket32` shim specifies that we'll use a buffer size of `1024`, which is several times larger than the number of characters in our longest message. You can see this value as the parameter to the `recv` call in the code block above.[^fn9] {numref}`Figure %s<c05_fig2_ref>` illustrates how our `socket32` shim will hide the need to specify the receive buffer size when we write our `guess-client.py` script (coming below).
+
+```{figure} images/c05_fig2.png
+:name: c05_fig2_ref
+
+An illustration of how our `socket32.py` shim library slips between our client script and the Python `socket` library to simplify the interface on the networking functions we use.
+```
 
 ## Encoding again!
 
-The second detail of the `sendall` and `recv` calls that well abstraction away deals with encoding. By having our client and the server use the same shim, we can guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.
+The second detail of the `sendall` and `recv` calls that we'll abstract away deals with encoding. By having our client and the server use the same shim, we can guarantee that they speak the same language, or more precisely in the land of computation, they encode their string objects in the same way. We began worrying about this in Chapter 3, when we talked about the many different ways the characters in a file might be encoded.
 
 In some applications, clients and servers are written by different programmers. When this happens, we have to know the character encoding that the server will use and force our strings into that encoding. This is the work being done by the `str.encode` and `str.decode` methods in the code block above. In particular, the script encodes into a Python `bytes` object, which is useful for holding and manipulating *binary data*. Binary data is a topic we'll discuss soon, and for now, just think of this encoding work as transforming our string message into an agreed-upon encoding.
 
@@ -655,7 +661,7 @@ def main():
 
 The returned socket (`conn2client`) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., `s` in our script) is how all clients reach the server to request a connection. When the server accepts a client's connection, it converses with it through a separate socket (our `conn2client`), which is dedicated to that client's conversation. This separation of tasks is a very powerful problem-solving technique!
 
-In our completed server script, we'll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.[^fn9] Inside this with-statement's body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using `conn2client.sendall`. It then awaits the next guess.
+In our completed server script, we'll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.[^fn10] Inside this with-statement's body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using `conn2client.sendall`. It then awaits the next guess.
 
 ```{code-block} python
 ---
@@ -703,7 +709,7 @@ if __name__ == '__main__':
     main()
 ```
 
-When is the server done with the `conn2client` socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.[^fn10] Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.
+When is the server done with the `conn2client` socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.[^fn11] Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.
 
 ## Programmer beware
 
@@ -726,7 +732,7 @@ $ python3 guess-server.py &
 $ python3 guess-client.py
 ```
 
-If you're running this chapter's scripts as code blocks in an interactive Python notebook, you'll want to use the magic of the exclamation-point escape and the Unix `nohup` command.[^fn11] Here's what you do:
+If you're running this chapter's scripts as code blocks in an interactive Python notebook, you'll want to use the magic of the exclamation-point escape and the Unix `nohup` command.[^fn12] Here's what you do:
 
 1. Upload `guess-server.py` into your notebook session.
 2. Create a code block like the one below and run it. It'll start `guess-server.py` in background. An exclamation point (`!`) in the first column of a code block tells the Python interpreter to pass the rest of the line to the shell.
@@ -738,7 +744,7 @@ If you're running this chapter's scripts as code blocks in an interactive Python
 
 In each of these approaches, we're not really using the network. Remember that we're running these two scripts with the loopback interface, but we can't easily tell that without looking at the code. Again, abstraction at work!
 
-\[Version 20240717\]
+\[Version 20240719\]
 
 [^fn1]: Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.
 
@@ -756,8 +762,10 @@ In each of these approaches, we're not really using the network. Remember that w
 
 [^fn8]: While we use a shim to simplify the interface to a library with more functionality than we need, shim libraries solve numerous software engineering problems. For example, you could use a shim library to keep an application running while the software libraries on which it depends are slowly upgraded. The shim translates between the new and old versions of an API. You can think of this as keeping a plane aloft while you sequentially upgrade each of its systems!
 
-[^fn9]: There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.
+[^fn9]: It's not always possible to know the maximum size of the messages that will be sent nor be able to allocate a buffer as large as your application's largest message size, assuming it is known. As you can imagine in these instances, you'd have to turn a simple receive call into a loop of receive calls.
 
-[^fn10]: If the server breaks the connection before the client, the connection won't be shut down properly and you'll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can't immediately run your next test.
+[^fn10]: There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.
 
-[^fn11]: The nohup command is an infrequently used command that stands for "no hang up." Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user's running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won't block us from running other code cells.
+[^fn11]: If the server breaks the connection before the client, the connection won't be shut down properly and you'll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can't immediately run your next test.
+
+[^fn12]: The nohup command is an infrequently used command that stands for "no hang up." Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user's running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won't block us from running other code cells.
