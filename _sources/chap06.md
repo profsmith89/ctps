@@ -46,7 +46,7 @@ Here's a picture I took of my dog in May of 2020.
 ```{figure} images/c06_fig1.png
 :name: c06_fig1_ref
 
-My dog, Cosmo, lying down in the green grass.
+My dog, Cosmo, lying down in our yard.
 ```
 
 Do you see the dog in this image? Unless you're visually impaired, of course you do. Our brains have learned over time what a dog looks like, and they help us identify dogs in the images captured by our eyes.
@@ -414,7 +414,7 @@ Run `edge3.py`, and you'll see that the filtered image contains a white line whe
 
 You have now done all that the `ImageFilter` library did when our code in `edges.py` applied a `CONTOUR` filter. In this way, a computer can highlight the dog-shaped blob in `cosmo.jpg`. Knowing that that blob looks like a dog requires machine learning, a topic for later.
 
-\[Version 20240718\]
+\[Version 20240719\]
 
 [^fn1]: The details and quotes in this section come from ["After the Fact" by Jill Lepore](https://www.newyorker.com/magazine/2016/03/21/the-internet-of-us-and-the-end-of-facts) (The New Yorker, March 21, 2016).
 

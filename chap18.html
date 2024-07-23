@@ -468,7 +468,7 @@ document.write(`
 <figure class="align-default" id="c18-fig1-ref">
 <img alt="_images/c18_fig1.png" src="_images/c18_fig1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">An illustration of the jagged frontier of any GAI tool’s capabilities, from Dell’Acqua et al. [2023].</span><a class="headerlink" href="#c18-fig1-ref" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">An illustration of the jagged frontier of any GAI tool’s capabilities, from Dell’Acqua et al. [2023].</span><a class="headerlink" href="#c18-fig1-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>This study’s findings tell an important story about how we should use GAI tools in our own work. On tasks <em>within</em> the frontier (i.e., where the GAI tool worked well), the authors found:</p>
@@ -555,11 +555,11 @@ document.write(`
 </pre></div>
 </div>
 <p>Let’s suppose that GPT-2 returns the word “learn”. From its training, the model has discovered this word comes next in contexts like this, but “learn” is not the only reasonable continuation it computes. Wolfram reports that GPT-2 also generates “predict”, “make”, “understand”, “do”, and many other words as possible continuations. In fact, GPT-2 computes with each generated word what we can think of as a probability; the higher the probability the more likely it is that the word is a reasonable continuation based on its training.</p>
-<p>In order to return one of these generated words, GPT-2 has to make a choice, as illustrated in <a class="reference internal" href="#c18-fig2-ref"><span class="std std-numref">Figure 34</span></a>. Should it select “learn” which is the choice with the highest computed probability? Or should it select one of the other highly ranked words?</p>
+<p>In order to return one of these generated words, GPT-2 has to make a choice, as illustrated in <a class="reference internal" href="#c18-fig2-ref"><span class="std std-numref">Figure 37</span></a>. Should it select “learn” which is the choice with the highest computed probability? Or should it select one of the other highly ranked words?</p>
 <figure class="align-default" id="c18-fig2-ref">
 <img alt="_images/c18_fig2.png" src="_images/c18_fig2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">The top five most likely words in Wolfram’s example that GPT-2 predicts will reasonably continue the prompt “The best thing about AI is its ability to”.</span><a class="headerlink" href="#c18-fig2-ref" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">The top five most likely words in Wolfram’s example that GPT-2 predicts will reasonably continue the prompt “The best thing about AI is its ability to”.</span><a class="headerlink" href="#c18-fig2-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Through experience, LLM developers have discovered that models that always return the highest-ranked next word produce responses that sound flat and repetitious to humans. Models with more natural-sounding responses vary the choice of words from those most highly ranked.</p>
@@ -574,14 +574,14 @@ document.write(`
 <h2>Complexity from simplicity<a class="headerlink" href="#complexity-from-simplicity" title="Permalink to this heading">#</a></h2>
 <p>Earlier, when I asked ChatGPT to explain GAI, it responded that these systems help us to “understand how complex output can emerge from simple rules and structures.” This statement refers to the building blocks and basic layout of a LLM (and many other AI models like image recognizers), which I’ll now briefly describe. My point is not to have you comprehend all the details, but to realize that a GAI model isn’t constructed and programmed like a calculator or spreadsheet application. Structurally, GAI models are <em>neural networks</em>, which were inspired by the biological structure of the human brain (i.e., the brain’s networks of neurons).</p>
 <p>Neural networks were first proposed in the 1940s, and today’s computational neurons are largely unchanged since then. What’s changed is the computing speed of these neurons, the number of them we can interconnect and train, and the size of the training data sets. Everything has gotten orders of magnitude faster or bigger.</p>
-<p><a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 35</span></a> is a typical and idealized illustration of a neural network. It is comprised of computational neurons (i.e., the circles in the figure) that are organized into layers. Inputs to the model are fed to the first layer of neurons, which compute with these inputs and whose outputs are fed to the next layer of neurons. This feed-forward organization continues until the last layer outputs the model’s result.</p>
+<p><a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 38</span></a> is a typical and idealized illustration of a neural network. It is comprised of computational neurons (i.e., the circles in the figure) that are organized into layers. Inputs to the model are fed to the first layer of neurons, which compute with these inputs and whose outputs are fed to the next layer of neurons. This feed-forward organization continues until the last layer outputs the model’s result.</p>
 <figure class="align-default" id="c18-fig3-ref">
 <img alt="_images/c18_fig3.png" src="_images/c18_fig3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) and are treated as weighted inputs to the nodes (circles), which represent the computational neurons. Each neuron performs a fairly simple numerical computation. REPLACE: This placeholder is taken from Wolfram [2023].</span><a class="headerlink" href="#c18-fig3-ref" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) and are treated as weighted inputs to the nodes (circles), which represent the computational neurons. Each neuron performs a fairly simple numerical computation. REPLACE: This placeholder is taken from Wolfram [2023].</span><a class="headerlink" href="#c18-fig3-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The thickness of the arrows in <a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 35</span></a> varies to represent that the values carried along each edge are weighted before being used in a neuron’s computation. If we pull that weighting into the work done at an individual neuron, the output value of a neuron is:</p>
+<p>The thickness of the arrows in <a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 38</span></a> varies to represent that the values carried along each edge are weighted before being used in a neuron’s computation. If we pull that weighting into the work done at an individual neuron, the output value of a neuron is:</p>
 <ul class="simple">
 <li><p>the weighted sum of the values on the  <span class="math notranslate nohighlight">\(n\)</span> incoming edges: <span class="math notranslate nohighlight">\(\sum_{i=1}^{n} (w_i * x_i)\)</span> where <span class="math notranslate nohighlight">\(w\)</span> is a weight and <span class="math notranslate nohighlight">\(x\)</span> is an incoming value;</p></li>
 <li><p>plus a constant <span class="math notranslate nohighlight">\(b\)</span>;</p></li>
