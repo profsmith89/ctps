@@ -6,7 +6,7 @@ This chapter opens with a description of how the Rabin-Karp algorithm avoids spe
 
 This knowledge introduces you to a new approach to problem solving. The approach still has us search the entire problem space for a solution, but it splits this search work into what is called *online and offline work*. When time from user input to solution matters, as it does in the Google search context, doing some of the work before a user gets involved (i.e., the offline work) and then the final bits of the work once we receive the user's input (i.e., the online work) can mean the difference between meeting a problem's requirements and spectacularly missing them.
 
-Given the enormous size of the Google search problem, this sort of problem-solving approach is what we need to bypass the challenge that even a string-matching search that scans through the text only once, and does so on a really fast machine, cannot scan 100 million gigabytes with any response time that a human would find reasonable. In other words, linear-time string matching won't solve our simplified Google search problem, and we need something else.
+Given the enormous size of the Google search problem, this sort of an approach is what we need to bypass the challenge that even a string-matching search that scans through the text only once, and does so on a really fast machine, cannot scan 100 million gigabytes with any response time that a human would find reasonable. In other words, linear-time string matching won't solve our simplified Google search problem, and we need something else.
 
 Fortunately, Rabin-Karp provides us with a potential answer. It introduces us to the technique of *hashing*, which allows us to build offline an index (like a book index) of the webpages that contain words of interest. But when we split the work we do to solve the problem into online and offline components, we have created for ourselves a new challenge: how do we know what to search for before the user asks us a question? Obviously, we don't, but we can turn the preprocessing into work not just for one query, but (effectively) for all possible queries. This is what Google means when it talks about building an index. So our problem-to-be-solved becomes: *how do we build a book index?* A book index is simpler than Google's web index, but the online performance of an index is what we need to solve our simplified Google search problem!
 
@@ -25,21 +25,33 @@ In this chapter, you will learn a new approach to problem solving that splits wo
 
 ## Strings to numbers
 
-To understand the brilliance of the Rabin-Karp algorithm, let's begin with a focus on the matching loop. This is what that loop looked like in `bf_strmatch`, given a pattern string `p` of length `m` and a text string `t` of length `n`:
+To understand the brilliance of the Rabin-Karp algorithm, we begin with a focus on the matching loop. Recall what this matching loop looked like in `bf_strmatch` (see the code block below). Given a pattern string `p` of length `m` and a text string `t` of length `n`, this loop has a computational complexity of $O((n-m+1)*m)$ because it makes up to *m* character comparisons on each iteration.
 
 ```{code-block} python
 ---
 lineno-start: 10
 ---
-### Part of chap09/bf_strmatch.py -- not executable
+### chap09/bf_strmatch.py
 for s in range(n - m + 1):
     if p[0:m] == t[s:s+m]:
         print(f'Pattern occurs with shift {s}')
 ```
 
-This loop has a computational complexity of $O((n-m+1)*m)$ because it makes up to *m* character comparisons on every iteration of the for-loop. In `rk_strmatch`, we turned the if-statement from one hiding a loop up to *m*, which has a computational complexity cost of $O(m)$, into an equality comparison between two integers (line 43 in `chap09/rk_strmatch.py`), which has a computational complexity cost of $O(1)$.
+The function `rk_strmatch` hides this expensive comparison (i.e., `p[0:m] == t[s:s+m]`) behind a new if-statement (line 43) in the matching loop body. This statement contains an equality comparison between two integers, which has a computational complexity cost of $O(1)$. In other words, as long as this new comparison evaluates `False`, we remove a factor of $m$ from the matching loop's computational complexity.
 
-It's important to realize that the equality comparison is answering the pseudocode question: Does the pattern string match the text substring of length `m` starting at character location `s`? You are probably now asking the question: How does a single integer hold the same information content as a string of length `m`?
+```{code-block} python
+---
+lineno-start: 41
+---
+### chap10/rk_strmatch.py
+for s in range(n - m + 1):
+    if hp == ht:
+        # Verify that this is an actual match
+        if p[0:m] == t[s:s+m]:
+            print(f'Pattern occurs with shift {s}')
+```
+
+What question is this equality comparison between two integers answering? It tries to answer the same one that the expensive comparison did: Does the pattern string match the text substring of length `m` starting at character location `s`? You are probably now wondering: How can that be? It works if we can have an integer hold the same information content as a string of length `m`. Read on to see how!
 
 ## A simple hash function
 
@@ -53,17 +65,13 @@ To create a hash, which is just an integer value, we'll write a function that ta
 
 How might we algorithmically create a hash from a string? First, remember that every character has a unique numerical encoding, and when we're working with strings, we were just interpreting each number as a character. To create an integer hash that has some relationship to the characters in a string, we'll want to get access to the characters' numerical encodings, which we can do by using Python's built-in `ord` function.
 
-```{margin} Simplification
-We use [Unicode](https://home.unicode.org/) to give us an encoding space big enough to capture many of the different characters used in human communication. Without loss of generality and to simplify my examples, I'll won't use Unicode and instead use the older ASCII encoding, which encodes the characters in 8 bits or 1 byte.
-```
-
 ```{code-block} python
 print(ord('a'), ord('1'))
 ```
 
-Knowing this, one way to create a hash function would be to read the input string as a sequence of digits, where each digit in the number output from the hash function is the ASCII encoding of the character at that digit's location. This is probably easier to understand through an example.
+Knowing this, one way to create a hash function would be to read the input string as a sequence of digits, where each digit in the number output from the hash function is the ASCII encoding[^fn1] of the character at that digit's location. This is probably easier to understand through an example.
 
-For a moment, let's pretend that `ord('1')` is not `49`, but `1`. In fact, let's assume every character digit between 0 and 9 has itself as its numerical encoding. What then is the hash of the string `'1983'`? It's just the number 1 followed by the number 9 followed by 8 and finally 3. Read together as a single number `1983`, these digits represent the number one thousand nine hundred and eighty-three.
+For a moment, let's pretend that `ord('1')` is not `49`, but `1`. In fact, let's assume every digit between 0 and 9 has itself as its numerical encoding. What then is the hash of the string `'1983'`? It's just the number 1 followed by the number 9 followed by 8 and finally 3. Read together as a single number `1983`, these digits represent the number one thousand nine hundred and eighty-three.
 
 Following this same logic with ASCII, in which each digit's encoding doesn't fit in a single base-10 digit but requires a base-256 digit (i.e., the encoding is 8-bits wide), `'1983'` becomes the number 49 followed by the number 57 followed by 56 and finally 51. Thinking about each of these digits in base-256 and then converting that number to base-10, the hash of `'1983'` is:
 
@@ -93,7 +101,7 @@ There's a problem with this simple approach, which we'll get to in a moment, but
 
 But what about the substring of text to which we compare the pattern string? It changes from one iteration of the matching loop to the next. Luckily, there's a very simply pattern to how it changes.
 
-To understand this pattern, first recognize that the matching loop begins with the first $m$ characters of the text string. As we did with the pattern string, we can compute the text string's starting hash before we enter the matching loop. It falls under the same $O(m)$ term that computed the pattern string's hash since both can be done within the same preprocessing loop.
+To understand this pattern, first recognize that the matching loop begins with the first $m$ characters of the text string. As we did with the pattern string, we can compute the text string's starting hash before we enter the matching loop. It falls under the same $O(m)$ term that we computed for the pattern string's hash since both can be done within the same preprocessing loop.
 
 Then comes the repeating pattern: Given a text substring of $m$ characters, the next substring to consider removes the leftmost character in the substring and adds a new character to the righthand side of the substring. This action corresponds to the sliding of the pattern-string template one character to the right for each matching loop iteration, as shown in {numref}`Figure %s<c10_fig2_ref>`.
 
@@ -103,7 +111,7 @@ Then comes the repeating pattern: Given a text substring of $m$ characters, the 
 To update a hash, our script must do three things: (1) remove the most significant digit; (2) shift up by one digit the significance of the remaining digits; and (3) add in a new least significant digit.
 ```
 
-Knowing this, how do we numerically adjust our simple hash knowing that we have to slice off the most-significant digit, shift the remaining digits, and append a new least-significant digit? Well, in the make-believe world where ASCII characters `'0'` through `'9'` are encoded with their numerical values, we turn the hash for `'1983'` (i.e., `1983`) into the hash for `'9834'` (i.e., `9834`) in the following way:
+So how do we numerically adjust our simple hash knowing that we have to slice off the most-significant digit, shift the remaining digits, and append a new least-significant digit? Well, in the make-believe world where ASCII characters `'0'` through `'9'` are encoded with their numerical values, we turn the hash for `'1983'` (i.e., `1983`) into the hash for `'9834'` (i.e., `9834`) in the following way:
 
 $(1983 - (1 * 10^3)) * 10 + 4 = 9834$
 
@@ -150,7 +158,7 @@ num = simple_hash(text[s:s+m])
 print(f'{text[s:s+m]} = {num}')
 ```
 
-The following block of code puts together what we've done to convert the original `bf_strmatch` code into something resembling the Rabin-Karp method.
+The following block of code puts together what we've discussed into something resembling the Rabin-Karp method.
 
 ```{code-block} python
 ---
@@ -194,25 +202,25 @@ def rk_strmatch_partial(t, p):
 The view is beautiful from up here, but Houston, we have a problem. This simple hashing function requires that the size of the space of hash numbers is the same as the size of the space of our pattern strings, which we'd like to be infinite. Let me make this size problem concrete for you with an example.
 
 ```{code-block} python
+---
+lineno-start: 41
+---
+### chap10/simple_hash.py
 s = 'one thousand nine hundred and eighty-three'
 print(f'{s} = {simple_hash(s)}')
 ```
 
 Thank goodness Python doesn't put a bound on the size of the integers it allows us to express! But we can't pretend that this really big number is any less expensive to process than the original string. We need to update the specification for our hashing function.
 
-We want a hash function that maps an arbitrary length string into a reasonably small range of numbers. By reasonable, I mean a set of numbers that require nothing more than a single machine operation in which to do an equality comparison. We don't know much about machine operations at this point, but whatever we pick shouldn't create too big a number when running the types of operations we have in `rk_strmatch_partial` above. Do you remember from the end of Act I that my machine could count pretty darn quick up to several billion? We're probably safe if the results of the multiplications in `rk_strmatch_partial` don't exceed this number.
+We want a hash function that maps an arbitrary length string into a reasonably small range of numbers. By reasonable, I mean a set of numbers that require nothing more than a single machine operation in which to do an equality comparison. We don't know much about machine operations at this point, but whatever we pick shouldn't create too big a number when running the types of operations we have in `rk_strmatch_partial`. Do you remember from the end of Act I that my machine could count pretty darn quick up to several billion? We're probably safe if the results of the multiplications in `rk_strmatch_partial` don't exceed this number.
 
-```{margin} Modular Arithmetic
-If you need a refresher on the rules in modular arithmetic, I recommend the [tutorial in Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic).
-```
+Ok, but the function `simple_hash` doesn't just multiply a number by 256. It repeatedly multiples a number by 256 (then adds a little bit) for `m` iterations. We need something that correctly handles multiplication as an operation, but also puts a bound on the number of digits (really bits) that will be required to represent each result. By this point, you have probably guessed that we can use *modular arithmetic* to accomplish this goal.[^fn2]
 
-Ok, but the function `simple_hash` doesn't just multiply a number by 256. It repeatedly multiples a number by 256 (then adds a little bit) for `m` iterations. We need something that correctly handles multiplication as an operation, but also puts a bound on the number of digits (really bits) that will be required to represent each result. By this point, you have probably guessed that we can use *modular arithmetic* to accomplish this goal.
-
-We're almost back to the implementation for `rk_strmatch` that we presented in the last chapter. We reprint it here so that you can more easily follow along with the final bits of the explanation.
+We're almost back to the implementation for `rk_strmatch` that we presented in the last chapter. We reprint it here so that you can more easily follow along with the final bits of the explanation.[^fn3]
 
 ```{code-block} python
 ---
-lineno-start: 1
+lineno-start: 13
 ---
 ### chap10/rk_strmatch.py
 def rk_strmatch(t, p):
@@ -254,11 +262,7 @@ def rk_strmatch(t, p):
                 ht += q
 ```
 
-```{margin} Human Languages
-Human languages are, of course, not random in their distribution of letters and letter sequences. However, we do the best we can in not making the problem worse.
-```
-
-In the preprocessing work for `rk_strmatch`, we set the variable `q` to the prime number `65537`. We could have used any prime number of reasonable size as the modulus for our modular arithmetic. The use of a prime modulus helps to more evenly spread the numbers generated by our hash function around the hash space. The actual spread depends on the strings you choose to hash at any particular time, but assuming some randomness in the input strings, a prime modulus helps pull that randomness into the hash space.
+In the preprocessing work for `rk_strmatch`, we set the variable `q` to the prime number `65537`. We could have used any prime number of reasonable size as the modulus for our modular arithmetic. The use of a prime modulus helps to more evenly spread the numbers generated by our hash function around the hash space. The actual spread depends on the strings you choose to hash[^fn4] at any particular time, but assuming some randomness in the input strings, a prime modulus helps pull that randomness into the hash space.
 
 Let's update our specification (see {numref}`Figure %s<c10_fig3_ref>`) with what we've done.
 
@@ -270,7 +274,7 @@ An updated specification for hashing that limits the range of integers produced.
 
 Notice that it is entirely possible, although we hope infrequent, that two (or more) input strings will hash to the same number. This is called a *hash collision*. Hope, of course, is not a problem-solving strategy, and any code that uses hashes as a shorthand for arbitrary-length strings must check when two hashes match. In particular, we mush check that the two strings from which these hashes originated are in fact the same. If they aren't, we simply found a *collision* in the hash space.
 
-Handling collisions is the purpose of the if-statement on line 30. Notice that, when the algorithm encounters a lot of hash collisions, its behavior reverts back to the worst-case computational complexity of `bf_strmatch`.
+Handling collisions is the purpose of the if-statement on line 42 in the code bloc above. Notice that, when the algorithm encounters a lot of hash collisions, its behavior reverts back to the worst-case computational complexity of `bf_strmatch`.
 
 You might wonder why the code only does something extra when it finds two hashes that match. What about the case when the two hashes don't match? Will we ever have a problem? Absolutely not. When two hashes are different, then the strings from which they were generated must have been different.
 
@@ -300,23 +304,19 @@ A simplified diagram of how Google goes from a string in its search box to a lis
 
 A hash function is a procedure that can turn the unbounded space of all strings into a bounded range of integers. Built on top of this procedure, a *hash table* is a data structure that associates a storage location with each integer that the hash function can produce. The hash function plus "search index" block in {numref}`Figure %s<c10_fig4_ref>` is an example of a hash table.
 
-```{margin} Abstract Data Types
-The adjective "abstract" emphasizes the fact that we aren't expected to know anything about the implementation of this data type. We know about its function (i.e., its behavior), but nothing about its implementation or the runtime performance of its operations.
-```
+Hash tables are also called *associative memories* or *associative arrays*. As an *abstract data type*, associative arrays support the mapping of keys to values.[^fn5] In Python, the dictionary data type (`dict`) is an associative memory built into the language. You may recall that we used this data type in Chapter 4 to associate the values we wanted with the keys that described a query string (e.g., the value `'json'` with the key `'format'`).
 
-Hash tables are also called *associative memories* or *associative arrays*. As an *abstract data type*, associative arrays support the mapping of keys to values. In Python, the dictionary data type (`dict`) is an associative memory built into the language. You may recall that we used this data type in Chapter 4 to associate the values we wanted with the keys that described a query string (e.g., the value `'json'` with the key `'format'`).
-
-But hash tables are more than this abstraction; they are a *concrete data type* with specific run-time performance goals for its individual operations. You use a hash table when you want an associative array for which it takes a small amount of time to insert an item, delete an item, and search for an item. Stated in terms of computational complexity, each of these operations take $O(1)$ time in a hash table.
+But hash tables are more than this abstraction; they are a *concrete data type* with specific run-time performance goals for its individual operations. You use a hash table when you want an associative array for which it takes a small amount of time to insert an item, delete an item, and search for an item. Stated in terms of computational complexity, each of these operations take $O(1)$ time (i.e., constant time) in a hash table.
 
 ## The speed of array-index operations
 
 You might be saying, "Wait? What's going on behind this associative-memory abstraction that guarantees this performance?"
 
-Let's step back and recognize that the search-index data structure we drew in {numref}`Figure %s<c10_fig4_ref>` looks a lot like the sequences and arrays we drew in Act I. They were just a bunch of boxes placed one after the other, and we used the square-bracket syntax (`[]`) to say from which box's contents we wanted. For example, if we wanted the fifth character in `the_line` we just read from `CatInTheHat.txt`, we got it by typing `the_line[4]`.
+Let's step back and recognize that the search-index data structure we drew in {numref}`Figure %s<c10_fig4_ref>` looks a lot like the sequences and arrays we drew in Act I. They were just a bunch of boxes placed one after another, and we used the square-bracket syntax (`[]`) to say from which box's was the content we wanted. For example, if we wanted the fifth character in `the_line` we just read from `CatInTheHat.txt`, we got it by typing `the_line[4]`.
 
 To this point, you probably haven't thought about how long it takes your machine to grab the fifth character in a string like `the_line`. Does the machine start from the beginning of the string (i.e., `the_line[0]`) in the computer's memory, count 5 characters forward, and then return the character at that fifth location? If it did, then every index into a string would take time proportional to its location in the string.
 
-It clearly doesn't, or I wouldn't be raising this point. The beauty of our computers' memories, where our scripts execute, are that they are *random-access memories (RAM) indexed by byte addresses*. In a random-access memory, if you present the memory with a byte address (i.e., an index measured in bytes from the start of the memory), it will immediately read that location and give you back what's stored there (assuming that the address doesn't exceed the memory's size). There is no search involved; it is *direct access*.
+It clearly doesn't, or I wouldn't be raising this point. The beauty of our computers' memories, where our scripts execute, are that they are *random-access memories (RAM) indexed by byte addresses*. In a random-access memory, if you present the memory with a byte address (i.e., an index measured in bytes from the start of the memory), it will proceed immediately to read that location and give you back what's stored there (assuming that the address doesn't exceed the memory's size). There is no search involved; it is *direct access*.
 
 Returning to our string example, to directly access a character in a string, the Python interpreter simply needs to know:
 
@@ -324,7 +324,7 @@ Returning to our string example, to directly access a character in a string, the
 2. the size of a character in bytes in this string type (i.e., does the string just store 1-byte ASCII characters or something larger?), and
 3. the index of the character the programmer wants (i.e., the number within the square brackets).
 
-The Python interpreter then multiplies the index by the size of a character and then adds this result to the starting address of the string to generate the address in memory where it can find the character you desire. A few quick pieces of simple math and the value is returned to you.
+The Python interpreter then multiplies the index by the size of a character and then adds this result to the starting address of the string to generate the address in memory where it can find the character you desire. A few quick pieces of simple math followed by a RAM access and you have your value.
 
 ```{code-block} python
 byte_address = index * size_of(character) + starting_byte_address
@@ -338,7 +338,7 @@ A good hash table does two things: (1) computes hashes quickly and (2) minimizes
 
 But this is where things get tricky. Let's assume that our hash table uses strings as keys. How long does it take to do string matching to verify that the stored value is associated with the input key? Aargh! We know this. In the best case, it is proportional to the length of the string. If we do brute-force string matching during our hash table lookup, the computational complexity of the operation is not $O(1)$, but $O(sizeOfTheInputString)$.
 
-This annoying wrinkle is why most hash table implementations, including [dictionaries in Python](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), require you to use immutable types for the hash table keys. Briefly, an object of an immutable type allows the Python interpreter to use the starting address of that object in memory as a small hash of the object. The cases we would need to enumerate to convince ourselves that this comparison would suffice to identify a hash collision would make this description even more tedious than it has already become. And luckily, we're not here to build a working hash-table data type. We just want to use one and understand when we'll get good performance from it.
+This annoying wrinkle is why most hash table implementations, including [dictionaries in Python](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), require you to use immutable types for the hash table keys. Briefly, an object of an immutable type allows the Python interpreter to use the starting address of that object in memory as a small hash of the object. The cases we would need to enumerate to convince ourselves that this comparison suffices to identify a hash collision would make this description even more tedious than it has already become. And luckily, we're not here to build a working hash-table data type. We just want to use one and understand when we'll get good performance from it.
 
 ## Collision resolution
 
@@ -346,13 +346,13 @@ As much as I'd like to end at this point and complete the design of our book ind
 
 Not allowing such a thing to happen would break the desired behavior of the hash table as an abstract data type. Silently throwing away the previously stored key-value pair in that location is equally unacceptable. We must find two locations to store these two different key-value pairs that map to the same hash, and we need to have a process for searching all the possible locations when our first array lookup fails (i.e., the lookup key doesn't match the stored key).
 
-There are a number of competing methods with different tradeoffs for solving what's called *collision resolution* in hash tables. Two popular techniques are *separate chaining*, which uses extra storage outside the hash table array to hold the key-value pairs involved in collisions, and *open addressing*, which forces collisions into the currently unoccupied array locations (i.e., it uses no extra storage). Neither technique is superior over the other in all problem contexts. If you take an algorithms and data structures course, you'll learn how to implement these schemes and learn the conditions under which one outperforms than the other.
+There are a number of competing methods with different tradeoffs for solving what's called *collision resolution* in hash tables. Two popular techniques are *separate chaining*, which uses extra storage outside the hash table array to hold the key-value pairs involved in collisions, and *open addressing*, which forces collisions into the currently unoccupied array locations (i.e., it uses no extra storage). Neither technique is superior over the other in all problem contexts. If you dive deeper into algorithms and data structures, you'll learn how to implement these schemes and learn the conditions under which one outperforms than the other.
 
 To be clear, none of these techniques overcome the worst-case computational complexity of a hash table lookup. It is always possible, although unlikely with a good hash function, that all of your keys produce the same hash. In the worst-case behavior, a table lookup has $O(n)$ work to do to find the key-value pair you desire, assuming you put $n$ key-value pairs into the hash table before this lookup.
 
 ## Specification for creating a book index
 
-Enough about hash tables, their design, and their computational complexity, let's use one to solve our book index problem! As I mentioned earlier, solving this problem will give us a flavor for what Google does to build its search index.
+Enough about hash tables, their design, and their computational complexity, let's use one to solve our book index problem. As I mentioned earlier, solving this problem will give us a flavor for what Google does to build its search index.
 
 Our script will implement the following specification: *Given a simple text file and a special character sequence at the beginning of a line that indicates when we're moving from one reference unit to the next, print a sorted list of word-references pairs.* Because there are many small words in human languages that are not something we typically include in a book index, our implementation will also ignore any words in the text that are shorter than some character bound.
 
@@ -360,23 +360,15 @@ Our script will implement the following specification: *Given a simple text file
 
 Let's begin our design by deciding that we'll build the book index by processing our book a single line at a time, which is what we did to read a book in Chapter 1. It's often good to start with a script structure around which we have some experience. We can always change our mind and adjust the design once we gain further insights into the work we have to do.
 
-Let's also decide that we'll use a Python dictionary to store the word-reference pairs as we process each line in the input text. Recall that a Python dictionary is an implementation of the hash table abstract data type. But what exactly is a word-references pair?
+Let's also decide that we'll use a Python dictionary to store the word-references pairs as we process each line in the input text. Recall that a Python dictionary is an implementation of the hash table abstract data type. But what exactly is a word-references pair?
 
-Starting with the first part of this pair, we all intuitively know what a word is in a line of text, but what code do we have to write to extract words from our text file? Unfortunately, this is not an easy question to answer as some characters, like an apostrophe, are not only punctuation marks (i.e., single quotes) but also parts of a word (e.g., in the contraction "isn't").
+Starting with the first part of this pair, our brains recognize words in a line of text, but what code should we write to extract words from a line of text? Unfortunately, this is not an easy question to answer as some characters, like an apostrophe, are not only punctuation marks (i.e., single quotes) but also parts of a word (e.g., in the contraction "isn't").
 
-```{margin} Looking Ahead
-The cryptic code in `get_wordlist` uses regular expressions and lookahead, which we'll cover in Chapter 13.
-```
-
-We'll "solve" this challenge by using a piece of code that we don't yet understand to create a word list from a line of text. We'll call this function `get_wordlist`, and it will take a line of text and return a Python list, where each element in the list is a word.
-
-```{margin} Book Units
-Recall that our specification requires the user to specify how we'll recognize that we're moving from one book unit to the next and what number to use as the initialization of that count of units.
-```
+We'll "solve" this challenge by using a piece of code that we don't yet understand to create a word list from a line of text.[^fn6] We'll call this function `get_wordlist`, and it will take a line of text and return a Python list, where each element in the list is a word.
 
 What about this "references" thing in the other half of the word-references pair? Let's agree that this is a Python list of the book's unit numbers in which you can find one or more instances of the word in the word-references pair. If the books units we want referenced in the book index are page numbers, this list would contain the list of pages on which you can find one or more instances of the word. If the books units are chapter numbers, this list would contain the list of chapters in which you can find one or more instances of the word. And so forth.
 
-Great! With these decisions made, we can start writing some pseudocode!
+Great! With these decisions made, we can start writing pseudocode.[^fn7]
 
 ```{code-block} python
 ---
@@ -395,22 +387,31 @@ lineno-start: 1
 # print out book index
 ```
 
-Our pseudocode begins with a few initializations, and then it processes the book a line at a time, adding to the Python dictionary the words in each line. Although we didn't say it in the pseudocode, we add only words greater than the minimum word length. We'll have to remember to do that in our update function.
+Our pseudocode begins with a few initializations, and then it processes the book a line at a time, adding to the Python dictionary the words in each line. Although the pseudocode doesn't say it, we add only words greater than the minimum word length. We'll have to remember to do that in our update function.
 
-There's nothing in this pseudocode that we haven't already learned how to do, and so let's jump right to a script that implements much of what we just described.
+There's nothing in this pseudocode that we haven't already learned how to do, and so let's jump right to a script that implements much of what it describes.
 
 ```{code-block} python
 ---
 lineno-start: 1
 ---
 ### chap10/index0.py
+import sys
 import re
 import string
 
-# Configuration constants for our index generation
+# Instead of bothering to ask the user for this information on each run of the
+# program, we'll just make them global constants.  In production code, we'd
+# define this information in a configuration file, which would be a better way
+# to have our user infrequently change what are relatively stable constants than
+# asking this user to edit our scripts.
 MIN_LEN = 4           # don't index any words shorter than 5 chars
 UNIT_PAT = ''         # for pages in CatInTheHat.txt
 UNIT_CNT_INIT = 1
+'''
+UNIT_PAT = 'CHAPTER'  # for chapters in JustDavid-chaps.txt
+UNIT_CNT_INIT = 0
+'''
 
 # The magic function that turns a line into a wordlist
 def get_wordlist(line):
@@ -439,7 +440,8 @@ def build_index(txt):
     for line in txt.split('\n'):
         if found_new_unit(line):
             unitno += 1
-        d = update_index(d, get_wordlist(line), unitno)
+        else:
+            d = update_index(d, get_wordlist(line), unitno)
 
     # Print out the index
     print(d)
@@ -450,17 +452,19 @@ This script pulls out the work we need to do to update the dictionary (i.e., `up
 The only other piece of code worth highlighting is that which implements the function `found_new_unit`. In one of the two text files we'll use to test our script, `CatInTheHat.txt` uses blank lines to indicate the end of a page. Python naturally does the right thing in comparing two strings of different lengths, even if you ask it for a "substring" that is larger in size than the actual string. The only exceptional case is when one of the two strings is the empty string (`''`). The function `found_new_unit` handles this special case as a special case.
 
 ```{admonition} You Try It
-Can you figure out value is produced by the equality test on line 22 in the previous code block when `UNIT_PAT` is the empty string and `line` is `'This is NOT a blank line'`? When you do, you'll see why we need the test on line 19.
+
+Can you figure out what value is produced by the equality test on line 31 in `found_new_unit` when `UNIT_PAT` is the empty string and `line` is `'This is NOT a blank line'`? When you do, you'll understand why we need the test on line 19.[^fn8]
+
 ```
 
 ## Updating the index
 
-What is missing from our script is the implementation of `update_index` and the proper printing of the index. Right now, we don't put any words into the dictionary and our printing code simply prints the contents of the dictionary. Let's fill in `update_index` first, because we can test the core aspects of our implementation even without a proper printing routine.
+What is missing from our script is the implementation of `update_index` and the proper printing of the dictionary `d` that is our book index. Right now, `update_index` doesn't put any words into the dictionary and our printing code simply prints the contents of the dictionary (line 50). Let's fill in `update_index` first, because we can test the core aspects of our implementation even without a proper printing routine.
 
-This routine wants to do something for each word in `wordlist`. Let's consider what might happen for each word:
+The function `update_index` should do something for each word in `wordlist`. Let's consider the different cases:
 
 * The simple case is when we find that the word is not in the dictionary (i.e., not yet in the index). In this case, we need to add the word and the value associated with it (i.e., `unitno`) to the dictionary. We'll store the `unitno` as the first element in a list because we might later find the hashed word in another unit of the book.
-* When the word is already in the dictionary, we still have work to do. We must check if the current unit number (e.g., the page or chapter number on which we now find this word) is already in the stored list of units. If it is, we have nothing to do (e.g., we don't add the same page number twice). If it isn't, we need to add the current unit number to the end of the references list.
+* When the word is already in the dictionary, we still have work to do. We must check if the current unit number (e.g., the page or chapter number on which we now find this word) is already in the stored list of units. If it is, we have nothing to do (i.e., we don't add the same page number twice). If it isn't, we need to add the current unit number to the end of the references list.
 
 The following code implements this functionality using the methods of a Python dictionary.
 
@@ -481,7 +485,7 @@ def update_index(d, wordlist, unitno):
     return d
 ```
 
-Let's run some simple tests to see if this work and what we might have forgotten. We will use Python's ability to easily create multiline strings using triple quotes.
+Let's run some simple tests to see if this works and what we might have forgotten. We will use Python's ability to easily create multiline strings using triple quotes.
 
 ```{code-block} python
 ---
@@ -584,7 +588,7 @@ This looks quite good, but notice that you cannot predict the order of the keys 
 
 ## Sort and strip
 
-Ok, but we have to print the index so that it looks like a book index. This isn't that hard, since Python dictionaries allow you to iterate through the keys in a dictionary and even use Python's built-in `sorted` function to sort the keys in the key iterator.
+Ok, but we have to print the index so that it looks like a book index. This isn't that hard, since Python dictionaries allow you to iterate through the keys in a dictionary and even use Python's built-in `sorted` function to sort the keys.
 
 The only other thing we'll want to do is strip the square brackets off the list of references when we convert this list to a string. Here's the final version of `build_index` and a rerun of the last test.
 
@@ -602,7 +606,8 @@ def build_index(txt):
     for line in txt.split('\n'):
         if found_new_unit(line):
             unitno += 1
-        d = update_index(d, get_wordlist(line), unitno)
+        else:
+            d = update_index(d, get_wordlist(line), unitno)
 
     # Print out the index
     for w in sorted(d):
@@ -618,8 +623,28 @@ lineno-start: 1
 build_index(txt)
 ```
 
-You now have a general idea how Google takes a search string we give it and quickly provides us with a list of pages containing the keywords in our search. It simply looks up the search string's keywords in a big hash table, and each lookup takes constant time. None of this work takes time proportional to the size of all the pages in the indexed web, and we quickly get an answer!
+```{admonition} You Try It
+Run `index32.py` with `JustDavid-chaps.txt`, which you can find in the `chap10` code distribution. In `index32.py`, you'll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the `UNIT_PAT` and `UNIT_CNT_INIT` definitions that are appropriate for `CatInTheHat.txt` and enable those for `JustDavid-chaps.txt`.
+```
 
-Of course, Google does more than just this, as we'll discuss in the following chapters, but this is a great start. Congratulations!
+You now have a general idea how Google takes a search string and quickly returns a list of pages containing the keywords in our search. It simply looks up the search string's keywords in a big hash table, and each lookup takes constant time. None of this online work takes time proportional to the size of all the pages in the indexed web.
 
-\[Version 20230817\]
+Of course, Google does more than just web search, as we'll discuss in the following chapters, but this is a great start. Congratulations!
+
+\[Version 20240724\]
+
+[^fn1]: We use [Unicode](https://home.unicode.org/) to give us an encoding space big enough to capture many of the different characters used in human communication. Without loss of generality and to simplify my examples, I'll won't use Unicode and instead use the older ASCII encoding, which encodes characters in 8 bits or 1 byte.
+
+[^fn2]: If you need a refresher on the rules in modular arithmetic, I recommend the [tutorial in Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic).
+
+[^fn3]: I've left out the debugging code you'll find in \`rk\_strmatch.py\`, which won't aid during the explanation but will help you in visualizing what the function does as it runs.
+
+[^fn4]: Human languages are, of course, not random in their distribution of letters and letter sequences. However, we do the best we can to not make the problem worse.
+
+[^fn5]: The adjective "abstract" in the term abstract data type emphasizes the fact that we aren't expected to know anything about the implementation of this data type. We know about its function (i.e., its behavior), but nothing about its implementation or the runtime performance of its operations.
+
+[^fn6]: The cryptic code in \`get\_wordlist\` uses regular expressions and lookahead, which we'll cover in Chapter 13.
+
+[^fn7]: Recall that our specification requires the user to specify how we'll recognize that we're moving from one book unit to the next and what number to use as the initialization of that count of units. You'll see this in the pseudocode.
+
+[^fn8]: The expression \`len(UNIT\_PAT)\` is 0 when \`UNIT\_PAT\` is the empty string, which makes the slice in \`line\[0:len(UNIT\_PAT)\]\` a slice of nothing, which is the empty string. That's not what we want, and we need to handle the case when \`UNIT\_PAT\` is the empty string with different logic.
