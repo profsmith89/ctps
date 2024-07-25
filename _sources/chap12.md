@@ -596,13 +596,13 @@ ww = merge_sort(w)
 print(f'a = {aa}\nc = {cc}\nw = {ww}')
 ```
 
-What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, a large number of problems in math and nature[^fn9] are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
+What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, a large number of problems in math and nature are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
 
 ## Beckett's challenge
 
 As promised, this chapter ends by solving a problem that doesn't seem like it is amenable to a divide-and-conquer approach. Now, I don't expect you to see the solution before it's presented. I don't even expect you to feel comfortable with the solution after you've played with its recursive implementation. It takes time and repeated practice to think in this way, and you're probably still striving to be comfortable building iterative solutions. I simply ask you to work through this final problem and appreciate the power of the approach and the simplicity of the solution. And then remember this technique when you're solving your own problems.
 
-Since this book has a theatrical theme, we're going to investigate a problem posed by [the playwright Samuel Beckett](https://en.wikipedia.org/wiki/Samuel_Beckett). One of his plays, named *Quad*, has the actors enter and exit the stage so that *the same subset of actors never appear together more than once*.[^fn10]
+Since this book has a theatrical theme, we're going to investigate a problem posed by [the playwright Samuel Beckett](https://en.wikipedia.org/wiki/Samuel_Beckett). One of his plays, named *Quad*, has the actors enter and exit the stage so that *the same subset of actors never appear together more than once*.[^fn9]
 
 What does this mean? Let's imagine a play with three actors, named `A`, `B`, and `C`. As the play begins, the curtain rises on an empty stage. We'll represent an empty stage by placing a `0` under each of the actors' names. Then, when actor enters the stage, we'll change their `0` to a `1`. When they exit, their `1` becomes a `0`. Only one actor will enter or exit the stage at any instance in time.
 
@@ -640,7 +640,7 @@ def beckett(n):
 
 Beckett's challenge with a single actor should print the first two lines in  {numref}`Figure %s<c12_table1_ref>`. The first line is a unique stage direction, and we want it printed even in the challenge with no actors. But we don't want `"empty stage"` printed in the base case of the recursion; it should be printed only at the start of a challenge. This reasoning leads us to put this print-statement in the function that calls `beckett` and starts the recursion.
 
-Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example.[^fn11] A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
+Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example.[^fn10] A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
 
 ```{code-block} python
 ---
@@ -679,7 +679,7 @@ In {numref}`Figure %s<c12_table2_ref>`, what do you notice about the sequencing 
 
 Now look at actor `A`. They act like an actor in the one-actor challenge: Halfway through the play they enter and never exit. But this halfway point is far enough into the play that actor `B` has time to go through a `0-1` dance. And once `A` enters, they wait patiently as actor `B` reverses their dance from the first half.
 
-With that pattern in mind, look back at {numref}`Figure %s<c12_table1_ref>`. Actor `A` enters halfway through the play. When they enter, actors `B` and `C` had enough time to go through a dance, which these two actors reverse once `A` enters. And the dance that B and C do in the first four rows is the same dance they did in the 2-actor challenge. We've found a pattern to exploit\![^fn12]
+With that pattern in mind, look back at {numref}`Figure %s<c12_table1_ref>`. Actor `A` enters halfway through the play. When they enter, actors `B` and `C` had enough time to go through a dance, which these two actors reverse once `A` enters. And the dance that B and C do in the first four rows is the same dance they did in the 2-actor challenge. We've found a pattern to exploit\![^fn11]
 
 ## A polished, full solution
 
@@ -755,10 +755,8 @@ I hope you understand how the recursive `beckett` function works. I hope you've 
 
 [^fn8]: The recursive solution will use the same \`merge\` function that we used in the iterative solution, but I will slightly change its interface. While the iterative solution sorted the input list in place, it is more natural for the recursive solution to return the sorted list. This has to do with the lack of an explicit temporary, which we noticed in looking at the several factorial implementations.
 
-[^fn9]: In this chapter's active-learning exercises, you'll explore a fun recursive problem from nature, which will also introduce you to plotting in Python.
+[^fn9]: I learned about this challenge from Robert Sedgewick and Kevin Wayne's book, *Computer Science: An Interdisciplinary Approach* (Addison-Wesley, 2017). It appears as Program 2.3.3.
 
-[^fn10]: I learned about this challenge from Robert Sedgewick and Kevin Wayne's book, *Computer Science: An Interdisciplinary Approach* (Addison-Wesley, 2017). It appears as Program 2.3.3.
+[^fn10]: Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
 
-[^fn11]: Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
-
-[^fn12]: The binary sequence produced by the function \`beckett\` is called a [Gray code](https://en.wikipedia.org/wiki/Gray_code), which has found many uses in our world, from electronic devices to experimental design. Now that you know about this code, read about it and look for it in your world!
+[^fn11]: The binary sequence produced by the function \`beckett\` is called a [Gray code](https://en.wikipedia.org/wiki/Gray_code), which has found many uses in our world, from electronic devices to experimental design. Now that you know about this code, read about it and look for it in your world!
