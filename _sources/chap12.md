@@ -2,19 +2,19 @@
 
 The last chapter ended with a suggestion that we add a heuristic into our goal-directed search algorithm. Without a heuristic, every item on the frontier appears equally good. But with one, our search algorithm explores first the frontier list's potentially most fruitful item. You can think of the heuristic calculation as solving a simple version of the problem (e.g., which direction would a crow fly to get to our driving goal). While not guaranteed to lead to an optimal solution, good heuristics are fast to compute and likely to prioritize the right frontier items, which can get the search algorithm to a near-optimal solution quickly.
 
-But finding the highest priority item in a list is another kind of search problem. We don't want to replace the simplicity of an uniformed search (i.e., the appending and popping of items from the ends of the frontier list) with an expensive search of this list, which might make an informed search slower than an uniformed one. To avoid this, informed searches keep the frontier list *ordered* by priority. And creating such an order is the job of a *sorting algorithm*.
+But finding the highest priority item in a list is another kind of search problem. We don't want to replace the simplicity of an uninformed search (i.e., the appending and popping of items from the ends of the frontier list) with an expensive search of this list, which might make an informed search slower than an uninformed one. To avoid this, informed searches keep the frontier list *ordered* by priority. And creating such an order is the job of a *sorting algorithm*.
 
-Sorting appears as a part of many algorithms in computer science, and it makes many of the problems we want solved more efficient and the answers we get more useful. For example, Google sorts its search results before presenting them to the user, since users expect to see the most relevant results at the top of the returned list. In performing this sort, a combination of heuristics are used to assign a score to each returned result (e.g., a person in a particular geographic location probably desires results in that geographic location more than other locations). To similarly aid us in quickly finding that which we care about, the words in a book index are sorted alphabetically.
+Sorting appears as a part of many algorithms in computer science, and it makes many of the problems we want solved more efficient and the answers we get more useful. For example, Google sorts its search results before presenting them to the user, since users expect to see the most relevant results at the top of the returned list. In performing this sort, several heuristics are used to assign a score to each returned result (e.g., a person in a particular geographic location probably desires results in that geographic location more than other locations). To similarly aid us in quickly finding that which we care about, the words in a book index are sorted alphabetically.
 
 ```{admonition} You Try It
 Think about your daily life and identify three or four other examples of places where things are sorted for your convenience.
 ```
 
-Because of the importance of sorting, it's another well-studied computational problem. While modern programming languages provide useful sorting primitives---and we'll discuss those found in Python---the first third of this chapter develops two different sorting algorithms, which provides you with another opportunity to practice going from a specification to two algorithms with different computational complexities. The more computationally efficient of these introduces a new problem-solving technique, called *divide and conquer*. It works well when the problem before you can be divided into smaller, similarly structured problems. Sorting is exactly such a problem, and we'll see how to sort a list of numbers by restating the problem as one in which we separately sort the list's two halves and then quickly combine the sorted results.
+Because of the importance of sorting, it's another well-studied computational problem. While modern programming languages provide useful sorting primitives---and we'll cover those found in Python---the first third of this chapter goes from a formal specification for sorting to two algorithms with different computational complexities that satisfy this specification. The more computationally efficient of these introduces a new problem-solving technique, called *divide and conquer*. It works well when a problem can be divided into smaller, similarly structured problems. Sorting is exactly such a problem, and we'll see how to sort a list of numbers by organizing it as one in which we separately sort the list's two halves and then quickly combine the sorted results.
 
 The implementation of this more computationally efficient sorting algorithm also introduces you to a new coding technique called *recursion*, which is the more natural way to write divide-and-conquer algorithms. You'll learn to write recursive functions from a recursive specification in the middle third of this chapter.
 
-The chapter's last third pulls all these ideas together by illustrating how to design a recursive solution for a problem that may not initially appear amenable to a divide-and-conquer approach. This is not easy and takes significant practice, but the simplicity of the solution script is the reward for the hard work.
+The chapter's last third pulls all these ideas together by illustrating how to design a recursive solution to a problem that may not initially appear amenable to a divide-and-conquer approach. This is not easy and takes significant practice, but the simplicity of the solution script is the reward for the hard work.
 
 ```{admonition} Learning Outcomes
 Learn about divide-and-conquer as a problem-solving technique and recursion as a method for writing such algorithms. Sorting, which can be solved using divide-and-conquer, is a tool we often use (e.g., in our solutions to search). You will code two very different sorting algorithms and learn about Python's built-in mechanisms for sorting. Because our normal looping mechanisms are not a great way to code divide-and-conquer algorithms, you'll learn to write recursive functions. Finally, given a problem that at first doesn't seem amenable to a divide-and-conquer technique, you'll marvel at the conciseness of recursion to express a solution to this problem. In particular, after completing this chapter, you will be able to:
@@ -24,7 +24,7 @@ Learn about divide-and-conquer as a problem-solving technique and recursion as a
 *   Pass a function as a parameter so that you can specialize the behavior of Python's sorting functions [programming skills];
 *   Describe and code a brute-force sorting algorithm called insertion sort, which is probably what you use when sorting the cards you've been dealt [CS concepts];
 *   Understand how splitting work can lead to an efficient solution and code an example of this using binary search [design and CS concepts];
-*   Employ a divide-and-conquer approach to create a more efficient sorting algorithm, called merge sort [design and CS concepts];
+*   Employ a divide-and-conquer approach to create a more efficient sorting algorithm called merge sort [design and CS concepts];
 *   Code merge sort in iterative and recursive styles [CS concepts and programming skills];
 *   Describe the key components of a recursive function [design and CS concepts];
 *   Search for patterns in your problem to see if it might be amenable to a divide-and-conquer approach and recognize the base cases in a recursive implementation [design].
@@ -32,29 +32,19 @@ Learn about divide-and-conquer as a problem-solving technique and recursion as a
 
 ## A specification for sorting
 
-We've talked about the importance of sorting and now let's understand how to create a sorted list from an unsorted one. We begin with a formal specification for sorting:
-
-```{margin} Reference
-I've borrowed this definition from an earlier edition of _Introduction to Algorithms_ by Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest [The MIT Press; Cambridge, MA; 1995], p. 2.
-```
-
-Given a sequence of $n$ numbers, $[a1, a2, ..., an]$, produce an output sequence $[a1', a2', ..., an']$ such that $a1' <= a2' <= ... <= an'$.
+We've talked about the importance of sorting and now let's understand how to create a sorted list from an unsorted one. We begin with a formal specification for sorting:[^fn1] Given a sequence of $n$ numbers, $[a1, a2, ..., an]$, produce an output sequence $[a1', a2', ..., an']$ such that $a1' <= a2' <= ... <= an'$.
 
 Does this definition match your intuitive understanding of sorting? If you think about a list of numbers and a desire to reorder these numbers so that the smallest is first in the output list, it probably does.
 
-But what if you wanted to sort the list with the largest number first? The definition still works if we consider $<=$ to be an ordering operation that we specify and not the less-than-or-equal-to operator. In this way, we can sort a list of numbers or strings in either ascending or descending order simply by providing the ordering operation we want applied.
+But what if you wanted to sort the list with the largest number first? The definition still works if we consider $<=$ to be an ordering operation that we specify and not the less-than-or-equal-to operator. In this way, we can sort a list of numbers or strings in either ascending or descending order simply by providing the ordering operation we want applied (i.e., the formal specification now begins: Given a sequence of $n$ numbers and an ordering operation $<=$, produce ...).
 
-But still, does this definition cover everything you've ever sorted? What about when faculty sort their students by full name? How about when you sort your family from shortest to tallest for the annual family picture? We know that faculty sort students initially by last name and then, if needed, by first, and while our family members aren't numbers, height is a characteristic we can use to order them. Neither of these "complications" fundamentally changes the work we do to sort. They simply specify the work to be done by the ordering operation or the attribute of the objects we'll used to sort them.
+But still, does this updated definition cover everything you've ever sorted? What about when faculty sort their students by full name? How about when you sort your family from shortest to tallest for the annual family picture? We know that faculty sort students initially by last name and then, if needed, by first, and while our family members aren't numbers, height is a characteristic we can use to order them. Neither of these "complications" fundamentally changes the work we do to sort. They simply specify the work to be done by the ordering operation or the attribute of the objects we'll used to sort them.
 
-Hopefully, you agree with me that this extremely short definition does an excellent job of capturing the essence of sorting, even if we might want to adapt this specification to specify how we'd like the sorting comparison done.  
+Hopefully, you agree with me that this extremely short definition does an excellent job of capturing the essence of sorting, even if we might want to adapt it to specify exactly how we'd like the sorting comparison done.  
 
 ## Sorting in Python
 
-As an example of how programming languages generalize sort, consider the two functions built into Python:
-
-```{margin} More Details
-To learn more about these sorting functions, please see the helpful page titled ["Sorting HOW TO"](https://docs.python.org/3/howto/sorting.html) in the Python documentation.
-```
+As an example of how programming languages handle this generalization, consider the two functions built into Python:[^fn2]
 
 * The `list` class contains a `sort` method that sorts a list object in place. The original contents of the list are replaced with the sorted contents.
 * The built-in function `sorted` takes an object of an iterable type (e.g., a sequence or a dictionary) and returns a new sorted list. The original object is left unchanged.
@@ -76,7 +66,7 @@ def unsort():
     return a, c, w
 ```
 
-Often you can use these two sorting functions without any parameters, as illustrated in the next two code blocks.
+Often you can use Python's two sorting functions without any parameters, as illustrated in the next two code blocks.
 
 ```{code-block} python
 ---
@@ -106,9 +96,9 @@ ww = sorted(w)
 print(f'aa = {aa}\ncc = {cc}\nww = {ww}\n')
 ```
 
-Looking back to Chapter 10, where we built a book index, you'll see that we used the built-in `sorted` function in a problem-to-be-solved: it sorted our dictionary of word-reference pairs for us. Python dictionaries are iterable objects, and calling `sorted` with a dictionary returns a sorted list of the dictionary's keys, which was exactly what we wanted to print (see lines 62-65 in `chap10/index32.py`). 
+Looking back to Chapter 10, where we built a book index, you'll see that we used the built-in `sorted` function; with it, we sorted our dictionary of word-reference pairs. Python dictionaries are iterable objects, and calling `sorted` with a dictionary returns a sorted list of the dictionary's keys, which was exactly what we wanted to print (see lines 63-66 in `chap10/index32.py`). 
 
-These examples work because: (1) the way we expected the list elements and dictionary keys sorted matched these functions' default action (i.e., sort with the "smallest" item first); and (2) the classes for these iterable objects implement the magic method \_\_lt\_\_, which `sort` and `sorted` use behind the scenes to determine the sorted ordering.
+These examples work because: (1) the way we wanted to sort the list elements and dictionary keys matched these functions' default action (i.e., sort with the "smallest" item first); and (2) the classes for these iterable objects implement the magic method `__lt__`, which `sort` and `sorted` use behind the scenes to determine the sorted order.
 
 ## Sorting in descending order
 
@@ -137,7 +127,7 @@ print(f'aa = {aa}\ncc = {cc}\nww = {ww}\n')
 
 ## Sorting with your own comparison function
 
-But we also talked about more "complicated" sortings that professors do with student names and you do with your relatives for a family picture. The two Python sorting functions handle this type of complicated data through their `key` parameter. It allows you to do things like: (1) sort a list of words without worrying about the capitalization of the words; and (2) sort a list of complex objects using only one or a few of the attributes of the objects.
+But we also talked about more "complicated" sortings that professors do with student names and you do with your relatives for a family picture. The two Python sorting functions handle this type of complicated data through their `key` parameter. It allows you to do things like: (1) sort a list of words without worrying about the capitalization of the words; and (2) sort a list of complex objects using only one or a few of the objects' attributes.
 
 The `key` parameter takes a function. We know how to define a function and how to call a function, but what does it mean to say that a parameter takes a function? Well, a function is just another Python object, and instead of invoking that function using its name and a pair of parentheses (e.g., `str.lower()`), we can assign a new name to that function by referring to its current name (e.g., `also_lower = str.lower`). That's all that occurs when we pass a function as a parameter (i.e., give the function a new name). So, to sort our unsorted list of words without worrying about each word's capitalization, we simply write:
 
@@ -155,15 +145,15 @@ print(f'w_caps = {w_caps}')
 print(f'w_nocaps = {w_nocaps}')
 ```
 
-Inside the implementation of `sort`, `str.lower` is applied to each item in the input list (i.e., `w`) and the result of this function is the value used in the comparison to determine whether this item comes before or after another item.
+Inside the implementation of `sort`, `str.lower` is applied to each item in the input list (i.e., `w`) and the result of `str.lower` is the value used in the comparison to determine whether this item comes before or after another item.
 
-But we don't have to pass to `key` functions that someone else wrote. We can pass the name of a function we've written! This will allow us to sort a list of complex objects using only one or a few of the attributes of the objects.
+But we don't have to set the parameter `key` to the name of a function that someone else wrote. We can pass the name of a function we've written! This will allow us to sort a list of complex objects using only one or a few of the objects' attributes.
 
 For instance, imagine we have a database of records, where a *record* is a block of information consisting of many attributes. We'll build an example of such a database as a simple list, and each list item will be a tuple. The list items are our database records, and the tuple items the values for each record field. Here's an example of such a database using a set of characteristics about the individuals that were involved in the first class I taught using this book: 
 
 ```{code-block} python
 ---
-lineno-start: 37
+lineno-start: 38
 ---
 ### chap12/sorting.py
 
@@ -203,7 +193,7 @@ print(sorted(cs32_staff, key=batting_avg, reverse=True))
 Sorting problem solved!
 
 ```{admonition} You Try It
-Your `key` function doesn't just have to use the value of one record's attribute; it can combine the values of several attributes or pieces of these attributes. Can you figure out the function you'd write to sort a list of names by last name and break ties by first name? Try your solution on this list of names: `['Ada Lovelace', 'Grace Hopper', 'danah boyd', 'Moses Liskov', 'Barbara Liskov', 'Anita Borg']`. Be careful with capitalization! You can find an answer in `chap12/sorting_names.py`.
+Your `key` function doesn't just have to use the value of a single attribute; it can combine the values of several attributes or pieces of these attributes. Can you figure out the function you'd write to sort a list of names by last name and break ties by first name? Try your solution on this list of names: `['Ada Lovelace', 'Grace Hopper', 'danah boyd', 'Moses Liskov', 'Barbara Liskov', 'Anita Borg']`. Be careful with capitalization! You can find an answer in `chap12/sorting_names.py`.
 ```
 
 ## Sorting playing cards
@@ -218,7 +208,7 @@ Let's return to our initial specification and look at two different algorithms f
 Do you see the pattern? Computer scientists call this algorithm *an insertion sort*, and we can code it by recognizing that it involves a pair of nested for-loops. The outer loop visits each card in the unsorted part of our hand; it corresponds to the numbered steps in the pseudocode above. We need an inner loop to implement the act of insertion in each numbered step because it's not easy to insert an element where it belongs in a sorted list. To do this, our code will walk down the sorted part of the list swapping the unsorted item with the sorted item before it until it reaches the position where it belongs in the sorted order.
 
 ```{admonition} You Try It
-This description might be hard to follow. Take a look at `insertion_sort` in the code block below, and then run it with the two print-statements uncommented using either the subsequent code block or `insertion_sort.py` from this book's code repository. If you study what the routine prints for each iteration of the for-loops, you'll better understand its swapping mechanism.
+This description might be hard to follow. Take a look at `insertion_sort` in the code block below, and then run it with the two print-statements uncommented. If you study what the routine prints for each iteration of the for-loops, you'll better understand its swapping mechanism.
 ```
 
 ```{code-block} python
@@ -268,30 +258,21 @@ Given that `insertion_sort` contains two nested for-loops that iterate at most $
 Can you create an input list `b` of length 5 containing nothing but integers that exhibits this number of swaps (i.e., $(5 * 4)/2 = 10$ swaps)? Leave the print statements uncommented in `insertion_sort` so that you can count the number of swaps performed.
 ```
 
-```{margin} Other Sorting Algorithms
-A simple internet search for "sorting algorithms" will list many of the most popular sorting techniques.
-```
-
-I called insertion sort a brute-force approach, and if the computational complexity of this approach is $O(n^2)$, then there must be a sorting algorithm that does better than this. In fact, there are several, but we'll look at just one. This one works by thoughtfully splitting the problem into two smaller problems.
+I called insertion sort a brute-force approach, and if the computational complexity of this approach is $O(n^2)$, then there must be a sorting algorithm that does better than this. In fact, there are several[^fn3] but we'll look at just one. This one works by thoughtfully splitting the problem into two smaller problems.
 
 ## Binary search
 
-To see why this might help, let's begin with an example of how splitting things can speed up searching. Recall the guess-the-number script from Chapter 5, and think about the strategy you employ when you try to minimize the number of guesses. Does this strategy have you guess the numbers in increasing order from the smallest possible number?
+To see why splitting a problem into several smaller instances might help, let's try this with searching. Recall the guess-the-number script from Chapter 5, and think about the strategy you employ when you try to minimize your number of guesses.
 
-Of course not. That approach doesn't use to your advantage the hints given by the computer after each guess. In particular, guessing first the number 1 in the range 1 to 100 means that the computer will respond with "Too small!" when 1 isn't the hidden number. You could then guess 2, and unless you're very lucky, the computer's answer is the same. Continue in this fashion and you never take advantage of the other possible response: "Too big!"
+Does this strategy have you guess the numbers in increasing order from the smallest possible number? Of course not. That approach doesn't use to your advantage the hints given by the computer after each guess. In particular, guessing first the number 1 in the range 1 to 100 means that the computer will respond with "Too small!" when 1 isn't the hidden number. You could then guess 2, and unless you're very lucky, the computer's answer is the same. Continue in this fashion and you never take advantage of the other possible response: "Too big!"
 
-Now consider what happens when your guess leaves unguessed numbers above and below it. Again assuming that whatever number you guessed wasn't the secret, the computer's answer of "Too small!" or "Too big!" eliminates more than just the guessed number; it eliminates the unguessed numbers either above or below your guess. If you make wise choices, your guesses can eliminate large portions of the search space and quickly get you to the secret number.
+Now consider what happens when your guess leaves unguessed numbers above and below it. Again assuming that whatever number you guessed wasn't the secret, the computer's answer of "Too small!" eliminates more than just the guessed number; it eliminates all the unguessed numbers below it. If you make wise choices, your guesses can eliminate large portions of the search space and quickly get you to the secret number.
 
-```{margin} Searching an Old-fashioned Phonebook
-As another example of binary search in action, [watch Professor David Malan of CS50 fame](https://www.youtube.com/watch?v=DSffdCT5Cx4) use binary search to find this book's author in an old-fashioned phone book.
-```
-
-The optimal strategy is called *a binary search*, in which you guess a number at the mid-point of the search space. It's optimal because an answer of "Too small!" or "Too big!" then eliminates one half of the remaining search space, which is the best you can do on average.
+The optimal strategy is called *a binary search*, in which you guess a number at the mid-point of the search space. It's optimal because an answer of "Too small!" or "Too big!" then eliminates one half of the remaining search space, which is the best you can do on average.[^fn4]
 
 *A binary-search algorithm* has you continue in this manner (i.e., choosing the mid-point of the remaining search space each time) until you hit the hidden number. In the worst case, it takes at most $log_2 n$ guesses to find the hidden number, where $n$ is the size of the search space.
 
-The `guesses` function in the next code block implements the binary-search algorithm so that the computer can guess a secret number you pick, which reverses the participants' roles in the guess-the-number game we built in Chapter 5. There's no new Python syntax or operators in this code, but take a few moments to read through it and make sure you understand how it implements binary search.
-
+The `guesses` function in the next code block implements the binary-search algorithm in a game that has the computer can guess your secret number. This game reverses the participants' roles in the guess-the-number game we built in Chapter 5. There's no new Python syntax or operators in this code, but take a few moments to read through it and make sure you understand how it implements binary search.
 
 ```{code-block} python
 ---
@@ -344,15 +325,13 @@ Run `guess.py` from the `chap12` code repository, which implements `guess32.py` 
 
 ## Divide and conquer
 
-This idea of splitting a problem in half to make it easier is at the heart of this chapter's new problem-solving technique, called *divide-and-conquer*. And just as we did in a binary-search algorithm, we'll repeatedly split each smaller problem until we get to a situation where we know the answer.
+This idea of splitting a problem in half to make it easier is at the heart of this chapter's new problem-solving technique, called *divide-and-conquer*. And just as we did in a binary-search algorithm, we'll repeatedly split each smaller problem until we get to a situation where splits are no longer necessary.
 
-In the context of sorting, we start with an unsorted list and split it in half. This split produces two lists, which most likely are themselves unsorted, but let's pause and consider what we'd do if the split happens to produce two sorted lists.
+To understand this in detail, let's return to the context of sorting. Given an unsorted list, divide-and-conquer has us split this list in half. This split produces two lists, which most likely are themselves unsorted, but let's pause and consider what we'd do if the split happens to produce two sorted lists. To be clear, splits don't sort. But we might be lucky and start with an unsorted list like `[1, 3, 5, 2, 4, 6]`, and when we split this list in half (i.e., between `5` and `2`), we're left with two sorted lists. That's close to what we want (i.e., a list with all the original elements sorted), and so let's now ask, given two sorted lists, how would we combine them into a single sorted one?
 
-To be clear, splits don't sort. But we might be lucky and start with an unsorted list like `[1, 3, 5, 2, 4, 6]`. If we split this list between the `5` and the `2`, we're left with two sorted lists. It seems useless to split each of these sorted lists into twice as many sorted lists. What we should do when we want to combine two sorted lists into one?
+A function that quickly *merges* two sorted lists into a single sorted list is not hard to build if we recognize that one of the two first items in the sorted lists must be the first item in the fully sorted list. Let's take the smaller of the two from its sorted list and append it to an output list. One of the two sorted lists is now one element shorter, but this situation is not any different than the one we just had. We again want to ask: Which of the two items at the front of the two sorted lists should be appended to the single sorted list? We continue like this until we have moved all the items from the two small sorted input lists into the single sorted output list. 
 
-We need a function that quickly *merges* two sorted lists into a single sorted list. Such a script is not hard to build if we recognize that the first item in the single sorted list must be one of the first two items in the smaller sorted lists. We'll pop that item from its sorted list and append it to our single, output list. One of the sorted lists is now one element shorter, but we're back to the question we just asked: which of the two items at the front of the two sorted lists should be appended to the single sorted list?
-
-That's the core of the merge function that combines all the lists we produced by splitting. We'll switch from splitting to merging when we've done enough splitting to produce nothing but sorted lists.
+That's the core of the merge function that will combine all the lists we produce through splitting. In other words, we'll switch from splitting to merging when we recognize that we've done enough splitting to produce nothing but sorted lists.
 
 ```{tip}
 In general, every divide-and-conquer algorithm has some sort of splitting phase and a complementary merging phase.
@@ -396,13 +375,9 @@ def merge(a, b):
 
 ## From split to merge
 
-Knowing how to split and how to merge, we have the pieces we need for a divide-and-conquer sort, but how do we know when to transition from the initial split phase to the final merge phase? Well, we know the conditions that need to be true to use `merge`: it can begin once we have nothing but sorted lists. This means that the question we really want to answer is, "Without checking the order of its elements, how small a list must split produce before we know that the list is sorted?" If we answer this question, then we know when we'll can stop splitting and start merging.
+Knowing how to split and how to merge, we have the pieces we need for a divide-and-conquer sort, but how do we identify when to transition from splitting to merging? Well, we know the conditions that need to be true to use `merge`: it can begin once we have nothing but sorted lists. This means that the question we really want to answer is, "Without checking the order of its elements, how small a list must split produce before we know without checking that a list is sorted?" If we answer this question, then we've identified when we can stop splitting and start merging.
 
-```{Tip}
-We're not relying on luck, as we did in the earlier example, and we can't take the time to check the order of the elements in a list. We want to know when we can look at a simple attribute of a list, like its length, and know that it must be sorted. To answer a question that asks for a guarantee, we often focus on the edge conditions in a problem. This type of thinking is one way people searchCod for new algorithms.
-```
-
-Did you figure it out? Empty lists and lists with a single element are guaranteed to be sorted. Nicely, our `merge` function properly handles lists of these lengths.
+Did you figure it out? The key here is to think about the length of a list. Empty lists and lists with a single element are guaranteed to be sorted. Nicely, our `merge` function properly handles lists of these lengths.
 
 We now understand the full divide-and-conquer method of sorting, which computer scientists call *merge sort*. The algorithm is easy to describe:
 
@@ -461,7 +436,7 @@ def merge_sort(s):
 ```
 
 ```{admonition} You Try It
-The function `merge_sort` implements the merge-sort algorithm using the hammer of iteration. It works, but as we'll soon see, it is not the best tool for the job. Nonetheless, the next code block exercises this implementation, and I encourage you run it as you read through the code. While these blocks don't contain any new Python syntax, this iterative implementation does a lot of hard-to-follow slicing in a pair of nested while-loops. You might drop in a few print-statements to make it easier for you to understand its work.
+The function `merge_sort` in `imerge_sort.py` implements the merge-sort algorithm using the hammer of iteration. It works, but as we'll soon see, it is not the best tool for the job. Nonetheless, the next code block exercises this implementation, and I encourage you run it as you read through the code. While these blocks don't contain any new Python syntax, this iterative implementation does a lot of hard-to-follow slicing in a pair of nested while-loops. You might drop in a few print-statements to make it easier for you to understand its work.
 ```
 
 ```{code-block} python
@@ -480,18 +455,14 @@ print(f'a = {a}\nc = {c}\nw = {w}')
 
 ## Recursion
 
-Despite the ugliness of this implementation, merge sort is typically faster than insertion sort. Given a list of $n$ elements, insertion sort has a worst-case computational complexity of $O(n^2)$ and merge sort of $O(n log_2 n)$. This is because merge sort makes $O(log_2 n)$ splits and this same number of merges, and each merge step requires $O(n)$ work. On sorting a large list, this complexity difference is significant.
+Despite the ugliness of the iterative implementation, merge sort is typically faster than insertion sort. Given a list of $n$ elements, insertion sort has a worst-case computational complexity of $O(n^2)$ and merge sort of $O(n log_2 n)$. This is because merge sort makes $O(log_2 n)$ splits and this same number of merges, and each merge step requires $O(n)$ work. On sorting a large list, this complexity difference is significant.
 
 But it's beginning to appear that to run faster, we must pay for this speed boost with a more complex implementation. Just eyeball `insertion_sort` versus `merge_sort`, and recall what we saw in comparing `bf_strmatch` against `rk_strmatch`. Despite these two examples, we'll see it's not always true that increased speed begets an ugly implementation. Sometimes we just need to use the right tool, and for divide-and-conquer algorithms, that tool is *recursion*.
 
 Recursion is a fancy way of saying that a function repeatedly calls itself. While having a function call itself in this manner may sound like a recipe for an infinite loop, we avoid this outcome by:
 
-```{margin} Nesting Dolls
-It might help to have an image of the [Russian Matryoshka Dolls](https://en.wikipedia.org/wiki/Matryoshka_doll) in your mind. Each inner doll is smaller than its outer doll, and if you open them all, you'll find that the innermost doll doesn't open. That innermost doll is the base case.
-```
-
 1. Requiring each recursive call to solve a slightly smaller (or simpler) problem, and;
-2. Making sure we have what are called one or more base cases, which do not involve a recursive call.
+2. Making sure we have what are called one or more *base cases*, which do not involve a recursive call.[^fn5]
 
 Before we look at the recursive form of merge sort, let's get a feel for the structure of a recursive implementation by looking at the canonical recursive algorithm: factorial. You probably remember that the factorial of a number $n$, expressed in mathematical notation as $n!$, is the product of the numbers between $n$ and $1$, inclusive.
 
@@ -508,11 +479,7 @@ factorial_of_3 = 3 * 2 * 1
 factorial_of_4 = 4 * factorial_of_3
 ```
 
-```{margin} Details
-Factorial is defined only for non-negative integers.
-```
-
-Using this idea, let's assume we have a function `factorial` that takes a single input parameter `n` and returns its factorial value, then the following equality would be true for any positive integer:
+Using this idea, let's assume we have a function `factorial` that takes a single input parameter `n` and returns its factorial value, then the following equality would be true for any positive integer:[^fn6]
 
 ```{code-block} python
 factorial(n) == n * factorial(n - 1)
@@ -575,27 +542,21 @@ Congratulations! You just wrote your first recursive program.
 
 ## Iterative factorial
 
-I mentioned that factorial was the canonical example of a calculation that can be solved by divide and conquer and implemented in a recursive style, but you might wonder what this function looks like if written using an explicit looping statement.
+I mentioned that factorial was the canonical example of a calculation that can be solved by divide-and-conquer and implemented in a recursive style, but you might wonder what this function looks like if written using an explicit looping statement.
 
 ```{admonition} You Try It
-Try writing the function `factorial` using either a for- or while-loop. You can find my for-loop solution in `ffactorial.py` and my while-loop solution in `wfactorial.py`.
+
+Try writing the function `factorial` using either a for- or while-loop. You can find my for-loop solution in `ffactorial.py` and my while-loop solution in `wfactorial.py`.[^fn7]
+
 ```
 
-```{margin} While vs. For
-By the way, as expected, when compared to the for-loop solution, the while-loop solution requires us to manage the loop's index variable. I reuse the input parameter as the while-loop's index variable to save one initialization. Nothing new here.
-```
-
-Notice that both of these iterative solutions require us to create a named temporary, which I called `result` in my solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of [our complete recursive factorial function on Python Tutor](https://pythontutor.com/visualize.html#code=def%20factorial(n):%0A%20%20%20%20if%20n%20%3C%200:%0A%20%20%20%20%20%20%20%20raise%20ValueError(%22factorial%20is%20not%20defined%20for%20negative%20integers%22)%0A%20%20%20%20elif%20n%20%3C%202:%0A%20%20%20%20%20%20%20%20return%201%0A%20%20%20%20else:%0A%20%20%20%20%20%20%20%20return%20n%20*%20factorial(n%20-%201)%0A%20%20%20%20%0Afactorial(4)&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false).
+Notice that both of these iterative solutions require us to create a named temporary, which I called `result` in both solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of [our complete recursive factorial function on Python Tutor](https://pythontutor.com/visualize.html#code=def%20factorial(n):%0A%20%20%20%20if%20n%20%3C%200:%0A%20%20%20%20%20%20%20%20raise%20ValueError(%22factorial%20is%20not%20defined%20for%20negative%20integers%22)%0A%20%20%20%20elif%20n%20%3C%202:%0A%20%20%20%20%20%20%20%20return%201%0A%20%20%20%20else:%0A%20%20%20%20%20%20%20%20return%20n%20*%20factorial(n%20-%201)%0A%20%20%20%20%0Afactorial(4)&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false).
 
 ## Recursive merge sort
 
-You might prefer the simplicity of the code in `factorial` over the other two implementations. And if you are inclined to think mathematically, this implementation clearly reflects the mathematical formulation of the problem, which might make this code easier for you to read and understand.
+You might prefer the simplicity of the code in `factorial` over the other two implementations. And if you are inclined to think mathematically, this implementation clearly reflects the problem's mathematical formulation, which might make this code easier for you to read and understand.
 
-This simplicity of expression is a characteristic of recursive code, and it is why there are quite a few people who speak with a religious fervor about recursion. But it is true that this simplicity-of-expression quality becomes more evident as the divide-and-conquer problems we're trying to solve become more complex. Let's keep this in mind as we look at the recursive solution to merge sort.
-
-```{margin} Minor Interface Change
-The recursive solution will use the same `merge` function that we used in the iterative solution, but I will slightly change its interface. While the iterative solution sorted the input list in place, it is more natural for the recursive solution to return the sorted list. This has to do with the lack of an explicit temporary, which we noticed in looking at the several factorial implementations.
-```
+This simplicity of expression is a characteristic of recursive code, and it is why there are quite a few people who speak with a religious fervor about recursion. But it is true that this simplicity-of-expression quality becomes more evident as the divide-and-conquer problems we're trying to solve become more complex. Let's keep this in mind as we look at the recursive solution to merge sort.[^fn8]
 
 ```{code-block} python
 ---
@@ -635,21 +596,13 @@ ww = merge_sort(w)
 print(f'a = {aa}\nc = {cc}\nw = {ww}')
 ```
 
-```{margin} More Practice with Recursion
-In this chapter's active-learning exercises, you'll explore a fun recursive problem from nature, which will also introduce you to plotting in Python.
-```
-
-What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, a large number of problems in math and nature are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
+What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, a large number of problems in math and nature[^fn9] are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
 
 ## Beckett's challenge
 
 As promised, this chapter ends by solving a problem that doesn't seem like it is amenable to a divide-and-conquer approach. Now, I don't expect you to see the solution before it's presented. I don't even expect you to feel comfortable with the solution after you've played with its recursive implementation. It takes time and repeated practice to think in this way, and you're probably still striving to be comfortable building iterative solutions. I simply ask you to work through this final problem and appreciate the power of the approach and the simplicity of the solution. And then remember this technique when you're solving your own problems.
 
-```{margin} Credit
-I learned about this challenge from Robert Sedgewick and Kevin Wayne's book, _Computer Science: An Interdisciplinary Approach_ (2017). It appears as Program 2.3.3.
-```
-
-Since this book has a theatrical theme, we're going to investigate a problem posed by [the playwright Samuel Beckett](https://en.wikipedia.org/wiki/Samuel_Beckett). One of his plays, named *Quad*, has the actors to enter and exit the stage so that *the same subset of actors never appear together more than once*.
+Since this book has a theatrical theme, we're going to investigate a problem posed by [the playwright Samuel Beckett](https://en.wikipedia.org/wiki/Samuel_Beckett). One of his plays, named *Quad*, has the actors enter and exit the stage so that *the same subset of actors never appear together more than once*.[^fn10]
 
 What does this mean? Let's imagine a play with three actors, named `A`, `B`, and `C`. As the play begins, the curtain rises on an empty stage. We'll represent an empty stage by placing a `0` under each of the actors' names. Then, when actor enters the stage, we'll change their `0` to a `1`. When they exit, their `1` becomes a `0`. Only one actor will enter or exit the stage at any instance in time.
 
@@ -661,7 +614,7 @@ Under these constraints and with these encodings, {numref}`Figure %s<c12_table1_
 A solution to Beckett's challenge with three actors.
 ```
 
-This table contains eight rows (not counting the header) because the number of different subsets of $n$ objects is exactly $2^n$. To verify that this table, when reading the rows in order from top to bottom, is a solution to Beckett's challenge, notice that, when looking at the `ABC` encoding in binary, no two rows of the table are the same, which means that no subset of actors is on the stage more than once.
+This table contains eight rows (not counting the header) because the number of different subsets of $n$ objects is exactly $2^n$. To verify that this table, when reading the rows in order from top to bottom, is a solution to Beckett's challenge, notice that, when looking at the `ABC` binary encodings, no two rows of the table are the same, which means that no subset of actors is on the stage more than once.
 
 ## Its base case
 
@@ -669,7 +622,7 @@ To create a script that can solve Beckett's challenge for any number of actors, 
 
 Hmmm. It's not immediately obvious to me what stage directions we need to add to the solution with `n-1` actors that produces the solution with `n` actors, and so let's try some simple examples. What would we print for stage directions to solve Beckett's challenge for a play with no actors? It is the smallest Beckett challenge, and it feels like our base case.
 
-Do you see that we'd print nothing for a challenge involving zero actors? We have an empty stage, and no actors to enter or exit it. During the recursive call sequence, when we're calling our function with ever smaller problems, this is our function's base case. Let's start writing our recursive `beckett` function so that it prints nothing and returns when called with no actors.
+Do you see that we'd print nothing for a challenge involving zero actors? We have an empty stage, and no actors to enter or exit it. During the recursive call sequence, when we're calling our function with ever smaller problems, this is our recursive function's base case. Let's start writing our function `beckett` so that it prints nothing and returns when called with no actors.
 
 ```{code-block} python
 ---
@@ -687,11 +640,7 @@ def beckett(n):
 
 Beckett's challenge with a single actor should print the first two lines in  {numref}`Figure %s<c12_table1_ref>`. The first line is a unique stage direction, and we want it printed even in the challenge with no actors. But we don't want `"empty stage"` printed in the base case of the recursion; it should be printed only at the start of a challenge. This reasoning leads us to put this print-statement in the function that calls `beckett` and starts the recursion.
 
-```{margin} Actor Names
-Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
-```
-
-Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example. A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
+Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example.[^fn11] A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
 
 ```{code-block} python
 ---
@@ -712,12 +661,13 @@ def beckett(n):
 num_actors = 1
 
 print(f'empty stage')
+
 beckett(num_actors)
 ```
 
 ## Looking for the pattern
 
-To design an algorithm that generates stage directions of the form "enter X" and "exit Y" for the play in {numref}`Figure %s<c12_table1_ref>`, we must identify and understand the repeating patterns in the table's sequence of binary encodings. In general, coding with recursion involves finding the pattern that repeats, each time on a smaller scale. Let's focus on the solution table for the challenge with two actors.
+To design an algorithm that generates stage directions of the form "enter B" and "exit C" for the play in {numref}`Figure %s<c12_table1_ref>`, we must identify and understand the repeating patterns in the table's sequence of binary encodings. In general, coding with recursion involves finding the pattern that repeats, each time on a smaller scale. Let's focus on the solution table for the challenge with two actors.
 
 ```{figure} images/c12_table2.png
 :name: c12_table2_ref
@@ -727,9 +677,9 @@ A solution to Beckett's challenge with two actors.
 
 In {numref}`Figure %s<c12_table2_ref>`, what do you notice about the sequencing of the bits for actor `B`? Compare the first two boxed values against the last boxed two. Yes! The sequence reverses itself.
 
-Now look at actor `A`. They act like an actor in the one-actor challenge: Halfway through the play they enter and never exit. But this halfway point is far enough into the play that actor `B` has time to go through a `0-1` dance. And once `A` enters, this actor waits patiently as actor `B` reverses their dance from the first half.
+Now look at actor `A`. They act like an actor in the one-actor challenge: Halfway through the play they enter and never exit. But this halfway point is far enough into the play that actor `B` has time to go through a `0-1` dance. And once `A` enters, they wait patiently as actor `B` reverses their dance from the first half.
 
-With that pattern in mind, look back at {numref}`Figure %s<c12_table1_ref>`. Actor `A` enters halfway through the play. When they enter, they left enough time for actors `B` and `C` to go through a dance, which these two actors reverse once `A` enters. And the dance that B and C do in the first four rows is the same dance they did in the 2-actor challenge!
+With that pattern in mind, look back at {numref}`Figure %s<c12_table1_ref>`. Actor `A` enters halfway through the play. When they enter, actors `B` and `C` had enough time to go through a dance, which these two actors reverse once `A` enters. And the dance that B and C do in the first four rows is the same dance they did in the 2-actor challenge. We've found a pattern to exploit\![^fn12]
 
 ## A polished, full solution
 
@@ -739,15 +689,11 @@ With the pattern recognized, what remains is to convert the pattern into code. W
 * The printing goes between the two recursive calls, which means that we had the right idea in `beckett1.py`, even if we didn't realize it at the time. You can see this by focusing on actor `A`, who we just discussed watches off-stage as the other actors go through their dance (i.e., the first recursive call). Actor `A` then enters the stage (i.e., we print `"enter A"`). And finally, this actor watches on-stage as the other actors go through their reversed dance (i.e., the second recursive call).
 * We need to send along another piece of information, which is a Boolean telling the recursion whether an actor is in the "dance-in" or "dance-out" portion of their pattern. This is the purpose of the `enters` parameter on `beckett`.
 
-```{margin} Gray Codes
-What the `beckett` script produces is called a **Gray code**, which has found many uses in our world, from electronic devices to experimental design. Now that you know about them, feel free to read about them and look for them in your world!
-```
-
 ```{code-block} python
 ---
 lineno-start: 1
 ---
-### chap12/beckett.py
+### chap12/beckett32.py
 
 # Set the number of actors in your play, which
 # must be less than or equal to 10
@@ -756,7 +702,11 @@ assert num_actors <= 10
 
 # Setup for pretty printing
 on_stage = 0  # encoding of who is on stage
-names = 'ABCDEFGHIJ'[:num_actors]
+if num_actors == 3:
+    # Used to demonstrate the dance with playing cards
+    names = 'KQJ'
+else:
+    names = 'ABCDEFGHIJ'[:num_actors]
 
 def stage_print(dir, n):
     global on_stage
@@ -787,4 +737,28 @@ This final `beckett` function is disturbingly simple, and that's what happens wh
 
 I hope you understand how the recursive `beckett` function works. I hope you've also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett's challenge is even harder, but you can do it if you take it a step at a time, as we just did.
 
-\[Version 20230930\]
+\[Version 20240725\]
+
+[^fn1]: I've borrowed this definition from an earlier edition of *Introduction to Algorithms* by Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest (The MIT Press; Cambridge, MA; 1995), p. 2.
+
+[^fn2]: To learn more about sorting in Python, please see the helpful page titled ["Sorting HOW TO"](https://docs.python.org/3/howto/sorting.html) in the Python documentation.
+
+[^fn3]: A simple internet search for "sorting algorithms" will list many of the most popular sorting techniques.
+
+[^fn4]: As another example of binary search in action, [watch Professor David Malan of CS50 fame](https://www.youtube.com/watch?v=DSffdCT5Cx4) use binary search to find this book's author in an old-fashioned phone book.
+
+[^fn5]: It might help to have an image of the [Russian Matryoshka Dolls](https://en.wikipedia.org/wiki/Matryoshka_doll) in your mind. Each inner doll is smaller than its outer doll, and if you open them all, you'll find that the innermost doll doesn't open. That innermost doll is the base case.
+
+[^fn6]: Factorial is defined only for non-negative integers.
+
+[^fn7]: As expected, when compared to the for-loop solution, the while-loop solution requires us to manage the loop's index variable. My while-loop solution reuses the input parameter as the while-loop's index variable to save one initialization. Nothing new here.
+
+[^fn8]: The recursive solution will use the same \`merge\` function that we used in the iterative solution, but I will slightly change its interface. While the iterative solution sorted the input list in place, it is more natural for the recursive solution to return the sorted list. This has to do with the lack of an explicit temporary, which we noticed in looking at the several factorial implementations.
+
+[^fn9]: In this chapter's active-learning exercises, you'll explore a fun recursive problem from nature, which will also introduce you to plotting in Python.
+
+[^fn10]: I learned about this challenge from Robert Sedgewick and Kevin Wayne's book, *Computer Science: An Interdisciplinary Approach* (Addison-Wesley, 2017). It appears as Program 2.3.3.
+
+[^fn11]: Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
+
+[^fn12]: The binary sequence produced by the function \`beckett\` is called a [Gray code](https://en.wikipedia.org/wiki/Gray_code), which has found many uses in our world, from electronic devices to experimental design. Now that you know about this code, read about it and look for it in your world!
