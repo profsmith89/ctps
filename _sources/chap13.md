@@ -663,10 +663,6 @@ While this command line with its sequence of tasks solves our problem, it is a l
 
 As a simple example of piping, imagine that I wanted to see the Python scripts in my working directory sorted by size, and I wanted the smallest scripts listed first. The `ls` command has an option `-l` that prints a lot of information for each item it lists, and most Unix-like systems come with a `sort` program. The `sort` program on my system has an option `-k` that allows me to indicate which column `sort` should use for ordering the input lines.[^fn23] Terrific! I just need to wire the output of `ls` into the input of `sort`, and my job is done.
 
-```{margin} Where's the File Size?
-The fifth column in each listing line is the size of the file. For example, `broken.py` is 416 bytes.
-```
-
 ```{code-block} none
 ---
 emphasize-lines: 1
