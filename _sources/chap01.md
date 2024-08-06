@@ -129,7 +129,7 @@ So lets's write down some pseudocode, i.e., some ideas about how to instruct a c
 
 Fortunately, there are numerous applications available in which you can write, run, and inspect code. These tools are typically called an *editor*, an *interpreter*, and a *debugger*. The editor is where we will write our pseudocode and then our Python script. The interpreter is what allows us to run the script we have written, and the debugger is a tool that can help us understand the reasons why our script may not have run as we had hoped.
 
-While you can use these as standalone tools, many programmers like to use what is called an *Integrated Development Environment (IDE)*. An IDE packages together all the tools you'll need in a single application. In a moment, I'll help you get started with an actual IDE in which you'll build the computational solutions I discuss in this book's chapters. There are many different, including some free, IDEs, and it won't matter which you use. The most important thing is that you **use one** as you work your way through this book.
+While you can use these as standalone tools, many programmers like to use what is called an *Integrated Development Environment (IDE)*. An IDE packages together all the tools you'll need in a single application. In a moment, I'll help you get started with an actual IDE in which you'll build the computational solutions I discuss in this book's chapters. There are many different, including some free, IDEs, and it won't matter which you use. The most important thing is that you use an IDE as you work your way through this book.
 
 ## Our generic IDE
 
@@ -264,7 +264,7 @@ But more than no error message, it looks clicking the Run button did nothing. Th
 
 Giving the Python interpreter a script (like `seuss.py` that we've started writing) is one way to command it, but it isn't the only way. We can also ask the interpreter to *interact* with us. You should think about this as having a conversation with the interpreter. In this conversation, we can feed it different parts of our Python script and see how it reacts, and like an attentive friend, it will remember what we've previously said to it.
 
-In the directions that got you started with your selected IDE, I include a section that tells you which panel in your IDE you should use to start the Python interpreter in its interactive mode, i.e., what people call the *interactive Python interpreter*. This IDE panel contains a shell prompt at which you type `python3,` and then press the return key on a Mac or the enter key on a PC.
+In the directions that got you started with your selected IDE, I include a section that tells you which panel in your IDE you should use to start the Python interpreter in its interactive mode, i.e., what people call the *interactive Python interpreter*. This IDE panel contains a shell prompt at which you type `python3`, and then press the return key on a Mac or the enter key on a PC.
 
 ```{admonition} Terminology
 :class: tip
@@ -283,7 +283,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
 
-To exit the interactive Python interpreter, you simultaneously press your keyboard's control key and the letter-D key. Going forward, I'll abbreviate this key combination as *Ctrl+D*.
+To exit the interactive Python interpreter, you simultaneously press your keyboard's control key and the letter-D key.[^fn4] Going forward, I'll abbreviate this key combination as *Ctrl+D*.
 
 ```{admonition} You Try It
 Use Ctrl+D to exit the interactive Python interpreter and then type `python3` at the shell prompt to re-enter the interactive interpreter.
@@ -320,7 +320,7 @@ The interpreter responded with something interesting. It doesn't read like the e
 
 ## The interpreter as a calculator
 
-What happens if you type `2 + 3` at the interactive Python interpreter's prompt?[^fn4] Before you hit enter, take a moment and think about what we are asking the interpreter to do.
+What happens if you type `2 + 3` at the interactive Python interpreter's prompt?[^fn5] Before you hit enter, take a moment and think about what we are asking the interpreter to do.
 
 ```{code-block} python
 2 + 3
@@ -471,7 +471,7 @@ Continuing with the transcript above, I then typed the last line of our `seuss.p
 
 To answer this question, you need to understand what it means to have the Python interpreter in interactive mode. In this mode, the interpreter becomes a great way to test little pieces of code. It's like asking the actors in the theater to run through just a small piece of a theatrical script, during which we expect our actors to jump into and then out of character. When the interpreter jumps "out of character" (i.e., after it finishes whatever we asked it to do), it will print the result of its last computation. This is why it printed the first line after we asked it to execute `my_open_book.readline()`; it's the result of executing `readline` in the context of `my_open_book`.
 
-When it comes to showtime, however, we want a different behavior: the actors should stay on script and do only what's in the script. Showtime begins when we click our IDE's Run button. The showtime run of `seuss.py` printed nothing because *we didn't tell the Python interpreter to print anything*. In particular, the script's last command told the interpreter to read a line from a file; it was to do nothing else. If we want the interpreter to print the line it read, we must tell it explicitly to do this. It's like the difference between asking a human actor to read a line in a book while onstage versus read a line in a book and say it out loud.
+When it comes to showtime, however, we want a different behavior: the actors should stay on script and do only what's in the script. Showtime begins when we click our IDE's Run button. The showtime run of `seuss.py` printed nothing because *we didn't tell the Python interpreter to print anything*. In particular, the script's last command told the interpreter to read a line from a file; it was to do nothing else. If we want the interpreter to print the line it read, we must tell it explicitly to do this. It's like the difference between asking a human actor to read a book versus read a book out loud.
 
 ## Printing to the console pane
 
@@ -506,7 +506,7 @@ We've done a lot, and let's take a few minutes to focus on terminology and how t
 
 We have been writing *statements*, one per line, that the Python interpreter reads. As the interpreter reads a line, it discards anything that is a comment, and if there's something left, it performs the requested computation.
 
-When the Python interpreter executes a statement in our script, it works with *objects*. As you'll come to learn, almost everything that a Python script manipulates is an object. An object is how Python represents simple things like the number `5` and complex things like the `CatInTheHat.txt` file we opened. 
+When the Python interpreter executes a statement in our script, it works with *objects*. As you'll come to learn, almost everything that a Python script manipulates is an object. An object is how Python represents simple things like the number `5` and complex things like the `CatInTheHat.txt` file we opened. Even functions are objects.
 
 Objects have *attributes*, and objects of the same *type* (also called its *class*) have the same collection of attributes. For example, the numbers `5` and `6` are of the same type (i.e., both are integers) while our open file object `my_open_book` has a different type and thus different attributes.
 
@@ -570,7 +570,7 @@ String literals are not the only kind of literal values. The number `5` is also 
 
 ## Variables
 
-Did you try removing both the opening and closing quotes on `'CatInTheHat.txt'`? Without the surrounding quotes, the interpreter responds with a `NameError: name 'CatInTheHat' is not defined`. Python thinks that `CatInTheHat` is a name[^fn5] and not a string literal.
+Did you try removing both the opening and closing quotes on `'CatInTheHat.txt'`? Without the surrounding quotes, the interpreter responds with a `NameError: name 'CatInTheHat' is not defined`. Python thinks that `CatInTheHat` is a name[^fn6] and not a string literal.
 
 You'll eventually hear people talk about the names of objects we define with the assignment operation (`=`), like `the_line`, as *variables*. The idea behind this term is that a name can refer to one object at one point in a script and then to different object at another point. For instance, we have used the variable `the_line` to grab and print the first line of our book, and in a minute, we'll extend `seuss.py` so that it uses the same name to grab and print the book's second line. Same name, but its value (i.e., object it names) varies over time.
 
@@ -722,7 +722,7 @@ You might be annoyed by the blank line that our script inserts between the book'
 
 What, might you ask, is a carriage return? It is a term that had meaning when people used [old-style typewriters](https://www.youtube.com/watch?v=FkUXn5bOwzk). Around 1:28 into the linked video, the person pushes a silver handle to reset the typewriter's carriage to the start of the next line. This silver handle is called a carriage return.
 
-When we're in a text editor on our computers, we simply hit [the button labeled "return" (Apple Mac) or "enter" (IBM PC)](https://en.wikipedia.org/wiki/Enter_key), which moves the cursor to the start of the next line in our text document. While this key press doesn't look like it inserts anything into our text document, it actually does. Run the following three statements in the interactive Python interpreter, and it will show you all the characters in the first line of our text file.[^fn6]
+When we're in a text editor on our computers, we simply hit [the button labeled "return" (Apple Mac) or "enter" (IBM PC)](https://en.wikipedia.org/wiki/Enter_key), which moves the cursor to the start of the next line in our text document. While this key press doesn't look like it inserts anything into our text document, it actually does. Run the following three statements in the interactive Python interpreter, and it will show you all the characters in the first line of our text file.[^fn7]
 
 ```{code-block} none
 ---
@@ -734,7 +734,7 @@ emphasize-lines: 1, 2, 3
 'The sun did not shine.\n'
 ```
 
-A backslash followed by a lowercase n (`\n`) is the printed representation for the mechanical action of a typewriter's carriage return. It is called a *newline character*. While you should think of `\n` as a single character, to type it in a string literal you must type a backslash \\ followed by a lowercase n. Where you put a newline character in a string literal indicates where you want the computer's cursor to move to the beginning of the next line when the string is printed.[^fn7]
+A backslash followed by a lowercase n (`\n`) is the printed representation for the mechanical action of a typewriter's carriage return. It is called a *newline character*. While you should think of `\n` as a single character, to type it in a string literal you must type a backslash \\ followed by a lowercase n. Where you put a newline character in a string literal indicates where you want the computer's cursor to move to the beginning of the next line when the string is printed.[^fn8]
 
 Back in the interactive interpreter, type `print(the_line)` and hit enter. Notice that when we print the value of this string, the interpreter knows that we want the action (i.e., move the cursor to the start of the next line) and not a character representation of this special character.
 
@@ -810,7 +810,7 @@ my_open_book = open('CatInTheHat.txt')
 
 Lines 2-4 are what computer scientists call *a loop*, and the indented statements are called *the loop body*. Loops consist of what you should view as two distinct sets of instructions: those that define how many times the loop's repeating work is done; and those that define the work to be repeatedly done. In the script above, the pseudocode comment states how many times the loop repeats, and the loop body is the work that's repeatedly done.
 
-In some problems, we'll know the number of times a loop needs to execute, but in this problem, we don't. We've opened the book and put our virtual finger on the story's first line, but we don't know how many lines are in it. Between lines 1 and 2, we'd need to add statements that instruct the interpreter to compute the number of lines in `my_open_book`.[^fn8]
+In some problems, we'll know the number of times a loop needs to execute, but in this problem, we don't. We've opened the book and put our virtual finger on the story's first line, but we don't know how many lines are in it. Between lines 1 and 2, we'd need to add statements that instruct the interpreter to compute the number of lines in `my_open_book`.[^fn9]
 
 While we could make this approach work, it isn't the only way to specify how many times the loop body should execute. Consider this alternative that doesn't use *a count* but *an ending condition*:
 
@@ -832,13 +832,13 @@ Discovering when a script fails to operate as intended is the domain of _testing
 
 ## End of File (EOF)
 
-The second approach hinges on knowing when `readline` successfully reads a line from the input file and when it doesn't. To get a feel for what this means, let's return to our `seuss.py` script,[^fn9] which always reads the first two lines from the input file, and think about an input for which this is a seemingly bad idea. Once you've taken a moment to decide upon a problematic input file, work through the next "You Try It" block.
+The second approach hinges on knowing when `readline` successfully reads a line from the input file and when it doesn't. To get a feel for what this means, let's return to our `seuss.py` script,[^fn10] which always reads the first two lines from the input file, and think about an input for which this is a seemingly bad idea. Once you've taken a moment to decide upon a problematic input file, work through the next "You Try It" block.
 
 ```{admonition} You Try It
 Use your IDE to open `CatInTheHat.txt` and delete all but the first line. It should now look like the contents of `Cat1.txt` in the `txts` folder. It might be problematic to ask our script, which expects a file with at least two lines, to read a file with just one. But let's try it anyway: Once you've changed `CatInTheHat.txt`, click the Run button.
 ```
 
-Despite the fact that `seuss.py` tries to read more lines than are in the file, it correctly prints the input text file.[^fn10] Why? What does `readline` do when it attempts to read beyond the end of the input file?
+Despite the fact that `seuss.py` tries to read more lines than are in the file, it correctly prints the input text file.[^fn11] Why? What does `readline` do when it attempts to read beyond the end of the input file?
 
 Let's head back to the interactive Python interpreter. In it, run the first line of our script, i.e., call `open` and name the object it computes `my_open_book`. Now type `help(my_open_book)` and hit enter. The interpreter answers assuming we want to know what we can do with the object that our variable `my_open_book` names. What a nice feature of the Python `help` command!
 
@@ -879,7 +879,7 @@ I encourage you to use blank lines to separate the major tasks in your script. T
 
 ## Testing a condition
 
-It's time to focus on our loop and translate its pseudocode into Python. We'll begin with our loop's *ending condition*, which is when value of `the_line` becomes the empty string. In other words, we need to compare that variable's string value against a string literal, and we need to know when they're equal. This is a *test for equality*, and it is one of many different comparison operators that Python provides.[^fn11] When comparing the equality of two strings or two numbers in Python, you use the `==` operator.[^fn12]
+It's time to focus on our loop and translate its pseudocode into Python. We'll begin with our loop's *ending condition*, which is when value of `the_line` becomes the empty string. In other words, we need to compare that variable's string value against a string literal, and we need to know when they're equal. This is a *test for equality*, and it is one of many different comparison operators that Python provides.[^fn12] When comparing the equality of two strings or two numbers in Python, you use the `==` operator.[^fn13]
 
 ```{code-block} python
 ---
@@ -920,9 +920,9 @@ A Python *break-statement* exits the loop in which it sits. Because we only want
 
 ## Indentation
 
-Indentation, or the whitespace at the start of each line in a script, holds meaning in Python. It matters to the way that the Python interpreter understands your script, as I explained when discussing the operation of Python's if-statement and hinted in illustrating a Python loop. This shouldn't be a completely strange concept for we use whitespace in our writing to, for example, indicate the start of a new paragraph.[^fn13]
+Indentation, or the whitespace at the start of each line in a script, holds meaning in Python. It matters to the way that the Python interpreter understands your script, as I explained when discussing the operation of Python's if-statement and hinted in illustrating a Python loop. This shouldn't be a completely strange concept for we use whitespace in our writing to, for example, indicate the start of a new paragraph.[^fn14]
 
-Not only does indentation matter, but how you create this indentation matters. If you want to avoid problems, indent using spaces, not tabs. A tab is a special character, like the newline character, and you will want to set your IDE to convert tabs into a specific number of spaces.[^fn14] Whitespace containing a tab character might look the same to you and me as one consisting of only spaces, but they don't look the same to the Python interpreter. 
+Not only does indentation matter, but how you create this indentation matters. If you want to avoid problems, indent using spaces, not tabs. A tab is a special character, like the newline character, and you will want to set your IDE to convert tabs into a specific number of spaces.[^fn15] Whitespace containing a tab character might look the same to you and me as one consisting of only spaces, but they don't look the same to the Python interpreter. 
 
 Finally, neatness and consistency are a virtue in problem solving with computation. Just as it is hard to read an essay that's inconsistently indented, code that is inconsistently indented is hard for humans and the Python interpreter to understand. All the Python statements you want grouped together should be indented *by the same amount*. If they are not, you will have problems.
 
@@ -953,7 +953,7 @@ Like the if-statement, the while-loop tests a condition that determines the exec
 What does it mean that I've put the literal `True` in for our while-loop's condition? When it's evaluated, the Python interpreter will (trivially) determine that the expression `True` is true and move forward to execute the loop body. And because this condition can never evaluate to `False`, line 4 an example of an *infinite loop*: Without any other way to break out, the loop runs forever.
 
 ```{admonition} You Try It
-At some point, you'll mistakenly create an infinite loop. To show that they're nothing scary, let's run one. Look at `seuss-infinite.py` and notice that I've commented out the if-statement and the break-statement it protects. Comment out these same two lines in your `seuss.py` script. When you click the Run button, it will turn into a Stop button. Click it to stop the script. If you're running in the shell, as we'll do in later chapters, the keyboard combination Ctrl+C (i.e., simultaneously press your keyboard's control key and the letter-C key) will end an infinite loop's execution. Don't forget to uncomment lines 9-10 in your `seuss.py` script before continuing.
+At some point, you'll mistakenly create an infinite loop. To show that they're nothing scary, let's run one. Look at `seuss-infinite.py` in this chapter's code distribution and notice that I've commented out the if-statement and the break-statement it protects (lines 9-10 in the code block above). Comment out these same two lines in your `seuss.py` script. When you click the Run button, the script prints the story but not "The End." It's stuck continually trying to read another line in a file without any more lines and never gets to the print-statement on line 12). To stop this script, notice that the Run button has turned into a Stop button. Click it and the script will stop. If you're running in the shell, as we'll do in later chapters, the keyboard combination Ctrl+C (i.e., simultaneously press your keyboard's control key and the letter-C key) will end an infinite loop's execution. Don't forget to uncomment lines 9-10 in your `seuss.py` script before continuing.
 ```
 
 Our loop doesn't run forever because it checks for the exit condition inside the loop body and breaks out of the loop when `readline` indicates that we hit the EOF. It's more convenient to put this condition inside the loop body than between the keyword `while` and the colon because we cannot check for EOF until we read a line. As I mentioned earlier, there are other ways to write this loop, and as you move through the upcoming chapters, you'll learn to evaluate for yourself which approach feels natural for your problem.
@@ -966,7 +966,7 @@ Run the previous code block, which is called `seuss-final.py` in the code reposi
 
 ## Any book
 
-While our script's loop is flexible enough handle any book (i.e., plain text file), `seuss.py` opens a particular book, i.e., the one specified by the literal string in `open`. To read a different book, we need to change this string literal. While we could do this, a better approach has us go back and change our problem specification. Let's have our script to begin by asking the user what book they'd like to read. In our new script (called `anybook.py`), we'll store the user's response in a variable, and then use that variable as the input parameter to `open`.
+While our script's loop is flexible enough handle any book (i.e., plain text file), `seuss.py` opens a particular book, i.e., the one specified by the literal string in `open`. To read a different book, we need to change this string literal. While we could do this, a better approach has us go back and change our problem specification. Let's have our script to begin by asking the user what book they'd like to read. In our new script (called `anybook.py`[^fn16]), we'll store the user's response in a variable, and then use that variable as the input parameter to `open`.
 
 To ask the user for input while your script is running, Python provides us with the built-in function `input`. If you type `help(input)` in the interactive Python interpreter, you learn how this function does exactly what we need as long as we type just the name of the file we want to read without any spaces before or after the filename (i.e., `input` captures everything we type).
 
@@ -1004,15 +1004,15 @@ Like this first problem-to-be-solved, I chose the problems in each chapter of th
 
 ## Historical references to computational thinking
 
-As a published term, computational thinking was first mentioned by Seymour Papert in his 1980 book titled *Mindstorms: Children, computers, and powerful ideas*.[^fn15] As a mathematician, computer scientist, and educator, Papert was looking for concrete ways to have children better understand abstract concepts, and he felt computers could help children connect with powerful mathematical ideas in a manner beyond their formulae. To Papert, this was thinking with computation.
+As a published term, computational thinking was first mentioned by Seymour Papert in his 1980 book titled *Mindstorms: Children, computers, and powerful ideas*.[^fn17] As a mathematician, computer scientist, and educator, Papert was looking for concrete ways to have children better understand abstract concepts, and he felt computers could help children connect with powerful mathematical ideas in a manner beyond their formulae. To Papert, this was thinking with computation.
 
-In a 2006 CACM article, Jeannette Wing argued for a much broader notion of computational thinking. This article provides numerous diverse examples of computational thinking, and it posits that such thinking is an important skill for everyone, not just computer scientists.[^fn16] Wing also emphasized that this type of thinking is more like conceptualizing and problem solving than the narrow act of programming a computer. She debunked the idea that computational thinking is how computers "think." In contrast, she stressed that it is how humans think, and this thinking draws together the many ways we think in other logical and mechanical domains.
+In a 2006 CACM article, Jeannette Wing argued for a much broader notion of computational thinking. This article provides numerous diverse examples of computational thinking, and it posits that such thinking is an important skill for everyone, not just computer scientists.[^fn18] Wing also emphasized that this type of thinking is more like conceptualizing and problem solving than the narrow act of programming a computer. She debunked the idea that computational thinking is how computers "think." In contrast, she stressed that it is how humans think, and this thinking draws together the many ways we think in other logical and mechanical domains.
 
-Although Wing doesn't provide a single definition for computational thinking in her 2006 article, many in the community have contributed thoughts toward a universally agreed-upon definition. For example, Alfred Aho offered this definition in 2011: "computational thinking \[is\] the thought processes involved in formulating problems so their solutions can be represented as computational steps and algorithms. An important part of this process is finding appropriate models of computation with which to formulate the problem and derive its solutions."[^fn17]
+Although Wing doesn't provide a single definition for computational thinking in her 2006 article, many in the community have contributed thoughts toward a universally agreed-upon definition. For example, Alfred Aho offered this definition in 2011: "computational thinking \[is\] the thought processes involved in formulating problems so their solutions can be represented as computational steps and algorithms. An important part of this process is finding appropriate models of computation with which to formulate the problem and derive its solutions."[^fn19]
 
-More recently, the work by Wing, Aho, and others has been synthesized into the following definition: computational thinking is the "thought processes involved in formulating problems and their solutions so that the solutions are represented in a form that can be effectively carried out by an information-processing agent." In their 2021 *Science & Education* article, Michael Lodi and Simone Martini call this the Aho-Cuny-Snyder-Wing definition, in recognition of the contributions from these four particularly influential individuals.[^fn18]
+More recently, the work by Wing, Aho, and others has been synthesized into the following definition: computational thinking is the "thought processes involved in formulating problems and their solutions so that the solutions are represented in a form that can be effectively carried out by an information-processing agent." In their 2021 *Science & Education* article, Michael Lodi and Simone Martini call this the Aho-Cuny-Snyder-Wing definition, in recognition of the contributions from these four particularly influential individuals.[^fn20]
 
-\[Version 20240719\]
+\[Version 20240806\]
 
 [^fn1]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
 
@@ -1020,32 +1020,36 @@ More recently, the work by Wing, Aho, and others has been synthesized into the f
 
 [^fn3]: The IDEs I'll suggest to you are ones used by professional programmers. Because of this, you can continue with your selected tool long after you finish this book.
 
-[^fn4]: Note that I'm switching back from transcript blocks to code blocks. This allows you to copy the content of the code block and paste it at your interactive Python interpreter's prompt. Don't just read. Try!
+[^fn4]: If you're a MacOS user, I do mean the control and not command key.
 
-[^fn5]: And in particular, a namespace for the name txt.
+[^fn5]: Note that I'm switching back from transcript blocks to code blocks. This allows you to copy the content of the code block and paste it at your interactive Python interpreter's prompt. Don't just read. Try!
 
-[^fn6]: Remember, in the interactive interpreter, typing an object's name tells the interactive interpreter that we want to see the value of that object.
+[^fn6]: And in particular, a namespace for the name txt.
 
-[^fn7]: There are old computer systems that required you to use two special characters to move its cursor to the start of the next line. You typed a carriage return character (\\r), which moved the cursor to the beginning of the current line, and then a newline character (\\n), which moved the cursor to the next line. I'll assume you're using a modern computer that requires only the single \\n special character to perform both actions.
+[^fn7]: Remember, in the interactive interpreter, typing an object's name tells the interactive interpreter that we want to see the value of that object.
 
-[^fn8]: Computing the number of lines in a file is something that ALE 1.2 asks you to do. Please see the ALEs (i.e., Active Learning Exercises) on the website that is the companion to this book.
+[^fn8]: There are old computer systems that required you to use two special characters to move its cursor to the start of the next line. You typed a carriage return character (\\r), which moved the cursor to the beginning of the current line, and then a newline character (\\n), which moved the cursor to the next line. I'll assume you're using a modern computer that requires only the single \\n special character to perform both actions.
 
-[^fn9]: The version of \`seuss.py\` that I mean is the one that looks like the script \`seuss-2lines.py\` in your IDE's file browser.
+[^fn9]: Computing the number of lines in a file is something that ALE 1.2 asks you to do. Please see the ALEs (i.e., Active Learning Exercises) on the website that is the companion to this book.
 
-[^fn10]: Your IDE's file editor might show \`Cat1.txt\` as a file with two numbered lines, but that last blank line contains nothing on it. It exists because of the newline character at the end of the first line! If you don't believe me, delete all the lines in \`CatInTheHat.txt\` and rerun \`seuss.py\`. It definitely didn't read two lines that time, and it still functioned correctly.
+[^fn10]: The version of \`seuss.py\` that I mean is the one that looks like the script \`seuss-2lines.py\` in your IDE's file browser.
 
-[^fn11]: A web search for "python comparison operators" will tell you about the others.
+[^fn11]: Your IDE's file editor might show \`Cat1.txt\` as a file with two numbered lines, but that last blank line contains nothing on it. It exists because of the newline character at the end of the first line! If you don't believe me, delete all the lines in \`CatInTheHat.txt\` and rerun \`seuss.py\`. It definitely didn't read two lines that time, and it still functioned correctly.
 
-[^fn12]: Notice that Python's test for equality is written with two equal signs, which distinguishes it from Python's assignment operator, which uses a single equal sign. Even those of us experienced in coding will mistakenly type one equal sign when we meant two. When debugging your code, check for this type of mistake.
+[^fn12]: A web search for "python comparison operators" will tell you about the others.
 
-[^fn13]: Other programming languages use explicit symbols to group statements together. The difference is more taste than anything. Python believes that indentation without any extra special symbols makes scripts easier to read and understand.
+[^fn13]: Notice that Python's test for equality is written with two equal signs, which distinguishes it from Python's assignment operator, which uses a single equal sign. Even those of us experienced in coding will mistakenly type one equal sign when we meant two. When debugging your code, check for this type of mistake.
 
-[^fn14]: I use four spaces per indentation in the code throughout this book.
+[^fn14]: Other programming languages use explicit symbols to group statements together. The difference is more taste than anything. Python believes that indentation without any extra special symbols makes scripts easier to read and understand.
 
-[^fn15]: Seymour Papert. 1980. Mindstorms: children, computers, and powerful ideas. Basic Books, Inc., USA.
+[^fn15]: I use four spaces per indentation in the code throughout this book.
 
-[^fn16]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
+[^fn16]: I've started a convention in \`anybook.py\` that I'll continue with the rest of the book's scripts: it begins with three hash (or number sign) symbols. On this line, I tell you where you can find this code in the book's GitHub repository.
 
-[^fn17]: Alfred V. Aho. 2011. Ubiquity symposium: Computation and Computational Thinking. Ubiquity 2011, January, Article 1 (January 2011), 8 pages. https://doi.org/10.1145/1922681.1922682
+[^fn17]: Seymour Papert. 1980. Mindstorms: children, computers, and powerful ideas. Basic Books, Inc., USA.
 
-[^fn18]: Michael Lodi and Simone Martini. 2021. Computational Thinking, Between Papert and Wing. Science & Education 30 (April 28, 2021), 883--908. https://doi.org/10.1007/s11191-021-00202-5
+[^fn18]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
+
+[^fn19]: Alfred V. Aho. 2011. Ubiquity symposium: Computation and Computational Thinking. Ubiquity 2011, January, Article 1 (January 2011), 8 pages. https://doi.org/10.1145/1922681.1922682
+
+[^fn20]: Michael Lodi and Simone Martini. 2021. Computational Thinking, Between Papert and Wing. Science & Education 30 (April 28, 2021), 883--908. https://doi.org/10.1007/s11191-021-00202-5

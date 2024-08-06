@@ -44,7 +44,7 @@ What would be the problem specification? It could be something as seemingly simp
 
 ## Splitting the problem into small pieces
 
-One of the keys to successfully writing a computational script is to break a large problem into small pieces and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.
+One of the keys to successfully writing a computational script is to break a large problem into small pieces (i.e., problem decomposition) and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.
 
 What are the primary pieces in our problem specification? Well, we have to:
 
@@ -155,7 +155,7 @@ We have only dipped our toes into the deep topic of FSMs. You will find that the
 
 When implementing the FSM in {numref}`Figure %s <c02_fig2_ref>`, the first thing to note is that it contains only three states, where the third state (`DONE`) represents the termination of our script. This means that our script has only to keep track of which of the first two states (`S0` and `S1`) it is in at any point in time, which we can do with a single *Boolean* variable. 
 
-Let's call this variable `looking_for_open_quote`, and define its behavior so that it is `True` when the script is in state `S0` and `False` when the script is in `S1`. Then with the frame from `script1.py`, we can write Python code to initialize `looking_for_open_quote` (corresponding to the FSM's start state) and use that variable to separate the work in state `S0` from that in `S1`:
+Let's call this variable `looking_for_open_quote`, and define its behavior so that it is `True` when the script is in state `S0` and `False` when the script is in `S1`. Then with the frame from `script1.py`, we can write Python code to initialize `looking_for_open_quote` (corresponding to the FSM's start state) and use that variable to separate the work in state `S0` from that in `S1`:[^fn5]
 
 ```{code-block} python
 ---
@@ -208,7 +208,7 @@ I want to pause here and highlight the fact that we are using the word "line" in
 9 We had something to do!"
 ```
 
-Let's start to implement these ideas by focusing first on the transition between states while in state `S0`.[^fn5]
+Let's start to implement these ideas by focusing first on the transition between states while in state `S0`.[^fn6]
 
 ```{code-block} python
 ---
@@ -229,7 +229,7 @@ Notice that line 20 uses an if-statement to check for the event that causes the 
 
 ## Strings as a sequence of characters
 
-To this point, I've been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the terminal. Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object. 
+To this point, I've been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the console.[^fn7] Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object. 
 
 Short answer: it does. A string in Python is a *sequence* of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we'll manipulate in our scripts. The abstraction you should have in your mind for a sequence is *an ordered collection of items*. 
 
@@ -260,7 +260,7 @@ If you wanted to know that there was no double quote in `the_line`, you'd write 
 
 ## Coding a transition
 
-To transition from state `S0` to state `S1` (i.e., pseudocode line 21), we simply need to set our state variable[^fn6] appropriately, which in this case means setting `looking_for_open_quote` to `False`. Staying in `S0` is even easier: `looking_for_open_quote` stays `True`, and this means we can delete the entire `else` clause since there's no work to be done (i.e., it is already `True` in this code block!).
+To transition from state `S0` to state `S1` (i.e., pseudocode line 21), we simply need to set our state variable[^fn8] appropriately, which in this case means setting `looking_for_open_quote` to `False`. Staying in `S0` is even easier: `looking_for_open_quote` stays `True`, and this means we can delete the entire `else` clause since there's no work to be done (i.e., it is already `True` in this code block!).
 
 ```{code-block} python
 ---
@@ -350,7 +350,7 @@ But how do we know that the double quote sits at index 12? All that the `in` ope
 
 Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I'm going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem without using this Python aid. This aside introduces to you the other major looping construct in Python (and many other languages): the *for-loop*. More importantly, it will help you to understand what takes place behind the scenes in the Python aid that we'll eventually use.
 
-The following code block fills in more of the work we need done in state `S0`. In particular, it uses a for-loop to find the location of the first double-quote character in `the_line` and then begins capturing the dialogue.[^fn7]
+The following code block fills in more of the work we need done in state `S0`. In particular, it uses a for-loop to find the location of the first double-quote character in `the_line` and then begins capturing the dialogue.[^fn9]
 
 ```{code-block} python
 ---
@@ -423,7 +423,7 @@ Because the if-statement on line 18 isn't _self-documenting_ (i.e., it doesn't l
 
 When you have been programming long enough, like any practiced skill, you'll start to see repeated patterns. The special use of the value `-1` is a common one for error handling. A command, function, or method carves out one or more values and distinguishes those values as error conditions. In our current example, `find` needs only the integers in the range `0` to `len(s)-1` to fully accomplish its stated functionality. The person who wrote the implementation of `find` was free to pick any value outside this range of valid results as an error condition. She might have picked several such values to indicate a number of different error conditions.
 
-One of the things you'll learn as your programming skill grows is that you should always check and handle the error conditions that might occur in the commands, functions, and methods you use. The only reason not to do this is because you have carefully reasoned out why the error condition cannot occur.[^fn8]
+One of the things you'll learn as your programming skill grows is that you should always check and handle the error conditions that might occur in the commands, functions, and methods you use. The only reason not to do this is because you have carefully reasoned out why the error condition cannot occur.[^fn10]
 
 Unfortunately, just because a design pattern is commonly used doesn't mean it isn't without headaches. This pattern requires us to add the statement `if i != -1:` to our script, which we are supposed to read as "if `find` returned a valid index into `the_line` then we found an opening double-quote character at index `i`." Yeah, it doesn't look much like that to me either (and hence our added comment).
 
@@ -468,7 +468,7 @@ lineno-start: 15
 
 ## Concatenation, overloading, and shorthands
 
-Let's go through the code for state S1, which will highlight an important things: (1) a design difference between the two blocks; and (2) a common shorthand you'll see in Python code.
+Let's go through the code for state S1, which will highlight two important things: (1) a design difference between the two blocks; and (2) a common shorthand you'll see in Python code.
 
 First notice that the if-statement on line 26, unlike its sibling on line 18, does something for both the case of finding a double quote in `the_line` and not finding one. When the script finds a closing double quote, it adds the remaining dialogue to the variable `dialog`. By add, I of course mean concatenate. As you learned in Chapter 1's exercises, the `+` operator concatenates when its operands are strings and adds when its operands are numbers. This is called *overloading*: the operation of the operator depends on the type of its operands.
 
@@ -609,7 +609,7 @@ The syntax on the righthand side of the `=` operator where we set `short_dialog`
 
 With that in mind, we can read `dialog[1:].split('"')[0]` as saying: Take the object named `dialog` and treat it as a sequence. We want every item in this sequence except the first (i.e., excluding the 0th item), as specified by the slice `dialog[1:]`. Next, split this result into a list of subsequences using the double-quote character as the splitting points, as specified by `.split('"')`. The double-quote character is not included in the resulting subsequences, and the list returned by `split` is itself a sequence. We index into this list to grab the first item (i.e., at index `0`), which turns out to be everything in `the_line` between the opening double quote and the ending double quote! And this explains why the subsequent `print` concatenates opening and closing double-quote characters back onto the `short_dialog` as we print it.
 
-The righthand side of the `short_dialog` assignment statement is an example of *function composition*, and we will see it used often. In fact, we saw an earlier example in our for-loop code (i.e., `range(len(the_line))`). This example looks a lot like function composition in mathematics, where you evaluate the stuff in the innermost pair of parentheses first and then work your way out to the outermost parentheses. Overall, try not to let either of these different forms of function composition overwhelm or intimidate you. When you come across them, just take them a step at a time. You'll eventually come to appreciate that[^fn9]
+The righthand side of the `short_dialog` assignment statement is an example of *function composition*, and we will see it used often. In fact, we saw an earlier example in our for-loop code (i.e., `range(len(the_line))`). This example looks a lot like function composition in mathematics, where you evaluate the stuff in the innermost pair of parentheses first and then work your way out to the outermost parentheses. Overall, try not to let either of these different forms of function composition overwhelm or intimidate you. When you come across them, just take them a step at a time. You'll eventually come to appreciate that[^fn11]
 
 ```{code-block} python
 ---
@@ -653,7 +653,7 @@ emphasize-lines: 2, 3
 <class 'str'>
 ```
 
-\[Version 20240719\]
+\[Version 20240806\]
 
 [^fn1]: There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 
@@ -663,12 +663,16 @@ emphasize-lines: 2, 3
 
 [^fn4]: For those who love formal definitions, both deterministic and nondeterministic FSMs are mathematical models of computation. They are defined by the quintuple: an alphabet of events; the set of all states; the initial state; a transition function, and a set of (possibly empty) final sets. The initial state and final states are included in (i.e., are a subset of) the set of all states.
 
-[^fn5]: As our scripts grow, I won't always include all of the current one in the displayed code block. A clue to this happening is that a code block's line numbering won't start at 1. When this happens, you can find the full context in the filename mentioned in the opening a triple-hash comment.
+[^fn5]: As it says in the \`README.md\` text file in this chapter's code distribution, \`script2.py\` is incomplete and won't run without an error. We're building toward a runnable script. Not every script listed in this book is one that runs.
 
-[^fn6]: The variable that records which state the FSM is working in.
+[^fn6]: As our scripts grow, I won't always include all of the current one in the displayed code block. A clue to this happening is that a code block's line numbering won't start at 1. When this happens, you can find the full context in the filename mentioned in the opening a triple-hash comment.
 
-[^fn7]: Here is [a fun article](https://www.wired.com/story/why-you-hate-media-technically-speaking/) on the difference between dialogue and dialog. I use the first when I'm talking about what we want to capture and the second as the variable by which we capture the first.
+[^fn7]: You'll also see the console called a terminal window. What we see today as a window on our laptop or panel in our IDE used to be a big piece of computer hardware called the [computer terminal](https://en.wikipedia.org/wiki/Computer_terminal).
 
-[^fn8]: You might know, for example, that the error condition is impossible because of some processing you did immediately prior.
+[^fn8]: The variable that records which state the FSM is working in.
 
-[^fn9]: The string literal in this example illustrates how you can escape a quote character. In this way, the apostrophe in the contraction is not recognized by the Python interpreter as the literal's closing single quote.
+[^fn9]: Here is [a fun article](https://www.wired.com/story/why-you-hate-media-technically-speaking/) on the difference between dialogue and dialog. I use the first when I'm talking about what we want to capture and the second as the variable by which we capture the first.
+
+[^fn10]: You might know, for example, that the error condition is impossible because of some processing you did immediately prior.
+
+[^fn11]: The string literal in this example illustrates how you can escape a quote character. In this way, the apostrophe in the contraction is not recognized by the Python interpreter as the literal's closing single quote.

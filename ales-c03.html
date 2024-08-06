@@ -179,6 +179,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Use Generative AI</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
 
 
@@ -188,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 3</a></li>
+
 
 
 
@@ -373,8 +379,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-namespaces">ALE 3.7: Imports and namespaces?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 </ul>
 
             </nav>
@@ -564,8 +571,8 @@ document.write(`
 <p><strong>Step 3.</strong> In the Shell, run: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">module32.py</span></code></p>
 <p>Compare this output to the last, focusing on the lines that start with <code class="docutils literal notranslate"><span class="pre">module32.py</span></code>. Remember that modules in Python are just scripts that we import to get access to some functions and objects we don’t want to write for ourselves!</p>
 </section>
-<section id="ale-3-7-imports-and-the-namespace">
-<h1>ALE 3.7: Imports and the namespace?<a class="headerlink" href="#ale-3-7-imports-and-the-namespace" title="Permalink to this heading">#</a></h1>
+<section id="ale-3-7-imports-and-namespaces">
+<h1>ALE 3.7: Imports and namespaces?<a class="headerlink" href="#ale-3-7-imports-and-namespaces" title="Permalink to this heading">#</a></h1>
 <p>Let’s use the scripts from ALE 3.6 to see what happens to the global namespace as we use two different forms of the import-statement.</p>
 <p><strong>Step 1.</strong> In the same directory that you placed <code class="docutils literal notranslate"><span class="pre">import.py</span></code> and <code class="docutils literal notranslate"><span class="pre">module32.py</span></code>, start the interactive Python interpreter (i.e., run <code class="docutils literal notranslate"><span class="pre">python3</span></code> at the Shell prompt).</p>
 <p>At the interactive Python interpreter prompt, run: <code class="docutils literal notranslate"><span class="pre">dir()</span></code></p>
@@ -662,7 +669,55 @@ document.write(`
 <p>The script dies with an <code class="docutils literal notranslate"><span class="pre">UnboundLocalError</span></code> on line 6, where we tried to update the global variable within the function <code class="docutils literal notranslate"><span class="pre">my_print</span></code>. Python gives you a way to fix this with a global-statement, but you’re just heading down dark and bumpy road with more problems to come. For example, did you really want to update the global variable or just a local copy of it?</p>
 <p>The only time in this book that you’ll be encouraged to use a global variable is in situations like we saw with <code class="docutils literal notranslate"><span class="pre">capitalize</span></code>. Think about how we’re using this name: We set it once at the start of the script and then only ever reference its value. We never try to change it. Global variables are great things to read, and a real pain to update. You’ll feel this pain if you ever have to debug a global variable that you read and write all over your (probably long) script.</p>
 <p>If you want to know more about scope and the scope rules in Python, I recommend <a class="reference external" href="https://realpython.com/python-scope-legb-rule/">this Real Python tutorial</a>.</p>
-<p>[Version 20240127]</p>
+</section>
+<section id="ale-3-9-slicing-with-bad-indices">
+<h1>ALE 3.9: Slicing with bad indices<a class="headerlink" href="#ale-3-9-slicing-with-bad-indices" title="Permalink to this heading">#</a></h1>
+<p>For those diligent souls that looked through the implementation of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> (first defined in <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>), you may have noticed that the slice taken on line 8 (i.e., <code class="docutils literal notranslate"><span class="pre">s[i:i+j]</span></code>) could, in certain circumstances, specify invalid indices for the string <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<p>Exactly what circumstances? Well, the while-loop on line 7 takes <code class="docutils literal notranslate"><span class="pre">i</span></code> from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">len(s)</span> <span class="pre">-</span> <span class="pre">1</span></code>, which are all valid indices in <code class="docutils literal notranslate"><span class="pre">s</span></code>. The slice in the condition on line 8, however, adds <code class="docutils literal notranslate"><span class="pre">j</span></code> to <code class="docutils literal notranslate"><span class="pre">i</span></code> in specifying the end of the slice. Thus, whenever <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">&gt;</span> <span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;</span> <span class="pre">len(s)</span> <span class="pre">-</span> <span class="pre">j</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">+</span> <span class="pre">j</span></code> will be an index outside the valid indices of <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<p>And yet this implementation of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> works. Why?</p>
+<p><strong>Step 1.</strong> In the interactive Python interpreter, try the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Learning never exhausts the mind. Leonardo da Vinci&#39;</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">34</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The end index of this slice is clearly beyond the length of our input string, but the interpreter happily (i.e., without raising an error) returns <code class="docutils literal notranslate"><span class="pre">Leonardo</span> <span class="pre">da</span> <span class="pre">Vinci</span></code>. If you read the notes about slicing in <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">the Common Sequence Operations for sequence types in the Python documentation</a>, you’ll learn that the designers of Python have chosen to treat start and end indices greater than <code class="docutils literal notranslate"><span class="pre">len(s)</span></code> as <code class="docutils literal notranslate"><span class="pre">len(s)</span></code>.</p>
+<p><strong>Step 2.</strong> This robustness is a nice feature of Python, but you shouldn’t expect it to also be true in other programming languages. Change <code class="docutils literal notranslate"><span class="pre">ale09.py</span></code> so that it doesn’t use this feature of Python (i.e., it never asks on line 8 for a slice that includes invalid indices). When you run this script, it checks what it gets back from <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/ale09.py</span>
+<span class="linenos"> 2</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 4</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 5</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">10</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">18</span>    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Learning never exhausts the mind. Leonardo da Vinci&#39;</span>
+<span class="linenos">19</span>    <span class="n">soln1</span> <span class="o">=</span> <span class="s1">&#39;Learning never exhausts the 🧠. Leonardo da Vinci&#39;</span>
+<span class="linenos">20</span>    <span class="n">soln2</span> <span class="o">=</span> <span class="s1">&#39;Learning never exhausts the mind. Leonardo da VINCI&#39;</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># Check a replacement in the input string</span>
+<span class="linenos">23</span>    <span class="n">s_new</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;mind&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{brain}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">s_new</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="k">assert</span> <span class="n">s_new</span> <span class="o">==</span> <span class="n">soln1</span><span class="p">,</span> <span class="s2">&quot;my_replace didn&#39;t work correctly&quot;</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="c1"># Check a replacement at the end of the input string</span>
+<span class="linenos">28</span>    <span class="nb">slice</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;Vinci&#39;</span><span class="p">,</span> <span class="s1">&#39;VINCI&#39;</span><span class="p">)</span>
+<span class="linenos">29</span>    <span class="n">s_new</span><span class="p">(</span><span class="n">s_new</span><span class="p">)</span>
+<span class="linenos">30</span>    <span class="k">assert</span> <span class="n">s_new</span> <span class="o">==</span> <span class="n">soln2</span><span class="p">,</span> <span class="s2">&quot;my_replace didn&#39;t work correctly&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">33</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>[Version 20240806]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -739,8 +794,9 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-6-what-happens-when">ALE 3.6: What happens when?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-the-namespace">ALE 3.7: Imports and the namespace?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-namespaces">ALE 3.7: Imports and namespaces?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 </ul>
 
   </nav></div>

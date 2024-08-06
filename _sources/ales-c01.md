@@ -1,4 +1,4 @@
-# Chapter 1 #
+## Chapter 1 ##
 
 ## ALE 1.1: Hello World
 
@@ -183,4 +183,90 @@ The paragraphs in `CatInTheHat.txt` are separated by blank lines, and so you can
 
 Good luck!
 
-\[Version 20230625\]
+## ALE 1.5: Using the while condition
+
+Chapter 1 develops `anybook.py` using a while-loop with a condition that always true. This allowed me to separately explain that our solution needs both a looping construct (i.e., the ability to repeatedly execute a block of code for each line in the input file) and an ending condition that stops the loop.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap01/anybook.py
+my_book = input('What book would you like to read? ')
+my_open_book = open(my_book)
+
+# Print every line in the book
+while True:
+    the_line = my_open_book.readline()
+    print(the_line, end='')
+
+    # Check for EOF
+    if the_line == '':
+        break
+
+print("The End.")
+```
+
+* Line 6 in `anybook.py` provides the looping construct; lines 7-12 are the loop body.
+* Line 11 checks the loop's exit condition (i.e., it checks to see if there are no more lines to read).
+* Line 12 breaks out of the loop when the exit condition is true( i.e., execution continues on line 14).
+
+Python's while-statement allows you to specify all three of these things in a compact form. To do this, we must move the exit condition into the while-condition and flip its sense. Why flip its sense? Because the while-condition (i.e., where we had previously written `True` to create an infinite loop) indicates the condition under which the loop *continues*. It's now not an exit condition, but a continue condition.
+
+The loop in `anybook.py` continues whenever the line we've read from `my_open_book` is not the empty string. So, we flip the exit condition from `the_line == ''` into the continue condition `the_line != ''` and replace `True` in line 6 with this continue condition.
+
+But moving this condition from line 11 in `anybook.py` and having it replace `True` in line 6 means that we move the use of the value named `the_line` before its definition (on line 7). In other words, the first time we hit line 6, `the_line` will be an undefined name. There are two solutions to this problem, and you'll code both of them.
+
+**Step 1.** One solution is to lift the reading of the first line in `my_open_book` to be before the while-loop, as shown in `ale05a.py`. Your job is to figure out what belongs in this while-loop's body. As a hint, look at what we previously did in the loop body in `anybook.py` and remember that we definitely don't need lines 10-12. Make sure to run your solution to verify that it works.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap01/ale05a.py
+my_book = input('What book would you like to read? ')
+my_open_book = open('txts/' + my_book)
+
+# Read the first line in the book, if it exists
+the_line = my_open_book.readline()
+
+# Loop printing every line in the book
+while the_line != '':
+    # REPLACE ME with the correct loop body
+
+print("The End.")
+```
+
+**Step 2.** Another solution defines the name `the_line` but doesn't set it to the value of the first line in `my_open_book`. What value should we give `the_line` if not the first line in the file? Well, any value that allows the while-loop to continue will work, and for our script, that's any value except the empty string. The script `ale05b.py` sets up this version of our while-loop, and your job is again to write the loop's body (and verify what you write works).
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap01/ale05b.py
+my_book = input('What book would you like to read? ')
+my_open_book = open('txts/' + my_book)
+
+# Define the name `the_line` and set it to a junk value
+the_line = 'JUNK'
+
+# Loop printing every line in the book
+while the_line != '':
+    # REPLACE ME with the correct loop body
+
+print("The End.")
+```
+
+**Step 3.** Which solution, including the original `anybook.py`, do you like best? Why do you like it? There's no definitely right answer to the first question.
+
+**Step 4.** You'll probably run into experienced programmers that tell you not to write infinite loops (i.e., our original `while True` loop). I'm not one of those programmers. I believe in using the solution that best expresses a solution to the problem in front of me, and because the problem in Chapter 1 doesn't have a reason to define `the_line` before the while-loop, an infinite loop with an explicit exit condition check feels natural to me. It also makes the while-loop body easy to read: grab a line from the input file; print it; and check to see if we're done with the file. Of course, you can switch the order of the print and check if you're uncomfortable printing the empty string.
+
+The script we wrote in Step 1 minimizes the work that the script does when it runs, and the tradeoff is that you have to write the `readline` command twice. You might also not like the fact that the reading of a line and the printing of it are split over two loop iterations (i.e., you read it in one loop iteration; jump back to the `while` and check the continue condition; and finally print what you read in the next loop iteration if what was read wasn't the empty string). In other problems, you'll have values you need to check the continue condition before you start the loop, and nothing might need to be split over loop iterations. When this occurs, you should definitely use the compact form of the while-loop.
+
+The script we wrote in Step 2 keeps the work that goes together (i.e., read and print) within one loop body, and it puts the exit condition in the while-condition (with its sense flipped, of course). The cost is that we need to make sure we get into the loop (where we do `readline`) on the first iteration.
+
+No matter which of these solutions appeal to you just remember that the definition of `the_line` before the while-loop in Steps 1 and 2 are really part of that loop's work.
+
+Overall, each of the three approaches is a fine solution, and you should use the one that makes the most sense to you.
+
+\[Version 20240806\]

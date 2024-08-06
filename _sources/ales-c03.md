@@ -259,7 +259,7 @@ Look at the output and then at the code in `import.py` and `module32.py`. Make s
 
 Compare this output to the last, focusing on the lines that start with `module32.py`. Remember that modules in Python are just scripts that we import to get access to some functions and objects we don't want to write for ourselves!
 
-## ALE 3.7: Imports and the namespace?
+## ALE 3.7: Imports and namespaces?
 
 Let's use the scripts from ALE 3.6 to see what happens to the global namespace as we use two different forms of the import-statement. 
 
@@ -401,4 +401,65 @@ The only time in this book that you'll be encouraged to use a global variable is
 
 If you want to know more about scope and the scope rules in Python, I recommend [this Real Python tutorial](https://realpython.com/python-scope-legb-rule/).
 
-\[Version 20240127\]
+## ALE 3.9: Slicing with bad indices
+
+For those diligent souls that looked through the implementation of `my_replace` (first defined in `replace7.py`), you may have noticed that the slice taken on line 8 (i.e., `s[i:i+j]`) could, in certain circumstances, specify invalid indices for the string `s`.
+
+Exactly what circumstances? Well, the while-loop on line 7 takes `i` from `0` to `len(s) - 1`, which are all valid indices in `s`. The slice in the condition on line 8, however, adds `j` to `i` in specifying the end of the slice. Thus, whenever `j > 2` and `i > len(s) - j`, `i + j` will be an index outside the valid indices of `s`.
+
+And yet this implementation of `my_replace` works. Why?
+
+**Step 1.** In the interactive Python interpreter, try the following:
+
+```{code-block} python
+---
+lineno-start: 1
+---
+>>> s = 'Learning never exhausts the mind. Leonardo da Vinci'
+>>> s[34:len(s)+10]
+``` 
+
+The end index of this slice is clearly beyond the length of our input string, but the interpreter happily (i.e., without raising an error) returns `Leonardo da Vinci`. If you read the notes about slicing in [the Common Sequence Operations for sequence types in the Python documentation](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations), you'll learn that the designers of Python have chosen to treat start and end indices greater than `len(s)` as `len(s)`.
+
+**Step 2.** This robustness is a nice feature of Python, but you shouldn't expect it to also be true in other programming languages. Change `ale09.py` so that it doesn't use this feature of Python (i.e., it never asks on line 8 for a slice that includes invalid indices). When you run this script, it checks what it gets back from `my_replace`.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap03/ale09.py
+def my_replace(s, old, new):
+    i = 0           # tracks where we are in the input string
+    j = len(old)    # skip-ahead amount for index calculations
+    new_s = s[0:0]  # the new string we're building
+
+    while i < len(s):
+        if s[i:i+j] == old:
+            new_s = new_s + new
+            i += j
+        else:
+            new_s = new_s + s[i]
+            i += 1
+
+    return new_s
+
+def main():
+    s = 'Learning never exhausts the mind. Leonardo da Vinci'
+    soln1 = 'Learning never exhausts the 🧠. Leonardo da Vinci'
+    soln2 = 'Learning never exhausts the mind. Leonardo da VINCI'
+
+    # Check a replacement in the input string
+    s_new = my_replace(s, 'mind', '\N{brain}')
+    print(s_new)
+    assert s_new == soln1, "my_replace didn't work correctly"
+
+    # Check a replacement at the end of the input string
+    slice = my_replace(s, 'Vinci', 'VINCI')
+    s_new(s_new)
+    assert s_new == soln2, "my_replace didn't work correctly"
+
+if __name__ == '__main__':
+    main()
+```
+
+\[Version 20240806\]

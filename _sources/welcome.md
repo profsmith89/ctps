@@ -109,6 +109,12 @@ This is a problem-solving-first approach to learn concepts in computer science a
 
 Furthermore, experts become experts because they see the similarities between problems, and this ability helps them get quickly started on a new problem. Experts almost never start from a blank page. They start with an approach that solved a similar problem and then adapt it for the differences they see in their new problem. We will do the same thing in coding by often starting from something we have previously written. This helps you avoid the daunting challenge of a blank page.
 
+## Getting started
+
+The one exception to this never-start-from-a-blank-page approach is the first chapter, where I assume you have no prior background in coding or computational thinking. It introduces you to the general problem-solving process, gets you started in an environment where you'll practice problem solving with computation, and explains some basic statements in programming and the Python programming language. This is important foundational material that could have comprised a complete chapter, but I wrapped it in a problem-to-be-solved, just like all the other chapters. That's because a problem-solving approach to learning this material works as well for it as for the rest of the book's material.
+
+There is, however, a cost to organizing the introductory chapter with a problem-to-be-solved: it necessarily takes you on a longer journey (i.e., it is nearly twice the length of the average chapter). Don't let this discourage you. Once you've solved your first problem, the rest will fall quicker.
+
 This is what awaits you in this book. It is an approach that has engaged students intrinsically motivated to learn programming and those who thought they could never do it. No matter which you are, I'm glad that you picked up this book. You are about to experience the beauty and power of computational thinking to solve real-world problems, especially those that excite you. And as you learn to write your own scripts, I hope you will, like the best playwrights do, develop your own voice, your own unique style. Then what you do with this new and wondrous skill is up to you.
 
-\[Version 20240611\]
+\[Version 20240802\]

@@ -179,6 +179,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Use Generative AI</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c02.html">Chapter 2</a></li>
 
 
@@ -188,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="ales-c03.html">Chapter 3</a></li>
+
 
 
 
@@ -422,8 +428,7 @@ document.write(`
 </ul>
 </div>
 <section id="the-duality-of-code-and-data">
-<h2>The duality of code and data<a class="headerlink" href="#the-duality-of-code-and-data" title="Permalink to this heading">#</a></h2>
-<p>The first problem we solved in this book had us write a Python script that we eventually called <code class="docutils literal notranslate"><span class="pre">read32.py</span></code> and with which we read the data file <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>. <a class="reference internal" href="#c15-fig1-ref"><span class="std std-numref">Figure 34</span></a> is a screenshot of both these files. Besides their contents, what’s the difference between them? Take a moment to ponder this question, and then read on.</p>
+<p><strong>The duality of code and data.</strong> The first problem we solved in this book had us write a Python script that we eventually called <code class="docutils literal notranslate"><span class="pre">read32.py</span></code> and with which we read the data file <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>. <a class="reference internal" href="#c15-fig1-ref"><span class="std std-numref">Figure 34</span></a> is a screenshot of both these files. Besides their contents, what’s the difference between them? Take a moment to ponder this question, and then read on.</p>
 <figure class="align-default" id="c15-fig1-ref">
 <img alt="_images/c15_fig1.png" src="_images/c15_fig1.png" />
 <figcaption>
@@ -436,8 +441,7 @@ document.write(`
 <p>For example, sometimes we use a Python script as a set of instructions to direct our computer to complete some task for us, with help from the Python interpreter. Other times, we tell a program (e.g., the editor in our IDE) to read and write our Python script as data. A debugger plays both these roles.</p>
 </section>
 <section id="breakpoints-and-runtime-state">
-<h2>Breakpoints and runtime state<a class="headerlink" href="#breakpoints-and-runtime-state" title="Permalink to this heading">#</a></h2>
-<p>The following is a typical way to use a debugger:</p>
+<p><strong>Breakpoints and runtime state.</strong> The following is a typical way to use a debugger:</p>
 <ol class="arabic simple">
 <li><p>Start the debugger and ask it to open your script. Your script is being treated as data.</p></li>
 <li><p>Tell the debugger where you want to place a <em>breakpoint</em>, which is a point (e.g., a file line) in your script where you’d like to pause its execution. The debugger is still treating your script like data, and I’ll explain in a moment what exactly a breakpoint is and how the debugger modifies your script.</p></li>
@@ -449,8 +453,7 @@ document.write(`
 </ol>
 </section>
 <section id="inserting-a-breakpoint">
-<h2>Inserting a breakpoint<a class="headerlink" href="#inserting-a-breakpoint" title="Permalink to this heading">#</a></h2>
-<p>Let’s drive home these concepts by building our own minimal debugger using nothing but Python statements. As we’ve practiced throughout this book, we’ll start simply: the first version of our debugger will read the script we want debugged, insert a breakpoint, and write out the edited script. The following is some pseudocode to get us started:</p>
+<p><strong>Inserting a breakpoint.</strong> Let’s drive home these concepts by building our own minimal debugger using nothing but Python statements. As we’ve practiced throughout this book, we’ll start simply: the first version of our debugger will read the script we want debugged, insert a breakpoint, and write out the edited script. The following is some pseudocode to get us started:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### Pseudocode for our Python script debugger</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span><span class="c1"># Ask for the name of the script to be debugged</span>
@@ -538,8 +541,7 @@ document.write(`
 <p>If you run <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>, giving it a script-to-be-debugged either on the command line or through the prompt, you’ll see that it asks for a line on which to place a breakpoint, but it doesn’t actually edit the script. Let’s change the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> to insert a breakpoint.</p>
 </section>
 <section id="inserting-a-new-statement">
-<h2>Inserting a new statement<a class="headerlink" href="#inserting-a-new-statement" title="Permalink to this heading">#</a></h2>
-<p>A breakpoint is nothing more than the raising of a Python exception, which will give control back to our debugger if it catches all exceptions raised by the script-to-be-debugged. We can create our own Python exception and raise it as follows:</p>
+<p><strong>Inserting a new statement.</strong> A breakpoint is nothing more than the raising of a Python exception, which will give control back to our debugger if it catches all exceptions raised by the script-to-be-debugged. We can create our own Python exception and raise it as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)</span></code></p>
 <p>Let’s assume our script-to-be-debugged is <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> from Chapter 5, and we’d like to put this breakpoint before line 24 in this script. This line compares the user’s guess against the secret. Notice that I said “before line 24.” I don’t mean any point before line 24, but the point immediately before this line. In other words, line 23 (and everything before it at runtime) should have executed, but line 24 (and everything after it at runtime) should not have.</p>
 <p>How we insert the raise-statement into <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> between lines 23 and 24 depends on whether we are able to <em>stretch the script without breaking it</em>. In other words, is the script that we give the debugger more like:</p>
@@ -555,8 +557,7 @@ document.write(`
 <p>However, some debuggers work with the script’s instructions in a data structure that resembles an image file. Since we cannot easily stretch the bit array in an image file, the debugger instead saves a copy of the statement that will execute after the breakpoint (i.e., line 24 in our example) and then overwrites this statement in the image file with the breakpoint statement. If the user wants to continue the script’s execution, the debugger will first replace the breakpoint statement with the saved statement and then continue execution.</p>
 </section>
 <section id="indenting-that-statement">
-<h2>Indenting that statement<a class="headerlink" href="#indenting-that-statement" title="Permalink to this heading">#</a></h2>
-<p>Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply have to remember that indexing into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 19 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
+<p><strong>Indenting that statement.</strong> Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply have to remember that indexing into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 19 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
 <p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt_index,</span> <span class="pre">'raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)\n')</span></code></p>
 <p>But there’s a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?</p>
 <aside class="margin sidebar">
@@ -613,8 +614,7 @@ document.write(`
 </div>
 </section>
 <section id="launching-a-script-from-within-a-script">
-<h2>Launching a script from within a script<a class="headerlink" href="#launching-a-script-from-within-a-script" title="Permalink to this heading">#</a></h2>
-<p>We have edited our script-to-be-debugged, and we’ve seen its behavior has changed (i.e., it now raises our breakpoint exception). Our next task is to launch this edited script under the control of our debugger and have it catch the breakpoint exception. We know how to catch exceptions using a try-except-statement, but how do we start the execution of the edited script from within our debugger?</p>
+<p><strong>Launching a script from within a script.</strong> We have edited our script-to-be-debugged, and we’ve seen its behavior has changed (i.e., it now raises our breakpoint exception). Our next task is to launch this edited script under the control of our debugger and have it catch the breakpoint exception. We know how to catch exceptions using a try-except-statement, but how do we start the execution of the edited script from within our debugger?</p>
 <p>It’s actually quite simple. Python includes a built-in function that allows you to execute a string as if it were a Python script. It’s called <code class="docutils literal notranslate"><span class="pre">exec</span></code>, and we can experiment with it using the function strings from Chapter 14.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">hello_world</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;world = &quot;world&quot;</span>
 <span class="linenos">2</span><span class="s1">print(&quot;Hello&quot;, world)</span>
@@ -685,8 +685,7 @@ document.write(`
 </div>
 </section>
 <section id="instrumenting-a-script">
-<h2>Instrumenting a script<a class="headerlink" href="#instrumenting-a-script" title="Permalink to this heading">#</a></h2>
-<p>We could go on and implement what needs to be done to look at the state of the running script, but then we’d just be reimplementing what we already have in the Python debugger <code class="docutils literal notranslate"><span class="pre">pdb</span></code>. Instead, let’s get a feel for accessing another script’s runtime state by modifying <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code> so that it <em>instruments</em> this other script. What does this mean? Basically, we’ll build a script that allows us to specify:</p>
+<p><strong>Instrumenting a script.</strong> We could go on and implement what needs to be done to look at the state of the running script, but then we’d just be reimplementing what we already have in the Python debugger <code class="docutils literal notranslate"><span class="pre">pdb</span></code>. Instead, let’s get a feel for accessing another script’s runtime state by modifying <code class="docutils literal notranslate"><span class="pre">pdb3.py</span></code> so that it <em>instruments</em> this other script. What does this mean? Basically, we’ll build a script that allows us to specify:</p>
 <ol class="arabic simple">
 <li><p>Where to put print statements in a script; and</p></li>
 <li><p>What we want those print statements to say.</p></li>
@@ -790,8 +789,7 @@ pin32: All done!
 </div>
 </section>
 <section id="repl">
-<h2>REPL<a class="headerlink" href="#repl" title="Permalink to this heading">#</a></h2>
-<p>Let’s take this line of thought one step farther, which will help you to understand the acronym REPL that you might have heard mentioned when people talk about the interactive Python interpreter. REPL stands for <em>Read-Eval-Print Loop</em>. You should think of this loop as: (1) read a string that represents an expression; (2) evaluate that expression; (3) print the result of the evaluation; and (4) loop back to read the next expression.</p>
+<p><strong>REPL.</strong> Let’s take this line of thought one step farther, which will help you to understand the acronym REPL that you might have heard mentioned when people talk about the interactive Python interpreter. REPL stands for <em>Read-Eval-Print Loop</em>. You should think of this loop as: (1) read a string that represents an expression; (2) evaluate that expression; (3) print the result of the evaluation; and (4) loop back to read the next expression.</p>
 <p>This loop is essentially what the Python interpreter does. It reads the first line in your script, which it then evaluates. The evaluation might update the value of some variables in the current namespace, insert some new names, or cause a <em>side effect</em>, which is the technical term for file input/output or printing to the terminal. All together, these constitute the “print” portion of loop. Finally, the interpreter moves on to read the next line in your script, and the loop start all over again.</p>
 <p>The “Eval” step in the Python interpreter’s implementation of this loop is exposed to you as a Python programmer through the built-in function <code class="docutils literal notranslate"><span class="pre">eval</span></code>. It differs from <code class="docutils literal notranslate"><span class="pre">exec</span></code> in that it expects its string argument to be an expression. If you pass <code class="docutils literal notranslate"><span class="pre">eval</span></code> a Python statement, it will raise an exception.</p>
 <div class="admonition-you-try-it admonition">
