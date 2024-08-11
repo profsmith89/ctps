@@ -385,8 +385,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-script-ourselves">Write the script ourselves</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-chatgpt">Ask ChatGPT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-this-task-within-the-frontier">Is this task within the frontier?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expanding-frontier">The expanding frontier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-problem-solve-with-a-llm">How to problem solve with a LLM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-good-prompts">&gt; &gt; <strong>Writing good prompts</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-good-prompts">Writing good prompts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-thoughts">Final thoughts</a></li>
 </ul>
             </nav>
@@ -438,13 +439,13 @@ document.write(`
 <li><p>to read and write several widely-used statements in Python syntax; and</p></li>
 <li><p>to recognize and fix flaws in a Python script.</p></li>
 </ol>
-<p>You’ve learned these lessons, and you now can write this code as easily as you do basic math. And despite <em>knowing</em> how to do basic math, we don’t always <em>choose</em> to do it. Sometimes we rely on a calculator or a spreadsheet. While GAI tools don’t operate, as we’ll soon discuss, like calculators or spreadsheet programs, they’re useful when <em>getting to the answer quickly is more important to us than doing the work ourselves</em>. The same rule applies to GAI tools.</p>
+<p>You’ve learned these lessons, and you now can write this code as easily as you do basic math. And despite <em>knowing</em> how to do basic math, we don’t always <em>choose</em> to do it. Sometimes we rely on a calculator or a spreadsheet. While GAI tools don’t operate, as we’ll soon discuss, like calculators or spreadsheet programs, they’re useful when <em>getting to an answer quickly is more important than doing the work ourselves</em>. The same rule applies to GAI tools.</p>
 <p>Act III has been all about tools, like GAI, that enable us to more quickly solve problems. In particular, it has covered two types of tools. Ones that help us to:</p>
 <ul class="simple">
 <li><p><em>understand why</em> a script failed (e.g., a debugger); and</p></li>
 <li><p><em>do less</em> in Steps 5-7 of Chapter 1’s problem-solving process (e.g., ML libraries).</p></li>
 </ul>
-<p>GAI tools assist in both ways. They don’t change the eight steps in our problem-solving process or eliminate the need to iterate when a script fails, whether one we wrote or a GAI produced, but they can pinpoint where in the problem-solving process we need to return and allow us to focus on the larger tasks involved in problem solving.</p>
+<p>GAI tools assist in both ways. They don’t change the eight steps in our problem-solving process or eliminate the need to iterate when a script fails, whether one we wrote or a GAI produced, but GAI tools can pinpoint where in the problem-solving process we need to return and allow us to focus on the larger tasks involved in problem solving.</p>
 <div class="admonition-learning-outcomes admonition">
 <p class="admonition-title">Learning Outcomes</p>
 <p>Learn to use generative artificial intelligence (GAI), and large language models (LLMs) in particular, as tools for problem solving. You will discover that GAI tools don’t fundamentally change the problem-solving process we discussed in Chapter 1. You’ll gain an understanding how these tools operate and how they’re not like calculators and spreadsheets. You’ll learn how to use them so that you become a more productive problem solver. After completing this chapter, you will be able to:</p>
@@ -459,11 +460,7 @@ document.write(`
 </div>
 <section id="navigating-the-jagged-frontier">
 <p><strong>Navigating the jagged frontier.</strong> While GAIs are tools that can augment your newly attained abilities, there are (at least) two gotchas. I’ll describe the first now as further justification for my earlier emphatic no and the second later after we talk about how a particular type of GAI used in writing code, the Large Language Model (LLM), works.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Reference</p>
-<p>The figure and findings discussed in this section are from Dell’Acqua, Fabrizio and McFowland III, Edward and Mollick, Ethan R. and Lifshitz-Assaf, Hila and Kellogg, Katherine and Rajendran, Saran and Krayer, Lisa and Candelon, François and Lakhani, Karim R., “Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality” (September 15, 2023). Harvard Business School Technology &amp; Operations Mgt. Unit Working Paper No. 24-013. The full text is available at <a class="reference external" href="https://ssrn.com/abstract=4573321">SSRN</a> or <a class="reference external" href="http://dx.doi.org/10.2139/ssrn.4573321">doi.org</a>.</p>
-</aside>
-<p>The first is nicely illustrated by a 2023 study from Harvard Business School researchers, who investigated how the productivity and work-product quality of knowledge workers changed when using a GAI tool. In their study, there were three sets of consultants:</p>
+<p>The first is nicely illustrated by a 2023 study from Harvard Business School researchers<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> who investigated how the productivity and work-product quality of knowledge workers changed when using a GAI tool. In their study, there were three sets of consultants:</p>
 <ul class="simple">
 <li><p>those who were not allowed to use a GAI tool;</p></li>
 <li><p>those who were allowed to use a GAI tool; and</p></li>
@@ -479,20 +476,20 @@ document.write(`
 <p>This study’s findings tell an important story about how we should use GAI tools in our own work. On tasks <em>within</em> the frontier (i.e., where the GAI tool worked well), the authors found:</p>
 <ul class="simple">
 <li><p>Consultants using a GAI tool were “significantly more productive (they completed 12.2% <em>more tasks</em> on average, and completed tasks 25.1% <em>more quickly</em>), and produced significantly <em>higher quality results</em> (more than 40% higher quality …).” [Emphasis added.]</p></li>
-<li><p>Plus, those <em>individuals with below-average skills benefited more</em> from using a GAI tool (a 43% boost versus 17%).</p></li>
+<li><p>Plus, those <em>individuals with below-average skills benefited more</em> from using a GAI tool (a 43% boost versus 17%). [Emphasis added.]</p></li>
 </ul>
 <p>Perhaps unsurprising, when a tool is appropriate for the job at hand, you work faster and better. More surprising is the result that, when you are less skilled, a GAI tool provides a greater amount of help. It is not often that a tool levels the playing field, helping novices more than power users.</p>
 <p>Yet, on tasks <em>outside</em> the frontier (i.e., where the GAI tool is often wrong), the authors found:</p>
 <ul class="simple">
 <li><p>Consultants using a GAI tool were “19 percentage points <em>less likely</em> to produce correct solutions compared to those without.” [Emphasis added.]</p></li>
-<li><p>Plus, those who were instructed on ways to write better prompts produced <em>worse results</em>.</p></li>
+<li><p>Plus, those who were instructed on ways to write better prompts produced <em>worse results</em>. [Emphasis added.]</p></li>
 </ul>
 <p>Clearly, understanding a tool’s frontier matters.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>As a user of GAI tools, you need to know on what tasks a tool works well and not be lulled into blindly accepting what it produces. The companies producing GAI tools, for competitive reasons, won’t often tell you where this frontier is. Furthermore, as this third act has tried to emphasize, it is not sufficient to learn how to use a tool. You must also understand its limitations.</p>
+<p>As a user of GAI tools, you need to know on what tasks a tool works well and not be lulled into blindly accepting what it produces. The companies producing GAI tools, for competitive reasons, won’t often tell you where this frontier is. Furthermore, as this third act has emphasized, it is not sufficient to learn how to use a tool. You must also understand its limitations.</p>
 </div>
-<p>While the capabilities of GAI tools will continue to improve, there will always be a frontier. With a general understanding of how GAI tools work and a little bit of critical thinking, you can discover the frontier in the tool you’re using. In the rest of this chapter, I’ll demonstrate this for the task of problem solving with computation using OpenAI’s GPT-4. By focusing your interactions with a GAI tool where you need help and it is capable, you’ll be able to supercharge your newly-acquired problem-solving skills.</p>
+<p>While the capabilities of GAI tools will continue to improve, there will always be a frontier. With a general understanding of how GAI tools work and a little bit of critical thinking, you can discover a tool’s frontier. In the rest of this chapter, I’ll demonstrate this for the task of problem solving with computation using OpenAI’s GPT-4. By focusing your interactions with a GAI tool where you need help and it is capable, you’ll be able to supercharge your newly-acquired problem-solving skills.</p>
 </section>
 <section id="my-use-of-gai">
 <p><strong>My use of GAI.</strong> I just made a claim that isn’t too different than you see from any company building or employing GAI: This technology is powerful, and it is going to change the way many of us work. But it is still early days, and only time will tell how things will change. We can, however, accelerate this discovery process by explaining to each other how we have used GAI in our own work.</p>
@@ -506,7 +503,7 @@ document.write(`
 <div><p><strong>Me:</strong> What is generative artificial intelligence?</p>
 <p><strong>ChatGPT:</strong> Generative Artificial Intelligence is a type of AI that focuses on creating new content. It’s like an AI artist that can independently create something new rather than simply analyzing and understanding existing content. Examples of generative AI include AI systems that can generate music, images, or text. <strong>In a computational thinking context, the concept of generative systems helps us understand how complex output can emerge from simple rules and structures.</strong></p>
 </div></blockquote>
-<p>This illustrates one of the ways I think about using a GAI tool. The full framework involves asking the following three questions:</p>
+<p>This example illustrates one of the ways I think about using a GAI tool. The full framework involves asking the following three questions:</p>
 <ul class="simple">
 <li><p>Do I want to <strong>delegate</strong> some of my work to the GAI tool? I answer yes when <em>I want the outcome</em> (e.g., a summary of a long essay, or finding and understanding a bug in my Python program), but <em>the process of producing the outcome is not something I need to do</em>.</p></li>
 <li><p>Do I want the GAI tool to <strong>nudge</strong> along my creativity? I answer yes when I think that the GAI tool might help me expand upon my initial ideas or generate a broader set of examples. This is what I did above. <em>I want the outcome</em> (e.g., a chapter that appeals to a wide range of readers), and it’s important that <em>I’m intimately involved in the process of generating it</em>.</p></li>
@@ -515,11 +512,7 @@ document.write(`
 <p>We’ll use this framework throughout this chapter, and I hope you find it useful in your own interactions with different GAI tools.</p>
 </section>
 <section id="large-language-models-llms">
-<p><strong>Large Language Models (LLMs).</strong> To navigate the jagged frontier of a GAI tool, it helps to have a basic understanding of how they work. In particular, I’ll briefly describe the functioning of Large Language Models (LLMs), which are the foundation for today’s AI coding assistants. GPT-4 is a LLM and one of the multiple models that powers the chat interface that is ChatGPT. While I’ll focus on GPT-4, what you’ll learn is equally applicable to the LLMs available from OpenAI and other companies.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Reference</p>
-<p>If you want an excellent and understandable introduction to LLMs, I highly recommend Stephen Wolfram’s <a class="reference external" href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/">“What Is ChatGPT Doing … and Why Does It Work?,” Stephen Wolfram Writings (2023)</a>. This section borrows from Wolfram’s lengthy article.</p>
-</aside>
+<p><strong>Large Language Models (LLMs).</strong> To navigate the jagged frontier of a GAI tool, it helps to have a basic understanding of how they work. In particular, I’ll briefly describe the functioning of Large Language Models (LLMs), which are the foundation for today’s AI coding assistants.<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> GPT-4 is a LLM and one of the multiple models that powers the chat interface that is ChatGPT. While I’ll focus on GPT-4, what you’ll learn is equally applicable to the LLMs available from other companies.</p>
 <p>LLMs are essentially functions that map a text input to a text output.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_text</span> <span class="o">=</span> <span class="s1">&#39;What is generative artificial intelligence?&#39;</span>
 <span class="n">output_text</span> <span class="o">=</span> <span class="n">GPT4</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
@@ -535,7 +528,7 @@ document.write(`
 <p>Machines have none of these things, but they can generate what some people might likely say in a particular context based on prior analysis of:</p>
 <ul class="simple">
 <li><p>the text on the billions of web sites across the internet;</p></li>
-<li><p>the content of millions of digitized books; and</p></li>
+<li><p>the content in the millions of digitized books; and</p></li>
 <li><p>the transcripts of many online videos.</p></li>
 </ul>
 <p>LLMs are a classic use of online and offline work, where the offline work is the kind that we covered in the previous chapter:</p>
@@ -548,11 +541,7 @@ document.write(`
 </section>
 <section id="the-operation-of-llms">
 <p><strong>The operation of LLMs.</strong> For his article, Stephen Wolfram [2023] uses an earlier and smaller version of OpenAI’s GPT system (GPT-2) to describe the computational work being done in the final online step. As he explains, what looks to us through the ChatGPT interface as a prompt and a lengthy response is actually multiple calls to the GPT model.</p>
-<p>Let’s take these calls one at a time. Wolfram’s example, which I’ll describe here, begins with the prompt string <code class="docutils literal notranslate"><span class="pre">&quot;The</span> <span class="pre">best</span> <span class="pre">thing</span> <span class="pre">about</span> <span class="pre">AI</span> <span class="pre">is</span> <span class="pre">its</span> <span class="pre">ability</span> <span class="pre">to&quot;</span></code> and GPT-2 responds with (roughly) a word that is a reasonable continuation to it.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">Why roughly?</p>
-<p>I say roughly because LLMs technically produce a <em>token</em>, which may not be a complete word and may be a punctuation mark. But to understand how LLMs work, we can simply think of these tokens as words.</p>
-</aside>
+<p>Let’s take these calls one at a time. Wolfram’s example, which I’ll describe here, begins with the prompt string <code class="docutils literal notranslate"><span class="pre">&quot;The</span> <span class="pre">best</span> <span class="pre">thing</span> <span class="pre">about</span> <span class="pre">AI</span> <span class="pre">is</span> <span class="pre">its</span> <span class="pre">ability</span> <span class="pre">to&quot;</span></code> and GPT-2 responds with (roughly<a class="footnote-reference brackets" href="#fn3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>) a word that is a reasonable continuation to it.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">the_next_word</span> <span class="o">=</span> <span class="n">GPT2</span><span class="p">(</span><span class="s2">&quot;The best thing about AI is its ability to&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -564,31 +553,27 @@ document.write(`
 <p><span class="caption-number">Fig. 37 </span><span class="caption-text">The top five most likely words in Wolfram’s example that GPT-2 predicts will reasonably continue the prompt “The best thing about AI is its ability to”.</span><a class="headerlink" href="#c18-fig2-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Through experience, LLM developers have discovered that models that always return the highest-ranked next word produce responses that sound flat and repetitious to humans. Models with more natural-sounding responses vary the choice of words from those most highly ranked.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">The temperature knob</p>
-<p>In some LLMs, you can adjust the model’s <em>temperature</em> setting to more strongly nudge it toward less likely words. But nudging it too far down its ranking will make the LLM sound like a lunatic. There’s that just-right nature of ML rising up again.</p>
-</aside>
+<p>Through experience, LLM developers have discovered that models that always return the highest-ranked next word produce responses that sound flat and repetitious to humans. Models with more natural-sounding responses vary the choice of words from those most highly ranked.<a class="footnote-reference brackets" href="#fn4" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
 <p>But let’s continue with Wolfram’s example and have the model chose “learn” from this list. The conversation’s context is now “The best thing about AI is its ability to learn” and the next step is to call GPT-2 with this string. The model provides the next word (e.g., the word “from”) and we again update the context. We have now defined the body of a loop: the model chooses a word that is a reasonable continuation of its current context and then uses its choice to update the context.</p>
 <p>The next obvious question is: what is this loop’s exit condition? As we’ve learned, loops need at least one. A straightforward answer to this question is to use a special END token. The model generates a probability for END on each call, and when this token is selected, the model has determined that it is reasonable to end the loop and return the response.</p>
 </section>
 <section id="complexity-from-simplicity">
 <p><strong>Complexity from simplicity.</strong> Earlier, when I asked ChatGPT to explain GAI, it responded that these systems help us to “understand how complex output can emerge from simple rules and structures.” This statement refers to the building blocks and basic layout of a LLM (and many other AI models like image recognizers), which I’ll now briefly describe. My point is not to have you comprehend all the details, but to realize that a GAI model isn’t constructed and programmed like a calculator or spreadsheet application. Structurally, GAI models are <em>neural networks</em>, which were inspired by the biological structure of the human brain (i.e., the brain’s networks of neurons).</p>
-<p>Neural networks were first proposed in the 1940s, and today’s computational neurons are largely unchanged since then. What’s changed is the computing speed of these neurons, the number of them we can interconnect and train, and the size of the training data sets. Everything has gotten orders of magnitude faster or bigger.</p>
+<p>Neural networks were first proposed in the 1940s, and today’s computational neurons are largely unchanged since then. What’s changed is the computing speed of these neurons, the number of them we can interconnect and train, and the size of the training data sets. Everything has gotten orders of magnitude faster and bigger.</p>
 <p><a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 38</span></a> is a typical and idealized illustration of a neural network. It is comprised of computational neurons (i.e., the circles in the figure) that are organized into layers. Inputs to the model are fed to the first layer of neurons, which compute with these inputs and whose outputs are fed to the next layer of neurons. This feed-forward organization continues until the last layer outputs the model’s result.</p>
 <figure class="align-default" id="c18-fig3-ref">
 <img alt="_images/c18_fig3.png" src="_images/c18_fig3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) and are treated as weighted inputs to the nodes (circles), which represent the computational neurons. Each neuron performs a fairly simple numerical computation. REPLACE: This placeholder is taken from Wolfram [2023].</span><a class="headerlink" href="#c18-fig3-ref" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) and are treated as weighted inputs to the nodes (circles), which represent the computational neurons. Each neuron performs a fairly simple numerical computation.</span><a class="headerlink" href="#c18-fig3-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The thickness of the arrows in <a class="reference internal" href="#c18-fig3-ref"><span class="std std-numref">Figure 38</span></a> varies to represent that the values carried along each edge are weighted before being used in a neuron’s computation. If we pull that weighting into the work done at an individual neuron, the output value of a neuron is:</p>
 <ul class="simple">
-<li><p>the weighted sum of the values on the  <span class="math notranslate nohighlight">\(n\)</span> incoming edges: <span class="math notranslate nohighlight">\(\sum_{i=1}^{n} (w_i * x_i)\)</span> where <span class="math notranslate nohighlight">\(w\)</span> is a weight and <span class="math notranslate nohighlight">\(x\)</span> is an incoming value;</p></li>
+<li><p>the sum of the weighted values on the  <span class="math notranslate nohighlight">\(n\)</span> incoming edges: <span class="math notranslate nohighlight">\(\sum_{i=1}^{n} (w_i * x_i)\)</span> where <span class="math notranslate nohighlight">\(w\)</span> is a weight and <span class="math notranslate nohighlight">\(x\)</span> is an incoming value;</p></li>
 <li><p>plus a constant <span class="math notranslate nohighlight">\(b\)</span>;</p></li>
 <li><p>followed by a <em>thresholding</em> or <em>activation</em> function <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
 </ul>
-<p>Each computational neuron in a model’s neural network typically has its own set of weights for the incoming edges and constant <span class="math notranslate nohighlight">\(b\)</span>. These are the <em>parameters</em> that you hear mentioned when a company quantifies the complexity of its model. They are also what are set through training, as we’ll discuss next.</p>
+<p>Each computational neuron in a model’s neural network typically has its own set of weights for the incoming edges and its own constant <span class="math notranslate nohighlight">\(b\)</span>. These are the <em>parameters</em> that you hear mentioned when a company quantifies the complexity of its model. They are also what are set through training, as we’ll discuss next.</p>
 <p>The thresholding or activation function is typically the same across all computational neurons in a layer. More interesting is its purpose, which is to allow for nonlinear behavior out of a layer.</p>
 <p>While a neuron’s computation may not sound simple to you, it is much simpler than all but the most trivial of the programs we’ve been writing throughout this book. Perhaps someday someone will figure out how human-sounding responses come from such simple structures, but as of today, we can’t explain it. Furthermore, engineering a useful neural network continues to be more of an art than a science.</p>
 </section>
@@ -598,9 +583,9 @@ document.write(`
 <p>To make this concrete, consider the following start to a sentence: “The sky is _____”. From our data set of real-world sentences, we know that “blue”, “stormy”, “falling”, “endless”, and “empty” are all reasonable continuations while “able” and “tape” are not. Which word from the first list should the model give the highest priority? That would depend upon the context of the conversation before this sentence.</p>
 <p>My last point hints at something you should understand that LLMs are not doing. They are not a really big hash table that hashes the input prompt to access a stored list of reasonable words. If you think about it for a moment (or do the math that Wolfram [2023] describes), you’ll quickly realize that there are too many prefix possibilities to even conceive of building such a table. This also means that the training set cannot contain every possible user prompt, since it is of a large but limited size.</p>
 <p>But this is all ok. LLMs are exactly what the M in the acronym stands for: a model. The word probabilities generated by a model like GPT-4 are just estimates informed by its training. The word it generates needs to fit the patterns seen in the training set, not any particular example. If it helps, recall that the sales-price predictor in the last chapter used attributes of a previously unseen house to predict this home’s sales price. This home didn’t have to be in the training set.</p>
-<div class="admonition-gpt-stands-for admonition">
-<p class="admonition-title">GPT stands for …</p>
-<p>The acronym GPT in the ChatGPT application name and GPT-x model names stand for “Generative Pre-trained Transformer” and you now can explain the first two terms. Transformer refers to a specific architecture of neural networks that focuses the model’s attention on particular parts of the input prompt. It’s kind of like choosing the right set of attributes on which to focus our sales-price predictor.</p>
+<div class="tip admonition">
+<p class="admonition-title">Terminology</p>
+<p>The acronym GPT in the ChatGPT application name and GPT-x model names stands for “Generative Pre-trained Transformer” and you now can explain the first two terms. Its last term, Transformer, refers to a specific architecture of neural networks that focuses the model’s attention on particular parts of the input prompt. It’s kind of like choosing the right set of attributes on which to focus our sales-price predictor.</p>
 </div>
 </section>
 <section id="two-pieces-to-problem-solving-with-gai">
@@ -614,7 +599,7 @@ document.write(`
 <section id="an-easy-request">
 <p><strong>An easy request?</strong> As we’ve done in every other chapter, let’s proceed with a problem-to-be-solved. Here’s the setup: When I teach my introductory computer science course using this book, I have the students practice their knowledge of goal-directed search (Chapter 11) by writing a program that plays the parlor game <a class="reference external" href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Six Degrees of Kevin Bacon</a>. In this game, players challenge each other to connect two given actors by:</p>
 <ol class="arabic simple">
-<li><p>describing a chain of actors bracketed by the two given actors; and</p></li>
+<li><p>describing a chain of actors, bracketed by the two given actors; and</p></li>
 <li><p>for each pair of consecutive actors in the chain, naming a movie in which they both co-starred.</p></li>
 </ol>
 <p>For example, Kevin Bacon and Marlon Brando are connected through Jack Nicholson because:</p>
@@ -622,11 +607,8 @@ document.write(`
 <li><p>Bacon and Nicholson starred together in <em>A Few Good Men</em></p></li>
 <li><p>Nicholson and Brando starred together in <em>The Missouri Breaks</em></p></li>
 </ul>
-<aside class="margin sidebar">
-<p class="sidebar-title">Degree of Separation</p>
-<p>The chain Bacon-Nicholson-Brando has a degrees-of-separation measure of two.</p>
-</aside>
-<p>My students test their programs on a small slice of the <a class="reference external" href="https://developer.imdb.com/non-commercial-datasets/">IMDb data sets</a>, and when they think their code works, they try it on a much larger one. My pedagogical goal is to demonstrate that your code may functionally work, but large data sets can stress it in ways small data sets don’t (e.g., quickly show you where your code is inefficiently implemented). The chain I showed with Bacon, Nicholson, and Brando is found through a breadth-first search on the large IMDb data set, and when running a depth-first search, their programs can also produce answers with much larger degrees of separation—the graph of actors and movies is highly interconnected (i.e., there are many paths that work). Without fail, the students will come to me and ask if their script’s output, like the following that reports 66 degrees of separation, is correct. I look at them and say, “I don’t know. How would you check this output?”</p>
+<p>The chain Bacon-Nicholson-Brando is said to have a <em>degrees-of-separation</em> measure of two, i.e., it took two steps (or movies) to go from Bacon to Nicholson.</p>
+<p>My students test their programs on a small slice of the <a class="reference external" href="https://developer.imdb.com/non-commercial-datasets/">IMDb data sets</a>, and when they think their code works, I ask them to try it on a much larger slice. My pedagogical goal is to demonstrate that your code may functionally work, but large data sets can stress it in ways small data sets don’t (e.g., quickly show you where your code is inefficiently implemented). The chain I showed with Bacon, Nicholson, and Brando is found through a breadth-first search on the large IMDb data set, and when running a depth-first search, their programs often produce answers with much larger degrees of separation. The graph of actors and movies is highly interconnected, and there exist many chains from Bacon to Nicholson. Without fail, the students will come to me and ask if their script’s depth-first output, like the following that reports 66 degrees of separation, is correct. I look at them and say, “I don’t know. How would you check this output?”</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Name: Which &#39;kevin bacon&#39;?
 ID: 9323132, Name: Kevin Bacon, Birth:
 ID: 102, Name: Kevin Bacon, Birth: 1958
@@ -645,11 +627,11 @@ Intended Person ID: Name: Running a dfs search
 66: Marthe Keller and Marlon Brando starred in The Formula
 </pre></div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title">The First Four Lines</p>
-<p>Because I captured this output by directing the script’s standard output (see Chapter 13), you don’t see my answers to the script’s <code class="docutils literal notranslate"><span class="pre">input</span></code> prompts. At the first occurrence of <code class="docutils literal notranslate"><span class="pre">Name:</span></code>, it asks for the first actor’s name, to which I responded “kevin bacon”. The next question comes on the same output line because the newline character was in my response. The output <code class="docutils literal notranslate"><span class="pre">Which</span> <span class="pre">'kevin</span> <span class="pre">bacon'?</span></code> and two ID lines occur because there are two actors with this name in the IMDb data set, and the script wants to know which one I meant. To the <code class="docutils literal notranslate"><span class="pre">Intended</span> <span class="pre">Person</span> <span class="pre">ID:</span></code> prompt, I responded “102”. The script then asks for the second actor’s name, and I typed “Marlon Brando”. With the data it needs, the script then states it had begun running a depth-first search (DFS). It reports finding a path with 66 degrees of separation and prints the details of this path.</p>
-</aside>
-<p>The copy of the output above doesn’t show all 66 lines in the path, but hopefully you see the pattern: Each line is of the form “ACTOR1 and ACTOR2 starred in MOVIE” where the uppercase nouns are placeholders for actor names and movie titles. A properly-functioning goal-directed search, as we discussed in Chapter 11, shouldn’t visit the same node (i.e., actor) more than once. This means that no actor should appear in the last 66 lines more than twice.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>Take a moment to understand this captured output, including its first four lines. I captured this output by directing the solution script’s standard output, as we discussed in Chapter 13. Because I only captured the script’s standard output, you don’t see my answers to the script’s <code class="docutils literal notranslate"><span class="pre">input</span></code> prompts, which traveled over the script’s standard input. At the first occurrence of <code class="docutils literal notranslate"><span class="pre">Name:</span></code>, the script asked for the first actor’s name, to which I responded “kevin bacon”. The next question comes on the same output line because the newline character was in my response. The output <code class="docutils literal notranslate"><span class="pre">Which</span> <span class="pre">'kevin</span> <span class="pre">bacon'?</span></code> and the two ID lines occurred because there are two actors with this name in the IMDb data set, and the script wants to know which one I meant. To the <code class="docutils literal notranslate"><span class="pre">Intended</span> <span class="pre">Person</span> <span class="pre">ID:</span></code> prompt, I responded “102”. The script then asks for the second actor’s name, and I typed “Marlon Brando”. With the data it needs, the script then states it had begun running a depth-first search (DFS). It reports finding a chain with 66 degrees of separation and prints the details of it.</p>
+</div>
+<p>The copy of the output above doesn’t show all 66 lines in the chain, but hopefully you see the pattern: Each line is of the form “ACTOR1 and ACTOR2 starred in MOVIE” where the uppercase nouns are placeholders for actor names and movie titles. A properly-functioning goal-directed search, as we discussed in Chapter 11, shouldn’t visit the same node (i.e., actor) more than once. This means that no actor should appear in the last 66 lines more than twice.</p>
 <p>To check this, we have three options:</p>
 <ol class="arabic simple">
 <li><p>Check the list by hand counting the occurrences of each name.</p></li>
@@ -742,9 +724,9 @@ Intended Person ID: Name: Running a dfs search
 <div><p><strong>ChatGPT:</strong> Upon analyzing the text, I found that the name “Kevin Bacon” appears twice in the document. There are no other names repeated more than twice in the text provided.</p>
 </div></blockquote>
 <p>It’s true that “Kevin Bacon” appears more than twice because I forgot to ask ChatGPT to ignore the first several lines, as I did when running my <code class="docutils literal notranslate"><span class="pre">check</span></code> function.</p>
-<div class="admonition-first-lesson-learned admonition">
-<p class="admonition-title">First Lesson Learned</p>
-<p>You still need to think when you ask a GAI tool to do your work.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>First Lesson Learned:</strong> You still need to think when you ask a GAI tool to do your work.</p>
 </div>
 <p>But ChatGPT’s first sentence in the response doesn’t really make much sense. I asked if any names appeared <em>more than twice</em>, and while it correctly identified “Kevin Bacon” as appearing too many times, it wrote that this name “<em>appeared twice</em> in the document.” [Emphasis added.] This caused me to ask, “please explain how you came to that answer” and it replied:</p>
 <blockquote>
@@ -778,9 +760,9 @@ Intended Person ID: Name: Running a dfs search
 <p><strong>Louis-Do de Lencquesaing</strong> is the only name that appears more than twice in the document. This conclusion was reached by methodically going through each line of the text and counting the occurrences of each name, focusing especially on those that appear multiple times.</p>
 </div></blockquote>
 <p>ChatGPT correctly finds that Louis-Do de Lencquesaing is mentioned too many times, but it still struggles with counting. And it strangely tells me about a few but not all the other actors mentioned twice.</p>
-<div class="admonition-second-lesson-learned admonition">
-<p class="admonition-title">Second Lesson Learned</p>
-<p>ChatGPT works quickly, but you’ll spend additional time debugging its work.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Second Lesson Learned:</strong> ChatGPT works quickly, but you’ll spend additional time debugging its work.</p>
 </div>
 <p>At this point, I haven’t found a prompt that causes ChatGPT to tell me exactly what I want to know and in a manner that makes me confident of its work. The reason I’m not getting a good result from ChatGPT could be that: (1) my skills in prompting need improvement; or (2) this task is beyond the model’s frontier. These are exactly the two challenges I mentioned earlier in problem solving with GAI. Let’s deal with them one at a time.</p>
 </section>
@@ -795,12 +777,11 @@ Intended Person ID: Name: Running a dfs search
 </ol>
 <p>I can’t tell the difference between these three cases, but I don’t have to. If I assume the GAI tool can’t solve the task whenever it can’t convince me, I won’t use an incorrect solution. This conservative approach also has the nice property that it will improve as the capabilities of GAI tools improve (and as I become smarter).</p>
 <p>You’ve previously seen me using this approach with ChatGPT. Assuming the prompts I used were clear and unambiguous (an issue we’ll explore later), I can conclude through our prior work with GPT-4 that it isn’t fully capable of robustly solving our problem-to-be-solved.</p>
-<div class="admonition-a-different-example admonition">
-<p class="admonition-title">A Different Example</p>
-<p>Wolfram [2023] describes the training of a GPT-2-like model for recognizing and producing sequences of balanced parentheses, as one sees in mathematical and programming language expressions. The model works well for short sequences of opening parentheses (e.g., the model correctly responds that it should follow <code class="docutils literal notranslate"><span class="pre">(((</span></code> with <code class="docutils literal notranslate"><span class="pre">)))</span></code>), but the highest-probability completion for long sequences of opening parentheses doesn’t always produce a response that’s balanced. Wolfram [2023] theorizes that this model can reliably solve only things that humans can solve at a glance. When humans need to start counting and matching parentheses, the model should too and GPT-2 doesn’t.</p>
-<p>I’m not limited to GPT-2, and so I asked GPT-4 to “generate a balanced set of parentheses” and gave it a number of examples (i.e., what’s called <em>few-shot prompting</em> as we’ll discuss later). GPT-4 correctly solved the long sequences that GPT-2 couldn’t. When I asked GPT-4 to explain its work, it showed me a piece of Python code (the code is in <code class="docutils literal notranslate"><span class="pre">chap18/balance_parentheses.py</span></code> in the book’s GitHub repository). In other words, unlike GPT-2, GPT-4 was “smart enough” to realize it should built an algorithmic solution and use it. More tasks were inside its frontier than GPT-2.</p>
-<p>Unfortunately, not all tasks are inside GPT-4’s frontier for it became anchored in the context. When I continued to prompt it and provided the prefix <code class="docutils literal notranslate"><span class="pre">()())</span></code>, which can’t be made balanced by adding more parentheses, it responded: “The input <code class="docutils literal notranslate"><span class="pre">()())</span></code> is already balanced, so the output remains <code class="docutils literal notranslate"><span class="pre">()())</span></code>.” The reason it gave for the answer was the same <code class="docutils literal notranslate"><span class="pre">balance_parentheses.py</span></code> code, which doesn’t check for the condition I was testing.</p>
-</div>
+</section>
+<section id="the-expanding-frontier">
+<p><strong>The expanding frontier.</strong> As an example of GAI’s expanding frontier, Wolfram [2023] describes the training of a GPT-2-like model for recognizing and producing sequences of balanced parentheses, as one sees in mathematical and programming language expressions. The model works well for short sequences of opening parentheses (e.g., the model correctly responds that it should follow <code class="docutils literal notranslate"><span class="pre">(((</span></code> with <code class="docutils literal notranslate"><span class="pre">)))</span></code>), but the highest-probability completion for long sequences of opening parentheses doesn’t always produce a response that’s balanced. Wolfram [2023] theorizes that this model can reliably solve only things that humans can solve at a glance. When humans need to start counting and matching parentheses, the model should too and GPT-2 doesn’t.</p>
+<p>I’m not limited to GPT-2, and so I asked GPT-4 to “generate a balanced set of parentheses” and gave it a number of examples (i.e., what’s called <em>few-shot prompting</em> as we’ll discuss later). GPT-4 correctly solved the long sequences that GPT-2 couldn’t. When I asked GPT-4 to explain its work, it showed me a piece of Python code, which I have put in <code class="docutils literal notranslate"><span class="pre">balance_parentheses.py</span></code> in the book’s GitHub repository. In other words, unlike GPT-2, GPT-4 was “smart enough” to realize it should built an algorithmic solution and use it. More tasks were inside its frontier than GPT-2.</p>
+<p>Unfortunately, not all tasks are inside GPT-4’s frontier for it became anchored in the context. When I continued to prompt it and provided the prefix <code class="docutils literal notranslate"><span class="pre">()())</span></code>, which can’t be made balanced by adding more parentheses, it responded: “The input <code class="docutils literal notranslate"><span class="pre">()())</span></code> is already balanced, so the output remains <code class="docutils literal notranslate"><span class="pre">()())</span></code>.” The reason it gave for the answer was the same <code class="docutils literal notranslate"><span class="pre">balance_parentheses.py</span></code> code, which doesn’t check for the condition in my example.</p>
 </section>
 <section id="how-to-problem-solve-with-a-llm">
 <p><strong>How to problem solve with a LLM.</strong> Now that we’ve decided the complete problem-to-be-solved from my introductory computer science class is not within GPT-4’s frontier, how should we proceed to get benefit from the use of it? Simple, we decompose this problem into its tasks as if we were going to solve it ourselves, and then ask for GPT-4’s help in solving the most difficult of these smaller tasks.</p>
@@ -836,40 +817,21 @@ Intended Person ID: Name: Running a dfs search
 </pre></div>
 </div>
 <p>When you run this script, it prints: `Carey Mulligan and starred in The Great Gatsby`. ChatGPT took me literally and removed the second actor’s name from the line. This is not the interpretation of my prompt that I wanted. English is ambiguous!</p>
-<div class="admonition-third-lesson-learned admonition">
-<p class="admonition-title">Third Lesson Learned</p>
-<p>While “programming” a GAI in English (or any human language) might make problem solving with computation accessible to more people in the world, there’s a reason why programming languages attempt to have well-defined semantics.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Third Lesson Learned:</strong> While “programming” a GAI in English (or any human language) might make problem solving with computation accessible to more people across the world, there’s a reason why programming languages attempt to have well-defined semantics.</p>
 </div>
-<p>Still, ChatGPT gave us a starting point for a solution and an explanation of what went into the regular-expression pattern it used (see below). We’ll likely solve our problem faster with this assistance.</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Regular Expression (<code class="docutils literal notranslate"><span class="pre">re</span></code>) Module: This module provides support for regular expressions in Python. We use it to define a pattern and perform substitutions in the text.</p></li>
-<li><p>Pattern Definition:</p></li>
-</ol>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">\b[A-Z][a-z]*</span></code>: This matches a word beginning with a capital letter followed by zero or more lowercase letters, representing a proper noun (a possible name).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">\s</span></code>: Matches any whitespace.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">(?:and\s)?</span></code>: A non-capturing group that matches the word “and” followed by a whitespace, if it exists. The question mark makes it optional.</p></li>
-<li><p>The entire pattern matches two proper nouns possibly connected by “and”, followed by “starred”.</p></li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p>Replacement:</p></li>
-</ol>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">r'\1'</span></code>: This replacement keeps the word “starred” in place but removes the names and “and”, thus cleaning the line of the specified names while keeping the structure of the rest of the sentence.</p></li>
-</ul>
-<p>This function will specifically work well under the constraints of the provided example and similar structures. If your sentences vary significantly or have different structures, the regex pattern might need adjustments to better suit those variations.</p>
-</div></blockquote>
+<p>Still, ChatGPT gave us a starting point for a solution and an explanation (not shown) of what went into the regular-expression pattern it used. We’ll likely solve our problem faster with this assistance.</p>
 </section>
 <section id="writing-good-prompts">
-<p><strong>&gt; &gt; <strong>Writing good prompts</strong>.</strong> Now that you’ve seen some prompts, it’s finally time to discuss what makes a good one. This topic is also called <em>prompt engineering</em>. I begin with three often-recommended ways to prompt a LLM. While effective, they’re also very formulaic. To provide you with more freedom to express your prompts and still have them be good, I’ll then briefly discuss what I believe makes a good prompt.</p>
+<p><strong>Writing good prompts.</strong> Now that you’ve seen some prompts, it’s finally time to discuss what makes a good one. This topic is also called <em>prompt engineering</em>. I begin with three often-recommended ways to prompt a LLM. While effective, they’re also very formulaic. To provide you with more freedom to express your prompts and still have them be good, I’ll then briefly discuss what I believe makes a good prompt.</p>
 <p>The following are three popular prompt forms frequently cited by those with expertise in prompt engineering:</p>
 <ul class="simple">
 <li><p><strong>Instruction:</strong> This form begins with a command to the model that instructs it to do a particular task, and has you follow the command with your supporting data or context. For example, your prompt might begin with the statement: “Summarize the following text in a paragraph.” You’d follow this statement with the text to summarize.</p></li>
 <li><p><strong>Completion:</strong> This form begins with the context you want the model to absorb and ends an incomplete statement that the model naturally tries to complete. Continuing with the example I used in the instruction form, you could start your prompt with the text you’d like summarized and then end with the incomplete sentence: “Briefly, this text discusses”.</p></li>
 <li><p><strong>Demonstration:</strong> This form has you show the model what you want it to do through one or more examples and end with the question you want answered. It is reminiscence of supervised learning, and it is frequently called <em>few-shot learning</em>.</p></li>
 </ul>
-<p>As an example of a demonstration prompt, let’s continue to try to get ChatGPT to grab the actor names from a line of the form: <code class="docutils literal notranslate"><span class="pre">ACTOR1</span> <span class="pre">and</span> <span class="pre">ACTOR2</span> <span class="pre">starred</span> <span class="pre">in</span> <span class="pre">MOVIE</span></code>.</p>
+<p>As an example of a completion prompt, let’s continue to try to get ChatGPT to grab the actor names from a line of the form: <code class="docutils literal notranslate"><span class="pre">ACTOR1</span> <span class="pre">and</span> <span class="pre">ACTOR2</span> <span class="pre">starred</span> <span class="pre">in</span> <span class="pre">MOVIE</span></code>.</p>
 <blockquote>
 <div><p><strong>Me:</strong></p>
 <p>Input: Carey Mulligan and Joel Edgerton starred in The Great Gatsby</p>
@@ -898,15 +860,19 @@ Intended Person ID: Name: Running a dfs search
 <span class="linenos">13</span>    
 <span class="linenos">14</span>    <span class="k">return</span> <span class="n">result</span>
 <span class="linenos">15</span>
-<span class="linenos">16</span><span class="c1"># Example usage</span>
+<span class="linenos">16</span><span class="c1"># Example usage (from ChatGPT)</span>
 <span class="linenos">17</span><span class="n">input_text</span> <span class="o">=</span> <span class="s2">&quot;Aden Young and Marshall Napier starred in Shotgun Wedding&quot;</span>
 <span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="n">extract_actors</span><span class="p">(</span><span class="n">input_text</span><span class="p">))</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1"># Another test of the code that I added</span>
+<span class="linenos">21</span><span class="n">input_text</span> <span class="o">=</span> <span class="s2">&quot;Jane Tsentas and Cleo O&#39;Hara starred in Evil Come Evil Go&quot;</span>
+<span class="linenos">22</span><span class="nb">print</span><span class="p">(</span><span class="n">extract_actors</span><span class="p">(</span><span class="n">input_text</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>If you run <code class="docutils literal notranslate"><span class="pre">extract_actors.py</span></code>, you’ll find that it doesn’t produce the same answer as it did in the demonstration prompt, i.e., it adds the movie title to the printed list. And if you inspect the regular expression it uses, you’ll see that it won’t work for names like “Cleo O’Hara”, which contain characters other than the letters <code class="docutils literal notranslate"><span class="pre">a-z</span></code>. This happened despite the fact that I included that name in my examples.</p>
-<div class="admonition-fourth-lesson-learned admonition">
-<p class="admonition-title">Fourth Lesson Learned</p>
-<p>Even with good prompts, the solution produced with a GAI tool today won’t necessary work in all the situations you care about. Problem solving involves iteration, even when you use GAI.</p>
+<p>As typical, ChatGPT included an example that shows you how to invoke the function. I added another test. When you run <code class="docutils literal notranslate"><span class="pre">extract_actors.py</span></code>, you’ll find that ChatGPT’s test works fine, but the one I added doesn’t. And if you inspect the regular expression in <code class="docutils literal notranslate"><span class="pre">extract_actors</span></code>, you’ll see that it won’t work for names like “Cleo O’Hara”, which contain characters other than the letters <code class="docutils literal notranslate"><span class="pre">a-z</span></code>. This happened despite the fact that I included that name in my completion-prompt examples.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Fourth Lesson Learned:</strong> Even with good prompts, the solution produced with a GAI tool today won’t necessary work in all the situations you care about. Problem solving involves iteration, even when you use GAI.</p>
 </div>
 <p>You can find lots of websites on the internet that discuss prompt engineering. I view most of their advice as that which is appropriate for getting better outputs from a human assistant as well as a GAI tool. Here are some basic rules of thumb:</p>
 <ul class="simple">
@@ -933,7 +899,24 @@ Intended Person ID: Name: Running a dfs search
 <p>But be vigilantly skeptical. Always check and never blindly accept a GAI tool’s output.</p>
 <p>When all is said and done, problem solving with GAI is still the same process I described in Chapter 1. Whether you use Python or English to “program” the machine to solve your problem, your instructions need to be precise and carefully constructed.</p>
 <p>Happy problem solving!</p>
-<p>[Version 20240605]</p>
+<p>[Version 20240811]</p>
+<hr class="footnotes docutils" />
+<aside class="footnote brackets" id="fn1" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The figure and findings discussed in this section are from Dell’Acqua, Fabrizio and McFowland III, Edward and Mollick, Ethan R. and Lifshitz-Assaf, Hila and Kellogg, Katherine and Rajendran, Saran and Krayer, Lisa and Candelon, François and Lakhani, Karim R., “Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality” (September 15, 2023). Harvard Business School Technology &amp; Operations Mgt. Unit Working Paper No. 24-013. The full text is available at SSRN (<a class="reference external" href="https://ssrn.com/abstract=4573321">https://ssrn.com/abstract=4573321</a>) or <a class="reference external" href="http://doi.org">doi.org</a> (<a class="reference external" href="http://dx.doi.org/10.2139/ssrn.4573321">http://dx.doi.org/10.2139/ssrn.4573321</a>).</p>
+</aside>
+<aside class="footnote brackets" id="fn2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>If you want an excellent and understandable introduction to LLMs, I highly recommend <a class="reference external" href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/">Stephen Wolfram’s “What Is ChatGPT Doing … and Why Does It Work?,” Stephen Wolfram Writings (2023)</a>. This section borrows from Wolfram’s lengthy article.</p>
+</aside>
+<aside class="footnote brackets" id="fn3" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>I say roughly because LLMs technically produce a <em>token</em>, which may not be a complete word and may be a punctuation mark. But to understand how LLMs work, we can simply think of these tokens as words.</p>
+</aside>
+<aside class="footnote brackets" id="fn4" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>In some LLMs, you can adjust the model’s <em>temperature</em> setting to more strongly nudge it toward less likely words. But nudging it too far down its ranking will make the LLM sound like a lunatic. There’s that just-right nature of ML rising up again.</p>
+</aside>
 </section>
 </section>
 
@@ -1015,8 +998,9 @@ Intended Person ID: Name: Running a dfs search
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-script-ourselves">Write the script ourselves</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-chatgpt">Ask ChatGPT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-this-task-within-the-frontier">Is this task within the frontier?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expanding-frontier">The expanding frontier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-problem-solve-with-a-llm">How to problem solve with a LLM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-good-prompts">&gt; &gt; <strong>Writing good prompts</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-good-prompts">Writing good prompts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-thoughts">Final thoughts</a></li>
 </ul>
   </nav></div>
