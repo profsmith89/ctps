@@ -438,7 +438,7 @@ def my_replace(s, old, new):
             new_s = new_s + new
             i += j
         else:
-            new_s = new_s + s[i]
+            new_s = new_s + s[i:i+1]
             i += 1
 
     return new_s
@@ -462,4 +462,80 @@ if __name__ == '__main__':
     main()
 ```
 
-\[Version 20240806\]
+## ALE 3.10: Concatenating lists (or slicing produces sequences)
+
+There's another head-scratching implementation detail in `my_replace` (first defined in `replace7.py`) that you may have noticed: Why is `s[i:i+1]` added to the end of the growing `new_s` instead of the simpler `s[i]` (line 12 in `replace7.py`)?
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap03/replace7.py
+def my_replace(s, old, new):
+    i = 0           # tracks where we are in the input string
+    j = len(old)    # skip-ahead amount for index calculations
+    new_s = s[0:0]  # the new string we're building
+
+    while i < len(s):
+        if s[i:i+j] == old:
+            new_s = new_s + new
+            i += j
+        else:
+            new_s = new_s + s[i:i+1]
+            i += 1
+
+    return new_s
+```
+
+The else-block inside the while-loop above executes when the substring starting at index `i` in `s` doesn't match the substring we wish to replace (i.e., `old`). When this is true, the algorithm wants to take the sequence element at index `i` in `s` and concatenate it to the end of `new_s`.
+
+You might think that `s[i]` and `s[i:i+1]` always produce the same result, since both operations seem to say, "Please give me the item at index `i` in `s` and nothing more." But they don't. Let's see this with two simple examples.
+
+**Step 1.** Let's start with a string, which we know acts like a sequence. In the interactive Python interpreter, try the following:
+
+```{code-block} python
+---
+lineno-start: 1
+---
+>>> s = 'Python is fun'
+>>> s[1]
+'y'
+>>> s[1:2]
+'y'
+``` 
+
+When our sequence object is a string, `s[i]` yields the same result as `s[i:i+1]`. This means that `my_replace` could use `s[i]` if `my_replace` was ever to only operate on strings. Go ahead and try changing line 12 in `replace7.py`, whose `main` function only calls `my_replace` with strings.
+
+**Step 2.** Now let's experiment with lists, which is the other type on which we'd like `my_replace` to work. Again in the interactive Python interpreter, try the following:
+
+```{code-block} python
+---
+lineno-start: 1
+---
+>>> s = [1, 2, 3]
+>>> s[3]
+3
+>>> s[3:4]
+[3]
+``` 
+
+When our sequence object is a list, `s[i]` returns *the object* stored at index `i` in `s`, but `s[i:i+1]` returns *a list* containing only the object stored at index `i` in `s`. This means that we cannot use `s[i]` on line 12 in `replace7.py` if `my_replace` is to operate on lists and strings. Go ahead and try it---you'll a `TypeError` saying that you cannot concatenate an integer to a list.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+>>> s = [1, 2, 3]
+>>> s + s[3]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+>>> s + s[3:4]
+[1, 2, 3]
+``` 
+
+Try changing line 14 in `bookshelf1.py` and then run it. This script's `main` function calls `my_replace` with both strings and lists, and it will fail to complete successfully.
+
+The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.
+
+\[Version 20240813\]

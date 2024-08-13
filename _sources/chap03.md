@@ -381,7 +381,7 @@ def my_replace(s, old, new):
             new_s = new_s + new
             i += j
         else:
-            new_s = new_s + s[i]
+            new_s = new_s + s[i:i+1]
             i += 1
 
     return new_s
@@ -451,7 +451,7 @@ Let's pause for a moment and rise above the details of building a function and l
 
 While writing the Python code, we learned a couple of different ways to replace a portion of a string with another string, with the last version of our script implementing our own string replace. Notice that the script's purpose doesn't include this level of detail. The Python interpreter needs these details (i.e., how it should replace words in a string), but in solving the problem, we don't particularly care if the interpreter uses `my_replace` or Python's built-in `str.replace` method.
 
-This is *abstraction* at work, and it is one of the benefits of using functions. With them, we can hide necessary but unimportant-to-the-script's-main-purpose details. In fact, even though the implementation of `my_replace` was sitting there in lines 3-15 of `replace7.py`, did you take the time to read and understand exactly how it works? Be honest. Probably not many readers did, and that, my friend, is abstraction at its finest! We used `my_replace`. We talked about it. You (hopefully) understood its interface and could use it yourself, but you didn't ever bother to worry about how it exactly did what you abstractly thought about it doing.
+This is *abstraction* at work, and it is one of the benefits of using functions. With them, we can hide necessary but unimportant-to-the-script's-main-purpose details. In fact, even though the implementation of `my_replace` was sitting there in lines 3-15 of `replace7.py`, did you take the time to read and understand exactly how it works? Be honest. Probably not many readers did, and that, my friend, is abstraction at its finest! We used `my_replace`. We talked about it. You (hopefully) understood its interface and could use it yourself, but you didn't ever bother to worry about how it exactly did what you thought about it doing.
 
 Abstraction is a big idea in computer science, but don't let that frighten you. It is something that each of us does all the time in life. As you gain experience in problem solving, you'll find that abstraction goes hand-in-hand with *decomposition*, i.e., the breaking down of a large, complex problem into simpler steps, as we did to solve this chapter's problem. We began by abstractly thinking about replacing a part of a string with a different string, and we weren't initially concerned with how we would accomplish this replacement. Only later did we ask whether this replacement was something we had to write for ourselves or was a piece of functionality someone else had already written for us.
 
@@ -488,7 +488,7 @@ def my_replace(s, old, new):
             new_s = new_s + new
             i += j
         else:
-            new_s = new_s + s[i]
+            new_s = new_s + s[i:i+1]
             i += 1
 
     return new_s
@@ -591,7 +591,7 @@ def my_replace(s, old, new):
             new_s = new_s + new
             i += j
         else:
-            new_s = new_s + s[i]
+            new_s = new_s + s[i:i+1]
             i += 1
 
     return new_s
@@ -789,7 +789,7 @@ An example where this is needed is in a pseudorandom number generator, which use
 
 In this chapter, you've learned a lot about how to organize the code in your scripts. The topics covered are enough to move us into a new set of interesting problems, but probably not enough practice to make you comfortable in writing your own functions. For more practice, I encourage you to try this chapter's active-learning exercises on the companion website. They'll also explain the dangers of using global variables rather than the parameter-passing and value-return mechanisms of functions.
 
-\[Version 20240806\]
+\[Version 20240813\]
 
 [^fn1]: A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this \[short video\](https://www.youtube.com/watch?v=WGCaK-N2dsA) to learn more.
 

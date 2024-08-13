@@ -461,7 +461,7 @@ def my_replace(s, old, new):
             new_s = new_s + new
             i += j
         else:
-            new_s = new_s + s[i]
+            new_s = new_s + s[i:i+1]
             i += 1
 
     return new_s

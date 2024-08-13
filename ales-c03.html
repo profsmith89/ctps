@@ -202,6 +202,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
 
 
@@ -382,6 +383,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-namespaces">ALE 3.7: Imports and namespaces?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
 </ul>
 
             </nav>
@@ -693,7 +695,7 @@ document.write(`
 <span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
 <span class="linenos">10</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
 <span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="linenos">14</span>
 <span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
@@ -717,7 +719,59 @@ document.write(`
 <span class="linenos">33</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>[Version 20240806]</p>
+</section>
+<section id="ale-3-10-concatenating-lists-or-slicing-produces-sequences">
+<h1>ALE 3.10: Concatenating lists (or slicing produces sequences)<a class="headerlink" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences" title="Permalink to this heading">#</a></h1>
+<p>There’s another head-scratching implementation detail in <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> (first defined in <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>) that you may have noticed: Why is <code class="docutils literal notranslate"><span class="pre">s[i:i+1]</span></code> added to the end of the growing <code class="docutils literal notranslate"><span class="pre">new_s</span></code> instead of the simpler <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> (line 12 in <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>)?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace7.py</span>
+<span class="linenos"> 2</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
+<span class="linenos"> 4</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
+<span class="linenos"> 5</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
+<span class="linenos">10</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">j</span>
+<span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
+</pre></div>
+</div>
+<p>The else-block inside the while-loop above executes when the substring starting at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code> doesn’t match the substring we wish to replace (i.e., <code class="docutils literal notranslate"><span class="pre">old</span></code>). When this is true, the algorithm wants to take the sequence element at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code> and concatenate it to the end of <code class="docutils literal notranslate"><span class="pre">new_s</span></code>.</p>
+<p>You might think that <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">s[i:i+1]</span></code> always produce the same result, since both operations seem to say, “Please give me the item at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code> and nothing more.” But they don’t. Let’s see this with two simple examples.</p>
+<p><strong>Step 1.</strong> Let’s start with a string, which we know acts like a sequence. In the interactive Python interpreter, try the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Python is fun&#39;</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">3</span><span class="go">&#39;y&#39;</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">5</span><span class="go">&#39;y&#39;</span>
+</pre></div>
+</div>
+<p>When our sequence object is a string, <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> yields the same result as <code class="docutils literal notranslate"><span class="pre">s[i:i+1]</span></code>. This means that <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> could use <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> if <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> was ever to only operate on strings. Go ahead and try changing line 12 in <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code>, whose <code class="docutils literal notranslate"><span class="pre">main</span></code> function only calls <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with strings.</p>
+<p><strong>Step 2.</strong> Now let’s experiment with lists, which is the other type on which we’d like <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> to work. Again in the interactive Python interpreter, try the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">3</span><span class="go">3</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">5</span><span class="go">[3]</span>
+</pre></div>
+</div>
+<p>When our sequence object is a list, <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> returns <em>the object</em> stored at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code>, but <code class="docutils literal notranslate"><span class="pre">s[i:i+1]</span></code> returns <em>a list</em> containing only the object stored at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code>. This means that we cannot use <code class="docutils literal notranslate"><span class="pre">s[i]</span></code> on line 12 in <code class="docutils literal notranslate"><span class="pre">replace7.py</span></code> if <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> is to operate on lists and strings. Go ahead and try it—you’ll a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> saying that you cannot concatenate an integer to a list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="linenos">3</span><span class="gt">Traceback (most recent call last):</span>
+<span class="linenos">4</span>  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="linenos">5</span><span class="gr">IndexError</span>: <span class="n">list index out of range</span>
+<span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="linenos">7</span><span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<p>Try changing line 14 in <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> and then run it. This script’s <code class="docutils literal notranslate"><span class="pre">main</span></code> function calls <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with both strings and lists, and it will fail to complete successfully.</p>
+<p>The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.</p>
+<p>[Version 20240813]</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -797,6 +851,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-7-imports-and-namespaces">ALE 3.7: Imports and namespaces?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
 </ul>
 
   </nav></div>
