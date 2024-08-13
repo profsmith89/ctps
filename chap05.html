@@ -202,6 +202,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="ales-c04.html">Chapter 4</a></li>
 
 
@@ -433,7 +434,7 @@ document.write(`
 <p>The core of this game is generating a secret number, and if we can figure out how to do that in Python, we can probably build the rest of the game based on stuff we’ve already learned (i.e., using loops and conditionals). Given our recent mentions about randomness, you’ve probably guessed that having a computer “think” of a number means that it should randomly select one within a given range. As we have experienced lately, the Python library often has exactly the functionality we need, and it is true once again. We simply need to import <a class="reference external" href="https://docs.python.org/3/library/random.html">the <code class="docutils literal notranslate"><span class="pre">random</span></code> library</a> and invoke its <code class="docutils literal notranslate"><span class="pre">randint</span></code> function, specifying the range we desire.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Run the following code block and try changing the parameters to the function on line 2. You can develop your script using the frame in <code class="docutils literal notranslate"><span class="pre">guess.py</span></code>.</p>
+<p>Run the following code block and try changing the parameters to the <code class="docutils literal notranslate"><span class="pre">randint</span></code> function. You should eventually move the <code class="docutils literal notranslate"><span class="pre">import</span></code> and <code class="docutils literal notranslate"><span class="pre">randint</span></code> statements into <code class="docutils literal notranslate"><span class="pre">guess.py</span></code>, where you’ll build our game.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap05/guess.py</span>
 <span class="linenos">2</span><span class="kn">import</span> <span class="nn">random</span> 
@@ -449,13 +450,14 @@ document.write(`
 </div>
 <p>In any single turn of this simple game, the player makes a guess and the computer checks this guess against its secret number. We might write down this idea using the following pseudocode:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
-<span class="linenos">10</span><span class="c1"># Check guess against the secret</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1"># Check guess against the secret</span>
 </pre></div>
 </div>
 <p>Is this all we need to do in a turn? No, this game wouldn’t be much fun if we didn’t let the player know the result of our comparison. Let’s fix that as we convert the pseudocode into Python.</p>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Don’t peek at the next code block, and try to write Python statements that implement line 2 in the previous code block. Make sure to print what you learn from your checks! You’ve seen, in previous chapters, all the Python that’s required.</p>
+<p>Don’t peek at the next code block, and try to write Python statements that implement line 11 in the previous code block. Make sure to print what you learn from your checks! You’ve seen, in previous chapters, all the Python that’s required.</p>
 </div>
 <p>To push the answer down a bit, I’ll take a moment to explain that I’ve tried to make as many of this chapter’s code blocks runnable without errors as possible, but you should be aware of a few things:</p>
 <ol class="arabic simple">
@@ -463,7 +465,7 @@ document.write(`
 <li><p>More often, a code block fails because I’m demonstrating a common error (e.g., the need for a type conversion, as I illustrate in our first attempt to grab a player’s guess). I explicitly call these instances out in the text.</p></li>
 <li><p>Toward the middle of the chapter we begin writing client and server scripts, and you should know that it doesn’t make much sense to run a client script without the server script also running—they need to communicate! Don’t attempt to run any of the individual client and server scripts. This chapter’s final section titled “Run it!” provides you with instructions on how to run client and server scripts together.</p></li>
 </ol>
-<p>And now a set of Python statements that implement the pseudocode in line 2 above. It doesn’t matter which two conditions you check and in what order as long as you handle all three.</p>
+<p>And now a set of Python statements that implement the pseudocode in line 11 above. It doesn’t matter which two conditions you check and in what order as long as you handle all three.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1"># Grab the player&#39;s guess</span>
 <span class="linenos">10</span>
 <span class="linenos">11</span><span class="c1"># Check guess against the secret</span>
@@ -491,7 +493,7 @@ document.write(`
 <span class="linenos">18</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Run the earlier code block that defined <code class="docutils literal notranslate"><span class="pre">secret</span></code> and then the code block above (or run <code class="docutils literal notranslate"><span class="pre">script.py</span></code> where you’ve placed these two code blocks). You’ll find that the comparison between <code class="docutils literal notranslate"><span class="pre">guess</span></code> and <code class="docutils literal notranslate"><span class="pre">secret</span></code> fails with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>Run the earlier code block that defined <code class="docutils literal notranslate"><span class="pre">secret</span></code> and then the code block above (or run <code class="docutils literal notranslate"><span class="pre">guess.py</span></code> where you’ve placed these two code blocks). You’ll find that the comparison between <code class="docutils literal notranslate"><span class="pre">guess</span></code> and <code class="docutils literal notranslate"><span class="pre">secret</span></code> fails with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <p>If you review <a class="reference external" href="https://docs.python.org/3/library/functions.html#input">the documentation for <code class="docutils literal notranslate"><span class="pre">input</span></code></a>, you’ll read that this function takes everything on the line typed by the player, except for the trailing newline character, and converts it to a string object. This means that our if-statements asked the Python interpreter to compare a string object (<code class="docutils literal notranslate"><span class="pre">guess</span></code>) against an integer object (<code class="docutils literal notranslate"><span class="pre">secret</span></code>). Such a comparison raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> exception because it makes no sense to compare these two things. The Python interpreter has no idea what you want it to do.</p>
 <p>No big deal. We simply need to convert something like <code class="docutils literal notranslate"><span class="pre">'42'</span></code> into <code class="docutils literal notranslate"><span class="pre">42</span></code>. The first is a string representation of a number, but the interpreter doesn’t know that. It simply knows that <code class="docutils literal notranslate"><span class="pre">'42'</span></code> is a string of characters.</p>
 <p>We can convert a string representing a number into an integer using Python’s built-in function <code class="docutils literal notranslate"><span class="pre">int</span></code>. We don’t need the string returned by <code class="docutils literal notranslate"><span class="pre">input</span></code> for any reason other than passing it to <code class="docutils literal notranslate"><span class="pre">int</span></code>, and so let’s pass it directly. The following code block does this, and it executes without an error.</p>
@@ -534,7 +536,7 @@ document.write(`
 <li><p>If <code class="docutils literal notranslate"><span class="pre">int</span></code> is unsuccessful and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception, the exception doesn’t terminate our script but redirects the interpreter to the code inside the except-clause, which prints a helpful message. Once this is done, we fall out of the try-except-statement and continues with the next iteration of the while-loop.</p></li>
 </ol>
 <p>Any statement within the try-block that raises an exception listed in the except-block will redirect the interpreter to the except-block. In later problems, we’ll change the kind of exception that our except-block catches.</p>
-<p>By catching exceptions like this, we save ourselves some difficult coding work and create a program that <em>fails gracefully</em>.<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.</p>
+<p>By catching exceptions like this, we save ourselves some difficult coding work<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> and create a program that <em>fails gracefully</em>. This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You <em>never</em> want to trust that the user provided your script with well-structured input. You should <em>always</em> have your script check that the user input is what you expect it to be. This is the first step in writing scripts with strong security guarantees. A try-except-statement wrapped in an infinite loop is just one design pattern that accomplishes this.</p>
@@ -755,7 +757,7 @@ document.write(`
 <span class="linenos">13</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
-<p>Our script specifies the hostname (<code class="docutils literal notranslate"><span class="pre">HOST</span></code>) as an IP address. Every computer connected to the Internet has an IP address, and to get started with our client and server scripts, we’re going to use a special one. The IP address <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> is recognized by most all networked machines as a way of saying you’re talking about the machine on which you’re logged in, which in computer parlance is called the <em>localhost</em>. Just as each of us has a name, we also know we’re talking about ourselves when we say “self.”</p>
+<p>Our script specifies the hostname (<code class="docutils literal notranslate"><span class="pre">HOST</span></code>) as an IP address. Every computer connected to the Internet has an IP address, and to get started with our client and server scripts, we’re going to use a special one. The IP address <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> is recognized by most networked machines as a way of saying you’re talking about the machine on which you’re logged in, which in computer parlance is called the <em>localhost</em>. Just as each of us has a name, we also know we’re talking about ourselves when we say “self.”</p>
 <p>You’ll also hear people talking about <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> as the <em>loopback address</em>. The idea is that we send out a message and it loops right back to us. By using this loopback address, we can run our client and server scripts on the same machine.</p>
 </section>
 <section id="sending-and-receiving-messages">
@@ -867,8 +869,8 @@ document.write(`
 <span class="linenos">16</span>
 <span class="linenos">17</span>    <span class="c1"># Send and receive messages through the connection</span>
 <span class="linenos">18</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
-<span class="linenos">19</span>        <span class="n">guess</span> <span class="o">=</span> <span class="c1"># recv guess from client</span>
-<span class="linenos">20</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="n">msg</span> <span class="o">=</span> <span class="c1"># recv guess from client</span>
+<span class="linenos">20</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 <span class="linenos">21</span>
 <span class="linenos">22</span>        <span class="c1"># Check guess against secret and respond</span>
 <span class="linenos">23</span>        <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
@@ -925,7 +927,7 @@ document.write(`
 </section>
 <section id="the-conversation">
 <p><strong>The conversation.</strong> The returned socket (<code class="docutils literal notranslate"><span class="pre">conn2client</span></code>) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., <code class="docutils literal notranslate"><span class="pre">s</span></code> in our script) is how all clients reach the server to request a connection. When the server accepts a client’s connection, it converses with it through a separate socket (our <code class="docutils literal notranslate"><span class="pre">conn2client</span></code>), which is dedicated to that client’s conversation. This separation of tasks is a very powerful problem-solving technique!</p>
-<p>In our completed server script, we’ll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Inside this with-statement’s body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">conn2client.sendall</span></code>. It then awaits the next guess.</p>
+<p>In our completed server script, we’ll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Inside this with-statement’s body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a message containing a guess.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using <code class="docutils literal notranslate"><span class="pre">conn2client.sendall</span></code>. It then awaits the next guess.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess-server.py</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
@@ -949,10 +951,10 @@ document.write(`
 <span class="linenos">21</span>            <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="linenos">22</span>
 <span class="linenos">23</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
-<span class="linenos">24</span>                <span class="n">guess</span> <span class="o">=</span> <span class="n">conn2client</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
-<span class="linenos">25</span>                <span class="k">if</span> <span class="ow">not</span> <span class="n">guess</span><span class="p">:</span>
+<span class="linenos">24</span>                <span class="n">msg</span> <span class="o">=</span> <span class="n">conn2client</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="linenos">25</span>                <span class="k">if</span> <span class="n">msg</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">26</span>                    <span class="k">break</span>
-<span class="linenos">27</span>                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+<span class="linenos">27</span>                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 <span class="linenos">28</span>
 <span class="linenos">29</span>                <span class="c1"># Check guess against secret and respond</span>
 <span class="linenos">30</span>                <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
@@ -968,7 +970,7 @@ document.write(`
 <span class="linenos">40</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn2client</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
+<p>When is the server done with the <code class="docutils literal notranslate"><span class="pre">conn2client</span></code> socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.<a class="footnote-reference brackets" href="#fn12" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.</p>
 </section>
 <section id="programmer-beware">
 <p><strong>Programmer beware.</strong> The steps we took to establish a connection between the client and server can fail in many ways, and if we were writing production scripts, we’d want to write them to catch and gracefully handle all these errors. When we bypass this important work and assume everything proceeds smoothly, our server script needs to handle only one networking condition: client disconnects.</p>
@@ -978,25 +980,32 @@ document.write(`
 <section id="run-it">
 <p><strong>Run it!</strong> Are you ready to try running our client and server scripts? It’s a bit more complicated than running a single script but not terribly much. If you’re running with an IDE, follow either the first or second option below:</p>
 <ul class="simple">
-<li><p>IDE Option 1: A simplest approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell <em>before</em> the client script in the other. When the client script terminates, the server script should automatically terminate too.</p></li>
-<li><p>IDE Option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like this:</p></li>
+<li><p>IDE Option 1: The simplest (and my recommended) approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell <em>before</em> the client script in the other. When the client script terminates, the server script should automatically terminate too.</p></li>
+<li><p>IDE Option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like following transcript. Line 2 is the <em>job number</em> and <em>process ID</em> given to the running <code class="docutils literal notranslate"><span class="pre">guess-server</span></code> by the shell; yours will be different. Line 3 is the shell giving us the next prompt mashed together with the status print I included in the server script; the shell and the server are both writing to the terminal. You could type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">guess-client.py</span></code> right on line 4, but I hit return to get an unobscured shell prompt and then start the client. The client is now running, but so is the server, and both of these processes write something to the terminal.<a class="footnote-reference brackets" href="#fn13" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> Since our code to grab a player’s guess is resilient, I again hit return to get a clean prompt from the client. You can now see why I recommend Option 1, which gives the server and client their own terminal windows in which they output text.</p></li>
 </ul>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Commands to run in a shell; NOT a Python script
-$ python3 guess-server.py &amp;
-$ python3 guess-client.py
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>chap05$ python3 guess-server.py &amp;
+<span class="linenos"> 2</span>[1] 10440
+<span class="linenos"> 3</span>chap05$ GUESS-THE-NUMBER server started. Listening on (&#39;127.0.0.1&#39;, 65432)
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>chap05$ python3 guess-client.py 
+<span class="linenos"> 6</span>## Welcome to GUESS THE NUMBER! ##
+<span class="linenos"> 7</span>Please input your guess: Connected by (&#39;127.0.0.1&#39;, 51049)
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>Guesses must be an integer. Try again...
+<span class="linenos">10</span>Please input your guess:
 </pre></div>
 </div>
-<p>If you’re running this chapter’s scripts as code blocks in an interactive Python notebook, you’ll want to use the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.<a class="footnote-reference brackets" href="#fn12" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> Here’s what you do:</p>
+<p>If you’re running this chapter’s scripts as code blocks in an interactive Python notebook, you’ll want to use the magic of the exclamation-point escape and the Unix <code class="docutils literal notranslate"><span class="pre">nohup</span></code> command.<a class="footnote-reference brackets" href="#fn14" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> Here’s what you do:</p>
 <ol class="arabic simple">
-<li><p>Upload <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> into your notebook session.</p></li>
+<li><p>Upload <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> and <code class="docutils literal notranslate"><span class="pre">socket32.py</span></code> into your notebook session.</p></li>
 <li><p>Create a code block like the one below and run it. It’ll start <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> in background. An exclamation point (<code class="docutils literal notranslate"><span class="pre">!</span></code>) in the first column of a code block tells the Python interpreter to pass the rest of the line to the shell.</p></li>
-<li><p>Finally, copy the <code class="docutils literal notranslate"><span class="pre">main</span></code> function from <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> into a code block and run it. You’ve effectively done what I called “IDE Option 2” above but inside an interactive Python notebook.</p></li>
+<li><p>Finally, copy the <code class="docutils literal notranslate"><span class="pre">main</span></code> function from <code class="docutils literal notranslate"><span class="pre">guess-client.py</span></code> into a code block and run it. You’ve effectively done what I called “IDE Option 2” above but inside an interactive Python notebook. Since separate code blocks don’t share where they put their output, you won’t see the interleaving mess I described above.</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!nohup python3 guess-server.py &amp;
 </pre></div>
 </div>
 <p>In each of these approaches, we’re not really using the network. Remember that we’re running these two scripts with the loopback interface, but we can’t easily tell that without looking at the code. Again, abstraction at work!</p>
-<p>[Version 20240719]</p>
+<p>[Version 20240813]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -1040,10 +1049,18 @@ $ python3 guess-client.py
 </aside>
 <aside class="footnote brackets" id="fn11" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
-<p>If the server breaks the connection before the client, the connection won’t be shut down properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
+<p>Line 24 of `guess-server.py` names the object returned from `conn2client.recv` call `msg`. This object is a string, and if it is the empty string, the server knows that the client has hung up and it ends the message processing loop. If the message isn’t the empty string, the server converts the message, which should be a string in an integer suit in this game, into an integer to compare it against the secret number. In other server scripts, line 27 might be more complicated depending on the message structure.</p>
 </aside>
 <aside class="footnote brackets" id="fn12" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">12</a><span class="fn-bracket">]</span></span>
+<p>If the server breaks the connection before the client, the connection won’t be shut down properly and you’ll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can’t immediately run your next test.</p>
+</aside>
+<aside class="footnote brackets" id="fn13" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">13</a><span class="fn-bracket">]</span></span>
+<p>The interleaving of the output that you see might look different since we cannot predict the way a machine will run two independent processes. Our machines are constantly running a small part of one program and then switching to run a small part of another, which makes it look like the machine is running them all at the same time—look up <em>timesharing</em> to learn more. To avoid this unpredictability, I carefully constructed the sequence diagram for this game to have the client and server alternate in sending messages (i.e., there’s never any confusion about which should be talking and which should be listening).</p>
+</aside>
+<aside class="footnote brackets" id="fn14" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">14</a><span class="fn-bracket">]</span></span>
 <p>The nohup command is an infrequently used command that stands for “no hang up.” Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user’s running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won’t block us from running other code cells.</p>
 </aside>
 </section>

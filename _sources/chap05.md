@@ -33,7 +33,7 @@ Let's build an extremely simple game involving randomness. This game will have t
 The core of this game is generating a secret number, and if we can figure out how to do that in Python, we can probably build the rest of the game based on stuff we've already learned (i.e., using loops and conditionals). Given our recent mentions about randomness, you've probably guessed that having a computer "think" of a number means that it should randomly select one within a given range. As we have experienced lately, the Python library often has exactly the functionality we need, and it is true once again. We simply need to import [the `random` library](https://docs.python.org/3/library/random.html) and invoke its `randint` function, specifying the range we desire.
 
 ```{admonition} You Try It
-Run the following code block and try changing the parameters to the function on line 2. You can develop your script using the frame in `guess.py`.
+Run the following code block and try changing the parameters to the `randint` function. You should eventually move the `import` and `randint` statements into `guess.py`, where you'll build our game.
 ```
 
 ```{code-block} python
@@ -60,13 +60,14 @@ In any single turn of this simple game, the player makes a guess and the compute
 lineno-start: 9
 ---
 # Grab the player's guess
+
 # Check guess against the secret
 ```
 
 Is this all we need to do in a turn? No, this game wouldn't be much fun if we didn't let the player know the result of our comparison. Let's fix that as we convert the pseudocode into Python.
 
 ```{admonition} You Try It
-Don't peek at the next code block, and try to write Python statements that implement line 2 in the previous code block. Make sure to print what you learn from your checks! You've seen, in previous chapters, all the Python that's required.
+Don't peek at the next code block, and try to write Python statements that implement line 11 in the previous code block. Make sure to print what you learn from your checks! You've seen, in previous chapters, all the Python that's required.
 ```
 
 To push the answer down a bit, I'll take a moment to explain that I've tried to make as many of this chapter's code blocks runnable without errors as possible, but you should be aware of a few things:
@@ -75,7 +76,7 @@ To push the answer down a bit, I'll take a moment to explain that I've tried to 
 2. More often, a code block fails because I'm demonstrating a common error (e.g., the need for a type conversion, as I illustrate in our first attempt to grab a player's guess). I explicitly call these instances out in the text.
 3. Toward the middle of the chapter we begin writing client and server scripts, and you should know that it doesn't make much sense to run a client script without the server script also running---they need to communicate! Don't attempt to run any of the individual client and server scripts. This chapter's final section titled "Run it!" provides you with instructions on how to run client and server scripts together.
 
-And now a set of Python statements that implement the pseudocode in line 2 above. It doesn't matter which two conditions you check and in what order as long as you handle all three.
+And now a set of Python statements that implement the pseudocode in line 11 above. It doesn't matter which two conditions you check and in what order as long as you handle all three.
 
 ```{code-block} python
 ---
@@ -114,7 +115,7 @@ else:
     print('Too big!')
 ```
 
-Run the earlier code block that defined `secret` and then the code block above (or run `script.py` where you've placed these two code blocks). You'll find that the comparison between `guess` and `secret` fails with a `TypeError`. 
+Run the earlier code block that defined `secret` and then the code block above (or run `guess.py` where you've placed these two code blocks). You'll find that the comparison between `guess` and `secret` fails with a `TypeError`. 
 
 If you review [the documentation for `input`](https://docs.python.org/3/library/functions.html#input), you'll read that this function takes everything on the line typed by the player, except for the trailing newline character, and converts it to a string object. This means that our if-statements asked the Python interpreter to compare a string object (`guess`) against an integer object (`secret`). Such a comparison raises a `TypeError` exception because it makes no sense to compare these two things. The Python interpreter has no idea what you want it to do.
 
@@ -178,7 +179,7 @@ How does this new statement work? There are two cases to consider:
 
 Any statement within the try-block that raises an exception listed in the except-block will redirect the interpreter to the except-block. In later problems, we'll change the kind of exception that our except-block catches.
 
-By catching exceptions like this, we save ourselves some difficult coding work and create a program that *fails gracefully*.[^fn2] This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.
+By catching exceptions like this, we save ourselves some difficult coding work[^fn2] and create a program that *fails gracefully*. This phrase means that our script is: (1) resilient to poorly structured inputs; (2) able to give the user more than one attempt at making the input well-structured; and (3) more helpful than a typical Python exception message in telling the user what went wrong.
 
 ```{tip}
 You _never_ want to trust that the user provided your script with well-structured input. You should _always_ have your script check that the user input is what you expect it to be. This is the first step in writing scripts with strong security guarantees. A try-except-statement wrapped in an infinite loop is just one design pattern that accomplishes this.
@@ -452,7 +453,7 @@ def main():
         # REST OF SCRIPT
 ```
 
-Our script specifies the hostname (`HOST`) as an IP address. Every computer connected to the Internet has an IP address, and to get started with our client and server scripts, we're going to use a special one. The IP address `127.0.0.1` is recognized by most all networked machines as a way of saying you're talking about the machine on which you're logged in, which in computer parlance is called the *localhost*. Just as each of us has a name, we also know we're talking about ourselves when we say "self."
+Our script specifies the hostname (`HOST`) as an IP address. Every computer connected to the Internet has an IP address, and to get started with our client and server scripts, we're going to use a special one. The IP address `127.0.0.1` is recognized by most networked machines as a way of saying you're talking about the machine on which you're logged in, which in computer parlance is called the *localhost*. Just as each of us has a name, we also know we're talking about ourselves when we say "self."
 
 You'll also hear people talking about `127.0.0.1` as the *loopback address*. The idea is that we send out a message and it loops right back to us. By using this loopback address, we can run our client and server scripts on the same machine.
 
@@ -590,8 +591,8 @@ with create_new_socket() as s:
 
     # Send and receive messages through the connection
     while True:   # message processing loop
-        guess = # recv guess from client
-        guess = int(guess)
+        msg = # recv guess from client
+        guess = int(msg)
 
         # Check guess against secret and respond
         if guess < secret:
@@ -661,7 +662,7 @@ def main():
 
 The returned socket (`conn2client`) is the one that the server will use to communicate with the client. By creating a new socket for each accepted connection, the server can serve multiple clients simultaneously. The original socket (i.e., `s` in our script) is how all clients reach the server to request a connection. When the server accepts a client's connection, it converses with it through a separate socket (our `conn2client`), which is dedicated to that client's conversation. This separation of tasks is a very powerful problem-solving technique!
 
-In our completed server script, we'll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.[^fn10] Inside this with-statement's body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a guess. Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using `conn2client.sendall`. It then awaits the next guess.
+In our completed server script, we'll operate on this new socket inside a with-statement (line 19) so that it is properly closed when the server is done with it.[^fn10] Inside this with-statement's body, we generate a secret for this client connection and slip into an infinite loop, in which the server waits for the client to send a message containing a guess.[^fn11] Once received, the server compares the guess against its secret. Depending on the result of this comparison, the server sends an appropriate response using `conn2client.sendall`. It then awaits the next guess.
 
 ```{code-block} python
 ---
@@ -690,10 +691,10 @@ def main():
             secret = random.randint(1, 100)
 
             while True:   # message processing loop
-                guess = conn2client.recv()
-                if not guess:
+                msg = conn2client.recv()
+                if msg == '':
                     break
-                guess = int(guess)
+                guess = int(msg)
 
                 # Check guess against secret and respond
                 if guess < secret:
@@ -709,7 +710,7 @@ if __name__ == '__main__':
     main()
 ```
 
-When is the server done with the `conn2client` socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.[^fn11] Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.
+When is the server done with the `conn2client` socket? You might think that the server can sever the connection once the client guesses the secret number (i.e., at line 33), but that would lead to a networking problem.[^fn12] Stay true to the server-managing-a-resource imagery and have the server wait until the client disconnects, as I describe next.
 
 ## Programmer beware
 
@@ -723,20 +724,30 @@ You might feel that there is a lot of networking setup for the server in our sim
 
 Are you ready to try running our client and server scripts? It's a bit more complicated than running a single script but not terribly much. If you're running with an IDE, follow either the first or second option below:
 
-* IDE Option 1: A simplest approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell *before* the client script in the other. When the client script terminates, the server script should automatically terminate too.
-* IDE Option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like this:
+* IDE Option 1: The simplest (and my recommended) approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell *before* the client script in the other. When the client script terminates, the server script should automatically terminate too.
+* IDE Option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script in background (i.e., by appending an ampersand to the command). Then run the client script. It would look something like following transcript. Line 2 is the *job number* and *process ID* given to the running `guess-server` by the shell; yours will be different. Line 3 is the shell giving us the next prompt mashed together with the status print I included in the server script; the shell and the server are both writing to the terminal. You could type `python3 guess-client.py` right on line 4, but I hit return to get an unobscured shell prompt and then start the client. The client is now running, but so is the server, and both of these processes write something to the terminal.[^fn13] Since our code to grab a player's guess is resilient, I again hit return to get a clean prompt from the client. You can now see why I recommend Option 1, which gives the server and client their own terminal windows in which they output text.
 
 ```{code-block} none
-### Commands to run in a shell; NOT a Python script
-$ python3 guess-server.py &
-$ python3 guess-client.py
+---
+lineno-start: 1
+---
+chap05$ python3 guess-server.py &
+[1] 10440
+chap05$ GUESS-THE-NUMBER server started. Listening on ('127.0.0.1', 65432)
+
+chap05$ python3 guess-client.py 
+## Welcome to GUESS THE NUMBER! ##
+Please input your guess: Connected by ('127.0.0.1', 51049)
+
+Guesses must be an integer. Try again...
+Please input your guess:
 ```
 
-If you're running this chapter's scripts as code blocks in an interactive Python notebook, you'll want to use the magic of the exclamation-point escape and the Unix `nohup` command.[^fn12] Here's what you do:
+If you're running this chapter's scripts as code blocks in an interactive Python notebook, you'll want to use the magic of the exclamation-point escape and the Unix `nohup` command.[^fn14] Here's what you do:
 
-1. Upload `guess-server.py` into your notebook session.
+1. Upload `guess-server.py` and `socket32.py` into your notebook session.
 2. Create a code block like the one below and run it. It'll start `guess-server.py` in background. An exclamation point (`!`) in the first column of a code block tells the Python interpreter to pass the rest of the line to the shell.
-3. Finally, copy the `main` function from `guess-client.py` into a code block and run it. You've effectively done what I called "IDE Option 2" above but inside an interactive Python notebook.
+3. Finally, copy the `main` function from `guess-client.py` into a code block and run it. You've effectively done what I called "IDE Option 2" above but inside an interactive Python notebook. Since separate code blocks don't share where they put their output, you won't see the interleaving mess I described above.
 
 ```{code-block} none
 !nohup python3 guess-server.py &
@@ -744,7 +755,7 @@ If you're running this chapter's scripts as code blocks in an interactive Python
 
 In each of these approaches, we're not really using the network. Remember that we're running these two scripts with the loopback interface, but we can't easily tell that without looking at the code. Again, abstraction at work!
 
-\[Version 20240719\]
+\[Version 20240813\]
 
 [^fn1]: Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.
 
@@ -766,6 +777,10 @@ In each of these approaches, we're not really using the network. Remember that w
 
 [^fn10]: There is no as-clause in the with-statement on line 19 because we previously created and named the object whose lifetime ends when the with-block is exited.
 
-[^fn11]: If the server breaks the connection before the client, the connection won't be shut down properly and you'll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can't immediately run your next test.
+[^fn11]: Line 24 of \`guess-server.py\` names the object returned from \`conn2client.recv\` call \`msg\`. This object is a string, and if it is the empty string, the server knows that the client has hung up and it ends the message processing loop. If the message isn't the empty string, the server converts the message, which should be a string in an integer suit in this game, into an integer to compare it against the secret number. In other server scripts, line 27 might be more complicated depending on the message structure.
 
-[^fn12]: The nohup command is an infrequently used command that stands for "no hang up." Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user's running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won't block us from running other code cells.
+[^fn12]: If the server breaks the connection before the client, the connection won't be shut down properly and you'll have to wait for the operating system to timeout a bunch of networking resources. No big deal, but it is annoying when you can't immediately run your next test.
+
+[^fn13]: The interleaving of the output that you see might look different since we cannot predict the way a machine will run two independent processes. Our machines are constantly running a small part of one program and then switching to run a small part of another, which makes it look like the machine is running them all at the same time---look up *timesharing* to learn more. To avoid this unpredictability, I carefully constructed the sequence diagram for this game to have the client and server alternate in sending messages (i.e., there's never any confusion about which should be talking and which should be listening).
+
+[^fn14]: The nohup command is an infrequently used command that stands for "no hang up." Hang up is a term that Unix-like systems use to indicate that the user has logged out. At logout, all of a user's running programs are sent a hangup (HUP) signal, and typically programs end when they receive it. The nohup command says to ignore the HUP signal. The combination of nohup with a script launched in the background guarantees that the command won't block us from running other code cells.
