@@ -33,7 +33,7 @@ As you've experienced, a module and its API simplifies the work we need to do in
 
 ## A new problem
 
-To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in my local library? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in Harvard Library's miles of bookshelves.
+To date, we've affirmatively answered some simple questions: Can I write a program that converts a book into a theatrical script? Can I write a function that replaces a subsequence of a string with a different subsequence? Here's another seemingly simple question: Can I write a program to check if a book exists in my local library? Maybe I want to know if there's a copy of Dr. Seuss's *The Cat in the Hat* somewhere in Harvard Library's miles of bookshelves.
 
 We all know how to do this work ourselves. We'd simply look up the book's title in the library's card catalog. At Harvard, what used to be a physically imposing room full of cabinets with drawers of index cards[^fn1] is now an online resource called [HOLLIS](https://library.harvard.edu/services-tools/hollis). So, my question really is: Can I write a script that sends a query from my computer to some computer running HOLLIS? And I had better know how to craft a query that the computer running HOLLIS will understand, and my program had better be able to interpret whatever response it gets back.
 
@@ -87,12 +87,12 @@ if __name__ == '__main__':
     main()
 ```
 
-This script uses Python's `requests` library, which is described as "[an elegant and simple HTTP library for Python, built for human beings."](https://requests.readthedocs.io/en/master/) This library is not part of Python's standard library, and you may have to follow a few steps explained in the library's documentation to get it installed on your machine. Once installed, the API provided by this library makes it very simple to complete the middle two steps of our pseudocode, as illustrated by the single `requests.get` call on line 13.
+This script uses Python's `requests` library, which is described as "[an elegant and simple HTTP library for Python, built for human beings."](https://requests.readthedocs.io/en/master/) This library is not part of Python's standard library, and you may have to follow a few steps explained in the library's documentation to get it installed for your use. Once installed, the API provided by this library makes it very simple to complete the middle two steps of our pseudocode, as illustrated by the single `requests.get` call on line 13.
 
-This call and its returned result hide all the hard and confusing parts of communicating across whatever network is connected to your computer. Lines 8-9 do a small amount of string-processing work to set up the parameter to this call (lines 8-9). Lines 16-19 inspect the object returned by `requests.get` to determine whether Wikipedia understood our question.
+This call and its returned result hide all the hard and confusing parts of communicating across whatever network is connected to your computer. Lines 8-9 do a small amount of string-processing work to set up the parameter to this call.[^fn3] Lines 16-19 inspect the object returned by `requests.get` to determine whether Wikipedia understood our question.
 
 ```{admonition} You Try It
-Run the `qweb1.py` and it will respond that it successfully talked to a Wikipedia server. You may need to install the `requests` package in your IDE.
+Run the `qweb1.py` and it will respond that it successfully talked to a Wikipedia server. You may need to install the `requests` package.
 ```
 
 ## The client-server programming model
@@ -104,12 +104,12 @@ We have written a script that acts as a *client* in this client-server model. To
 ```{figure} images/c04_fig1.png
 :name: c04_fig1_ref
 
-Two examples of the client-server programming model. The left-hand picture shows the client and server processes on two separate computers connected by a network. The right-hand picture shows the client and server processes on the same machine. The model abstracts aways this distinction, which means the same script handles both cases.
+Two examples of the client-server programming model. The left-hand picture shows the client and server processes on two separate computers, which perform interprocess communication over a network. The right-hand picture shows the client and server processes on the same machine; later chapters will discuss how we can perform interprocess communication in this configuration. The model abstracts aways this distinction, which means the same script handles both cases.
 ```
 
 {numref}`Figure %s<c04_fig1_ref>` illustrates both of these cases. It is important to keep in mind that we're talking about a script that becomes a running program when we talk about clients and (in next chapter) servers. While you might hear someone point to a computer and say that it is their server, they probably mean that they have reserved this computer to run one or more server programs that respond to the requests of one or more client programs.
 
-By the way, the computer science term for a running program (or more precisely a running instance of a script) is a *process*, and when the client and server processes exchange information, it is called *interprocess communication*. Two processes sending data across a computer network is one form of interprocess communication.
+The computer science term for a running program (or more precisely a running instance of a script) is a *process*, and when the client and server processes exchange information, it is called *interprocess communication*. Two processes sending data across a computer network is one form of interprocess communication.
 
 Whether the client and server are running on two separate, networked computers or both on the same computer is a detail hidden by the abstraction of the client-server programming model. And when networks are involved, the model hides the details of whether it is a wired network, a wireless network, or some combination of networks using lots of different transport mechanisms and data exchange protocols!
 
@@ -174,7 +174,7 @@ Whenever possible, you should use HTTPS rather than HTTP to thwart someone snoop
 
 The next major piece of a URL is the *hostname* specified as an Internet Domain Name. If we want to communicate with a process on another machine, we have to be able to name that machine, and Internet Domain Names are a standardized way of doing just that. There's a whole interesting question of, given a valid hostname, how do you actually route messages through computer networks to the computer with that hostname, especially when that computer might be a mobile device that connects to different parts of a computer network at different times. We don't have to concern ourselves with this problem because it is hidden from us below the abstraction barrier, but you should realize that this is more complicated than putting a home address on an envelope, since most houses aren't mobile homes.
 
-The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we'd like. This path is specified in a form very similar to the paths we use in UNIX-like filesystems. This is not surprising since we are, in fact, specifying a file in the host's filesystem.[^fn3]
+The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we'd like. This path is specified in a form very similar to the filesystem paths we'll discuss in detail in Chapter 13. This is not surprising since we are, in fact, specifying a file in the host's filesystem.
 
 Finally, HTTP allows us to specify an optional query at the end of our URL. The question mark (`?`) separates the path from the query. The query itself is a string comprised of name and value pairs, with each pair separated by an ampersand (`&`) character.
 
@@ -478,7 +478,7 @@ And how would we change this to access the fifth character of the title string? 
 response.json()['query']['search'][0]['title'][4]
 ```
 
-While we will continue to play with JSON-structured response bodies, you may see (or desire) other types of responses. For instance, the default response format for the Harvard Library API is something that looks like JSON, but is actually another standard called XML. We can indicate to a Web API that we'd like a particular response encoding by changing the `Accept` value in the header. In other situations, we might want plain text (`text/html`) or an image (`image/jpeg`).
+While we will continue to play with JSON-structured response bodies, you may see (or desire) other types of responses. For instance, the default response format for the Harvard Library API is something that looks like JSON, but is actually another standard called XML. As we'll see in our next script (`qweb7.py`), we can indicate that we'd like a particular response encoding by changing the `Accept` value in the request header.
 
 ## Enumerating answers from HOLLIS
 
@@ -611,7 +611,7 @@ if __name__ == '__main__':
 ```
 
 ```{admonition} You Try It
-To run `qweb8.py`, you'll need an IDE that is running locally on your machine (i.e., not in the cloud) so that you can launch a window running a web browser. In running `qweb8.py`, be aware that it only checks the title you input against what HOLLIS considers the interesting part of the title. To match "The Cat in the Hat" you input "cat in the hat". You could extend `qweb8.py` with the title-printing logic in `qweb7.py`.
+To run `qweb8.py`, you'll need an IDE that is running locally on your machine (i.e., not in the cloud) so that you can launch a window running a web browser. To run `qweb8.py`, you should replace `safari` on line 55 with the appropriate name for the web browser on your machine. Also, be aware that the script only checks the title you input against what HOLLIS considers the interesting part of the title. To match "The Cat in the Hat" you input "cat in the hat". You could extend `qweb8.py` with the title-printing logic in `qweb7.py`.
 ```
 
 The script `qweb8.py` creates a function `h_lib` to hide the details of making a search query on HOLLIS. This should all look familiar except for the very end of the function, where we check for a response that contains no matches.
@@ -622,7 +622,7 @@ Think about how we'd do that using just a for-statement. We'd probably set a boo
 
 The for-else-statement does away with this flag in this exact use case. The if-statement in the for-loop contains the condition we'd like to find `True`, and when the if-statement's condition is `True`, we break out of the for-loop. This is exactly what we'd like to think about this loop doing. But what if this loop iterates all the way through because we never found our desired item. Here's where the else-clause of the for-statement executes, alerting us that we failed in our search. Now that, my friends, how you create a programming language feature for a common construct.
 
-And what did the script do when it found our desired book? It grabbed the HOLLIS URL for the book out of the matching record and launched a web browser (in this case, `Safari`) to display the resource at that URL. Did I have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the `webbrowser` library; I simply imported and used this library after spending only a few minutes with its API description.
+And what did the script do when it found our desired book? It grabbed the HOLLIS URL for the book out of the matching record and launched a web browser to display the resource at that URL. Did I have to know anything specific about the operation of web browsers? No! A wonderfully helpful individual created the `webbrowser` library; I simply imported and used this library after spending only a few minutes with its API description.
 
 ## Blocking and non-blocking function calls
 
@@ -632,13 +632,13 @@ Line 21 can't execute until we have completed the `requests.get` call and have a
 
 This is your first taste of *concurrency* (also called *parallelism*), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
 
-\[Version 20240716\]
+\[Version 20240813\]
 
 [^fn1]: In case you're interested, here's an article titled ["The Evolving Card Catalog" by Karen Coyle](https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/) (January 4, 2016).
 
 [^fn2]: In the next chapter, we will peek under the covers of this API, just as we did with string-replace. We'll also start solving problems that require more general communication between two networked computers. We won't, however, go too deep, and if you want to know exactly how computers communicate over wired and wireless networks, find yourself a book or course on computing networking.
 
-[^fn3]: We'll discuss filesystem paths and their form in detail in Chapter 13.
+[^fn3]: Line 9 uses Python's *formatted string literals*, which are called *f-strings* for short. By placing the letter \`f\` (or \`F\` if you prefer) before your string literal, you can embed one or more Python expressions in the string literal by surrounding them with curly braces (i.e., \`\{ \}\`). The string literal is built with the value of the expression at that location. See [Formatted String Literals in the Python documentation](https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings) for additional information.
 
 [^fn4]: Some other online API directories include: [Rapid API Hub](https://rapidapi.com/hub); [API list](https://apilist.fun/); and [Public APIs](https://github.com/public-apis/public-apis).
 
@@ -648,7 +648,7 @@ This is your first taste of *concurrency* (also called *parallelism*), and it is
 
 [^fn7]: You can learn more about multiple assignment in this chapter's active-learning exercises.
 
-[^fn8]: To communicate with the Harvard Library system, \`qweb7.py\` uses [the LibraryCloud API](https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs).
+[^fn8]: To communicate with the Harvard Library system, \`qweb7.py\` uses [the LibraryCloud API](https://wiki.harvard.edu/confluence/display/LibraryStaffDoc/LibraryCloud+APIs). At the time of this book's writing, \`qweb7.py\` successfully runs on Replit, but fails in the PythonAnywhere's environment (i.e., fails with a "403 Forbidden" HTTP status code, which means that the server understood the request but refused it). It isn't always easy to understand why a request fails.
 
 [^fn9]: You can learn more about tuples in this chapter's active-learning exercises.
 
