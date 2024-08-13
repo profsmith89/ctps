@@ -513,9 +513,9 @@ When our sequence object is a string, `s[i]` yields the same result as `s[i:i+1]
 lineno-start: 1
 ---
 >>> s = [1, 2, 3]
->>> s[3]
+>>> s[2]
 3
->>> s[3:4]
+>>> s[2:3]
 [3]
 ``` 
 
@@ -526,12 +526,12 @@ When our sequence object is a list, `s[i]` returns *the object* stored at index 
 lineno-start: 1
 ---
 >>> s = [1, 2, 3]
->>> s + s[3]
+>>> s + s[2]
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-IndexError: list index out of range
->>> s + s[3:4]
-[1, 2, 3]
+TypeError: can only concatenate list (not "int") to list
+>>> s + s[2:3]
+[1, 2, 3, 3]
 ``` 
 
 Try changing line 14 in `bookshelf1.py` and then run it. This script's `main` function calls `my_replace` with both strings and lists, and it will fail to complete successfully.
