@@ -66,13 +66,11 @@ Our computers have been programmed to do the same thing. When we double-click a 
 
 While this is normally what we want to happen, this outcome (i.e., a window containing an image) is the result of a program interpreting the contents of the image file. It doesn't tell us what is actually stored in that file.
 
-Let's try removing the hint and see what our computer does. In other words, make a copy of `cosmo.jpg` and name the copy `cosmo`. Now our computer can't use the file extension as a hint to determine what to do when opening the file. Next, let's ask Microsoft Visual Studio Code (or pretty much any IDE) to display the file `cosmo`. Visual Studio is a program that will display the image in the file if you ask it to open `cosmo.jpg`.
-
-When we double-click the file `cosmo`, Visual Studio pops an alert, which tells us that "The file is not displayed in the editor because it is either binary or uses an unsupported text encoding. Do you want to open it anyway?" Putting aside what Visual Studio means by "binary," we've learned about text encodings. Clearly Visual Studio peeked inside the file to see if it recognized the file as a text file in one of its known encodings. It didn't, but for fun, let's see what happens if it tries to interpret `cosmo` as a text file. Click "open it anyway."
+Let's try removing the hint and see what our computer does. In other words, make a copy of `cosmo.jpg` and name the copy `cosmo`. Now our computer can't use the file extension as a hint to determine what to do when opening the file. Next, let's ask Microsoft Visual Studio Code (VS Code) to display the file `cosmo`.[^fn3] When we double-click the file `cosmo`, VS Code pops an alert, which tells us that "The file is not displayed in the editor because it is either binary or uses an unsupported text encoding. Do you want to open it anyway?" Putting aside what VS Code means by "binary," we've learned about text encodings. Clearly VS Code peeked inside the file to see if it recognized the file as a text file in one of its known encodings. It didn't, but for fun, let's see what happens if it tries to interpret `cosmo` as a text file. Click "open it anyway."
 
 Yikes, this doesn't look anything like a text file ... because we know it isn't!
 
-Ok, but we don't want Visual Studio to use an incorrect interpretation, we want *no interpretation*. When you say such a thing to computer scientists, they'll reach for their favorite "hexdump" program. There's one with that name on most Unix-based systems, and there's an extension for Visual Studio that does that same work. Let's use it now.
+Ok, but we don't want VS Code to use an incorrect interpretation, we want *no interpretation*. When you say such a thing to computer scientists, they'll reach for their favorite "hexdump" program. There's one with that name on most Unix-based systems, and there's an extension for VS Code that does that same work. Let's use it now.
 
  
 
@@ -86,15 +84,15 @@ The start of the raw data in `cosmo.jpg`, as displayed by a hexdump program.
 
 {numref}`Figure %s<c06_fig2_ref>` shows the output of hexdump when it reads the file `cosmo.jpg`. The pairs of characters in the shaded 2-dimensional (2D) array in the middle of this figure are hexadecimal numbers corresponding to the contents of the file. Yes, the file contains nothing but lots and lots of numbers.
 
-The 8-digit numbers at the left and and 2-digit numbers at the top (also in hexadecimal) exist to make it straightforward for you to determine the index of any pair of digits in the central shaded box, when you think about the contents as a long 1-dimensional (1D) sequence of pairs. For example, the first pair of hexadecimal digits in the upper left-hand shaded corner is `FF`, and this pair is given offset `00000000` (i.e., the row number plus the column number). The next pair to the right (`D8`) is given the offset `00000001`. The last pair in the first row (`48`) has offset `0000000f`, and it is followed in the file by the first pair in the second row (`00`) at offset `00000010`. In other words, while hexdump prints the file contents as a 2D array, you should think of it as a long 1D array.
+The 8-digit numbers at the left and 2-digit numbers at the top (also in hexadecimal) exist to make it straightforward for you to determine the index of any pair of digits in the central shaded box, when you think about the contents as a long 1-dimensional (1D) sequence of pairs. For example, the first pair of hexadecimal digits in the upper left-hand shaded corner is `FF`, and this pair is given offset `00000000` (i.e., the row number plus the column number). The next pair to the right (`D8`) is given the offset `00000001`. The last pair in the first row (`48`) has offset `0000000f`, and it is followed in the file by the first pair in the second row (`00`) at offset `00000010`. In other words, while hexdump prints the file contents as a 2D array, you should think of it as a long 1D array.
 
-Finally, the characters to the right of the shaded box in {numref}`Figure %s<c06_fig2_ref>` are an ASCII interpretation of each pair in the shaded box. For instance, `D8` at offset `00000001` is the letter capital-X in the ASCII text encoding.
+Finally, the characters to the right of the shaded box in {numref}`Figure %s<c06_fig2_ref>` are an ASCII interpretation of each pair in the shaded box. For instance, `4A` at offset `00000006` is the letter capital-J in the ASCII text encoding.
 
 We can see that this isn't a normal text file, since most of the ASCII interpretations are the period character (`.`), which means that a pair is either: (1) really the ASCII encoding for the period character; (2) the ASCII encoding for a space character that hexdump prints as a period character; or (3) a numeric value not corresponding to any displayable ASCII character. The last case could, for example, be the ASCII value for the newline character, which we've expressed as `\n` in our scripts.
 
 ```{admonition} You Try It
 
-{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called metadata) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn3]
+{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called metadata) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn4]
 
 ```
 
@@ -110,7 +108,7 @@ You'll notice that the first ten of these symbols are the same ones we use every
 
 The second reason is simpler: Zero is a great place to start in counting if you realize that what comes before one of something is none of that thing! When we want to count something in code, we'll want to initialize our counting variable to 0. If you don't you'll be adding 1 to an unknown value in your counting variable!
 
-Back to hexadecimal. "Hexa-" is a combining form that means six, and so you can think of hexadecimal as a number system with "six more things than ten." What symbols are used for these six extra things? Well, we have run out of single digits, and so convention has us use the first six letters of the English alphabet: A, B, C, D, E, F.[^fn4]
+Back to hexadecimal. "Hexa-" is a combining form that means six, and so you can think of hexadecimal as a number system with "six more things than ten." What symbols are used for these six extra things? Well, we have run out of single digits, and so convention has us use the first six letters of the English alphabet: A, B, C, D, E, F.[^fn5]
 
 Our hexdump illustrates this way of counting in action. The first item in the hexdump sequence is `FF` and is accessed with the index `0`. The second is `D8` and is accessed with the index `1`. Those indices are the same in both decimal and hexadecimal, and they continue to be the same up through index `9` (the second instance of the item with value `46`). How we write the next index after `9` depends on which base we're using to count. Decimal is a base-10 system (i.e., it uses 10 symbols), while hexadecimal is a base-16 system (i.e., it uses 16 symbols). As such, the next item in the hexdump (i.e., the second `00` in the first shaded row) is index `10` in base-10 and `A` in base-16. The first item in the second row of the hexdump (`00` again) is index `16` in base-10 and `10` in base-16. And so forth.
 
@@ -124,7 +122,7 @@ Knowing this, what then do you think 10 is in base-16? Using the approach that h
 
 ```{admonition} You Try It
 
-What is the index, in hexadecimal, for the first occurrence of the value `1B` in the hexdump of `cosmo.jpg`? What is the decimal value of that index?[^fn5]
+What is the index, in hexadecimal, for the first occurrence of the value `1B` in the hexdump of `cosmo.jpg`? What is the decimal value of that index?[^fn6]
 
 ```
 
@@ -150,9 +148,9 @@ When you run the hex command, you'll see that the Python interpreter prepended t
 
 While we can see that the bunch of numbers saved in `cosmo.jpg` and then displayed as an image contains a dog, can the computer recognize that there's a dog in this sea of numbers? Short answer, yes, with the help of machine learning (ML), which we will discuss in Chapter 17. If you have a phone that unlocks with facial recognition, you're already using this technology in your daily life. For now, we can get an idea of how this works, and importantly learn that the work going on in the bowels of our computers is really nothing more than math on numbers. 
 
-To work with images, we are going to use a very handy library called `PIL`, [the Python Imaging Library](https://pillow.readthedocs.io/en/stable/handbook/overview.html). This library includes support for a wide range of file formats, including JPEG, and it allows us to write only a few lines of code to perform an extensive set of image processing tasks.
+To work with images, we are going to use a very handy library called PIL, [the Python Imaging Library](https://pillow.readthedocs.io/en/stable/handbook/overview.html). This library includes support for a wide range of file formats, including JPEG, and it allows us to write only a few lines of code to perform an extensive set of image processing tasks.
 
-For example, similar to what we did when we read the text files containing the story of *The Cat In Hat*, we will use the `Image.open` method to read the image data into an `Image` object, which I've named `im` in `edges.py`. After processing this image, our scripts will write out the new image to a file called `out.png` using the `Image.save` method. Feel free to change the filename and file extension; the extension tells the PIL library in which format to write. To see the resulting image, simply open the saved file as you would with any image file (e.g., double-click the file).
+For example, similar to what we did when we read the text files containing the story of *The Cat In Hat*, we will use the `Image.open` method to read the image data into an `Image` object, which I've named `im` in `edges.py`. After processing this image, our scripts will write out the new image to a file called `out.png` using the `Image.save` method. Feel free to change the filename and file extension; the extension tells the PIL in which format to write. To see the resulting image, simply open the saved file as you would with any image file (e.g., double-click the file).
 
 ```{code-block} python
 ---
@@ -163,13 +161,13 @@ from PIL import Image, ImageFilter
 
 imfile = input('Name of imagefile: ')
 
-with Image.open(imfile) as im:
+with Image.open('images/' + imfile) as im:
     # Apply a filter that detects edges
     filtered = im.filter(ImageFilter.CONTOUR)
     filtered.save('images/out.png')
 ```
 
-`Image` objects have a large number of methods we could invoke. To highlight the edges, or contours, of the things in an image, we apply a convolution filter.[^fn6]
+`Image` objects have a large number of methods we could invoke. To highlight the edges, or contours, of the things in an image, we apply a convolution filter.[^fn7]
 
 ```{admonition} You Try It
 Run `edges.py` and input `cosmo.jpg`. After the script has run, in `out.png` you'll see that the application of this filter (i.e., a mathematical transform of the numbers in `cosmo.jpg`) nicely outlines my dog.
@@ -177,7 +175,7 @@ Run `edges.py` and input `cosmo.jpg`. After the script has run, in `out.png` you
 
 ## Painting a picture
 
-To understand what took place when we ran a convolution filter, we are going to use the PIL library to build a very simple image that contains a single edge and then write a few lines of Python code to detect that edge. The script `edge1.py` gets us started.
+To understand what took place when we ran a convolution filter, we are going to use the PIL to build a very simple image that contains a single edge and then write a few lines of Python code to detect that edge. The script `edge1.py` gets us started.
 
 ```{code-block} python
 ---
@@ -189,7 +187,7 @@ from PIL import Image
 # Width and height of our image
 sz = (100, 100)
 
-# Create a single plane of black and white pixels, initialized to black
+# Create a single plane of grayscale pixels, initialized to black
 im = Image.new('L', sz)
 
 # Create direct access to the pixels in the image
@@ -204,9 +202,9 @@ for i in range(sz[0]):
 im.save('images/out.png')
 ```
 
-This script begins by creating a new `Image` object that contains a 2D array of size 100x100, as specified by the second parameter to the `Image.new` call.[^fn7] This 2D array is the canvas on which we'll paint our image. However, unlike a picture we create with a paint brush, the picture we will build is more like one from a paint-by-number kit, where each element in this 2D array is of a fixed size and painted with a single color. Every picture we take with a digital camera is created in this way, and each element in the 2D array that comprises a digital picture is called a *pixel*, which is short for picture element.
+This script begins by creating a new `Image` object that contains a 2D array of size 100x100, as specified by the second parameter to the `Image.new` call.[^fn8] This 2D array is the canvas on which we'll paint our image. However, unlike a picture we create with a paint brush, the picture we will build is more like one from a paint-by-number kit, where each element in this 2D array is of a fixed size and painted with a single color. Every picture we take with a digital camera is created in this way, and each element in the 2D array that comprises a digital picture is called a *pixel*, which is short for picture element.
 
-Pixels come in different ranges of colors. Our script asked the `Image` library for pixels that can be colored with one of 256 different shades of gray, where `0` represents pure black and `255` pure white. This is what the first parameter, called the *mode*, to the `Image.new` call specifies when passed with the string value `'L'`. In an exercise, you will change this mode to `'RGB'` so that you can build pictures with a rainbow of colors. In RGB mode, the number `0` still represents pure black, but we now have more than 16.7 million colors between the color black and the color white (16,777,216 colors in total to be exact). As a last example, we might have specified the mode  `'1'`, which encodes pure black as the number `0` and pure white as the number `1`. In this mode, you have only two colors in your pallet.[^fn8] 
+Pixels come in different ranges of colors. Our script asked the `Image` module for pixels that can be colored with one of 256 different shades of gray, where `0` represents pure black and `255` pure white. This is what the first parameter, called the *mode*, to the `Image.new` call specifies when passed with the string value `'L'`. In an exercise, you will change this mode to `'RGB'` so that you can build pictures with a rainbow of colors. In RGB mode, the number `0` still represents pure black, but we now have more than 16.7 million colors between the color black and the color white (16,777,216 colors in total to be exact). As a last example, we might have specified the mode  `'1'`, which encodes pure black as the number `0` and pure white as the number `1`. In this mode, you have only two colors in your palette.[^fn9] 
 
 ## Bits
 
@@ -224,7 +222,7 @@ Great, but you might be wondering why computers use binary numbering. You might 
 
 To understand this design decision, answer the following question: For which of the following pairs of numbers is it easier for you, a human, to tell that the two values in the pair are not the same: `11011000` and `11011100`, or `D8` and `DA`? I'll guess that you'll say the latter, and this difference in ability only increases as the number of digits you're scanning increases. 
 
-Hexdump uses base-16 because it is easier to read hex numbers and a straightforward process to convert back and forth between base-2 and base-16. Starting from the righthand end of a base-2 number, you group together the rightmost four bits and convert them into a single hexadecimal digit. You then grab the next four bits and repeat until you run out of bits. For example, `11011000` becomes `1101 1000`, which becomes `D 8`, which we can push back together as `D8`. (Feel free to run the process in reverse, when needed.) When you understand this, I hope you realize that hexdump is actually showing us the bits in the JPEG file.[^fn9]
+Hexdump uses base-16 because it is easier to read hex numbers and a straightforward process to convert back and forth between base-2 and base-16. Starting from the righthand end of a base-2 number, you group together the rightmost four bits and convert them into a single hexadecimal digit. You then grab the next four bits and repeat until you run out of bits. For example, `11011000` becomes `1101 1000`, which becomes `D 8`, which we can push back together as `D8`. (Feel free to run the process in reverse, when needed.) When you understand this, I hope you realize that hexdump is actually showing us the bits in the JPEG file.[^fn10]
 
 ## One finger, no thumb
 
@@ -240,21 +238,21 @@ What a digital circuit senses as "on" (or a `1` value) is a real-world value (ca
 
 ```{admonition} You Try It
 
-How should we treat a measurement is 0.47 miles? Should we treat it as 1 mile or 0 miles? In other words, should we round this value up or down?[^fn10]
+How should we treat a measurement is 0.47 miles? Should we treat it as 1 mile or 0 miles? In other words, should we round this value up or down?[^fn11]
 
 ```
 
-The magic of digital circuits is this ability to ignore, and in fact avoid accumulating, a certain amount of imprecision away from the ideal values.[^fn11] Because of this magical property of digital circuits, we can pretend, for example, that the file `cosmo.jpg` in my computer's memory, or in a solid state drive, or on a magnetic hard drive, or being transmitted across the Internet is just a bunch of binary numbers, even though the first `1` value in the file is not actually exactly `1` (or the same exact value) on any of those mentioned media.
+The magic of digital circuits is this ability to ignore, and in fact avoid accumulating, a certain amount of imprecision away from the ideal values.[^fn12] Because of this magical property of digital circuits, we can pretend, for example, that the file `cosmo.jpg` in my computer's memory, or in a solid state drive, or on a magnetic hard drive, or being transmitted across the Internet is just a bunch of binary numbers, even though the first `1` value in the file is not actually exactly `1` (or the same exact value) on any of those mentioned media.
 
 ## Bits, bytes, and nibbles
 
-With this new knowledge, let's return to our `edge1.py` script. The code creates a 100x100 2D-array of pixels, and each pixel can contain one of 256 shades of gray. 256 is $2^8$, which explains why `'L'` is described on [the documentation page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) as "8-bit pixels, black and white."
+With this new knowledge, let's return to our `edge1.py` script. The code creates a 100x100 2D-array of pixels, and each pixel can contain one of 256 shades of gray. 256 is $2^8$, which explains why `'L'` is described on [the documentation page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) as "8-bit pixels, grayscale."
 
 Eight bits grouped together occurs so frequently in computer science that this grouping is given its own name: a *byte*. If you look back at the hexdump, you'll notice that this is what hexdump is indexing. `FF` is the value of the first byte in `cosmo.jpg`; `D8` is the value of the second byte.
 
 You might also hear the term *nibble*, which is half a byte or 4 bits. Half a byte like `D8` is simply one of the hexadecimal characters.
 
-You'll also recognize the term byte from the unit of size in which you buy computer memory or hard-drive storage. My laptop has 16 GB, or 16 gigabytes, of memory, where giga- means $10^9$. In other words, my laptop has a little bit more than 16 billion bytes of memory.[^fn12] 
+You'll also recognize the term byte from the unit of size in which you buy computer memory or hard-drive storage. My laptop has 16 GB, or 16 gigabytes, of memory, where giga- means $10^9$. In other words, my laptop has a little bit more than 16 billion bytes of memory.[^fn13] 
 
 ## Setting a pixel's color
 
@@ -268,7 +266,7 @@ What kind of picture will this create? The first iteration of the outer loop set
 
 But which pixel in the 2D `pixels` array is the pixel at `[0,0]`? If you read the PIL documentation, it says that `[0,0]` is defined to be the upper lefthand corner of the image. There's nothing special about this choice other than that's how the code in the library has been designed to work.
 
-We'll learn more in the next chapter about how a nested loop structure causes us to move through the pixels in an image, but for now, we only care that, as we move right and down in the `pixels` array, we will store ever larger sums, which in our color pallet moves us closer to the color white. So, it sounds like this script will produce an image with a diagonal fade, from black in the upper lefthand corner to white in the lower righthand corner.
+We'll learn more in the next chapter about how a nested loop structure causes us to move through the pixels in an image, but for now, we only care that, as we move right and down in the `pixels` array, we will store ever larger sums, which in our color palette moves us closer to the color white. So, it sounds like this script will produce an image with a diagonal fade, from black in the upper lefthand corner to white in the lower righthand corner.
 
 ```{admonition} You Try It
 Run `edge1.py` and see that it does produce an image with a diagonal fade.
@@ -288,7 +286,7 @@ from PIL import Image
 # Width and height of our image
 sz = (400, 400)
 
-# Create a single plane of black and white pixels, initialized to black
+# Create a single plane of grayscale pixels, initialized to black
 im = Image.new('L', sz)
 
 # Create direct access to the pixels in the image
@@ -328,25 +326,25 @@ pixels[399, 399] = -1
 print(pixels[399, 399])
 ```
 
-Putting this all together, we asked the Python Image Library (PIL) to create an image of 400-by-400 pixels where each pixel held an 8-bit value between 0 (black) and 255 (white). It kept us to this by (silently) making sure that the image's pixel array never contained any values outside this range. When we tried to store a value greater than 255 or less than 0, it "saturated" that value at either 0 or 255.
+Putting this all together, we asked the PIL to create an image of 400-by-400 pixels where each pixel held an 8-bit value between 0 (black) and 255 (white). It kept us to this by (silently) making sure that the image's pixel array never contained any values outside this range. When we tried to store a value greater than 255 or less than 0, it "saturated" that value at either 0 or 255.
 
 ## Overflow and Underflow
 
-Many programming languages allow you to define a variable and specify that it can contain only integer values between 0 and 255. A computer scientist would say that such a variable has the type *unsigned byte*. The word byte indicates that we need only 8 bits to represent every possible unique value, and the word unsigned means that the values should be interpreted as all greater than or equal to zero. This exactly describes the encoding we use for 8-bit, black-and-white pixels.
+Many programming languages allow you to define a variable and specify that it can contain only integer values between 0 and 255. A computer scientist would say that such a variable has the type *unsigned byte*. The word byte indicates that we need only 8 bits to represent every possible unique value, and the word unsigned means that the values should be interpreted as all greater than or equal to zero. This exactly describes the encoding we use for 8-bit, grayscale pixels.
 
 We will learn more about the benefits of types, but for now, I want to introduce you to the ways that different programming languages might handle an operation that produces a value that doesn't fit into an unsigned byte. 
 
-Take, for example, the situation with which we've been dealing: the addition of two 8-bit, black-and-white pixels. As we've learned, this addition might produce a value greater than 255, for which we have no 8-bit representation. In general, computer scientists say that the addition *overflowed* its representation (or just overflowed for short). Similarly, a subtraction may *underflow*, by producing a value less than the smallest allowed representation. Saturation is one way of "correcting" these situations. In our current problem-to-be-solved, it is a sensible solution because we're working with image pixels and there's nothing blacker than black or whiter than white.
+Take, for example, the situation with which we've been dealing: the addition of two 8-bit, grayscale pixels. As we've learned, this addition might produce a value greater than 255, for which we have no 8-bit representation. In general, computer scientists say that the addition *overflowed* its representation (or just overflowed for short). Similarly, a subtraction may *underflow*, by producing a value less than the smallest allowed representation. Saturation is one way of "correcting" these situations. In our current problem-to-be-solved, it is a sensible solution because we're working with image pixels and there's nothing blacker than black or whiter than white.
 
-More generally, a running program may not know that a variable represents an 8-bit, black-and-white pixel, but only that the variable's physical representation is an unsigned byte. In this case, saturation may not be the right action to take. Instead, a better action might be to raise an exception.
+More generally, a running program may not know that a variable represents an 8-bit, grayscale pixel, but only that the variable's physical representation is an unsigned byte. In this case, saturation may not be the right action to take. Instead, a better action might be to raise an exception.
 
 We've seen several types of exceptions, and they are ways for a running program to indicate that something happened that it doesn't know how to handle. If your script doesn't register a way to handle an exceptional event, the event will terminate the running instance of your script.
 
-Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C's unsigned add is that you perform the addition and then lop off the most significant bits that don't fit in the physical representation. All of these, of course, are just different ways of describing the concept of modulo arithmetic.
+Sometimes, the designer of a programming language will choose to ignore particular kinds of overflow and underflow. For example, addition on unsigned integers in the C programming language never, by definition, overflows. If you add two unsigned, 8-bit numbers in C, the result is the sum of the two numbers modulo 256. In other words, unsigned addition in C is like adding on an analog clock face: when you add one to the biggest number on the clock face, you find yourself at the smallest number on the clock face. Another way to think about C's unsigned add is that you perform the addition and then lop off the most significant bits that don't fit in the physical representation. All of these, of course, are just different ways of describing the concept of Modulo arithmetic.
 
 ## Finding edges
 
-We are FINALLY ready to build a black-and-white picture containing an edge and then do some simple math to highlight that edge's location in the image.
+We are FINALLY ready to build a picture containing an edge and then do some simple math to highlight that edge's location in the image.
 
 The script `edge3.py` builds two images. In the first (called `im`), it sets the color of all columns in the image array with indices below 25 to black and the rest to white, which creates a vertical boundary between the black and white areas. The second image (called `filtered`) computes each of its pixel values by performing some math using a selected group of the pixels in `im`, as I'll explain in detail in a moment. 
 
@@ -360,7 +358,7 @@ from PIL import Image
 # Width and height of our image
 sz = (100, 100)
 
-# Create a single plane of black and white pixels, initialized to black.
+# Create a single plane of grayscale pixels, initialized to black.
 im = Image.new('L', sz)
 
 # Create direct access to the pixels in the image
@@ -394,9 +392,9 @@ filtered.save(images/out_filtered.png)
 
 The script creates the first image using the syntax for Python's conditional-assignment statement (line 16). The statement might look intimidating at first, but you'll get it if you take the statement a piece at a time: `pixels[i,j]` is set to the value `0` if the condition is `True`; otherwise it is set to `255`. The condition in the statement is `i < 25`, but it could be anything that evaluates to `True` or `False`.
 
-After saving this initial image `im`, the script then creates an entirely-black `filtered` image of the same size as `im`. The interesting work is in the body of the second nested for-loops, which you can think about as computation that uses a sliding window with 9 panes of glass organized as 3 rows of 3 columns. The script centers this 3x3 window over a `[i,j]` pixel in `im` and uses the values of the window's pixels to compute the color of the `[i,j]` pixel in `filtered`.[^fn13]
+After saving this initial image `im`, the script then creates an entirely-black `filtered` image of the same size as `im`. The interesting work is in the body of the second nested for-loops, which you can think about as computation that uses a sliding window with 9 panes of glass organized as 3 rows of 3 columns. The script centers this 3x3 window over a `[i,j]` pixel in `im` and uses the values of the window's pixels to compute the color of the `[i,j]` pixel in `filtered`.[^fn14]
 
-{numref}`Figure %s<c06_fig4_ref>` illustrates the work of this second pair of nested for-loops. The `pixels` image in the figure is like our script's `im` image except that we switch from black to white after three columns (not 25). The `fpixels` image is the result of the `fpixels` computation on lines 29-33 for each `[i,j]` pixel. I've drawn the 3x3 sliding window over a pixel `[i,j]` and shown the computation that takes place. This particular computation produces a value of -765, which is saturated to `0` (black).[^fn14]
+{numref}`Figure %s<c06_fig4_ref>` illustrates the work of this second pair of nested for-loops (lines 27-28). The `pixels` image in the figure is like our script's `im` image except that we switch from black to white after three columns (not 25). The `fpixels` image is the result of the `fpixels` computation on lines 29-33 for each `[i,j]` pixel. I've drawn the 3x3 sliding window over a pixel `[i,j]` and shown the computation that takes place. This particular computation produces a value of -765, which is saturated to `0` (black).[^fn15]
 
 ```{figure} images/c06_fig4.png
 :name: c06_fig4_ref
@@ -420,26 +418,28 @@ You have now done all that the `ImageFilter` library did when our code in `edges
 
 [^fn2]: Quoted from [*Elements Of Data Science*](https://allendowney.github.io/ElementsOfDataScience/README.html) by Allen Downey.
 
-[^fn3]: The date starts at offset 000000CC. The picture was taken at 3:39pm on May 19, 2020.
+[^fn3]: You should be able to do this in most every IDE
 
-[^fn4]: Gottfried Wilhelm Leibniz, an inventor of calculus, is credited with the invention of base-16 numbering, and he anticipated the use of the characters a-f as symbols for the base's extra digits. Lloyd Strickland and Harry Lewis in their book titled *Leibniz on Binary: The Invention of Computer Arithmetic* (MIT Press, 2022) enumerate other labelings that Leibniz proposed, including the naming of these extra digits after musical notes.
+[^fn4]: The date starts at offset 000000CC. The picture was taken at 3:39pm on May 19, 2020.
 
-[^fn5]: The first 1B hexadecimal pair in the hexdump is at offset 59 (base 16). This hexadecimal offset has a decimal value of 89 (base 10).
+[^fn5]: Gottfried Wilhelm Leibniz, an inventor of calculus, is credited with the invention of base-16 numbering, and he anticipated the use of the characters a-f as symbols for the base's extra digits. Lloyd Strickland and Harry Lewis in their book titled *Leibniz on Binary: The Invention of Computer Arithmetic* (MIT Press, 2022) enumerate other labelings that Leibniz proposed, including the naming of these extra digits after musical notes.
 
-[^fn6]: If you don't know what a convolution filter is, you will in a few moments. Keep reading!
+[^fn6]: The first 1B hexadecimal pair in the hexdump is at offset 59 (base 16). This hexadecimal offset has a decimal value of 89 (base 10).
 
-[^fn7]: The second parameter to the \`Image.new\` call is \`sz\`, which is a tuple defined on line 5. Recall that you can think of a tuple as a box in which you store several objects and access these objects by indexing.
+[^fn7]: If you don't know what a convolution filter is, you will in a few moments. Keep reading!
 
-[^fn8]: See [the PIL Modes page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) for a full mapping of mode codes to pixel types and depths.
+[^fn8]: The second parameter to the \`Image.new\` call is \`sz\`, which is a tuple defined on line 5. Recall that you can think of a tuple as a box in which you store several objects and access these objects by indexing.
 
-[^fn9]: Remember what Visual Studio said when we asked it to open the file named \`cosmo\`? The file "is either a binary or ...." Visual Studio was telling us that it was a file full of binary numbers that don't represent any text encoding. Those numbers encode some kind of information, but not something that is entirely text! In our case, this other kind of information was an image file.
+[^fn9]: See [the PIL Modes page](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) for a full mapping of mode codes to pixel types and depths.
 
-[^fn10]: This is a bit (pun intended) of a trick question. The answer is neither. If we ignore the imprecision around 0 and 1, we similarly shouldn't believe the small differences around 0.5. Furthermore, if a signal is measured close to the value that represents neither a digital 0 nor a digital 1, it means we have some type of error in our digital system.
+[^fn10]: Remember what VS Code said when we asked it to open the file named \`cosmo\`? The file "is either a binary or ...." VS Code was telling us that it was a file full of binary numbers that don't represent any text encoding. Those numbers encode some kind of information, but not something that is entirely text! In our case, this other kind of information was an image file.
 
-[^fn11]: It's not really magic, but we won't dive below the digital abstraction in this book. If you're interested, take a digital design course to learn exactly how this is done.
+[^fn11]: This is a bit (pun intended) of a trick question. The answer is neither. If we ignore the imprecision around 0 and 1, we similarly shouldn't believe the small differences around 0.5. Furthermore, if a signal is measured close to the value that represents neither a digital 0 nor a digital 1, it means we have some type of error in our digital system.
 
-[^fn12]: I say "a little bit more than" because the 16 in 16 GB is rounded too.
+[^fn12]: It's not really magic, but we won't dive below the digital abstraction in this book. If you're interested, take a digital design course to learn exactly how this is done.
 
-[^fn13]: The script carefully avoids allowing the sliding window to slip outside the bounds of the original image by playing with the range of the indices in the nested for-loops.
+[^fn13]: I say "a little bit more than" because the 16 in 16 GB is rounded too.
 
-[^fn14]: Although pixels in an 8-bit, black-and-white image are limited to values between 0 and 255, the PIL library returns a Python integer object to us when we apply an index to the \`pixels\` object, which allows us to compute a number like -765. Saturation occurs when we attempt to store -765 in \`fpixels\[i,j\]\`.
+[^fn14]: The script carefully avoids allowing the sliding window to slip outside the bounds of the original image by playing with the range of the indices in the nested for-loops.
+
+[^fn15]: Although pixels in an 8-bit, grayscale image are limited to values between 0 and 255, the PIL returns a Python integer object to us when we apply an index to the \`pixels\` object, which allows us to compute a number like -765. Saturation occurs when we attempt to store -765 in \`fpixels\[i,j\]\`.

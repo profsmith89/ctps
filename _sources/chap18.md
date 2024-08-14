@@ -383,7 +383,7 @@ While Option 2 isn't hard, perhaps we could save the hour I took producing `chec
 It's true that "Kevin Bacon" appears more than twice because I forgot to ask ChatGPT to ignore the first several lines, as I did when running my `check` function.
 
 ```{tip}
-**First Lesson Learned:** You still need to think when you ask a GAI tool to do your work.
+You still need to think when you ask a GAI tool to do your work.
 ```
 
 But ChatGPT's first sentence in the response doesn't really make much sense. I asked if any names appeared *more than twice*, and while it correctly identified "Kevin Bacon" as appearing too many times, it wrote that this name "*appeared twice* in the document." \[Emphasis added.\] This caused me to ask, "please explain how you came to that answer" and it replied:
@@ -427,7 +427,7 @@ The following is my prompt and ChatGPT's answer:
 ChatGPT correctly finds that Louis-Do de Lencquesaing is mentioned too many times, but it still struggles with counting. And it strangely tells me about a few but not all the other actors mentioned twice.
 
 ```{tip}
-**Second Lesson Learned:** ChatGPT works quickly, but you'll spend additional time debugging its work.
+ChatGPT works quickly, but you'll spend additional time debugging its work.
 ```
 
 At this point, I haven't found a prompt that causes ChatGPT to tell me exactly what I want to know and in a manner that makes me confident of its work. The reason I'm not getting a good result from ChatGPT could be that: (1) my skills in prompting need improvement; or (2) this task is beyond the model's frontier. These are exactly the two challenges I mentioned earlier in problem solving with GAI. Let's deal with them one at a time.
@@ -501,7 +501,7 @@ print(remove_names_from_line(line))
 When you run this script, it prints: \`Carey Mulligan and starred in The Great Gatsby\`. ChatGPT took me literally and removed the second actor's name from the line. This is not the interpretation of my prompt that I wanted. English is ambiguous!
 
 ```{tip}
-**Third Lesson Learned:** While "programming" a GAI in English (or any human language) might make problem solving with computation accessible to more people across the world, there's a reason why programming languages attempt to have well-defined semantics.
+While "programming" a GAI in English (or any human language) might make problem solving with computation accessible to more people across the world, there's a reason why programming languages attempt to have well-defined semantics.
 ```
 
 Still, ChatGPT gave us a starting point for a solution and an explanation (not shown) of what went into the regular-expression pattern it used. We'll likely solve our problem faster with this assistance.
@@ -571,7 +571,7 @@ print(extract_actors(input_text))
 As typical, ChatGPT included an example that shows you how to invoke the function. I added another test. When you run `extract_actors.py`, you'll find that ChatGPT's test works fine, but the one I added doesn't. And if you inspect the regular expression in `extract_actors`, you'll see that it won't work for names like "Cleo O'Hara", which contain characters other than the letters `a-z`. This happened despite the fact that I included that name in my completion-prompt examples.
 
 ```{tip}
-**Fourth Lesson Learned:** Even with good prompts, the solution produced with a GAI tool today won't necessary work in all the situations you care about. Problem solving involves iteration, even when you use GAI.
+Even with good prompts, the solution produced with a GAI tool today won't necessary work in all the situations you care about. Problem solving involves iteration, even when you use GAI.
 ```
 
 You can find lots of websites on the internet that discuss prompt engineering. I view most of their advice as that which is appropriate for getting better outputs from a human assistant as well as a GAI tool. Here are some basic rules of thumb:

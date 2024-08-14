@@ -791,7 +791,7 @@ In this chapter, you've learned a lot about how to organize the code in your scr
 
 \[Version 20240813\]
 
-[^fn1]: A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this \[short video\](https://www.youtube.com/watch?v=WGCaK-N2dsA) to learn more.
+[^fn1]: A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this [short video](https://www.youtube.com/watch?v=WGCaK-N2dsA) to learn more.
 
 [^fn2]: \`script32.py\` is a cleaned-up version of \`script9.py\` from Chapter 2.
 
@@ -809,7 +809,7 @@ In this chapter, you've learned a lot about how to organize the code in your scr
 
 [^fn9]: PEP stands for Python Enhancement Proposal. These proposals provide information to the Python community about a language feature, design decision, or recommended guideline.
 
-[^fn10]: John V. Guttag. 2021. Introduction to Computation and Programming Using Python: With Application to Computational Modeling and Understanding Data (Third Edition). The MIT Press.
+[^fn10]: John V. Guttag. 2021. *Introduction to Computation and Programming Using Python: With Application to Computational Modeling and Understanding Data* (Third Edition). The MIT Press.
 
 [^fn11]: Put aside for a moment the fact that both these operations are concisely expressed in Python using its power operator \`\*\*\`, which by the way illustrates that the designers of Python thought about this exact issue when deciding what operators to define!
 

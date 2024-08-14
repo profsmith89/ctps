@@ -1024,11 +1024,11 @@ More recently, the work by Wing, Aho, and others has been synthesized into the f
 
 [^fn5]: Note that I'm switching back from transcript blocks to code blocks. This allows you to copy the content of the code block and paste it at your interactive Python interpreter's prompt. Don't just read. Try!
 
-[^fn6]: And in particular, a namespace for the name txt.
+[^fn6]: And in particular, a namespace for the name \`txt\`.
 
 [^fn7]: Remember, in the interactive interpreter, typing an object's name tells the interactive interpreter that we want to see the value of that object.
 
-[^fn8]: There are old computer systems that required you to use two special characters to move its cursor to the start of the next line. You typed a carriage return character (\\r), which moved the cursor to the beginning of the current line, and then a newline character (\\n), which moved the cursor to the next line. I'll assume you're using a modern computer that requires only the single \\n special character to perform both actions.
+[^fn8]: There are old computer systems that required you to use two special characters to move its cursor to the start of the next line. You typed a carriage return character (\`\\r\`), which moved the cursor to the beginning of the current line, and then a newline character (\`\\n\`), which moved the cursor to the next line. I'll assume you're using a modern computer that requires only the single \`\\n\` special character to perform both actions.
 
 [^fn9]: Computing the number of lines in a file is something that ALE 1.2 asks you to do. Please see the ALEs (i.e., Active Learning Exercises) on the website that is the companion to this book.
 

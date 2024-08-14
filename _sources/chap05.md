@@ -759,7 +759,7 @@ In each of these approaches, we're not really using the network. Remember that w
 
 [^fn1]: Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.
 
-[^fn2]: Think about what it takes to check if a string is an integer. We need to visit and check each character, verifying that it is a number. Except that we probably don't want leading zeros. And except that we should allow for a leading + or - character, which may or may not be there. This is tricky code to write correctly, and why should we bother? Someone already did this work in \`int\`!
+[^fn2]: Think about what it takes to check if a string is an integer. We need to visit and check each character, verifying that it is a number. Except that we probably don't want leading zeros. And except that we should allow for a leading \`+\` or \`-\` character, which may or may not be there. This is tricky code to write correctly, and why should we bother? Someone already did this work in \`int\`!
 
 [^fn3]: In case you're curious, the \`socket\` library is similar to the networking primitives in most operating systems. The \`requests\` library, in fact, uses the \`socket\` library in its implementation!
 
