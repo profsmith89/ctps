@@ -380,11 +380,11 @@ fpixels = filtered.load()
 # Apply an edge-detection convolution (it's just math for B&W only!)
 for i in range(1, sz[0]-1):
     for j in range(1, sz[1]-1):
-        fpixels[i,j] = (pixels[i-1,j-1] * -1 + pixels[i-1,j] * -1 + 
+        fpixels[i,j] = (pixels[i-1,j-1] * -1 + pixels[i-1,j  ] * -1 + 
                         pixels[i-1,j+1] * -1 + pixels[i  ,j-1] * -1 + 
-                        pixels[i  ,j] * 8  + 
+                        pixels[i  ,j  ] *  8 + 
                         pixels[i  ,j+1] * -1 + pixels[i+1,j-1] * -1 + 
-                        pixels[i+1,j] * -1 + pixels[i+1,j+1] * -1)
+                        pixels[i+1,j  ] * -1 + pixels[i+1,j+1] * -1)
 
 # Save resulting image
 filtered.save(images/out_filtered.png)
@@ -412,7 +412,7 @@ Run `edge3.py`, and you'll see that the filtered image contains a white line whe
 
 You have now done all that the `ImageFilter` library did when our code in `edges.py` applied a `CONTOUR` filter. In this way, a computer can highlight the dog-shaped blob in `cosmo.jpg`. Knowing that that blob looks like a dog requires machine learning, a topic for later.
 
-\[Version 20240719\]
+\[Version 20240814\]
 
 [^fn1]: The details and quotes in this section come from ["After the Fact" by Jill Lepore](https://www.newyorker.com/magazine/2016/03/21/the-internet-of-us-and-the-end-of-facts) (The New Yorker, March 21, 2016).
 

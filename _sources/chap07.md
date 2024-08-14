@@ -145,7 +145,7 @@ As we slowly add bits to the righthand side of the significand, we increase the 
 
 I used a for-loop since we know the maximum number of bits in our significand; the loop must end at that maximum and a for-loop makes this easy to do and to understand. You could build an equivalent solution with a while-loop.
 
-Inside the for-loop, I check to see if our best guess (`best`) matches `n`, and break out of the loop early if it is. Besides updating the string encoding of the significand, the loop body adjusts the bounds (i.e., `upper` and `lower`) as it updates `guess`, since every bit we add to the significand tightens one or the other of the two bounds.
+Inside the for-loop, I check to see if our best guess (`best`) matches `n`, and break out of the loop early if it does. Besides updating the string encoding of the significand, the loop body adjusts the bounds (i.e., `upper` and `lower`) as it updates `guess`, since every bit we add to the significand tightens one or the other of the two bounds.
 
 ```{code-block} python
 ---
@@ -213,13 +213,13 @@ Run `fbin.py` with `0.574` and `52`, and you'll match the answer we got earlier 
 
 ## FP errors accumulate
 
-Unfortunately, precision doesn't just effect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why `0.1 * 0.1` doesn't equal `0.01`. A slightly inaccurate FP representation of `0.1` times itself produces a result with more inaccuracy than the conversion of `0.01` into a FP number. Or stated another way, the computer doesn't know if you were trying to multiple `0.1` times itself or `0.10000002384185791` times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.
+Unfortunately, precision doesn't just affect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why `0.1 * 0.1` doesn't equal `0.01`. A slightly inaccurate FP representation of `0.1` times itself produces a result with more inaccuracy than the conversion of `0.01` into a FP number. Or stated another way, the computer doesn't know if you were trying to multiply `0.1` times itself or `0.10000002384185791` times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.
 
-If your script operates with floating-point numbers and you need the results to be precise, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on [accuracy problems in floating-point arithmetic](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems) can get you started on this tricky subject.
+If your script operates with floating-point numbers in a domain where rounding errors matter, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on [accuracy problems in floating-point arithmetic](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems) can get you started on this tricky subject.
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20240718\]
+\[Version 20240814\]
 
 [^fn1]: The leading \`0b\` mimics the leading \`0x\` we saw on hexadecimal numbers. Following this prefix, we write a \`0\`, which indicates that there's no whole number here, and the radix point, which always precedes the fractional part.
 
