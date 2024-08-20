@@ -173,7 +173,7 @@ def dogwalk(my_city):
        and return True if goal successfully met. The
        successful path is marked in the city object."""
     # Set the current state
-    loc = my_city.start
+    cur_loc = my_city.start
 
     while cur_loc in my_city:
         # Where to? Well, what steps are possible?
@@ -199,7 +199,7 @@ def dogwalk(my_city):
 
 ```{admonition} Terminology
 :class: tip
-It is worth reviewing the terminology I mentioned in Chapter 1. In the function `dogwalk`, `my_city` is an object, and this object has a set of attributes associated with it. For example, the attribute `start` is a data attribute (i.e., it names a data object) and the attributes `possible_moves`, `move`, and `mark` are function attributes (also called methods that we call like a function).
+It is worth reviewing the terminology I mentioned in Chapter 1. In the function `dogwalk`, `my_city` is an object, and this object has a set of attributes associated with it. For example, the attribute `start` is a _data attribute_ (i.e., it names a data object) and the attributes `possible_moves`, `move`, and `mark` are _function attributes_ (also called methods that we call like a function).
 ```
 
 The algorithm in the function `dogwalk` builds upon that in `walk.py`. It sets the current state (i.e., `cur_loc`) to the starting location in the city, and then it falls into a while-loop that iterates until this current state matches our goal. Inside the loop, we call `my_city.possible_moves`, which returns the list of possible moves we can make from our current location. This method's second argument is the character we use to mark already-visited locations in the city, as you see on line 29; we don't want those spots as possible locations for our next move. With a valid list of possible moves, the algorithm randomly picks one and moves there (lines 25-26). Of course, it can make a move only if Cosmo isn't at a dead end, which is the check on lines 21-22. Finally, line 32 prepares the algorithm to repeat these actions with the new location where Cosmo moved.
@@ -286,7 +286,7 @@ This is power of *object-oriented (OO) programming*, which uses data abstraction
 
 ```{tip}
 
-At first, OO programming may feel overwhelming as it comes with a boatload of syntax and jargon. Even I find the OO terminology to be intimidating and confusing. But there's definitely nothing to fear here as you have been using the OO approach from this book's start. Everything you manipulate in Python is an object, even what feels primitive and simple, like integers and strings. I'll introduce you to the basics of OO programming, and if you'd like to learn more, you might next read Chapter 10 in John Guttag's book titled an Introduction to Computation and Programming Using Python.[^fn8]
+At first, OO programming may feel overwhelming as it comes with a boatload of syntax and jargon. Even I find the OO terminology to be intimidating and confusing. But there's definitely nothing to fear here as you have been using the OO approach from this book's start. Everything you manipulate in Python is an object, even what feels primitive and simple, like integers and strings. I'll introduce you to the basics of OO programming, and if you'd like to learn more, you might next read Chapter 10 in John Guttag's book titled an *Introduction to Computation and Programming Using Python*.[^fn8]
 
 ```
 
@@ -307,7 +307,7 @@ This is the *class definition* for `CitySqGrid`, and *classes* are how we implem
 Like a function definition, a class definition defines a data type's interface and makes explicit its implementation. When we learned about functions and their definitions in Chapter 3, it was easy to identify the public interface from the private implementation. The same separation exists with classes, but it is harder to see, especially in Python.[^fn9] If your new data type is anything but trivial, it becomes very hard to understand how to use it by simply reading the class's definition. This means that docstrings and comments become extremely important.
 
 ```{tip}
-I have described the interface for `CitySqGrid` (i.e., its abstraction as seen through its data attributes and methods) in a docstring at the top of its class definition. I further adopt the convention of following the docstring with a comment that is meant not to help users of the data type but those who want to modify its implementation. Follow this convention or imagine your own---just give those who will use your data type some clear way to understand what's in its interface and what are implementation details.
+I have described the interface for `CitySqGrid` (i.e., its abstraction as seen through its _data attributes_ and _methods_) in a docstring at the top of its class definition. I further adopt the convention of following the docstring with a comment that is meant not to help users of the data type but those who want to modify its implementation. Follow this convention or imagine your own---just give those who will use your data type some clear way to understand what's in its interface and what are implementation details.
 ```
 
 While I'll continue to make reference to the `CitySqGrid` class, it is too complicated to use as an understandable first example. Instead, I'll teach you how to build your own class by creating a new data type, called `Pin`, that allows us to add [Google-Maps-like pins](https://en.wikipedia.org/wiki/Google_Maps_pin) to the `CitySqGrid` maps we used in `walk.py`.
@@ -588,7 +588,7 @@ The `Pin` class builds on a class called `object`, which is a class at the root 
 
 ```{admonition} Terminology
 :class: tip
-Along with the term subclass, you will hear the complementary term superclass. `Maze` is the superclass of `CitySqGrid`, and it shares its attributes with all its subclasses. 
+Along with the term subclass, you will hear the complementary term _superclass_. `Maze` is the superclass of `CitySqGrid`, and it shares its attributes with all its subclasses. 
 ```
 
 It's good that a subclass inherits the attributes of its superclass because, if you look in `city.py` at `CitySqGrid`'s class definition, you'll find only two method definitions: `__init__` and `reset`. This is despite the fact that `CitySqGrid`'s docstring mentions many other methods, including ones we used in `wander.py` like `mark`, `get_mark`, `__str__`, and `__contains__`.
@@ -617,7 +617,7 @@ In general, it's fine for a superclass method to operate on instances of a subcl
 
 ```{admonition} Terminology and Conventions
 :class: tip
-You will find methods in the `Maze` class with names that start with a double underscore but do not end with them. By convention, these are helper functions. OO programming not only encapsulates the attributes and methods of a data type in a `class` statement, but it allows you to use all of the helpful aspects of procedural programming within this statement. For example, turning a `Maze` object into its ASCII image involves a row-by-row generation of ASCII characters. It is easier to implement this procedure by factoring out the work done for each row into a method called `__str_row` and then having `__str__` repeatedly call this helper function. However, this is an implementation detail, and I want it hidden from those using the data type. In Python, this hiding is done with a naming convention; other programming languages have keyword mechanisms for making certain attributes of a class private to the implementation of the class. If a piece of Python code outside the class definition calls a double-underbar-leading method at runtime, the Python3 interpreter will raise an `AttributeError`.
+You will find methods in the `Maze` class with names that start with a double underscore but do not end with them. By convention, these are _helper functions_. OO programming not only encapsulates the attributes and methods of a data type in a `class` statement, but it allows you to use all of the helpful aspects of procedural programming within this statement. For example, turning a `Maze` object into its ASCII image involves a row-by-row generation of ASCII characters. It is easier to implement this procedure by factoring out the work done for each row into a method called `__str_row` and then having `__str__` repeatedly call this helper function. However, this is an implementation detail, and I want it hidden from those using the data type. In Python, this hiding is done with a naming convention; other programming languages have keyword mechanisms for making certain attributes of a class _private_ to the implementation of the class. If a piece of Python code outside the class definition calls a double-underbar-leading method at runtime, the Python3 interpreter will raise an `AttributeError`.
 ```
 
 ## General maps
@@ -874,7 +874,7 @@ In general, prioritizing our possible search moves is the job of a *heuristic fu
 
 There are many heuristics in the domain of search. I asked you to imagine a common one (called *greedy*), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point's heuristic (called *A\* search*). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems.
 
-\[Version 20240819\]
+\[Version 20240820\]
 
 [^fn1]: It didn't take many years of Google's existence before it realized that maps and mapping should an important part of its web services. As a fun look at the history of Google Maps and how middle-aged entrepreneurs working civilized hours launched what has become Maps, you might read [this short Medium article](https://medium.com/@lewgus/the-untold-story-about-the-founding-of-google-maps-e4a5430aec92).
 

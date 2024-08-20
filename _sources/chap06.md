@@ -92,7 +92,7 @@ We can see that this isn't a normal text file, since most of the ASCII interpret
 
 ```{admonition} You Try It
 
-{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called metadata) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn4]
+{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called _metadata _) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn4]
 
 ```
 
@@ -412,7 +412,7 @@ Run `edge3.py`, and you'll see that the filtered image contains a white line whe
 
 You have now done all that the `ImageFilter` library did when our code in `edges.py` applied a `CONTOUR` filter. In this way, a computer can highlight the dog-shaped blob in `cosmo.jpg`. Knowing that that blob looks like a dog requires machine learning, a topic for later.
 
-\[Version 20240814\]
+\[Version 20240820\]
 
 [^fn1]: The details and quotes in this section come from ["After the Fact" by Jill Lepore](https://www.newyorker.com/magazine/2016/03/21/the-internet-of-us-and-the-end-of-facts) (The New Yorker, March 21, 2016).
 

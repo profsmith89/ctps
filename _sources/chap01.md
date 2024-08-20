@@ -98,7 +98,7 @@ The contents at the start of the file named `CatInTheHat.txt`.
 In addition to our script's input, we also have to specify its output. Let's agree that our script output on our computer screen the text we see in {numref}`Figure %s <c01_fig2_ref>`.
 
 ```{tip}
-These two choices illustrate an approach for which I'll repeatedly advocate: Start with a single and simple instance of your problem-to-be-solved. Here we have decided to start with a script that won't read _any book in any format_, but this _one specific book in one particular format_. Then write a script that solves that instance. Only then should you consider how you might expand your script's functionality so that it solves multiple different instances of your problem (i.e., other books and other formats).
+These two choices illustrate an approach for which I'll repeatedly advocate: Start with a _single and simple_ instance of your problem-to-be-solved. Here we have decided to start with a script that won't read _any book in any format_, but this _one specific book in one particular format_. Then write a script that solves that instance. Only then should you consider how you might expand your script's functionality so that it solves multiple different instances of your problem (i.e., other books and other formats).
 ```
 
 In summary, the script we will write will take the contents of the file named `CatInTheHat.txt` as input and display its contents on our computer screen, as if it were reading the book from start to finish. As a finishing touch, let's have the script add an extra line to the end of the book where it will say, as I always did for my children, "The End."
@@ -953,7 +953,7 @@ Like the if-statement, the while-loop tests a condition that determines the exec
 What does it mean that I've put the literal `True` in for our while-loop's condition? When it's evaluated, the Python interpreter will (trivially) determine that the expression `True` is true and move forward to execute the loop body. And because this condition can never evaluate to `False`, line 4 an example of an *infinite loop*: Without any other way to break out, the loop runs forever.
 
 ```{admonition} You Try It
-At some point, you'll mistakenly create an infinite loop. To show that they're nothing scary, let's run one. Look at `seuss-infinite.py` in this chapter's code distribution and notice that I've commented out the if-statement and the break-statement it protects (lines 9-10 in the code block above). Comment out these same two lines in your `seuss.py` script. When you click the Run button, the script prints the story but not "The End." It's stuck continually trying to read another line in a file without any more lines and never gets to the print-statement on line 12). To stop this script, notice that the Run button has turned into a Stop button. Click it and the script will stop. If you're running in the shell, as we'll do in later chapters, the keyboard combination Ctrl+C (i.e., simultaneously press your keyboard's control key and the letter-C key) will end an infinite loop's execution. Don't forget to uncomment lines 9-10 in your `seuss.py` script before continuing.
+At some point, you'll mistakenly create an infinite loop. To show that they're nothing scary, let's run one. Look at `seuss-infinite.py` in this chapter's code distribution and notice that I've commented out the if-statement and the break-statement it protects (lines 9-10 in the code block above). Comment out these same two lines in your `seuss.py` script. When you click the Run button, the script prints the story but not "The End." It's stuck continually trying to read another line in a file without any more lines and never gets to the print-statement on line 12). To stop this script, notice that the Run button has turned into a Stop button. Click it and the script will stop. If you're running in the shell, as we'll do in later chapters, the keyboard combination _Ctrl+C_ (i.e., simultaneously press your keyboard's control key and the letter-C key) will end an infinite loop's execution. Don't forget to uncomment lines 9-10 in your `seuss.py` script before continuing.
 ```
 
 Our loop doesn't run forever because it checks for the exit condition inside the loop body and breaks out of the loop when `readline` indicates that we hit the EOF. It's more convenient to put this condition inside the loop body than between the keyword `while` and the colon because we cannot check for EOF until we read a line. As I mentioned earlier, there are other ways to write this loop, and as you move through the upcoming chapters, you'll learn to evaluate for yourself which approach feels natural for your problem.
@@ -961,7 +961,7 @@ Our loop doesn't run forever because it checks for the exit condition inside the
 Returning to my emphasis on indentation in Python, notice that line 10 is indented twice. This double indentation indicates that the break-statement's execution depends upon the conditions in both the while-statement on line 4 and the if-statement on line 9. Only when both conditions are true will the `break` execute.
 
 ```{admonition} You Try It
-Run the previous code block, which is called `seuss-final.py` in the code repository. You'll find that this script "reads out loud" one of my favorite children's books, The Cat in the Hat by Dr. Seuss. Problem solved!
+Run the previous code block, which is called `seuss-final.py` in the code repository. You'll find that this script "reads out loud" one of my favorite children's books, _The Cat in the Hat_ by Dr. Seuss. Problem solved!
 ```
 
 ## Any book
@@ -1012,7 +1012,7 @@ Although Wing doesn't provide a single definition for computational thinking in 
 
 More recently, the work by Wing, Aho, and others has been synthesized into the following definition: computational thinking is the "thought processes involved in formulating problems and their solutions so that the solutions are represented in a form that can be effectively carried out by an information-processing agent." In their 2021 *Science & Education* article, Michael Lodi and Simone Martini call this the Aho-Cuny-Snyder-Wing definition, in recognition of the contributions from these four particularly influential individuals.[^fn20]
 
-\[Version 20240806\]
+\[Version 20240820\]
 
 [^fn1]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
 

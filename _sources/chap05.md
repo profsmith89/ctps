@@ -755,7 +755,7 @@ If you're running this chapter's scripts as code blocks in an interactive Python
 
 In each of these approaches, we're not really using the network. Remember that we're running these two scripts with the loopback interface, but we can't easily tell that without looking at the code. Again, abstraction at work!
 
-\[Version 20240813\]
+\[Version 20240820\]
 
 [^fn1]: Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.
 

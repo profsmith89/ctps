@@ -10,7 +10,7 @@ In short, we want to know how to use computers to analyze data about our "busine
 
 What exactly is data science? It is the extraction of meaningful insights and new knowledge from data. As a process, it involves *data collection*, *data cleaning*, *data exploration and pattern detection*, and *model building* for prediction and decision-making. These four steps are often repeatedly done until we are able to identify a truly meaningful insight. Once we've discovered some new insight or useful fact about our world through these steps, there's a final step in which we communicate what we have discovered.
 
-Acting like a data scientist is a perfect way for us to wrap up our discussion of numbers, since so much of a data scientist's work is statistical in nature. In this chapter, we'll focus on the initial steps in every data science process and the domain-agnostic aspects of these steps.[^fn1] In particular, we will focus on two sub-questions of our motivating question: (1) Once we have collected some data, why it is important to clean the data in our data set before we try to analyze them? And (2) once we've cleaned the data, what programming techniques are generally helpful in doing data exploration and pattern detection. We'll practice both of these skills through two applications on images: (1) a technique for removing a photobombing person from an image (i.e., data set cleaning); and (2) a technique for hiding information inside an image (i.e., data exploration and pattern detection).
+Acting like a data scientist is a perfect way for us to wrap up our discussion of numbers, since so much of a data scientist's work is statistical in nature. In this chapter, we'll focus on the initial steps in every data science process and the domain-agnostic aspects of these steps.[^fn1] In particular, we will focus on two sub-questions of our motivating question: (1) Once we have collected some data, why it is important to clean the data in our data set before we try to analyze them? And (2) once we've cleaned the data, what programming techniques are generally helpful in doing data exploration and pattern detection? We'll practice both of these skills through two applications on images: (1) a technique for removing a photobombing person from an image (i.e., data set cleaning); and (2) a technique for hiding information inside an image (i.e., data exploration and pattern detection).
 
 ```{admonition} Learning Outcomes
 In this chapter, you will be introduced to the field of data science and learn how you can use computation to analyze data and discover new knowledge. We focus on the initial steps in every data-science problem (i.e., data collection, data cleaning, and data exploration) using images as our big data set. By the end of the chapter, you will be able to:
@@ -123,16 +123,16 @@ Let's get a feel for the precision we don't need in a digital image that we have
 ```{figure} images/c08_fig3.png
 :name: c08_fig3_ref
 
-An image of the Boston Public Garden. While this figure is black-and-white, the file `images/garden.png` in the book's code repository for this chapter is in color, i.e., its pixels are encoded in RGB mode. The figure on the left is this original image, and the one on the right is the resulting image after removing some of the original's fine-grained color information using the `zero.py` script we're about to develop.
+An image of the Boston Public Garden. While this figure is black-and-white, the file `images/garden.png` in the book's code repository for this chapter is in color, i.e., its pixels are encoded in `RGB` mode. The figure on the left is this original image, and the one on the right is the resulting image after removing some of the original's fine-grained color information using the `zero.py` script we're about to develop.
 ``` 
 
-RGB mode represents color pixels with a tuple of three 8-bit numbers: The first representing the amount of red in the pixel; the second the amount of green; and the last the amount of blue.[^fn3] We can manipulate these numbers using not only the common unary and binary *arithmetic* operators (e.g., the unary negate operator and the binary add operator), but with what are called unary and binary *bitwise* (or sometimes called *logical*) operators. Remember that a number like 240 is stored in the computer in its binary representation (i.e., 11110000), and bitwise operators allow us to operate directly on these bits.
+\`RGB\` mode represents color pixels with a tuple of three 8-bit numbers: The first representing the amount of red in the pixel; the second the amount of green; and the last the amount of blue.[^fn3] We can manipulate these numbers using not only the common unary and binary *arithmetic* operators (e.g., the unary negate operator and the binary add operator), but with what are called unary and binary *bitwise* (or sometimes called *logical*) operators. Remember that a number like 240 is stored in the computer in its binary representation (i.e., 11110000), and bitwise operators allow us to operate directly on these bits.
 
 For example, `&` is a binary bitwise operator in Python that takes two integers, and for each bit location in the input integers performs an AND operation. This operation, for single-bit inputs, produces a `1` only when both of its inputs are `1`. If either input is a `0`, the output is a `0`. For multi-bit inputs, the single-bit operation is performed at each bit position.
 
 ```{admonition} Terminology
 :class: tip
-On lines 2 and 3, the `0b` prefix on the integer literals tells the Python interpreter that they are expressed in base 2, not base 10.
+On lines 2 and 3, the `0b` prefix on the integer literals tells the Python interpreter that they are expressed in base-2, not base-10. Lines 4, 5, and 7 use a Python format specification (i.e., `:04b`) that specifies how the value of the variable or expression before the colon should be printed. I want the value printed in binary (the `b`) with a minimum width of four digits (the `4`) and padded with leading zeros (the `0`) if necessary.
 ```
 
 ```{code-block} python
@@ -169,7 +169,7 @@ print(f'{a} and {b} = {a and b}')
 
 ```{admonition} Terminology
 :class: tip
-Whoa, you might say. Head rush. Yes, the terminology here can be confusing. Many programming languages---Python included---talk about _binary_ operators, and when they do so, they're talking about operators that take two operands (like our familiar `+` operator). They're not talking about operations that operate on binary numbers in a bitwise fashion, which are called _bitwise_ operations. Finally, these languages distinguish Boolean operations from binary operators and bitwise operations. A Python `and` operation is a binary operator that works on two Boolean operands and produces a Boolean result. The Python `&` operation is also a binary operator, and its operation is built on the same logical AND concept, but applies this logical AND concept to each bit location in the input integers.
+Whoa, you might say. Head rush. Yes, the terminology here can be confusing. Many programming languages---Python included---talk about _binary_ operators, and when they do so, they're talking about operators that take two operands (like our familiar `+` operator). They're not talking about operations that operate on binary numbers in a bitwise fashion, which are called _bitwise_ operations. Finally, these languages distinguish Boolean operations from binary operators and bitwise operations. The Python `and` operation is a binary operator that works on two Boolean operands and produces a Boolean result. The Python `&` operation is also a binary operator, and its operation is built on the same logical AND concept, but applies this logical AND concept to each bit location in the input integers.
 ```
 
 Let's see the `&` operation in action to help us understand it better. Take a look at the code in the function `zero_lowest_bits` below.
@@ -184,9 +184,9 @@ def zero_lowest_bits(v):
     return (v & 0b11110000)
 ```
 
-This function takes a single argument `v`, performs a bitwise AND operation with that input and an integer literal, and returns the result. The crazy-looking value `0b11110000` is an integer constant just like `240` is. In fact, it is nothing more than the 8-bit representation for `240` in base two. We've simply expressed the base-10 integer `240` as a binary value because, in this form, it is easier to see what we're trying to do. And what we're doing is forcing the lowest four bits[^fn5] of the input value `v` to be all zeros.
+This function takes a single argument `v`, performs a bitwise AND operation with that input and an integer literal, and returns the result. The crazy-looking value `0b11110000` is the integer `240`. It is nothing more than the 8-bit representation of `240` in base-2. We've simply expressed the base-10 integer `240` as a binary value because, in this form, it is easier to see what we're trying to do. And what we're doing is forcing the lowest four bits[^fn5] of the input value `v` to be all zeros.
 
-Let's run a few tests on this new function using the interactive Python interpreter (or put copy the previous code block and the subsequent ones into a Python script).
+Let's run a few tests on this new function using the interactive Python interpreter (or copy the previous code block and the subsequent ones into a Python script).
 
 ```{code-block} python
 ---
@@ -223,7 +223,7 @@ r2 = zero_lowest_bits(n2)
 print(r1, r2)
 ```
 
-How many bits does it take to encode `256` in binary? What does this mean for the bits in the constant `0b11110000` above the most significant `1`?
+How many bits does it take to encode `256` in binary? What are the bit values above the most significant `1` in the constant `0b11110000`?
 
 If you can answer these two questions, then you'll understand why the docstring on the function `zero_lowest_bits` says it takes 8-bit inputs. We're going to pass it 8-bit values representing the `RGB` colors of our image's pixels, but if you passed the routine an integer with a value requiring more than 8 bits, our routine will ignore any bits above the lower 8 (i.e., it will zero them out as it does with the lower 4 bits).
 
@@ -247,7 +247,7 @@ lineno-start: 14
 ---
 ### chap08/zero.py
 def zero_image_lowest_bits(src, dest):
-    '''Zeroing lowest 4 bits in all channels of input image'''
+    '''Zeroing lowest 4 bits in all color channels of input image'''
     for x in range(src.size[0]):
         for y in range(src.size[1]):
             r, g, b = src.getpixel((x,y))
@@ -292,17 +292,15 @@ While image steganography is not technique used in data science, it will set us 
 
 ## Where is that pixel?
 
-When we write a Python script to blend a hidden image into an envelope image, the two images might be the same size, and in this case, we're simply laying one image over the other. We could also place several small images in a large envelope image. In this, we'll want to say where in the envelope image we want to place each hidden image, and to do this, we need a coordinate system that uniquely identifies each pixel in an image.
+When we write a Python script to blend a hidden image into an envelope image, the two images might be the same size, and in this case, we're simply laying one image over the other. We could also place several small images in a large envelope image. In this, we'll want to say where in the envelope image we want to place each hidden image, and to do this, we need a coordinate system that uniquely identifies each pixel.
 
-We haven't needed to think about the coordinate system in images because all of the work we have done to this point has had us process each and every pixel. Using PIL's `getpixel` and `putpixel` methods, we indexed individual pixels in an image's 2D array using a coordinate tuple `(x,y)`, but where in an image is a particular `(x,y)` coordinate?
-
-To answer this question, we can look at [the Python Imaging Library documentation where it says](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#coordinate-system) that it "uses a Cartesian pixel coordinate system, with (0,0) in the upper left corner. Note that the coordinates refer to the implied pixel corners; the centre of a pixel addressed as (0, 0) actually lies at (0.5, 0.5)."
+From Chapter 6, we know that PIL defines the upper lefthand corner pixel with the `(0,0)` coordinate.[^fn8] But beyond this, we haven't really thought about an image's coordinate system because everything we've done has had us process each and every pixel in the image.
 
 ## And how did we get there?
 
-Similar to how we ignored the coordinate system in our images, we also haven't thought much about the particulars of our *traversal* of an image's pixels. Our scripts contained two nested for-loops,[^fn8] and we randomly picked one dimension for the outer for-loop (i.e., `src.size[0]`) and the other dimension fell to the inner for-loop (i.e., `src.size[1]`). We also choose, honestly randomly, to start each for-loop at index 0. These are choices, and by making different choices, we change our *order of traversal* of the elements in the data set.
+Because we had to touch every pixel, we also ignored the particulars of our *traversal* of the pixels in an image. Our scripts contained two nested for-loops,[^fn9] and we randomly picked one dimension for the outer for-loop (i.e., `src.size[0]`) and the other dimension fell to the inner for-loop (i.e., `src.size[1]`). We also choose, honestly randomly, to start each for-loop at index 0. These are choices, and by making different choices, we change the *order of traversal*.
 
-We can learn about an image's dimensions by looking at its `size` attribute. [The documentation says](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.size) that this attribute is "a 2-tuple (width, height)." This means that `src.size[0]` provides us with a measurement of the width of the image. In a Cartesian plane, this would correspond to the x-axis, which is often how we labeled the outer loop in our scripts. You can also think of this index as numbering the columns in our image. The other value, `src.size[1]` in our scripts, represents the height of the image, or the number of rows of pixels in it.
+We can learn about an image's dimensions by looking at its `size` attribute. [The PIL documentation says](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.size) that this attribute is "a 2-tuple (width, height)." This means that `src.size[0]` provides us with a measurement of the width of the image. In a Cartesian plane, this would correspond to the x-axis, which is often how we labeled the outer loop in our scripts. You can also think of this index as numbering the columns of pixels in our image. The other value, `src.size[1]` in our scripts, represents the height of the image, or the number of rows of pixels in it.
 
 ## Visualizing a traversal
 
@@ -313,7 +311,7 @@ To visualize an image's coordinate system, let's build a script that marks its m
 lineno-start: 1
 ---
 def traverse(im, stop_x, stop_y):
-    '''Traverse an image from (0,0) until location (x,y)'''
+    '''Traverse an image from (0,0) until location (stop_x,stop_y)'''
     for i in range(im.size[0]):
         for j in range(im.size[1]):
             pixel = im.getpixel((i,j))
@@ -347,7 +345,7 @@ def do_something(pixel):
     return pixel
 
 def traverse(im, stop_x, stop_y):
-    '''Traverse an image from (0,0) until location (x,y)
+    '''Traverse an image from (0,0) until location (stop_x,stop_y)'''
        and do something at each visited pixel.  The input
        image is unchanged, and the changed image is returned.
     '''
@@ -368,7 +366,7 @@ new_im.save('images/xverse.png')
 
 ## Inverting a pixel's color
 
-Our function is structured as we desire, but the helper function still doesn't change the value of the visited pixels. What might we do to create a path of visited pixels that is easy for us to see? How about we invert our image? It's easy to create an inverted video image by simply replacing the value of each color in each pixel with the result of the calculation: `256 - orig_color_value`.
+Our function is structured as we desire, but the helper function still doesn't change the value of the visited pixels. What might we do to create a path of visited pixels that is easy for us to see? How about we invert our image? It's easy to create an inverted image by simply replacing the value of each color in each pixel with the result of the calculation: `255 - orig_color_value`.
 
 The following code block does this by replacing our do-nothing `do_something` function with one that reverses the input pixel. Try it out, and then look at the resulting image.
 
@@ -378,9 +376,9 @@ lineno-start: 31
 ---
 ### chap08/xverse.py
 def do_something(pixel):
-    '''Reverse video the input pixel'''
+    '''Invert the input pixel'''
     r, g, b = pixel
-    return (256 - r, 256 - g, 256 - b)
+    return (255 - r, 255 - g, 255 - b)
 
 inverted = traverse(garden, 100, 100)
 inverted.save('images/xverse.png')
@@ -441,19 +439,21 @@ Play with the full form of the `range` function in the interactive Python interp
 
 List comprehensions are syntactic shorthands for creating a list from using an *expression*, an *iterable*, and an optional *condition*. It replaces the writing of a for-loop to initialize a list, where the body of the loop computes an expression and appends each computed value to the list. If you want only some of the computed values, you include an if-statement based on the desired condition. The syntax is: `newlist = [expression for item in iterable if condition]`. The `range` function produces an iterable object.
 
+Try these in the interactive Python interpreter:
+
 ```{code-block} python
 # Default start to 0 and step to 1
-my_range = [i for i in range(10)]
+[i for i in range(10)]
 ```
 
 ```{code-block} python
 # Explicitly state start is 0 and step is 1
-my_range = [i for i in range(0, 10, 1)]
+[i for i in range(0, 10, 1)]
 ```
 
 ```{code-block} python
 # Run the same sequence backwards
-my_range = [i for i in range(10 - 1, 0 - 1, -1)]
+[i for i in range(10 - 1, 0 - 1, -1)]
 ```
 
 ## Storing a 2D array in memory
@@ -469,7 +469,7 @@ To understand this better, it might be easier to stop thinking of image files an
 emphasize-lines: 2
 ---
 ### NOT executable
-$ hexdump -C CatInTheHat.txt
+chap08$ hexdump -C CatInTheHat.txt
 00000000  54 68 65 20 73 75 6e 20  64 69 64 20 6e 6f 74 20  |The sun did not |
 00000010  73 68 69 6e 65 2e 0a 49  74 20 77 61 73 20 74 6f  |shine..It was to|
 00000020  6f 20 77 65 74 20 74 6f  20 70 6c 61 79 2e 0a 53  |o wet to play..S|
@@ -504,15 +504,15 @@ Importantly, you're comfortable with problem solving as an iterative process. Al
 
 You are no longer a novice. You are now ready to learn to use computers to solve a more complex set of real-world problems.
 
-\[Version 20240723\]
+\[Version 20240820\]
 
 [^fn1]: In Chapter 17, we will explore the model building portion of the data science process.
 
 [^fn2]: JPEG and other image file formats are more than simple 2D arrays. They contain metadata, like the time and date on which the image was captured, and they often compress the actual image data so that the file takes less space to store. Computer scientists like to explore the tradeoffs between processing time and storage space.
 
-[^fn3]: ALEs 6.1 and 6.2 discuss RGB mode and encourage you to experiment with its pixel encoding.
+[^fn3]: ALEs 6.1 and 6.2 discuss \`RGB\` mode and encourage you to experiment with its pixel encoding.
 
-[^fn4]: Python is lenient about what can be interpreted as a Boolean value, and while it isn't important to what we're doing here, you might want to checkout [the Python documentation on Boolean operations](https://docs.python.org/3/reference/expressions.html#boolean-operations) if you're curious.
+[^fn4]: Python is lenient about what can be interpreted as a Boolean value, and while it isn't important to what we're doing here, you might want to read [the Python documentation on Boolean operations](https://docs.python.org/3/reference/expressions.html#boolean-operations) if you're curious.
 
 [^fn5]: "Lowest" in this phrase refers to the right-hand side of the number, which is where we put the digits with the least significance to the whole number. Zeroing the 3 in 543 doesn't change the number as much as zeroing the 4 or the 5. The same is true in binary numbers.
 
@@ -520,4 +520,6 @@ You are no longer a novice. You are now ready to learn to use computers to solve
 
 [^fn7]: If you're in a course using this book, this chapter's programming problem set asks you to implement this process. Of course, there are many ways to hide the hidden image in an envelope image. For example, you could also distribute the full 8-bit pixels of the hidden image across two pixels of the envelope image, which had their lower 4 bits cleared. This alternate approach requires that the envelope image is as least twice as large as the hidden image.
 
-[^fn8]: If our data set was organized with more dimensions, our code would include a larger number of nested for-loops.
+[^fn8]: Here I'm using the tuple notation we use with PIL's \`getpixel\` and \`putpixel\` methods.
+
+[^fn9]: If our data set was organized with more dimensions, our code would include a larger number of nested for-loops.

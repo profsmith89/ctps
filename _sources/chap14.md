@@ -122,7 +122,7 @@ The function `contains_dquote` handles an important question we asked in our scr
 
 I'm emphasizing decision problems because they'll play an important role in proving that we can't write `found_bug`. Whoa, you might say. And I'll say, "Yes." This is the first problem that will defeat us, and it's not because we're not smart enough. It's because Alan Turing proved in 1936 that no one could write an algorithm to solve it. No algorithm means no solution. Finding all bugs in all scripts is an example of an *uncomputable* problem. I'm sorry that we can't deliver our super tool.
 
-You might also hear theoretical computer scientists call this category of problems *undecidable*. There's two reasons for this. First, and most simply, they like to use the terms compute, decide, and solve interchangeably. Second, and a bit more technical, it's because they often prove that a problem *P* is uncomputable by a technique called *reduction*, which is a fancy term for showing the solution to *P* depends upon the solution to some other problem (call it *D*). If a decision problem *D* has been proven to be undecidable and you can show that a solution to *D* is required in a solution to P, then *P* is undecidable too.
+You might also hear theoretical computer scientists call this category of problems *undecidable*. There's two reasons for this. First, and most simply, they like to use the terms compute, decide, and solve interchangeably. Second, and a bit more technical, it's because they often prove that a problem *P* is uncomputable by a technique called *reduction*, which is a fancy term for showing the solution to *P* depends upon the solution to some other problem (call it *D*). If a decision problem *D* has been proven to be undecidable and you can show that a solution to *D* is required in a solution to *P*, then *P* is undecidable too.
 
 While I'm mentioning types of problems, now's a good time to say that we've been writing what are called solutions to *tractable* problems, which means we know of algorithms that can solve these problems *efficiently* (i.e., producing an answer takes a reasonable amount of time and other computational resources). Web search, which we discussed in Act II, is an example of a non-trivial, but tractable problem.
 
@@ -414,7 +414,7 @@ I clearly made a mistake in implementing `yex`; the while-loop in `yex` is an in
 
 ```{admonition} Terminology
 :class: tip
-Because `yex` contains an infinite loop that's not in its specification, we'll say that the output of `yex` is not defined under this input. It exhibits undefined behavior.
+Because `yex` contains an infinite loop that's not in its specification, we'll say that the output of `yex` is _not defined under this input_. It exhibits _undefined behavior_.
 ```
 
 ```{tip}
@@ -594,7 +594,7 @@ We used a number of tools, without naming most of them, commonly employed by tho
 
 While it is true that we can't expect a computational tool to find all our bugs, this doesn't mean we can't find lots of specific kinds of bugs in many different kinds of programs. On to the next two chapters to learn how you can more quickly and easily find many important bugs!
 
-\[Version 20240806\]
+\[Version 20240820\]
 
 [^fn1]: When computer scientists talk about static analyses, they mean analyses that ask questions about a program or how a program will execute without running it. Runtime debugging involves asking questions about a program's state while it executes. All the functions in this chapter perform static analysis.
 
