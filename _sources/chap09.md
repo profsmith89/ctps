@@ -6,7 +6,7 @@ Luckily, through your work in Act I, you have already begun using the most-impor
 
 ## A complex problem-to-be-solved
 
-We'll start with a theme you may have noticed in the previous act's problems. We asked if we could find a double-quote character in a string and the words "cat" and "hat" in a text file. We asked if we could find a particular book in the Harvard Library. And in the previous chapter, we looked for particular patterns in a sea of numbers. These are all examples of *search problems*.
+We'll start with a theme you may have noticed in the previous act's problems. We asked if we could find a double-quote character in a string and the words "cat" and "hat" in a text file. We asked if we could find a particular book in the Harvard Library. And in the previous chapter, we talked about the importance of looking for particular patterns in a sea of numbers. These are all examples of *search problems*.
 
 Search appears in almost all aspects of our personal and professional lives, making it a nearly ubiquitous technique in problem solving. Looking across time at the characteristics of our search problems, we see a fascinating trend: the data over which we search has consistently grown in size. Fueling this has been a relentless growth in the capabilities of our computers, which allow us to solve ever larger search problems in ever shorter amounts of time. This human desire to find answers to our questions ever more quickly has become, in fact, a big business.
 
@@ -267,7 +267,7 @@ We have a context for our string-matching script, and we can ask, "Will brute-fo
 
 At the start of this chapter, we mentioned that people expect answers to their search questions in ever shorter amounts of time. Therefore, in this context, we care about how quickly a script's implementation can return an answer. 
 
-Overall, the performance of an algorithm and its implementation is one of a handful of questions that computer scientists ask all the time. Does the algorithm solve our problem of interest? If yes, does it run correctly under all input conditions? If yes, how fast does it run? How much space does it use while running? Is it resilient to adversarial attacks? We will cover most of these questions and say a few words in the next act about the historical importance of the last few. But for now, we will focus on answering the question of how long an algorithm (or the script that implements it) takes to run, since that's important in searching 100 million gigabytes of text.
+Overall, the performance of an algorithm and its implementation is one of a handful of questions that computer scientists ask all the time. Does the algorithm solve our problem of interest? If yes, does it run correctly under all input conditions? If yes, how fast does it run? How much space (e.g., computer memory) does it use while running? Is it resilient to adversarial attacks? We will cover most of these questions and say a few words in the next act about the historical importance of the last few. But for now, we will focus on answering the question of how long an algorithm (or the script that implements it) takes to run, since that's important in searching 100 million gigabytes of text.
 
 ## Measuring performance
 
@@ -280,11 +280,11 @@ To use this utility in the shell, you often type the name of the time utility an
 emphasize-lines: 2, 6
 ---
 ### NOT a script and therefore NOT executable
-$ /usr/bin/time python3 bf_strmatch.py 'This test is a bigger test' 'test'
+chap09$ /usr/bin/time python3 bf_strmatch.py 'This test is a bigger test' 'test'
 Pattern occurs with shift 5
 Pattern occurs with shift 22
         0.05 real         0.02 user         0.01 sys
-$ /usr/bin/time python3 bf_strmatch2.py 'This test is a bigger test' 'test'
+chap09$ /usr/bin/time python3 bf_strmatch2.py 'This test is a bigger test' 'test'
 Pattern occurs with shift 5
 Pattern occurs with shift 22
         0.05 real         0.03 user         0.01 sys
@@ -292,7 +292,7 @@ Pattern occurs with shift 22
 
 From the output, we see that our two scripts ran and produced the expected output. In addition, the `time` utility printed three different measures of the execution of each script, each measured in seconds. You can think of the first number, which is labeled `real`, as wall-clock time. It is the one that concerns us. We're going to ignore the other two, which break wall-clock time down into two components that are not important to our current evaluation question.
 
-Both scripts took 5 hundreds of a second to execute. If you run these two commands yourself, you'll see the first number vary a bit. For instance, I got 0.08 seconds on one run, but most of my runs were 0.05 seconds. There was no discernible pattern that said one script was faster than the other.
+Both scripts took 5 hundredths of a second to execute. If you run these two commands yourself, you'll see the first number vary a bit. For instance, I got 0.08 seconds on one run, but most of my runs were 0.05 seconds. There was no discernible pattern that said one script was faster than the other.
 
 Part of the problem here is that my computer is fast and the program doesn't make it work too hard. How can we make my computer work harder to see if one script is actually faster?
 
@@ -307,7 +307,7 @@ How does this work? In Python, `sys.stdin` is a file object like those we create
 emphasize-lines: 2
 ---
 ### NOT a script and therefore NOT executable
-$ /usr/bin/time python3 bf_strmatch.py 'has left' < JustDavid.txt
+chap09$ /usr/bin/time python3 bf_strmatch.py 'has left' < JustDavid.txt
 Pattern occurs with shift 326953
         0.15 real         0.10 user         0.01 sys
 ```
@@ -315,7 +315,7 @@ Pattern occurs with shift 326953
 This is still not a very big text, and the script runs in about 15 hundredths of a second on my computer.[^fn11] However, the text is large enough to see that Python's string comparison using the equal-equal operator (`==`) is slightly faster than our own for-loop comparison. We will talk about why this is true in Chapter 16, but for our purposes here, it's enough to know that we've added work for the Python interpreter to do using our own for-loop in `bf_strmatch2.py` that doesn't exist when we forego that for-loop and instead use the equal-equal operator built into the language. 
 
 ```{tip}
-If you want to feed the functions `bf_strmatch` and `bf_strmatch2` some of your own big input text files and time them, the script `chap09/cmp_bf_times.py` on the book's Github repository automates the comparison of the two script, given a pattern and a filename whose contents you wanted searched. It uses a method from the Python `time` module. 
+If you want to feed the functions `bf_strmatch` and `bf_strmatch2` some of your own big input text files and time them, the script `chap09/cmp_bf_times.py` on the book's Github repository automates the comparison of the two scripts, given a pattern and a filename whose contents you wanted searched. It uses a method from the Python `time` module. 
 ```
 
 The key point here is that the wall-clock difference between `bf_strmatch.py` and `bf_strmatch2.py` isn't the result of something inherent in our algorithm. It exists because of the choices we made when implementing the BF\_STRMATCH algorithm. As we have briefly seen, we can eliminate this time difference with careful choices as we code our algorithms, if we understand what language features take what amount of time at execution. Again, a topic for later.
@@ -449,7 +449,7 @@ def rk_strmatch(t, p):
     # loop on i exactly m times
 
     # Matching work
-    # loop on s up to n
+    # loop on s up to n times
     #     if two numbers match
     #         loop up to m times checking for match
     #         if found-match print
@@ -458,11 +458,11 @@ def rk_strmatch(t, p):
     #         do some math; no loops
 ```
 
-Both algorithms have a loop with index variable `s` that does some work for each possible shift value. Both these algorithms loop up to `n` (i.e., the length of the input text) times. They may loop fewer times, but in the worse case, they will loop `n` times when the length of the pattern string is 1.[^fn13]
+Importantly, both algorithms have a loop with index variable `s` that does some work for each possible shift value. Both these algorithms loop up to `n` (i.e., the length of the input text) times. They may loop fewer times, but in the worse case, they will loop `n` times when the length of the pattern string is 1.[^fn13]
 
-Before we look at the internals of these two matching loops, let's consider the setup work done by each algorithm prior to matching. Looking first at `bf_strmatch`, it does a couple of simple assignments; no loops appear in its setup work (lines 9-10). The setup code in `rk_strmatch` (lines 15-36), in contrast, includes two loops on index variable `i` that loop almost exactly `m` (i.e., the length of the pattern string) times. Inside these, the algorithm does some simple math and makes an assignment or two.
+Before we focus on the internals of these two matching loops, which will help us to understand the difference between the two algorithms, let's discuss how I came to the pseudocode statements corresponding to each algorithm's setup work. Looking first at `bf_strmatch`, the code (lines 9-10) does a couple of simple assignments; there are no loops. The setup code in `rk_strmatch` (lines 15-36), in contrast, includes two loops on index variable `i` that loop almost exactly `m` (i.e., the length of the pattern string) times. Inside these, the algorithm does some simple math and makes an assignment or two. This analysis produces the pseudocode on line 3 of `bf_strmatch` and lines 3-4 of `rk_strmatch`.
 
-To this point in our analysis, `bf_strmatch` looks like it is going to be faster. In the worst case, it does some straight-line code and then loops roughly `n` times, while `rk_strmatch` loops to `m` twice and then loops to `n`.
+With this difference in the setup behavior, `bf_strmatch` looks like it is going to be faster. In the worst case, it does some straight-line code and then loops roughly `n` times, while `rk_strmatch` loops to `m` twice and then loops to `n`.
 
 Let's turn this English into an arithmetic expression. Let's say that a reasonable amount of straight-line work is proportional to one unit of execution time. A loop body without any loops in it (i.e., just straight-line code) would therefore also have a cost proportional to one unit of execution time. The cost of a loop and its body would simply be the execution-time cost of its body times the number of iterations we estimate that it will make.
 
@@ -470,7 +470,7 @@ With these simple rules, the estimated execution time of `bf_strmatch` would be 
 
 Now, what are the estimated costs of the body of each algorithm's matching loop? The body of the matching loop in `bf_strmatch` contains a loop with a simple body, and as such, `something` is `m * 1`, or just `m`, in the worst case. Remember that the `==`-operator is doing work equivalent to the for-i loop in `bf_strmatch2`!
 
-The body of the matching loop in `rk_strmatch` also contains a loop with a simple body that iterates up to `m` times, but this inner loop is protected by an if-statement (line 43).[^fn14] Unfortunately, we don't have enough information right now about the operation of `rk_strmatch` to estimate when the condition in this if-statement will be true. It might be true during just one of the total `n` iterations of the outer matching loop. Or it might be true on every iteration of the outer matching loop. In the first case, the execution time of `rk_strmatch` will be proportional to `2 * m + ((n-1) * 1 + 1 * m)`, or `m + n` when we ignore constants. In the second case, `rk_strmatch` looks a lot like `bf_strmatch`, but with more setup work. The dominate factor affecting the execution time in this case is `n * m`, or more precisely when n and m are both large: `(n - m + 1) * m`.
+The body of the matching loop in `rk_strmatch` also contains a loop with a simple body that iterates up to `m` times, but this inner loop is protected by an if-statement (line 43).[^fn14] Unfortunately, we don't have enough information right now about the operation of `rk_strmatch` to estimate when the condition in this if-statement will be true. It might be true during just one of the total `n` iterations of the outer matching loop. Or it might be true on every iteration of the outer matching loop. In the first case, the execution time of `rk_strmatch` will be proportional to `2 * m + ((n-1) * 1 + 1 * m)`, or `m + n` when we ignore constants. In the second case, `rk_strmatch` looks a lot like `bf_strmatch`, but with more setup work. The dominant factor affecting the execution time in this case is `n * m`, or more precisely when n and m are both large: `(n - m + 1) * m`.
 
 ## Computational complexity
 
@@ -487,7 +487,7 @@ The rules I described above are a simplified way of finding such *asymptotic run
 
 The matching time of the algorithm behind `bf_strmatch` is $O((n - m + 1) * m)$, which you should recognize as the expression we derived. It is also the worst-case matching time for `rk_strmatch`. This big-O notation means that, within some constant factor, there exists some numbers for $n$ and $m$ beyond which the growth of algorithm's running time will not exceed the growth rate of this big-O function.
 
-If you don't understand all these details, that's fine. I simply want you to identify these dominate terms in our algorithms and compare the growth rates for two different algorithms to see which is appropriate for your problem-to-be-solved.
+If you don't understand all these details, that's fine. I simply want you to identify these dominant terms in our algorithms and compare the growth rates for two different algorithms to see which is appropriate for your problem-to-be-solved.
 
 ## Computational complexity in action
 
@@ -555,7 +555,7 @@ This code, when run on my laptop, produces the following output. Notice that I h
 emphasize-lines: 2
 ---
 ### NOT a script and therefore NOT executable
-$ python3 cmp_strmatch.py
+chap09$ python3 cmp_strmatch.py
 ### Test: m << t
 For p = 20 bytes, t = 326962 bytes
 bf_strmatch took 0.065106 secs
@@ -630,11 +630,11 @@ We've come to the end of the chapter, and we haven't yet solved our problem: how
 
 In the next chapter, we'll explore these details and learn about a technique called *hashing*, which is how Rabin-Karp beats brute force. Hashing will lead us to *hash tables*, a widely-used data structure, which just happens to be at the heart of Python's dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach. Onward!
 
-\[Version 20240724\]
+\[Version 20240821\]
 
 [^fn1]: In October of 2020, Google posted [a video titled "Trillions of Questions, No Easy Answers: A (home) movie about how Google Search works"](https://www.youtube.com/watch?v=tFq6Q_muwG0&t=6s). This video is also highlighted on [Google's page describing how it thinks about search](https://www.google.com/search/howsearchworks/).
 
-[^fn2]: In Chapter 2, we saw three different approaches: membership test using the in-operator; Python's string-find method; and our own string-find function.
+[^fn2]: In Chapter 2, we saw three different approaches: membership test using the in-operator; Python's string-find method; and our own for-loop-based string-find.
 
 [^fn3]: *Introduction to Algorithms* (Third Edition) by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein \[The MIT Press; Cambridge, MA; 2009\], p. 985.
 
@@ -658,6 +658,6 @@ In the next chapter, we'll explore these details and learn about a technique cal
 
 [^fn13]: I ignore the case when the pattern string is empty because that's a trivial result. Every shift is a valid shift when the pattern string is empty. We don't need to run the algorithm, and we could add a conditional at the start of our functions that checks for an empty pattern string.
 
-[^fn14]: The other if-statement in the matching loop in \`bf\_strmatch\` (i.e., line 51) has an execution cost proportional to 1, and we can ignore it.
+[^fn14]: The other if-statement in the matching loop in \`rk\_strmatch\` (i.e., line 51) has an execution cost proportional to 1, and we can ignore it.
 
-[^fn15]: Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., O(m)), but a better worst-case matching bound of O(n) for all inputs. Technically, its bounds are 𝛩(m) and 𝛩(n). Yup, you need to go learn the difference between Big-O and Big Theta 𝛩 notation!
+[^fn15]: Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., O(m)), but a better worst-case matching bound of O(n) for all inputs. Technically, its bounds are 𝛩(m) and 𝛩(n). Yup, you need to go learn the difference between Big-O and Big-𝛩 notation!
