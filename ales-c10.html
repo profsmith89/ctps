@@ -218,8 +218,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 10</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="ales-c12.html">Chapter 12</a></li>
 
 
@@ -373,11 +371,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 10</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-1-are-these-data-still-good">ALE 10.1: Are these data still good?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-2-the-bsd-checksum">ALE 10.2: The BSD checksum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-1-are-these-data-still-good">ALE 10.1: Are these data still good?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-2-the-bsd-checksum">ALE 10.2: The BSD checksum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-3-find-colliding-words">ALE 10.3: Find colliding words</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -388,12 +385,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="chapter-10">
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-10">
 <h1>Chapter 10<a class="headerlink" href="#chapter-10" title="Permalink to this heading">#</a></h1>
-</section>
 <section id="ale-10-1-are-these-data-still-good">
-<h1>ALE 10.1: Are these data still good?<a class="headerlink" href="#ale-10-1-are-these-data-still-good" title="Permalink to this heading">#</a></h1>
-<p>Whenever we send a message across a network or leave our data on a storage device, there’s a non-zero chance that a real-world event (e.g., an electrical spike from a lightning strike) will cause one or more of data bits to flip their value (i.e., from a 1 to a 0 or a 0 to a 1). A common method for noticing when such data has been corrupted is to pair it with a hash of all the bits in a block of data. Computer scientists often refer to such a hash as a <em>checksum</em>, and in this ALE, you’ll learn about and implement a historically popular one that requires just one extra bit per data block: CRC-1.</p>
+<p><strong>ALE 10.1: Are these data still good?</strong> Whenever we send a message across a network or leave our data on a storage device, there’s a non-zero chance that a real-world event (e.g., an electrical spike from a lightning strike) will cause one or more of data bits to flip their value (i.e., from a 1 to a 0 or a 0 to a 1). A common method for noticing when such data has been corrupted is to pair it with a hash of all the bits in a block of data. Computer scientists often refer to such a hash as a <em>checksum</em>, and in this ALE, you’ll learn about and implement a historically popular one that requires just one extra bit per data block: CRC-1.</p>
 <p><strong>Step 1.</strong> CRC stands for <em>Cyclic Redundancy Check</em>, and it is a <em>non-cryptographic hash function</em>, which means that you can use it for error detection but not for any meaningful security purpose. CRC-1 is a fancy name for adding a single <em>parity bit</em> to the end of a short block of data. Because it is easy and space efficient to compute, the generation of a parity bit is often implemented directly in hardware. If a computer’s memory includes parity bits, the hardware can alert the operating system when a running program tries to read a piece of memory that has been corrupted.</p>
 <p>CRC-1 is called a parity bit because you are just recording a fact about the number of bits in the data that are a 1. Obviously with one parity bit, we can’t record the number of 1-bits in a data block of length greater than 1, and so the parity bit simply records whether the number of 1-bits is an even or odd number. Because we can encode this even/odd fact in one of two ways (e.g., the parity bit being equal to 0 means either that the number of 1-bits is even or that the number of 1-bits is odd), the world defines CRC-1 either as an <em>even-parity</em> implementation or an <em>odd-parity</em> one.</p>
 <p>In both implementations, you count the number of 1-bits in both the data block and the parity bit. <em>Even parity</em> sets the parity bit to 1 when that makes the total number of 1-bits even, and <em>odd parity</em> sets the parity bit to 1 when that makes the total into an odd number.</p>
@@ -473,8 +468,7 @@ document.write(`
 </div>
 </section>
 <section id="ale-10-2-the-bsd-checksum">
-<h1>ALE 10.2: The BSD checksum<a class="headerlink" href="#ale-10-2-the-bsd-checksum" title="Permalink to this heading">#</a></h1>
-<p>When we type commands in the Shell on Replit, we are interacting with a program running on a Unix operating system. For those of you running on a MacBook, MacOS is basically a Unix operating system under its hood. In fact, MacOS is a descendent of <a class="reference external" href="https://www.youtube.com/watch?v=Sne3m0qLEMk">BSD Unix</a>, which was developed at the University of California, Berkeley in the 1970s. It was an extension of the original UNIX operating system developed just a few years earlier at Bell Labs, which started in 1925 as the research arm of Western Electric and AT&amp;T.</p>
+<p><strong>ALE 10.2: The BSD checksum.</strong> When we type commands in the Shell on Replit, we are interacting with a program running on a Unix operating system. For those of you running on a MacBook, MacOS is basically a Unix operating system under its hood. In fact, MacOS is a descendent of <a class="reference external" href="https://www.youtube.com/watch?v=Sne3m0qLEMk">BSD Unix</a>, which was developed at the University of California, Berkeley in the 1970s. It was an extension of the original UNIX operating system developed just a few years earlier at Bell Labs, which started in 1925 as the research arm of Western Electric and AT&amp;T.</p>
 <p>One of the extensions that the Berkeley researchers added to their version of Unix was the BSD checksum utility called <code class="docutils literal notranslate"><span class="pre">sum</span></code>, which can still be found in MacOS. It was meant as mechanism to create a fingerprint (i.e., a checksum or hash) of a file so that you could later tell if the file had been corrupted (i.e., had one of its bytes changed).</p>
 <p>The BSD checksum employed a very simple algorithm, which we describe in pseudocode below. Instead of taking a file of bytes as input, our function will take a string of ASCII (8-bit) characters.</p>
 <p>Notice that this routine creates a 16-bit result, which means an integer between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">65535</span></code>. It does a little bit of bit manipulation, which is the hardest part of creating the Python code corresponding to this pseudocode. Otherwise, it is just adding the numerical value of each character together and keeping the lowest 16 bits of the resulting sum.</p>
@@ -517,7 +511,37 @@ document.write(`
 </pre></div>
 </div>
 <p>Congratulations! You now know several kinds of hash functions, all of which convert inputs of unbounded size into an output that is a small integer, with some hashes as small as a single bit!</p>
-<p>[Version 20240315]</p>
+</section>
+<section id="ale-10-3-find-colliding-words">
+<p><strong>ALE 10.3: Find colliding words.</strong> The script <code class="docutils literal notranslate"><span class="pre">rk_strmatch.py</span></code> currently finds substrings in the text that match a given pattern. If the pattern fed is a word, can you change this script so that it prints <strong>not substring matches</strong> but <strong>the words that collide with the pattern word</strong> (i.e., find two words that produce the same hash value)? Let’s try!</p>
+<p>In doing this work, you’ll probably want to:</p>
+<ol class="arabic simple">
+<li><p>Pull out the code that computes a hash in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> into its own function and make the hashing function constants into globals.</p></li>
+<li><p>Make sure that the substring that matches the pattern word is itself a word. You can assume that words contain only the letters a-z.</p></li>
+<li><p>Check your work by printing both the hash of the pattern word and the hash of the colliding words.</p></li>
+<li><p>Print a colliding word only once, even if it occurs many times in the input text.</p></li>
+</ol>
+<p>Start by copying <code class="docutils literal notranslate"><span class="pre">rk_strmatch.py</span></code> into a file called <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code>, and then edit that file so that you don’t destroy your good copy of the original script.</p>
+<p>To test your script, you can try the following two commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">JustDavid-chaps.txt</span> <span class="pre">book</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">JustDavid-chaps.txt</span> <span class="pre">pale</span></code></p></li>
+</ul>
+<p>The test with “book” should print:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>chap10$ python3 ale03.py JustDavid-chaps.txt book
+pattern hash(&quot;book&quot;) = 3324
+No collisions found
+</pre></div>
+</div>
+<p>The test with “pale” should print:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>chap10$ python3 ale03.py JustDavid-chaps.txt pale
+pattern hash(&quot;pale&quot;) = 64517
+COLLISION: hash(&quot;spot&quot;) = 64517
+COLLISION: hash(&quot;tops&quot;) = 64517
+</pre></div>
+</div>
+<p>[Version 20240822]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -587,11 +611,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 10</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-1-are-these-data-still-good">ALE 10.1: Are these data still good?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-2-the-bsd-checksum">ALE 10.2: The BSD checksum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-1-are-these-data-still-good">ALE 10.1: Are these data still good?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-2-the-bsd-checksum">ALE 10.2: The BSD checksum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-10-3-find-colliding-words">ALE 10.3: Find colliding words</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

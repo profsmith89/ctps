@@ -1,4 +1,4 @@
-## Chapter 10 ##
+# Chapter 10 #
 
 ## ALE 10.1: Are these data still good?
 
@@ -167,4 +167,39 @@ print('PASSED our unit tests!')
 
 Congratulations! You now know several kinds of hash functions, all of which convert inputs of unbounded size into an output that is a small integer, with some hashes as small as a single bit!
 
-\[Version 20240315\]
+## ALE 10.3: Find colliding words
+
+The script `rk_strmatch.py` currently finds substrings in the text that match a given pattern. If the pattern fed is a word, can you change this script so that it prints **not substring matches** but **the words that collide with the pattern word** (i.e., find two words that produce the same hash value)? Let's try!
+
+In doing this work, you'll probably want to:
+
+1. Pull out the code that computes a hash in `rk_strmatch` into its own function and make the hashing function constants into globals.
+2. Make sure that the substring that matches the pattern word is itself a word. You can assume that words contain only the letters a-z.
+3. Check your work by printing both the hash of the pattern word and the hash of the colliding words.
+4. Print a colliding word only once, even if it occurs many times in the input text.
+
+Start by copying `rk_strmatch.py` into a file called `ale03.py`, and then edit that file so that you don't destroy your good copy of the original script.
+
+To test your script, you can try the following two commands:
+
+* `python3 ale03.py JustDavid-chaps.txt book`
+* `python3 ale03.py JustDavid-chaps.txt pale`
+
+The test with "book" should print:
+
+```{code-block} python
+chap10$ python3 ale03.py JustDavid-chaps.txt book
+pattern hash("book") = 3324
+No collisions found
+```
+
+The test with "pale" should print:
+
+```{code-block} python
+chap10$ python3 ale03.py JustDavid-chaps.txt pale
+pattern hash("pale") = 64517
+COLLISION: hash("spot") = 64517
+COLLISION: hash("tops") = 64517
+```
+
+\[Version 20240822\]
