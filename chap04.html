@@ -447,15 +447,15 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching wikipedia for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="c1"># Craft a request wikipedia will understand about The Cat in the Hat</span>
 <span class="linenos"> 8</span>    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>
 <span class="linenos"> 9</span>    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://en.wikipedia.org/w/api.php?action=query&amp;list=search&amp;srsearch=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&amp;srlimit=1&amp;format=json&quot;</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Send that request from our computer to the one running wikipedia</span>
 <span class="linenos">12</span>    <span class="c1"># Read the response from the wikipedia computer</span>
 <span class="linenos">13</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Print the answer to our question ... sorta </span>
 <span class="linenos">16</span>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
 <span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Our request to Wikipedia succeeded!&quot;</span><span class="p">)</span>
@@ -507,17 +507,17 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching wikipedia for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="c1"># Highlight the 4 components of a URL for HTTP</span>
 <span class="linenos"> 8</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos"> 9</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;en.wikipedia.org&#39;</span>
 <span class="linenos">10</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/w/api.php&#39;</span>
 <span class="linenos">11</span>    <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;?action=query&amp;list=search&amp;srsearch=The+Cat+in+the+Hat&amp;srlimit=1&amp;format=json&#39;</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Build the URL and launch a `get` request</span>
 <span class="linenos">14</span>    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">hostname</span><span class="si">}{</span><span class="n">path</span><span class="si">}{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="linenos">15</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
 <span class="linenos">18</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Our request to Wikipedia succeeded!&quot;</span><span class="p">)</span>
 <span class="linenos">19</span>    <span class="k">else</span><span class="p">:</span>
@@ -548,13 +548,13 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching wikipedia for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
 <span class="linenos"> 8</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos"> 9</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;en.wikipedia.org&#39;</span>
 <span class="linenos">10</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/w/api.php&#39;</span>
 <span class="linenos">11</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">14</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
 <span class="linenos">15</span>             <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span>
@@ -562,9 +562,9 @@ document.write(`
 <span class="linenos">17</span>             <span class="s1">&#39;srlimit&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="linenos">18</span>             <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span>
 <span class="linenos">19</span>    <span class="p">}</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>    
 <span class="linenos">21</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
-<span class="linenos">22</span>
+<span class="linenos">22</span>    
 <span class="linenos">23</span>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
 <span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Our request to Wikipedia succeeded!&quot;</span><span class="p">)</span>
 <span class="linenos">25</span>    <span class="k">else</span><span class="p">:</span>
@@ -631,7 +631,7 @@ document.write(`
 <span class="linenos"> 6</span>    <span class="c1"># print(&#39;Searching wikipedia: changed &quot;path&quot;&#39;)</span>
 <span class="linenos"> 7</span>    <span class="c1"># print(&#39;Searching wikipedia: changed &quot;hostname&quot;&#39;)</span>
 <span class="linenos"> 8</span>    <span class="c1"># print(&#39;Searching wikipedia: changed &quot;srsearch&quot;&#39;)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
 <span class="linenos">11</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos">12</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;en.wikipedia.org&#39;</span>
@@ -639,7 +639,7 @@ document.write(`
 <span class="linenos">14</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/w/api.php&#39;</span>
 <span class="linenos">15</span>    <span class="c1"># path = &#39;/asdfghjasdfghj/api.php&#39;</span>
 <span class="linenos">16</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">19</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
 <span class="linenos">20</span>             <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span>
@@ -648,9 +648,9 @@ document.write(`
 <span class="linenos">23</span>             <span class="s1">&#39;srlimit&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="linenos">24</span>             <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span>
 <span class="linenos">25</span>    <span class="p">}</span>
-<span class="linenos">26</span>
+<span class="linenos">26</span>    
 <span class="linenos">27</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>    
 <span class="linenos">29</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.status_code =&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="linenos">30</span>
 <span class="linenos">31</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -686,13 +686,13 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching wikipedia for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
 <span class="linenos"> 8</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos"> 9</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;en.wikipedia.org&#39;</span>
 <span class="linenos">10</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/w/api.php&#39;</span>
 <span class="linenos">11</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">14</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
 <span class="linenos">15</span>             <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span>
@@ -700,14 +700,14 @@ document.write(`
 <span class="linenos">17</span>             <span class="s1">&#39;srlimit&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="linenos">18</span>             <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span>
 <span class="linenos">19</span>    <span class="p">}</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>    
 <span class="linenos">21</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
-<span class="linenos">22</span>
+<span class="linenos">22</span>    
 <span class="linenos">23</span>    <span class="c1"># Print the response headers with a line per key</span>
 <span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.headers =&quot;</span><span class="p">)</span>
 <span class="linenos">25</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 <span class="linenos">26</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>    
 <span class="linenos">28</span>    <span class="c1"># This is how we can access one of the keys</span>
 <span class="linenos">29</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Content-Type:&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">])</span>
 <span class="linenos">30</span>
@@ -727,13 +727,13 @@ document.write(`
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching wikipedia for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
 <span class="linenos"> 9</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos">10</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;en.wikipedia.org&#39;</span>
 <span class="linenos">11</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/w/api.php&#39;</span>
 <span class="linenos">12</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span>    
 <span class="linenos">14</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">15</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
 <span class="linenos">16</span>             <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span>
@@ -741,20 +741,20 @@ document.write(`
 <span class="linenos">18</span>             <span class="s1">&#39;srlimit&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="linenos">19</span>             <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span>
 <span class="linenos">20</span>    <span class="p">}</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="c1"># Print the response body directly</span>
 <span class="linenos">25</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.text =&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="linenos">26</span>
+<span class="linenos">26</span>    
 <span class="linenos">27</span>    <span class="nb">print</span><span class="p">()</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>    
 <span class="linenos">29</span>    <span class="c1"># Read the response body in JSON format and print it</span>
 <span class="linenos">30</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="linenos">31</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.json() =&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-<span class="linenos">32</span>
+<span class="linenos">32</span>    
 <span class="linenos">33</span>    <span class="nb">print</span><span class="p">()</span>
-<span class="linenos">34</span>
+<span class="linenos">34</span>    
 <span class="linenos">35</span>    <span class="c1"># Print just the title from the JSON-structured response</span>
 <span class="linenos">36</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Title =&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">][</span><span class="s1">&#39;search&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
 <span class="linenos">37</span>
@@ -781,29 +781,29 @@ document.write(`
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching HOLLIS for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
 <span class="linenos"> 9</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
 <span class="linenos">10</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;api.lib.harvard.edu&#39;</span>
 <span class="linenos">11</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/v2/items.json&#39;</span>
 <span class="linenos">12</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span>    
 <span class="linenos">14</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">15</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="s1">&#39;The Cat in the Hat&#39;</span><span class="p">,</span>
 <span class="linenos">16</span>             <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">2</span>
 <span class="linenos">17</span>    <span class="p">}</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>    
 <span class="linenos">19</span>    <span class="c1"># Add a field to the request header saying what we accept</span>
 <span class="linenos">20</span>    <span class="n">accept</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">accept</span><span class="p">)</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="c1"># Read the response body in JSON format and print it</span>
 <span class="linenos">25</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="linenos">26</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.json() =&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>    
 <span class="linenos">28</span>    <span class="nb">print</span><span class="p">()</span>
-<span class="linenos">29</span>
+<span class="linenos">29</span>    
 <span class="linenos">30</span>    <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;pagination&#39;</span><span class="p">][</span><span class="s1">&#39;numFound&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">31</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Zero results&#39;</span><span class="p">)</span>
 <span class="linenos">32</span>    <span class="k">else</span><span class="p">:</span>
@@ -837,15 +837,15 @@ document.write(`
 <span class="linenos"> 8</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;api.lib.harvard.edu&#39;</span>
 <span class="linenos"> 9</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/v2/items.json&#39;</span>
 <span class="linenos">10</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
 <span class="linenos">13</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="n">book</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Add a field to the request header saying what we accept</span>
 <span class="linenos">16</span>    <span class="n">accept</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">accept</span><span class="p">)</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>    
 <span class="linenos">20</span>    <span class="c1"># Return a list of matching items from the received response</span>
 <span class="linenos">21</span>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;pagination&#39;</span><span class="p">][</span><span class="s1">&#39;numFound&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">22</span>        <span class="k">return</span> <span class="p">[]</span>
@@ -870,10 +870,10 @@ document.write(`
 <span class="linenos">41</span>
 <span class="linenos">42</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">43</span>    <span class="n">desired_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What&#39;s the title of your desired book? &quot;</span><span class="p">)</span>
-<span class="linenos">44</span>
+<span class="linenos">44</span>    
 <span class="linenos">45</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Searching HOLLIS for &quot;</span><span class="si">{</span><span class="n">desired_book</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
 <span class="linenos">46</span>    <span class="n">items</span> <span class="o">=</span> <span class="n">h_lib</span><span class="p">(</span><span class="n">desired_book</span><span class="p">)</span>
-<span class="linenos">47</span>
+<span class="linenos">47</span>    
 <span class="linenos">48</span>    <span class="c1"># Launch a browser window if we find the desired book</span>
 <span class="linenos">49</span>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
 <span class="linenos">50</span>        <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">desired_book</span><span class="p">):</span>
@@ -905,7 +905,7 @@ document.write(`
 <p><strong>Blocking and non-blocking function calls.</strong> Let’s pause for a moment and look at two of the powerful function calls we made in <code class="docutils literal notranslate"><span class="pre">qweb8.py</span></code>. The <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call on line 18 and the <code class="docutils literal notranslate"><span class="pre">browser.open</span></code> call on line 56 are different in a fundamentally interesting way. I don’t mean that one returns a Python list and the other returns the special Python object <code class="docutils literal notranslate"><span class="pre">None</span></code>. No, I want you to think about when lines 21 and 57 execute.</p>
 <p>Line 21 can’t execute until we have completed the <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> call and have a <code class="docutils literal notranslate"><span class="pre">response</span></code> object. This call <em>blocks</em> the further execution of our script until it completes. In particular, our script has to wait for some server process to do some work before the process running our script can continue. On the other hand, our script doesn’t care how long a process that runs the web browser takes to display the URL we asked it to render. Our script can merrily move on to the work in line 57 and beyond. The call to <code class="docutils literal notranslate"><span class="pre">webbrowser.open</span></code> is an example of a <em>non-blocking</em> call.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a></p>
 <p>This is your first taste of <em>concurrency</em> (also called <em>parallelism</em>), and it is a fascinating and tricky subject. For now, be aware whether the library call you’re making will block and think about the implications of that action on the rest of what you write in your script.</p>
-<p>[Version 20240813]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

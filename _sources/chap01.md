@@ -908,7 +908,7 @@ my_open_book = open('CatInTheHat.txt')
 # Do the indented work until all the lines have been read
     the_line = my_open_book.readline()
     print(the_line, end='')
-
+    
     # Check for EOF
     if the_line == '':
         break
@@ -940,7 +940,7 @@ my_open_book = open('CatInTheHat.txt')
 while True:
     the_line = my_open_book.readline()
     print(the_line, end='')
-
+    
     # Check for EOF
     if the_line == '':
         break
@@ -982,7 +982,7 @@ my_open_book = open(my_book)
 while True:
     the_line = my_open_book.readline()
     print(the_line, end='')
-
+    
     # Check for EOF
     if the_line == '':
         break
@@ -1012,7 +1012,7 @@ Although Wing doesn't provide a single definition for computational thinking in 
 
 More recently, the work by Wing, Aho, and others has been synthesized into the following definition: computational thinking is the "thought processes involved in formulating problems and their solutions so that the solutions are represented in a form that can be effectively carried out by an information-processing agent." In their 2021 *Science & Education* article, Michael Lodi and Simone Martini call this the Aho-Cuny-Snyder-Wing definition, in recognition of the contributions from these four particularly influential individuals.[^fn20]
 
-\[Version 20240820\]
+\[Version 20240826\]
 
 [^fn1]: Jeannette M. Wing. 2006. Computational thinking. Commun. ACM 49, 3 (March 2006), 33--35. https://doi.org/10.1145/1118178.1118215
 

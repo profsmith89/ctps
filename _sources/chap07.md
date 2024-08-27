@@ -174,7 +174,7 @@ for i in range(1, bits+1):
     # of our current lower bound, i.e., move up the value below the
     # target number.
     new_guess = lower + (2.0 ** -i)
-
+    
     # Update the correct bound, depending upon whether the new estimate
     # overshot the target or not.
     if new_guess <= n:
@@ -183,16 +183,16 @@ for i in range(1, bits+1):
     else:
         upper = new_guess
         encoding += '0'
-
+    
     # And now update which of these is our current best estimate
     if n - lower < upper - n:
         best = lower
     else:
         best = upper
-
+    
     if best == n:
         break
-
+    
     # Print how we've done so far
     units = 'bit' if i == 1 else 'bits'
     print(f'With {i} {units}, {n} is between {lower} and {upper}')
@@ -219,7 +219,7 @@ If your script operates with floating-point numbers in a domain where rounding e
 
 As if it wasn't hard enough to write a correct program!
 
-\[Version 20240814\]
+\[Version 20240827\]
 
 [^fn1]: The leading \`0b\` mimics the leading \`0x\` we saw on hexadecimal numbers. Following this prefix, we write a \`0\`, which indicates that there's no whole number here, and the radix point, which always precedes the fractional part.
 

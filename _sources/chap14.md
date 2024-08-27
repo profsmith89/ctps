@@ -154,14 +154,14 @@ def string_bug(f):
     if items == 1:
         # No double-quote string literals in f
         return "No"
-
+    
     # Process just the strings in the worklist. String literals
     # defined using a single double-quote character cannot
     # contain a newline character.
     for i in range(1, items, 2):
         if '\n' in work_list[i]:
             return "Yes" 
-
+    
     # Make sure the last string ended with a double quote, which
     # means the length of work_list should odd.
     if items & 1 != 1:
@@ -277,11 +277,11 @@ def analyze(analysis_name, fun_name, s=None):
     # `analysis_name` is in `analysis_name.py`.
     analysis_mod = importlib.import_module(analysis_name)
     analysis_fun = getattr(analysis_mod, analysis_name)
-
+    
     # Grab function to analyze. The utility used assumes that
     # the function `fun_name` is in `fun_name.py`.
     f = our_tools.grab_f(fun_name)
-
+    
     # Do the analysis
     if s == None:
         ans = analysis_fun(f)
@@ -373,7 +373,7 @@ def yep(f, s):
         print(f, end='\n\n')
         print('*** s ***')
         print(s, end='\n\n')
-
+    
     # Default answer
     return "Yes"
 ```
@@ -399,7 +399,7 @@ def yex(f, s):
         cnt = 0
         while cnt < 1000000:
             cnt -= 1
-
+    
     # Default answer
     return "Yes"
 ```
@@ -594,7 +594,7 @@ We used a number of tools, without naming most of them, commonly employed by tho
 
 While it is true that we can't expect a computational tool to find all our bugs, this doesn't mean we can't find lots of specific kinds of bugs in many different kinds of programs. On to the next two chapters to learn how you can more quickly and easily find many important bugs!
 
-\[Version 20240820\]
+\[Version 20240827\]
 
 [^fn1]: When computer scientists talk about static analyses, they mean analyses that ask questions about a program or how a program will execute without running it. Runtime debugging involves asking questions about a program's state while it executes. All the functions in this chapter perform static analysis.
 

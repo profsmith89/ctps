@@ -20,13 +20,13 @@ def print_numbered_lines(filename):
         with open(filename, 'r') as file:
             # Read all lines in the file
             lines = file.readlines()
-
+        
         # Loop through the lines, enumerate starts counting from 0 by default
         for index, line in enumerate(lines, start=1):
             # Print each line with its line number
             # Strip is used to remove any extra newline characters before adding our own
             print(f"{index}: {line.strip()}")
-
+    
     except FileNotFoundError:
         # If the file is not found, inform the user
         print("The file was not found. Please check the file path and try again.")
@@ -316,37 +316,37 @@ def increment(d, key):
 
 def check(lines):
     '''Make sure no actor occurs more than twice'''
-
+    
     # Dictionary where we keep a count of instances of each actor
     count = {}
-
+    
     # Compile the fancy RE
     the_re = r'\d+:\s+([ \-\'\w]+) and ([ \-\'\w]+) starred in (.*)$'
     p = re.compile(the_re)
-
+    
     # Process each line grabbing the actors and the movie
     for line in lines:
         # Skip any blank lines
         if line == '':
             continue
-
+        
         # Define RE pattern and run match on current line
         m = p.match(line)
-
+        
         # Error checking
         if m == None:
             # I missed a case for the RE
             assert False, f'Died on line: {line}'
-
+        
         # Pull out the parts
         actor1 = m.group(1)
         actor2 = m.group(2)
         movie = m.group(3)   # currently unused
- 
+        
         # Put the actors in the dictionary
         increment(count, actor1)
         increment(count, actor2)                
-
+    
     # print(count)
     print(f'{blue}No repeated actors!{reset}')
 ```
@@ -361,12 +361,12 @@ lineno-start: 59
 
 with open(input('Filename? ')) as f:
     lines = f.readlines()
-
+    
     # Figure out how many initial lines to remove
     i = 0
     while 'degrees of separation' not in lines[i]:
         i += 1
-
+    
     check(lines[i+1:])
 ```
 
@@ -486,11 +486,11 @@ def remove_names_from_line(line):
     # Pattern to find capitalized words followed by 'and' or 'starred'
     # This regex assumes that names are always before 'starred' and start with capital letters
     pattern = r'\b[A-Z][a-z]*\s(?:and\s)?[A-Z][a-z]*\s(starred)'
-
+    
     # Replace the names and 'and' if it appears with 'starred'
     # This keeps the structure of the sentence but removes the names
     clean_line = re.sub(pattern, r'\1', line)
-
+    
     return clean_line
 
 # Example usage
@@ -598,7 +598,7 @@ When all is said and done, problem solving with GAI is still the same process I 
 
 Happy problem solving!
 
-\[Version 20240811\]
+\[Version 20240827\]
 
 [^fn1]: The figure and findings discussed in this section are from Dell'Acqua, Fabrizio and McFowland III, Edward and Mollick, Ethan R. and Lifshitz-Assaf, Hila and Kellogg, Katherine and Rajendran, Saran and Krayer, Lisa and Candelon, François and Lakhani, Karim R., "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality" (September 15, 2023). Harvard Business School Technology & Operations Mgt. Unit Working Paper No. 24-013. The full text is available at SSRN (https://ssrn.com/abstract=4573321) or doi.org (http://dx.doi.org/10.2139/ssrn.4573321).
 

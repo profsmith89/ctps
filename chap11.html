@@ -535,25 +535,25 @@ document.write(`
 <span class="linenos">12</span><span class="sd">       successful path is marked in the city object.&quot;&quot;&quot;</span>
 <span class="linenos">13</span>    <span class="c1"># Set the current state</span>
 <span class="linenos">14</span>    <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">my_city</span><span class="o">.</span><span class="n">start</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="k">while</span> <span class="n">cur_loc</span> <span class="ow">in</span> <span class="n">my_city</span><span class="p">:</span>
 <span class="linenos">17</span>        <span class="c1"># Where to? Well, what steps are possible?</span>
 <span class="linenos">18</span>        <span class="n">moves</span> <span class="o">=</span> <span class="n">my_city</span><span class="o">.</span><span class="n">possible_moves</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
 <span class="linenos">19</span>        <span class="c1"># print(f&#39;DEBUG: loc = {loc}; moves = {moves}&#39;)</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>        
 <span class="linenos">21</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">moves</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">22</span>            <span class="k">return</span> <span class="kc">False</span>   <span class="c1"># dead end!</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>        
 <span class="linenos">24</span>        <span class="c1"># Randomly pick a possible move and make it</span>
 <span class="linenos">25</span>        <span class="n">a_move</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">moves</span><span class="p">)</span>
 <span class="linenos">26</span>        <span class="n">next_loc</span> <span class="o">=</span> <span class="n">my_city</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">a_move</span><span class="p">)</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>        
 <span class="linenos">28</span>        <span class="c1"># Leave a scent at current loc</span>
 <span class="linenos">29</span>        <span class="n">my_city</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">30</span>
+<span class="linenos">30</span>        
 <span class="linenos">31</span>        <span class="c1"># Update current state</span>
 <span class="linenos">32</span>        <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">next_loc</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>    
 <span class="linenos">34</span>    <span class="c1"># The random path was successful!</span>
 <span class="linenos">35</span>    <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
@@ -569,7 +569,7 @@ document.write(`
 <span class="linenos">38</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Building a city with a 4x4 square grid&#39;</span><span class="p">)</span>
 <span class="linenos">39</span>    <span class="n">nyc</span> <span class="o">=</span> <span class="n">CitySqGrid</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Cosmo</span><span class="p">)</span>
 <span class="linenos">40</span>    <span class="nb">print</span><span class="p">(</span><span class="n">nyc</span><span class="p">)</span>
-<span class="linenos">41</span>
+<span class="linenos">41</span>    
 <span class="linenos">42</span>    <span class="c1"># Cosmo walks himself</span>
 <span class="linenos">43</span>    <span class="n">success</span> <span class="o">=</span> <span class="n">dogwalk</span><span class="p">(</span><span class="n">nyc</span><span class="p">)</span>
 <span class="linenos">44</span>    <span class="nb">print</span><span class="p">(</span><span class="n">nyc</span><span class="p">)</span>
@@ -591,24 +591,24 @@ document.write(`
 <span class="linenos"> 6</span><span class="k">def</span> <span class="nf">sim</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span>
 <span class="linenos"> 7</span>    <span class="c1"># Initialize the metric of interest</span>
 <span class="linenos"> 8</span>    <span class="n">dead_ends</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="c1"># Build the specified city</span>
 <span class="linenos">11</span>    <span class="n">my_city</span> <span class="o">=</span> <span class="n">CitySqGrid</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">dogwalk</span><span class="o">.</span><span class="n">Cosmo</span><span class="p">)</span>
 <span class="linenos">12</span>    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Building a </span><span class="si">{</span><span class="n">blocks</span><span class="si">}</span><span class="s1">x</span><span class="si">{</span><span class="n">blocks</span><span class="si">}</span><span class="s1"> city&#39;</span><span class="p">)</span>
 <span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="n">my_city</span><span class="p">)</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
 <span class="linenos">17</span>        <span class="c1"># Reset the city before each trial</span>
 <span class="linenos">18</span>        <span class="n">my_city</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>        
 <span class="linenos">20</span>        <span class="c1"># Run, record, and print the trial</span>
 <span class="linenos">21</span>        <span class="n">success</span> <span class="o">=</span> <span class="n">dogwalk</span><span class="o">.</span><span class="n">dogwalk</span><span class="p">(</span><span class="n">my_city</span><span class="p">)</span>
 <span class="linenos">22</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
 <span class="linenos">23</span>            <span class="n">dead_ends</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="linenos">24</span>        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
 <span class="linenos">25</span>            <span class="nb">print</span><span class="p">(</span><span class="n">my_city</span><span class="p">)</span>
-<span class="linenos">26</span>
+<span class="linenos">26</span>    
 <span class="linenos">27</span>    <span class="c1"># Print the percentage of trials ending in dead ends</span>
 <span class="linenos">28</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dead_ends</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">trials</span><span class="si">}</span><span class="s1">% dead ends&#39;</span><span class="p">)</span>
 </pre></div>
@@ -675,7 +675,7 @@ document.write(`
 <span class="linenos">62</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">63</span>    <span class="c1"># Build the city and put Cosmo at its center</span>
 <span class="linenos">64</span>    <span class="n">nyc</span> <span class="o">=</span> <span class="n">CitySqGrid</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">Cosmo</span><span class="p">)</span>
-<span class="linenos">65</span>
+<span class="linenos">65</span>    
 <span class="linenos">66</span>    <span class="c1"># Add Cosmo&#39;s favorite pins to the city map</span>
 <span class="linenos">67</span>    <span class="n">pins</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos">68</span>        <span class="n">Pin</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Lots of squirrels&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
@@ -685,11 +685,11 @@ document.write(`
 <span class="linenos">72</span>    <span class="p">]</span>
 <span class="linenos">73</span>    <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">pins</span><span class="p">:</span>
 <span class="linenos">74</span>        <span class="n">nyc</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">pin</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">pin</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
-<span class="linenos">75</span>
+<span class="linenos">75</span>    
 <span class="linenos">76</span>    <span class="nb">print</span><span class="p">(</span><span class="n">nyc</span><span class="p">)</span>
-<span class="linenos">77</span>
+<span class="linenos">77</span>    
 <span class="linenos">78</span>    <span class="n">wander</span><span class="p">(</span><span class="n">nyc</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-<span class="linenos">79</span>
+<span class="linenos">79</span>    
 <span class="linenos">80</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Thanks for the fun walk!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -726,10 +726,10 @@ document.write(`
 <span class="linenos">24</span>        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span>
 <span class="linenos">25</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">note</span> <span class="o">=</span> <span class="n">note</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>        
 <span class="linenos">28</span>        <span class="k">assert</span> <span class="n">stars</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">stars</span> <span class="o">&lt;=</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Invalid number of stars&quot;</span>
 <span class="linenos">29</span>        <span class="bp">self</span><span class="o">.</span><span class="n">stars</span> <span class="o">=</span> <span class="n">stars</span>
-<span class="linenos">30</span>
+<span class="linenos">30</span>        
 <span class="linenos">31</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stars</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
 <span class="linenos">32</span>            <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="n">green_heart</span>
 <span class="linenos">33</span>        <span class="k">else</span><span class="p">:</span>
@@ -772,16 +772,16 @@ document.write(`
 <span class="linenos">34</span>        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
 <span class="linenos">35</span>            <span class="n">best_loc</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># not a valid location</span>
 <span class="linenos">36</span>            <span class="n">best_distance</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="c1"># bigger than any allowable map</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>            
 <span class="linenos">38</span>            <span class="c1"># Find the closest highly-rated pin</span>
 <span class="linenos">39</span>            <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">pins</span><span class="p">:</span>
 <span class="linenos">40</span>                <span class="n">dist</span> <span class="o">=</span> <span class="n">pin</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">)</span>
 <span class="linenos">41</span>                <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">best_distance</span><span class="p">:</span>
 <span class="linenos">42</span>                    <span class="n">best_loc</span> <span class="o">=</span> <span class="n">pin</span><span class="o">.</span><span class="n">loc</span>
 <span class="linenos">43</span>                    <span class="n">best_distance</span> <span class="o">=</span> <span class="n">dist</span>
-<span class="linenos">44</span>
+<span class="linenos">44</span>                    
 <span class="linenos">45</span>            <span class="k">assert</span> <span class="n">best_loc</span> <span class="o">!=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Failed to find a pin&quot;</span>
-<span class="linenos">46</span>
+<span class="linenos">46</span>            
 <span class="linenos">47</span>            <span class="c1"># Teleport to within one step, which requires me to erase</span>
 <span class="linenos">48</span>            <span class="c1"># the character from the current cur_loc.</span>
 <span class="linenos">49</span>            <span class="n">character</span> <span class="o">=</span> <span class="n">my_city</span><span class="o">.</span><span class="n">get_mark</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">)</span>
@@ -810,22 +810,22 @@ document.write(`
 <span class="linenos">49</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">50</span>    <span class="c1"># Our faithful dog</span>
 <span class="linenos">51</span>    <span class="n">Cosmo</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{DOG FACE}</span><span class="s1">&#39;</span>
-<span class="linenos">52</span>
+<span class="linenos">52</span>    
 <span class="linenos">53</span>    <span class="c1"># Build a city</span>
 <span class="linenos">54</span>    <span class="n">nyc</span> <span class="o">=</span> <span class="n">CitySqGrid</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">Cosmo</span><span class="p">)</span>
-<span class="linenos">55</span>
+<span class="linenos">55</span>    
 <span class="linenos">56</span>    <span class="c1"># Create some pins and keep track of them in a list</span>
 <span class="linenos">57</span>    <span class="n">pins</span> <span class="o">=</span> <span class="p">[</span>
 <span class="linenos">58</span>        <span class="n">Pin</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Lots of squirrels&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
 <span class="linenos">59</span>        <span class="n">Pin</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="s2">&quot;Fire Hydrant&quot;</span><span class="p">,</span> <span class="s2">&quot;Many good smells&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
 <span class="linenos">60</span>        <span class="n">Pin</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;Cat&quot;</span><span class="p">,</span> <span class="s2">&quot;Not a nice cat!&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
 <span class="linenos">61</span>    <span class="p">]</span>
-<span class="linenos">62</span>
+<span class="linenos">62</span>    
 <span class="linenos">63</span>    <span class="c1"># Add each pin in pins to the city map</span>
 <span class="linenos">64</span>    <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">pins</span><span class="p">:</span>
 <span class="linenos">65</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Adding </span><span class="si">{</span><span class="n">pin</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">66</span>        <span class="n">nyc</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">pin</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">pin</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
-<span class="linenos">67</span>
+<span class="linenos">67</span>    
 <span class="linenos">68</span>    <span class="nb">print</span><span class="p">(</span><span class="n">nyc</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -863,7 +863,7 @@ document.write(`
 <span class="linenos">81</span>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="linenos">82</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets all cell contents to their original state&quot;&quot;&quot;</span>
 <span class="linenos">83</span>        <span class="n">maze</span><span class="o">.</span><span class="n">Maze</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="linenos">84</span>
+<span class="linenos">84</span>        
 <span class="linenos">85</span>        <span class="c1"># Reset the start point with our character</span>
 <span class="linenos">86</span>        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
 <span class="linenos">87</span>        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">character</span>
@@ -898,36 +898,36 @@ document.write(`
 <span class="linenos"> 9</span>    <span class="c1"># Set the current state and mark the map location explored</span>
 <span class="linenos">10</span>    <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">start</span>
 <span class="linenos">11</span>    <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Build a list on which to keep known but unexplored locations</span>
 <span class="linenos">14</span>    <span class="n">frontier</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="k">while</span> <span class="n">cur_loc</span> <span class="o">!=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>    <span class="c1"># search loop</span>
 <span class="linenos">17</span>        <span class="c1"># What unexplored next steps are possible?</span>
 <span class="linenos">18</span>        <span class="n">moves</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">possible_moves</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>        
 <span class="linenos">20</span>        <span class="c1"># Add moves not already on the frontier to the frontier</span>
 <span class="linenos">21</span>        <span class="k">for</span> <span class="n">a_move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
 <span class="linenos">22</span>            <span class="n">loc</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">simulate_move</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">a_move</span><span class="p">)</span>
 <span class="linenos">23</span>            <span class="k">if</span> <span class="n">loc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frontier</span><span class="p">:</span>
 <span class="linenos">24</span>                <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
 <span class="linenos">25</span>                <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">FRONTIER</span><span class="p">)</span>
-<span class="linenos">26</span>
+<span class="linenos">26</span>        
 <span class="linenos">27</span>        <span class="c1"># DEBUG: Uncomment to watch the frontier grow</span>
 <span class="linenos">28</span>        <span class="c1"># print(my_map)</span>
 <span class="linenos">29</span>        <span class="c1"># input(&#39;Ready to move on? &#39;)</span>
-<span class="linenos">30</span>
+<span class="linenos">30</span>        
 <span class="linenos">31</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">32</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No solution&#39;</span><span class="p">)</span>
 <span class="linenos">33</span>            <span class="k">return</span>
-<span class="linenos">34</span>
+<span class="linenos">34</span>        
 <span class="linenos">35</span>        <span class="c1"># Choose a location from the frontier as next to explore</span>
 <span class="linenos">36</span>        <span class="n">next_loc</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 <span class="linenos">37</span>        <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">next_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">38</span>
+<span class="linenos">38</span>        
 <span class="linenos">39</span>        <span class="c1"># Update current state</span>
 <span class="linenos">40</span>        <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">next_loc</span>
-<span class="linenos">41</span>
+<span class="linenos">41</span>    
 <span class="linenos">42</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found a solution&#39;</span><span class="p">)</span>
 <span class="linenos">43</span>    <span class="n">my_map</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
 <span class="linenos">44</span>    <span class="k">return</span>
@@ -1000,14 +1000,14 @@ document.write(`
 <span class="linenos">18</span>    <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">start</span>
 <span class="linenos">19</span>    <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
 <span class="linenos">20</span>    <span class="n">cur_note</span> <span class="o">=</span> <span class="n">TreeNote</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="c1"># Build a list on which to keep known but unexplored locations</span>
 <span class="linenos">23</span>    <span class="n">frontier</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>    
 <span class="linenos">25</span>    <span class="k">while</span> <span class="n">cur_loc</span> <span class="o">!=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>    <span class="c1"># search loop</span>
 <span class="linenos">26</span>        <span class="c1"># What unexplored next steps are possible?</span>
 <span class="linenos">27</span>        <span class="n">moves</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">possible_moves</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>        
 <span class="linenos">29</span>        <span class="c1"># Add moves not already on the frontier to the frontier</span>
 <span class="linenos">30</span>        <span class="k">for</span> <span class="n">a_move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
 <span class="linenos">31</span>            <span class="n">loc</span> <span class="o">=</span> <span class="n">my_map</span><span class="o">.</span><span class="n">simulate_move</span><span class="p">(</span><span class="n">cur_loc</span><span class="p">,</span> <span class="n">a_move</span><span class="p">)</span>
@@ -1015,31 +1015,31 @@ document.write(`
 <span class="linenos">33</span>                <span class="n">new_note</span> <span class="o">=</span> <span class="n">TreeNote</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">cur_note</span><span class="p">,</span> <span class="n">a_move</span><span class="p">)</span>
 <span class="linenos">34</span>                <span class="n">frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_note</span><span class="p">)</span>
 <span class="linenos">35</span>                <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">FRONTIER</span><span class="p">)</span>
-<span class="linenos">36</span>
+<span class="linenos">36</span>        
 <span class="linenos">37</span>        <span class="c1"># DEBUG: Uncomment to watch the frontier grow</span>
 <span class="linenos">38</span>        <span class="c1"># print(my_map)</span>
 <span class="linenos">39</span>        <span class="c1"># input(&#39;Ready to move on? &#39;)</span>
-<span class="linenos">40</span>
+<span class="linenos">40</span>        
 <span class="linenos">41</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frontier</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">42</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No solution&#39;</span><span class="p">)</span>
 <span class="linenos">43</span>            <span class="k">return</span>
-<span class="linenos">44</span>
+<span class="linenos">44</span>        
 <span class="linenos">45</span>        <span class="c1"># Choose a note from the frontier as next to explore</span>
 <span class="linenos">46</span>        <span class="n">next_note</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 <span class="linenos">47</span>        <span class="n">next_loc</span> <span class="o">=</span> <span class="n">next_note</span><span class="o">.</span><span class="n">state</span>
 <span class="linenos">48</span>        <span class="n">my_map</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="n">next_loc</span><span class="p">,</span> <span class="n">EXPLORED</span><span class="p">)</span>
-<span class="linenos">49</span>
+<span class="linenos">49</span>        
 <span class="linenos">50</span>        <span class="c1"># Update current state</span>
 <span class="linenos">51</span>        <span class="n">cur_note</span> <span class="o">=</span> <span class="n">next_note</span>
 <span class="linenos">52</span>        <span class="n">cur_loc</span> <span class="o">=</span> <span class="n">next_loc</span>
-<span class="linenos">53</span>
+<span class="linenos">53</span>    
 <span class="linenos">54</span>    <span class="c1"># Follow the parent links from cur_note to create</span>
 <span class="linenos">55</span>    <span class="c1"># the actual driving directions</span>
 <span class="linenos">56</span>    <span class="n">ddirections</span> <span class="o">=</span> <span class="p">[</span><span class="n">cur_note</span><span class="p">]</span>
 <span class="linenos">57</span>    <span class="k">while</span> <span class="n">cur_note</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
 <span class="linenos">58</span>        <span class="n">cur_note</span> <span class="o">=</span> <span class="n">cur_note</span><span class="o">.</span><span class="n">parent</span>
 <span class="linenos">59</span>        <span class="n">ddirections</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cur_note</span><span class="p">)</span>
-<span class="linenos">60</span>
+<span class="linenos">60</span>    
 <span class="linenos">61</span>    <span class="c1"># Print out the driving directions</span>
 <span class="linenos">62</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Solution ##&#39;</span><span class="p">)</span>
 <span class="linenos">63</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Starting at </span><span class="si">{</span><span class="n">ddirections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1090,7 +1090,7 @@ document.write(`
 <p>The as-the-crow-flies distance to the goal isn’t a set of driving directions (i.e., we’re not following the map!), but it does indicate which of two moves would bring us closer to the goal. Imagine using this distance to select the search algorithm’s next location from the frontier list. We’re using the distance to put the frontier list locations in a priority order. The higher the priority, the more likely that location will get us to the goal.</p>
 <p>In general, prioritizing our possible search moves is the job of a <em>heuristic function.</em> The heuristic we use, of course, might be wrong. For example, we might have to drive in a direction away from the goal to find the road that will get us to it. Heuristics don’t guarantee that we’ll do better, but good ones, on average, find a near-optimal solution more quickly than our two uninformed solutions.</p>
 <p>There are many heuristics in the domain of search. I asked you to imagine a common one (called <em>greedy</em>), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point’s heuristic (called <em>A* search</em>). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems.</p>
-<p>[Version 20240820]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

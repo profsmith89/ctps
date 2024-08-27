@@ -616,29 +616,29 @@ document.write(`
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span><span class="k">def</span> <span class="nf">guesses</span><span class="p">():</span>
 <span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;## Welcome to I&#39;LL GUESS YOUR NUMBER ##&quot;</span><span class="p">)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please think of a number between </span><span class="si">{</span><span class="n">LO</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">HI</span><span class="si">}</span><span class="s2">, but don&#39;t tell me.&quot;</span><span class="p">)</span>
 <span class="linenos">11</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Hit return when you&#39;re ready ...&quot;</span><span class="p">)</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Possible user answers</span>
 <span class="linenos">14</span>    <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;too low&#39;</span><span class="p">,</span> <span class="s1">&#39;too high&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">]</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="c1"># Initializations</span>
 <span class="linenos">17</span>    <span class="n">lo</span> <span class="o">=</span> <span class="n">LO</span>
 <span class="linenos">18</span>    <span class="n">hi</span> <span class="o">=</span> <span class="n">HI</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>    
 <span class="linenos">20</span>    <span class="c1"># Use binary search as the algorithm we play by</span>
 <span class="linenos">21</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">22</span>        <span class="c1"># Generate new guess at mid-point</span>
 <span class="linenos">23</span>        <span class="n">mid</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="p">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>        
 <span class="linenos">25</span>        <span class="c1"># Grab answer from the player</span>
 <span class="linenos">26</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">27</span>            <span class="n">ans</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Is it </span><span class="si">{</span><span class="n">mid</span><span class="si">}</span><span class="s1">? &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 <span class="linenos">28</span>            <span class="k">if</span> <span class="n">ans</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">:</span>
 <span class="linenos">29</span>                <span class="k">break</span>
 <span class="linenos">30</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please answer &quot;too low&quot;, &quot;too high&quot;, or &quot;yes&quot;.&#39;</span><span class="p">)</span>
-<span class="linenos">31</span>
+<span class="linenos">31</span>        
 <span class="linenos">32</span>        <span class="c1"># Update range of possible guesses</span>
 <span class="linenos">33</span>        <span class="k">if</span> <span class="n">ans</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
 <span class="linenos">34</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\U0001f60e</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -668,18 +668,18 @@ document.write(`
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Given two sorted lists, return a single sorted list&quot;&quot;&quot;</span>
-<span class="linenos"> 5</span>
+<span class="linenos"> 5</span>    
 <span class="linenos"> 6</span>    <span class="c1"># Check for and handle trivial merge cases</span>
 <span class="linenos"> 7</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos"> 8</span>        <span class="k">return</span> <span class="n">b</span>
 <span class="linenos"> 9</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">10</span>        <span class="k">return</span> <span class="n">a</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Create a place to put the merged lists</span>
 <span class="linenos">13</span>    <span class="n">merged</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="linenos">14</span>    <span class="c1"># Calculate how long the merged list should be</span>
 <span class="linenos">15</span>    <span class="n">tot_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="c1"># Merge a and b</span>
 <span class="linenos">18</span>    <span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">merged</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tot_length</span><span class="p">):</span>
 <span class="linenos">19</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -690,7 +690,7 @@ document.write(`
 <span class="linenos">24</span>            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="linenos">25</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">26</span>            <span class="n">merged</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>    
 <span class="linenos">28</span>    <span class="k">return</span> <span class="n">merged</span>
 </pre></div>
 </div>
@@ -711,7 +711,7 @@ document.write(`
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Iterative merge sort: s sorted in place&quot;&quot;&quot;</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists that are guaranteed to be sorted)</span>
 <span class="linenos"> 9</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">10</span>        <span class="k">return</span>
@@ -720,12 +720,12 @@ document.write(`
 <span class="linenos">13</span>    <span class="c1"># to sublists of length 1, which will then</span>
 <span class="linenos">14</span>    <span class="c1"># grow back up to len(s) in powers of 2</span>
 <span class="linenos">15</span>    <span class="n">sublist_len</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="c1"># Merge all sorted sublists back up the tree of splits</span>
 <span class="linenos">18</span>    <span class="k">while</span> <span class="n">sublist_len</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">19</span>        <span class="c1"># i is the starting index of the next two sublists to merge</span>
 <span class="linenos">20</span>        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>        
 <span class="linenos">22</span>        <span class="c1"># Merge all pairs of sorted sublists of length sublist_len</span>
 <span class="linenos">23</span>        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">24</span>            <span class="c1"># Compute the end index of the first sublist</span>
@@ -733,18 +733,18 @@ document.write(`
 <span class="linenos">26</span>            <span class="c1"># Catch the special case of the last sublist&#39;s length</span>
 <span class="linenos">27</span>            <span class="c1"># that may be shorter than sublist_len</span>
 <span class="linenos">28</span>            <span class="n">k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">sublist_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-<span class="linenos">29</span>
+<span class="linenos">29</span>            
 <span class="linenos">30</span>            <span class="n">merged</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">k</span><span class="p">])</span>
-<span class="linenos">31</span>
+<span class="linenos">31</span>            
 <span class="linenos">32</span>            <span class="c1"># Put the merged list back into s</span>
 <span class="linenos">33</span>            <span class="n">ii</span> <span class="o">=</span> <span class="n">i</span>
 <span class="linenos">34</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">merged</span><span class="p">:</span>
 <span class="linenos">35</span>                <span class="n">s</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
 <span class="linenos">36</span>                <span class="n">ii</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>            
 <span class="linenos">38</span>            <span class="c1"># Move to the next pair of sublists to merge</span>
 <span class="linenos">39</span>            <span class="n">i</span> <span class="o">+=</span> <span class="n">sublist_len</span> <span class="o">*</span> <span class="mi">2</span>
-<span class="linenos">40</span>
+<span class="linenos">40</span>        
 <span class="linenos">41</span>        <span class="c1"># Increase the length of the sublists to merge</span>
 <span class="linenos">42</span>        <span class="n">sublist_len</span> <span class="o">*=</span> <span class="mi">2</span>
 </pre></div>
@@ -839,14 +839,14 @@ document.write(`
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursive merge sort: returns a sorted list&quot;&quot;&quot;</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists that are sorted by definition)</span>
 <span class="linenos"> 9</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">10</span>        <span class="k">return</span> <span class="n">s</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Find index at truncated midpoint of list</span>
 <span class="linenos">13</span>    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Return merge of the two sorted halves</span>
 <span class="linenos">16</span>    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]),</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">mid</span><span class="p">:]))</span>
 </pre></div>
@@ -960,7 +960,7 @@ document.write(`
 <span class="linenos">25</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">26</span>        <span class="c1"># No characters so no stage directions</span>
 <span class="linenos">27</span>        <span class="k">return</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>    
 <span class="linenos">29</span>    <span class="n">beckett</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="linenos">30</span>    <span class="k">if</span> <span class="n">enters</span><span class="p">:</span>
 <span class="linenos">31</span>        <span class="n">stage_print</span><span class="p">(</span><span class="s1">&#39;enter&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -975,7 +975,7 @@ document.write(`
 </div>
 <p>This final <code class="docutils literal notranslate"><span class="pre">beckett</span></code> function is disturbingly simple, and that’s what happens when the pattern embedded in the problem is matched with the right tool. In this case, the tool was a divide-and-conquer approach coupled with the technique of recursion.</p>
 <p>I hope you understand how the recursive <code class="docutils literal notranslate"><span class="pre">beckett</span></code> function works. I hope you’ve also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett’s challenge is even harder, but you can do it if you take it a step at a time, as we just did.</p>
-<p>[Version 20240725]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

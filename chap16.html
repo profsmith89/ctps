@@ -484,14 +484,14 @@ document.write(`
 <span class="linenos">14</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">15</span>        <span class="n">paragraph</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="linenos">16</span>    <span class="n">paragraph</span> <span class="o">=</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Print out instructions</span>
 <span class="linenos">19</span>    <span class="nb">print</span><span class="p">(</span> \
 <span class="linenos">20</span><span class="sd">&quot;&quot;&quot;INSTRUCTIONS:</span>
 <span class="linenos">21</span><span class="sd">Let&#39;s look at each sentence in this paragraph, and</span>
 <span class="linenos">22</span><span class="sd">you tell me if you want me to surround a phrase with</span>
 <span class="linenos">23</span><span class="sd">em dashes rather that the existing commas.&quot;&quot;&quot;</span><span class="p">)</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>    
 <span class="linenos">25</span>    <span class="c1"># Iterate through each candidate sentence in text.</span>
 <span class="linenos">26</span>    <span class="c1"># A sentence is a candidate only if it has three</span>
 <span class="linenos">27</span>    <span class="c1"># or more phrases in it.</span>
@@ -503,9 +503,9 @@ document.write(`
 <span class="linenos">33</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">34</span>            <span class="c1"># Nothing to do</span>
 <span class="linenos">35</span>            <span class="k">continue</span>
-<span class="linenos">36</span>
+<span class="linenos">36</span>        
 <span class="linenos">37</span>        <span class="nb">print</span><span class="p">()</span>
-<span class="linenos">38</span>
+<span class="linenos">38</span>        
 <span class="linenos">39</span>        <span class="c1"># Print the phrases and ask the user</span>
 <span class="linenos">40</span>        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phrases</span><span class="p">):</span>
 <span class="linenos">41</span>            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
@@ -522,7 +522,7 @@ document.write(`
 <span class="linenos">52</span>            <span class="k">continue</span>
 <span class="linenos">53</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">54</span>            <span class="n">a</span> <span class="o">=</span> <span class="n">ans</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># Turn ans into an index</span>
-<span class="linenos">55</span>
+<span class="linenos">55</span>        
 <span class="linenos">56</span>        <span class="c1"># Add back the comma on the unaffected phrases while</span>
 <span class="linenos">57</span>        <span class="c1"># building the sentence prefix and suffix.</span>
 <span class="linenos">58</span>        <span class="n">s_prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -537,14 +537,14 @@ document.write(`
 <span class="linenos">67</span>                <span class="n">s_suffix</span> <span class="o">+=</span> <span class="n">phrases</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
 <span class="linenos">68</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">69</span>                <span class="n">s_suffix</span> <span class="o">+=</span> <span class="n">phrases</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-<span class="linenos">70</span>
+<span class="linenos">70</span>        
 <span class="linenos">71</span>        <span class="c1"># Add the em dashes to the affected phrase and remove</span>
 <span class="linenos">72</span>        <span class="c1"># the leading spaces in it and the new_suffix.</span>
 <span class="linenos">73</span>        <span class="n">new_s</span> <span class="o">=</span> <span class="n">s_prefix</span> <span class="o">+</span> <span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">phrases</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">s_suffix</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="linenos">74</span>
+<span class="linenos">74</span>        
 <span class="linenos">75</span>        <span class="c1"># Put the updated sentence back into the sentences list</span>
 <span class="linenos">76</span>        <span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_s</span>
-<span class="linenos">77</span>
+<span class="linenos">77</span>    
 <span class="linenos">78</span>    <span class="c1"># Add back the periods and print out the new paragraph</span>
 <span class="linenos">79</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
 <span class="linenos">80</span>        <span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;.&#39;</span>
@@ -693,9 +693,9 @@ document.write(`
 <span class="linenos"> 5</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">a_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
 <span class="linenos"> 7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">an_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span><span class="w">    </span>
 <span class="linenos"> 9</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Does C think these two objects are equal? %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a_string</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">an_int</span><span class="p">);</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span><span class="w">    </span>
 <span class="linenos">11</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="linenos">12</span><span class="p">}</span>
 </pre></div>
@@ -714,13 +714,13 @@ document.write(`
 <span class="linenos"> 6</span><span class="w">    </span><span class="cm">/* declaration of two variables of different types */</span>
 <span class="linenos"> 7</span><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">a_string</span><span class="p">;</span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">an_int</span><span class="p">;</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span><span class="w">    </span>
 <span class="linenos">10</span><span class="w">    </span><span class="cm">/* initialization of the values of these variables */</span>
 <span class="linenos">11</span><span class="w">    </span><span class="n">a_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
 <span class="linenos">12</span><span class="w">    </span><span class="n">an_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span><span class="w">    </span>
 <span class="linenos">14</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Does C think these two objects are equal? %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a_string</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">an_int</span><span class="p">);</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span><span class="w">    </span>
 <span class="linenos">16</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="linenos">17</span><span class="p">}</span>
 </pre></div>
@@ -757,7 +757,7 @@ document.write(`
 <span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>    
 <span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">10</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
 <span class="linenos">11</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
@@ -765,34 +765,33 @@ document.write(`
 <span class="linenos">13</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">14</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">15</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="k">return</span> <span class="n">new_s</span>
 <span class="linenos">18</span>
-<span class="linenos">19</span>
-<span class="linenos">20</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">21</span>    <span class="c1"># Create a string object with a line from The Cat in the Hat</span>
-<span class="linenos">22</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat!&#39;</span>
-<span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
-<span class="linenos">24</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">25</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
-<span class="linenos">26</span>
-<span class="linenos">27</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
-<span class="linenos">28</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
-<span class="linenos">29</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
-<span class="linenos">30</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
-<span class="linenos">31</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
-<span class="linenos">32</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
-<span class="linenos">35</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
-<span class="linenos">36</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
-<span class="linenos">39</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
-<span class="linenos">40</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
-<span class="linenos">41</span>
-<span class="linenos">42</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos">43</span>    <span class="n">main</span><span class="p">()</span>
+<span class="linenos">19</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">20</span>    <span class="c1"># Create a string object with a line from The Cat in the Hat</span>
+<span class="linenos">21</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;The Cat in the Hat!&#39;</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">23</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
+<span class="linenos">25</span>    
+<span class="linenos">26</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
+<span class="linenos">27</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
+<span class="linenos">28</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
+<span class="linenos">29</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
+<span class="linenos">30</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
+<span class="linenos">31</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
+<span class="linenos">32</span>    
+<span class="linenos">33</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
+<span class="linenos">34</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
+<span class="linenos">35</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">36</span>    
+<span class="linenos">37</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
+<span class="linenos">38</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
+<span class="linenos">39</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">42</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>What type annotations should we use for the formal parameters of <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>? We can’t use either <code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> because this routine is supposed to work with any sequence that defines the length, slicing, and concatenation operators (i.e., the magic methods <code class="docutils literal notranslate"><span class="pre">__len__</span></code>, <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>, and <code class="docutils literal notranslate"><span class="pre">__add__</span></code>). Well, perhaps we might declare these parameters to be of type <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, whose definition you can import from the <code class="docutils literal notranslate"><span class="pre">typing</span></code> module, as I illustrate in <code class="docutils literal notranslate"><span class="pre">bookshelf1-anno.py</span></code>.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> Unfortunately, this doesn’t work. Mypy will mark expressions like <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">+</span> <span class="pre">new</span></code> as an error because not all sequence types in Python support concatenation. That was a design choice in the Python language, and it means that we’re left with no type that’s right for the data abstraction we built in <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>. We either have to: (1) eliminate this abstraction from our code base (and consider every error message from mypy a true error); or (2) keep <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> and decide that we’re going to ignore some of the “errors” flagged by mypy.</p>
@@ -801,7 +800,7 @@ document.write(`
 <p class="admonition-title">Tip</p>
 <p>As Python programmer working in a dynamically-typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you’ll want to know how that language’s features can also be a vehicle for common runtime errors. For example, C is often described as a high-level language that allows programmers to operate close to the machine’s hardware. It allows you to manipulate your computer’s memory in ways you cannot in Python, but it also requires you to manage your program’s dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn’t ever use such a tool since memory management is handled completely by the language runtime.</p>
 </div>
-<p>[Version 20240809]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

@@ -615,21 +615,21 @@ def process_traceback(lines, i):
     i += 1  # skip 'Traceback' line
     stack = []  # stack frames
     cwd = os.getcwd()
-
+    
     # Process each 'File' line in traceback
     while lines[i][:6] == '  File':
         # Define RE pattern and run match on current line
         p = r'  File "(?P<fname>.*)", line (?P<lnno>\d+), in (?P<fun>[\w<>]+)'
         m = re.match(p, lines[i])
-
+        
         # Record stack frames for scripts in our current
         # directory; ignore frames in libraries.
         if m.group('fname')[:len(cwd)] == cwd:
             stack.insert(0, m.groupdict())
-
+        
         i += 2
         assert i < len(lines)
-
+    
     # i indicates where to continue processing in lines
     return (i, stack)
 ```
@@ -743,7 +743,7 @@ This line starts with [a "shebang" sequence](https://en.wikipedia.org/wiki/Sheba
 
 We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter's error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute `rewrite.py`, and one of them turned out to be an elegant solution to our problem.
 
-\[Version 20240729\]
+\[Version 20240827\]
 
 [^fn1]: The undefined name is one line 5 of \`broken.py\`.
 

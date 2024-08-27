@@ -435,7 +435,7 @@ document.write(`
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos"> 6</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: head.py input.csv&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos"> 9</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
 <span class="linenos">10</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
@@ -485,23 +485,23 @@ document.write(`
 <span class="linenos">14</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">15</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">16</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: avg_pbbr.py input.csv&#39;</span><span class="p">)</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">19</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
 <span class="linenos">20</span>        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
 <span class="linenos">21</span>            <span class="c1"># Grab this entry&#39;s number of bedrooms</span>
 <span class="linenos">22</span>            <span class="n">num_bedrooms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bedroom AbvGr&#39;</span><span class="p">])</span>
 <span class="linenos">23</span>            <span class="k">assert</span> <span class="n">num_bedrooms</span> <span class="o">&lt;=</span> <span class="n">MAX_BEDROOMS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;We need a bigger list (</span><span class="si">{</span><span class="n">num_bedrooms</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>            
 <span class="linenos">25</span>            <span class="c1"># Grab its sales price</span>
 <span class="linenos">26</span>            <span class="n">price</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>            
 <span class="linenos">28</span>            <span class="c1"># Update the right tuple in `bedrooms`</span>
 <span class="linenos">29</span>            <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
 <span class="linenos">30</span>                <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
 <span class="linenos">31</span>                <span class="n">homes</span><span class="p">[</span><span class="n">num_bedrooms</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">price</span>
 <span class="linenos">32</span>            <span class="p">)</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>        
 <span class="linenos">34</span>        <span class="c1"># Print out the results</span>
 <span class="linenos">35</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">homes</span><span class="p">):</span>
 <span class="linenos">36</span>            <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -751,7 +751,7 @@ document.write(`
 <span class="linenos">11</span>    <span class="n">predictions</span> <span class="o">=</span> <span class="n">my_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
 <span class="linenos">12</span>    <span class="n">test_mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
 <span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">leaves</span><span class="si">}</span><span class="se">\t</span><span class="s1">$</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">test_mae</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="k">if</span> <span class="n">test_mae</span> <span class="o">&lt;</span> <span class="n">lowest_mae</span><span class="p">:</span>
 <span class="linenos">16</span>        <span class="c1"># Update best</span>
 <span class="linenos">17</span>        <span class="n">best_num_leaves</span> <span class="o">=</span> <span class="n">leaves</span>
@@ -812,7 +812,7 @@ document.write(`
 <p>To build a good model, experience and “taste” matter, as we saw in trying to choose which features to include in a model and where we’ll place a model’s sliders (e.g., maximum number of leaves in a decision tree). Because of this, the field remains more art than science, but everyday new libraries are released that make this work easier. Don’t get frustrated if your first models don’t perform well.</p>
 <p>In this chapter, we built fairly good predictors using relatively simple statistical models. The benefit of simple models is that their predictions are generally easy to explain. For example, one house sells for more than another because it contains more bedrooms (everything else being equal), or a comment is considered toxic when it contains words often used in toxic comments. In a quest for ever more accurate predictors, data scientists are regularly developing more complicated models whose predictive performance we cannot as easily explain. Like predictive accuracy, a model’s explainability may be important in some application areas and not in others. For instance, I generally don’t think about how autocorrect comes up with its suggestions while I type my text messages, but predictive models won’t likely succeed in clinical medicine unless they are explainable. Do pay attention to what’s important in your application area.</p>
 <p>Finally, a data scientist’s work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you’ve gained to make the world a better place for all.</p>
-<p>[Version 20240810]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

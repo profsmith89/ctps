@@ -113,14 +113,14 @@ def main():
     with open(sys.argv[1]) as fin:
         paragraph = fin.read()
     paragraph = paragraph.replace('\n',' ')
-
+    
     # Print out instructions
     print( \
 """INSTRUCTIONS:
 Let's look at each sentence in this paragraph, and
 you tell me if you want me to surround a phrase with
 em dashes rather that the existing commas.""")
-
+    
     # Iterate through each candidate sentence in text.
     # A sentence is a candidate only if it has three
     # or more phrases in it.
@@ -132,9 +132,9 @@ em dashes rather that the existing commas.""")
         if len(phrases) == 1 or len(phrases) == 2:
             # Nothing to do
             continue
-
+        
         print()
-
+        
         # Print the phrases and ask the user
         for j, p in enumerate(phrases):
             if j != 0 and j != len(phrases) - 1:
@@ -151,7 +151,7 @@ if any, do you want to set off with em dashes? '))
             continue
         else:
             a = ans - 1  # Turn ans into an index
-
+        
         # Add back the comma on the unaffected phrases while
         # building the sentence prefix and suffix.
         s_prefix = ''
@@ -166,14 +166,14 @@ if any, do you want to set off with em dashes? '))
                 s_suffix += phrases[j] + ','
             else:
                 s_suffix += phrases[j]
-
+        
         # Add the em dashes to the affected phrase and remove
         # the leading spaces in it and the new_suffix.
         new_s = s_prefix + '--' + phrases[a].split() + '--' + s_suffix.split()
-
+        
         # Put the updated sentence back into the sentences list
         sentences[i] = new_s
-
+    
     # Add back the periods and print out the new paragraph
     for i in range(len(sentences)):
         sentences[i] += '.'
@@ -372,9 +372,9 @@ lineno-start: 1
 int main(void) {
     char a_string = 'A';
     int an_int = 65;
-
+    
     printf("Does C think these two objects are equal? %d\n", a_string == an_int);
-
+    
     return 0;
 }
 ```
@@ -398,13 +398,13 @@ int main(void) {
     /* declaration of two variables of different types */
     char a_string;
     int an_int;
-
+    
     /* initialization of the values of these variables */
     a_string = 'A';
     an_int = 65;
-
+    
     printf("Does C think these two objects are equal? %d\n", a_string == an_int);
-
+    
     return 0;
 }
 ```
@@ -455,7 +455,7 @@ def my_replace(s, old, new):
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
-
+    
     while i < len(s):
         if s[i:i+j] == old:
             new_s = new_s + new
@@ -463,9 +463,8 @@ def my_replace(s, old, new):
         else:
             new_s = new_s + s[i:i+1]
             i += 1
-
+    
     return new_s
-
 
 def main():
     # Create a string object with a line from The Cat in the Hat
@@ -473,18 +472,18 @@ def main():
     print(the_line)
     the_line = my_replace(the_line, 'Hat', '\N{top hat}')
     print(the_line)
-
+    
     # Create a representation of the objects on my shelf
     stuffed_lion = '\N{lion face}'
     kids_pic = 'kids.jpg'
     textbook = 'cs32.scriv'
     favorite_cd = 'BornToRun.mp3'
     novel = 'CatInTheHat.txt'
-
+    
     # Create a sequence object that represents my shelf
     shelf = [stuffed_lion, kids_pic, textbook, favorite_cd, novel]
     print(shelf)
-
+    
     # Make it look like our textbook has been opened on my shelf
     shelf = my_replace(shelf, [textbook], ['\N{open book}'])
     print(shelf)
@@ -501,7 +500,7 @@ While things do get complicated, the main point is that tools exist that can hel
 As Python programmer working in a dynamically-typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you'll want to know how that language's features can also be a vehicle for common runtime errors. For example, C is often described as a high-level language that allows programmers to operate close to the machine's hardware. It allows you to manipulate your computer's memory in ways you cannot in Python, but it also requires you to manage your program's dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn't ever use such a tool since memory management is handled completely by the language runtime.
 ```
 
-\[Version 20240809\]
+\[Version 20240827\]
 
 [^fn1]: This term "static" refers to any analysis performed on a program's code when that program isn't running.
 

@@ -502,14 +502,14 @@ document.write(`
 <span class="linenos">20</span>    <span class="k">if</span> <span class="n">items</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos">21</span>        <span class="c1"># No double-quote string literals in f</span>
 <span class="linenos">22</span>        <span class="k">return</span> <span class="s2">&quot;No&quot;</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="c1"># Process just the strings in the worklist. String literals</span>
 <span class="linenos">25</span>    <span class="c1"># defined using a single double-quote character cannot</span>
 <span class="linenos">26</span>    <span class="c1"># contain a newline character.</span>
 <span class="linenos">27</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 <span class="linenos">28</span>        <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">work_list</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
 <span class="linenos">29</span>            <span class="k">return</span> <span class="s2">&quot;Yes&quot;</span> 
-<span class="linenos">30</span>
+<span class="linenos">30</span>    
 <span class="linenos">31</span>    <span class="c1"># Make sure the last string ended with a double quote, which</span>
 <span class="linenos">32</span>    <span class="c1"># means the length of work_list should odd.</span>
 <span class="linenos">33</span>    <span class="k">if</span> <span class="n">items</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
@@ -592,11 +592,11 @@ document.write(`
 <span class="linenos"> 8</span>    <span class="c1"># `analysis_name` is in `analysis_name.py`.</span>
 <span class="linenos"> 9</span>    <span class="n">analysis_mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
 <span class="linenos">10</span>    <span class="n">analysis_fun</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">analysis_mod</span><span class="p">,</span> <span class="n">analysis_name</span><span class="p">)</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Grab function to analyze. The utility used assumes that</span>
 <span class="linenos">13</span>    <span class="c1"># the function `fun_name` is in `fun_name.py`.</span>
 <span class="linenos">14</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">our_tools</span><span class="o">.</span><span class="n">grab_f</span><span class="p">(</span><span class="n">fun_name</span><span class="p">)</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="c1"># Do the analysis</span>
 <span class="linenos">17</span>    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">18</span>        <span class="n">ans</span> <span class="o">=</span> <span class="n">analysis_fun</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -664,7 +664,7 @@ document.write(`
 <span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos"> 8</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*** s ***&#39;</span><span class="p">)</span>
 <span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Default answer</span>
 <span class="linenos">12</span>    <span class="k">return</span> <span class="s2">&quot;Yes&quot;</span>
 </pre></div>
@@ -685,7 +685,7 @@ document.write(`
 <span class="linenos"> 9</span>        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">10</span>        <span class="k">while</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">1000000</span><span class="p">:</span>
 <span class="linenos">11</span>            <span class="n">cnt</span> <span class="o">-=</span> <span class="mi">1</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="c1"># Default answer</span>
 <span class="linenos">14</span>    <span class="k">return</span> <span class="s2">&quot;Yes&quot;</span>
 </pre></div>
@@ -828,7 +828,7 @@ document.write(`
 <li><p>One of those problems is determining if a Python function <code class="docutils literal notranslate"><span class="pre">f</span></code> running on input <code class="docutils literal notranslate"><span class="pre">s</span></code> is going to throw an exception. And with this result, our dream of writing a program to find all bugs in all our scripts is dashed.</p></li>
 </ol>
 <p>While it is true that we can’t expect a computational tool to find all our bugs, this doesn’t mean we can’t find lots of specific kinds of bugs in many different kinds of programs. On to the next two chapters to learn how you can more quickly and easily find many important bugs!</p>
-<p>[Version 20240820]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

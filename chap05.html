@@ -547,12 +547,12 @@ document.write(`
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="linenos"> 8</span>    <span class="c1"># print(f&#39;DEBUG: The secret number is {secret}&#39;)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>        
 <span class="linenos">12</span>        <span class="c1"># Grab a guess from the player</span>
 <span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">14</span>            <span class="k">try</span><span class="p">:</span>
@@ -561,7 +561,7 @@ document.write(`
 <span class="linenos">17</span>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 <span class="linenos">18</span>                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
 <span class="linenos">19</span>        <span class="c1"># print(f&#39;DEBUG: You guessed {guess}&#39;)</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>        
 <span class="linenos">21</span>        <span class="c1"># Check guess against the secret</span>
 <span class="linenos">22</span>        <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
 <span class="linenos">23</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
@@ -699,7 +699,7 @@ document.write(`
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="c1"># Create a socket and call it s</span>
 <span class="linenos"> 9</span>    <span class="c1"># Connect s to the server</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
 <span class="linenos">12</span>        <span class="c1"># Grab a guess from the player</span>
 <span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -708,11 +708,11 @@ document.write(`
 <span class="linenos">16</span>              <span class="k">break</span>
 <span class="linenos">17</span>          <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 <span class="linenos">18</span>              <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>        
 <span class="linenos">20</span>        <span class="c1"># Use s to send guess to server</span>
 <span class="linenos">21</span>        <span class="c1"># Wait for server to respond on s with answer to comparison</span>
 <span class="linenos">22</span>        <span class="c1"># Print response</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>        
 <span class="linenos">24</span>        <span class="c1"># Is game over?</span>
 </pre></div>
 </div>
@@ -725,11 +725,11 @@ document.write(`
 <span class="linenos"> 5</span>
 <span class="linenos"> 6</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>    
 <span class="linenos"> 9</span>    <span class="c1"># Create a socket and call it s</span>
 <span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="c1"># Connect s to the server</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
@@ -748,10 +748,10 @@ document.write(`
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
@@ -771,10 +771,10 @@ document.write(`
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
 <span class="linenos">14</span>            <span class="c1"># Grab a guess from the player</span>
 <span class="linenos">15</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -783,11 +783,11 @@ document.write(`
 <span class="linenos">18</span>                    <span class="k">break</span>
 <span class="linenos">19</span>                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 <span class="linenos">20</span>                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>            
 <span class="linenos">22</span>            <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
 <span class="linenos">23</span>            <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 <span class="linenos">24</span>            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="linenos">25</span>
+<span class="linenos">25</span>            
 <span class="linenos">26</span>            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
 <span class="linenos">27</span>                <span class="k">break</span>
 <span class="linenos">28</span>
@@ -821,10 +821,10 @@ document.write(`
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># our game loop</span>
 <span class="linenos">14</span>            <span class="c1"># Grab a guess from the player</span>
 <span class="linenos">15</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -833,11 +833,11 @@ document.write(`
 <span class="linenos">18</span>                    <span class="k">break</span>
 <span class="linenos">19</span>                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 <span class="linenos">20</span>                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Guesses must be an integer. Try again...&#39;</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>            
 <span class="linenos">22</span>            <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guess</span><span class="p">))</span>
 <span class="linenos">23</span>            <span class="n">response</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 <span class="linenos">24</span>            <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="linenos">25</span>
+<span class="linenos">25</span>            
 <span class="linenos">26</span>            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">:</span>
 <span class="linenos">27</span>                <span class="k">break</span>
 <span class="linenos">28</span>
@@ -858,18 +858,18 @@ document.write(`
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
 <span class="linenos"> 9</span>    <span class="c1"># Bind socket to address and publish contact info</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Answer incoming connection</span>
 <span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by &lt;client&gt;&#39;</span><span class="p">)</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span>    
 <span class="linenos">14</span>    <span class="c1"># Create a secret for this connection    </span>
 <span class="linenos">15</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="c1"># Send and receive messages through the connection</span>
 <span class="linenos">18</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
 <span class="linenos">19</span>        <span class="n">msg</span> <span class="o">=</span> <span class="c1"># recv guess from client</span>
 <span class="linenos">20</span>        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>        
 <span class="linenos">22</span>        <span class="c1"># Check guess against secret and respond</span>
 <span class="linenos">23</span>        <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
 <span class="linenos">24</span>            <span class="c1"># sendall(&#39;Too small!&#39;)</span>
@@ -877,7 +877,7 @@ document.write(`
 <span class="linenos">26</span>            <span class="c1"># sendall(&#39;Exactly! You win!&#39;)</span>
 <span class="linenos">27</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">28</span>            <span class="c1"># sendall(&#39;Too big!&#39;)</span>
-<span class="linenos">29</span>
+<span class="linenos">29</span>    
 <span class="linenos">30</span>    <span class="c1"># If we get here, client broke connection</span>
 </pre></div>
 </div>
@@ -898,7 +898,7 @@ document.write(`
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
 <span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
@@ -914,11 +914,11 @@ document.write(`
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
 <span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># Answer incoming connection</span>
 <span class="linenos">16</span>        <span class="n">conn2client</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 <span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>        
 <span class="linenos">19</span>        <span class="c1"># REST OF SCRIPT</span>
 </pre></div>
 </div>
@@ -939,7 +939,7 @@ document.write(`
 <span class="linenos">11</span>        <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
 <span class="linenos">12</span>        <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GUESS-THE-NUMBER server started. Listening on&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># Answer incoming connection</span>
 <span class="linenos">16</span>        <span class="n">conn2client</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 <span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connected by&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
@@ -947,13 +947,13 @@ document.write(`
 <span class="linenos">19</span>        <span class="k">with</span> <span class="n">conn2client</span><span class="p">:</span>
 <span class="linenos">20</span>            <span class="c1"># Create a secret for this connection    </span>
 <span class="linenos">21</span>            <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="linenos">22</span>
+<span class="linenos">22</span>            
 <span class="linenos">23</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>   <span class="c1"># message processing loop</span>
 <span class="linenos">24</span>                <span class="n">msg</span> <span class="o">=</span> <span class="n">conn2client</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 <span class="linenos">25</span>                <span class="k">if</span> <span class="n">msg</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">26</span>                    <span class="k">break</span>
 <span class="linenos">27</span>                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>                
 <span class="linenos">29</span>                <span class="c1"># Check guess against secret and respond</span>
 <span class="linenos">30</span>                <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">secret</span><span class="p">:</span>
 <span class="linenos">31</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too small!&#39;</span><span class="p">)</span>
@@ -961,7 +961,7 @@ document.write(`
 <span class="linenos">33</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Exactly! You win!&#39;</span><span class="p">)</span>
 <span class="linenos">34</span>                <span class="k">else</span><span class="p">:</span>
 <span class="linenos">35</span>                    <span class="n">conn2client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s1">&#39;Too big!&#39;</span><span class="p">)</span>
-<span class="linenos">36</span>
+<span class="linenos">36</span>            
 <span class="linenos">37</span>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Disconnected&#39;</span><span class="p">)</span>
 <span class="linenos">38</span>
 <span class="linenos">39</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -1003,7 +1003,7 @@ document.write(`
 </pre></div>
 </div>
 <p>In each of these approaches, we’re not really using the network. Remember that we’re running these two scripts with the loopback interface, but we can’t easily tell that without looking at the code. Again, abstraction at work!</p>
-<p>[Version 20240820]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

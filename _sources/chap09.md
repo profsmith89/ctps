@@ -342,19 +342,19 @@ lineno-start: 13
 def rk_strmatch(t, p):
     n = len(t)
     m = len(p)
-
+    
     # Preprocessing steps
-
+    
     # Constants in Rabin-Karp string-matching problem
     d = 256    # number of character encodings in ASCII
     q = 65537  # a prime number
-
+    
     # Compute the hash value of a 1 in the high-order position (i.e.,
     # m-1th position), where digits have radix d
     hh = 1
     for i in range(m - 1):
         hh = (hh * d) % q
-
+    
     # Calculate the hash values for p and t[0:m], since the matching
     # loop needs these values as it starts
     hp = 0
@@ -362,10 +362,10 @@ def rk_strmatch(t, p):
     for i in range(m):
         hp = ((hp * d) + ord(p[i])) % q
         ht = ((ht * d) + ord(t[i])) % q
-
+    
     #print(f'DEBUG: pattern hash("{p[0:m]}") = {hp}')
     #print(f'DEBUG: hash("{t[0:m]}") = {ht}')
-
+    
     # Matching step
     for s in range(n - m + 1):
         if hp == ht:
@@ -375,7 +375,7 @@ def rk_strmatch(t, p):
             #else:
                 #print(f'DEBUG: hash collision')
                 #print(f'DEBUG: hash("{t[s:s+m]}") = {ht}')
-
+        
         if s < n - m:
             # Need to compute hash for next iteration
             ht = ((ht - (ord(t[s]) * hh)) * d
@@ -432,7 +432,7 @@ lineno-start: 1
 def bf_strmatch(t, p):
     # some setup work
     # no loops
-
+    
     # Matching work
     # loop on s up to n times
     #     loop up to m times checking for match
@@ -447,7 +447,7 @@ def rk_strmatch(t, p):
     # some setup work
     # loop on i exactly m-1 times
     # loop on i exactly m times
-
+    
     # Matching work
     # loop on s up to n times
     #     if two numbers match
@@ -507,15 +507,15 @@ import time
 
 def compare_times(t, p):
     print(f'For p = {len(p)} bytes, t = {len(t)} bytes')
-
+    
     start = time.process_time()
     bf_strmatch(t, p)
     print(f'bf_strmatch took {time.process_time() - start} secs')
-
+    
     start = time.process_time()
     rk_strmatch(t, p)
     print(f'rk_strmatch took {time.process_time() - start} secs')
-
+    
     print('')
 
 # Grab the text from a file
@@ -630,7 +630,7 @@ We've come to the end of the chapter, and we haven't yet solved our problem: how
 
 In the next chapter, we'll explore these details and learn about a technique called *hashing*, which is how Rabin-Karp beats brute force. Hashing will lead us to *hash tables*, a widely-used data structure, which just happens to be at the heart of Python's dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach. Onward!
 
-\[Version 20240821\]
+\[Version 20240827\]
 
 [^fn1]: In October of 2020, Google posted [a video titled "Trillions of Questions, No Easy Answers: A (home) movie about how Google Search works"](https://www.youtube.com/watch?v=tFq6Q_muwG0&t=6s). This video is also highlighted on [Google's page describing how it thinks about search](https://www.google.com/search/howsearchworks/).
 

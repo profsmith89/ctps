@@ -488,13 +488,13 @@ document.write(`
 <span class="linenos">11</span>    <span class="n">mag</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">12</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 <span class="linenos">13</span>        <span class="n">mag</span> <span class="o">*=</span> <span class="mi">256</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Take off most-significant digit</span>
 <span class="linenos">16</span>    <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="o">*</span> <span class="n">mag</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Add on a new least-significant digit</span>
 <span class="linenos">19</span>    <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">s</span> <span class="o">+</span> <span class="n">m</span><span class="p">])</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>    
 <span class="linenos">21</span>    <span class="k">return</span> <span class="n">num</span>
 </pre></div>
 </div>
@@ -518,18 +518,18 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">rk_strmatch_partial</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 <span class="linenos"> 2</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="linenos"> 3</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="linenos"> 4</span>
+<span class="linenos"> 4</span>    
 <span class="linenos"> 5</span>    <span class="c1"># Preprocessing steps</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="c1"># Constants in Rabin-Karp string-matching problem</span>
 <span class="linenos"> 8</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>    
 <span class="linenos">10</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
 <span class="linenos">11</span>    <span class="c1"># m-1th position), where digits have radix d</span>
 <span class="linenos">12</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">13</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">14</span>        <span class="n">hh</span> <span class="o">=</span> <span class="n">hh</span> <span class="o">*</span> <span class="n">d</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the matching</span>
 <span class="linenos">17</span>    <span class="c1"># loop needs these values as it starts</span>
 <span class="linenos">18</span>    <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span>
@@ -537,12 +537,12 @@ document.write(`
 <span class="linenos">20</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
 <span class="linenos">21</span>        <span class="n">hp</span> <span class="o">=</span> <span class="p">(</span><span class="n">hp</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="linenos">22</span>        <span class="n">ht</span> <span class="o">=</span> <span class="p">(</span><span class="n">ht</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="c1"># Matching step</span>
 <span class="linenos">25</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">26</span>        <span class="k">if</span> <span class="n">hp</span> <span class="o">==</span> <span class="n">ht</span><span class="p">:</span>
 <span class="linenos">27</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>        
 <span class="linenos">29</span>        <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">:</span>
 <span class="linenos">30</span>            <span class="c1"># Need to compute hash for next iteration</span>
 <span class="linenos">31</span>            <span class="n">ht</span> <span class="o">=</span> <span class="p">(</span><span class="n">ht</span> <span class="o">-</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="o">*</span> <span class="n">hh</span><span class="p">))</span> <span class="o">*</span> <span class="n">d</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">])</span>
@@ -564,19 +564,19 @@ document.write(`
 <span class="linenos">14</span><span class="k">def</span> <span class="nf">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 <span class="linenos">15</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="linenos">16</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Preprocessing steps</span>
-<span class="linenos">19</span>
+<span class="linenos">19</span>    
 <span class="linenos">20</span>    <span class="c1"># Constants in Rabin-Karp string-matching problem</span>
 <span class="linenos">21</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
 <span class="linenos">22</span>    <span class="n">q</span> <span class="o">=</span> <span class="mi">65537</span>  <span class="c1"># a prime number</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
 <span class="linenos">25</span>    <span class="c1"># m-1th position), where digits have radix d</span>
 <span class="linenos">26</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">27</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">28</span>        <span class="n">hh</span> <span class="o">=</span> <span class="p">(</span><span class="n">hh</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
-<span class="linenos">29</span>
+<span class="linenos">29</span>    
 <span class="linenos">30</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the matching</span>
 <span class="linenos">31</span>    <span class="c1"># loop needs these values as it starts</span>
 <span class="linenos">32</span>    <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span>
@@ -584,14 +584,14 @@ document.write(`
 <span class="linenos">34</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
 <span class="linenos">35</span>        <span class="n">hp</span> <span class="o">=</span> <span class="p">((</span><span class="n">hp</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">%</span> <span class="n">q</span>
 <span class="linenos">36</span>        <span class="n">ht</span> <span class="o">=</span> <span class="p">((</span><span class="n">ht</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">%</span> <span class="n">q</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>    
 <span class="linenos">38</span>    <span class="c1"># Matching step</span>
 <span class="linenos">39</span>    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">40</span>        <span class="k">if</span> <span class="n">hp</span> <span class="o">==</span> <span class="n">ht</span><span class="p">:</span>
 <span class="linenos">41</span>            <span class="c1"># Verify that this is an actual match</span>
 <span class="linenos">42</span>            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">]:</span>
 <span class="linenos">43</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pattern occurs with shift </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">44</span>
+<span class="linenos">44</span>        
 <span class="linenos">45</span>        <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">m</span><span class="p">:</span>
 <span class="linenos">46</span>            <span class="c1"># Need to compute hash for next iteration</span>
 <span class="linenos">47</span>            <span class="n">ht</span> <span class="o">=</span> <span class="p">((</span><span class="n">ht</span> <span class="o">-</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="o">*</span> <span class="n">hh</span><span class="p">))</span> <span class="o">*</span> <span class="n">d</span>
@@ -726,7 +726,7 @@ document.write(`
 <span class="linenos">37</span><span class="k">def</span> <span class="nf">build_index</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
 <span class="linenos">38</span>    <span class="c1"># Start with an empty dictionary</span>
 <span class="linenos">39</span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">40</span>
+<span class="linenos">40</span>    
 <span class="linenos">41</span>    <span class="c1"># Iterate through each line in book watching for book unit boundaries</span>
 <span class="linenos">42</span>    <span class="n">unitno</span> <span class="o">=</span> <span class="n">UNIT_CNT_INIT</span>
 <span class="linenos">43</span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
@@ -734,7 +734,7 @@ document.write(`
 <span class="linenos">45</span>            <span class="n">unitno</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="linenos">46</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">47</span>            <span class="n">d</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">get_wordlist</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="n">unitno</span><span class="p">)</span>
-<span class="linenos">48</span>
+<span class="linenos">48</span>    
 <span class="linenos">49</span>    <span class="c1"># Print out the index</span>
 <span class="linenos">50</span>    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
@@ -763,7 +763,7 @@ document.write(`
 <span class="linenos">38</span>                <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unitno</span><span class="p">)</span>
 <span class="linenos">39</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">40</span>            <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">unitno</span><span class="p">]</span>
-<span class="linenos">41</span>
+<span class="linenos">41</span>    
 <span class="linenos">42</span>    <span class="k">return</span> <span class="n">d</span>
 </pre></div>
 </div>
@@ -789,7 +789,7 @@ document.write(`
 <span class="linenos">42</span>                <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unitno</span><span class="p">)</span>
 <span class="linenos">43</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">44</span>            <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">unitno</span><span class="p">]</span>
-<span class="linenos">45</span>
+<span class="linenos">45</span>    
 <span class="linenos">46</span>    <span class="k">return</span> <span class="n">d</span>
 </pre></div>
 </div>
@@ -811,14 +811,14 @@ document.write(`
 <span class="linenos">38</span>        
 <span class="linenos">39</span>        <span class="c1"># No capitals</span>
 <span class="linenos">40</span>        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="linenos">41</span>
+<span class="linenos">41</span>        
 <span class="linenos">42</span>        <span class="c1"># Update our dictionary</span>
 <span class="linenos">43</span>        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
 <span class="linenos">44</span>            <span class="k">if</span> <span class="n">unitno</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]:</span>
 <span class="linenos">45</span>                <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unitno</span><span class="p">)</span>
 <span class="linenos">46</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">47</span>            <span class="n">d</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">unitno</span><span class="p">]</span>
-<span class="linenos">48</span>
+<span class="linenos">48</span>    
 <span class="linenos">49</span>    <span class="k">return</span> <span class="n">d</span>
 </pre></div>
 </div>
@@ -850,7 +850,7 @@ document.write(`
 <span class="linenos">51</span><span class="k">def</span> <span class="nf">build_index</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
 <span class="linenos">52</span>    <span class="c1"># Start with an empty dictionary</span>
 <span class="linenos">53</span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">54</span>
+<span class="linenos">54</span>    
 <span class="linenos">55</span>    <span class="c1"># Iterate through each line in book watching for book unit boundaries</span>
 <span class="linenos">56</span>    <span class="n">unitno</span> <span class="o">=</span> <span class="n">UNIT_CNT_INIT</span>
 <span class="linenos">57</span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
@@ -858,7 +858,7 @@ document.write(`
 <span class="linenos">59</span>            <span class="n">unitno</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="linenos">60</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">61</span>            <span class="n">d</span> <span class="o">=</span> <span class="n">update_index</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">get_wordlist</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="n">unitno</span><span class="p">)</span>
-<span class="linenos">62</span>
+<span class="linenos">62</span>    
 <span class="linenos">63</span>    <span class="c1"># Print out the index</span>
 <span class="linenos">64</span>    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
 <span class="linenos">65</span>        <span class="n">pages</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">w</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;[]&#39;</span><span class="p">)</span>
@@ -875,7 +875,7 @@ document.write(`
 </div>
 <p>You now have a general idea how Google takes a search string and quickly returns a list of pages containing the keywords in our search. It simply looks up the search string’s keywords in a big hash table, and each lookup takes constant time. None of this online work takes time proportional to the size of all the pages in the indexed web.</p>
 <p>Of course, Google does more than just web search, as we’ll discuss in the following chapters, but this is a great start. Congratulations!</p>
-<p>[Version 20240822]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

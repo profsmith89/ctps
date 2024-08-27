@@ -269,7 +269,7 @@ imfile = 'images/garden.png'
 with Image.open(imfile) as im:
     # Create a new frame for the filtered image
     im_less = Image.new(im.mode, im.size)
-
+    
     zero_image_lowest_bits(im, im_less)
     im_less.save('images/zeroed.png')
 ```
@@ -351,12 +351,12 @@ def traverse(im, stop_x, stop_y):
     '''
     # Create an image frame and initialize it with the input image
     new_im = im.copy()
-
+    
     for i in range(im.size[0]):
         for j in range(im.size[1]):
             pixel = im.getpixel((i,j))
             new_im.putpixel((i,j), do_something(pixel))
-
+            
             if (i == stop_x and j == stop_y):
                 return new_im
 
@@ -410,12 +410,12 @@ def traverse(im, stop_x, stop_y):
     '''
     # Create an image frame and initialize it with the input image
     new_im = im.copy()
-
+    
     for j in range(im.size[1]):
         for i in range(im.size[0]):
             pixel = im.getpixel((i,j))
             new_im.putpixel((i,j), do_something(pixel))
-
+            
             if (i == stop_x and j == stop_y):
                 return new_im
 
@@ -504,7 +504,7 @@ Importantly, you're comfortable with problem solving as an iterative process. Al
 
 You are no longer a novice. You are now ready to learn to use computers to solve a more complex set of real-world problems.
 
-\[Version 20240820\]
+\[Version 20240827\]
 
 [^fn1]: In Chapter 17, we will explore the model building portion of the data science process.
 

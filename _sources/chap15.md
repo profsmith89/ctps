@@ -100,20 +100,20 @@ def my_pdb(script_fname):
         Returns: edited script as list of lines
     '''
     edited_script = []
-
+    
     # Read in the original script (as a list of file lines)
     with open(script_fname) as fin:
         edited_script = fin.readlines()
-
+    
     # Grab line number where we'll place the breakpoint
     breakpt = get_lineno(len(edited_script))
-
+    
     # Convert breakpoint number into a list index
     breakpt_index = breakpt - 1
-
+    
     # Add the breakpoint
     # TO BE WRITTEN
-
+    
     return edited_script
 
 def get_lineno(lines):
@@ -152,9 +152,9 @@ def main():
         fname = sys.argv[1]
     else:
         sys.exit('Usage: python3 pdb0-soln.py [script_to_be_debugged]')
-
+    
     edited_script = my_pdb(fname)
-
+    
     print_it(edited_script)
     # write_it(edited_script, fname)
 
@@ -207,17 +207,17 @@ def my_pdb(script_fname):
         Returns: edited script as list of lines
     '''
     edited_script = []
-
+    
     # Read in the original script (as a list of file lines)
     with open(script_fname) as fin:
         edited_script = fin.readlines()
-
+    
     # Grab line number where we'll place the breakpoint
     breakpt = get_lineno(len(edited_script))
-
+    
     # Convert breakpoint number into a list index
     breakpt_index = breakpt - 1
-
+    
     # Add the breakpoint
     # .. grab the whitespace so we get the right indentation
     my_whitespace = ''
@@ -226,13 +226,13 @@ def my_pdb(script_fname):
             my_whitespace += c
         else:
             break
-
+    
     breakpt_statement = my_whitespace + \
         f'raise Exception("My breakpoint", {breakpt})\n'
-
+    
     # .. insert a raise statement as our breakpoint
     edited_script.insert(breakpt_index, breakpt_statement)
-
+    
     return edited_script
 
 # the other functions and main are unchanged from pdb1.py
@@ -311,12 +311,12 @@ def main():
         fname = sys.argv[1]
     else:
         sys.exit('Usage: python3 pdb3.py [script_to_be_debugged]')
-
+    
     edited_script = my_pdb(fname)
-
+    
     # print_it(edited_script)
     # write_it(edited_script, fname)
-
+    
     # Run the edited script and catch our breakpoint exception.
     # Remember to turn the list of strings into one big string.
     try:
@@ -389,9 +389,9 @@ def insert_print(edited_script, breakpt_index, ws):
     '''
     # Ask for the print-statement argument
     printarg = input("What is print's argument? ")
-
+    
     print_statement = ws + f'print(f"{printarg}")\n'
-
+    
     # Insert our print statement
     edited_script.insert(breakpt_index, print_statement)
 
@@ -402,17 +402,17 @@ def my_pin(script_fname, insert_code):
         Returns: edited script as list of lines
     '''
     edited_script = []
-
+    
     # Read in the original script (as a list of file lines)
     with open(script_fname) as fin:
         edited_script = fin.readlines()
-
+    
     # Grab line number where we'll place some new code
     breakpt = get_lineno(len(edited_script))
-
+    
     # Convert breakpoint number into a list index
     breakpt_index = breakpt - 1
-
+    
     # Compute the leading whitespace at `breakpt_index`
     my_whitespace = ''
     for c in edited_script[breakpt_index]:
@@ -420,9 +420,9 @@ def my_pin(script_fname, insert_code):
             my_whitespace += c
         else:
             break
-
+    
     insert_code(edited_script, breakpt_index, my_whitespace)
-
+    
     return edited_script
 
 # get_lineno, print_it, and write_it are unchanged from pdb3.py
@@ -435,9 +435,9 @@ def main():
         fname = sys.argv[1]
     else:
         sys.exit('Usage: python3 pin32.py [script_to_be_instrumented]')
-
+    
     edited_script = my_pin(fname, insert_print)
-
+    
     # Run the instrumented script
     exec(''.join(edited_script), globals())
     
@@ -532,7 +532,7 @@ Run `python3 repl32.py guess32.py` and answer `24` to the line-number question. 
 
 We've built ourselves a powerful and flexible tool with which we can investigate the state of a running program. We've also built ourselves an interpreter than uses a script's interrupted execution context as its environment. Including the real Python debugger `pdb`, you now have several tools with which you can slow down a program's execution so that you can better understand its behavior and more quickly fix the bugs within it. Happy bug squashing!
 
-\[Version 20240808\]
+\[Version 20240827\]
 
 [^fn1]: It's from Brian W. Kernighan and P.J. Plauger \[1978\]. *The Elements of Programming Style (2nd edition)*, McGraw-Hill, page 10.
 

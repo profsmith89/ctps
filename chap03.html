@@ -483,7 +483,7 @@ document.write(`
 <span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 <span class="linenos"> 8</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos"> 9</span>
+<span class="linenos"> 9</span>        
 <span class="linenos">10</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">11</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">12</span>            <span class="k">break</span>
@@ -520,12 +520,12 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>        
 <span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;Gato&#39;</span><span class="p">)</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>        
 <span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span>        
 <span class="linenos">14</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">15</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">16</span>            <span class="k">break</span>
@@ -576,12 +576,12 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>        
 <span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>        
 <span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">13</span>
+<span class="linenos">13</span>        
 <span class="linenos">14</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">15</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">16</span>            <span class="k">break</span>
@@ -599,13 +599,13 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>        
 <span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">10</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">11</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">17</span>            <span class="k">break</span>
@@ -628,13 +628,13 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 6</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 7</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>        
 <span class="linenos"> 9</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">10</span>        <span class="c1"># my code to replace &#39;Cat&#39; with &#39;\N{cat face with wry smile}&#39;</span>
 <span class="linenos">11</span>        <span class="c1"># my code to replace &#39;Hat&#39; with &#39;\N{top hat}&#39;</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">17</span>            <span class="k">break</span>
@@ -659,13 +659,13 @@ document.write(`
 <span class="linenos"> 9</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos">10</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>        
 <span class="linenos">13</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">14</span>        <span class="c1"># call my_replace on the_line, specifying &#39;Cat&#39; is replaced by &#39;\N{cat face with wry smile}&#39;</span>
 <span class="linenos">15</span>        <span class="c1"># call my_replace on the_line, specifying &#39;Hat&#39; is replaced by &#39;\N{top hat}&#39;</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>        
 <span class="linenos">17</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>        
 <span class="linenos">19</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">20</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">21</span>            <span class="k">break</span>
@@ -684,7 +684,7 @@ document.write(`
 <span class="linenos"> 3</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 4</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 5</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
-<span class="linenos"> 6</span>
+<span class="linenos"> 6</span>    
 <span class="linenos"> 7</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 8</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
 <span class="linenos"> 9</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
@@ -692,7 +692,7 @@ document.write(`
 <span class="linenos">11</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">12</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">13</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="k">return</span> <span class="n">new_s</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span>
@@ -702,13 +702,13 @@ document.write(`
 <span class="linenos">21</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos">22</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">23</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>        
 <span class="linenos">25</span>        <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">26</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">27</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>        
 <span class="linenos">29</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">30</span>
+<span class="linenos">30</span>        
 <span class="linenos">31</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">32</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">33</span>            <span class="k">break</span>
@@ -763,7 +763,7 @@ document.write(`
 <span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>    
 <span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">10</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
 <span class="linenos">11</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
@@ -771,28 +771,28 @@ document.write(`
 <span class="linenos">13</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">14</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">15</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="k">return</span> <span class="n">new_s</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span>
 <span class="linenos">20</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">21</span>    <span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
 <span class="linenos">22</span>    <span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos">25</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos">26</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">27</span>
+<span class="linenos">27</span>            
 <span class="linenos">28</span>            <span class="c1"># Having some fun with text substitution</span>
 <span class="linenos">29</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{cat face with wry smile}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">30</span>            <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="linenos">31</span>
+<span class="linenos">31</span>            
 <span class="linenos">32</span>            <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>            
 <span class="linenos">34</span>            <span class="c1"># Check for EOF</span>
 <span class="linenos">35</span>            <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">36</span>                <span class="k">break</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>    
 <span class="linenos">38</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The End.&quot;</span><span class="p">)</span>
 <span class="linenos">39</span>
 <span class="linenos">40</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -844,7 +844,7 @@ document.write(`
 <span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>    
 <span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos">10</span>        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
 <span class="linenos">11</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">new</span>
@@ -852,7 +852,7 @@ document.write(`
 <span class="linenos">13</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">14</span>            <span class="n">new_s</span> <span class="o">=</span> <span class="n">new_s</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">15</span>            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">16</span>
+<span class="linenos">16</span>    
 <span class="linenos">17</span>    <span class="k">return</span> <span class="n">new_s</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span>
@@ -862,18 +862,18 @@ document.write(`
 <span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
 <span class="linenos">24</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">25</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
-<span class="linenos">26</span>
+<span class="linenos">26</span>    
 <span class="linenos">27</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
 <span class="linenos">28</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
 <span class="linenos">29</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
 <span class="linenos">30</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
 <span class="linenos">31</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
 <span class="linenos">32</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>    
 <span class="linenos">34</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
 <span class="linenos">35</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
 <span class="linenos">36</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>    
 <span class="linenos">38</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
 <span class="linenos">39</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
 <span class="linenos">40</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
@@ -934,18 +934,18 @@ The Cat in the 🎩!
 <span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
 <span class="linenos"> 8</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
 <span class="linenos">12</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
 <span class="linenos">13</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
 <span class="linenos">14</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
 <span class="linenos">15</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
 <span class="linenos">16</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
 <span class="linenos">19</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
 <span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
 <span class="linenos">23</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
 <span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
@@ -965,18 +965,18 @@ The Cat in the 🎩!
 <span class="linenos"> 7</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
 <span class="linenos"> 8</span>    <span class="n">the_line</span> <span class="o">=</span> <span class="n">replace32</span><span class="o">.</span><span class="n">my_replace</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="s1">&#39;Hat&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\N{top hat}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos"> 9</span>    <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Create a representation of the objects on my shelf</span>
 <span class="linenos">12</span>    <span class="n">stuffed_lion</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\N{lion face}</span><span class="s1">&#39;</span>
 <span class="linenos">13</span>    <span class="n">kids_pic</span> <span class="o">=</span> <span class="s1">&#39;kids.jpg&#39;</span>
 <span class="linenos">14</span>    <span class="n">textbook</span> <span class="o">=</span> <span class="s1">&#39;cs32.scriv&#39;</span>
 <span class="linenos">15</span>    <span class="n">favorite_cd</span> <span class="o">=</span> <span class="s1">&#39;BornToRun.mp3&#39;</span>
 <span class="linenos">16</span>    <span class="n">novel</span> <span class="o">=</span> <span class="s1">&#39;CatInTheHat.txt&#39;</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Create a sequence object that represents my shelf</span>
 <span class="linenos">19</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="p">[</span><span class="n">stuffed_lion</span><span class="p">,</span> <span class="n">kids_pic</span><span class="p">,</span> <span class="n">textbook</span><span class="p">,</span> <span class="n">favorite_cd</span><span class="p">,</span> <span class="n">novel</span><span class="p">]</span>
 <span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="c1"># Make it look like our textbook has been opened on my shelf</span>
 <span class="linenos">23</span>    <span class="n">shelf</span> <span class="o">=</span> <span class="n">replace32</span><span class="o">.</span><span class="n">my_replace</span><span class="p">(</span><span class="n">shelf</span><span class="p">,</span> <span class="p">[</span><span class="n">textbook</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;</span><span class="se">\N{open book}</span><span class="s1">&#39;</span><span class="p">])</span>
 <span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">shelf</span><span class="p">)</span>
@@ -998,7 +998,7 @@ The Cat in the 🎩!
 <p>We might, however, want to use a non-pure function defined in a module. This function might need us to initialize some state before we can use the function, and this is the purpose of having the Python interpreter run some top-level statements when it first processes a module through an import-statement.</p>
 <p>An example where this is needed is in a pseudorandom number generator, which uses a seed to initialize the deterministic algorithm that generates the uniformly distributed, seemingly random numbers it produces. If the algorithm starts with the same seed each time it is run, it will produce the same “random” number sequence. This is great for testing, but not so great for game play, Monte Carlo simulations, or a wealth of other stochastic methods used to model physical, biological, and social processes. We will use such generators in Chapter 5.</p>
 <p>In this chapter, you’ve learned a lot about how to organize the code in your scripts. The topics covered are enough to move us into a new set of interesting problems, but probably not enough practice to make you comfortable in writing your own functions. For more practice, I encourage you to try this chapter’s active-learning exercises on the companion website. They’ll also explain the dangers of using global variables rather than the parameter-passing and value-return mechanisms of functions.</p>
-<p>[Version 20240813]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

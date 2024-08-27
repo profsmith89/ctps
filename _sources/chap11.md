@@ -174,25 +174,25 @@ def dogwalk(my_city):
        successful path is marked in the city object."""
     # Set the current state
     cur_loc = my_city.start
-
+    
     while cur_loc in my_city:
         # Where to? Well, what steps are possible?
         moves = my_city.possible_moves(cur_loc, EXPLORED)
         # print(f'DEBUG: loc = {loc}; moves = {moves}')
-
+        
         if len(moves) == 0:
             return False   # dead end!
-
+        
         # Randomly pick a possible move and make it
         a_move = random.choice(moves)
         next_loc = my_city.move(cur_loc, a_move)
-
+        
         # Leave a scent at current loc
         my_city.mark(cur_loc, EXPLORED)
-
+        
         # Update current state
         cur_loc = next_loc
-
+    
     # The random path was successful!
     return True
 ```
@@ -215,7 +215,7 @@ def main():
     print('\nBuilding a city with a 4x4 square grid')
     nyc = CitySqGrid(4, Cosmo)
     print(nyc)
-
+    
     # Cosmo walks himself
     success = dogwalk(nyc)
     print(nyc)
@@ -244,24 +244,24 @@ import dogwalk
 def sim(blocks, trials, verbose):
     # Initialize the metric of interest
     dead_ends = 0
-
+    
     # Build the specified city
     my_city = CitySqGrid(blocks, dogwalk.Cosmo)
     if verbose:
         print(f'\nBuilding a {blocks}x{blocks} city')
         print(my_city)
-
+    
     for _ in range(trials):
         # Reset the city before each trial
         my_city.reset()
-
+        
         # Run, record, and print the trial
         success = dogwalk.dogwalk(my_city)
         if not success:
             dead_ends += 1
         if verbose:
             print(my_city)
-
+    
     # Print the percentage of trials ending in dead ends
     print(f'{100 * dead_ends // trials}% dead ends')
 ```
@@ -350,7 +350,7 @@ lineno-start: 61
 def main():
     # Build the city and put Cosmo at its center
     nyc = CitySqGrid(6, Cosmo)
-
+    
     # Add Cosmo's favorite pins to the city map
     pins = [
         Pin((1,3), "Park", "Lots of squirrels", 5),
@@ -360,11 +360,11 @@ def main():
     ]
     for pin in pins:
         nyc.mark(pin.loc, pin.icon)
-
+    
     print(nyc)
-
+    
     wander(nyc, pins)
-
+    
     print('Thanks for the fun walk!')
 ```
 
@@ -422,10 +422,10 @@ lineno-start: 22
         self.loc = loc
         self.name = name
         self.note = note
-
+        
         assert stars >=0 and stars <=5, "Invalid number of stars"
         self.stars = stars
-
+        
         if self.stars >= 3:
             self.icon = green_heart
         else:
@@ -487,16 +487,16 @@ lineno-start: 33
         elif cmd == 'c':
             best_loc = (-1,-1)    # not a valid location
             best_distance = 100.0 # bigger than any allowable map
-
+            
             # Find the closest highly-rated pin
             for pin in pins:
                 dist = pin.distance(cur_loc)
                 if dist < best_distance:
                     best_loc = pin.loc
                     best_distance = dist
-
+                    
             assert best_loc != (-1, -1), "Failed to find a pin"
-
+            
             # Teleport to within one step, which requires me to erase
             # the character from the current cur_loc.
             character = my_city.get_mark(cur_loc)
@@ -539,22 +539,22 @@ lineno-start: 48
 def main():
     # Our faithful dog
     Cosmo = '\N{DOG FACE}'
-
+    
     # Build a city
     nyc = CitySqGrid(6, Cosmo)
-
+    
     # Create some pins and keep track of them in a list
     pins = [
         Pin((1,3), "Park", "Lots of squirrels", 5),
         Pin((3,7), "Fire Hydrant", "Many good smells", 4),
         Pin((9,5), "Cat", "Not a nice cat!", 1),
     ]
-
+    
     # Add each pin in pins to the city map
     for pin in pins:
         print(f'Adding {pin}')
         nyc.mark(pin.loc, pin.icon)
-
+    
     print(nyc)
 ```
 
@@ -607,7 +607,7 @@ lineno-start: 80
     def reset(self):
         """Resets all cell contents to their original state"""
         maze.Maze.reset(self)
-
+        
         # Reset the start point with our character
         row, col = self.start
         self.grid[row][col].content = self.character
@@ -651,36 +651,36 @@ def search(my_map):
     # Set the current state and mark the map location explored
     cur_loc = my_map.start
     my_map.mark(cur_loc, EXPLORED)
-
+    
     # Build a list on which to keep known but unexplored locations
     frontier = []
-
+    
     while cur_loc != my_map.goal:    # search loop
         # What unexplored next steps are possible?
         moves = my_map.possible_moves(cur_loc, EXPLORED)
-
+        
         # Add moves not already on the frontier to the frontier
         for a_move in moves:
             loc = my_map.simulate_move(cur_loc, a_move)
             if loc not in frontier:
                 frontier.append(loc)
                 my_map.mark(loc, FRONTIER)
-
+        
         # DEBUG: Uncomment to watch the frontier grow
         # print(my_map)
         # input('Ready to move on? ')
-
+        
         if len(frontier) == 0:
             print('No solution')
             return
-
+        
         # Choose a location from the frontier as next to explore
         next_loc = frontier.pop()
         my_map.mark(next_loc, EXPLORED)
-
+        
         # Update current state
         cur_loc = next_loc
-
+    
     print('Found a solution')
     my_map.print()
     return
@@ -771,14 +771,14 @@ def search(my_map):
     cur_loc = my_map.start
     my_map.mark(cur_loc, EXPLORED)
     cur_note = TreeNote(cur_loc, None, None)
-
+    
     # Build a list on which to keep known but unexplored locations
     frontier = []
-
+    
     while cur_loc != my_map.goal:    # search loop
         # What unexplored next steps are possible?
         moves = my_map.possible_moves(cur_loc, EXPLORED)
-
+        
         # Add moves not already on the frontier to the frontier
         for a_move in moves:
             loc = my_map.simulate_move(cur_loc, a_move)
@@ -786,31 +786,31 @@ def search(my_map):
                 new_note = TreeNote(loc, cur_note, a_move)
                 frontier.append(new_note)
                 my_map.mark(loc, FRONTIER)
-
+        
         # DEBUG: Uncomment to watch the frontier grow
         # print(my_map)
         # input('Ready to move on? ')
-
+        
         if len(frontier) == 0:
             print('No solution')
             return
-
+        
         # Choose a note from the frontier as next to explore
         next_note = frontier.pop()
         next_loc = next_note.state
         my_map.mark(next_loc, EXPLORED)
-
+        
         # Update current state
         cur_note = next_note
         cur_loc = next_loc
-
+    
     # Follow the parent links from cur_note to create
     # the actual driving directions
     ddirections = [cur_note]
     while cur_note.parent:
         cur_note = cur_note.parent
         ddirections.insert(0, cur_note)
-
+    
     # Print out the driving directions
     print('## Solution ##')
     print(f'Starting at {ddirections[0].state}')
@@ -874,7 +874,7 @@ In general, prioritizing our possible search moves is the job of a *heuristic fu
 
 There are many heuristics in the domain of search. I asked you to imagine a common one (called *greedy*), which always takes the move from the frontier list with the best heuristic score. Another, which often provides more consistently good results, combines the cost of the path to the current point with the value of that point's heuristic (called *A\* search*). Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems.
 
-\[Version 20240820\]
+\[Version 20240827\]
 
 [^fn1]: It didn't take many years of Google's existence before it realized that maps and mapping should an important part of its web services. As a fun look at the history of Google Maps and how middle-aged entrepreneurs working civilized hours launched what has become Maps, you might read [this short Medium article](https://medium.com/@lewgus/the-untold-story-about-the-founding-of-google-maps-e4a5430aec92).
 

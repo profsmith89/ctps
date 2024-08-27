@@ -472,7 +472,7 @@ document.write(`
 <span class="linenos"> 5</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 6</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 <span class="linenos"> 7</span>        <span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos"> 8</span>
+<span class="linenos"> 8</span>        
 <span class="linenos"> 9</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">10</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">11</span>            <span class="k">break</span>
@@ -491,7 +491,7 @@ document.write(`
 <span class="linenos"> 8</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos"> 9</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">10</span>            <span class="k">break</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>        
 <span class="linenos">12</span>        <span class="c1"># new pseudocode goes here</span>
 <span class="linenos">13</span>
 <span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The End.&quot;</span><span class="p">)</span>
@@ -534,14 +534,14 @@ document.write(`
 <span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
 <span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="linenos"> 9</span>       <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="linenos"> 9</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 <span class="linenos">10</span>        
 <span class="linenos">11</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">12</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">13</span>            <span class="k">break</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># new pseudocode goes here</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="c1"># Do some work</span>
@@ -573,7 +573,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span>        <span class="c1">### Part of chap02/script3.py</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="c1"># Do some work</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>            
 <span class="linenos">19</span>            <span class="c1"># Part of which is transitioning between states</span>
 <span class="linenos">20</span>            <span class="c1"># if found opening double quote</span>
 <span class="linenos">21</span>                <span class="c1"># move to s1</span>
@@ -594,7 +594,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span>        <span class="c1">### Part of chap02/script4.py</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="c1"># Do some work</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>            
 <span class="linenos">19</span>            <span class="c1"># Part of which is transitioning between states</span>
 <span class="linenos">20</span>            <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">the_line</span><span class="p">:</span>
 <span class="linenos">21</span>                <span class="c1"># move to s1</span>
@@ -664,13 +664,13 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span>        <span class="c1">### Part of chap02/script6.py</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="c1"># Do some work</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>            
 <span class="linenos">19</span>            <span class="c1"># Part of which is capturing dialogue</span>
 <span class="linenos">20</span>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)):</span>
 <span class="linenos">21</span>                <span class="k">if</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span>
 <span class="linenos">22</span>                    <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
 <span class="linenos">23</span>                    <span class="k">break</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>            
 <span class="linenos">25</span>            <span class="c1"># Part of which is transitioning between states</span>
 <span class="linenos">26</span>            <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">the_line</span><span class="p">:</span>
 <span class="linenos">27</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
@@ -734,7 +734,7 @@ document.write(`
 <span class="linenos">20</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
 <span class="linenos">21</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">22</span>                <span class="c1"># FIXME! Need to handle short dialogue.</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>        
 <span class="linenos">24</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in S1</span>
 <span class="linenos">25</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
 <span class="linenos">26</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># Was the find successful?</span>
@@ -767,14 +767,14 @@ document.write(`
 <span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
 <span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 9</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>        
 <span class="linenos">11</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">12</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">13</span>            <span class="k">break</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># new pseudocode goes here</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
@@ -783,7 +783,7 @@ document.write(`
 <span class="linenos">20</span>                <span class="n">dialog</span> <span class="o">=</span> <span class="n">the_line</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
 <span class="linenos">21</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">22</span>                <span class="c1"># FIXME! Need to handle short dialogue.</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>        
 <span class="linenos">24</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in S1</span>
 <span class="linenos">25</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
 <span class="linenos">26</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># Was the find successful?</span>
@@ -823,14 +823,14 @@ document.write(`
 <span class="linenos"> 4</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos"> 5</span>    <span class="c1"># Set our FSM to the start state</span>
 <span class="linenos"> 6</span>    <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos"> 7</span>
+<span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="linenos"> 9</span>        <span class="n">the_line</span> <span class="o">=</span> <span class="n">my_open_book</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>        
 <span class="linenos">11</span>        <span class="c1"># Check for EOF</span>
 <span class="linenos">12</span>        <span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">13</span>            <span class="k">break</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>        
 <span class="linenos">15</span>        <span class="c1"># new pseudocode goes here</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
@@ -844,7 +844,7 @@ document.write(`
 <span class="linenos">25</span>                    <span class="n">short_dialog</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="linenos">26</span>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ACTOR: &quot;</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">short_dialog</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
 <span class="linenos">27</span>                    <span class="c1"># ... and stay in state S0</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>        
 <span class="linenos">29</span>        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># in S1</span>
 <span class="linenos">30</span>            <span class="n">i</span> <span class="o">=</span> <span class="n">the_line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
 <span class="linenos">31</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># Was the find successful?</span>
@@ -888,7 +888,7 @@ document.write(`
 </span>&lt;class &#39;str&#39;&gt;
 </pre></div>
 </div>
-<p>[Version 20240806]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

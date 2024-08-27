@@ -79,7 +79,7 @@ with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -103,7 +103,7 @@ with open('txts/' + my_book) as my_open_book:
         # Check for EOF
         if the_line == '':
             break
-
+        
         # new pseudocode goes here
 
 print("The End.")
@@ -167,14 +167,14 @@ my_book = input('What book would you like as a script? ')
 with open('txts/' + my_book) as my_open_book:
     # Set our FSM to the start state
     looking_for_open_quote = True
-
+    
     while True:
-       the_line = my_open_book.readline()
+        the_line = my_open_book.readline()
         
         # Check for EOF
         if the_line == '':
             break
-
+        
         # new pseudocode goes here
         if looking_for_open_quote:   # in S0
             # Do some work
@@ -217,7 +217,7 @@ lineno-start: 15
         ### Part of chap02/script3.py
         if looking_for_open_quote:   # in S0
             # Do some work
-
+            
             # Part of which is transitioning between states
             # if found opening double quote
                 # move to s1
@@ -248,7 +248,7 @@ lineno-start: 15
         ### Part of chap02/script4.py
         if looking_for_open_quote:   # in S0
             # Do some work
-
+            
             # Part of which is transitioning between states
             if '"' in the_line:
                 # move to s1
@@ -359,13 +359,13 @@ lineno-start: 15
         ### Part of chap02/script6.py
         if looking_for_open_quote:   # in S0
             # Do some work
-
+            
             # Part of which is capturing dialogue
             for i in range(len(the_line)):
                 if the_line[i] == '"':
                     dialog = the_line[i:]
                     break
-
+            
             # Part of which is transitioning between states
             if '"' in the_line:
                 looking_for_open_quote = False
@@ -453,7 +453,7 @@ lineno-start: 15
                 dialog = the_line[i:]
                 looking_for_open_quote = False
                 # FIXME! Need to handle short dialogue.
-
+        
         else:                        # in S1
             i = the_line.find('"')
             if i != -1:  # Was the find successful?
@@ -498,14 +498,14 @@ my_book = input('What book would you like as a script? ')
 with open('txts/' + my_book) as my_open_book:
     # Set our FSM to the start state
     looking_for_open_quote = True
-
+    
     while True:
         the_line = my_open_book.readline()
-
+        
         # Check for EOF
         if the_line == '':
             break
-
+        
         # new pseudocode goes here
         if looking_for_open_quote:   # in S0
             i = the_line.find('"')
@@ -514,7 +514,7 @@ with open('txts/' + my_book) as my_open_book:
                 dialog = the_line[i:]
                 looking_for_open_quote = False
                 # FIXME! Need to handle short dialogue.
-
+        
         else:                        # in S1
             i = the_line.find('"')
             if i != -1:  # Was the find successful?
@@ -569,14 +569,14 @@ my_book = input('What book would you like as a script? ')
 with open('txts/' + my_book) as my_open_book:
     # Set our FSM to the start state
     looking_for_open_quote = True
-
+    
     while True:
         the_line = my_open_book.readline()
-
+        
         # Check for EOF
         if the_line == '':
             break
-
+        
         # new pseudocode goes here
         if looking_for_open_quote:   # in S0
             i = the_line.find('"')
@@ -590,7 +590,7 @@ with open('txts/' + my_book) as my_open_book:
                     short_dialog = dialog[1:].split('"')[0]
                     print("\nACTOR: " + '"' + short_dialog + '"')
                     # ... and stay in state S0
-
+        
         else:                        # in S1
             i = the_line.find('"')
             if i != -1:  # Was the find successful?
@@ -653,7 +653,7 @@ emphasize-lines: 2, 3
 <class 'str'>
 ```
 
-\[Version 20240806\]
+\[Version 20240827\]
 
 [^fn1]: There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 

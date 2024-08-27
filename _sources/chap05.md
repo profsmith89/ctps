@@ -198,12 +198,12 @@ import random
 
 def main():
     print('## Welcome to GUESS THE NUMBER! ##')
-
+    
     secret = random.randint(1, 100)
     # print(f'DEBUG: The secret number is {secret}')
-
+    
     while True:   # our game loop
-
+        
         # Grab a guess from the player
         while True:
             try:
@@ -212,7 +212,7 @@ def main():
             except ValueError:
                 print('Guesses must be an integer. Try again...')
         # print(f'DEBUG: You guessed {guess}')
-
+        
         # Check guess against the secret
         if guess < secret:
             print('Too small!')
@@ -382,7 +382,7 @@ print('## Welcome to GUESS THE NUMBER! ##')
 
 # Create a socket and call it s
     # Connect s to the server
-
+    
     while True:   # our game loop
         # Grab a guess from the player
         while True:
@@ -391,11 +391,11 @@ print('## Welcome to GUESS THE NUMBER! ##')
               break
           except ValueError:
               print('Guesses must be an integer. Try again...')
-
+        
         # Use s to send guess to server
         # Wait for server to respond on s with answer to comparison
         # Print response
-
+        
         # Is game over?
 ```
 
@@ -414,11 +414,11 @@ import socket
 
 def main():
     print('## Welcome to GUESS THE NUMBER! ##')
-
+    
     # Create a socket and call it s
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         # Connect s to the server
-
+        
         # REST OF SCRIPT
 ```
 
@@ -446,10 +446,10 @@ PORT = 65432        # The port used by the server
 
 def main():
     print('## Welcome to GUESS THE NUMBER! ##')
-
+    
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
-
+        
         # REST OF SCRIPT
 ```
 
@@ -479,10 +479,10 @@ PORT = 65432        # The port used by the server
 
 def main():
     print('## Welcome to GUESS THE NUMBER! ##')
-
+    
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
-
+        
         while True:   # our game loop
             # Grab a guess from the player
             while True:
@@ -491,11 +491,11 @@ def main():
                     break
                 except ValueError:
                     print('Guesses must be an integer. Try again...')
-
+            
             s.sendall(str(guess).encode('utf-8'))
             response = s.recv(1024).decode('utf-8')
             print(response)
-
+            
             if response == 'Exactly! You win!':
                 break
 
@@ -539,10 +539,10 @@ PORT = 65432        # The port used by the server
 
 def main():
     print('## Welcome to GUESS THE NUMBER! ##')
-
+    
     with create_new_socket() as s:
         s.connect(HOST, PORT)
-
+        
         while True:   # our game loop
             # Grab a guess from the player
             while True:
@@ -551,11 +551,11 @@ def main():
                     break
                 except ValueError:
                     print('Guesses must be an integer. Try again...')
-
+            
             s.sendall(str(guess))
             response = s.recv()
             print(response)
-
+            
             if response == 'Exactly! You win!':
                 break
 
@@ -582,18 +582,18 @@ PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 with create_new_socket() as s:
     # Bind socket to address and publish contact info
-
+    
     # Answer incoming connection
     print('Connected by <client>')
-
+    
     # Create a secret for this connection    
     secret = random.randint(1, 100)
-
+    
     # Send and receive messages through the connection
     while True:   # message processing loop
         msg = # recv guess from client
         guess = int(msg)
-
+        
         # Check guess against secret and respond
         if guess < secret:
             # sendall('Too small!')
@@ -601,7 +601,7 @@ with create_new_socket() as s:
             # sendall('Exactly! You win!')
         else:
             # sendall('Too big!')
-
+    
     # If we get here, client broke connection
 ```
 
@@ -628,7 +628,7 @@ def main():
         s.bind(HOST, PORT)
         s.listen()
         print("GUESS-THE-NUMBER server started. Listening on", (HOST, PORT))
-
+        
         # REST OF SCRIPT
 ```
 
@@ -650,11 +650,11 @@ def main():
         s.bind(HOST, PORT)
         s.listen()
         print("GUESS-THE-NUMBER server started. Listening on", (HOST, PORT))
-
+        
         # Answer incoming connection
         conn2client, addr = s.accept()
         print('Connected by', addr)
-
+        
         # REST OF SCRIPT
 ```
 
@@ -681,7 +681,7 @@ def main():
         s.bind(HOST, PORT)
         s.listen()
         print("GUESS-THE-NUMBER server started. Listening on", (HOST, PORT))
-
+        
         # Answer incoming connection
         conn2client, addr = s.accept()
         print('Connected by', addr)
@@ -689,13 +689,13 @@ def main():
         with conn2client:
             # Create a secret for this connection    
             secret = random.randint(1, 100)
-
+            
             while True:   # message processing loop
                 msg = conn2client.recv()
                 if msg == '':
                     break
                 guess = int(msg)
-
+                
                 # Check guess against secret and respond
                 if guess < secret:
                     conn2client.sendall('Too small!')
@@ -703,7 +703,7 @@ def main():
                     conn2client.sendall('Exactly! You win!')
                 else:
                     conn2client.sendall('Too big!')
-
+            
             print('Disconnected')
 
 if __name__ == '__main__':
@@ -755,7 +755,7 @@ If you're running this chapter's scripts as code blocks in an interactive Python
 
 In each of these approaches, we're not really using the network. Remember that we're running these two scripts with the loopback interface, but we can't easily tell that without looking at the code. Again, abstraction at work!
 
-\[Version 20240820\]
+\[Version 20240827\]
 
 [^fn1]: Using randomly generated numbers is only one type of nondeterminism. Working with networked programs will introduce you to another type, and the techniques in this chapter will help you handle both of these forms.
 

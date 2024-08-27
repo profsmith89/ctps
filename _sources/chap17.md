@@ -47,7 +47,7 @@ import sys, csv
 def main():
     if len(sys.argv) != 2:
         sys.exit('Usage: head.py input.csv')
-
+    
     with open(sys.argv[1], encoding='utf-8') as fin:
         reader = csv.DictReader(fin)
         for i, row in enumerate(reader):
@@ -108,23 +108,23 @@ homes = [
 def main():
     if len(sys.argv) != 2:
         sys.exit('Usage: avg_pbbr.py input.csv')
-
+    
     with open(sys.argv[1], encoding='utf-8') as fin:
         reader = csv.DictReader(fin)
         for row in reader:
             # Grab this entry's number of bedrooms
             num_bedrooms = int(row['Bedroom AbvGr'])
             assert num_bedrooms <= MAX_BEDROOMS, f"We need a bigger list ({num_bedrooms})"
-
+            
             # Grab its sales price
             price = int(row['SalePrice'])
-
+            
             # Update the right tuple in `bedrooms`
             homes[num_bedrooms] = (
                 homes[num_bedrooms][0] + 1,
                 homes[num_bedrooms][1] + price
             )
-
+        
         # Print out the results
         for i, t in enumerate(homes):
             if t[0] != 0:
@@ -468,7 +468,7 @@ for leaves in [4, 16, 64, 128, 1024, 16384, 131072]:
     predictions = my_model.predict(test_X)
     test_mae = mean_absolute_error(test_y, predictions)
     print(f'{leaves}\t${int(test_mae)}')
-
+    
     if test_mae < lowest_mae:
         # Update best
         best_num_leaves = leaves
@@ -550,7 +550,7 @@ In this chapter, we built fairly good predictors using relatively simple statist
 
 Finally, a data scientist's work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you've gained to make the world a better place for all.
 
-\[Version 20240810\]
+\[Version 20240827\]
 
 [^fn1]: You can read De Cock's original paper in the [Journal of Statistics Education, Volume 19, Number 3 (2011)](https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from [Marco Palermo's Kaggle site](https://www.kaggle.com/datasets/marcopale/housing). Normally, as we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
 

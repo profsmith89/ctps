@@ -127,13 +127,13 @@ def update_hash(text, s, m, num):
     mag = 1
     for i in range(m-1):
         mag *= 256
-
+    
     # Take off most-significant digit
     num = num - ord(text[s]) * mag
-
+    
     # Add on a new least-significant digit
     num = num * 256 + ord(text[s + m])
-
+    
     return num
 ```
 
@@ -167,18 +167,18 @@ lineno-start: 1
 def rk_strmatch_partial(t, p):
     n = len(t)
     m = len(p)
-
+    
     # Preprocessing steps
-
+    
     # Constants in Rabin-Karp string-matching problem
     d = 256    # number of character encodings in ASCII
-
+    
     # Compute the hash value of a 1 in the high-order position (i.e.,
     # m-1th position), where digits have radix d
     hh = 1
     for i in range(m - 1):
         hh = hh * d
-
+    
     # Calculate the hash values for p and t[0:m], since the matching
     # loop needs these values as it starts
     hp = 0
@@ -186,12 +186,12 @@ def rk_strmatch_partial(t, p):
     for i in range(m):
         hp = (hp * d) + ord(p[i])
         ht = (ht * d) + ord(t[i])
-
+    
     # Matching step
     for s in range(n - m + 1):
         if hp == ht:
             print(f'Pattern occurs with shift {s}')
-
+        
         if s < n - m:
             # Need to compute hash for next iteration
             ht = (ht - (ord(t[s]) * hh)) * d + ord(t[s+m])
@@ -226,19 +226,19 @@ lineno-start: 13
 def rk_strmatch(t, p):
     n = len(t)
     m = len(p)
-
+    
     # Preprocessing steps
-
+    
     # Constants in Rabin-Karp string-matching problem
     d = 256    # number of character encodings in ASCII
     q = 65537  # a prime number
-
+    
     # Compute the hash value of a 1 in the high-order position (i.e.,
     # m-1th position), where digits have radix d
     hh = 1
     for i in range(m - 1):
         hh = (hh * d) % q
-
+    
     # Calculate the hash values for p and t[0:m], since the matching
     # loop needs these values as it starts
     hp = 0
@@ -246,14 +246,14 @@ def rk_strmatch(t, p):
     for i in range(m):
         hp = ((hp * d) + ord(p[i])) % q
         ht = ((ht * d) + ord(t[i])) % q
-
+    
     # Matching step
     for s in range(n - m + 1):
         if hp == ht:
             # Verify that this is an actual match
             if p[0:m] == t[s:s+m]:
                 print(f'Pattern occurs with shift {s}')
-
+        
         if s < n - m:
             # Need to compute hash for next iteration
             ht = ((ht - (ord(t[s]) * hh)) * d
@@ -434,7 +434,7 @@ def update_index(d, wordlist, unitno):
 def build_index(txt):
     # Start with an empty dictionary
     d = {}
-
+    
     # Iterate through each line in book watching for book unit boundaries
     unitno = UNIT_CNT_INIT
     for line in txt.split('\n'):
@@ -442,7 +442,7 @@ def build_index(txt):
             unitno += 1
         else:
             d = update_index(d, get_wordlist(line), unitno)
-
+    
     # Print out the index
     print(d)
 ```
@@ -481,7 +481,7 @@ def update_index(d, wordlist, unitno):
                 d[word].append(unitno)
         else:
             d[word] = [unitno]
-
+    
     return d
 ```
 
@@ -517,7 +517,7 @@ def update_index(d, wordlist, unitno):
                 d[word].append(unitno)
         else:
             d[word] = [unitno]
-
+    
     return d
 ```
 
@@ -549,14 +549,14 @@ def update_index(d, wordlist, unitno):
         
         # No capitals
         word = word.lower()
-
+        
         # Update our dictionary
         if word in d:
             if unitno not in d[word]:
                 d[word].append(unitno)
         else:
             d[word] = [unitno]
-
+    
     return d
 ```
 
@@ -600,7 +600,7 @@ lineno-start: 50
 def build_index(txt):
     # Start with an empty dictionary
     d = {}
-
+    
     # Iterate through each line in book watching for book unit boundaries
     unitno = UNIT_CNT_INIT
     for line in txt.split('\n'):
@@ -608,7 +608,7 @@ def build_index(txt):
             unitno += 1
         else:
             d = update_index(d, get_wordlist(line), unitno)
-
+    
     # Print out the index
     for w in sorted(d):
         pages = str(d[w]).strip('[]')
@@ -631,7 +631,7 @@ You now have a general idea how Google takes a search string and quickly returns
 
 Of course, Google does more than just web search, as we'll discuss in the following chapters, but this is a great start. Congratulations!
 
-\[Version 20240822\]
+\[Version 20240827\]
 
 [^fn1]: I've said we care about loops, and since this statement isn't a loop, computer scientists say that it takes *constant time*, which is expressed as *O(1)*. What they're really saying is that the operation doesn't depend upon the length of the input; it is constant time work no matter what the input.
 

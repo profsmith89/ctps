@@ -68,15 +68,15 @@ import requests
 
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
-
+    
     # Craft a request wikipedia will understand about The Cat in the Hat
     s = 'The Cat in the Hat'.replace(' ', '+')
     url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={s}&srlimit=1&format=json"
-
+    
     # Send that request from our computer to the one running wikipedia
     # Read the response from the wikipedia computer
     response = requests.get(url)
-
+    
     # Print the answer to our question ... sorta 
     if response.status_code == 200:
         print(f"Our request to Wikipedia succeeded!")
@@ -146,17 +146,17 @@ import requests
 
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
-
+    
     # Highlight the 4 components of a URL for HTTP
     protocol = 'https'
     hostname = 'en.wikipedia.org'
     path = '/w/api.php'
     query = '?action=query&list=search&srsearch=The+Cat+in+the+Hat&srlimit=1&format=json'
-
+    
     # Build the URL and launch a `get` request
     url = f"{protocol}://{hostname}{path}{query}"
     response = requests.get(url)
-
+    
     if response.status_code == 200:
         print(f"Our request to Wikipedia succeeded!")
     else:
@@ -199,13 +199,13 @@ import requests
 
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
-
+    
     # Concatenate the first 3 components of a URL for HTTP
     protocol = 'https'
     hostname = 'en.wikipedia.org'
     path = '/w/api.php'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'action': 'query',
              'list': 'search',
@@ -213,9 +213,9 @@ def main():
              'srlimit': 1,
              'format': 'json'
     }
-
+    
     response = requests.get(url, params=query)
-
+    
     if response.status_code == 200:
         print(f"Our request to Wikipedia succeeded!")
     else:
@@ -311,7 +311,7 @@ def main():
     # print('Searching wikipedia: changed "path"')
     # print('Searching wikipedia: changed "hostname"')
     # print('Searching wikipedia: changed "srsearch"')
-
+    
     # Concatenate the first 3 components of a URL for HTTP
     protocol = 'https'
     hostname = 'en.wikipedia.org'
@@ -319,7 +319,7 @@ def main():
     path = '/w/api.php'
     # path = '/asdfghjasdfghj/api.php'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'action': 'query',
              'list': 'search',
@@ -328,9 +328,9 @@ def main():
              'srlimit': 1,
              'format': 'json'
     }
-
+    
     response = requests.get(url, params=query)
-
+    
     print("response.status_code =", response.status_code)
 
 if __name__ == '__main__':
@@ -380,13 +380,13 @@ import requests
 
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
-
+    
     # Concatenate the first 3 components of a URL for HTTP
     protocol = 'https'
     hostname = 'en.wikipedia.org'
     path = '/w/api.php'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'action': 'query',
              'list': 'search',
@@ -394,14 +394,14 @@ def main():
              'srlimit': 1,
              'format': 'json'
     }
-
+    
     response = requests.get(url, params=query)
-
+    
     # Print the response headers with a line per key
     print("response.headers =")
     for key, value in response.headers.items():
         print(f"    {key}: {value}")
-
+    
     # This is how we can access one of the keys
     print("Content-Type:", response.headers['Content-Type'])
 
@@ -429,13 +429,13 @@ import json
 
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
-
+    
     # Concatenate the first 3 components of a URL for HTTP
     protocol = 'https'
     hostname = 'en.wikipedia.org'
     path = '/w/api.php'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'action': 'query',
              'list': 'search',
@@ -443,20 +443,20 @@ def main():
              'srlimit': 1,
              'format': 'json'
     }
-
+    
     response = requests.get(url, params=query)
-
+    
     # Print the response body directly
     print("response.text =", response.text)
-
+    
     print()
-
+    
     # Read the response body in JSON format and print it
     j = response.json()
     print("response.json() =", json.dumps(j, indent=4))
-
+    
     print()
-
+    
     # Print just the title from the JSON-structured response
     print("Title =", j['query']['search'][0]['title'])
 
@@ -494,29 +494,29 @@ import json
 
 def main():
     print('Searching HOLLIS for "The Cat in the Hat"')
-
+    
     # Concatenate the first 3 components of a URL for HTTP
     protocol = 'https'
     hostname = 'api.lib.harvard.edu'
     path = '/v2/items.json'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'q': 'The Cat in the Hat',
              'limit': 2
     }
-
+    
     # Add a field to the request header saying what we accept
     accept = {'Accept': 'application/json'}
-
+    
     response = requests.get(url, params=query, headers=accept)
-
+    
     # Read the response body in JSON format and print it
     j = response.json()
     print("response.json() =", json.dumps(j, indent=4))
-
+    
     print()
-
+    
     if j['pagination']['numFound'] == 0:
         print('Zero results')
     else:
@@ -556,15 +556,15 @@ def h_lib(book):
     hostname = 'api.lib.harvard.edu'
     path = '/v2/items.json'
     url = protocol + '://' + hostname + path
-
+    
     # Describe the query string as a Python dictionary
     query = {'q': book, 'limit': 5}
-
+    
     # Add a field to the request header saying what we accept
     accept = {'Accept': 'application/json'}
-
+    
     response = requests.get(url, params=query, headers=accept)
-
+    
     # Return a list of matching items from the received response
     if response.json()['pagination']['numFound'] == 0:
         return []
@@ -589,10 +589,10 @@ def get_url(items):
 
 def main():
     desired_book = input("What's the title of your desired book? ")
-
+    
     print(f'Searching HOLLIS for "{desired_book}"')
     items = h_lib(desired_book)
-
+    
     # Launch a browser window if we find the desired book
     for item in items:
         if match(item, desired_book):
@@ -632,7 +632,7 @@ Line 21 can't execute until we have completed the `requests.get` call and have a
 
 This is your first taste of *concurrency* (also called *parallelism*), and it is a fascinating and tricky subject. For now, be aware whether the library call you're making will block and think about the implications of that action on the rest of what you write in your script.
 
-\[Version 20240813\]
+\[Version 20240827\]
 
 [^fn1]: In case you're interested, here's an article titled ["The Evolving Card Catalog" by Karen Coyle](https://americanlibrariesmagazine.org/2016/01/04/cataloging-evolves/) (January 4, 2016).
 

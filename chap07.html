@@ -518,7 +518,7 @@ document.write(`
 <span class="linenos">21</span>    <span class="c1"># of our current lower bound, i.e., move up the value below the</span>
 <span class="linenos">22</span>    <span class="c1"># target number.</span>
 <span class="linenos">23</span>    <span class="n">new_guess</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">**</span> <span class="o">-</span><span class="n">i</span><span class="p">)</span>
-<span class="linenos">24</span>
+<span class="linenos">24</span>    
 <span class="linenos">25</span>    <span class="c1"># Update the correct bound, depending upon whether the new estimate</span>
 <span class="linenos">26</span>    <span class="c1"># overshot the target or not.</span>
 <span class="linenos">27</span>    <span class="k">if</span> <span class="n">new_guess</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
@@ -527,16 +527,16 @@ document.write(`
 <span class="linenos">30</span>    <span class="k">else</span><span class="p">:</span>
 <span class="linenos">31</span>        <span class="n">upper</span> <span class="o">=</span> <span class="n">new_guess</span>
 <span class="linenos">32</span>        <span class="n">encoding</span> <span class="o">+=</span> <span class="s1">&#39;0&#39;</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>    
 <span class="linenos">34</span>    <span class="c1"># And now update which of these is our current best estimate</span>
 <span class="linenos">35</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">-</span> <span class="n">lower</span> <span class="o">&lt;</span> <span class="n">upper</span> <span class="o">-</span> <span class="n">n</span><span class="p">:</span>
 <span class="linenos">36</span>        <span class="n">best</span> <span class="o">=</span> <span class="n">lower</span>
 <span class="linenos">37</span>    <span class="k">else</span><span class="p">:</span>
 <span class="linenos">38</span>        <span class="n">best</span> <span class="o">=</span> <span class="n">upper</span>
-<span class="linenos">39</span>
+<span class="linenos">39</span>    
 <span class="linenos">40</span>    <span class="k">if</span> <span class="n">best</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
 <span class="linenos">41</span>        <span class="k">break</span>
-<span class="linenos">42</span>
+<span class="linenos">42</span>    
 <span class="linenos">43</span>    <span class="c1"># Print how we&#39;ve done so far</span>
 <span class="linenos">44</span>    <span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;bit&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;bits&#39;</span>
 <span class="linenos">45</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;With </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">units</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> is between </span><span class="si">{</span><span class="n">lower</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">upper</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -559,7 +559,7 @@ document.write(`
 <p><strong>FP errors accumulate.</strong> Unfortunately, precision doesn’t just affect our ability to encode a real number as a FP number. FP operations make matters worse by accumulating the inaccuracies in representation. This is why <code class="docutils literal notranslate"><span class="pre">0.1</span> <span class="pre">*</span> <span class="pre">0.1</span></code> doesn’t equal <code class="docutils literal notranslate"><span class="pre">0.01</span></code>. A slightly inaccurate FP representation of <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself produces a result with more inaccuracy than the conversion of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> into a FP number. Or stated another way, the computer doesn’t know if you were trying to multiply <code class="docutils literal notranslate"><span class="pre">0.1</span></code> times itself or <code class="docutils literal notranslate"><span class="pre">0.10000002384185791</span></code> times itself, since single-precision FP represents both base-10 numbers with the same string of binary bits.</p>
 <p>If your script operates with floating-point numbers in a domain where rounding errors matter, you need to understand what operations you can safely perform and which you cannot. This is what textbooks and courses on numerical computing will teach you. The Wikipedia page on <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problemshttps://en.wikipedia.org/wiki/Floating-point_arithmetic%23Accuracy_problems">accuracy problems in floating-point arithmetic</a> can get you started on this tricky subject.</p>
 <p>As if it wasn’t hard enough to write a correct program!</p>
-<p>[Version 20240814]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

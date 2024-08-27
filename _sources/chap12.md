@@ -286,29 +286,29 @@ HI = 10000
 
 def guesses():
     print("## Welcome to I'LL GUESS YOUR NUMBER ##")
-
+    
     print(f"Please think of a number between {LO} and {HI}, but don't tell me.")
     input("Hit return when you're ready ...")
-
+    
     # Possible user answers
     answers = ['too low', 'too high', 'yes']
-
+    
     # Initializations
     lo = LO
     hi = HI
-
+    
     # Use binary search as the algorithm we play by
     while True:
         # Generate new guess at mid-point
         mid = lo + (hi - lo) // 2
-
+        
         # Grab answer from the player
         while True:
             ans = input(f'Is it {mid}? ').lower()
             if ans in answers:
                 break
             print('Please answer "too low", "too high", or "yes".')
-
+        
         # Update range of possible guesses
         if ans == 'yes':
             print('\U0001f60e')
@@ -347,18 +347,18 @@ lineno-start: 1
 
 def merge(a, b):
     """Given two sorted lists, return a single sorted list"""
-
+    
     # Check for and handle trivial merge cases
     if len(a) == 0:
         return b
     if len(b) == 0:
         return a
-
+    
     # Create a place to put the merged lists
     merged = []
     # Calculate how long the merged list should be
     tot_length = len(a) + len(b)
-
+    
     # Merge a and b
     while (len(merged) < tot_length):
         if len(a) == 0:
@@ -369,7 +369,7 @@ def merge(a, b):
             merged.append(a.pop(0))
         else:
             merged.append(b.pop(0))
-
+    
     return merged
 ```
 
@@ -397,7 +397,7 @@ lineno-start: 3
 
 def merge_sort(s):
     """Iterative merge sort: s sorted in place"""
-
+    
     # Catch trivial cases (i.e., lists that are guaranteed to be sorted)
     if len(s) < 2:
         return
@@ -406,12 +406,12 @@ def merge_sort(s):
     # to sublists of length 1, which will then
     # grow back up to len(s) in powers of 2
     sublist_len = 1
-
+    
     # Merge all sorted sublists back up the tree of splits
     while sublist_len < len(s):
         # i is the starting index of the next two sublists to merge
         i = 0
-
+        
         # Merge all pairs of sorted sublists of length sublist_len
         while i <= len(s):
             # Compute the end index of the first sublist
@@ -419,18 +419,18 @@ def merge_sort(s):
             # Catch the special case of the last sublist's length
             # that may be shorter than sublist_len
             k = min(j + sublist_len, len(s))
-
+            
             merged = merge(s[i:j], s[j:k])
-
+            
             # Put the merged list back into s
             ii = i
             for item in merged:
                 s[ii] = item
                 ii += 1
-
+            
             # Move to the next pair of sublists to merge
             i += sublist_len * 2
-
+        
         # Increase the length of the sublists to merge
         sublist_len *= 2
 ```
@@ -566,14 +566,14 @@ lineno-start: 3
 
 def merge_sort(s):
     """Recursive merge sort: returns a sorted list"""
-
+    
     # Catch trivial cases (i.e., lists that are sorted by definition)
     if len(s) < 2:
         return s
-
+    
     # Find index at truncated midpoint of list
     mid = len(s) // 2
-
+    
     # Return merge of the two sorted halves
     return merge(merge_sort(s[0:mid]), merge_sort(s[mid:]))
 ```
@@ -720,7 +720,7 @@ def beckett(n, enters):
     if n == 0:
         # No characters so no stage directions
         return
-
+    
     beckett(n - 1, True)
     if enters:
         stage_print('enter', n)
@@ -737,7 +737,7 @@ This final `beckett` function is disturbingly simple, and that's what happens wh
 
 I hope you understand how the recursive `beckett` function works. I hope you've also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett's challenge is even harder, but you can do it if you take it a step at a time, as we just did.
 
-\[Version 20240725\]
+\[Version 20240827\]
 
 [^fn1]: I've borrowed this definition from an earlier edition of *Introduction to Algorithms* by Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest (The MIT Press; Cambridge, MA; 1995), p. 2.
 

@@ -100,7 +100,7 @@ with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -155,12 +155,12 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         the_line = the_line.replace('Cat', 'Gato')
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -238,12 +238,12 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         the_line = the_line.replace('Cat', '\N{cat face with wry smile}')
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -266,13 +266,13 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         the_line = the_line.replace('Cat', '\N{cat face with wry smile}')
         the_line = the_line.replace('Hat', '\N{top hat}')
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -303,13 +303,13 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         # my code to replace 'Cat' with '\N{cat face with wry smile}'
         # my code to replace 'Hat' with '\N{top hat}'
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -342,13 +342,13 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         # call my_replace on the_line, specifying 'Cat' is replaced by '\N{cat face with wry smile}'
         # call my_replace on the_line, specifying 'Hat' is replaced by '\N{top hat}'
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -375,7 +375,7 @@ def my_replace(s, old, new):
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
-
+    
     while i < len(s):
         if s[i:i+j] == old:
             new_s = new_s + new
@@ -383,7 +383,7 @@ def my_replace(s, old, new):
         else:
             new_s = new_s + s[i:i+1]
             i += 1
-
+    
     return new_s
 
 
@@ -393,13 +393,13 @@ print()   # print a blank line between question and script's output
 with open('txts/' + my_book) as my_open_book:
     while True:
         the_line = my_open_book.readline()
-
+        
         # Having some fun with text substitution
         the_line = my_replace(the_line, 'Cat', '\N{cat face with wry smile}')
         the_line = my_replace(the_line, 'Hat', '\N{top hat}')
-
+        
         print(the_line, end='')
-
+        
         # Check for EOF
         if the_line == '':
             break
@@ -482,7 +482,7 @@ def my_replace(s, old, new):
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
-
+    
     while i < len(s):
         if s[i:i+j] == old:
             new_s = new_s + new
@@ -490,28 +490,28 @@ def my_replace(s, old, new):
         else:
             new_s = new_s + s[i:i+1]
             i += 1
-
+    
     return new_s
 
 
 def main():
     my_book = input('What book would you like to read? ')
     print()   # print a blank line between question and script's output
-
+    
     with open('txts/' + my_book) as my_open_book:
         while True:
             the_line = my_open_book.readline()
-
+            
             # Having some fun with text substitution
             the_line = my_replace(the_line, 'Cat', '\N{cat face with wry smile}')
             the_line = my_replace(the_line, 'Hat', '\N{top hat}')
-
+            
             print(the_line, end='')
-
+            
             # Check for EOF
             if the_line == '':
                 break
-
+    
     print("\nThe End.")
 
 if __name__ == '__main__':
@@ -585,7 +585,7 @@ def my_replace(s, old, new):
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
-
+    
     while i < len(s):
         if s[i:i+j] == old:
             new_s = new_s + new
@@ -593,7 +593,7 @@ def my_replace(s, old, new):
         else:
             new_s = new_s + s[i:i+1]
             i += 1
-
+    
     return new_s
 
 
@@ -603,18 +603,18 @@ def main():
     print(the_line)
     the_line = my_replace(the_line, 'Hat', '\N{top hat}')
     print(the_line)
-
+    
     # Create a representation of the objects on my shelf
     stuffed_lion = '\N{lion face}'
     kids_pic = 'kids.jpg'
     textbook = 'cs32.scriv'
     favorite_cd = 'BornToRun.mp3'
     novel = 'CatInTheHat.txt'
-
+    
     # Create a sequence object that represents my shelf
     shelf = [stuffed_lion, kids_pic, textbook, favorite_cd, novel]
     print(shelf)
-
+    
     # Make it look like our textbook has been opened on my shelf
     shelf = my_replace(shelf, [textbook], ['\N{open book}'])
     print(shelf)
@@ -710,18 +710,18 @@ def main():
     print(the_line)
     the_line = my_replace(the_line, 'Hat', '\N{top hat}')
     print(the_line)
-
+    
     # Create a representation of the objects on my shelf
     stuffed_lion = '\N{lion face}'
     kids_pic = 'kids.jpg'
     textbook = 'cs32.scriv'
     favorite_cd = 'BornToRun.mp3'
     novel = 'CatInTheHat.txt'
-
+    
     # Create a sequence object that represents my shelf
     shelf = [stuffed_lion, kids_pic, textbook, favorite_cd, novel]
     print(shelf)
-
+    
     # Make it look like our textbook has been opened on my shelf
     shelf = my_replace(shelf, [textbook], ['\N{open book}'])
     print(shelf)
@@ -747,18 +747,18 @@ def main():
     print(the_line)
     the_line = replace32.my_replace(the_line, 'Hat', '\N{top hat}')
     print(the_line)
-
+    
     # Create a representation of the objects on my shelf
     stuffed_lion = '\N{lion face}'
     kids_pic = 'kids.jpg'
     textbook = 'cs32.scriv'
     favorite_cd = 'BornToRun.mp3'
     novel = 'CatInTheHat.txt'
-
+    
     # Create a sequence object that represents my shelf
     shelf = [stuffed_lion, kids_pic, textbook, favorite_cd, novel]
     print(shelf)
-
+    
     # Make it look like our textbook has been opened on my shelf
     shelf = replace32.my_replace(shelf, [textbook], ['\N{open book}'])
     print(shelf)
@@ -789,7 +789,7 @@ An example where this is needed is in a pseudorandom number generator, which use
 
 In this chapter, you've learned a lot about how to organize the code in your scripts. The topics covered are enough to move us into a new set of interesting problems, but probably not enough practice to make you comfortable in writing your own functions. For more practice, I encourage you to try this chapter's active-learning exercises on the companion website. They'll also explain the dangers of using global variables rather than the parameter-passing and value-return mechanisms of functions.
 
-\[Version 20240813\]
+\[Version 20240827\]
 
 [^fn1]: A community of volunteer enthusiasts helped make the Python programming language itself a world-wide phenomenon. Watch this [short video](https://www.youtube.com/watch?v=WGCaK-N2dsA) to learn more.
 

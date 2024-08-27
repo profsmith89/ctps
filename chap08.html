@@ -591,7 +591,7 @@ document.write(`
 <span class="linenos">34</span><span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">imfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
 <span class="linenos">35</span>    <span class="c1"># Create a new frame for the filtered image</span>
 <span class="linenos">36</span>    <span class="n">im_less</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-<span class="linenos">37</span>
+<span class="linenos">37</span>    
 <span class="linenos">38</span>    <span class="n">zero_image_lowest_bits</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">im_less</span><span class="p">)</span>
 <span class="linenos">39</span>    <span class="n">im_less</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;images/zeroed.png&#39;</span><span class="p">)</span>
 </pre></div>
@@ -650,12 +650,12 @@ document.write(`
 <span class="linenos">44</span>    <span class="s1">&#39;&#39;&#39;</span>
 <span class="linenos">45</span><span class="s1">    # Create an image frame and initialize it with the input image</span>
 <span class="linenos">46</span><span class="s1">    new_im = im.copy()</span>
-<span class="linenos">47</span>
+<span class="linenos">47</span><span class="s1">    </span>
 <span class="linenos">48</span><span class="s1">    for i in range(im.size[0]):</span>
 <span class="linenos">49</span><span class="s1">        for j in range(im.size[1]):</span>
 <span class="linenos">50</span><span class="s1">            pixel = im.getpixel((i,j))</span>
 <span class="linenos">51</span><span class="s1">            new_im.putpixel((i,j), do_something(pixel))</span>
-<span class="linenos">52</span>
+<span class="linenos">52</span><span class="s1">            </span>
 <span class="linenos">53</span><span class="s1">            if (i == stop_x and j == stop_y):</span>
 <span class="linenos">54</span><span class="s1">                return new_im</span>
 <span class="linenos">55</span>
@@ -696,12 +696,12 @@ document.write(`
 <span class="linenos">45</span><span class="sd">    &#39;&#39;&#39;</span>
 <span class="linenos">46</span>    <span class="c1"># Create an image frame and initialize it with the input image</span>
 <span class="linenos">47</span>    <span class="n">new_im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="linenos">48</span>
+<span class="linenos">48</span>    
 <span class="linenos">49</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
 <span class="linenos">50</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
 <span class="linenos">51</span>            <span class="n">pixel</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
 <span class="linenos">52</span>            <span class="n">new_im</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">do_something</span><span class="p">(</span><span class="n">pixel</span><span class="p">))</span>
-<span class="linenos">53</span>
+<span class="linenos">53</span>            
 <span class="linenos">54</span>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">stop_x</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="n">stop_y</span><span class="p">):</span>
 <span class="linenos">55</span>                <span class="k">return</span> <span class="n">new_im</span>
 <span class="linenos">56</span>
@@ -761,7 +761,7 @@ document.write(`
 <p>You repeatedly practiced starting with a general statement of a problem and then decomposing it into its constituent parts. You gained significant practice in a particular approach to problem solving called worklist processing, and by understanding how computers digitally encode and represent real-world ideas and information, you can manipulate them.</p>
 <p>Importantly, you’re comfortable with problem solving as an iterative process. All too often, our first attempt at a script fails to run without an error, or if it does run to completion, the script produces unexpected results. You understand that you should avoid certain types of problematic code structures (e.g., a file open without a file close) and anticipate the potential problems in other design patterns (e.g., variables that are aliases for each other). I hope you have grown skeptical and regularly check the form of your input data and the results of some computations before you start using them. And when things inevitably still go wrong, you’ve begun to understand the Python interpreter’s error messages and to work through your scripts a step at a time to verify which parts work and where the failure likely resides.</p>
 <p>You are no longer a novice. You are now ready to learn to use computers to solve a more complex set of real-world problems.</p>
-<p>[Version 20240820]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

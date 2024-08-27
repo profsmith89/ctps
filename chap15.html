@@ -467,20 +467,20 @@ document.write(`
 <span class="linenos"> 7</span><span class="sd">        Returns: edited script as list of lines</span>
 <span class="linenos"> 8</span><span class="sd">    &#39;&#39;&#39;</span>
 <span class="linenos"> 9</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">10</span>
+<span class="linenos">10</span>    
 <span class="linenos">11</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
 <span class="linenos">12</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">13</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Grab line number where we&#39;ll place the breakpoint</span>
 <span class="linenos">16</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
-<span class="linenos">17</span>
+<span class="linenos">17</span>    
 <span class="linenos">18</span>    <span class="c1"># Convert breakpoint number into a list index</span>
 <span class="linenos">19</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="linenos">20</span>
+<span class="linenos">20</span>    
 <span class="linenos">21</span>    <span class="c1"># Add the breakpoint</span>
 <span class="linenos">22</span>    <span class="c1"># TO BE WRITTEN</span>
-<span class="linenos">23</span>
+<span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="k">return</span> <span class="n">edited_script</span>
 <span class="linenos">25</span>
 <span class="linenos">26</span><span class="k">def</span> <span class="nf">get_lineno</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
@@ -519,9 +519,9 @@ document.write(`
 <span class="linenos">59</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">60</span>    <span class="k">else</span><span class="p">:</span>
 <span class="linenos">61</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb0-soln.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
-<span class="linenos">62</span>
+<span class="linenos">62</span>    
 <span class="linenos">63</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="linenos">64</span>
+<span class="linenos">64</span>    
 <span class="linenos">65</span>    <span class="n">print_it</span><span class="p">(</span><span class="n">edited_script</span><span class="p">)</span>
 <span class="linenos">66</span>    <span class="c1"># write_it(edited_script, fname)</span>
 <span class="linenos">67</span>
@@ -559,17 +559,17 @@ document.write(`
 <span class="linenos"> 8</span><span class="sd">        Returns: edited script as list of lines</span>
 <span class="linenos"> 9</span><span class="sd">    &#39;&#39;&#39;</span>
 <span class="linenos">10</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">11</span>
+<span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
 <span class="linenos">13</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">14</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="linenos">15</span>
+<span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="c1"># Grab line number where we&#39;ll place the breakpoint</span>
 <span class="linenos">17</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
-<span class="linenos">18</span>
+<span class="linenos">18</span>    
 <span class="linenos">19</span>    <span class="c1"># Convert breakpoint number into a list index</span>
 <span class="linenos">20</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="c1"># Add the breakpoint</span>
 <span class="linenos">23</span>    <span class="c1"># .. grab the whitespace so we get the right indentation</span>
 <span class="linenos">24</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -578,13 +578,13 @@ document.write(`
 <span class="linenos">27</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
 <span class="linenos">28</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">29</span>            <span class="k">break</span>
-<span class="linenos">30</span>
+<span class="linenos">30</span>    
 <span class="linenos">31</span>    <span class="n">breakpt_statement</span> <span class="o">=</span> <span class="n">my_whitespace</span> <span class="o">+</span> \
 <span class="linenos">32</span>        <span class="sa">f</span><span class="s1">&#39;raise Exception(&quot;My breakpoint&quot;, </span><span class="si">{</span><span class="n">breakpt</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="linenos">33</span>
+<span class="linenos">33</span>    
 <span class="linenos">34</span>    <span class="c1"># .. insert a raise statement as our breakpoint</span>
 <span class="linenos">35</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt_index</span><span class="p">,</span> <span class="n">breakpt_statement</span><span class="p">)</span>
-<span class="linenos">36</span>
+<span class="linenos">36</span>    
 <span class="linenos">37</span>    <span class="k">return</span> <span class="n">edited_script</span>
 <span class="linenos">38</span>
 <span class="linenos">39</span><span class="c1"># the other functions and main are unchanged from pdb1.py</span>
@@ -645,12 +645,12 @@ document.write(`
 <span class="linenos">72</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">73</span>    <span class="k">else</span><span class="p">:</span>
 <span class="linenos">74</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pdb3.py [script_to_be_debugged]&#39;</span><span class="p">)</span>
-<span class="linenos">75</span>
+<span class="linenos">75</span>    
 <span class="linenos">76</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pdb</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="linenos">77</span>
+<span class="linenos">77</span>    
 <span class="linenos">78</span>    <span class="c1"># print_it(edited_script)</span>
 <span class="linenos">79</span>    <span class="c1"># write_it(edited_script, fname)</span>
-<span class="linenos">80</span>
+<span class="linenos">80</span>    
 <span class="linenos">81</span>    <span class="c1"># Run the edited script and catch our breakpoint exception.</span>
 <span class="linenos">82</span>    <span class="c1"># Remember to turn the list of strings into one big string.</span>
 <span class="linenos">83</span>    <span class="k">try</span><span class="p">:</span>
@@ -718,9 +718,9 @@ document.write(`
 <span class="linenos"> 9</span><span class="sd">    &#39;&#39;&#39;</span>
 <span class="linenos">10</span>    <span class="c1"># Ask for the print-statement argument</span>
 <span class="linenos">11</span>    <span class="n">printarg</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is print&#39;s argument? &quot;</span><span class="p">)</span>
-<span class="linenos">12</span>
+<span class="linenos">12</span>    
 <span class="linenos">13</span>    <span class="n">print_statement</span> <span class="o">=</span> <span class="n">ws</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;print(f&quot;</span><span class="si">{</span><span class="n">printarg</span><span class="si">}</span><span class="s1">&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="linenos">14</span>
+<span class="linenos">14</span>    
 <span class="linenos">15</span>    <span class="c1"># Insert our print statement</span>
 <span class="linenos">16</span>    <span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt_index</span><span class="p">,</span> <span class="n">print_statement</span><span class="p">)</span>
 <span class="linenos">17</span>
@@ -731,17 +731,17 @@ document.write(`
 <span class="linenos">22</span><span class="sd">        Returns: edited script as list of lines</span>
 <span class="linenos">23</span><span class="sd">    &#39;&#39;&#39;</span>
 <span class="linenos">24</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="linenos">25</span>
+<span class="linenos">25</span>    
 <span class="linenos">26</span>    <span class="c1"># Read in the original script (as a list of file lines)</span>
 <span class="linenos">27</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">script_fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">28</span>        <span class="n">edited_script</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="linenos">29</span>
+<span class="linenos">29</span>    
 <span class="linenos">30</span>    <span class="c1"># Grab line number where we&#39;ll place some new code</span>
 <span class="linenos">31</span>    <span class="n">breakpt</span> <span class="o">=</span> <span class="n">get_lineno</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edited_script</span><span class="p">))</span>
-<span class="linenos">32</span>
+<span class="linenos">32</span>    
 <span class="linenos">33</span>    <span class="c1"># Convert breakpoint number into a list index</span>
 <span class="linenos">34</span>    <span class="n">breakpt_index</span> <span class="o">=</span> <span class="n">breakpt</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="linenos">35</span>
+<span class="linenos">35</span>    
 <span class="linenos">36</span>    <span class="c1"># Compute the leading whitespace at `breakpt_index`</span>
 <span class="linenos">37</span>    <span class="n">my_whitespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="linenos">38</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">edited_script</span><span class="p">[</span><span class="n">breakpt_index</span><span class="p">]:</span>
@@ -749,9 +749,9 @@ document.write(`
 <span class="linenos">40</span>            <span class="n">my_whitespace</span> <span class="o">+=</span> <span class="n">c</span>
 <span class="linenos">41</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">42</span>            <span class="k">break</span>
-<span class="linenos">43</span>
+<span class="linenos">43</span>    
 <span class="linenos">44</span>    <span class="n">insert_code</span><span class="p">(</span><span class="n">edited_script</span><span class="p">,</span> <span class="n">breakpt_index</span><span class="p">,</span> <span class="n">my_whitespace</span><span class="p">)</span>
-<span class="linenos">45</span>
+<span class="linenos">45</span>    
 <span class="linenos">46</span>    <span class="k">return</span> <span class="n">edited_script</span>
 <span class="linenos">47</span>
 <span class="linenos">48</span><span class="c1"># get_lineno, print_it, and write_it are unchanged from pdb3.py</span>
@@ -764,9 +764,9 @@ document.write(`
 <span class="linenos">55</span>        <span class="n">fname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">56</span>    <span class="k">else</span><span class="p">:</span>
 <span class="linenos">57</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: python3 pin32.py [script_to_be_instrumented]&#39;</span><span class="p">)</span>
-<span class="linenos">58</span>
+<span class="linenos">58</span>    
 <span class="linenos">59</span>    <span class="n">edited_script</span> <span class="o">=</span> <span class="n">my_pin</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">insert_print</span><span class="p">)</span>
-<span class="linenos">60</span>
+<span class="linenos">60</span>    
 <span class="linenos">61</span>    <span class="c1"># Run the instrumented script</span>
 <span class="linenos">62</span>    <span class="n">exec</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edited_script</span><span class="p">),</span> <span class="nb">globals</span><span class="p">())</span>
 <span class="linenos">63</span>    
@@ -841,7 +841,7 @@ pin32: All done!
 <p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">repl32.py</span> <span class="pre">guess32.py</span></code> and answer <code class="docutils literal notranslate"><span class="pre">24</span></code> to the line-number question. Input a guess and then at the <code class="docutils literal notranslate"><span class="pre">repl&gt;</span></code> prompt, type <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4</span></code>. At the next prompt, type <code class="docutils literal notranslate"><span class="pre">secret</span></code> or <code class="docutils literal notranslate"><span class="pre">guess</span></code>. You might also type something like <code class="docutils literal notranslate"><span class="pre">secret</span> <span class="pre">==</span> <span class="pre">guess</span></code>. When you’re done, type <code class="docutils literal notranslate"><span class="pre">#q</span></code> at the <code class="docutils literal notranslate"><span class="pre">repl&gt;</span></code> prompt to continue the execution of <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code>. Feel free to experiment with your own target script.</p>
 </div>
 <p>We’ve built ourselves a powerful and flexible tool with which we can investigate the state of a running program. We’ve also built ourselves an interpreter than uses a script’s interrupted execution context as its environment. Including the real Python debugger <code class="docutils literal notranslate"><span class="pre">pdb</span></code>, you now have several tools with which you can slow down a program’s execution so that you can better understand its behavior and more quickly fix the bugs within it. Happy bug squashing!</p>
-<p>[Version 20240808]</p>
+<p>[Version 20240827]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
