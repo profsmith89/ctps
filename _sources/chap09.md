@@ -277,9 +277,8 @@ To use this utility in the shell, you often type the name of the time utility an
 
 ```{code-block} none
 ---
-emphasize-lines: 2, 6
+emphasize-lines: 1, 5
 ---
-### NOT a script and therefore NOT executable
 chap09$ /usr/bin/time python3 bf_strmatch.py 'This test is a bigger test' 'test'
 Pattern occurs with shift 5
 Pattern occurs with shift 22
@@ -298,15 +297,14 @@ Part of the problem here is that my computer is fast and the program doesn't mak
 
 That's right. The script will run longer if we give it more text to search (e.g., [*War and Peace* by Leo Tolstoy](https://www.gutenberg.org/ebooks/2600) or [*Just David* by Eleanor H. Porter](https://www.gutenberg.org/ebooks/440), both of which you can download from Project Gutenberg).
 
-To this point, we've had to type the text we fed to `bf_strmatch.py` and `bf_strmatch2.py`. Since we probably don't have the time to type these long texts, we'll use the option of reading the text input from *standard input (stdin)* in a new way.[^fn9] Using this method, our existing scripts can read the contents of the Project Gutenberg text files we download.
+To this point, we've typed the text we fed to `bf_strmatch.py` and `bf_strmatch2.py`. Since we probably don't have the time to type a long text, we'll use the option of reading the text input from *standard input (stdin)* in a new way.[^fn9] Using this method, our existing scripts can read the contents of the Project Gutenberg text files we download.
 
 How does this work? In Python, `sys.stdin` is a file object like those we created with the `open` command, and on which, we can perform operations like `read` and `readline`. In `bf_strmatch.py`, when the script determines that we provided only the pattern on the command line, it calls `sys.stdin.read()` and assigns the returned string to `t` (see line 22).[^fn10] Previously, this line read the text we typed, but on Linux-like systems, you can extend a command like `python3 bf_strmatch.py 'test'` with a less-than sign (`<`). After this less-than sign, you indicate the filename whose contents you want available on `sys.stdin`. As an example, the following code block runs `bf_strmatch.py` looking for the phrase "has left" in the file `JustDavid.txt`.
 
 ```{code-block} none
 ---
-emphasize-lines: 2
+emphasize-lines: 1
 ---
-### NOT a script and therefore NOT executable
 chap09$ /usr/bin/time python3 bf_strmatch.py 'has left' < JustDavid.txt
 Pattern occurs with shift 326953
         0.15 real         0.10 user         0.01 sys
@@ -474,12 +472,9 @@ The body of the matching loop in `rk_strmatch` also contains a loop with a simpl
 
 ## Computational complexity
 
-This way of thinking gets away from the specifics of our machine's hardware, the choices different designers make in creating a programming language, the performance of the interpreter and runtime system that help run our scripts, and lots of other small details that affect wall-clock runtimes but aren't inherent in the performance of one algorithm versus another. Instead, this way of thinking focuses on a few characteristics of the input and how they influence the gross behavior of the algorithm. This is all a long way of saying some things matter much more than others, and all we really care about is that:
+This way of thinking gets away from the specifics of our machine's hardware, the choices different designers make in creating a programming language, the performance of the interpreter and runtime system that help run our scripts, and lots of other small details that affect wall-clock runtimes but aren't inherent in the performance of one algorithm versus another. Instead, this way of thinking focuses on a few characteristics of the input and how they influence the gross behavior of the algorithm.
 
-1. large inputs will take more time to process than small ones; and
-2. complex inputs will take more time to process than simple ones.
-
-We saw this in the rough analysis of our two string-match algorithms. In particular, we found that the runtimes of the two algorithms were proportional to the sizes of their inputs, i.e., `m` and `n`. And the magnitude of these numbers directly changed the running time of each algorithm through its looping structure. 
+This is all a long way of saying some things matter much more than others, and all we really care about here is that large inputs will take more time to process than small ones. We saw this in the rough analysis of our two string-match algorithms. In particular, we found that the runtimes of the two algorithms were proportional to the sizes of their inputs, i.e., `m` and `n`. And the magnitude of these numbers directly changed the running time of each algorithm through its looping structure. 
 
 If you continue in computer science, you'll soon learn that this type of work is the domain of theorists interested in questions of *computational complexity*. These individuals ask how efficiently, in terms of time and space, an algorithm can compute a solution. They're interested in finding a collection of expressions (or technically *functions*), as we did just a moment ago, that do a good job of describing the behavior of an algorithm as its input grows in size and complexity. For example, these functions might bound an algorithm's running time from *above* (i.e., in the *worst case*, the algorithm's running time won't grow faster than a particular function) and from *below* (i.e., in the *best case*, the algorithm's running time won't grow slower than another, possibly the same, function).
 
@@ -496,122 +491,113 @@ While we still don't know how `rk_strmatch` finds matches in a cheaper manner th
 * When $m$ is small compared to $n$, $m$ will look like a constant factor in $O((n - m + 1) * m)$, and the matching time of both algorithms will grow like $O(n)$. In fact, `bf_strmatch` might outperform `rk_strmatch` since its extra setup work and extra work inside the matching loop may become noticeable.
 * When $m$ is a significant proportion of $n$ (e.g., 25 percent of its size), $O((n - m + 1) * m)$ will start to look more like $O(n^2)$ for `bf_strmatch`. For `rk_strmatch`, how often the first if-statement within its matching loop evaluates true will dictate whether this algorithm grows as $O(n)$ or $O(n^2)$. We will assume that this if-statement evaluates true only when there's an actual valid shift, and under this assumption, we will craft the pattern string so that it never matches, hopefully driving `rk_strmatch` toward $O(n)$ growth as `bf_strmatch` experiences $O(n^2)$ growth. 
 
-The following code block implements this experiment using the content from `JustDavid.txt`. It concatenates copies of this file to create ever larger texts in which we look for either short or long patterns. In all experimental runs, the pattern never matches any of the text.
+The following script implements this experiment using the content from `JustDavid.txt`. It concatenates copies of this file to create ever larger texts in which we look for either short or long patterns. In all experimental runs, the pattern never matches any of the text.
 
 ```{code-block} python
 ---
-lineno-start: 9
+lineno-start: 1
 ---
 ### chap09/cmp_strmatch.py
+'''
+Compares the brute-force and Rabin-Karp string-matching
+algorithms across a range of input text and pattern sizes.
+'''
+import sys
 import time
+from bf_strmatch import bf_strmatch
+from rk_strmatch import rk_strmatch
 
 def compare_times(t, p):
     print(f'For p = {len(p)} bytes, t = {len(t)} bytes')
-    
+
     start = time.process_time()
     bf_strmatch(t, p)
     print(f'bf_strmatch took {time.process_time() - start} secs')
-    
+
     start = time.process_time()
     rk_strmatch(t, p)
     print(f'rk_strmatch took {time.process_time() - start} secs')
-    
+
     print('')
 
-# Grab the text from a file
-with open('JustDavid.txt') as f:
-    t_orig = f.read()
+def run_experiment(p_orig, t_orig):
+    '''Call this routine with a reasonable search pattern that
+       won't ever match in the text.'''
+    # As setup, create p_big through repetition to be about
+    # a quarter the size of the text input.
+    p_big = p_orig
+    while len(p_big) < len(t_orig) // 4:
+        p_big += p_big
 
-# A reasonable search pattern that won't ever match.  The loop grows it
-# through repetition to be about a quarter the size of the text input.
-p_orig = 'David laughed softty'
-p_big = p_orig
-while len(p_big) < len(t_orig) // 4:
-    p_big += p_big
+    # Number of tests to run, where each test is twice
+    # as big as the last.
+    times_to_double = 7
 
-times_to_double = 7
+    print('### Test: len(p) << len(t)')
+    t = t_orig
+    p = p_orig
+    for i in range(times_to_double):
+        compare_times(t, p)
+        t += t
+        p += p
 
-print('### Test: m << t')
-t = t_orig
-p = p_orig
-for i in range(times_to_double):
-    compare_times(t, p)
-    t += t
-    p += p
+    print('### Test: len(p) < len(t)')
+    t = t_orig
+    p = p_big
+    for i in range(times_to_double):
+        compare_times(t, p)
+        t += t
+        p += p
 
-print('### Test: m < t')
-t = t_orig
-p = p_big
-for i in range(times_to_double):
-    compare_times(t, p)
-    t += t
-    p += p
+def main():
+    # Check for proper usage and grab the input strings
+    if len(sys.argv) != 1:
+        sys.exit("Usage: python3 cmp_strmatch.py")
+
+    # Currently hardwired to grab the text from JustDavid.txt
+    with open('JustDavid.txt') as f:
+        t_orig = f.read()
+
+    # A reasonable search pattern that won't ever match
+    p_orig = 'David laughed softty'
+
+    run_experiment(p_orig, t_orig)
+
+if __name__ == '__main__':
+    main()
 ```
 
-This code, when run on my laptop, produces the following output. Notice that I had to kill the script before it finished the last run. I guess I have less patience than King Louis XIV.
+This code, when run on my laptop (i.e., I ran `python3 cmp_strmatch.py` at a shell prompt), produced the following results.[^fn15] , which I split into two columns corresponding to the two different tests. Notice that I killed the script before it completed its run of the `len(p) < len(t)`. I guess I have less patience than King Louis XIV.
 
 ```{code-block} none
----
-emphasize-lines: 2
----
-### NOT a script and therefore NOT executable
-chap09$ python3 cmp_strmatch.py
-### Test: m << t
-For p = 20 bytes, t = 326962 bytes
-bf_strmatch took 0.065106 secs
-rk_strmatch took 0.15572799999999998 secs
+### Test: len(p) << len(t)            ### Test: len(p) < len(t)
+For p = 20 bytes, t = 327K bytes      For p = 82K bytes, t = 327K bytes
+bf_strmatch took 0.065 secs           bf_strmatch took   0.785 secs
+rk_strmatch took 0.156 secs           rk_strmatch took   0.136 secs
 
-For p = 40 bytes, t = 653924 bytes
-bf_strmatch took 0.14156000000000002 secs
-rk_strmatch took 0.289499 secs
+For p = 40 bytes, t = 654K bytes      For p = 164K bytes, t = 654K bytes
+bf_strmatch took 0.142 secs           bf_strmatch took   3.199 secs
+rk_strmatch took 0.289 secs           rk_strmatch took   0.289 secs
 
-For p = 80 bytes, t = 1307848 bytes
-bf_strmatch took 0.25473499999999993 secs
-rk_strmatch took 0.5699639999999999 secs
+For p = 80 bytes, t = 1308K bytes     For p = 328K bytes, t = 1308K bytes
+bf_strmatch took 0.255 secs           bf_strmatch took  13.314 secs
+rk_strmatch took 0.570 secs           rk_strmatch took   0.551 secs
 
-For p = 160 bytes, t = 2615696 bytes
-bf_strmatch took 0.5031830000000002 secs
-rk_strmatch took 1.1247690000000001 secs
+For p = 160 bytes, t = 2616K bytes    For p = 655K bytes, t = 2616K bytes
+bf_strmatch took 0.503 secs           bf_strmatch took  53.569 secs
+rk_strmatch took 1.125 secs           rk_strmatch took   1.114 secs
 
-For p = 320 bytes, t = 5231392 bytes
-bf_strmatch took 1.0640210000000003 secs
-rk_strmatch took 2.511254 secs
+For p = 320 bytes, t = 5231K bytes    For p = 1310K bytes, t = 5231K bytes
+bf_strmatch took 1.064 secs           bf_strmatch took 219.776 secs
+rk_strmatch took 2.511 secs           rk_strmatch took   2.353 secs
 
-For p = 640 bytes, t = 10462784 bytes
-bf_strmatch took 3.7074369999999996 secs
-rk_strmatch took 4.611154000000001 secs
+For p = 640 bytes, t = 10462K bytes   For p = 2621K bytes, t = 10462K bytes
+bf_strmatch took 3.707 secs           bf_strmatch took 890.305 secs
+rk_strmatch took 4.611 secs           rk_strmatch took   4.560 secs
 
-For p = 1280 bytes, t = 20925568 bytes
-bf_strmatch took 5.857962999999998 secs
-rk_strmatch took 9.736253999999999 secs
-
-### Test: m < t
-For p = 81920 bytes, t = 326962 bytes
-bf_strmatch took 0.7853179999999966 secs
-rk_strmatch took 0.13610599999999806 secs
-
-For p = 163840 bytes, t = 653924 bytes
-bf_strmatch took 3.198730000000001 secs
-rk_strmatch took 0.288534999999996 secs
-
-For p = 327680 bytes, t = 1307848 bytes
-bf_strmatch took 13.31402 secs
-rk_strmatch took 0.551440999999997 secs
-
-For p = 655360 bytes, t = 2615696 bytes
-bf_strmatch took 53.568979999999996 secs
-rk_strmatch took 1.1143089999999916 secs
-
-For p = 1310720 bytes, t = 5231392 bytes
-bf_strmatch took 219.77597399999996 secs
-rk_strmatch took 2.3525840000000358 secs
-
-For p = 2621440 bytes, t = 10462784 bytes
-bf_strmatch took 890.305337 secs
-rk_strmatch took 4.559676000000081 secs
-
-For p = 5242880 bytes, t = 20925568 bytes
-^C
+For p = 1280 bytes, t = 20926K bytes  For p = 5243K bytes, t = 20926K bytes
+bf_strmatch took 5.858 secs           bf_strmatch took too long!
+rk_strmatch took 9.736 secs
 ```
 
 ```{figure} images/c09_fig4.png
@@ -626,11 +612,11 @@ However, when the pattern string is comparable in size with the text, we see a v
 
 ## Problem unsolved
 
-We've come to the end of the chapter, and we haven't yet solved our problem: how do we make it easy to find the webpages that mention a particular word or phrase? And by easy, we've learned that this problem's biggest challenge is in the time it takes to solve. While Rabin-Karp is faster than brute-force string matching, it alone isn't fast enough to power Google search.[^fn15] But the technical details of Rabin-Karp provide the key to running web searches quickly.
+We've come to the end of the chapter, and we haven't yet solved our problem: how do we make it easy to find the webpages that mention a particular word or phrase? And by easy, we've learned that this problem's biggest challenge is in the time it takes to solve. While Rabin-Karp is faster than brute-force string matching, it alone isn't fast enough to power Google search.[^fn16] But the technical details of Rabin-Karp provide the key to running web searches quickly.
 
 In the next chapter, we'll explore these details and learn about a technique called *hashing*, which is how Rabin-Karp beats brute force. Hashing will lead us to *hash tables*, a widely-used data structure, which just happens to be at the heart of Python's dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach. Onward!
 
-\[Version 20240827\]
+\[Version 20240829\]
 
 [^fn1]: In October of 2020, Google posted [a video titled "Trillions of Questions, No Easy Answers: A (home) movie about how Google Search works"](https://www.youtube.com/watch?v=tFq6Q_muwG0&t=6s). This video is also highlighted on [Google's page describing how it thinks about search](https://www.google.com/search/howsearchworks/).
 
@@ -660,4 +646,6 @@ In the next chapter, we'll explore these details and learn about a technique cal
 
 [^fn14]: The other if-statement in the matching loop in \`rk\_strmatch\` (i.e., line 51) has an execution cost proportional to 1, and we can ignore it.
 
-[^fn15]: Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., O(m)), but a better worst-case matching bound of O(n) for all inputs. Technically, its bounds are 𝛩(m) and 𝛩(n). Yup, you need to go learn the difference between Big-O and Big-𝛩 notation!
+[^fn15]: I ran \`python3 cmp\_strmatch.py\` at the shell prompt. I grabbed the output and formatted it so that it's easier to read the results of the two tests.
+
+[^fn16]: Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., O(m)), but a better worst-case matching bound of O(n) for all inputs. Technically, its bounds are 𝛩(m) and 𝛩(n). Yup, you need to go learn the difference between Big-O and Big-𝛩 notation!

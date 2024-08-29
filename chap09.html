@@ -581,8 +581,7 @@ document.write(`
 <section id="measuring-performance">
 <p><strong>Measuring performance.</strong> Asking how long a script takes to run seems like a straightforward question: Go grab your smartphone, launch the stopwatch app, start the stopwatch as you begin running the script, and stop it when the script completes. However, coordinating the starting and stopping of your stopwatch with the starting and stopping of a program is a bit tricky, and most operating systems provide you with a time utility that does this work for you.</p>
 <p>To use this utility in the shell, you often type the name of the time utility and then the command you want timed. The next code block illustrates this and the result of using my operating system’s time utility<a class="footnote-reference brackets" href="#fn8" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> to measure how long it takes to run  <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2</span></code> with the same input.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
-<span class="hll">chap09$ /usr/bin/time python3 bf_strmatch.py &#39;This test is a bigger test&#39; &#39;test&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll">chap09$ /usr/bin/time python3 bf_strmatch.py &#39;This test is a bigger test&#39; &#39;test&#39;
 </span>Pattern occurs with shift 5
 Pattern occurs with shift 22
         0.05 real         0.02 user         0.01 sys
@@ -596,10 +595,9 @@ Pattern occurs with shift 22
 <p>Both scripts took 5 hundredths of a second to execute. If you run these two commands yourself, you’ll see the first number vary a bit. For instance, I got 0.08 seconds on one run, but most of my runs were 0.05 seconds. There was no discernible pattern that said one script was faster than the other.</p>
 <p>Part of the problem here is that my computer is fast and the program doesn’t make it work too hard. How can we make my computer work harder to see if one script is actually faster?</p>
 <p>That’s right. The script will run longer if we give it more text to search (e.g., <a class="reference external" href="https://www.gutenberg.org/ebooks/2600"><em>War and Peace</em> by Leo Tolstoy</a> or <a class="reference external" href="https://www.gutenberg.org/ebooks/440"><em>Just David</em> by Eleanor H. Porter</a>, both of which you can download from Project Gutenberg).</p>
-<p>To this point, we’ve had to type the text we fed to <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code>. Since we probably don’t have the time to type these long texts, we’ll use the option of reading the text input from <em>standard input (stdin)</em> in a new way.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> Using this method, our existing scripts can read the contents of the Project Gutenberg text files we download.</p>
+<p>To this point, we’ve typed the text we fed to <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> and <code class="docutils literal notranslate"><span class="pre">bf_strmatch2.py</span></code>. Since we probably don’t have the time to type a long text, we’ll use the option of reading the text input from <em>standard input (stdin)</em> in a new way.<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> Using this method, our existing scripts can read the contents of the Project Gutenberg text files we download.</p>
 <p>How does this work? In Python, <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> is a file object like those we created with the <code class="docutils literal notranslate"><span class="pre">open</span></code> command, and on which, we can perform operations like <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">readline</span></code>. In <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code>, when the script determines that we provided only the pattern on the command line, it calls <code class="docutils literal notranslate"><span class="pre">sys.stdin.read()</span></code> and assigns the returned string to <code class="docutils literal notranslate"><span class="pre">t</span></code> (see line 22).<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> Previously, this line read the text we typed, but on Linux-like systems, you can extend a command like <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">bf_strmatch.py</span> <span class="pre">'test'</span></code> with a less-than sign (<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>). After this less-than sign, you indicate the filename whose contents you want available on <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>. As an example, the following code block runs <code class="docutils literal notranslate"><span class="pre">bf_strmatch.py</span></code> looking for the phrase “has left” in the file <code class="docutils literal notranslate"><span class="pre">JustDavid.txt</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
-<span class="hll">chap09$ /usr/bin/time python3 bf_strmatch.py &#39;has left&#39; &lt; JustDavid.txt
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll">chap09$ /usr/bin/time python3 bf_strmatch.py &#39;has left&#39; &lt; JustDavid.txt
 </span>Pattern occurs with shift 326953
         0.15 real         0.10 user         0.01 sys
 </pre></div>
@@ -723,12 +721,8 @@ Pattern occurs with shift 22
 <p>The body of the matching loop in <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> also contains a loop with a simple body that iterates up to <code class="docutils literal notranslate"><span class="pre">m</span></code> times, but this inner loop is protected by an if-statement (line 43).<a class="footnote-reference brackets" href="#fn14" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> Unfortunately, we don’t have enough information right now about the operation of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> to estimate when the condition in this if-statement will be true. It might be true during just one of the total <code class="docutils literal notranslate"><span class="pre">n</span></code> iterations of the outer matching loop. Or it might be true on every iteration of the outer matching loop. In the first case, the execution time of <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> will be proportional to <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">((n-1)</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">*</span> <span class="pre">m)</span></code>, or <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">+</span> <span class="pre">n</span></code> when we ignore constants. In the second case, <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> looks a lot like <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>, but with more setup work. The dominant factor affecting the execution time in this case is <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">m</span></code>, or more precisely when n and m are both large: <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">-</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">m</span></code>.</p>
 </section>
 <section id="computational-complexity">
-<p><strong>Computational complexity.</strong> This way of thinking gets away from the specifics of our machine’s hardware, the choices different designers make in creating a programming language, the performance of the interpreter and runtime system that help run our scripts, and lots of other small details that affect wall-clock runtimes but aren’t inherent in the performance of one algorithm versus another. Instead, this way of thinking focuses on a few characteristics of the input and how they influence the gross behavior of the algorithm. This is all a long way of saying some things matter much more than others, and all we really care about is that:</p>
-<ol class="arabic simple">
-<li><p>large inputs will take more time to process than small ones; and</p></li>
-<li><p>complex inputs will take more time to process than simple ones.</p></li>
-</ol>
-<p>We saw this in the rough analysis of our two string-match algorithms. In particular, we found that the runtimes of the two algorithms were proportional to the sizes of their inputs, i.e., <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>. And the magnitude of these numbers directly changed the running time of each algorithm through its looping structure.</p>
+<p><strong>Computational complexity.</strong> This way of thinking gets away from the specifics of our machine’s hardware, the choices different designers make in creating a programming language, the performance of the interpreter and runtime system that help run our scripts, and lots of other small details that affect wall-clock runtimes but aren’t inherent in the performance of one algorithm versus another. Instead, this way of thinking focuses on a few characteristics of the input and how they influence the gross behavior of the algorithm.</p>
+<p>This is all a long way of saying some things matter much more than others, and all we really care about here is that large inputs will take more time to process than small ones. We saw this in the rough analysis of our two string-match algorithms. In particular, we found that the runtimes of the two algorithms were proportional to the sizes of their inputs, i.e., <code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>. And the magnitude of these numbers directly changed the running time of each algorithm through its looping structure.</p>
 <p>If you continue in computer science, you’ll soon learn that this type of work is the domain of theorists interested in questions of <em>computational complexity</em>. These individuals ask how efficiently, in terms of time and space, an algorithm can compute a solution. They’re interested in finding a collection of expressions (or technically <em>functions</em>), as we did just a moment ago, that do a good job of describing the behavior of an algorithm as its input grows in size and complexity. For example, these functions might bound an algorithm’s running time from <em>above</em> (i.e., in the <em>worst case</em>, the algorithm’s running time won’t grow faster than a particular function) and from <em>below</em> (i.e., in the <em>best case</em>, the algorithm’s running time won’t grow slower than another, possibly the same, function).</p>
 <p>The rules I described above are a simplified way of finding such <em>asymptotic running times</em>. Theorists often present the results of this type of analysis using what’s called <em>big-O notation</em>, which has you focus on the dominant terms in the expression describing, for instance, an algorithm’s running time.</p>
 <p>The matching time of the algorithm behind <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> is <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span>, which you should recognize as the expression we derived. It is also the worst-case matching time for <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code>. This big-O notation means that, within some constant factor, there exists some numbers for <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> beyond which the growth of algorithm’s running time will not exceed the growth rate of this big-O function.</p>
@@ -740,112 +734,106 @@ Pattern occurs with shift 22
 <li><p>When <span class="math notranslate nohighlight">\(m\)</span> is small compared to <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(m\)</span> will look like a constant factor in <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span>, and the matching time of both algorithms will grow like <span class="math notranslate nohighlight">\(O(n)\)</span>. In fact, <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> might outperform <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> since its extra setup work and extra work inside the matching loop may become noticeable.</p></li>
 <li><p>When <span class="math notranslate nohighlight">\(m\)</span> is a significant proportion of <span class="math notranslate nohighlight">\(n\)</span> (e.g., 25 percent of its size), <span class="math notranslate nohighlight">\(O((n - m + 1) * m)\)</span> will start to look more like <span class="math notranslate nohighlight">\(O(n^2)\)</span> for <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code>. For <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code>, how often the first if-statement within its matching loop evaluates true will dictate whether this algorithm grows as <span class="math notranslate nohighlight">\(O(n)\)</span> or <span class="math notranslate nohighlight">\(O(n^2)\)</span>. We will assume that this if-statement evaluates true only when there’s an actual valid shift, and under this assumption, we will craft the pattern string so that it never matches, hopefully driving <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> toward <span class="math notranslate nohighlight">\(O(n)\)</span> growth as <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> experiences <span class="math notranslate nohighlight">\(O(n^2)\)</span> growth.</p></li>
 </ul>
-<p>The following code block implements this experiment using the content from <code class="docutils literal notranslate"><span class="pre">JustDavid.txt</span></code>. It concatenates copies of this file to create ever larger texts in which we look for either short or long patterns. In all experimental runs, the pattern never matches any of the text.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1">### chap09/cmp_strmatch.py</span>
-<span class="linenos">10</span><span class="kn">import</span> <span class="nn">time</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span><span class="k">def</span> <span class="nf">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-<span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;For p = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes, t = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes&#39;</span><span class="p">)</span>
-<span class="linenos">14</span>    
-<span class="linenos">15</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
-<span class="linenos">16</span>    <span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="linenos">17</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bf_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
-<span class="linenos">18</span>    
-<span class="linenos">19</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
-<span class="linenos">20</span>    <span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="linenos">21</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rk_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
-<span class="linenos">22</span>    
-<span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">24</span>
-<span class="linenos">25</span><span class="c1"># Grab the text from a file</span>
-<span class="linenos">26</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;JustDavid.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">27</span>    <span class="n">t_orig</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="linenos">28</span>
-<span class="linenos">29</span><span class="c1"># A reasonable search pattern that won&#39;t ever match.  The loop grows it</span>
-<span class="linenos">30</span><span class="c1"># through repetition to be about a quarter the size of the text input.</span>
-<span class="linenos">31</span><span class="n">p_orig</span> <span class="o">=</span> <span class="s1">&#39;David laughed softty&#39;</span>
-<span class="linenos">32</span><span class="n">p_big</span> <span class="o">=</span> <span class="n">p_orig</span>
-<span class="linenos">33</span><span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_big</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_orig</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
-<span class="linenos">34</span>    <span class="n">p_big</span> <span class="o">+=</span> <span class="n">p_big</span>
-<span class="linenos">35</span>
-<span class="linenos">36</span><span class="n">times_to_double</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: m &lt;&lt; t&#39;</span><span class="p">)</span>
-<span class="linenos">39</span><span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
-<span class="linenos">40</span><span class="n">p</span> <span class="o">=</span> <span class="n">p_orig</span>
-<span class="linenos">41</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
-<span class="linenos">42</span>    <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="linenos">43</span>    <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
-<span class="linenos">44</span>    <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
-<span class="linenos">45</span>
-<span class="linenos">46</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: m &lt; t&#39;</span><span class="p">)</span>
-<span class="linenos">47</span><span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
-<span class="linenos">48</span><span class="n">p</span> <span class="o">=</span> <span class="n">p_big</span>
-<span class="linenos">49</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
-<span class="linenos">50</span>    <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="linenos">51</span>    <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
-<span class="linenos">52</span>    <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
+<p>The following script implements this experiment using the content from <code class="docutils literal notranslate"><span class="pre">JustDavid.txt</span></code>. It concatenates copies of this file to create ever larger texts in which we look for either short or long patterns. In all experimental runs, the pattern never matches any of the text.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap09/cmp_strmatch.py</span>
+<span class="linenos"> 2</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 3</span><span class="sd">Compares the brute-force and Rabin-Karp string-matching</span>
+<span class="linenos"> 4</span><span class="sd">algorithms across a range of input text and pattern sizes.</span>
+<span class="linenos"> 5</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="linenos"> 7</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">bf_strmatch</span> <span class="kn">import</span> <span class="n">bf_strmatch</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">rk_strmatch</span> <span class="kn">import</span> <span class="n">rk_strmatch</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span> <span class="nf">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;For p = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes, t = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s1"> bytes&#39;</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos">15</span>    <span class="n">bf_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bf_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
+<span class="linenos">19</span>    <span class="n">rk_strmatch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rk_strmatch took </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s1"> secs&#39;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">p_orig</span><span class="p">,</span> <span class="n">t_orig</span><span class="p">):</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Call this routine with a reasonable search pattern that</span>
+<span class="linenos">26</span><span class="sd">       won&#39;t ever match in the text.&#39;&#39;&#39;</span>
+<span class="linenos">27</span>    <span class="c1"># As setup, create p_big through repetition to be about</span>
+<span class="linenos">28</span>    <span class="c1"># a quarter the size of the text input.</span>
+<span class="linenos">29</span>    <span class="n">p_big</span> <span class="o">=</span> <span class="n">p_orig</span>
+<span class="linenos">30</span>    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_big</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_orig</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+<span class="linenos">31</span>        <span class="n">p_big</span> <span class="o">+=</span> <span class="n">p_big</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="c1"># Number of tests to run, where each test is twice</span>
+<span class="linenos">34</span>    <span class="c1"># as big as the last.</span>
+<span class="linenos">35</span>    <span class="n">times_to_double</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: len(p) &lt;&lt; len(t)&#39;</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
+<span class="linenos">39</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">p_orig</span>
+<span class="linenos">40</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
+<span class="linenos">41</span>        <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">42</span>        <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
+<span class="linenos">43</span>        <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;### Test: len(p) &lt; len(t)&#39;</span><span class="p">)</span>
+<span class="linenos">46</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">t_orig</span>
+<span class="linenos">47</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">p_big</span>
+<span class="linenos">48</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times_to_double</span><span class="p">):</span>
+<span class="linenos">49</span>        <span class="n">compare_times</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">50</span>        <span class="n">t</span> <span class="o">+=</span> <span class="n">t</span>
+<span class="linenos">51</span>        <span class="n">p</span> <span class="o">+=</span> <span class="n">p</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">54</span>    <span class="c1"># Check for proper usage and grab the input strings</span>
+<span class="linenos">55</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">56</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Usage: python3 cmp_strmatch.py&quot;</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>    <span class="c1"># Currently hardwired to grab the text from JustDavid.txt</span>
+<span class="linenos">59</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;JustDavid.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">60</span>        <span class="n">t_orig</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span>    <span class="c1"># A reasonable search pattern that won&#39;t ever match</span>
+<span class="linenos">63</span>    <span class="n">p_orig</span> <span class="o">=</span> <span class="s1">&#39;David laughed softty&#39;</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>    <span class="n">run_experiment</span><span class="p">(</span><span class="n">p_orig</span><span class="p">,</span> <span class="n">t_orig</span><span class="p">)</span>
+<span class="linenos">66</span>
+<span class="linenos">67</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">68</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This code, when run on my laptop, produces the following output. Notice that I had to kill the script before it finished the last run. I guess I have less patience than King Louis XIV.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT a script and therefore NOT executable
-<span class="hll">chap09$ python3 cmp_strmatch.py
-</span>### Test: m &lt;&lt; t
-For p = 20 bytes, t = 326962 bytes
-bf_strmatch took 0.065106 secs
-rk_strmatch took 0.15572799999999998 secs
+<p>This code, when run on my laptop (i.e., I ran <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">cmp_strmatch.py</span></code> at a shell prompt), produced the following results.<a class="footnote-reference brackets" href="#fn15" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a> , which I split into two columns corresponding to the two different tests. Notice that I killed the script before it completed its run of the <code class="docutils literal notranslate"><span class="pre">len(p)</span> <span class="pre">&lt;</span> <span class="pre">len(t)</span></code>. I guess I have less patience than King Louis XIV.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Test: len(p) &lt;&lt; len(t)            ### Test: len(p) &lt; len(t)
+For p = 20 bytes, t = 327K bytes      For p = 82K bytes, t = 327K bytes
+bf_strmatch took 0.065 secs           bf_strmatch took   0.785 secs
+rk_strmatch took 0.156 secs           rk_strmatch took   0.136 secs
 
-For p = 40 bytes, t = 653924 bytes
-bf_strmatch took 0.14156000000000002 secs
-rk_strmatch took 0.289499 secs
+For p = 40 bytes, t = 654K bytes      For p = 164K bytes, t = 654K bytes
+bf_strmatch took 0.142 secs           bf_strmatch took   3.199 secs
+rk_strmatch took 0.289 secs           rk_strmatch took   0.289 secs
 
-For p = 80 bytes, t = 1307848 bytes
-bf_strmatch took 0.25473499999999993 secs
-rk_strmatch took 0.5699639999999999 secs
+For p = 80 bytes, t = 1308K bytes     For p = 328K bytes, t = 1308K bytes
+bf_strmatch took 0.255 secs           bf_strmatch took  13.314 secs
+rk_strmatch took 0.570 secs           rk_strmatch took   0.551 secs
 
-For p = 160 bytes, t = 2615696 bytes
-bf_strmatch took 0.5031830000000002 secs
-rk_strmatch took 1.1247690000000001 secs
+For p = 160 bytes, t = 2616K bytes    For p = 655K bytes, t = 2616K bytes
+bf_strmatch took 0.503 secs           bf_strmatch took  53.569 secs
+rk_strmatch took 1.125 secs           rk_strmatch took   1.114 secs
 
-For p = 320 bytes, t = 5231392 bytes
-bf_strmatch took 1.0640210000000003 secs
-rk_strmatch took 2.511254 secs
+For p = 320 bytes, t = 5231K bytes    For p = 1310K bytes, t = 5231K bytes
+bf_strmatch took 1.064 secs           bf_strmatch took 219.776 secs
+rk_strmatch took 2.511 secs           rk_strmatch took   2.353 secs
 
-For p = 640 bytes, t = 10462784 bytes
-bf_strmatch took 3.7074369999999996 secs
-rk_strmatch took 4.611154000000001 secs
+For p = 640 bytes, t = 10462K bytes   For p = 2621K bytes, t = 10462K bytes
+bf_strmatch took 3.707 secs           bf_strmatch took 890.305 secs
+rk_strmatch took 4.611 secs           rk_strmatch took   4.560 secs
 
-For p = 1280 bytes, t = 20925568 bytes
-bf_strmatch took 5.857962999999998 secs
-rk_strmatch took 9.736253999999999 secs
-
-### Test: m &lt; t
-For p = 81920 bytes, t = 326962 bytes
-bf_strmatch took 0.7853179999999966 secs
-rk_strmatch took 0.13610599999999806 secs
-
-For p = 163840 bytes, t = 653924 bytes
-bf_strmatch took 3.198730000000001 secs
-rk_strmatch took 0.288534999999996 secs
-
-For p = 327680 bytes, t = 1307848 bytes
-bf_strmatch took 13.31402 secs
-rk_strmatch took 0.551440999999997 secs
-
-For p = 655360 bytes, t = 2615696 bytes
-bf_strmatch took 53.568979999999996 secs
-rk_strmatch took 1.1143089999999916 secs
-
-For p = 1310720 bytes, t = 5231392 bytes
-bf_strmatch took 219.77597399999996 secs
-rk_strmatch took 2.3525840000000358 secs
-
-For p = 2621440 bytes, t = 10462784 bytes
-bf_strmatch took 890.305337 secs
-rk_strmatch took 4.559676000000081 secs
-
-For p = 5242880 bytes, t = 20925568 bytes
-^C
+For p = 1280 bytes, t = 20926K bytes  For p = 5243K bytes, t = 20926K bytes
+bf_strmatch took 5.858 secs           bf_strmatch took too long!
+rk_strmatch took 9.736 secs
 </pre></div>
 </div>
 <figure class="align-default" id="c09-fig4-ref">
@@ -858,9 +846,9 @@ For p = 5242880 bytes, t = 20925568 bytes
 <p>However, when the pattern string is comparable in size with the text, we see a very different trend. The <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> function starts out slightly slower than the <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> function, but as the size of both the pattern and text strings double, the <code class="docutils literal notranslate"><span class="pre">rk_strmatch</span></code> function experiences only a doubling in its running time. The doubling of the pattern string doesn’t affect its running time; only the doubling of the text file affects the running time, as our <span class="math notranslate nohighlight">\(O(n)\)</span> complexity analysis predicts. The running time of the <code class="docutils literal notranslate"><span class="pre">bf_strmatch</span></code> function, on the other hand, grows by approximately a factor of 4, corresponding to the doubling of both <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> and the algorithm’s <span class="math notranslate nohighlight">\(O(n^2)\)</span> complexity bound when <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> are comparable.</p>
 </section>
 <section id="problem-unsolved">
-<p><strong>Problem unsolved.</strong> We’ve come to the end of the chapter, and we haven’t yet solved our problem: how do we make it easy to find the webpages that mention a particular word or phrase? And by easy, we’ve learned that this problem’s biggest challenge is in the time it takes to solve. While Rabin-Karp is faster than brute-force string matching, it alone isn’t fast enough to power Google search.<a class="footnote-reference brackets" href="#fn15" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a> But the technical details of Rabin-Karp provide the key to running web searches quickly.</p>
+<p><strong>Problem unsolved.</strong> We’ve come to the end of the chapter, and we haven’t yet solved our problem: how do we make it easy to find the webpages that mention a particular word or phrase? And by easy, we’ve learned that this problem’s biggest challenge is in the time it takes to solve. While Rabin-Karp is faster than brute-force string matching, it alone isn’t fast enough to power Google search.<a class="footnote-reference brackets" href="#fn16" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a> But the technical details of Rabin-Karp provide the key to running web searches quickly.</p>
 <p>In the next chapter, we’ll explore these details and learn about a technique called <em>hashing</em>, which is how Rabin-Karp beats brute force. Hashing will lead us to <em>hash tables</em>, a widely-used data structure, which just happens to be at the heart of Python’s dictionary data type and Google search. Hashing and hash tables will also introduce us to a new problem-solving approach. Onward!</p>
-<p>[Version 20240827]</p>
+<p>[Version 20240829]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -920,6 +908,10 @@ For p = 5242880 bytes, t = 20925568 bytes
 </aside>
 <aside class="footnote brackets" id="fn15" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">15</a><span class="fn-bracket">]</span></span>
+<p>I ran `python3 cmp_strmatch.py` at the shell prompt. I grabbed the output and formatted it so that it’s easier to read the results of the two tests.</p>
+</aside>
+<aside class="footnote brackets" id="fn16" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">16</a><span class="fn-bracket">]</span></span>
 <p>Rabin-Karp is fast, but there are string-matching algorithms that are even faster. For example, the Knuth-Morris-Pratt algorithm has the same pre-processing bound as Rabin-Karp (i.e., O(m)), but a better worst-case matching bound of O(n) for all inputs. Technically, its bounds are 𝛩(m) and 𝛩(n). Yup, you need to go learn the difference between Big-O and Big-𝛩 notation!</p>
 </aside>
 </section>

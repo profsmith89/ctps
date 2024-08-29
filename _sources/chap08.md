@@ -468,7 +468,6 @@ To understand this better, it might be easier to stop thinking of image files an
 ---
 emphasize-lines: 2
 ---
-### NOT executable
 chap08$ hexdump -C CatInTheHat.txt
 00000000  54 68 65 20 73 75 6e 20  64 69 64 20 6e 6f 74 20  |The sun did not |
 00000010  73 68 69 6e 65 2e 0a 49  74 20 77 61 73 20 74 6f  |shine..It was to|

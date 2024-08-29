@@ -738,10 +738,9 @@ document.write(`
 <p><strong>Storing a 2D array in memory.</strong> I said that different analyses will naturally use different traversals. But when a programming language linearizes a multi-dimensional data set to store those individual values contiguously in the computer’s memory, it also decides on an ordering of your data set’s dimensions.</p>
 <p>Recall our discussion of hexdump in Chapter 6. The hexdump program displayed the contents of a file as a 2D array, but this was just for ease of display in a 2D computer window. Similarly, we like to think of our JPEG files as 2D images, and we display them that way, but the contents of these files are just a single long string of 8-bit numbers.</p>
 <p>To understand this better, it might be easier to stop thinking of image files and recall the text files from earlier in this act. These text files were nothing more than a long sequence of characters corresponding to the characters in the book we were reading. Below I ran the standalone version of <code class="docutils literal notranslate"><span class="pre">hexdump</span></code> on the file containing the text to <em>The Cat in the Hat</em> by Dr. Seuss.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT executable
-<span class="hll">chap08$ hexdump -C CatInTheHat.txt
-</span>00000000  54 68 65 20 73 75 6e 20  64 69 64 20 6e 6f 74 20  |The sun did not |
-00000010  73 68 69 6e 65 2e 0a 49  74 20 77 61 73 20 74 6f  |shine..It was to|
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chap08$ hexdump -C CatInTheHat.txt
+<span class="hll">00000000  54 68 65 20 73 75 6e 20  64 69 64 20 6e 6f 74 20  |The sun did not |
+</span>00000010  73 68 69 6e 65 2e 0a 49  74 20 77 61 73 20 74 6f  |shine..It was to|
 00000020  6f 20 77 65 74 20 74 6f  20 70 6c 61 79 2e 0a 53  |o wet to play..S|
 ...
 </pre></div>
