@@ -722,7 +722,7 @@ document.write(`
 <span class="linenos">33</span><span class="k">def</span> <span class="nf">update_index</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">wordlist</span><span class="p">,</span> <span class="n">unitno</span><span class="p">):</span>
 <span class="linenos">34</span>    <span class="c1"># Needs to be written</span>
 <span class="linenos">35</span>    <span class="k">return</span> <span class="n">d</span>
-<span class="linenos">36</span>    
+<span class="linenos">36</span>
 <span class="linenos">37</span><span class="k">def</span> <span class="nf">build_index</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
 <span class="linenos">38</span>    <span class="c1"># Start with an empty dictionary</span>
 <span class="linenos">39</span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
@@ -737,6 +737,23 @@ document.write(`
 <span class="linenos">48</span>    
 <span class="linenos">49</span>    <span class="c1"># Print out the index</span>
 <span class="linenos">50</span>    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">53</span>    <span class="c1"># Check for proper usage and grab the input strings</span>
+<span class="linenos">54</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">55</span>        <span class="n">txt</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">56</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">57</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">58</span>            <span class="n">txt</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">59</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">60</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Usage: python3 index0.py book.txt&quot;</span><span class="p">)</span>
+<span class="linenos">61</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Or: python3 index0.py &lt; book.txt&quot;</span><span class="p">)</span>
+<span class="linenos">62</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+<span class="linenos">63</span>    
+<span class="linenos">64</span>    <span class="n">build_index</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="linenos">67</span>    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>This script pulls out the work we need to do to update the dictionary (i.e., <code class="docutils literal notranslate"><span class="pre">update_index</span></code>, which is called on each iteration of the loop in <code class="docutils literal notranslate"><span class="pre">build_index</span></code>), since we haven’t yet written that pseudocode. Right now, the function <code class="docutils literal notranslate"><span class="pre">update_index</span></code> simply returns the dictionary it was passed.</p>
@@ -768,6 +785,14 @@ document.write(`
 </pre></div>
 </div>
 <p>Let’s run some simple tests to see if this works and what we might have forgotten. We will use Python’s ability to easily create multiline strings using triple quotes.</p>
+<div class="admonition-you-try-it admonition">
+<p class="admonition-title">You Try It</p>
+<p>You can run this and the rest of this chapter’s tests in one of two ways:</p>
+<ul class="simple">
+<li><p>Using the interactive Python interpreter, copy lines 1-50 of <code class="docutils literal notranslate"><span class="pre">index0.py</span></code> above and paste them at the interactive interpreter’s prompt. This will define the functions and global constants for you. Then copy the two statements in the code block below and paste them at the interactive interpreter’s prompt. As you continue with the chapter, update your interactive interpreter’s environment with the new functions we write.</p></li>
+<li><p>Using the files in the book’s GitHub repository, you’d run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">index1.py</span></code> (or whichever <code class="docutils literal notranslate"><span class="pre">index</span></code> script you’d like to try). The script waits for you to type the <code class="docutils literal notranslate"><span class="pre">txt</span></code> input. You can copy the text between the triple quotes below and paste that in the shell. To end the <code class="docutils literal notranslate"><span class="pre">txt</span></code> input, type Ctrl-D.</p></li>
+</ul>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">txt</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;&quot;Now! Now! Have no fear.</span>
 <span class="linenos">2</span><span class="s1">Have no fear!&quot; said the cat.</span>
 <span class="linenos">3</span><span class="s1">&quot;My tricks are not bad,&quot;</span>
@@ -865,17 +890,17 @@ document.write(`
 <span class="linenos">66</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">pages</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Using the last value of `txt`</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Test using the last value of `txt`</span>
 <span class="linenos">2</span><span class="n">build_index</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">index32.py</span></code> with <code class="docutils literal notranslate"><span class="pre">JustDavid-chaps.txt</span></code>, which you can find in the <code class="docutils literal notranslate"><span class="pre">chap10</span></code> code distribution. In <code class="docutils literal notranslate"><span class="pre">index32.py</span></code>, you’ll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the <code class="docutils literal notranslate"><span class="pre">UNIT_PAT</span></code> and <code class="docutils literal notranslate"><span class="pre">UNIT_CNT_INIT</span></code> definitions that are appropriate for <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> and enable those for <code class="docutils literal notranslate"><span class="pre">JustDavid-chaps.txt</span></code>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">index32.py</span></code> with <code class="docutils literal notranslate"><span class="pre">JustDavid-chaps.txt</span></code>, which you can find in the <code class="docutils literal notranslate"><span class="pre">chap10</span></code> code distribution. In <code class="docutils literal notranslate"><span class="pre">index32.py</span></code>, you’ll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the <code class="docutils literal notranslate"><span class="pre">UNIT_PAT</span></code> and <code class="docutils literal notranslate"><span class="pre">UNIT_CNT_INIT</span></code> definitions that are appropriate for <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> and enable those for <code class="docutils literal notranslate"><span class="pre">JustDavid-chaps.txt</span></code>. Now run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">index32.py</span> <span class="pre">JustDavid-chaps.txt</span></code> at your shell prompt.</p>
 </div>
 <p>You now have a general idea how Google takes a search string and quickly returns a list of pages containing the keywords in our search. It simply looks up the search string’s keywords in a big hash table, and each lookup takes constant time. None of this online work takes time proportional to the size of all the pages in the indexed web.</p>
 <p>Of course, Google does more than just web search, as we’ll discuss in the following chapters, but this is a great start. Congratulations!</p>
-<p>[Version 20240827]</p>
+<p>[Version 20240829]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>

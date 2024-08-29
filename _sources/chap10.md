@@ -430,7 +430,7 @@ def found_new_unit(line):
 def update_index(d, wordlist, unitno):
     # Needs to be written
     return d
-    
+
 def build_index(txt):
     # Start with an empty dictionary
     d = {}
@@ -445,6 +445,23 @@ def build_index(txt):
     
     # Print out the index
     print(d)
+
+def main():
+    # Check for proper usage and grab the input strings
+    if len(sys.argv) == 1:
+        txt = sys.stdin.read()
+    elif len(sys.argv) == 2:
+        with open(sys.argv[1]) as f:
+            txt = f.read()
+    else:
+        print("Usage: python3 index0.py book.txt")
+        print("   Or: python3 index0.py < book.txt")
+        sys.exit()
+    
+    build_index(txt)
+
+if __name__ == '__main__':
+    main()
 ```
 
 This script pulls out the work we need to do to update the dictionary (i.e., `update_index`, which is called on each iteration of the loop in `build_index`), since we haven't yet written that pseudocode. Right now, the function `update_index` simply returns the dictionary it was passed.
@@ -486,6 +503,13 @@ def update_index(d, wordlist, unitno):
 ```
 
 Let's run some simple tests to see if this works and what we might have forgotten. We will use Python's ability to easily create multiline strings using triple quotes.
+
+```{admonition} You Try It
+You can run this and the rest of this chapter's tests in one of two ways:
+
+*   Using the interactive Python interpreter, copy lines 1-50 of `index0.py` above and paste them at the interactive interpreter's prompt. This will define the functions and global constants for you. Then copy the two statements in the code block below and paste them at the interactive interpreter's prompt. As you continue with the chapter, update your interactive interpreter's environment with the new functions we write.
+*   Using the files in the book's GitHub repository, you'd run `python3 index1.py` (or whichever `index` script you'd like to try). The script waits for you to type the `txt` input. You can copy the text between the triple quotes below and paste that in the shell. To end the `txt` input, type Ctrl-D.
+```
 
 ```{code-block} python
 ---
@@ -619,19 +643,19 @@ def build_index(txt):
 ---
 lineno-start: 1
 ---
-# Using the last value of `txt`
+# Test using the last value of `txt`
 build_index(txt)
 ```
 
 ```{admonition} You Try It
-Run `index32.py` with `JustDavid-chaps.txt`, which you can find in the `chap10` code distribution. In `index32.py`, you'll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the `UNIT_PAT` and `UNIT_CNT_INIT` definitions that are appropriate for `CatInTheHat.txt` and enable those for `JustDavid-chaps.txt`.
+Run `index32.py` with `JustDavid-chaps.txt`, which you can find in the `chap10` code distribution. In `index32.py`, you'll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the `UNIT_PAT` and `UNIT_CNT_INIT` definitions that are appropriate for `CatInTheHat.txt` and enable those for `JustDavid-chaps.txt`. Now run `python3 index32.py JustDavid-chaps.txt` at your shell prompt.
 ```
 
 You now have a general idea how Google takes a search string and quickly returns a list of pages containing the keywords in our search. It simply looks up the search string's keywords in a big hash table, and each lookup takes constant time. None of this online work takes time proportional to the size of all the pages in the indexed web.
 
 Of course, Google does more than just web search, as we'll discuss in the following chapters, but this is a great start. Congratulations!
 
-\[Version 20240827\]
+\[Version 20240829\]
 
 [^fn1]: I've said we care about loops, and since this statement isn't a loop, computer scientists say that it takes *constant time*, which is expressed as *O(1)*. What they're really saying is that the operation doesn't depend upon the length of the input; it is constant time work no matter what the input.
 
