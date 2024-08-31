@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Active-Learning Exercises &#8212; Computational Thinking and Problem Solving</title>
+    <title>Chapter 11 &#8212; Computational Thinking and Problem Solving</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ales';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ales-c11';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 1" href="ales-c01.html" />
-    <link rel="prev" title="Chapter 18: Use Generative AI" href="chap18.html" />
+    <link rel="next" title="Chapter 12" href="ales-c12.html" />
+    <link rel="prev" title="Chapter 10" href="ales-c10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chap16.html">Chapter 16: Catch Them Early</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap17.html">Chapter 17: Build Prediction Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap18.html">Chapter 18: Use Generative AI</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ales.html">Active-Learning Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ales-c01.html">Chapter 1</a></li>
 
 
@@ -218,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="ales-c10.html">Chapter 10</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ales-c11.html">Chapter 11</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter 11</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ales-c12.html">Chapter 12</a></li>
 
 
@@ -280,7 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/ales.md" target="_blank"
+      <li><a href="_sources/ales-c11.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -362,7 +362,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Active-Learning Exercises</h1>
+    <h1>Chapter 11</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,13 +372,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1">Chapter 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2">Chapter 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-3">Chapter 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4">Chapter 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5">Chapter 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6">Chapter 6</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-8">Chapter 8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-making-print-work">ALE 11.2: Making print work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
 </ul>
             </nav>
         </div>
@@ -390,31 +388,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="active-learning-exercises">
-<h1>Active-Learning Exercises<a class="headerlink" href="#active-learning-exercises" title="Permalink to this heading">#</a></h1>
-<section id="chapter-1">
-<h2>Chapter 1<a class="headerlink" href="#chapter-1" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-11">
+<h1>Chapter 11<a class="headerlink" href="#chapter-11" title="Permalink to this heading">#</a></h1>
+<section id="ale-11-1-dictionary-of-dictionaries">
+<p><strong>ALE 11.1: Dictionary of dictionaries.</strong> [Insert an edited version of Kitty’s ALE 11.1.]</p>
 </section>
-<section id="chapter-2">
-<h2>Chapter 2<a class="headerlink" href="#chapter-2" title="Permalink to this heading">#</a></h2>
+<section id="ale-11-2-making-print-work">
+<p><strong>ALE 11.2: Making print work.</strong> [Insert an edited version of Kitty’s ALE 11.X titled “How the heck do you print a pin?” This will help the students to understand how they can add methods to an existing class and explain the difference between `__str__` and `__expr__` through a problem-to-be-solved.]</p>
 </section>
-<section id="chapter-3">
-<h2>Chapter 3<a class="headerlink" href="#chapter-3" title="Permalink to this heading">#</a></h2>
+<section id="ale-11-3-more-power-to-the-constructor">
+<p><strong>ALE 11.3: More power to the constructor.</strong> [Insert an edited version of Kitty’s ALE 11.X titled the same as this ALE. Change the task: support more icons by understanding the star rating and something from the note field.]</p>
 </section>
-<section id="chapter-4">
-<h2>Chapter 4<a class="headerlink" href="#chapter-4" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="chapter-5">
-<h2>Chapter 5<a class="headerlink" href="#chapter-5" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="chapter-6">
-<h2>Chapter 6<a class="headerlink" href="#chapter-6" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="chapter-8">
-<h2>Chapter 8<a class="headerlink" href="#chapter-8" title="Permalink to this heading">#</a></h2>
-</section>
-<div class="toctree-wrapper compound">
+<section id="ale-11-4-see-the-path">
+<p><strong>ALE 11.4: See the path.</strong> The driving-directions script built in Chapter 11 prints only the turn-by-turn directions that gets you from the start to the goal locations. Today’s mapping applications provide both this and the path marked on a map. Your task is to mark the turn-by-turn driving directions on the searched map and print it.</p>
+<p><strong>Step 1.</strong> We’ll start with the chapter’s depth-first solution. Copy <code class="docutils literal notranslate"><span class="pre">directions-dfs.py</span></code> and name this copy <code class="docutils literal notranslate"><span class="pre">ale04.py</span></code>. Edit line 1 to change <code class="docutils literal notranslate"><span class="pre">directions-dfs.py</span></code> to <code class="docutils literal notranslate"><span class="pre">ale04.py</span></code>.</p>
+<p><strong>Step 2.</strong> We’re going to make our changes inside the function <code class="docutils literal notranslate"><span class="pre">search</span></code>, since that’s where the current turn-by-turn driving directions are printed out. Find where those directions are printed and make sure you understand them.</p>
+<p><strong>Step 3.</strong> We’ll leave the code that produces the <code class="docutils literal notranslate"><span class="pre">ddirections</span></code> list of <code class="docutils literal notranslate"><span class="pre">TreeNote</span></code>s alone (lines 55-60) and start adding code around and inside the printing of the solution (lines 62-68). We’ll reuse <code class="docutils literal notranslate"><span class="pre">my_map</span></code>, which <code class="docutils literal notranslate"><span class="pre">search</span></code> used to find the solution, and place <code class="docutils literal notranslate"><span class="pre">EXPLORED</span></code> marks on the map to indicate the solution route. The following pseudocode describes all the work we need to occur to mark up <code class="docutils literal notranslate"><span class="pre">my_map</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">61</span><span class="c1">### chap11/ale04.py</span>
+<span class="linenos">62</span>    <span class="c1"># Reset the map so we can plot the driving directions</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span>    <span class="c1"># Mark the start location as EXPLORED</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>    <span class="c1"># Print out the driving directions and map them</span>
+<span class="linenos">67</span>    <span class="c1"># ... HINT: the existing code goes here</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span>    <span class="c1"># Re-mark the start and goal locations and then print</span>
+</pre></div>
 </div>
+<p>You’ll need to use the following attributes of a <code class="docutils literal notranslate"><span class="pre">Maze</span></code> object (i.e., <code class="docutils literal notranslate"><span class="pre">my_map</span></code>) to create the code that implements these pseudocode steps: <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">goal</span></code>, <code class="docutils literal notranslate"><span class="pre">reset</span></code>, <code class="docutils literal notranslate"><span class="pre">mark</span></code>, <code class="docutils literal notranslate"><span class="pre">move</span></code>, and <code class="docutils literal notranslate"><span class="pre">print</span></code>. Look at how we’ve used these attributes elsewhere in the <code class="docutils literal notranslate"><span class="pre">search</span></code> function and read through their docstrings in <code class="docutils literal notranslate"><span class="pre">maze.py</span></code>.</p>
+<p><strong>Step 4.</strong> When you’ve completed Step 3 and have your script printing the step-by-step driving directions and a map with the route marked, it’s time to try a new map. In the <code class="docutils literal notranslate"><span class="pre">main</span></code> function of <code class="docutils literal notranslate"><span class="pre">ale04.py</span></code>, duplicate the line that reads:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">my_map</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="n">Maze</span><span class="p">(</span><span class="n">maze</span><span class="o">.</span><span class="n">MAZE_map</span><span class="p">,</span> <span class="n">maze</span><span class="o">.</span><span class="n">MAZE_map_endpts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Comment out the original line and then change the duplicate into the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">my_map</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="n">Maze</span><span class="p">(</span><span class="n">maze</span><span class="o">.</span><span class="n">MAZE_map_ale04</span><span class="p">,</span> <span class="n">maze</span><span class="o">.</span><span class="n">MAZE_map_ale04_endpts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run your script and take a look at the solution. Do you like the route it found? If not, how might you change your script to have it find and print a more direct route from start to goal?</p>
+</section>
+<section id="ale-11-5-build-your-own-class">
+<p><strong>ALE 11.5: Build your own class.</strong> [Insert an edited version of Kitty’s ALE 11.2 titled “Build your own Pin” that has the student build their own class. It would be nice if it tied into the map motif as `Pin` did.]</p>
+<p>[Version 20240831]</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,20 +464,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="chap18.html"
+       href="ales-c10.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 18: Use Generative AI</p>
+        <p class="prev-next-title">Chapter 10</p>
       </div>
     </a>
     <a class="right-next"
-       href="ales-c01.html"
+       href="ales-c12.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 1</p>
+        <p class="prev-next-title">Chapter 12</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -484,13 +499,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-1">Chapter 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-2">Chapter 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-3">Chapter 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-4">Chapter 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-5">Chapter 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-6">Chapter 6</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-8">Chapter 8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-making-print-work">ALE 11.2: Making print work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
 </ul>
   </nav></div>
 
