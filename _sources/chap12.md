@@ -46,7 +46,7 @@ Hopefully, you agree with me that this extremely short definition does an excell
 
 As an example of how programming languages handle this generalization, consider the two functions built into Python:[^fn3]
 
-* The `list` class contains a `sort` method that sorts a list object *in place*. The original contents of the list are replaced with the sorted contents.
+* The `list` class contains a `sort` method that sorts a list object *in place*, which means that the original contents of the list are replaced with the sorted contents.
 * The built-in function `sorted` takes an object of an iterable type (e.g., a sequence or a dictionary) and *returns a new sorted list*. The original object is left unchanged.
 
 Let's build ourselves a few unsorted lists so that we can play with these functions. We'll use the lists `a`, `c`, and `w` below throughout the rest of this chapter.
@@ -473,7 +473,7 @@ But it's beginning to appear that to run faster, we must pay for this speed boos
 Recursion is a fancy way of saying that a function repeatedly calls itself. While having a function call itself in this manner may sound like a recipe for an infinite loop, we avoid this outcome by:
 
 1. Requiring each recursive call to solve a slightly smaller (or simpler) problem, and;
-2. Making sure we have what are called one or more *base cases*, which do not involve a recursive call.[^fn8]
+2. Making sure we have one or more of what are called *base cases*, which do not involve a recursive call.[^fn8]
 
 Before we look at the recursive form of merge sort, let's get a feel for the structure of a recursive implementation by looking at the canonical recursive algorithm: factorial. You probably remember that the factorial of a number $n$, expressed in mathematical notation as $n!$, is the product of the numbers between $n$ and $1$, inclusive.
 
@@ -490,7 +490,7 @@ factorial_of_3 = 3 * 2 * 1
 factorial_of_4 = 4 * factorial_of_3
 ```
 
-Using this idea, let's assume we have a function `factorial` that takes a single input parameter `n` and returns its factorial value, then the following equality would be true for any positive integer:[^fn9]
+Using this idea, let's assume we have a function `factorial` that takes a single input parameter `n` and returns its factorial value. Then the following equality would be true for any positive integer:[^fn9]
 
 ```{code-block} python
 factorial(n) == n * factorial(n - 1)
@@ -748,13 +748,13 @@ This final `beckett` function is disturbingly simple, and that's what happens wh
 
 I hope you understand how the recursive `beckett` function works. I hope you've also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett's challenge is even harder, but you can do it if you take it a step at a time, as we just did.
 
-\[Version 20240918\]
+\[Version 20240925\]
 
 [^fn1]: Divide and conquer is sometimes called *divide and combine*, a name that highlights the two pieces of this problem-solving process.
 
 [^fn2]: I've borrowed this definition from an earlier edition of *Introduction to Algorithms* by Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest (The MIT Press; Cambridge, MA; 1995), p. 2.
 
-[^fn3]: To learn more about sorting in Python, please see the helpful page titled ["Sorting HOW TO"](https://docs.python.org/3/howto/sorting.html) in the Python documentation.
+[^fn3]: To learn more about sorting in Python, please see the helpful page titled ["Sorting Techniques"](https://docs.python.org/3/howto/sorting.html) by Andrew Dalke and Raymond Hettinger.
 
 [^fn4]: Letters are sorted from a-z, except that capital letters are "smaller in value" than little letters. Letters that represent positive numbers are sorted in numerical order. Unicode characters are sorted by their numerical values. In fact, sorting letters and numbers are also explained by the realization that we're just sorting unicode values! Look up the unicode values of the characters A, B, a, b, 0, and 1.
 

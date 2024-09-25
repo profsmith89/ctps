@@ -440,7 +440,7 @@ document.write(`
 <section id="sorting-in-python">
 <p><strong>Sorting in Python.</strong> As an example of how programming languages handle this generalization, consider the two functions built into Python:<a class="footnote-reference brackets" href="#fn3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> class contains a <code class="docutils literal notranslate"><span class="pre">sort</span></code> method that sorts a list object <em>in place</em>. The original contents of the list are replaced with the sorted contents.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> class contains a <code class="docutils literal notranslate"><span class="pre">sort</span></code> method that sorts a list object <em>in place</em>, which means that the original contents of the list are replaced with the sorted contents.</p></li>
 <li><p>The built-in function <code class="docutils literal notranslate"><span class="pre">sorted</span></code> takes an object of an iterable type (e.g., a sequence or a dictionary) and <em>returns a new sorted list</em>. The original object is left unchanged.</p></li>
 </ul>
 <p>Let’s build ourselves a few unsorted lists so that we can play with these functions. We’ll use the lists <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, and <code class="docutils literal notranslate"><span class="pre">w</span></code> below throughout the rest of this chapter.</p>
@@ -778,7 +778,7 @@ document.write(`
 <p>Recursion is a fancy way of saying that a function repeatedly calls itself. While having a function call itself in this manner may sound like a recipe for an infinite loop, we avoid this outcome by:</p>
 <ol class="arabic simple">
 <li><p>Requiring each recursive call to solve a slightly smaller (or simpler) problem, and;</p></li>
-<li><p>Making sure we have what are called one or more <em>base cases</em>, which do not involve a recursive call.<a class="footnote-reference brackets" href="#fn8" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p></li>
+<li><p>Making sure we have one or more of what are called <em>base cases</em>, which do not involve a recursive call.<a class="footnote-reference brackets" href="#fn8" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p></li>
 </ol>
 <p>Before we look at the recursive form of merge sort, let’s get a feel for the structure of a recursive implementation by looking at the canonical recursive algorithm: factorial. You probably remember that the factorial of a number <span class="math notranslate nohighlight">\(n\)</span>, expressed in mathematical notation as <span class="math notranslate nohighlight">\(n!\)</span>, is the product of the numbers between <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, inclusive.</p>
 <p>We can directly calculate the factorial of a number like 4 by computing:</p>
@@ -790,7 +790,7 @@ document.write(`
 <span class="n">factorial_of_4</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial_of_3</span>
 </pre></div>
 </div>
-<p>Using this idea, let’s assume we have a function <code class="docutils literal notranslate"><span class="pre">factorial</span></code> that takes a single input parameter <code class="docutils literal notranslate"><span class="pre">n</span></code> and returns its factorial value, then the following equality would be true for any positive integer:<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a></p>
+<p>Using this idea, let’s assume we have a function <code class="docutils literal notranslate"><span class="pre">factorial</span></code> that takes a single input parameter <code class="docutils literal notranslate"><span class="pre">n</span></code> and returns its factorial value. Then the following equality would be true for any positive integer:<a class="footnote-reference brackets" href="#fn9" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -983,7 +983,7 @@ document.write(`
 </div>
 <p>This final <code class="docutils literal notranslate"><span class="pre">beckett</span></code> function is disturbingly simple, and that’s what happens when the pattern embedded in the problem is matched with the right tool. In this case, the tool was a divide-and-conquer approach coupled with the technique of recursion.</p>
 <p>I hope you understand how the recursive <code class="docutils literal notranslate"><span class="pre">beckett</span></code> function works. I hope you’ve also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett’s challenge is even harder, but you can do it if you take it a step at a time, as we just did.</p>
-<p>[Version 20240918]</p>
+<p>[Version 20240925]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -995,7 +995,7 @@ document.write(`
 </aside>
 <aside class="footnote brackets" id="fn3" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
-<p>To learn more about sorting in Python, please see the helpful page titled <a class="reference external" href="https://docs.python.org/3/howto/sorting.html">“Sorting HOW TO”</a> in the Python documentation.</p>
+<p>To learn more about sorting in Python, please see the helpful page titled <a class="reference external" href="https://docs.python.org/3/howto/sorting.html">“Sorting Techniques”</a> by Andrew Dalke and Raymond Hettinger.</p>
 </aside>
 <aside class="footnote brackets" id="fn4" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
