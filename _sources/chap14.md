@@ -74,7 +74,7 @@ lineno-start: 1
 from found_bug import found_bug
 
 # Let our tool do its work!
-if found_bug(f, s) == `"`Yes":
+if found_bug(f, s) == "Yes":
     print('Sorry, but function f has a bug on input s.')
 else:
     print('Good work, no bugs!')
@@ -163,7 +163,7 @@ def string_bug(f):
             return "Yes" 
     
     # Make sure the last string ended with a double quote, which
-    # means the length of work_list should odd.
+    # means the length of work_list should be odd.
     if items & 1 != 1:
         return "Yes"
     
@@ -253,12 +253,12 @@ def grab_f(fun_name):
     name (i.e., `fun_name.py`).'''
     try:
         fun_module = importlib.import_module(fun_name)
-        fun = getattr(fun_module, fun_name)
-        f = inspect.getsource(fun)
+        fun_object = getattr(fun_module, fun_name)
+        fun_src = inspect.getsource(fun_object)
     except SyntaxError:
         # Use the helper function instead
-        f = grab_f_with_error(fun_name)
-    return f
+        fun_src = grab_f_with_error(fun_name)
+    return fun_src
 ```
 
 We're now ready to build a tool that allows us to run any analysis (e.g., `string_bug`) on any function (e.g., `hello` or `hellu`). We'll call this analysis tool `analyze` and place it in `analyze.py`. Because we've talked about `found_bug` taking two parameters and shown `string_bug` taking just one (recall that finding syntax errors doesn't require an example input), we'll make `analyze` smart enough to handle either case. You should understand everything in the next code block.
@@ -347,7 +347,7 @@ lineno-start: 1
 ### chap14/yes.py
 
 def yes(f, s):
-    '''An analysis function that no analysis
+    '''An analysis function that does no analysis
     and always returns yes.'''
     return "Yes"
 ```
@@ -594,7 +594,7 @@ We used a number of tools, without naming most of them, commonly employed by tho
 
 While it is true that we can't expect a computational tool to find all our bugs, this doesn't mean we can't find lots of specific kinds of bugs in many different kinds of programs. On to the next two chapters to learn how you can more quickly and easily find many important bugs!
 
-\[Version 20240827\]
+\[Version 20241003\]
 
 [^fn1]: When computer scientists talk about static analyses, they mean analyses that ask questions about a program or how a program will execute without running it. Runtime debugging involves asking questions about a program's state while it executes. All the functions in this chapter perform static analysis.
 
