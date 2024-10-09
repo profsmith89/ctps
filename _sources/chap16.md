@@ -79,7 +79,7 @@ Let's summarize what we've learned from these three simple examples about the ba
 
 ## A silly coding error
 
-Now that you're warmed up, you're ready to see if you can act like a static analysis tool and find a bug in a bigger script. The script `emdash.py` takes a paragraph of text and allows the user to indicate that they'd like to replace the commas around [a parenthetical phrase](https://grammarist.com/grammar/parenthetical-phrases/) with em dashes. 
+Now that you're warmed up, you're ready to see if you can act like a static analysis tool and find a bug in a bigger script. The `main` function of the script `emdash.py` takes a paragraph of text and allows the user to indicate that they'd like to replace the commas around [a parenthetical phrase](https://grammarist.com/grammar/parenthetical-phrases/) with em dashes. 
 
 It would, for example, take the sentence:
 
@@ -90,7 +90,7 @@ And with direction from the user, turn it into:
 > In Chapter 16, we'll learn that it is possible--using static analysis tools--to find some of your script's coding errors without editing or running it.
 
 ```{admonition} You Try It
-While I haven't provided you with a lengthy description of how to run `emdash.py`, you don't need it to find the bug in the code block below. You need only to understand how Python operators and methods we've used many times before work. Read through the script and see if you can identify the bug. If you don't immediately see it, don't fret. Humans are not good at this sort of detailed work. And no cheating by running the script!
+While I haven't provided you with a lengthy description of how to run `emdash.py` or the script beyond its `main` function, you don't need it to find the runtime bug in `main`. You need only to understand how Python operators and methods we've used many times before work. Read through the script and see if you can identify the bug. You can assume that the call to `get_phrase_index` on line 51 returns a valid integer in the range `0` to `len(phrases)-1`. If you don't immediately see the bug, don't fret. Humans are not good at this sort of detailed work. And no cheating by running the script!
 ```
 
 ```{code-block} python
@@ -98,10 +98,14 @@ While I haven't provided you with a lengthy description of how to run `emdash.py
 lineno-start: 1
 ---
 ### chap16/emdash.py
+"""Limiting assumption: This script works with paragraphs
+in which all sentences end with periods, and no period
+characters are used for any other purpose."""
 import sys
 
 # Terminal colors
 C_RESET = '\033[0m'
+C_RED = '\033[31m'
 C_BLUE = '\033[34m'
 
 def main():
@@ -113,45 +117,40 @@ def main():
     with open(sys.argv[1]) as fin:
         paragraph = fin.read()
     paragraph = paragraph.replace('\n',' ')
-    
+
     # Print out instructions
     print( \
-"""INSTRUCTIONS:
-Let's look at each sentence in this paragraph, and
-you tell me if you want me to surround a phrase with
-em dashes rather that the existing commas.""")
-    
+"""**INSTRUCTIONS**
+As you look at each sentence in this paragraph, tell me
+via a phrase index if you want to surround that phrase
+with em dashes rather than the existing commas.""")
+
     # Iterate through each candidate sentence in text.
     # A sentence is a candidate only if it has three
     # or more phrases in it.
     sentences = paragraph.split('.')
     sentences = sentences[:-1]  # last item isn't a sentence
     for i, s in enumerate(sentences):
-        # Split the sentence into numbered phrases
+        # Split the sentence into phrases
         phrases = s.split(',')
         if len(phrases) == 1 or len(phrases) == 2:
             # Nothing to do
             continue
-        
-        print()
-        
-        # Print the phrases and ask the user
+
+        print()   # blank line in output
+
+        # Number and print the phrases
         for j, p in enumerate(phrases):
             if j != 0 and j != len(phrases) - 1:
                 print(f'{C_BLUE}{j+1}: {p}{C_RESET}')
             else:
                 print(f'{j+1}: {p}')
         
-        ans = int(input(f'\nWhich {C_BLUE}blue{C_RESET} phrase, \
-if any, do you want to set off with em dashes? '))
-        if ans == 0:
+        # Grab a phrase index from the user, if any
+        a = get_phrase_index(phrases)
+        if a == 0:
             continue     # Leave the sentence alone
-        elif ans == 1 or ans == len(phrases):
-            print("That phrase wasn't blue...skipping on.")
-            continue
-        else:
-            a = ans - 1  # Turn ans into an index
-        
+
         # Add back the comma on the unaffected phrases while
         # building the sentence prefix and suffix.
         s_prefix = ''
@@ -166,22 +165,19 @@ if any, do you want to set off with em dashes? '))
                 s_suffix += phrases[j] + ','
             else:
                 s_suffix += phrases[j]
-        
+
         # Add the em dashes to the affected phrase and remove
-        # the leading spaces in it and the new_suffix.
+        # the leading spaces in it and the s_suffix.
         new_s = s_prefix + '--' + phrases[a].split() + '--' + s_suffix.split()
-        
-        # Put the updated sentence back into the sentences list
+
+        # Put the edited sentence back into the sentences list
         sentences[i] = new_s
-    
+
     # Add back the periods and print out the new paragraph
     for i in range(len(sentences)):
         sentences[i] += '.'
     print('\nNew paragraph:')
     print(''.join(sentences))
-
-if __name__ == '__main__':
-    main()
 ```
 
 ## What's hidden
@@ -203,7 +199,6 @@ While we skip directly from writing to running in Python, a C programmer writes,
 lineno-start: 1
 ---
 /* chap16/fun.c */
-/* NOT EXECUTABLE since it C code, not Python */
 #include <stdio.h>
 #include <string.h>
 
@@ -219,7 +214,7 @@ int main(void) {
 }
 ```
 
-The following transcript shows how to compile and execute `fun.c`:
+The following transcript shows how to compile and execute `fun.c`:[^fn4]
 
 ```{code-block} none
 ---
@@ -230,10 +225,7 @@ chap16$ ./fun
 The strings are different.
 ```
 
-The command `make` invokes the C compiler and hides most all the complicated compilation process, which I further hid with the `-s` flag that tells `make` to be silent while it does its work. This command produces two files:
-
-* `fun.o`, which is the machine code for the routine we wrote. While it contains machine instructions, you can't run it because it's incomplete.[^fn4]
-* `fun`, which is a binary that will execute when invoked as a command. It includes the binary instructions in `fun.o` and *the runtime system* that is needed for a program to run on its own. The runtime system includes items like the code for C's builtin library. In Python, the runtime system is part of the interpreter.
+The command `make` invokes the C compiler and hides the complicated compilation process, which I further hid with the `-s` flag that tells `make` to be silent while it does its work. This command produces a file called `fun` in your current working directory. It is a binary that will execute when invoked as a command. It includes binary instructions corresponding to the C statements in `fun.c` and *the runtime system* that is needed for a program to run on its own. The runtime system includes items like the code for C's builtin library. In Python, the runtime system is part of the interpreter.
 
 ## Why compile?
 
@@ -254,18 +246,18 @@ As an example of an extension, I loaded and used [mypy](https://mypy-lang.org/) 
 ```{figure} images/c16_fig1.png
 :name: c16_fig1_ref
 
-Screenshot of an editor tab in Microsoft Visual Studio Code with the mypy Type Checker extension loaded (v2023.6.0). I've opened the error message associated with the red squiggle on line 73.
+Screenshot of an editor tab in Microsoft Visual Studio Code with the mypy Type Checker extension loaded (v2024.0.0). I've opened the error message associated with the red squiggle on line 72.
 ```
 
-This tool placed a red squiggle under a part of line 73. This line builds a new sentence in which we place em dashes around the parenthetical phrase named `phrases[a]`. As you can read in the comment on lines 71-72, the code should have removed the whitespace around this phrase and the text that came after it, which is what the specification for `emdash.py` said it should do. However, I mistakenly typed `split()` where I meant to `strip()`---twice in fact. I had invoked the `split` method several times earlier in the script, and my fingers mindlessly typed it again rather than the similar-looking `strip`.
+This tool placed a red squiggle under a part of line 72. This line builds a new sentence in which we place em dashes around the parenthetical phrase named `phrases[a]`. As you can read in the comment on lines 70-71, the code should have removed the whitespace around this phrase and the text that came after it, which is what the specification for `emdash.py` said it should do. However, I mistakenly typed `split()` where I meant to `strip()`---twice in fact. I had invoked the `split` method several times earlier in the script, and my fingers mindlessly typed it again rather than the similar-looking `strip`.
 
 ## To squiggle or not
 
-Knowing that I typed the wrong method name explains my error, but how did the mypy analysis know to place a red squiggle on line 73? To figure out the answer to this question, we must understand what the mypy error message is telling us. It says that the `+` operator was attempting to act upon a string object and a list object holding string objects.[^fn5] On line 73, the literal `'--'` is clearly of type `str`, but how did mypy know the type of the object produced by `phrase[a].split()`?
+Knowing that I typed the wrong method name explains my error, but how did the mypy analysis know to place a red squiggle on line 72? To figure out the answer to this question, we must understand what the mypy error message is telling us. It says that the `+` operator was attempting to act upon a string object and a list object holding string objects.[^fn5] On line 72, the literal `'--'` is clearly of type `str`, but how did mypy know the type of the object produced by `phrase[a].split()`?
 
-You might say that it's obvious, but if you did, you assumed that this expression was calling `str.split`. This is true only if `phrases[a]` produces a string object, and while it is true in this script, it didn't have to be true if we were reasoning about line 73 in isolation.
+You might say that it's obvious, but if you did, you assumed that this expression was calling `str.split`. This is true only if `phrases[a]` produces a string object, and while it is true in this script, it didn't have to be true if we were reasoning about line 72 in isolation.
 
-Python is a *dynamically-typed, object-oriented language*. As we learned in Chapter 11, we can build objects of any structure we'd like using Python's `class` syntax. So here's another perfectly rational way to decide the type of the object between the two + operators on line 73: `phrase` names an object whose class defines the indexing operator (i.e., the `[]` operator, which you can define using the `__getitem__` magic method).[^fn6] The object returned by `__getitem__` is one that defines a `split` method, and this method returns a string. This isn't what mypy determined, but my point is that this alternate reasoning follows a perfectly valid set of assumptions given what we know about Python and what we see on line 73.
+Python is a *dynamically-typed, object-oriented language*. As we learned in Chapter 11, we can build objects of any structure we'd like using Python's `class` syntax. So here's another perfectly rational way to decide the type of the object between the two + operators on line 72: `phrase` names an object whose class defines the indexing operator (i.e., the `[]` operator, which you can define using the `__getitem__` magic method).[^fn6] The object returned by `__getitem__` is one that defines a `split` method, and this method returns a string. This isn't what mypy determined, but my point is that this alternate reasoning follows a perfectly valid set of assumptions given what we know about Python and what we see on line 72.
 
 In summary, whether mypy decides to place a red squiggle under `phrases[a].split()` depends entirely on whether its reasoning determines that the returned object is of type `str` or `list[str]`. And what makes such reasoning hard is not the object-oriented nature of the language, but its dynamic typing.
 
@@ -296,7 +288,7 @@ The process of statically determining the possible types of a variable in a dyna
 
 ## Why types are interesting
 
-To catch divide-by-zero errors, it was obvious that we wanted to know if a variable (or in general an expression) could be `0`, but why is knowing the type of a variable also helpful in finding snippets of code that become runtime errors? Stated simply, it's because an object's type tells you what operations you can legally perform on or with the object.
+To catch divide-by-zero errors, it was obvious that we wanted to know if a variable (or in general an expression) could be `0`, but why is knowing the type of a variable also helpful in finding snippets of code that become runtime errors? Stated simply, it's because an object's type tells you *the operations you can legally perform on or with the object*.
 
 Type checking, therefore, asks if there is ever a place in our script where we're trying to manipulate an object (i.e., data) in a manner that is:
 
@@ -351,22 +343,21 @@ You've now learned that an object's type is an important attribute of an object,
 
 So where are we? We've learned that types are important, but because of dynamic typing, we know that the name of an object doesn't tell us anything about its type. Yet, the Python interpreter needs to know the types of the objects in a statement when it goes to evaluate that statement. Types tell the interpreter what operations are allowed and legal, and when you try to do something that isn't, it raises a `TypeError`. Where does the interpreter get this necessary type information if not from the variable name?
 
-The solution to this dilemma is that Python includes type information with every object it creates. We learned through `equal.py` that this information (i.e., this attribute) is kept separate from the value of each object. It is additional overhead (i.e., it causes an object to take up additional space in our computer's memory), but because of this overhead, the interpreter can perform *dynamic type checking* (i.e., type checking at runtime). Now you understand how the interpreter is able to raise a `TypeError` when executing line 73 in `emdash.py`.
+The solution to this dilemma is that Python includes type information with every object it creates. We learned through `equal.py` that this information (i.e., this attribute) is kept separate from the value of each object. It is additional overhead (i.e., it causes an object to take up additional space in our computer's memory), but because of this overhead, the interpreter can perform *dynamic type checking* (i.e., type checking at runtime). Now you understand how the interpreter is able to raise a `TypeError` when executing line 72 in `emdash.py`.
 
 ```{admonition} You Try It
-Try running `emdash.py` by typing `python3 emdash.py txts/debugging.txt` at the shell prompt; this command assumes you have this chapter's code distribution. The contents of the file `debugging.txt` are a paragraph that contains the example I mentioned earlier. The script identifies sentences in the paragraph that have multiple commas, and for each of these sentences, it will ask if you want to change a comma-surrounded phrase into a em-dash-surrounded one. Answer `0` if you don't want to make any changes to a particular sentence. When you ask the script to perform the change on a comma-surrounded phrase, it will die with a `TypeError` on line 73, as expected.
+Try running `emdash.py` by typing `python3 emdash.py txts/debugging.txt` at the shell prompt; this command assumes you have this chapter's code distribution. The contents of the file `debugging.txt` are a paragraph that contains the example I mentioned earlier. The script identifies sentences in the paragraph that have multiple commas, and for each of these sentences, it will ask if you want to change a comma-surrounded phrase into a em-dash-surrounded one. Answer `0` if you don't want to make any changes to a particular sentence. When you ask the script to perform the change on a comma-surrounded phrase, it will die with a `TypeError` on line 72, as expected.
 ```
 
 ## Static type checking
 
-And yet, we want to build *static* analyses that discover the `TypeError` on line 73 in `emdash.py` without having to run it. One way to provide a static analysis with the type information it needs is to attach the type information not to a program's objects but to its variable names. This is, in fact, what happens in the C programming language. Here is `equal.py` rewritten as a C program:[^fn7]
+And yet, we want to build *static* analyses that discover the `TypeError` on line 72 in `emdash.py` without having to run it. One way to provide a static analysis with the type information it needs is to attach the type information not to a program's objects but to its variable names. This is, in fact, what happens in the C programming language. Here is `equal.py` rewritten as a C program:[^fn7]
 
 ```{code-block} c
 ---
 lineno-start: 1
 ---
 /* chap16/equal.c */
-/* NOT EXECUTABLE since it C code, not Python */
 #include <stdio.h>
 
 int main(void) {
@@ -391,7 +382,6 @@ The program `equal2.c` separates the variables' declarations from their initiali
 lineno-start: 1
 ---
 /* chap16/equal2.c */
-/* NOT EXECUTABLE since it C code, not Python */
 #include <stdio.h>
 
 int main(void) {
@@ -410,7 +400,7 @@ int main(void) {
 ```
 
 ```{admonition} You Try It
-You can copy these two C programs into a Replit C project and run them for yourself (or any other environment with a C compiler installed). When `equal.c` and `equal2.c` answer the question about the equality of `a_string` and `an_int`, an answer of `0` means `False` and `1` means `True`.
+You can copy these two C programs into a Replit C project and run them for yourself (or any other environment with a C compiler installed). To compile `equal.c` in a Replit C project, you type `make -s equal` at the shell prompt, and then you run the resulting executable by typing `./equal` at the shell prompt. You do the same for `equal2.c`. When these two programs answer the question about the equality of `a_string` and `an_int`, an answer of `0` means `False` and `1` means `True`.
 
 Are you surprised at the answer? To resolve this surprise:
 
@@ -424,7 +414,7 @@ Are you surprised at the answer? To resolve this surprise:
 
 We are finally ready to understand how mypy operates and what we (as programmers) need to add into our scripts to enable it to do static type checking. As I mentioned earlier, dynamic typing is what makes static type checking hard. We need to know object types in order to do type checking, and that means we have to jettison Python's dynamic-typing nature.
 
-Perhaps you were a careful reader and noticed that the file open in {numref}`Figure %s <c16_fig1_ref>` is not `emdash.py`, but `emdash-anno.py`. Furthermore, line 73 starts with:
+Perhaps you were a careful reader and noticed that the file open in {numref}`Figure %s <c16_fig1_ref>` is not `emdash.py`, but `emdash-anno.py`. Furthermore, line 72 starts with:
 
 `new_s: str = ...`
 
@@ -435,12 +425,12 @@ rather than
 This change is just different syntax for the variable declarations we saw in C (i.e., `new_s: str` declares that any objects named `new_s` are expected to be of type `str`). In Python, these are called a *type hints*. They're hints because they're not necessary for the functioning of the script (i.e., the Python interpreter still performs dynamic type checking and you're free to ignore the mypy error messages). You can think of these type hints as acting like comments, but unlike a typical comment, they're meant not only for humans, but also for static type checkers like mypy.
 
 ```{admonition} You Try It
-Read the [Python Enhancement Proposal (PEP) 484](https://peps.python.org/pep-0484/) to learn much more about type hints, and then take a look at `emdash-anno.py` to see how I used them to help the mypy with static type checking.
+Read the [Python Enhancement Proposal (PEP) 484](https://peps.python.org/pep-0484/) to learn much more about type hints, and then take a look at `emdash-anno.py` to see how I used them to help mypy with static type checking.
 ```
 
 ## No free lunch
 
-Adding type hints does require us to be more explicit about what we're doing when we code (e.g., we need to decide and state that a name will only ever hold objects of the declared type), but the benefit is that we can build tools that help us identify where in our code we violate those declarations, which may help us find many subtle bugs that would otherwise require numerous test inputs and extensive testing time. When the code we write doesn't take full advantage of dynamic typing, and `emdash.py` is one of them since none of its names ever hold more than one type of object, this is a small price to pay for the huge benefits of static type checking. However, when we do exploit the benefits of dynamic typing, type hints come with a real cost. 
+Adding type hints does require us to be more explicit about what we're doing when we code (i.e., we need to decide and state that a name will only ever hold objects of the declared type), but the benefit is that we can build tools that help us identify where in our code we violate those declarations, which may help us find many subtle bugs that would otherwise require numerous test inputs and extensive testing time. When the code we write doesn't take advantage of dynamic typing---as is true with `emdash.py` where none of its names ever hold more than one type of object---this is a small price to pay for the huge benefits of static type checking. However, when we do exploit the benefits of dynamic typing, type hints come with a real cost. 
 
 Do you remember the function `my_replace` from Chapter 3?
 
@@ -494,13 +484,13 @@ if __name__ == '__main__':
 
 What type annotations should we use for the formal parameters of `my_replace`? We can't use either `str` or `list` because this routine is supposed to work with any sequence that defines the length, slicing, and concatenation operators (i.e., the magic methods `__len__`, `__getitem__`, and `__add__`). Well, perhaps we might declare these parameters to be of type `Sequence`, whose definition you can import from the `typing` module, as I illustrate in `bookshelf1-anno.py`.[^fn9] Unfortunately, this doesn't work. Mypy will mark expressions like `new_s + new` as an error because not all sequence types in Python support concatenation. That was a design choice in the Python language, and it means that we're left with no type that's right for the data abstraction we built in `my_replace`. We either have to: (1) eliminate this abstraction from our code base (and consider every error message from mypy a true error); or (2) keep `my_replace` and decide that we're going to ignore some of the "errors" flagged by mypy.
 
-While things do get complicated, the main point is that tools exist that can help you to find the bugs that creep into your scripts, and static tools have the amazing power to look for errors in all the possible runs of your script without the need for test inputs. Unfortunately, while powerful and useful, all such tools do have their limitations. Take the time to learn the capabilities of each individual tool and be cognizant of their limitations (or how they put limitations on your coding). If you do, you'll be able to more easily ring the bugs out of your scripts and more quickly solve the problems that matter to you.
+While things do get complicated, the main point is that tools exist that can help you to find the bugs that creep into your scripts, and static tools have the amazing power to look for errors in all the possible runs of your script without the need for test inputs. Unfortunately, while powerful and useful, all such tools do have their limitations. Take the time to learn the capabilities of each individual tool and be cognizant of their limitations (or how they put limitations on your coding). If you do, you'll be able to more easily wring the bugs out of your scripts and more quickly solve the problems that matter to you.
 
 ```{tip}
-As Python programmer working in a dynamically-typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you'll want to know how that language's features can also be a vehicle for common runtime errors. For example, C is often described as a high-level language that allows programmers to operate close to the machine's hardware. It allows you to manipulate your computer's memory in ways you cannot in Python, but it also requires you to manage your program's dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn't ever use such a tool since memory management is handled completely by the language runtime.
+As a Python programmer working in a dynamically-typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you'll want to know how that language's features can also be a vehicle for common runtime errors. For example, C is often described as a language that allows programmers to operate close to the machine's hardware. It allows you to manipulate your computer's memory in ways you cannot in Python, but it also requires you to manage your program's dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn't ever use such a tool since memory management is handled completely by the language runtime.
 ```
 
-\[Version 20240827\]
+\[Version 20241009\]
 
 [^fn1]: This term "static" refers to any analysis performed on a program's code when that program isn't running.
 
@@ -508,7 +498,7 @@ As Python programmer working in a dynamically-typed language, you can benefit fr
 
 [^fn3]: Unlike the last two examples, this code block illustrates a divide-by-zero bug that too often occurs in real programs.
 
-[^fn4]: Depending upon how your computer is configured, you may or may not see \`fun.o\` appear in your \`chap16\` directory.
+[^fn4]: These commands work in a C-language project on Replit. To run this commands elsewhere, you need to have a C compiler installed on your machine or in your cloud-based IDE and a properly configured makefile. Such details are beyond the topic of this book.
 
 [^fn5]: A list object holding string objects is how you read \`list\[str\]\`.
 
@@ -516,6 +506,6 @@ As Python programmer working in a dynamically-typed language, you can benefit fr
 
 [^fn7]: In Python, a newline character marks the end of a statement. In C, you must use a semicolon to mark the end of a statement, i.e., newlines are treated as meaningless whitespace in C.
 
-[^fn8]: Because the type check succeeds, you know that values of type \`char\` are also values of type \`int\`. In fact, if you go on to study C, you'll learn that characters are just 8-bit integers.
+[^fn8]: Both programs print \`1\`, which means that the type check succeeds. This experiment demonstrates that, in the C programming language, values of type \`char\` are also values of type \`int\`. In fact, if you go on to study C, you'll learn that characters are just 8-bit integers.
 
 [^fn9]: You can find \`bookshelf1-anno.py\` in \`chap16\` of the book's code repository.
