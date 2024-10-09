@@ -49,7 +49,7 @@ def main():
         sys.exit('Usage: head.py input.csv')
     
     with open(sys.argv[1], encoding='utf-8') as fin:
-        reader = csv.DictReader(fin)
+        reader = csv.DictReader(fin)  # assumes file contains a header row
         for i, row in enumerate(reader):
             # Just print the first 5 rows
             if i < 5:
@@ -92,7 +92,7 @@ To figure out what the predicted prices should be, let's write a Python script t
 ---
 lineno-start: 1
 ---
-### chap17/avg_pbbr.py
+### chap17/avg_pbbr.py -- custom-made for Ames-Iowa-Housing data set
 import sys, csv
 
 # Each `homes` element is a tuple with these elements:
@@ -168,9 +168,9 @@ Unfortunately, even if we were patient enough to figure out what buckets of lot 
 
 ## Machine learning
 
-We've been trying to suss out a pattern in the Ames-Iowa-Housing data that we could use as the foundation for a good predictor, and we were using your sister's experience in real estate as a starting point in this search. This wasn't a bad idea since evolution has made humans into good pattern recognizers---as we discussed in Chapter 1, the accumulation of experience turns good programmers into great ones (i.e., individuals that seem to quickly jump to the "right" structure for a script to solve a new problem). But we don't have your sister's experience and the patterns in the Ames-Iowa-Housing data might be quite subtle. ML is a computational approach that enables computers, through the use of *statistical techniques* and *a large training data set*, to build *models* that perform like an experienced human. They allow all of us to become instant experts in a new domain.
+We've been trying to suss out a pattern in the Ames-Iowa-Housing data that we could use as the foundation for a good predictor, and we were using your sister's experience in real estate as a starting point in this search. This wasn't a bad idea since evolution has made humans into good pattern recognizers---as we discussed in Chapter 1, the accumulation of experience turns good programmers into great ones, who seem to quickly jump to the "right" structure for a script to solve a new problem. But we don't have your sister's experience and the patterns in the Ames-Iowa-Housing data might be quite subtle. ML is a computational approach that enables computers, through the use of *statistical techniques* and *a large training data set*, to build *models* that perform like an experienced human. They allow all of us to become instant experts in a new domain.
 
-The statistical technique we used a moment ago was a decision tree. Statisticians recommend this approach when the relationship between the *features* (i.e., the characteristics of a home such as its number of bedrooms and lot size) and the *target variable* (i.e., the home's selling price) is complex. For those of you that know a bit about statistical analysis, this often means that the relationship is non-linear or includes important outliers.
+The statistical technique we used a moment ago was a decision tree. Statisticians recommend this approach when the relationship between the *features* (e.g., the characteristics of a home such as its number of bedrooms and lot size) and the *target variable* (e.g., the home's selling price) is complex. For those of you that know a bit about statistical analysis, this often means that the relationship is non-linear or includes important outliers.
 
 Decision trees produce fine predictors of home prices, and yet there are other statistical techniques that yield more accurate predictions. Despite this, we'll continue using decision trees. They are a great starting place for learning how to do ML because they are: (1) easy to understand; and (2) they form the basic building block of several better techniques.
 
@@ -186,7 +186,7 @@ When the patterns are hard to see, you'll need a large training set to have ML c
 
 There's one other characteristic of the Ames-Iowa-Housing data that doesn't have to be true in every ML problem: these data are *labeled*. This term means that the data set includes the answers, i.e., the value of the *target variable*, which for our problem is the selling price. In other words, we know not only the values of the features of each home, but we also know its true selling price. When using labeled data, it is called *supervised learning*.
 
-But not all ML requires labeled data. When we want to analyze a data set for any kind of pattern, it is called *unsupervised learning*. We won't talk further about this type of ML except to say that you should investigate it if you're interested in problems such as natural language processing, object recognition, customer segmentation (e.g., recommendation engines), or exploratory data analysis.
+But not all ML requires labeled data. When we want to analyze a data set for any kind of pattern, it is called *unsupervised learning*. We won't talk further about this type of ML except to say that you should investigate it if you're interested in problems such as natural language processing, object recognition, customer segmentation, or exploratory data analysis.
 
 ```{tip}
 The discipline of ML includes a dizzying number of statistical techniques under the headings of supervised and unsupervised learning. As you work in this area, you'll learn that there is no single best method, and you'll find that no one can accurately predict whether a particular approach will be successful. Experience will help limit the amount of trial and error you'll do, but be prepared to try lots of different approaches until you find one that works well.
@@ -197,7 +197,7 @@ The discipline of ML includes a dizzying number of statistical techniques under 
 We're about ready to dig into a ML library and solve our sister's problem, but before we discuss its particulars, I want to describe in general how we're moving work off our plates and on to the machine's. At the start of the chapter, we tried to follow a process like this:
 
 1. We looked at the data and picked one or more features we thought might correlate well with the target variable.
-2. We wrote a script (e.g., `avg_pbbr.py`) that analyzed the data in the data set to see if a pattern existed between our chosen features and the target variable. If not, we returned to step 1.
+2. We wrote a script (`avg_pbbr.py`) that analyzed the data in the data set to see if a pattern existed between our chosen features and the target variable. If not, we returned to step 1.
 3. Using what we learned from the analysis script, we would have filled in the unknown numbers in our decision-tree pseudocode and written a script that takes as input a set of feature values and outputs a predicted target value. This would have been the "model" we would have sent to your sister.
 
 In using this model, your sister probably would find that it didn't do an outstanding job of predicting the selling price of a new home coming on the market. This is because the steps we took didn't involve looking for the *best* model we could have built; we simply built *a* model based on the first pattern we found. An experienced data scientist would iterate and ask, "Ok, my first model works, but is there a better selection of features (or even a superior statistical approach) that produces a better predictor?"
@@ -217,7 +217,7 @@ Notice that we no longer need to write the code that implements a statistical an
 With this foundation, you are ready to start using the tools of a data scientist. We'll begin with the pandas library, which "is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language."[^fn3] It provides data structures and functions that allow us to quickly explore a data set.
 
 ```{tip}
-Many data scientists work in interactive Python notebooks (i.e., `ipynb` files) when doing ML, and we'll do the same in the rest of this chapter. They also commonly refer to the `pandas` library with the abbreviation `pd`.
+Many data scientists work in interactive Python notebooks (`ipynb` files) when doing ML, and we'll do the same in the rest of this chapter. They also commonly refer to the `pandas` library with the abbreviation `pd`.
 ```
 
 ```{code-block} python
@@ -406,7 +406,7 @@ Run the code above. Are you happy with the resulting predictions? Did we build a
 
 *Predictive accuracy* is the first measure that data scientists consider when deciding whether a model is good. If a model correctly predicts the target variable a sizable percentage of the time, they say it has good predictive accuracy. If it doesn't, they throw the model away and try again.
 
-You're probably thinking: How often does the model need to be correct, i.e., what percentage classifies as "sizable"? The answer depends on how you'll use the model. For your sister's use case (i.e., predicting home prices), her reputation will be damaged if the sale prices she suggests to her clients are far from what other experienced realtors suggest. But being slightly off the actual sales price isn't a big deal; no one expects a home to sell for exactly its listing price. This means that we want a reasonably high predictive accuracy, e.g., 70-90 percent of the time the model predicts the selling price within a couple of thousand dollars.[^fn6] On the other hand, you probably wouldn't be happy with a predictive accuracy of 9 in 10 if your doctor was using the model to decide whether your X-ray showed a tumor.
+You're probably thinking: How often does the model need to be correct, i.e., what percentage classifies as "sizable"? The answer depends on how you'll use the model. For your sister's use case, her reputation will be damaged if the sale prices she suggests to her clients are far from what other experienced realtors suggest. But being slightly off the actual sales price isn't a big deal; no one expects a home to sell for exactly its listing price. This means that we want a reasonably high predictive accuracy, e.g., 70-90 percent of the time the model predicts the selling price within a couple of thousand dollars.[^fn6] On the other hand, you probably wouldn't be happy with a predictive accuracy of 9 in 10 if your doctor was using the model to decide whether your X-ray showed a tumor.
 
 Ok, but how do we check if the model we built meets this 7-to-9-in-ten target? When I ran the previous code block, which compared the first five predicted home prices against the actual prices these homes sold for, it printed the following:
 
@@ -550,7 +550,7 @@ In this chapter, we built fairly good predictors using relatively simple statist
 
 Finally, a data scientist's work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you've gained to make the world a better place for all.
 
-\[Version 20240827\]
+\[Version 20241009\]
 
 [^fn1]: You can read De Cock's original paper in the [Journal of Statistics Education, Volume 19, Number 3 (2011)](https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from [Marco Palermo's Kaggle site](https://www.kaggle.com/datasets/marcopale/housing). Normally, as we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
 
