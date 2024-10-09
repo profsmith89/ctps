@@ -421,7 +421,7 @@ document.write(`
 <span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>While my IDE editor will flag many types of syntax errors (i.e., by placing a red squiggly line under the offending syntax), it doesn’t indicate that there’s anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> exception on line 4. This is a runtime error, but why did I have to run the script to discover it?<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p>While my IDE editor will flag many types of syntax errors by placing a red squiggly line under the offending syntax, it doesn’t indicate that there’s anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> exception on line 4. This is a runtime error, but why did I have to run the script to discover it?<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p>You might think that it would be fairly straightforward to perform a string search over the script looking for instances of <code class="docutils literal notranslate"><span class="pre">'/0'</span></code>, or something like it with some flexibility in the whitespace between the characters. And with this thought, you’ve started to design a static analysis for finding divide-by-zero errors.</p>
 <p>Division by the constant <code class="docutils literal notranslate"><span class="pre">0</span></code> is a fairly obvious, but how might you catch, without running it, the divide-by-zero error in the next code block?</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap16/dbzero1.py</span>
@@ -489,14 +489,14 @@ document.write(`
 <span class="linenos">18</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
 <span class="linenos">19</span>        <span class="n">paragraph</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="linenos">20</span>    <span class="n">paragraph</span> <span class="o">=</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="linenos">21</span>
+<span class="linenos">21</span>    
 <span class="linenos">22</span>    <span class="c1"># Print out instructions</span>
 <span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span> \
 <span class="linenos">24</span><span class="sd">&quot;&quot;&quot;**INSTRUCTIONS**</span>
 <span class="linenos">25</span><span class="sd">As you look at each sentence in this paragraph, tell me</span>
 <span class="linenos">26</span><span class="sd">via a phrase index if you want to surround that phrase</span>
 <span class="linenos">27</span><span class="sd">with em dashes rather than the existing commas.&quot;&quot;&quot;</span><span class="p">)</span>
-<span class="linenos">28</span>
+<span class="linenos">28</span>    
 <span class="linenos">29</span>    <span class="c1"># Iterate through each candidate sentence in text.</span>
 <span class="linenos">30</span>    <span class="c1"># A sentence is a candidate only if it has three</span>
 <span class="linenos">31</span>    <span class="c1"># or more phrases in it.</span>
@@ -508,9 +508,9 @@ document.write(`
 <span class="linenos">37</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">38</span>            <span class="c1"># Nothing to do</span>
 <span class="linenos">39</span>            <span class="k">continue</span>
-<span class="linenos">40</span>
+<span class="linenos">40</span>        
 <span class="linenos">41</span>        <span class="nb">print</span><span class="p">()</span>   <span class="c1"># blank line in output</span>
-<span class="linenos">42</span>
+<span class="linenos">42</span>        
 <span class="linenos">43</span>        <span class="c1"># Number and print the phrases</span>
 <span class="linenos">44</span>        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phrases</span><span class="p">):</span>
 <span class="linenos">45</span>            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
@@ -522,7 +522,7 @@ document.write(`
 <span class="linenos">51</span>        <span class="n">a</span> <span class="o">=</span> <span class="n">get_phrase_index</span><span class="p">(</span><span class="n">phrases</span><span class="p">)</span>
 <span class="linenos">52</span>        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 <span class="linenos">53</span>            <span class="k">continue</span>     <span class="c1"># Leave the sentence alone</span>
-<span class="linenos">54</span>
+<span class="linenos">54</span>        
 <span class="linenos">55</span>        <span class="c1"># Add back the comma on the unaffected phrases while</span>
 <span class="linenos">56</span>        <span class="c1"># building the sentence prefix and suffix.</span>
 <span class="linenos">57</span>        <span class="n">s_prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -537,14 +537,14 @@ document.write(`
 <span class="linenos">66</span>                <span class="n">s_suffix</span> <span class="o">+=</span> <span class="n">phrases</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
 <span class="linenos">67</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">68</span>                <span class="n">s_suffix</span> <span class="o">+=</span> <span class="n">phrases</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-<span class="linenos">69</span>
+<span class="linenos">69</span>        
 <span class="linenos">70</span>        <span class="c1"># Add the em dashes to the affected phrase and remove</span>
 <span class="linenos">71</span>        <span class="c1"># the leading spaces in it and the s_suffix.</span>
 <span class="linenos">72</span>        <span class="n">new_s</span> <span class="o">=</span> <span class="n">s_prefix</span> <span class="o">+</span> <span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">phrases</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;--&#39;</span> <span class="o">+</span> <span class="n">s_suffix</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="linenos">73</span>
+<span class="linenos">73</span>        
 <span class="linenos">74</span>        <span class="c1"># Put the edited sentence back into the sentences list</span>
 <span class="linenos">75</span>        <span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_s</span>
-<span class="linenos">76</span>
+<span class="linenos">76</span>    
 <span class="linenos">77</span>    <span class="c1"># Add back the periods and print out the new paragraph</span>
 <span class="linenos">78</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)):</span>
 <span class="linenos">79</span>        <span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">&#39;.&#39;</span>

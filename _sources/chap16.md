@@ -30,7 +30,7 @@ q = x / 0
 print(q)
 ```
 
-While my IDE editor will flag many types of syntax errors (i.e., by placing a red squiggly line under the offending syntax), it doesn't indicate that there's anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a `ZeroDivisionError` exception on line 4. This is a runtime error, but why did I have to run the script to discover it?[^fn2]
+While my IDE editor will flag many types of syntax errors by placing a red squiggly line under the offending syntax, it doesn't indicate that there's anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a `ZeroDivisionError` exception on line 4. This is a runtime error, but why did I have to run the script to discover it?[^fn2]
 
 You might think that it would be fairly straightforward to perform a string search over the script looking for instances of `'/0'`, or something like it with some flexibility in the whitespace between the characters. And with this thought, you've started to design a static analysis for finding divide-by-zero errors.
 
@@ -117,14 +117,14 @@ def main():
     with open(sys.argv[1]) as fin:
         paragraph = fin.read()
     paragraph = paragraph.replace('\n',' ')
-
+    
     # Print out instructions
     print( \
 """**INSTRUCTIONS**
 As you look at each sentence in this paragraph, tell me
 via a phrase index if you want to surround that phrase
 with em dashes rather than the existing commas.""")
-
+    
     # Iterate through each candidate sentence in text.
     # A sentence is a candidate only if it has three
     # or more phrases in it.
@@ -136,9 +136,9 @@ with em dashes rather than the existing commas.""")
         if len(phrases) == 1 or len(phrases) == 2:
             # Nothing to do
             continue
-
+        
         print()   # blank line in output
-
+        
         # Number and print the phrases
         for j, p in enumerate(phrases):
             if j != 0 and j != len(phrases) - 1:
@@ -150,7 +150,7 @@ with em dashes rather than the existing commas.""")
         a = get_phrase_index(phrases)
         if a == 0:
             continue     # Leave the sentence alone
-
+        
         # Add back the comma on the unaffected phrases while
         # building the sentence prefix and suffix.
         s_prefix = ''
@@ -165,14 +165,14 @@ with em dashes rather than the existing commas.""")
                 s_suffix += phrases[j] + ','
             else:
                 s_suffix += phrases[j]
-
+        
         # Add the em dashes to the affected phrase and remove
         # the leading spaces in it and the s_suffix.
         new_s = s_prefix + '--' + phrases[a].split() + '--' + s_suffix.split()
-
+        
         # Put the edited sentence back into the sentences list
         sentences[i] = new_s
-
+    
     # Add back the periods and print out the new paragraph
     for i in range(len(sentences)):
         sentences[i] += '.'
