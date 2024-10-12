@@ -330,7 +330,7 @@ def check(lines):
         if line == '':
             continue
         
-        # Define RE pattern and run match on current line
+        # Run match on current line
         m = p.match(line)
         
         # Error checking
@@ -347,7 +347,6 @@ def check(lines):
         increment(count, actor1)
         increment(count, actor2)                
     
-    # print(count)
     print(f'{blue}No repeated actors!{reset}')
 ```
 
@@ -355,7 +354,7 @@ In designing this function, I decided that its formal parameter `lines` would ex
 
 ```{code-block} python
 ---
-lineno-start: 59
+lineno-start: 58
 ---
 ### chap18/check_chain.py
 
@@ -479,7 +478,7 @@ The hardest task in this decomposition is grabbing the names from each line. So 
 ---
 lineno-start: 1
 ---
-### chap18/remove_names.py
+### chap18/remove_names.py -- Written by ChatGPT
 import re
 
 def remove_names_from_line(line):
@@ -598,7 +597,7 @@ When all is said and done, problem solving with GAI is still the same process I 
 
 Happy problem solving!
 
-\[Version 20240827\]
+\[Version 20241012\]
 
 [^fn1]: The figure and findings discussed in this section are from Dell'Acqua, Fabrizio and McFowland III, Edward and Mollick, Ethan R. and Lifshitz-Assaf, Hila and Kellogg, Katherine and Rajendran, Saran and Krayer, Lisa and Candelon, François and Lakhani, Karim R., "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality" (September 15, 2023). Harvard Business School Technology & Operations Mgt. Unit Working Paper No. 24-013. The full text is available at SSRN (https://ssrn.com/abstract=4573321) or doi.org (http://dx.doi.org/10.2139/ssrn.4573321).
 

@@ -550,7 +550,7 @@ In this chapter, we built fairly good predictors using relatively simple statist
 
 Finally, a data scientist's work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you've gained to make the world a better place for all.
 
-\[Version 20241009\]
+\[Version 20241012\]
 
 [^fn1]: You can read De Cock's original paper in the [Journal of Statistics Education, Volume 19, Number 3 (2011)](https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from [Marco Palermo's Kaggle site](https://www.kaggle.com/datasets/marcopale/housing). Normally, as we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
 

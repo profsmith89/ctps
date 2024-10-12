@@ -678,7 +678,7 @@ Intended Person ID: Name: Running a dfs search
 <span class="linenos">34</span>        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <span class="linenos">35</span>            <span class="k">continue</span>
 <span class="linenos">36</span>        
-<span class="linenos">37</span>        <span class="c1"># Define RE pattern and run match on current line</span>
+<span class="linenos">37</span>        <span class="c1"># Run match on current line</span>
 <span class="linenos">38</span>        <span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 <span class="linenos">39</span>        
 <span class="linenos">40</span>        <span class="c1"># Error checking</span>
@@ -695,22 +695,21 @@ Intended Person ID: Name: Running a dfs search
 <span class="linenos">51</span>        <span class="n">increment</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">actor1</span><span class="p">)</span>
 <span class="linenos">52</span>        <span class="n">increment</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">actor2</span><span class="p">)</span>                
 <span class="linenos">53</span>    
-<span class="linenos">54</span>    <span class="c1"># print(count)</span>
-<span class="linenos">55</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">blue</span><span class="si">}</span><span class="s1">No repeated actors!</span><span class="si">{</span><span class="n">reset</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">blue</span><span class="si">}</span><span class="s1">No repeated actors!</span><span class="si">{</span><span class="n">reset</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In designing this function, I decided that its formal parameter <code class="docutils literal notranslate"><span class="pre">lines</span></code> would expect only the lines that fit the pattern: <code class="docutils literal notranslate"><span class="pre">ACTOR1</span> <span class="pre">and</span> <span class="pre">ACTOR2</span> <span class="pre">starred</span> <span class="pre">in</span> <span class="pre">MOVIE</span></code>. As such, I do a bit of preprocessing on the captured output before invoking <code class="docutils literal notranslate"><span class="pre">check</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">59</span><span class="c1">### chap18/check_chain.py</span>
-<span class="linenos">60</span>
-<span class="linenos">61</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Filename? &#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">62</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="linenos">63</span>    
-<span class="linenos">64</span>    <span class="c1"># Figure out how many initial lines to remove</span>
-<span class="linenos">65</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="linenos">66</span>    <span class="k">while</span> <span class="s1">&#39;degrees of separation&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-<span class="linenos">67</span>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">68</span>    
-<span class="linenos">69</span>    <span class="n">check</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">58</span><span class="c1">### chap18/check_chain.py</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Filename? &#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">61</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="linenos">62</span>    
+<span class="linenos">63</span>    <span class="c1"># Figure out how many initial lines to remove</span>
+<span class="linenos">64</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">65</span>    <span class="k">while</span> <span class="s1">&#39;degrees of separation&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+<span class="linenos">66</span>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">67</span>    
+<span class="linenos">68</span>    <span class="n">check</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
 </pre></div>
 </div>
 <div class="admonition-you-try-it admonition">
@@ -797,7 +796,7 @@ Intended Person ID: Name: Running a dfs search
 <p><strong>ChatGPT:</strong> To remove the names from a sentence like “Carey Mulligan and Joel Edgerton starred in The Great Gatsby,” we can create a Python function that identifies patterns resembling names (typically capitalized words) and removes them. This approach assumes that names are the capitalized words before the verb “starred” in the sentence.</p>
 <p>Here’s a Python function that employs regular expressions to identify and remove these patterns:</p>
 </div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap18/remove_names.py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap18/remove_names.py -- Written by ChatGPT</span>
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">re</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="k">def</span> <span class="nf">remove_names_from_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
@@ -899,7 +898,7 @@ Intended Person ID: Name: Running a dfs search
 <p>But be vigilantly skeptical. Always check and never blindly accept a GAI tool’s output.</p>
 <p>When all is said and done, problem solving with GAI is still the same process I described in Chapter 1. Whether you use Python or English to “program” the machine to solve your problem, your instructions need to be precise and carefully constructed.</p>
 <p>Happy problem solving!</p>
-<p>[Version 20240827]</p>
+<p>[Version 20241012]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
