@@ -6,7 +6,7 @@ Computational tools help us to automate away the drudgery involved in our work, 
 
 However, unlike earlier chapters, this time we won't have to identify the patterns we wish to exploit. Because data scientists often work with data sets that are too large for humans to analyze, they need tools that can help to identify and exploit the patterns in these data sets. The design of these tools exist in a branch of artificial intelligence called *machine learning (ML)*, and we'll look at one popular library for it called scikit-learn. With such a library, it is very easy to mine a data set for patterns and create a model that uses the patterns it learned to make predictions about new data. In effect, we're asking the computer to analyze a data set and build an algorithm that we would find too difficult to build for ourselves.
 
-We'll explore two real-world problems in this space: (1) the predicting of housing prices based on a home's characteristics (e.g., its number of bedrooms and bathrooms); and (2) the labeling of online comments as toxic. The first is classic and fairly straightforward ML application. We'll use it as an introduction to ML tools and techniques. The second is a more difficult problem, and it will open our eyes to the dangers of bias in the ML models we build. I'll mention two of the many ways in which bias can creep into a model so that you can begin checking your own. Unfortunately, eliminating bias remains a hard problem, and sometimes, when the harms a model creates are greater than its benefits, you simply shouldn't deploy it.
+We'll explore two real-world problems in this space: (1) the predicting of housing prices based on a home's characteristics (e.g., its number of bedrooms and bathrooms); and (2) the labeling of online comments as toxic. The first is a classic and fairly straightforward ML application. We'll use it as an introduction to ML tools and techniques. The second is a more difficult problem, and it will open our eyes to the dangers of bias in the ML models we build. I'll mention two of the many ways in which bias can creep into a model so that you can begin checking your own. Unfortunately, eliminating bias remains a hard problem, and sometimes, when the harms a model creates are greater than its benefits, you simply shouldn't deploy it.
 
 ```{admonition} Learning Outcomes
 Learn to use machine learning (ML) as a tool for discovering and exploiting real-world correlations. You will perform supervised learning to build a decision-tree model that that predicts home prices. You'll practice with Pandas and data frames, i.e., table data structures. In addition to a focus on predictive accuracy, you'll grapple with questions of bias in ML. After completing this chapter, you will be able to:
@@ -64,7 +64,7 @@ if __name__ == '__main__':
 This script uses the `csv` library and its `DictReader` function, which takes a table's column headings and uses them as dictionary keys. When you run `head.py` on your copy of the Ames-Iowa-Housing CSV file, you should see the first five data rows printed as dictionaries. Each row is a home sale, which lists a lot of information. My copy of the data set contained 82 different pieces of information about each home sale, including `'Year Built'` and `'SalePrice'`. We now know why your sister asked for help.
 
 ```{admonition} You Try It
-Download the Ames-Iowa-Housing data from kaggle.com and run `head.py` on the complete CSV file.
+Download the Ames-Iowa-Housing data (e.g., from Marco Palermo's Kaggle site) and run `head.py` on the complete CSV file.
 ```
 
 ## Solving this problem ourselves
@@ -210,11 +210,11 @@ A good ML library automates much of steps 2 and 3 for you. We'll use the `pandas
 4. Test this object, which is a model fit to our training data via supervised learning, against some previously unseen data, and evaluate whether this model is a good one. If it is not, we'll return to an earlier step, changing perhaps the features included or the type of statistical analysis performed. 
 5. Share our best model with your sister. 
 
-Notice that we no longer need to write the code that implements a statistical analysis (step 2) or the model that fits the training data (step 3), as we tried to do earlier. Using powerful libraries like `pandas` and scikit-learn, our scripts need make only a few function calls.
+Notice that we no longer need to write the code that implements a statistical analysis (step 2) or the model that fits the training data (step 3), as we tried to do earlier. Using powerful libraries like `pandas` and scikit-learn, our scripts need to make only a few function calls.
 
 ## Getting a feel for the data
 
-With this foundation, you are ready to start using the tools of a data scientist. We'll begin with the pandas library, which "is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language."[^fn3] It provides data structures and functions that allow us to quickly explore a data set.
+With this foundation, you are ready to start using the tools of a data scientist. We'll begin with the `pandas` library, which "is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language."[^fn3] It provides data structures and functions that allow us to quickly explore a data set.
 
 ```{tip}
 Many data scientists work in interactive Python notebooks (`ipynb` files) when doing ML, and we'll do the same in the rest of this chapter. They also commonly refer to the `pandas` library with the abbreviation `pd`.
@@ -228,7 +228,7 @@ lineno-start: 1
 import pandas as pd
 ```
 
-The most important data structure in the `pandas` library is the `DataFrame`. You can think of a `DataFrame` as resembling a table, like a worksheet in Excel notebook. The `pandas` library provides input/output functions, like `pandas.read_csv`, that allow you to pour data into and pull data out of a `DataFrame`. And once your data is in a `DataFrame`, you can apply many of the library's powerful functions, such as `pandas.DataFrame.describe` that creates a summary description of the data in each column. The following code block shows how we can use the `pandas` library to begin exploring the data set containing home sales in Ames, Iowa.
+The most important data structure in the `pandas` library is the `DataFrame`. You can think of a `DataFrame` as resembling a table, like a worksheet in a spreadsheet application. The `pandas` library provides input/output functions, like `pandas.read_csv`, that allow you to pour data into and pull data out of a `DataFrame`. And once your data is in a `DataFrame`, you can apply many of the library's powerful functions, such as `pandas.DataFrame.describe` that creates a summary description of the data in each column. The following code block shows how we can use the `pandas` library to begin exploring the data set containing home sales in Ames, Iowa.
 
 ```{admonition} Terminology
 :class: tip
@@ -254,7 +254,7 @@ df.describe()
 Set the variable `csv_file` to the location of where you placed the Ames-Iowa-Housing data set. Execute the referenced code blocks in `ames.ipynb` as you read through this chapter. Remember that the interactive Python interpreter will print the result of the last statement in a code block when you execute it in a `ipynb` file. You'll need to see the returned result for `df.describe()` to follow the explanation that comes next.
 ```
 
-The results of our call to `df.describe()` list eight numbers for a large number of our data set's columns. The `pandas` library decided that each of these columns is a *numeric* series, and the numbers under the series name tell you some statistical facts about each of these columns. Here's a short summary of the meaning of each row in the table returned by `describe`:
+The results of our call to `df.describe()` list eight numbers for many but not all of our data set's columns. The `pandas` library decided that each of these columns is a *numeric* series, and the numbers under the series name tell you some statistical facts about each of these columns. Here's a short summary of the meaning of each row in the table returned by `describe`:
 
 * `count` reports the number of rows (in the indicated column from the data set) with *non-missing values*. As we discussed in Chapter 8, there are many reasons why a data set may contain missing values. In our data set, for example, two of the home sales don't report any value for `'Bsmt Full Bath'`, which might have occurred because the person filling out the data did't think that they needed to fill out this column for a house without a basement.
 * `mean` is the arithmetic average of the non-missing values.
@@ -338,7 +338,7 @@ As we've learned, frequent checks of our script's state help us to find mistakes
 
 We chose to use a decision tree, which the scikit-learn library[^fn4] provides through the `DecisionTreeRegressor` class. Instantiating an instance of this class is the first step in creating a model that uses decision trees.
 
-Hidden in this creation step, however, is a bit of randomness, which many ML libraries use as a best practice. Since we want to compare the models we build against each other, we want to eliminate this randomness as a potential cause of any difference in the performance of our models. We can accomplish this by specifying the random seed that the model should use each time it creates a new instance for us. This is the purpose of the `random_state` assignment in the constructor call in the following code block. You can choose any number you'd like as long as you consistently use it in all your constructor calls.
+Hidden in this creation step, however, is a bit of randomness, which many ML libraries use as a best practice for creating robust models. Since we want to compare the models we build against each other, we want to eliminate this randomness as a potential cause of any difference in the performance of our models. We can accomplish this by specifying the random seed that the model should use each time it creates a new instance for us. This is the purpose of the `random_state` assignment in the constructor call in the following code block. You can choose any number you'd like as long as you consistently use it in all your constructor calls.
 
 ```{code-block} python
 ---
@@ -364,7 +364,7 @@ Ok, but we used all the data we had about home sales in Ames, Iowa to create the
 
 There are many ways to poorly split a data set, and to avoid these pitfalls, the train-test split routines in ML libraries like scikit-learn employ randomness. Again, we want to control the random seed used by these functions so that we can ensure that all the models we build are fed the same training and testing data sets.
 
-The code block below retrains our model using the `train_X` and `train_y` data sets produced by the `train_test_split` function in the scikit-learn library. It then illustrates how to use the `predict` method on our model object, into which we feed the `test_X` data set. The resulting `predictions` are what we want to compare against the actual sale prices stored in `test_y`. I've written a little loop that does this comparison for the first five predictions, converting a few data types along the way (i.e.., the `Series` in `test_y` into a Python list and each `float` in `predictions` into an `int`).
+The code block below retrains our model using the `train_X` and `train_y` data sets produced by the `train_test_split` function in the scikit-learn library. It then illustrates how to use the `predict` method on our model object, into which we feed the `test_X` data set. The resulting `predictions` are what we want to compare against the actual sale prices stored in `test_y`. I've written a little loop that does this comparison for the first five predictions, converting a few data types along the way (i.e., the `Series` in `test_y` into a Python list and each `float` in `predictions` into an `int`).
 
 ```{tip}
 
@@ -507,11 +507,11 @@ The type of bias that she explores in the exercise at the end of her tutorial is
 
 ## Classifying comments as toxic
 
-Cook's exercise uses part of a data set containing approximately 2 million public comments collected from a range of online news sites that used a civility plugin produced by [a now-defunct company called Civil Comments](https://medium.com/@aja_15265/saying-goodbye-to-civil-comments-41859d3a2b1d). When the company shutdown, it released this data set, which was picked up by Alphabet's Conversation AI team and turned into [a 2019 kaggle competition](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/overview). The goal of the competition was to build a ML model that could identify which comments in this data set were toxic and do so without discriminating against individuals because of their age, race, gender, religion, or other legally protected characteristics. This problem is hard because discrimination exists in our world, and it is reflected in many of the data sets we collect. We want a model that identifies toxic comments without also learning our society's patterns of historical discrimination against particular individuals.
+Cook's exercise uses part of a data set containing approximately 2 million public comments collected from a range of online news sites that used a civility plugin produced by [a now-defunct company called Civil Comments](https://medium.com/@aja_15265/saying-goodbye-to-civil-comments-41859d3a2b1d). When the company shut down, it released this data set, which was picked up by Alphabet's Conversation AI team and turned into [a 2019 kaggle competition](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/overview). The goal of the competition was to build a ML model that could identify which comments in this data set were toxic and do so without discriminating against individuals because of their age, race, gender, religion, or other legally protected characteristics. This problem is hard because discrimination exists in our world, and it is reflected in many of the data sets we collect. We want a model that identifies toxic comments without also learning our society's patterns of historical discrimination against particular individuals.
 
 Cook steps you through the building of a `LogisticRegression` model, which takes a comment as a string and classifies it as toxic or not. You can check out the ML code in [Cook's tutorial](https://www.kaggle.com/code/alexisbcook/exercise-identifying-bias-in-ai/notebook); my goal with you here is to focus on what makes identifying historical bias hard so that you aren't caught unaware when you build your own ML models.
 
-From her snapshot of the entire data set, Cook's code pulls two example comments that illustrate toxic and non-toxic comments. I repeat below these two labeled comments:
+From her snapshot of the entire data set, Cook's code pulls two example comments that illustrate toxic and not-toxic comments. I repeat below these two labeled comments:
 
 ```{code-block} none
 ---
@@ -534,7 +534,7 @@ Cook's tutorial then encourages you to classify these four comments using the mo
 3. "I have a christian friend"
 4. "I have a muslim friend"
 
-We know that none of these should be classified as toxic comments; yet the model classifies the first and third as non-toxic and the second and fourth as toxic.
+We know that none of these should be classified as toxic comments; yet the model classifies the first and third as not-toxic and the second and fourth as toxic.
 
 What's going on? Well, the world has historically discriminated against individuals because of their race and their religion. We know this, and if you look at the comments in the data set marked as toxic, they often involve discriminatory comments against Blacks and Muslims. The model classifies our second and fourth comments as toxic not because these words alone are toxic, but because they were often included in comments labeled as toxic. The model learned a discriminatory pattern and assumed it was important in classifying comments as toxic.
 
@@ -544,13 +544,13 @@ The result is a model that exacerbates the historical discrimination against a s
 
 The toxicity-prediction model notwithstanding, data science has the capacity to do good and help people. This chapter is meant to get you started in this exciting field and make you aware of its biggest challenges.
 
-To build a good model, experience and "taste" matter, as we saw in trying to choose which features to include in a model and where we'll place a model's sliders (e.g., maximum number of leaves in a decision tree). Because of this, the field remains more art than science, but everyday new libraries are released that make this work easier. Don't get frustrated if your first models don't perform well.
+To build a good model, experience and "taste" matter, as we saw in trying to choose which features to include and where we'll place a model's sliders. Because of this, the field remains more art than science. Take advantage of the libraries that aid in this work, and don't get frustrated if your first models don't perform well.
 
 In this chapter, we built fairly good predictors using relatively simple statistical models. The benefit of simple models is that their predictions are generally easy to explain. For example, one house sells for more than another because it contains more bedrooms (everything else being equal), or a comment is considered toxic when it contains words often used in toxic comments. In a quest for ever more accurate predictors, data scientists are regularly developing more complicated models whose predictive performance we cannot as easily explain. Like predictive accuracy, a model's explainability may be important in some application areas and not in others. For instance, I generally don't think about how autocorrect comes up with its suggestions while I type my text messages, but predictive models won't likely succeed in clinical medicine unless they are explainable. Do pay attention to what's important in your application area.
 
 Finally, a data scientist's work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you've gained to make the world a better place for all.
 
-\[Version 20241012\]
+\[Version 20241015\]
 
 [^fn1]: You can read De Cock's original paper in the [Journal of Statistics Education, Volume 19, Number 3 (2011)](https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from [Marco Palermo's Kaggle site](https://www.kaggle.com/datasets/marcopale/housing). Normally, as we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
 
@@ -560,8 +560,8 @@ Finally, a data scientist's work is not complete until they attach a story to th
 
 [^fn4]: The Python module you want to import to use the scikit-learn library is called \`sklearn\`.
 
-[^fn5]: You can try this by calling \`predict\` with \`train\_X.head()\` instead of \`test\_X\` in the next code block.
+[^fn5]: You can try this by changing the code in 13th code block. Call \`predict\` with \`train\_X\` instead of \`test\_X\`; and set \`actuals\` to be \`train\_y.to\_list()\`.
 
 [^fn6]: This dollar amount reflects our knowledge that the average selling price in the Ames-Iowa-Housing data set is approximately 180,000 dollars.
 
-[^fn7]: For the major urban areas in the United States, the Council for Community and Economic Research (C2ER) collects and distributes cost-of-living data. At the end of 2023, the median home price was 335,000 dollars in Ames and 923,000 dollars in Boston, as computed by [zerodown.com](https://zerodown.com).
+[^fn7]: Real estate apps like Zillow.com often allow you to compare home values in different regions of the United States. I used this feature on Zillow to compare the September 2024 "Zillow Home Value Index" for Ames (262,085 dollars) and Boston (748,710 dollars).
