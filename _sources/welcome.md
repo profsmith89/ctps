@@ -1,6 +1,4 @@
-# Introduction #
-
-## Welcome!
+# Welcome #
 
 This book tells a story about computing, computational thinking, and computational approaches to problem solving. Computational thinking, paired with today's digital devices and the skill of computer programming that you'll learn in this book, will empower you with a new approach to solving the little problems you encounter in everyday life. 
 
@@ -37,11 +35,11 @@ I chose to base this book on Python because it emphasizes *readability*. I belie
 
 Readability is important because code is dense, with lots of things typically happening in each statement. This detail, as we will discuss, is necessary for the computer to understand what it is that you want it to do, but lots of detail all the time isn't what we humans handle well. Just as we sometimes skim dense documents to get the gist of what's going on, we're going to want to develop this same skill in computer programming. Python's emphasis on readability will help get us started toward this important skill of skimming code to understand its gist.
 
-Python is also one of the fastest growing languages in terms of popularity. What this means for us is that the growing community of Python users is constantly producing Python code that we can use in our projects. In other words, we don't have to write our code using only the primitive commands shipped in the core language. We can more quickly begin tackling hard problems because others have written and shared Python code that we will use as building blocks. What do I exactly mean? Well, think about how hard it would be to build a wood-frame house if you had to not only construct the wood frame for the floors, walls, and roof, but you also had to chop down the trees and slice the logs into boards. The former work is hard and adding the latter makes the project something only a historical hobbyist would love. Working in a programming language with a growing and vibrant community matters, as we will discuss more in the chapters to come!
+Python is also one of the fastest growing languages in terms of popularity. What this means for us is that the growing community of Python users is constantly producing Python code that we can use in our projects. In other words, we don't have to write our code using only the primitive commands shipped in the core language. We can more quickly begin tackling hard problems because others have written and shared Python code that we will use as building blocks. What do I exactly mean? Well, think about how hard it would be to build a wood-frame house if you had to not only construct the wood frame for the floors, walls, and roof, but you also had to chop down the trees and slice the logs into boards. The former work is hard and adding the latter makes the project something only a historical hobbyist would love. Working in a programming language with a growing and vibrant community matters, as we will discuss more in the chapters to come.
 
 ## Beyond Python
 
-I want you to notice that the first five learning goals above don't mention Python, or any other particular programming language. This is because we need a programming language to help us to practice thinking in a computational manner, but once you've developed that skill, it's not that difficult to convert your Python scripts (i.e., your programs written in Python) into a different language.
+I want you to notice that the first five learning goals above don't mention Python, or any other programming language. This is because we need a programming language to help us to practice thinking in a computational manner, but once you've developed that skill, it's not that difficult to convert your Python scripts (i.e., your programs written in Python) into a different language.
 
 In fact, the new language might not even be another traditional programming language. In the last chapter, I will show you how to take what you've learned about directing a machine in Python and apply this knowledge to create effective prompts in English for directing a generative artificial intelligence (GAI) chatbot to do your bidding.
 
@@ -51,15 +49,15 @@ I have chosen to structure these lessons about computers and computation as a th
 
 But I like the image of a drama for an additional reason. As some of you might already know, the word "drama" comes from the Greek word *dran*, which means to do, to act. And act you will.
 
-I ask that you don't passively read each of the chapters that follow. If you're reading this book online, you can execute and edit the code snippets throughout. If you're reading a printed version of this book, you can use practically any browser to connect to copies of the code snippets that you can execute and edit. Doing so will deepen your understanding of the concepts we cover. It will allow you to answer the "I wonder" and "what if" questions that pop into your mind.
+I ask that you don't passively read each of the chapters that follow. As explained on the book's companion website, you can (and should) execute and edit every piece of code in this book. Doing so will deepen your understanding of the concepts we cover. It will allow you to answer the "I wonder" and "what if" questions that pop into your mind.
 
 I'm serious. Don't just read. Experiment. Try to break things. Try to make the code in this book do things that interest you.
 
 ## Programmers and playwrights
 
-As you work your way through the code examples in this book, I'd like you to think of yourself as a programmer and a playwright. Paul Graham of Y Combinator fame wrote in 2003 that [hackers and painters](http://www.paulgraham.com/hp.html), seemingly different professions, are quite similar in that both groups hone their skills by doing. While I have great respect for Paul, I think programmers and playwrights are a more apt twosome. Why? It has to do with the immediacy of the feedback they receive on what they write. 
+As you work your way through the code examples in this book, I'd like you to think of yourself as a programmer and a playwright. Paul Graham of Y Combinator fame wrote in 2003[^fn1] that hackers and painters, seemingly different professions, are quite similar in that both groups hone their skills by doing. While I have great respect for Paul, I think programmers and playwrights are a more apt twosome. Why? It has to do with the immediacy of the feedback they receive on what they write. 
 
-Playwrights, who test their early drafts with a theatrical troupe, receive immediate feedback on the success of what they write. Those playwrights are able to compare what they had in mind while writing to what results when the scripts are performed. Paying close attention to what works and what doesn't, they can build a masterpiece. 
+Playwrights, who test their early drafts with a theatrical troupe, receive immediate feedback on the success of what they write. Those playwrights can compare what they had in mind while writing to what results when the scripts are performed. Paying close attention to what works and what doesn't, they can build a masterpiece. 
 
 Likewise, the best computer scripts come not fully formed from a programmer's mind, but blossom over time as the programmer tries things and adjusts to feedback, from both the machine and their peers. Programming, like playwriting, is a craft that improves with feedback, practice, and community. 
 
@@ -81,7 +79,7 @@ This book won't waste your time on a parade of programming language features, a 
 
 Instead, we will spend our time together in each chapter developing solutions to widely encountered problems. For example, how does one grab data from a text file? How do two individuals on different digital devices to communicate and cooperate with each other? How can you manipulate a digital image to portray something that never occurred? Or even, can search, which is at the heart of so many tools, work quickly over a large collection of data?
 
-Every computational concept and programming language feature I cover is taught within the context of a problem to be solved. I'll encourage you to work through each problem, and periodically, I'll give you the chance to practice what you've learned through a programming challenge, which builds upon the problem or problems we recently solved. These projects will both deepen your understanding of the concepts covered and develop your skills as someone capable of using computation to solve real-world problems.
+Every computational concept and programming language feature I cover is taught within the context of a problem to be solved. I'll encourage you to work through each problem, and periodically, I'll give you the chance to practice what you've learned. This work will both deepen your understanding of the concepts covered and develop your skills as someone capable of using computation to solve real-world problems.
 
 ## Learning to problem solve in three acts
 
@@ -105,7 +103,7 @@ Structurally, the book segments the problems into three acts. The acts correspon
 
 Nowhere in this book will you find a single section on a programming structure like looping or an important computer-science concept like abstraction. Instead, the text will regularly return to previously introduced topics, and when it does, I will layer on new nuances and new connections. This layering will help you to grow from novice to skilled practitioner.
 
-This is a problem-solving-first approach to learn concepts in computer science and become proficient with the syntax of a programming language like Python. Starting simple and building toward complexity through a carefully-ordered range of problem contexts is a proven approach to learning and retaining information.
+This is a problem-solving-first approach to learn concepts in computer science and become proficient with the syntax of a programming language like Python. Starting simple and building toward complexity through a carefully ordered range of problem contexts is a proven approach to learning and retaining information.
 
 Furthermore, experts become experts because they see the similarities between problems, and this ability helps them get quickly started on a new problem. Experts almost never start from a blank page. They start with an approach that solved a similar problem and then adapt it for the differences they see in their new problem. We will do the same thing in coding by often starting from something we have previously written. This helps you avoid the daunting challenge of a blank page.
 
@@ -113,8 +111,8 @@ Furthermore, experts become experts because they see the similarities between pr
 
 The one exception to this never-start-from-a-blank-page approach is the first chapter, where I assume you have no prior background in coding or computational thinking. It introduces you to the general problem-solving process, gets you started in an environment where you'll practice problem solving with computation, and explains some basic statements in programming and the Python programming language. This is important foundational material that could have comprised a complete chapter, but I wrapped it in a problem-to-be-solved, just like all the other chapters. That's because a problem-solving approach to learning this material works as well for it as for the rest of the book's material.
 
-There is, however, a cost to organizing the introductory chapter with a problem-to-be-solved: it necessarily takes you on a longer journey (i.e., it is nearly twice the length of the average chapter). Don't let this discourage you. Once you've solved your first problem, the rest will fall quicker.
+There is, however, a cost to organizing the introductory chapter with a problem-to-be-solved: it necessarily takes you on a longer journey (i.e., it is nearly twice the length of the average chapter). Don't let this discourage you. Once you've solved your first problem, the rest will fall quickly.
 
 This is what awaits you in this book. It is an approach that has engaged students intrinsically motivated to learn programming and those who thought they could never do it. No matter which you are, I'm glad that you picked up this book. You are about to experience the beauty and power of computational thinking to solve real-world problems, especially those that excite you. And as you learn to write your own scripts, I hope you will, like the best playwrights do, develop your own voice, your own unique style. Then what you do with this new and wondrous skill is up to you.
 
-\[Version 20240802\]
+[^fn1]: https://www.paulgraham.com/hp.html

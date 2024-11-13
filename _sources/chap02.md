@@ -24,29 +24,29 @@ To solve this chapter's problem, our script will not only maintain state directl
 ```{admonition} Learning Outcomes
 In this chapter, you will experience all eight steps in our problem-solving process, and by the end of it, you will be able to:
 *   Describe the importance of recognizing similarities and differences between problems when considering which past scripts might help you start writing a new script [design];
-*   Use finite-state-machine (FSM) diagrams as a widely-useful method for identifying and ordering the tasks your script must perform while processing its input [design and CS concepts];
+*   Use finite-state-machine (FSM) diagrams as a widely useful method for identifying and ordering the tasks your script must perform while processing its input [design and CS concepts];
 *   Convert FSM diagrams into pseudocode [design];
 *   Think about strings as a sequence (i.e., an ordered collection of characters), understand the power of this sequence abstraction, and use several common operations on sequences [CS concepts and programming skills];
 *   Perform string concatenation and understand operator overloading [CS concepts and programming skills];
 *   Write for-loops that iterate over the items in a sequence [programming skills];
 *   Become comfortable with all variations of if-statements [programming skills];
 *   Develop test inputs, and recognize and employ a common design pattern for error handling [programming skills];
-*   Explain off-by-one errors and recognize where this type of error often occur [CS concepts and programming skills];
+*   Explain off-by-one errors and recognize where this type of error often occurs [CS concepts and programming skills];
 *   Structure your script development so that you interleave testing and coding, to surface hidden assumptions and never go too long without an understanding of what works and doesn't [design and programming skills];
 *   Interpret the two ways of performing function composition in Python [programming skills].
 ```
 
 ## A new problem
 
-While Chapter 1 and some of its active-learning exercises (ALEs) had us decorate a story around its edges, our new problem-to-be-solved asks that we make the textual output of our script look quite different than its input. In particular, we'll turn `CatInTheHat.txt` into a theatrical script that a couple of actors --- playing the narrator, the Cat, the Fish, Things One and Two, and the Mother --- could perform.[^fn1]
+While Chapter 1 and some of its active-learning exercises (ALEs) had us decorate a story around its edges, our new problem-to-be-solved asks that we make the textual output of our script look quite different than its input. In particular, we'll turn `CatInTheHat.txt` into a theatrical script that acouple of actors---playing the narrator, the Cat, the Fish, Things One and Two, and the Mother--- could perform.[^fn1]
 
 What would be the problem specification? It could be something as seemingly simple as: *find the dialogue in the story and print it after the name of the character who says it*.
 
 ## Splitting the problem into small pieces
 
-One of the keys to successfully writing a computational script is to break a large problem into small pieces (i.e., problem decomposition) and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.
+One of the keys to successfully writing a computational script is to break a large problem into small pieces (i.e., problem decomposition) and then write code to solve each of those pieces. Later, you can pull the pieces together to create the script that meets the entire specification.
 
-What are the primary pieces in our problem specification? Well, we have to:
+What are the primary pieces in our problem specification? Well, we must:
 
 1. find a story's dialogue;
 2. identify which character says which lines; and
@@ -56,10 +56,10 @@ Of these three things, let's focus on finding the dialogue. Since each line of d
 
 With these decisions, {numref}`Figure %s <c02_fig1_ref>` shows how our script should print the first two pieces of dialogue from `CatInTheHat.txt`.
 
-```{figure} images/c02_fig1.png
+```{figure} images/Smith_fig_02-01.png
 :name: c02_fig1_ref
 
-The start of our script's output given `CatInTheHat.txt` as the its input.
+The start of our script's output given `CatInTheHat.txt` as its input.
 ```
 
 ## Reuse
@@ -123,7 +123,7 @@ What we just described is formally called a *finite state machine (FSM)*. Each *
 
 {numref}`Figure %s <c02_fig2_ref>` is a diagram of a FSM that solves our problem, where the states are represented as labeled circles (also called *nodes*) and *transitions between states* as directed arrows. Each arrow is labeled with the event that causes the transition. The initial state is identified by the special transition labeled `Start`.
 
-```{figure} images/c02_fig2.png
+```{figure} images/Smith_fig_02-02.png
 :name: c02_fig2_ref
 
 A complete FSM diagram for finding dialogue.
@@ -155,7 +155,7 @@ We have only dipped our toes into the deep topic of FSMs. You will find that the
 
 When implementing the FSM in {numref}`Figure %s <c02_fig2_ref>`, the first thing to note is that it contains only three states, where the third state (`DONE`) represents the termination of our script. This means that our script has only to keep track of which of the first two states (`S0` and `S1`) it is in at any point in time, which we can do with a single *Boolean* variable. 
 
-Let's call this variable `looking_for_open_quote`, and define its behavior so that it is `True` when the script is in state `S0` and `False` when the script is in `S1`. Then with the frame from `script1.py`, we can write Python code to initialize `looking_for_open_quote` (corresponding to the FSM's start state) and use that variable to separate the work in state `S0` from that in `S1`:[^fn6]
+Let's call this variable `looking_for_open_quote` and define its behavior so that it is `True` when the script is in state `S0` and `False` when the script is in `S1`. Then with the frame from `script1.py`, we can write Python code to initialize `looking_for_open_quote` (corresponding to the FSM's start state) and use that variable to separate the work in state `S0` from that in `S1`:[^fn6]
 
 ```{code-block} python
 ---
@@ -188,9 +188,9 @@ Notice that the script pulls the processing that every state does (i.e., reading
 
 ## This or that
 
-You'll also notice, in `script2.py`, a new syntactic structure for the Python if-statement. Compare it with the if-statement immediately above it, which is used to check for our infinite while-loop's exit condition. In checking for EOF, the if-statement protects the break-statement: we either hit this condition or continued on with the loop's work. In checking for something exceptional like this, the if-block and its controlling condition is all the structure we need.
+You'll also notice, in `script2.py`, a new syntactic structure for the Python if-statement. Compare it with the if-statement immediately above it, which is used to check for our infinite while-loop's exit condition. In checking for EOF, the if-statement protects the break-statement: we either hit this condition or continue with the loop's work. In checking for something exceptional like this, the if-block and its controlling condition is all the structure we need.
 
-In testing the value of `looking_for_open_quote`, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before continuing on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple `else`.
+In testing the value of `looking_for_open_quote`, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before moving on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple `else`.
 
 ```{tip}
 Why is an if-else-block better than two if-statements in this situation? Because the condition we're checking is either true or false. When it's not one, it must be the other. If you write two if-statements, you'll have to correctly write a condition and its complement. The if-else construct removes this unnecessary work (and potential error in logic or typing waiting to happen).
@@ -233,7 +233,7 @@ To this point, I've been relying on your intuition for what constitutes a string
 
 Short answer: it does. A string in Python is a *sequence* of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we'll manipulate in our scripts. The abstraction you should have in your mind for a sequence is *an ordered collection of items*. 
 
-It doesn't matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the `list` data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python `list` containing a stuffed animal, a picture of my kids, this course's textbook, an old compact disk, and then some other books.
+It doesn't matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the `list` data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python list containing a stuffed animal, a picture of my kids, this course's textbook, an old compact disk, and then some other books.
 
 ## Membership test
 
@@ -277,18 +277,15 @@ lineno-start: 15
 
 ## Indexing and slicing
 
-I left the comment "do some work" because transitioning on seeing a double quote is not all we need to do. To print each line of dialogue, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this work easy with a couple of other common operations on sequences. To illustrate them, I'll use line 8 of the file `CatInTheHat.txt`, which reads '`And I said, "How I wish`'.
+I left the comment "do some work" because transitioning on seeing a double quote is not all we need to do. To print each line of dialogue, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this work easy with indexing and slicing operations on sequences.
 
-```{code-block} none
-### NOT runnable -- turn into a figure!
-  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
-  | A | n | d |   | I |   | s | a | i | d | , |   | " | H | ... | s | h | \n |
-  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
-  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14    21  22  23   24
--24 -23 -22 -21 -20 -19 -18 -17 -16 -14 -13 -12 -11 -10  -9    -3  -2  -1
+```{figure} images/Smith_fig_02-03.png
+:name: c02_fig3_ref
+
+How Python numbers each character in a string, or more generally in a sequence.
 ```
 
-To begin using these operations, you need to understand how Python identifies a sequence item with an index number. Most important in this, Python---like many program languages---starts numbering the items *at 0*. For instance, `the_line[0]` returns '`A`', the first character in our example string. Asking for `the_line[1]` returns the second character. This use of square brackets is called *indexing*.
+To use these operations, you need to understand how Python numbers a sequence's items. {numref}`Figure %s <c02_fig3_ref>` illustrates this numbering using a string corresponding to line 8 of the file `CatInTheHat.txt`. Notice that Python---like many program languages---starts numbering the items *at 0*. If the string in {numref}`Figure %s <c02_fig3_ref>` was named `the_line`, then writing `the_line[0]` would return the string `'A'`, the first character in our example string. Asking for `the_line[1]` returns the second character. This use of square brackets is called *indexing*.
 
 ```{code-block} python
 ---
@@ -300,7 +297,7 @@ print(the_line[1])
 ```
 
 ```{admonition} You Try It
-Go ahead, and use the interactive Python interpreter to experiment with statements in this section's code blocks. The more you play the better you'll understand how indexing works.
+Go ahead and use the interactive Python interpreter to experiment with statements in this section's code blocks. The more you play the better you'll understand how indexing works.
 ```
 
 As I mentioned earlier, you can ask for the length of a sequence object. You do it with the Python built-in function `len`. For example, `len(the_line)` returns `24`. Notice that it counts letters, spaces, punctuation, and the special newline character at the end of this string. These are all items in the sequence named `the_line`.
@@ -350,7 +347,7 @@ But how do we know that the double quote sits at index 12? All that the `in` ope
 
 Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I'm going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem without using this Python aid. This aside introduces to you the other major looping construct in Python (and many other languages): the *for-loop*. More importantly, it will help you to understand what takes place behind the scenes in the Python aid that we'll eventually use.
 
-The following code block fills in more of the work we need done in state `S0`. In particular, it uses a for-loop to find the location of the first double-quote character in `the_line` and then begins capturing the dialogue.[^fn10]
+The following code block fills in more of the work we need done in state `S0`. It uses a for-loop to find the location of the first double-quote character in `the_line` and then begins capturing the dialogue.[^fn10]
 
 ```{code-block} python
 ---
@@ -371,7 +368,7 @@ lineno-start: 15
                 looking_for_open_quote = False
 ```
 
-The `for` statement on line 20 iterates over the items in a sequence. The `in` keyword here plays a similar membership role as we saw earlier, but this time, we are asking `i` to name each item in the specified sequence in order, and for each of those values, execute an iteration of the indented block of statements (i.e., the body of the for-loop).
+The for-statement on line 20 iterates over the items in a sequence. The `in` keyword here plays a similar membership role as we saw earlier, but this time, we are asking `i` to name each item in the specified sequence in order, and for each of those values, execute an iteration of the indented block of statements (i.e., the body of the for-loop).
 
 To see this for-loop in action, we need to know what the sequence is in this particular case. We already know what value is produced by `len(the_line)`, and we pass the integer value computed by it to another Python built-in function called `range`. This built-in is quite interesting, but for now we simply need to think of it as computing a sequence object containing the integers from `0` to one less than the integer value passed to `range`.
 
@@ -427,7 +424,7 @@ One of the things you'll learn as your programming skill grows is that you shoul
 
 Unfortunately, just because a design pattern is commonly used doesn't mean it isn't without headaches. This pattern requires us to add the statement `if i != -1:` to our script, which we are supposed to read as "if `find` returned a valid index into `the_line` then we found an opening double-quote character at index `i`." Yeah, it doesn't look much like that to me either (and hence our added comment).
 
-While not an issue with the structure of the logic, many programmers also dislike this design pattern because it can break up a script's flow with lots of checks for uncommon error conditions. When we are constantly distracted by infrequently-true error checks, it can make it very hard to read the script to understand its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.
+While not an issue with the structure of the logic, many programmers also dislike this design pattern because it can break up a script's flow with lots of checks for uncommon error conditions. When we are constantly distracted by infrequently true error checks, it can make it very hard to read the script to understand its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.
 
 ## Never go too long without testing
 
@@ -633,7 +630,7 @@ short_dialog = list_of_dialog_and_other_stuff[0]
 short_dialog
 ```
 
-Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which is necessary for the computation but not really important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.
+Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which is necessary for the computation but not important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.
 
 ## Abstraction as information hiding
 
@@ -645,15 +642,12 @@ Before we go, I want to correct something you may have come to believe. While I 
 
 ```{code-block} none
 ---
-emphasize-lines: 2, 3
+emphasize-lines: 1, 2
 ---
-### Run the highlighted statements in the interactive interpreter
 >>> the_line = 'And said, "At least I\'ll try."' 
 >>> type(the_line[0])
 <class 'str'>
 ```
-
-\[Version 20240830\]
 
 [^fn1]: There's one other actor in the story---the narrator's sister, Sally---but she never speaks.
 
@@ -665,15 +659,15 @@ emphasize-lines: 2, 3
 
 [^fn5]: If you view the FSM's input (a story in our example) as a string built from an alphabet of characters, well-formed means that the input causes the FSM to end in one of its final states. Computer scientists say that the set of all input strings that cause a FSM to end in a final state are the strings in the language described by that FSM. A FSM is therefore a *recognizer* of well-formed (or *valid*) strings in a particular language. We'll return to this topic in Chapter 11.
 
-[^fn6]: As it says in the \`README.md\` text file in this chapter's code distribution, \`script2.py\` is incomplete and won't run without an error. We're building toward a runnable script. Not every script listed in this book is one that runs.
+[^fn6]: As it says in the \`README.md\` text file in this chapter's GitHub repository, \`script2.py\` is incomplete and won't run without an error. We're building toward a runnable script. Not every script listed in this book is one that runs.
 
 [^fn7]: As our scripts grow, I won't always include all of the current one in the displayed code block. A clue to this happening is that a code block's line numbering won't start at 1. When this happens, you can find the full context in the filename mentioned in the opening a triple-hash comment.
 
-[^fn8]: You'll also see the console called a terminal window. What we see today as a window on our laptop or panel in our IDE used to be a big piece of computer hardware called the [computer terminal](https://en.wikipedia.org/wiki/Computer_terminal).
+[^fn8]: You'll also see the console called a terminal window. What we see today as a window on our laptop or panel in our IDE used to be a big piece of computer hardware called the computer terminal. See https://en.wikipedia.org/wiki/Computer\_terminal.
 
 [^fn9]: The variable that records which state the FSM is working in.
 
-[^fn10]: Here is [a fun article](https://www.wired.com/story/why-you-hate-media-technically-speaking/) on the difference between dialogue and dialog. I use the first when I'm talking about what we want to capture and the second as the variable by which we capture the first.
+[^fn10]: Here is a fun article (https://www.wired.com/story/why-you-hate-media-technically-speaking/) on the difference between *dialogue* and *dialog*. I use the first when I'm talking about what we want to capture and the second as the variable by which we capture the first.
 
 [^fn11]: You might know, for example, that the error condition is impossible because of some processing you did immediately prior.
 

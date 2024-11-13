@@ -113,7 +113,6 @@ def contains_dquote(s):
         return "Yes"
     else:
         return "No"
-
 ```
 
 The function `contains_dquote` handles an important question we asked in our script from Chapter 2 that pulled dialogue from a story. It too is a decision problem. 
@@ -122,7 +121,7 @@ The function `contains_dquote` handles an important question we asked in our scr
 
 I'm emphasizing decision problems because they'll play an important role in proving that we can't write `found_bug`. Whoa, you might say. And I'll say, "Yes." This is the first problem that will defeat us, and it's not because we're not smart enough. It's because Alan Turing proved in 1936 that no one could write an algorithm to solve it. No algorithm means no solution. Finding all bugs in all scripts is an example of an *uncomputable* problem. I'm sorry that we can't deliver our super tool.
 
-You might also hear theoretical computer scientists call this category of problems *undecidable*. There's two reasons for this. First, and most simply, they like to use the terms compute, decide, and solve interchangeably. Second, and a bit more technical, it's because they often prove that a problem *P* is uncomputable by a technique called *reduction*, which is a fancy term for showing the solution to *P* depends upon the solution to some other problem (call it *D*). If a decision problem *D* has been proven to be undecidable and you can show that a solution to *D* is required in a solution to *P*, then *P* is undecidable too.
+You might also hear theoretical computer scientists call this category of problems *undecidable*. There are two reasons for this. First, and most simply, they like to use the terms compute, decide, and solve interchangeably. Second, and a bit more technical, it's because they often prove that a problem *P* is uncomputable by a technique called *reduction*, which is a fancy term for showing the solution to *P* depends upon the solution to some other problem (call it *D*). If a decision problem *D* has been proven to be undecidable and you can show that a solution to *D* is required in a solution to *P*, then *P* is undecidable too.
 
 While I'm mentioning types of problems, now's a good time to say that we've been writing what are called solutions to *tractable* problems, which means we know of algorithms that can solve these problems *efficiently* (i.e., producing an answer takes a reasonable amount of time and other computational resources). Web search, which we discussed in Act II, is an example of a non-trivial, but tractable problem.
 
@@ -238,7 +237,7 @@ The small code block above defines the string `analysis_name` with the name of t
 
 Combining this new knowledge with our knowledge of how to get the source code corresponding to a function object, we can write a helper routine for grabbing the source code for a function whose name we know only at runtime. Focus your attention on lines 11-13 and 17 in `grab_f`; I'll explain why I wrapped lines 11-13 in a try-except-statement in a moment.
 
- ```{code-block} python
+```{code-block} python
 ---
 lineno-start: 1
 ---
@@ -294,9 +293,8 @@ You can either call the function `analyze` from a script or run `analyze.py` in 
 
 ```{code-block} none
 ---
-emphasize-lines: 2
+emphasize-lines: 1
 ---
-### Run the highlighted command in the shell
 chap14$ python3 analyze.py string_bug hello
 no
 ```
@@ -317,7 +315,7 @@ Our tool `analyze.py` worked, but it wasn't because `inspect.getsource` did its 
 
 It's because `importlib.import_module` won't complete when the imported function contains a syntax error. We're basically invoking the Python interpreter to read the definition of this function, and we know that the interpreter doesn't like syntax errors. As soon as it encounters a syntax error, the interpreter throws a `SyntaxError` exception.
 
-This is a problem for us because we want our analysis routine to find the syntax error, not the Python interpreter. Now you see the reason for the try-except-statement in `grab_f`. It catches the `SyntaxError` exception and calls `grab_f_with_error`, which you can review in `our_tools.py`. This helper function grabs the source code of `fun_name` by opening its file the old fashioned way (i.e., the way we learned in Chapter 1) and scanning through the file lines until it discovers the definition of the function.[^fn5]
+This is a problem for us because we want our analysis routine to find the syntax error, not the Python interpreter. Now you see the reason for the try-except-statement in `grab_f`. It catches the `SyntaxError` exception and calls `grab_f_with_error`, which you can review in `our_tools.py`. This helper function grabs the source code of `fun_name` by opening its file the old-fashioned way (i.e., the way we learned in Chapter 1) and scanning through the file lines until it discovers the definition of the function.[^fn5]
 
 ## Analyzing other functions
 
@@ -325,7 +323,7 @@ You now have a tool (`analyze.py`) with which you can run many different analysi
 
 ```{admonition} You Try It
 *   Check for mismatched double quotes in `read_story` by running `python3 analyze.py string_bug read_story`. Do you agree with the response?
-*   Use `read_story` as your analysis routine by running `python3 analyze.py read_story hello`. Then replace `hello` with `hellu` and run the analysis again. Finally, replace `hellu` with `string_bug`, which flips the two parameters in the previous bullet. Do the responses `Yes`, `Yes`, and `No` make sense? This demonstrates that we can use any decision program that takes one or two input parameters as our analysis function. We just have to know what question an analysis function asks and answers.
+*   Use `read_story` as your analysis routine by running `python3 analyze.py read_story hello`. Then replace `hello` with `hellu` and run the analysis again. Finally, replace `hellu` with `string_bug`, which flips the two parameters in the previous bullet. Do the responses `Yes`, `Yes`, and `No` make sense? This demonstrates that we can use any decision program that takes one or two input parameters as our analysis function. We just must know what question an analysis function asks and answers.
 *   Run `python3 analyze.py read_story read_story`. Our tool even permits us to have an analysis function analyze itself. We'll take advantage of this capability in a bit.
 *   Finally, run `python3 analyze.py string_bug string_bug` and consider its response. 
 ```
@@ -354,7 +352,7 @@ Try using it to analyze the function `hello`:[^fn6]
 
 `python3 analyze.py yes hello world`
 
-Feel free to replace `hello` with any other of our functions that take a single string input, and try running it. It also doesn't matter what you use in place of `world`, since `yes` ignores both input parameters.
+Feel free to replace `hello` with any other of our functions that take a single string input and try running it. It also doesn't matter what you use in place of `world`, since `yes` ignores both input parameters.
 
 These experiments are not all that interesting, and so let's modify `yes` to do something with `f` and `s`, which we'll call `yep`.
 
@@ -416,7 +414,9 @@ Because `yex` contains an infinite loop that's not in its specification, we'll s
 ```
 
 ```{tip}
-A program with an infinite loop doesn't have to be the result of a design or coding error. This behavior might be in the program's specification. If you're on a Unix-based operating system, check out the program called `yes`, whose man page says that it will "be repetitively affirmative." Try running it without a command line parameter and then with your favorite single word. Type Ctrl+C to stop its execution. This program is [surprisingly useful](https://en.wikipedia.org/wiki/Yes_%28Unix%29).
+
+A program with an infinite loop doesn't have to be the result of a design or coding error. This behavior might be in the program's specification. If you're on a Unix-based operating system, check out the program called `yes`, whose man page says that it will "be repetitively affirmative." Try running it without a command line parameter and then with your favorite single word. Type Ctrl+C to stop its execution. This program is surprisingly useful.[^fn7]
+
 ```
 
 ## A non-trivial decision problem
@@ -425,9 +425,9 @@ Having seen examples of decision functions and discussed some program analyses, 
 
 * `f`, a string containing a function's source code;
 * `s`, a string that is a valid input to `f`;
-* `s2`, an optional string for when `f` takes two string inputs.[^fn7]
+* `s2`, an optional string for when `f` takes two string inputs.[^fn8]
 
-While this interface matches the one we defined for `found_bug`, this new function solves a different decision problem. It exhibits the following behavior:[^fn8]
+While this interface matches the one we defined for `found_bug`, this new function solves a different decision problem. It exhibits the following behavior:[^fn9]
 
 * Return `Yes` when `f(s)` returns `Yes`;
 * Return `No` otherwise.
@@ -437,7 +437,7 @@ Clearly this new function should return `No` when `f(s)` returns `No`, but `f` d
 1. `f` contains one or more syntax errors (i.e., it is not a valid Python function);
 2. `f(s)` is undefined (e.g., `f` falls into an infinite loop, throws an exception, prints anything, or returns something other than `Yes` or `No`). 
 
-Let's call this new function `yes_on_s`.[^fn9] Its specified behavior seems straightforward, but let's stress test our understanding through a few examples. I'll present them using the command line syntax we used with our `analyze` tool, but remember that you cannot run these command lines as we haven't written `yes_on_s`. Also, to avoid having to write out the source code for a function when I want it as an input string (i.e., in the `s` position), I'll write the function name with the suffix `_src`. For instance, in Example 3 below, I'm passing the source code for `string_bug` as the input to `read_story`.
+Let's call this new function `yes_on_s`.[^fn10] Its specified behavior seems straightforward, but let's stress test our understanding through a few examples. I'll present them using the command line syntax we used with our `analyze` tool, but remember that you cannot run these command lines as we haven't written `yes_on_s`. Also, to avoid having to write out the source code for a function when I want it as an input string (i.e., in the `s` position), I'll write the function name with the suffix `_src`. For instance, in Example 3 below, I'm passing the source code for `string_bug` as the input to `read_story`.
 
 ```{admonition} You Try It
 Work through each of the following examples. Don't take my word for what will be printed each time. Make sure you can describe what takes place in your own words. 
@@ -483,7 +483,7 @@ This should print `No`. Because `yes_on_s` is analyzing `yex` on the inputs and 
 
 In addition to understanding `yes_on_s` by reasoning about its behavior on different inputs, we can also use `yes_on_s` to build other functions, even without an implementation. We'll then reason about the behavior of these new functions given the specification of `yes_on_s`.
 
-Let's begin with a function called `yes_on_self` that takes a single parameter `f` and returns `Yes` when `f(f_src)` returns `Yes` and No otherwise. This function's behavior might be easier to understand when viewed as Python statements:
+Let's begin with a function called `yes_on_self` that takes a single parameter `f` and returns `Yes` when `f(f_src)` returns `Yes` and `No` otherwise. This function's behavior might be easier to understand when viewed as Python statements:
 
 ```{code-block} python
 ---
@@ -505,7 +505,7 @@ This should print `Yes`, since it is equivalent to the command line in Example 4
 
 ```{admonition} You Try It
 
-Replace `contains_dquote` in Example 8 with `read_story` or `string_bug`. What would these commands return?[^fn10] 
+Replace `contains_dquote` in Example 8 with `read_story` or `string_bug`. What would these commands return?[^fn11] 
 ```
 
 When you're comfortable reasoning about the behavior of `yes_on_self`, think about what Example 9 would print.
@@ -532,7 +532,7 @@ Our reasoning finds that both `Yes` and `No` are valid outcomes, but the command
 
 ## Insight from indecision
 
-As we saw with the Unix program `yes` (which contains an infinite loop) and when talking about intractable problems, we can sometimes turn a program with an undesirable behavior into a useful tool. Let's do that with the core of `yes_on_self`. In particular, we'll define a new function called `trouble` that makes the same call to `yes_on_s` as `yes_on_self` did, but flips the response before returning it. Again, this behavior might be easier to understand when viewed as Python statements:
+As we saw with the Unix program `yes` (which contains an infinite loop) and when talking about intractable problems, we can sometimes turn a program with an undesirable behavior into a useful tool. Let's do that with the core of `yes_on_self`. Let's define a new function called `trouble` that makes the same call to `yes_on_s` as `yes_on_self` did but flips the response before returning it. Again, this behavior might be easier to understand when viewed as Python statements:
 
 ```{code-block} python
 ---
@@ -592,8 +592,6 @@ We used a number of tools, without naming most of them, commonly employed by tho
 
 While it is true that we can't expect a computational tool to find all our bugs, this doesn't mean we can't find lots of specific kinds of bugs in many different kinds of programs. On to the next two chapters to learn how you can more quickly and easily find many important bugs!
 
-\[Version 20241004\]
-
 [^fn1]: When computer scientists talk about static analyses, they mean analyses that ask questions about a program or how a program will execute without running it. Runtime debugging involves asking questions about a program's state while it executes. All the functions in this chapter perform static analysis.
 
 [^fn2]: The programs we've written and those we'll discuss in this chapter have a single program point where execution begins (e.g., the first line in a Python script or the function \`main\` in other programming languages), or they can be easily converted into such a program.
@@ -606,10 +604,12 @@ While it is true that we can't expect a computational tool to find all our bugs,
 
 [^fn6]: Note that \`yes\` refers to the function \`yes\`, while \`Yes\` is the string output of our decision programs (and decision functions).
 
-[^fn7]: This optional third argument allows us to work with the full range of decision functions we've seen in this chapter.
+[^fn7]: https://en.wikipedia.org/wiki/Yes\_%28Unix%29
 
-[^fn8]: For functions \`f\` that take two string arguments, mentally replace \`f(s)\` with \`f(s,s)\`. All the specification asks is that this new function returns \`Yes\` when \`f\` returns \`Yes\` on the input string or strings.
+[^fn8]: This optional third argument allows us to work with the full range of decision functions we've seen in this chapter.
 
-[^fn9]: With the function names and the flow of the argument that follows, I borrow heavily from Chapter 3 of *What Can Be Computed: A Practical Guide to the Theory of Computation* by John MacCormick \[Princeton University Press, 2018\]. I am grateful for what John's textbook taught me about making this material accessible to everyone.
+[^fn9]: For functions \`f\` that take two string arguments, mentally replace \`f(s)\` with \`f(s,s)\`. All the specification asks is that this new function returns \`Yes\` when \`f\` returns \`Yes\` on the input string or strings.
 
-[^fn10]: It would print Yes with the first change and No with the second.
+[^fn10]: With the function names and the flow of the argument that follows, I borrow heavily from Chapter 3 of John MacCormick, *What Can Be Computed: A Practical Guide to the Theory of Computation* (Princeton, NJ: Princeton University Press, 2018). I am grateful for what John's textbook taught me about making this material accessible to everyone.
+
+[^fn11]: It would print Yes with the first change and No with the second.

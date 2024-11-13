@@ -35,19 +35,19 @@ def print_numbered_lines(filename):
 # For example: print_numbered_lines("example.txt")
 ```
 
-If you're using this book in a course that has adopted my programming problem sets, you'll recognize this prompt as Part 1 of your first programming assignment. While the code above is almost certainly not what you wrote then---it uses programming constructs and Python functions that we didn't cover until later chapters---and not what you might write now---the try-exception statement provides less information than the Python interpreter's default error message---you'll see that this function works.
+If you're using this book in a course that has adopted my programming problem sets, you'll recognize this prompt as Part 1 of your first programming assignment. While the code above is almost certainly not what you wrote then---it uses programming constructs and Python functions that we didn't cover until later chapters---and not what you might write now---the try-except statement provides less information than the Python interpreter's default error message---you'll see that this function works.
 
 Are your new skills worthless? No!
 
 As this book's author, my emphatic no might not surprise you, but let me explain. At the start of Act I, you probably found this prompt to be a challenging task, but here at the end of Act III, you know that it isn't. I ask my students to tackle this challenge because it helps them learn:
 
 1. the basics of worklist processing, which is a widely applicable technique used in computational thinking and problem solving more generally;
-2. to read and write several widely-used statements in Python syntax; and
+2. to read and write several widely used statements in Python syntax; and
 3. to recognize and fix flaws in a Python script.
 
 You've learned these lessons, and you now can write this code as easily as you do basic math. And despite *knowing* how to do basic math, we don't always *choose* to do it. Sometimes we rely on a calculator or a spreadsheet. While GAI tools don't operate, as we'll soon discuss, like calculators or spreadsheet programs, they're useful when *getting to an answer quickly is more important than doing the work ourselves*. The same rule applies to GAI tools.
 
-Act III has been all about tools, like GAI, that enable us to more quickly solve problems. In particular, it has covered two types of tools. Ones that help us to:
+Act III has been all about tools, like GAI, that enable us to more quickly solve problems. It has covered two types of tools. Ones that help us to:
 
 * *understand why* a script failed (e.g., a debugger); and 
 * *do less* in Steps 5-7 of Chapter 1's problem-solving process (e.g., ML libraries).
@@ -77,10 +77,10 @@ The first is nicely illustrated by a 2023 study from Harvard Business School res
 
 The study's authors devised a set of tasks for these consultants to solve that were both within and beyond the capabilities of the GAI tool. The limit of the GAI's abilities is what the researchers called its *frontier*. Like any person's knowledge and skills, this frontier is jagged, meaning that given a large number of tasks with the same perceived difficulty the GAI tool will complete some of these tasks better than others. Or stated another way, for a task within the frontier, the GAI tool's responses will be largely correct and helpful. But for a task outside it, the GAI tool's responses will be largely incorrect, although the flaws in its responses may not be immediately obvious.
 
-```{figure} images/c18_fig1.png
+```{figure} images/Smith_fig_18-01.png
 :name: c18_fig1_ref
 
-An illustration of the jagged frontier of any GAI tool's capabilities, from Dell'Acqua et al. [2023].
+An illustration of the jagged frontier of any GAI tool's capabilities. Some tasks, like A, are outside the GAI's knowledge base and some, like B, are inside it.
 ```
 
 This study's findings tell an important story about how we should use GAI tools in our own work. On tasks *within* the frontier (i.e., where the GAI tool worked well), the authors found:
@@ -101,23 +101,23 @@ Clearly, understanding a tool's frontier matters.
 As a user of GAI tools, you need to know on what tasks a tool works well and not be lulled into blindly accepting what it produces. The companies producing GAI tools, for competitive reasons, won't often tell you where this frontier is. Furthermore, as this third act has emphasized, it is not sufficient to learn how to use a tool. You must also understand its limitations.
 ```
 
-While the capabilities of GAI tools will continue to improve, there will always be a frontier. With a general understanding of how GAI tools work and a little bit of critical thinking, you can discover a tool's frontier. In the rest of this chapter, I'll demonstrate this for the task of problem solving with computation using OpenAI's GPT-4. By focusing your interactions with a GAI tool where you need help and it is capable, you'll be able to supercharge your newly-acquired problem-solving skills.
+While the capabilities of GAI tools will continue to improve, there will always be a frontier. With a general understanding of how GAI tools work and a little bit of critical thinking, you can discover a tool's frontier. In the rest of this chapter, I'll demonstrate this for the task of problem solving with computation using OpenAI's GPT-4. By focusing your interactions with a GAI tool where you need help and it is capable, you'll be able to supercharge your newly acquired problem-solving skills.
 
 ## My use of GAI
 
-I just made a claim that isn't too different than you see from any company building or employing GAI: This technology is powerful, and it is going to change the way many of us work. But it is still early days, and only time will tell how things will change. We can, however, accelerate this discovery process by explaining to each other how we have used GAI in our own work.
+I just made a claim that isn't too different than you see from any company building or employing GAI: This technology is powerful, and it is going to change the way we work. But it is still early days, and only time will tell how things will change. We can, however, accelerate this discovery process by explaining to each other how we have used GAI in our own work.
 
 For me, this begins with a disclosure that I'm using a GAI tool:
 
 ```{admonition} How I Used GAI
-I acknowledge the use of OpenAI's ChatGPT (GPT-4) in the development of this chapter's content. The chapter's ideas, main points, and organization are entirely mine, and except where indicated, the text and code examples are mine.
+I acknowledge the use of OpenAI's ChatGPT (GPT-4) in the development of this chapter's content. The chapter's organization and main points are entirely mine, and except where indicated, the text and code examples are mine.
 ```
 
-For example, I asked GPT-4 to briefly describe GAI for students in a computational thinking class, and the last sentence in its response, which I've bolded below, is something I decided to highlight more prominently in writing this chapter than I had in outlining it.
+For example, I asked GPT-4 to briefly describe GAI for students in a computational thinking class, and the last sentence in its response, which I've emphasized below, is something I decided to highlight more prominently in writing this chapter than I had in outlining it.
 
 > **Me:** What is generative artificial intelligence?
 >
-> **ChatGPT:** Generative Artificial Intelligence is a type of AI that focuses on creating new content. It's like an AI artist that can independently create something new rather than simply analyzing and understanding existing content. Examples of generative AI include AI systems that can generate music, images, or text. **In a computational thinking context, the concept of generative systems helps us understand how complex output can emerge from simple rules and structures.**
+> **ChatGPT:** Generative Artificial Intelligence is a type of AI that focuses on creating new content. It's like an AI artist that can independently create something new rather than simply analyzing and understanding existing content. Examples of generative AI include AI systems that can generate music, images, or text. *In a computational thinking context, the concept of generative systems helps us understand how complex output can emerge from simple rules and structures.*
 
 This example illustrates one of the ways I think about using a GAI tool. The full framework involves asking the following three questions:
 
@@ -129,7 +129,7 @@ We'll use this framework throughout this chapter, and I hope you find it useful 
 
 ## Large Language Models (LLMs)
 
-To navigate the jagged frontier of a GAI tool, it helps to have a basic understanding of how they work. In particular, I'll briefly describe the functioning of Large Language Models (LLMs), which are the foundation for today's AI coding assistants.[^fn2] GPT-4 is a LLM and one of the multiple models that powers the chat interface that is ChatGPT. While I'll focus on GPT-4, what you'll learn is equally applicable to the LLMs available from other companies.
+To navigate the jagged frontier of a GAI tool, it helps to have a basic understanding of how they work. I'll briefly describe the functioning of Large Language Models (LLMs), which are the foundation for today's AI coding assistants. GPT-4 is a LLM and one of the multiple models that powers the chat interface that is ChatGPT. While I'll focus on GPT-4, what you'll learn is equally applicable to the LLMs available from other companies.
 
 LLMs are essentially functions that map a text input to a text output.
 
@@ -161,27 +161,27 @@ LLMs are a classic use of online and offline work, where the offline work is the
 
 ## The operation of LLMs
 
-For his article, Stephen Wolfram \[2023\] uses an earlier and smaller version of OpenAI's GPT system (GPT-2) to describe the computational work being done in the final online step. As he explains, what looks to us through the ChatGPT interface as a prompt and a lengthy response is actually multiple calls to the GPT model.
+Let's begin by understanding the computational work being done in the final online step. I'll lean on the work of Stephen Wolfram, who published in 2023 an excellent introduction to LLMs based on some experiments he performed with an early version of OpenAI's GPT system (GPT-2).[^fn2] This work explains that what looks to us through the ChatGPT interface as a prompt and a lengthy response is actually multiple calls to the GPT model.
 
-Let's take these calls one at a time. Wolfram's example, which I'll describe here, begins with the prompt string `"The best thing about AI is its ability to"` and GPT-2 responds with (roughly[^fn3]) a word that is a reasonable continuation to it.
+Let's take these calls one at a time. Wolfram's opening example, which I'll describe, begins with the prompt string `"The best thing about AI is its ability to"` and the GPT model responds with a *token* (i.e., a word, part of a word, or a punctuation mark) that is a reasonable continuation of it.
 
 ```{code-block} python
-the_next_word = GPT2("The best thing about AI is its ability to")
+the_next_token = GPT2("The best thing about AI is its ability to")
 ```
 
-Let's suppose that GPT-2 returns the word "learn". From its training, the model has discovered this word comes next in contexts like this, but "learn" is not the only reasonable continuation it computes. Wolfram reports that GPT-2 also generates "predict", "make", "understand", "do", and many other words as possible continuations. In fact, GPT-2 computes with each generated word what we can think of as a probability; the higher the probability the more likely it is that the word is a reasonable continuation based on its training.
+From its training, the model has seen that the word "learn" comes next in contexts like this, but this word is not the only reasonable continuation. As Wolfram \[2023\] reports, GPT-2 also generates "predict", "make", "understand", "do", and many other words as possible continuations. In fact, GPT-2 computes with each generated word what we can think of as a probability; the higher the probability the more likely it is that the word is a reasonable continuation based on its training.
 
-In order to return one of these generated words, GPT-2 has to make a choice, as illustrated in {numref}`Figure %s<c18_fig2_ref>`. Should it select "learn" which is the choice with the highest computed probability? Or should it select one of the other highly ranked words?
+To return one of these generated words, GPT-2 must make a choice, as illustrated in {numref}`Figure %s<c18_fig2_ref>`. Should it select "learn" which is the choice with the highest computed probability? Or should it select one of the other highly ranked words?
 
-```{figure} images/c18_fig2.png
+```{figure} images/Smith_fig_18-02.png
 :name: c18_fig2_ref
 
-The top five most likely words in Wolfram's example that GPT-2 predicts will reasonably continue the prompt "The best thing about AI is its ability to".
+The top five most likely words that GPT-2 predicts will reasonably continue the prompt "The best thing about AI is its ability to", from Wolfram [2023].
 ```
 
-Through experience, LLM developers have discovered that models that always return the highest-ranked next word produce responses that sound flat and repetitious to humans. Models with more natural-sounding responses vary the choice of words from those most highly ranked.[^fn4]
+Through experience, LLM developers have discovered that models that always return the highest-ranked next word produce responses that sound flat and repetitious to humans. Models with more natural-sounding responses vary the choice of words from those most highly ranked.[^fn3]
 
-But let's continue with Wolfram's example and have the model chose "learn" from this list. The conversation's context is now "The best thing about AI is its ability to learn" and the next step is to call GPT-2 with this string. The model provides the next word (e.g., the word "from") and we again update the context. We have now defined the body of a loop: the model chooses a word that is a reasonable continuation of its current context and then uses its choice to update the context.
+But let's continue with Wolfram's example in which the model chose "learn" from this list. The conversation's context is now "The best thing about AI is its ability to learn" and the next step is to call GPT-2 with this string. The model provides the next word (e.g., the word "from") and we again update the context. We have now defined the body of a loop: the model chooses a word that is a reasonable continuation of its current context and then uses its choice to update the context.
 
 The next obvious question is: what is this loop's exit condition? As we've learned, loops need at least one. A straightforward answer to this question is to use a special END token. The model generates a probability for END on each call, and when this token is selected, the model has determined that it is reasonable to end the loop and return the response.
 
@@ -191,17 +191,17 @@ Earlier, when I asked ChatGPT to explain GAI, it responded that these systems he
 
 Neural networks were first proposed in the 1940s, and today's computational neurons are largely unchanged since then. What's changed is the computing speed of these neurons, the number of them we can interconnect and train, and the size of the training data sets. Everything has gotten orders of magnitude faster and bigger.
 
-{numref}`Figure %s<c18_fig3_ref>` is a typical and idealized illustration of a neural network. It is comprised of computational neurons (i.e., the circles in the figure) that are organized into layers. Inputs to the model are fed to the first layer of neurons, which compute with these inputs and whose outputs are fed to the next layer of neurons. This feed-forward organization continues until the last layer outputs the model's result.
+{numref}`Figure %s<c18_fig3_ref>` is a typical and idealized illustration of a neural network. The computational neurons are organized into layers. Inputs to the model are fed to the first layer of neurons, which compute with these inputs and whose outputs are fed to the next layer of neurons. This feed-forward organization continues until the last layer outputs the model's result.
 
-```{figure} images/c18_fig3.png
+```{figure} images/Smith_fig_18-03.png
 :name: c18_fig3_ref
 
-The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) and are treated as weighted inputs to the nodes (circles), which represent the computational neurons. Each neuron performs a fairly simple numerical computation.
+.
 ```
 
-The thickness of the arrows in {numref}`Figure %s<c18_fig3_ref>` varies to represent that the values carried along each edge are weighted before being used in a neuron's computation. If we pull that weighting into the work done at an individual neuron, the output value of a neuron is:
+Inside each individual neuron, the work done is:
 
-* the sum of the weighted values on the  $n$ incoming edges: $\sum_{i=1}^{n} (w_i * x_i)$ where $w$ is a weight and $x$ is an incoming value;
+* the sum of the weighted values on the $n$ incoming edges: $\sum_{i=1}^{n} (w_i * x_i)$ where $w$ is a weight and $x$ is an incoming value;
 * plus a constant $b$;
 * followed by a *thresholding* or *activation* function $f$.
 
@@ -215,17 +215,17 @@ While a neuron's computation may not sound simple to you, it is much simpler tha
 
 Training a neural network (i.e., setting its parameters) relies on a combination of straightforward calculus and engineering art. The calculus is not important to achieve the goals of this chapter. By engineering art, I mean that the success of today's LLMs depends significantly on many seemingly arbitrary engineering decisions. It also takes a lot of time, money, and training data. We got an inkling of this challenge in the last chapter.
 
-But at a high level, we can train an LLM using supervised learning. We take sentences from our corpus of real-world examples and mask out the ends of them. We then measure the difference between the model's answer and the actual sentence endings. Using this difference, we nudge the model toward better responses by changing its parameters. LLM developers continue to do this until they're happy with the model's responses. Again, this should remind you of the ML work we discussed in the last chapter, although measuring the difference between words is not as simple as the difference between home prices.
+But at a high level, we can train a LLM using supervised learning. We take sentences from our corpus of real-world examples and mask out the ends of them. We then measure the difference between the model's answer and the actual sentence endings. Using this difference, we nudge the model toward better responses by changing its parameters. LLM developers continue to do this until they're happy with the model's responses. Again, this should remind you of the ML work we discussed in the last chapter, although measuring the difference between words is not as simple as the difference between home prices.
 
 To make this concrete, consider the following start to a sentence: "The sky is \_\_\_\_\_". From our data set of real-world sentences, we know that "blue", "stormy", "falling", "endless", and "empty" are all reasonable continuations while "able" and "tape" are not. Which word from the first list should the model give the highest priority? That would depend upon the context of the conversation before this sentence.
 
 My last point hints at something you should understand that LLMs are not doing. They are not a really big hash table that hashes the input prompt to access a stored list of reasonable words. If you think about it for a moment (or do the math that Wolfram \[2023\] describes), you'll quickly realize that there are too many prefix possibilities to even conceive of building such a table. This also means that the training set cannot contain every possible user prompt, since it is of a large but limited size.
 
-But this is all ok. LLMs are exactly what the M in the acronym stands for: a model. The word probabilities generated by a model like GPT-4 are just estimates informed by its training. The word it generates needs to fit the patterns seen in the training set, not any particular example. If it helps, recall that the sales-price predictor in the last chapter used attributes of a previously unseen house to predict this home's sales price. This home didn't have to be in the training set.
+But this is all ok. LLMs are exactly what the M in the acronym stands for: a model. The word probabilities generated by a model like GPT-2 and GPT-4 are just estimates informed by its training. The word it generates needs to fit the patterns seen in the training set, not any particular example. If it helps, recall that the sales-price predictor in the last chapter used attributes of a previously unseen house to predict this home's sales price. This home didn't have to be in the training set.
 
 ```{admonition} Terminology
 :class: tip
-The acronym GPT in the ChatGPT application name and GPT-x model names stands for "Generative Pre-trained Transformer" and you now can explain the first two terms. Its last term, Transformer, refers to a specific architecture of neural networks that focuses the model's attention on particular parts of the input prompt. It's kind of like choosing the right set of attributes on which to focus our sales-price predictor.
+The acronym GPT in the ChatGPT application name and GPT-x model names stands for "Generative Pre-trained Transformer" and you now can explain the first two terms. Its last term, Transformer, refers to a specific architecture of neural networks that focuses the model's attention on specific parts of the input prompt. It's kind of like choosing the right set of attributes on which to focus our sales-price predictor.
 ```
 
 ## Two pieces to problem solving with GAI
@@ -239,7 +239,7 @@ We haven't spoken about what makes a good prompt, but we will. On the other hand
 
 ## An easy request?
 
-As we've done in every other chapter, let's proceed with a problem-to-be-solved. Here's the setup: When I teach my introductory computer science course using this book, I have the students practice their knowledge of goal-directed search (Chapter 11) by writing a program that plays the parlor game [Six Degrees of Kevin Bacon](https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon). In this game, players challenge each other to connect two given actors by:
+As we've done in every other chapter, let's proceed with a problem-to-be-solved. Here's the setup: When I teach my introductory computer science course using this book, I have the students practice their knowledge of goal-directed search (Chapter 11) by writing a program that plays the parlor game *Six Degrees of Kevin Bacon*.[^fn4] In this game, players challenge each other to connect two given actors by:
 
 1. describing a chain of actors, bracketed by the two given actors; and
 2. for each pair of consecutive actors in the chain, naming a movie in which they both co-starred.
@@ -249,9 +249,11 @@ For example, Kevin Bacon and Marlon Brando are connected through Jack Nicholson 
 * Bacon and Nicholson starred together in *A Few Good Men*
 * Nicholson and Brando starred together in *The Missouri Breaks*
 
-The chain Bacon-Nicholson-Brando is said to have a *degrees-of-separation* measure of two, i.e., it took two steps (or movies) to go from Bacon to Nicholson.
+The chain Bacon-Nicholson-Brando is said to have a *degrees-of-separation* measure of two, i.e., it took two steps (or movies) to go from Bacon to Brando.
 
-My students test their programs on a small slice of the [IMDb data sets](https://developer.imdb.com/non-commercial-datasets/), and when they think their code works, I ask them to try it on a much larger slice. My pedagogical goal is to demonstrate that your code may functionally work, but large data sets can stress it in ways small data sets don't (e.g., quickly show you where your code is inefficiently implemented). The chain I showed with Bacon, Nicholson, and Brando is found through a breadth-first search on the large IMDb data set, and when running a depth-first search, their programs often produce answers with much larger degrees of separation. The graph of actors and movies is highly interconnected, and there exist many chains from Bacon to Nicholson. Without fail, the students will come to me and ask if their script's depth-first output, like the following that reports 66 degrees of separation, is correct. I look at them and say, "I don't know. How would you check this output?"
+My students test their programs on a small slice of the IMDb data sets[^fn5], and when they think their code works, I ask them to try it on a much larger slice. My pedagogical goal is to demonstrate that your code may functionally work, but large data sets can stress it in ways small data sets don't (e.g., quickly show you where your code is inefficiently implemented).
+
+The chain I showed with Bacon, Nicholson, and Brando is found through a breadth-first search on the large IMDb data set, and when running a depth-first search, their programs often produce answers with much larger degrees of separation. The graph of actors and movies is highly interconnected, and there exist many chains from Bacon to Brando. Without fail, some students will come to me and ask if their script's depth-first search output, like the following that reports 66 degrees of separation, is correct. I look at them and say, "I don't know. How would you check this output?"
 
 ```{code-block} none
 Name: Which 'kevin bacon'?
@@ -273,10 +275,10 @@ Intended Person ID: Name: Running a dfs search
 ```
 
 ```{admonition} You Try It
-Take a moment to understand this captured output, including its first four lines. I captured this output by directing the solution script's standard output, as we discussed in Chapter 13. Because I only captured the script's standard output, you don't see my answers to the script's `input` prompts, which traveled over the script's standard input. At the first occurrence of `Name:`, the script asked for the first actor's name, to which I responded "kevin bacon". The next question comes on the same output line because the newline character was in my response. The output `Which 'kevin bacon'?` and the two ID lines occurred because there are two actors with this name in the IMDb data set, and the script wants to know which one I meant. To the `Intended Person ID:` prompt, I responded "102". The script then asks for the second actor's name, and I typed "Marlon Brando". With the data it needs, the script then states it had begun running a depth-first search (DFS). It reports finding a chain with 66 degrees of separation and prints the details of it.
+Take a moment to understand this captured output, including its first four lines. I captured this output by redirecting the solution script's standard output, as we discussed in Chapter 13. Because I only captured the script's standard output, you don't see my answers to the script's `input` prompts, which traveled over the script's standard input. At the first occurrence of `Name:`, the script asked for the first actor's name, to which I responded "kevin bacon". The next question comes on the same output line because the newline character was in my input response. The output `Which 'kevin bacon'?` and the two ID lines occurred because there are two actors with this name in the IMDb data set, and the script wanted to know which one I meant. To the `Intended Person ID:` prompt, I responded "102". The script then asked for the second actor's name, and I typed "Marlon Brando". With the data it needed, the script then began running a depth-first search (DFS). It reported finding a chain with 66 degrees of separation and printed it.
 ```
 
-The copy of the output above doesn't show all 66 lines in the chain, but hopefully you see the pattern: Each line is of the form "ACTOR1 and ACTOR2 starred in MOVIE" where the uppercase nouns are placeholders for actor names and movie titles. A properly-functioning goal-directed search, as we discussed in Chapter 11, shouldn't visit the same node (i.e., actor) more than once. This means that no actor should appear in the last 66 lines more than twice.
+The copy of the output above doesn't show all 66 lines in the chain, but hopefully you see the pattern: Each line is of the form "ACTOR1 and ACTOR2 starred in MOVIE" where the uppercase nouns are placeholders for actor names and movie titles. A properly functioning goal-directed search, as we discussed in Chapter 11, shouldn't visit the same node (i.e., actor) more than once. This means that no actor should appear in the last 66 lines more than twice.
 
 To check this, we have three options:
 
@@ -284,7 +286,7 @@ To check this, we have three options:
 2. Write a Python script to analyze this output as we would have done by hand.
 3. Ask ChatGPT to do it for us.
 
-The students are asking me because Option 1 is undesirable and error-prone. Using my earlier framework, this problem-to-be-solved is a classic example of work everyone wants to delegate.
+The students are asking me because Option 1 is undesirable and error prone. Using my earlier framework, this problem-to-be-solved is a classic example of work everyone wants to delegate.
 
 ## Write the script ourselves
 
@@ -370,12 +372,12 @@ with open(input('Filename? ')) as f:
 ```
 
 ```{admonition} You Try It
-Run `check` as demonstrated on the output I showed earlier. The GitHub repository associated with this book contains the full text file (`test_wo_error.txt`) I showed above and two other text files that this function will flag as containing errors.
+Run `python3 check_chain.py test_wo_error.txt`, which feeds our script with the output my students asked about. The script verifies that the output is correct (i.e., no names are repeated more than twice). You should also try the two text files named with the pattern `test_w_error*.txt`, which `check_chain.py` will flag as problematic.
 ```
 
 ## Ask ChatGPT
 
-While Option 2 isn't hard, perhaps we could save the hour I took producing `check` and ask ChatGPT to check the output directly. ChatGPT allows you to upload a file with your prompt. So I uploaded `test_wo_errors.txt` and asked: "Are any of the names in the attached text repeated more than twice?" ChatGPT replied:
+While Option 2 isn't hard, perhaps we could save the hour I took producing `check_chain.py` and ask ChatGPT to check the output directly. ChatGPT allows you to upload a file with your prompt. So I uploaded `test_wo_errors.txt` and asked: "Are any of the names in the attached text repeated more than twice?" ChatGPT replied:
 
 > **ChatGPT:** Upon analyzing the text, I found that the name "Kevin Bacon" appears twice in the document. There are no other names repeated more than twice in the text provided.
 
@@ -385,7 +387,7 @@ It's true that "Kevin Bacon" appears more than twice because I forgot to ask Cha
 You still need to think when you ask a GAI tool to do your work.
 ```
 
-But ChatGPT's first sentence in the response doesn't really make much sense. I asked if any names appeared *more than twice*, and while it correctly identified "Kevin Bacon" as appearing too many times, it wrote that this name "*appeared twice* in the document." \[Emphasis added.\] This caused me to ask, "please explain how you came to that answer" and it replied:
+But ChatGPT's first sentence in the response doesn't really make much sense. I asked if any names appeared *more than twice*, and while it correctly identified "Kevin Bacon" as appearing too many times, it wrote that this name "*appears twice* in the document." \[Emphasis added.\] This caused me to ask, "please explain how you came to that answer" and it replied:
 
 > **ChatGPT:** To determine if any names were repeated more than twice in the text file, I performed a search in the file's contents for all occurrences of names. This search was conducted using the uploaded file's content where names were explicitly identified, and the data was systematically checked for repetitions.
 >
@@ -393,7 +395,7 @@ But ChatGPT's first sentence in the response doesn't really make much sense. I a
 >
 > Based on this analysis, I concluded that "Kevin Bacon" is the only name that appears twice, and no names exceed this number of mentions in the text.
 
-This sounds good albeit that it's quite a high-level description. I'm thinking now and so I decided to see if ChatGPT could really find a name repeated more than twice when that name occurred only in the part of the file that mattered (i.e., the chain of actor names). I copied the original output, duplicated the last line, and inserted Louis-Do de Lencquesaing between Marthe Keller and Marlon Brando in the chain of actors. Notice that Lencquesaing also occurs at chain links 64 and 65. Here's the end of this new test file, which I called `test_w_error2.txt`.
+This sounds good albeit that it's quite a high-level description. I'm thinking now and so I decided to see if ChatGPT could really find a name repeated more than twice when that name occurred only in the part of the file that mattered (i.e., the chain of actor names). I copied the original output, duplicated the last line, and inserted Louis-Do de Lencquesaing between Marthe Keller and Marlon Brando in the chain of actors. Notice that Louis-Do de Lencquesaing also occurs at chain links 64 and 65. Here's the end of this new test file, which I called `test_w_error2.txt`.
 
 ```{code-block} none
 Name: Which 'kevin bacon'?
@@ -433,7 +435,7 @@ At this point, I haven't found a prompt that causes ChatGPT to tell me exactly w
 
 ## Is this task within the frontier?
 
-There's no easy answer to this question because no one can yet explain exactly how a GAI tool is capable of solving the kind of task we just gave GPT-4. We can build these models, but we cannot explain how a prompt produces a specific response. There are many smart researchers working on this challenge of *explainability* in GAI systems.
+There's no easy answer to this question because no one can yet explain exactly how a GAI tool can solve the kind of task we just gave GPT-4. We can build these models, but we cannot explain how a prompt produces a specific response. There are many smart researchers working on this challenge of *explainability* in GAI systems.
 
 Until this challenge is solved, I use a heuristic. We talked about heuristics in Chapter 11. They are approximate methods that largely but not perfectly answer a hard question. A good heuristic is practical to compute and not badly wrong. So what is a heuristic method for deciding whether your task is within your GAI tool's frontier?
 
@@ -449,15 +451,15 @@ You've previously seen me using this approach with ChatGPT. Assuming the prompts
 
 ## The expanding frontier
 
-As an example of GAI's expanding frontier, Wolfram \[2023\] describes the training of a GPT-2-like model for recognizing and producing sequences of balanced parentheses, as one sees in mathematical and programming language expressions. The model works well for short sequences of opening parentheses (e.g., the model correctly responds that it should follow `(((` with `)))`), but the highest-probability completion for long sequences of opening parentheses doesn't always produce a response that's balanced. Wolfram \[2023\] theorizes that this model can reliably solve only things that humans can solve at a glance. When humans need to start counting and matching parentheses, the model should too and GPT-2 doesn't.
+As an example of GAI's expanding frontier, let's look at another example from Wolfram \[2023\]. It describes the training of a GPT-2-like model for recognizing and producing sequences of balanced parentheses, as one sees in mathematical and programming language expressions. The GPT-2 model works well for short sequences of opening parentheses (e.g., the model correctly responds that it should follow `(((` with `)))`), but the highest-probability completion for long sequences of opening parentheses doesn't always produce a response that's balanced. Wolfram \[2023\] theorizes that this model can reliably solve only things that humans can solve at a glance. When humans need to start counting and matching parentheses, the model should too and GPT-2 doesn't.
 
-I'm not limited to GPT-2, and so I asked GPT-4 to "generate a balanced set of parentheses" and gave it a number of examples (i.e., what's called *few-shot prompting* as we'll discuss later). GPT-4 correctly solved the long sequences that GPT-2 couldn't. When I asked GPT-4 to explain its work, it showed me a piece of Python code, which I have put in `balance_parentheses.py` in the book's GitHub repository. In other words, unlike GPT-2, GPT-4 was "smart enough" to realize it should built an algorithmic solution and use it. More tasks were inside its frontier than GPT-2.
+I'm not limited to GPT-2, and so I asked GPT-4 to "generate a balanced set of parentheses" and gave it several examples (i.e., what's called *few-shot prompting* as we'll discuss later). GPT-4 correctly solved the long sequences that GPT-2 couldn't. When I asked GPT-4 to explain its work, it showed me a piece of Python code, which I have put in `balance_parentheses.py` in the book's GitHub repository. In other words, unlike GPT-2, GPT-4 was "smart enough" to realize it should build an algorithmic solution and use it. More tasks were inside its frontier than GPT-2.
 
 Unfortunately, not all tasks are inside GPT-4's frontier for it became anchored in the context. When I continued to prompt it and provided the prefix `()())`, which can't be made balanced by adding more parentheses, it responded: "The input `()())` is already balanced, so the output remains `()())`." The reason it gave for the answer was the same `balance_parentheses.py` code, which doesn't check for the condition in my example.
 
 ## How to problem solve with a LLM
 
-Now that we've decided the complete problem-to-be-solved from my introductory computer science class is not within GPT-4's frontier, how should we proceed to get benefit from the use of it? Simple, we decompose this problem into its tasks as if we were going to solve it ourselves, and then ask for GPT-4's help in solving the most difficult of these smaller tasks.
+Now that we've conservatively decided the complete problem-to-be-solved from my introductory computer science class is not within GPT-4's frontier, how should we proceed to get benefit from the use of it? Simple, we decompose this problem into its tasks as if we were going to solve it ourselves, and then ask for GPT-4's help in solving the most difficult of these smaller tasks.
 
 ```{code-block} python
 # Grab the filename and read in its lines
@@ -497,13 +499,13 @@ line = "Carey Mulligan and Joel Edgerton starred in The Great Gatsby"
 print(remove_names_from_line(line))
 ```
 
-When you run this script, it prints: \`Carey Mulligan and starred in The Great Gatsby\`. ChatGPT took me literally and removed the second actor's name from the line. This is not the interpretation of my prompt that I wanted. English is ambiguous!
+When you run this script, it prints: `Carey Mulligan and starred in The Great Gatsby`. ChatGPT took me literally and removed the second actor's name from the line. This is not the interpretation of my prompt that I wanted. English is ambiguous!
 
 ```{tip}
 While "programming" a GAI in English (or any human language) might make problem solving with computation accessible to more people across the world, there's a reason why programming languages attempt to have well-defined semantics.
 ```
 
-Still, ChatGPT gave us a starting point for a solution and an explanation (not shown) of what went into the regular-expression pattern it used. We'll likely solve our problem faster with this assistance.
+Still, ChatGPT gave me a starting point for a solution and an explanation (not shown) of what went into the regular-expression pattern it used. I'll likely solve my problem faster with this assistance.
 
 ## Writing good prompts
 
@@ -513,7 +515,7 @@ The following are three popular prompt forms frequently cited by those with expe
 
 * **Instruction:** This form begins with a command to the model that instructs it to do a particular task, and has you follow the command with your supporting data or context. For example, your prompt might begin with the statement: "Summarize the following text in a paragraph." You'd follow this statement with the text to summarize.
 * **Completion:** This form begins with the context you want the model to absorb and ends an incomplete statement that the model naturally tries to complete. Continuing with the example I used in the instruction form, you could start your prompt with the text you'd like summarized and then end with the incomplete sentence: "Briefly, this text discusses".
-* **Demonstration:** This form has you show the model what you want it to do through one or more examples and end with the question you want answered. It is reminiscence of supervised learning, and it is frequently called *few-shot learning*.
+* **Demonstration:** This form has you show the model what you want it to do through one or more examples and end with the question you want answered. It is reminiscent of supervised learning, and it is frequently called *few-shot learning*.
 
 As an example of a completion prompt, let's continue to try to get ChatGPT to grab the actor names from a line of the form: `ACTOR1 and ACTOR2 starred in MOVIE`.
 
@@ -537,7 +539,7 @@ As an example of a completion prompt, let's continue to try to get ChatGPT to gr
 >
 > **ChatGPT:** Aden Young; Marshall Napier
 
-It worked well, and to have ChatGPT generate code I could use to do this work, I can follow this demonstration prompt with an instruction prompt: "Please write me a Python function that does this work." When I did this, ChatGPT produced the following function:
+It worked, and to have ChatGPT generate code I could use, I can follow this demonstration prompt with an instruction prompt: "Please write me a Python function that does this work." When I did this, ChatGPT produced the following function:
 
 ```{code-block} python
 ---
@@ -567,10 +569,10 @@ input_text = "Jane Tsentas and Cleo O'Hara starred in Evil Come Evil Go"
 print(extract_actors(input_text))
 ```
 
-As typical, ChatGPT included an example that shows you how to invoke the function. I added another test. When you run `extract_actors.py`, you'll find that ChatGPT's test works fine, but the one I added doesn't. And if you inspect the regular expression in `extract_actors`, you'll see that it won't work for names like "Cleo O'Hara", which contain characters other than the letters `a-z`. This happened despite the fact that I included that name in my completion-prompt examples.
+As typical, ChatGPT included an example that shows you how to invoke the function. I added another test. When you run `extract_actors.py`, you'll find that ChatGPT's test works fine, but the one I added doesn't. And if you inspect the regular expression in the function `extract_actors`, you'll see that it won't work for names like "Cleo O'Hara", which contain characters other than the letters `a-z`. This happened even though I included that name in my completion-prompt examples.
 
 ```{tip}
-Even with good prompts, the solution produced with a GAI tool today won't necessary work in all the situations you care about. Problem solving involves iteration, even when you use GAI.
+Even with good prompts, the solution produced with a GAI tool today won't necessarily work in all the situations you care about. Problem solving involves iteration and thorough testing, even when you use GAI.
 ```
 
 You can find lots of websites on the internet that discuss prompt engineering. I view most of their advice as that which is appropriate for getting better outputs from a human assistant as well as a GAI tool. Here are some basic rules of thumb:
@@ -578,7 +580,7 @@ You can find lots of websites on the internet that discuss prompt engineering. I
 * When giving instructions, make them clear, detailed, and easy to find.
     * If you want a comma-separated list, ask the tool to "return a comma-separated list."
     * If you want the tool to say "I don't know" when it doesn't know the answer, tell it: Say "I don't know" if you do not know the answer.
-    * Put these explicit instructions at the start or end of your prompt (i.e., not buried somewhere in it).
+    * Put your explicit instructions at the start or end of the prompt (i.e., not buried somewhere in it).
 * When a context for the model's answer matters, state it.
     * If you want a high-quality and detailed answer, tell the tool to answer as if it was an expert.
     * If you want an answer appropriate for a middle-school student, say that.
@@ -597,12 +599,12 @@ When all is said and done, problem solving with GAI is still the same process I 
 
 Happy problem solving!
 
-\[Version 20241012\]
+[^fn1]: The figure and findings discussed in this section are from Fabrizio Dell'Acqua, Edward McFowland III, Ethan R. Mollick, Hila Lifshitz-Assaf, Katherine Kellogg, Saran Rajendran, Lisa Krayer, François Candelon, and Karim R. Lakhani, "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality," Harvard Business School Technology & Operations Mgt. Unit Working Paper No. 24-013 (September 15, 2023). The full text is available at SSRN (https://ssrn.com/abstract=4573321) or doi.org (http://dx.doi.org/10.2139/ssrn.4573321).
 
-[^fn1]: The figure and findings discussed in this section are from Dell'Acqua, Fabrizio and McFowland III, Edward and Mollick, Ethan R. and Lifshitz-Assaf, Hila and Kellogg, Katherine and Rajendran, Saran and Krayer, Lisa and Candelon, François and Lakhani, Karim R., "Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality" (September 15, 2023). Harvard Business School Technology & Operations Mgt. Unit Working Paper No. 24-013. The full text is available at SSRN (https://ssrn.com/abstract=4573321) or doi.org (http://dx.doi.org/10.2139/ssrn.4573321).
+[^fn2]: Stephen Wolfram, "What Is ChatGPT Doing ... and Why Does It Work?" Stephen Wolfram Writings, February 14, 2023, https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/. In this chapter, I'll refer to this article as Wolfram \[2023\].
 
-[^fn2]: If you want an excellent and understandable introduction to LLMs, I highly recommend [Stephen Wolfram's "What Is ChatGPT Doing ... and Why Does It Work?," Stephen Wolfram Writings (2023)](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/). This section borrows from Wolfram's lengthy article.
+[^fn3]: In some LLMs, you can adjust the model's *temperature* setting to more strongly nudge it toward less likely words. But nudging it too far down its ranking will make the LLM sound like a lunatic. There's that just-right nature of ML surfacing again.
 
-[^fn3]: I say roughly because LLMs technically produce a *token*, which may not be a complete word and may be a punctuation mark. But to understand how LLMs work, we can simply think of these tokens as words.
+[^fn4]: https://en.wikipedia.org/wiki/Six\_Degrees\_of\_Kevin\_Bacon
 
-[^fn4]: In some LLMs, you can adjust the model's *temperature* setting to more strongly nudge it toward less likely words. But nudging it too far down its ranking will make the LLM sound like a lunatic. There's that just-right nature of ML rising up again.
+[^fn5]: https://developer.imdb.com/non-commercial-datasets/

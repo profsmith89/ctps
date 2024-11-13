@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 3: Replace Text With Emoji" href="chap03.html" />
+    <link rel="next" title="Chapter 3: Replace Text with Emoji" href="chap03.html" />
     <link rel="prev" title="Chapter 1: Read a Children’s Book" href="chap01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -158,10 +158,10 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="welcome.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Read a Children’s Book</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: Grab the Dialogue</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text With Emoji</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Replace Text with Emoji</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Query a Web Resource</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: Play Guess-a-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6: Do You See My Dog?</a></li>
@@ -429,26 +429,26 @@ document.write(`
 <p>In this chapter, you will experience all eight steps in our problem-solving process, and by the end of it, you will be able to:</p>
 <ul class="simple">
 <li><p>Describe the importance of recognizing similarities and differences between problems when considering which past scripts might help you start writing a new script [design];</p></li>
-<li><p>Use finite-state-machine (FSM) diagrams as a widely-useful method for identifying and ordering the tasks your script must perform while processing its input [design and CS concepts];</p></li>
+<li><p>Use finite-state-machine (FSM) diagrams as a widely useful method for identifying and ordering the tasks your script must perform while processing its input [design and CS concepts];</p></li>
 <li><p>Convert FSM diagrams into pseudocode [design];</p></li>
 <li><p>Think about strings as a sequence (i.e., an ordered collection of characters), understand the power of this sequence abstraction, and use several common operations on sequences [CS concepts and programming skills];</p></li>
 <li><p>Perform string concatenation and understand operator overloading [CS concepts and programming skills];</p></li>
 <li><p>Write for-loops that iterate over the items in a sequence [programming skills];</p></li>
 <li><p>Become comfortable with all variations of if-statements [programming skills];</p></li>
 <li><p>Develop test inputs, and recognize and employ a common design pattern for error handling [programming skills];</p></li>
-<li><p>Explain off-by-one errors and recognize where this type of error often occur [CS concepts and programming skills];</p></li>
+<li><p>Explain off-by-one errors and recognize where this type of error often occurs [CS concepts and programming skills];</p></li>
 <li><p>Structure your script development so that you interleave testing and coding, to surface hidden assumptions and never go too long without an understanding of what works and doesn’t [design and programming skills];</p></li>
 <li><p>Interpret the two ways of performing function composition in Python [programming skills].</p></li>
 </ul>
 </div>
 </section>
 <section id="a-new-problem">
-<p><strong>A new problem.</strong> While Chapter 1 and some of its active-learning exercises (ALEs) had us decorate a story around its edges, our new problem-to-be-solved asks that we make the textual output of our script look quite different than its input. In particular, we’ll turn <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> into a theatrical script that a couple of actors — playing the narrator, the Cat, the Fish, Things One and Two, and the Mother — could perform.<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<p><strong>A new problem.</strong> While Chapter 1 and some of its active-learning exercises (ALEs) had us decorate a story around its edges, our new problem-to-be-solved asks that we make the textual output of our script look quite different than its input. In particular, we’ll turn <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> into a theatrical script that acouple of actors—playing the narrator, the Cat, the Fish, Things One and Two, and the Mother— could perform.<a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <p>What would be the problem specification? It could be something as seemingly simple as: <em>find the dialogue in the story and print it after the name of the character who says it</em>.</p>
 </section>
 <section id="splitting-the-problem-into-small-pieces">
-<p><strong>Splitting the problem into small pieces.</strong> One of the keys to successfully writing a computational script is to break a large problem into small pieces (i.e., problem decomposition) and then write code to solve each of those pieces. Later, you can pull the pieces together in order to create the script that meets the entire specification.</p>
-<p>What are the primary pieces in our problem specification? Well, we have to:</p>
+<p><strong>Splitting the problem into small pieces.</strong> One of the keys to successfully writing a computational script is to break a large problem into small pieces (i.e., problem decomposition) and then write code to solve each of those pieces. Later, you can pull the pieces together to create the script that meets the entire specification.</p>
+<p>What are the primary pieces in our problem specification? Well, we must:</p>
 <ol class="arabic simple">
 <li><p>find a story’s dialogue;</p></li>
 <li><p>identify which character says which lines; and</p></li>
@@ -457,9 +457,9 @@ document.write(`
 <p>Of these three things, let’s focus on finding the dialogue. Since each line of dialogue is enclosed in easily identifiable double quotes, we can precisely specify what we need to do. As incomplete solutions for the other two problem pieces, we will label the extracted dialogue with “ACTOR:” and skip adding any stage directions.<a class="footnote-reference brackets" href="#fn2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p>With these decisions, <a class="reference internal" href="#c02-fig1-ref"><span class="std std-numref">Figure 5</span></a> shows how our script should print the first two pieces of dialogue from <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>.</p>
 <figure class="align-default" id="c02-fig1-ref">
-<img alt="_images/c02_fig1.png" src="_images/c02_fig1.png" />
+<img alt="_images/Smith_fig_02-01.png" src="_images/Smith_fig_02-01.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The start of our script’s output given <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> as the its input.</span><a class="headerlink" href="#c02-fig1-ref" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The start of our script’s output given <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> as its input.</span><a class="headerlink" href="#c02-fig1-ref" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -508,7 +508,7 @@ document.write(`
 <p><strong>Finite State Machines.</strong> What we just described is formally called a <em>finite state machine (FSM)</em>. Each <em>state</em> in this FSM describes some work we need done. In switching states, our script looks for <em>events</em>. The script starts in some <em>initial</em> (or <em>start</em>) state and completes its work when it enters one of possibly several <em>final</em> (or <em>end</em>) states.</p>
 <p><a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a> is a diagram of a FSM that solves our problem, where the states are represented as labeled circles (also called <em>nodes</em>) and <em>transitions between states</em> as directed arrows. Each arrow is labeled with the event that causes the transition. The initial state is identified by the special transition labeled <code class="docutils literal notranslate"><span class="pre">Start</span></code>.</p>
 <figure class="align-default" id="c02-fig2-ref">
-<img alt="_images/c02_fig2.png" src="_images/c02_fig2.png" />
+<img alt="_images/Smith_fig_02-02.png" src="_images/Smith_fig_02-02.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 6 </span><span class="caption-text">A complete FSM diagram for finding dialogue.</span><a class="headerlink" href="#c02-fig2-ref" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -528,7 +528,7 @@ document.write(`
 </section>
 <section id="encoding-the-state-information">
 <p><strong>Encoding the state information.</strong> When implementing the FSM in <a class="reference internal" href="#c02-fig2-ref"><span class="std std-numref">Figure 6</span></a>, the first thing to note is that it contains only three states, where the third state (<code class="docutils literal notranslate"><span class="pre">DONE</span></code>) represents the termination of our script. This means that our script has only to keep track of which of the first two states (<code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">S1</span></code>) it is in at any point in time, which we can do with a single <em>Boolean</em> variable.</p>
-<p>Let’s call this variable <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, and define its behavior so that it is <code class="docutils literal notranslate"><span class="pre">True</span></code> when the script is in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> when the script is in <code class="docutils literal notranslate"><span class="pre">S1</span></code>. Then with the frame from <code class="docutils literal notranslate"><span class="pre">script1.py</span></code>, we can write Python code to initialize <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> (corresponding to the FSM’s start state) and use that variable to separate the work in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> from that in <code class="docutils literal notranslate"><span class="pre">S1</span></code>:<a class="footnote-reference brackets" href="#fn6" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a></p>
+<p>Let’s call this variable <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> and define its behavior so that it is <code class="docutils literal notranslate"><span class="pre">True</span></code> when the script is in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> when the script is in <code class="docutils literal notranslate"><span class="pre">S1</span></code>. Then with the frame from <code class="docutils literal notranslate"><span class="pre">script1.py</span></code>, we can write Python code to initialize <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code> (corresponding to the FSM’s start state) and use that variable to separate the work in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> from that in <code class="docutils literal notranslate"><span class="pre">S1</span></code>:<a class="footnote-reference brackets" href="#fn6" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap02/script2.py</span>
 <span class="linenos"> 2</span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like as a script? &#39;</span><span class="p">)</span>
 <span class="linenos"> 3</span>
@@ -555,8 +555,8 @@ document.write(`
 <p>Notice that the script pulls the processing that every state does (i.e., reading a line of characters from the input file) out of each state’s work. We will talk more, in the next chapter, about the benefits of collecting commonly executed code together in one place.</p>
 </section>
 <section id="this-or-that">
-<p><strong>This or that.</strong> You’ll also notice, in <code class="docutils literal notranslate"><span class="pre">script2.py</span></code>, a new syntactic structure for the Python if-statement. Compare it with the if-statement immediately above it, which is used to check for our infinite while-loop’s exit condition. In checking for EOF, the if-statement protects the break-statement: we either hit this condition or continued on with the loop’s work. In checking for something exceptional like this, the if-block and its controlling condition is all the structure we need.</p>
-<p>In testing the value of <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before continuing on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple <code class="docutils literal notranslate"><span class="pre">else</span></code>.</p>
+<p><strong>This or that.</strong> You’ll also notice, in <code class="docutils literal notranslate"><span class="pre">script2.py</span></code>, a new syntactic structure for the Python if-statement. Compare it with the if-statement immediately above it, which is used to check for our infinite while-loop’s exit condition. In checking for EOF, the if-statement protects the break-statement: we either hit this condition or continue with the loop’s work. In checking for something exceptional like this, the if-block and its controlling condition is all the structure we need.</p>
+<p>In testing the value of <code class="docutils literal notranslate"><span class="pre">looking_for_open_quote</span></code>, we need to decide which of two pieces of work we want to do, and we must do the work in one of these two states before moving on. While we could write an if-statement to check one of the conditions and then follow it with another if-statement checking the other condition, Python provides a form of the if-statement that eliminates this unnecessary second check. In this form, the second if-statement becomes a simple <code class="docutils literal notranslate"><span class="pre">else</span></code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Why is an if-else-block better than two if-statements in this situation? Because the condition we’re checking is either true or false. When it’s not one, it must be the other. If you write two if-statements, you’ll have to correctly write a condition and its complement. The if-else construct removes this unnecessary work (and potential error in logic or typing waiting to happen).</p>
@@ -587,7 +587,7 @@ document.write(`
 <section id="strings-as-a-sequence-of-characters">
 <p><strong>Strings as a sequence of characters.</strong> To this point, I’ve been relying on your intuition for what constitutes a string in Python. We created them by defining string literals. We read file lines as strings and compared them against string literals (e.g., to test for EOF). And we printed them out to the console.<a class="footnote-reference brackets" href="#fn8" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> Probably none of this work forced you to think about how we were representing strings in the computer; we simply operated on them as big blobs. However, to ask whether a string contains a particular character, we have to know if Python allows us access to the components of a string object.</p>
 <p>Short answer: it does. A string in Python is a <em>sequence</em> of characters. I emphasized sequence in this definition because sequence is a very useful abstraction for lots of different objects that we’ll manipulate in our scripts. The abstraction you should have in your mind for a sequence is <em>an ordered collection of items</em>.</p>
-<p>It doesn’t matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the <code class="docutils literal notranslate"><span class="pre">list</span></code> data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> containing a stuffed animal, a picture of my kids, this course’s textbook, an old compact disk, and then some other books.</p>
+<p>It doesn’t matter if the items in a sequence are of the same type or kind, although in the case of a string, each item in the ordered collection is of the same kind (i.e., a character). We will soon play with the <code class="docutils literal notranslate"><span class="pre">list</span></code> data type in Python, which allows you to create a sequence containing different kinds of things. For example, the objects on my office bookshelf when viewed from left to right could be represented as a Python list containing a stuffed animal, a picture of my kids, this course’s textbook, an old compact disk, and then some other books.</p>
 </section>
 <section id="membership-test">
 <p><strong>Membership test.</strong> What makes a sequence a useful <em>abstraction</em> are the commonly used operations that query or manipulate Python sequences without needing to know anything more specific about the actual sequence. For example, we can ask about the length of a sequence, and it doesn’t matter if we’re asking about the number of characters in a string or items in a list. All that matters is that the object whose length we’re interested in acts like a sequence so that Python can answer with a count of the number of items in the collection.</p>
@@ -618,16 +618,14 @@ document.write(`
 </div>
 </section>
 <section id="indexing-and-slicing">
-<p><strong>Indexing and slicing.</strong> I left the comment “do some work” because transitioning on seeing a double quote is not all we need to do. To print each line of dialogue, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this work easy with a couple of other common operations on sequences. To illustrate them, I’ll use line 8 of the file <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>, which reads ‘<code class="docutils literal notranslate"><span class="pre">And</span> <span class="pre">I</span> <span class="pre">said,</span> <span class="pre">&quot;How</span> <span class="pre">I</span> <span class="pre">wish</span></code>’.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### NOT runnable -- turn into a figure!
-  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
-  | A | n | d |   | I |   | s | a | i | d | , |   | &quot; | H | ... | s | h | \n |
-  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+-   -+---+---+----+
-  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14    21  22  23   24
--24 -23 -22 -21 -20 -19 -18 -17 -16 -14 -13 -12 -11 -10  -9    -3  -2  -1
-</pre></div>
-</div>
-<p>To begin using these operations, you need to understand how Python identifies a sequence item with an index number. Most important in this, Python—like many program languages—starts numbering the items <em>at 0</em>. For instance, <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code> returns ‘<code class="docutils literal notranslate"><span class="pre">A</span></code>’, the first character in our example string. Asking for <code class="docutils literal notranslate"><span class="pre">the_line[1]</span></code> returns the second character. This use of square brackets is called <em>indexing</em>.</p>
+<p><strong>Indexing and slicing.</strong> I left the comment “do some work” because transitioning on seeing a double quote is not all we need to do. To print each line of dialogue, we need to capture the characters we read from an opening double quote until its matching ending one. Python makes this work easy with indexing and slicing operations on sequences.</p>
+<figure class="align-default" id="c02-fig3-ref">
+<img alt="_images/Smith_fig_02-03.png" src="_images/Smith_fig_02-03.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">How Python numbers each character in a string, or more generally in a sequence.</span><a class="headerlink" href="#c02-fig3-ref" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To use these operations, you need to understand how Python numbers a sequence’s items. <a class="reference internal" href="#c02-fig3-ref"><span class="std std-numref">Figure 7</span></a> illustrates this numbering using a string corresponding to line 8 of the file <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>. Notice that Python—like many program languages—starts numbering the items <em>at 0</em>. If the string in <a class="reference internal" href="#c02-fig3-ref"><span class="std std-numref">Figure 7</span></a> was named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, then writing <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code> would return the string <code class="docutils literal notranslate"><span class="pre">'A'</span></code>, the first character in our example string. Asking for <code class="docutils literal notranslate"><span class="pre">the_line[1]</span></code> returns the second character. This use of square brackets is called <em>indexing</em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">the_line</span> <span class="o">=</span> <span class="s1">&#39;And I said, &quot;How I wish</span><span class="se">\n</span><span class="s1">&#39;</span>
 <span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">the_line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -635,7 +633,7 @@ document.write(`
 </div>
 <div class="admonition-you-try-it admonition">
 <p class="admonition-title">You Try It</p>
-<p>Go ahead, and use the interactive Python interpreter to experiment with statements in this section’s code blocks. The more you play the better you’ll understand how indexing works.</p>
+<p>Go ahead and use the interactive Python interpreter to experiment with statements in this section’s code blocks. The more you play the better you’ll understand how indexing works.</p>
 </div>
 <p>As I mentioned earlier, you can ask for the length of a sequence object. You do it with the Python built-in function <code class="docutils literal notranslate"><span class="pre">len</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">len(the_line)</span></code> returns <code class="docutils literal notranslate"><span class="pre">24</span></code>. Notice that it counts letters, spaces, punctuation, and the special newline character at the end of this string. These are all items in the sequence named <code class="docutils literal notranslate"><span class="pre">the_line</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">len</span><span class="p">(</span><span class="n">the_line</span><span class="p">)</span>
@@ -661,7 +659,7 @@ document.write(`
 </section>
 <section id="for-loops">
 <p><strong>For-loops.</strong> Programmers ask this type of question often enough that the developers of Python made it easy to answer. But I’m going to divert us for a moment to talk about how, for example, a beginning programmer would solve this problem without using this Python aid. This aside introduces to you the other major looping construct in Python (and many other languages): the <em>for-loop</em>. More importantly, it will help you to understand what takes place behind the scenes in the Python aid that we’ll eventually use.</p>
-<p>The following code block fills in more of the work we need done in state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. In particular, it uses a for-loop to find the location of the first double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> and then begins capturing the dialogue.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a></p>
+<p>The following code block fills in more of the work we need done in state <code class="docutils literal notranslate"><span class="pre">S0</span></code>. It uses a for-loop to find the location of the first double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> and then begins capturing the dialogue.<a class="footnote-reference brackets" href="#fn10" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span>        <span class="c1">### Part of chap02/script6.py</span>
 <span class="linenos">16</span>        <span class="k">if</span> <span class="n">looking_for_open_quote</span><span class="p">:</span>   <span class="c1"># in S0</span>
 <span class="linenos">17</span>            <span class="c1"># Do some work</span>
@@ -677,7 +675,7 @@ document.write(`
 <span class="linenos">27</span>                <span class="n">looking_for_open_quote</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> statement on line 20 iterates over the items in a sequence. The <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword here plays a similar membership role as we saw earlier, but this time, we are asking <code class="docutils literal notranslate"><span class="pre">i</span></code> to name each item in the specified sequence in order, and for each of those values, execute an iteration of the indented block of statements (i.e., the body of the for-loop).</p>
+<p>The for-statement on line 20 iterates over the items in a sequence. The <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword here plays a similar membership role as we saw earlier, but this time, we are asking <code class="docutils literal notranslate"><span class="pre">i</span></code> to name each item in the specified sequence in order, and for each of those values, execute an iteration of the indented block of statements (i.e., the body of the for-loop).</p>
 <p>To see this for-loop in action, we need to know what the sequence is in this particular case. We already know what value is produced by <code class="docutils literal notranslate"><span class="pre">len(the_line)</span></code>, and we pass the integer value computed by it to another Python built-in function called <code class="docutils literal notranslate"><span class="pre">range</span></code>. This built-in is quite interesting, but for now we simply need to think of it as computing a sequence object containing the integers from <code class="docutils literal notranslate"><span class="pre">0</span></code> to one less than the integer value passed to <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
 <p>Let’s now look at the body of the for-loop in the code block above. It asks whether the character at index <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is a double quote. When it is, the body of the if-statement names the slice of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> from <code class="docutils literal notranslate"><span class="pre">i</span></code> to the end of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> with the variable <code class="docutils literal notranslate"><span class="pre">dialog</span></code>. We end the if-statement body with a <code class="docutils literal notranslate"><span class="pre">break</span></code> because we don’t need the for-loop to continue checking the rest of <code class="docutils literal notranslate"><span class="pre">the_line</span></code> once we’ve found a double quote. (Actually, there are other cases we need to handle, but not for our example from line 8 of <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>.)</p>
 <p>Our original if-statement that checked for a double-quote character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is now performing redundant work when the for-loop finds a double quote. We can rewrite the work in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> to integrate the transition work into the for-loop.</p>
@@ -717,7 +715,7 @@ document.write(`
 <p><strong>Design patterns for error handling.</strong> When you have been programming long enough, like any practiced skill, you’ll start to see repeated patterns. The special use of the value <code class="docutils literal notranslate"><span class="pre">-1</span></code> is a common one for error handling. A command, function, or method carves out one or more values and distinguishes those values as error conditions. In our current example, <code class="docutils literal notranslate"><span class="pre">find</span></code> needs only the integers in the range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">len(s)-1</span></code> to fully accomplish its stated functionality. The person who wrote the implementation of <code class="docutils literal notranslate"><span class="pre">find</span></code> was free to pick any value outside this range of valid results as an error condition. She might have picked several such values to indicate a number of different error conditions.</p>
 <p>One of the things you’ll learn as your programming skill grows is that you should always check and handle the error conditions that might occur in the commands, functions, and methods you use. The only reason not to do this is because you have carefully reasoned out why the error condition cannot occur.<a class="footnote-reference brackets" href="#fn11" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a></p>
 <p>Unfortunately, just because a design pattern is commonly used doesn’t mean it isn’t without headaches. This pattern requires us to add the statement <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">i</span> <span class="pre">!=</span> <span class="pre">-1:</span></code> to our script, which we are supposed to read as “if <code class="docutils literal notranslate"><span class="pre">find</span></code> returned a valid index into <code class="docutils literal notranslate"><span class="pre">the_line</span></code> then we found an opening double-quote character at index <code class="docutils literal notranslate"><span class="pre">i</span></code>.” Yeah, it doesn’t look much like that to me either (and hence our added comment).</p>
-<p>While not an issue with the structure of the logic, many programmers also dislike this design pattern because it can break up a script’s flow with lots of checks for uncommon error conditions. When we are constantly distracted by infrequently-true error checks, it can make it very hard to read the script to understand its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.</p>
+<p>While not an issue with the structure of the logic, many programmers also dislike this design pattern because it can break up a script’s flow with lots of checks for uncommon error conditions. When we are constantly distracted by infrequently true error checks, it can make it very hard to read the script to understand its primary function. We can solve this headache by using a different design pattern for error handling, which keeps exceptional events out of the main flow of your algorithm. We will talk about this other design pattern in a later problem-to-be-solved.</p>
 </section>
 <section id="never-go-too-long-without-testing">
 <p><strong>Never go too long without testing.</strong> We’ve made great progress on our script, and now we have a choice of how to proceed. On the one hand, we can continue to write code to handle all the cases that might occur in state <code class="docutils literal notranslate"><span class="pre">S0</span></code> (e.g., a piece of dialogue that is completely contained within a file line). Our minds are focused on <code class="docutils literal notranslate"><span class="pre">S0</span></code>, and it may be enticing to continue until we’ve handled every case we can imagine. On the other hand, we could switch and start writing some code for state <code class="docutils literal notranslate"><span class="pre">S1</span></code>. In particular, we could write <code class="docutils literal notranslate"><span class="pre">S1</span></code> code that complements the code we just finished in <code class="docutils literal notranslate"><span class="pre">S0</span></code>. The benefit of this approach is that it would allow us to see if we can get our script to run on some subset of the possible inputs.</p>
@@ -876,20 +874,18 @@ document.write(`
 <span class="linenos">5</span><span class="n">short_dialog</span>
 </pre></div>
 </div>
-<p>Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which is necessary for the computation but not really important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.</p>
+<p>Function composition removes the need to give names to the intermediate results, and without names, our attention is not drawn to this work, which is necessary for the computation but not important to the big picture. This point is important. For human readers, your script should be like a good story: It highlights the main action while hiding the details of exactly how the characters interact and get from place to place. But unlike a literary story, your script does contain these details, through the mechanism of function composition. The Python interpreter needs to know these details, since it does only what it is exactly told to do. Function composition keeps humans from being distracted by the details the interpreter needs to know.</p>
 </section>
 <section id="abstraction-as-information-hiding">
 <p><strong>Abstraction as information hiding.</strong> Another example of where we hid details to help with human understanding, recall how we replaced a for-loop and its associated code with an invocation of the <code class="docutils literal notranslate"><span class="pre">find</span></code> method on a string. Both computed a similar result, but we preferred the <code class="docutils literal notranslate"><span class="pre">find</span></code> string method over the for-loop implementation because it was both more concise and more expressive of what this step in our script was doing. In the next chapter, we will see how we can create our own compact representations—abstract away the details—so that each line of our script more closely resembles each step in the pseudocode we are trying to implement.</p>
 </section>
 <section id="there-is-no-character">
 <p><strong>There is no character.</strong> Before we go, I want to correct something you may have come to believe. While I have used the term “character” to describe single items in the sequence known as a Python string, there is no distinguished thing that is a character in Python. What we think of as a character is just a Python string of length 1. In other words, when I earlier wrote that <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'A'</span></code>, I was careful to write the result as a Python string. Go ahead and see what <code class="docutils literal notranslate"><span class="pre">type(the_line[0])</span></code> tells you about the type of the object returned from the string index method. We will talk more about types when we reach Act II.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>### Run the highlighted statements in the interactive interpreter
-<span class="hll">&gt;&gt;&gt; the_line = &#39;And said, &quot;At least I\&#39;ll try.&quot;&#39; 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll">&gt;&gt;&gt; the_line = &#39;And said, &quot;At least I\&#39;ll try.&quot;&#39; 
 </span><span class="hll">&gt;&gt;&gt; type(the_line[0])
 </span>&lt;class &#39;str&#39;&gt;
 </pre></div>
 </div>
-<p>[Version 20240830]</p>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="fn1" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -913,7 +909,7 @@ document.write(`
 </aside>
 <aside class="footnote brackets" id="fn6" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
-<p>As it says in the `README.md` text file in this chapter’s code distribution, `script2.py` is incomplete and won’t run without an error. We’re building toward a runnable script. Not every script listed in this book is one that runs.</p>
+<p>As it says in the `README.md` text file in this chapter’s GitHub repository, `script2.py` is incomplete and won’t run without an error. We’re building toward a runnable script. Not every script listed in this book is one that runs.</p>
 </aside>
 <aside class="footnote brackets" id="fn7" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
@@ -921,7 +917,7 @@ document.write(`
 </aside>
 <aside class="footnote brackets" id="fn8" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
-<p>You’ll also see the console called a terminal window. What we see today as a window on our laptop or panel in our IDE used to be a big piece of computer hardware called the <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_terminal">computer terminal</a>.</p>
+<p>You’ll also see the console called a terminal window. What we see today as a window on our laptop or panel in our IDE used to be a big piece of computer hardware called the computer terminal. See <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_terminal">https://en.wikipedia.org/wiki/Computer_terminal</a>.</p>
 </aside>
 <aside class="footnote brackets" id="fn9" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
@@ -929,7 +925,7 @@ document.write(`
 </aside>
 <aside class="footnote brackets" id="fn10" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
-<p>Here is <a class="reference external" href="https://www.wired.com/story/why-you-hate-media-technically-speaking/">a fun article</a> on the difference between dialogue and dialog. I use the first when I’m talking about what we want to capture and the second as the variable by which we capture the first.</p>
+<p>Here is a fun article (<a class="reference external" href="https://www.wired.com/story/why-you-hate-media-technically-speaking/">https://www.wired.com/story/why-you-hate-media-technically-speaking/</a>) on the difference between <em>dialogue</em> and <em>dialog</em>. I use the first when I’m talking about what we want to capture and the second as the variable by which we capture the first.</p>
 </aside>
 <aside class="footnote brackets" id="fn11" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
@@ -987,7 +983,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 3: Replace Text With Emoji</p>
+        <p class="prev-next-title">Chapter 3: Replace Text with Emoji</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

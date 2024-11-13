@@ -17,10 +17,10 @@ The implementation of this more computationally efficient sorting algorithm also
 The chapter's last third pulls all these ideas together by illustrating how to design a recursive solution to a problem that may not initially appear amenable to a divide-and-conquer approach. This is not easy and takes significant practice, but the simplicity of the solution script is the reward for the hard work.
 
 ```{admonition} Learning Outcomes
-Learn about divide-and-conquer as a problem-solving technique and recursion as a method for writing such algorithms. Sorting, which can be solved using divide-and-conquer, is a tool we often use (e.g., in our solutions to search). You will code two very different sorting algorithms and learn about Python's built-in mechanisms for sorting. Because our normal looping mechanisms are not a great way to code divide-and-conquer algorithms, you'll learn to write recursive functions. Finally, given a problem that at first doesn't seem amenable to a divide-and-conquer technique, you'll marvel at the conciseness of recursion to express a solution to this problem. In particular, after completing this chapter, you will be able to:
+Learn about divide-and-conquer as a problem-solving technique and recursion as a method for writing such algorithms. Sorting, which can be solved using divide-and-conquer, is a tool we often use (e.g., in our solutions to search). You will code two very different sorting algorithms and learn about Python's built-in mechanisms for sorting. Because our normal looping mechanisms are not a great way to code divide-and-conquer algorithms, you'll learn to write recursive functions. Finally, given a problem that at first doesn't seem amenable to a divide-and-conquer technique, you'll marvel at the conciseness of recursion to express a solution to this problem. After completing this chapter, you will be able to:
 
 *   Write a broadly applicable specification for sorting and understand how to extend this specification to cover a wide range of sorting problems [design and CS concepts];
-*   Use the `sort` method  on Python lists and the `sorted` built-in function to solve a wide range of sorting problems [programming skills];
+*   Use the `sort` method on Python lists and the `sorted` built-in function to solve a wide range of sorting problems [programming skills];
 *   Pass a function as a parameter so that you can specialize the behavior of Python's sorting functions [programming skills];
 *   Describe and code a brute-force sorting algorithm called insertion sort, which is probably what you use when sorting the cards you've been dealt [CS concepts];
 *   Understand how splitting work can lead to an efficient solution and code an example of this using binary search [design and CS concepts];
@@ -214,7 +214,7 @@ Let's return to our initial specification and look at two different algorithms f
 Do you see the pattern? Computer scientists call this algorithm *an insertion sort*, and we can code it by recognizing that it involves a pair of nested for-loops. The outer loop visits each card in the unsorted part of our hand; it corresponds to the numbered steps in the pseudocode above. We need an inner loop to implement the act of insertion in each numbered step because it's not easy to insert an element where it belongs in a sorted list. To do this, our code will walk down the sorted part of the list swapping the unsorted item with the sorted item before it until it reaches the position where it belongs in the sorted order.
 
 ```{admonition} You Try It
-This description might be hard to follow. Take a look at `insertion_sort` in the code block below, and then run it with the three `observe` functions uncommented (on lines 12, 18, and 23). If you study what the sort routine prints for each iteration of the for-loops, you'll better understand its operation.
+This description might be hard to follow. Look at `insertion_sort` in the code block below, and then run it with the three `observe` functions uncommented (on lines 12, 18, and 23). If you study what the routine prints for each iteration of the for-loops, you'll better understand its operation.
 ```
 
 ```{code-block} python
@@ -261,7 +261,7 @@ print(f'A = {a}\nC = {c}\nW = {w}')
 
 ## Time complexity of brute-force sorting
 
-Given that `insertion_sort` contains two nested for-loops that iterate at most $n$-times, where $n$ is the length of the input list, we can surmise that the computational complexity of this approach is $O(n^2)$. And if you think about the worst case number of swaps that will occur during an insertion sort, you'll calculate it to be $(n * (n - 1))/2$.
+Given that `insertion_sort` contains two nested for-loops that iterate at most $n$-times, where $n$ is the length of the input list, we can surmise that the computational complexity of this approach is $O(n^2)$. And if you think about the worst-case number of swaps that will occur during an insertion sort, you'll calculate it to be $(n * (n - 1))/2$.
 
 ```{admonition} You Try It
 
@@ -275,13 +275,13 @@ I called insertion sort a brute-force approach, and if the computational complex
 
 To see why splitting a problem into several smaller instances might help, let's try this with searching. Recall the guess-the-number script from Chapter 5, and think about the strategy you employ when you try to minimize your number of guesses.
 
-Does this strategy have you guess the numbers in increasing order from the smallest possible number? Of course not. That approach doesn't use to your advantage the hints given by the computer after each guess. In particular, guessing first the number 1 in the range 1 to 100 means that the computer will respond with "Too small!" when 1 isn't the hidden number. You could then guess 2, and unless you're very lucky, the computer's answer is the same. Continue in this fashion and you never take advantage of the other possible response: "Too big!"
+Does this strategy have you guess the numbers in increasing order from the smallest possible number? Of course not. That approach doesn't use to your advantage the hints given by the computer after each guess. Guessing first the number 1 in the range 1 to 100 means that the computer will respond with "Too small!" when 1 isn't the hidden number. You could then guess 2, and unless you're very lucky, the computer's answer is the same. Continue in this fashion and you never take advantage of the other possible response: "Too big!"
 
-Now consider what happens when your guess leaves unguessed numbers above and below it. Again assuming that whatever number you guessed wasn't the secret, the computer's answer of "Too small!" eliminates more than just the guessed number; it eliminates all the unguessed numbers below it. If you make wise choices, your guesses can eliminate large portions of the search space and quickly get you to the secret number.
+Now consider what happens when your guess leaves unguessed numbers above and below it. Again, assuming that whatever number you guessed wasn't the secret, the computer's answer of "Too small!" eliminates more than just the guessed number; it eliminates all the unguessed numbers below it. If you make wise choices, your guesses can eliminate large portions of the search space and quickly get you to the secret number.
 
 The optimal strategy is called *a binary search*, in which you guess a number at the mid-point of the search space. It's optimal because an answer of "Too small!" or "Too big!" then eliminates one half of the remaining search space, which is the best you can do on average.[^fn7]
 
-*A binary-search algorithm* has you continue in this manner (i.e., choosing the mid-point of the remaining search space each time) until you hit the hidden number. In the worst case, it takes at most $log_2 n$ guesses to find the hidden number, where $n$ is the size of the search space.
+*A binary-search algorithm* has you continue in this manner (i.e., choosing the mid-point of the remaining search space each time) until you hit the hidden number. In the worst case, it takes at most $log_2(n)$ guesses to find the hidden number, where $n$ is the size of the search space.
 
 The `guesses` function in the next code block implements the binary-search algorithm in a game that has the computer can guess your secret number. This game reverses the participants' roles in the guess-the-number game we built in Chapter 5. There's no new Python syntax or operators in this code, but take a few moments to read through it and make sure you understand how it implements binary search.
 
@@ -331,7 +331,7 @@ def guesses():
 ```
 
 ```{admonition} You Try It
-Run `guess.py` from the `chap12` code repository, which implements `guess32.py` from Chapter 5 with the same LO-HI range as `guesses.py`. Using the same secret number that the computer chose, then run `guesses.py` and see if the computer guesses this secret number in fewer turns. Next, progressively increase `HI` by a factor of 10 and watch how slowly the number of guesses taken by the computer grows. That's the power of $log_2 n$ growth.
+Run `guess.py` from the `chap12` code repository, which implements `guess32.py` from Chapter 5 with the same LO-HI range as `guesses.py`. Using the same secret number that the computer chose, then run `guesses.py` and see if the computer guesses this secret number in fewer turns. Next, progressively increase `HI` by a factor of 10 and watch how slowly the number of guesses taken by the computer grows. That's the power of $log_2(n)$ growth.
 ```
 
 ## Divide and conquer
@@ -468,7 +468,7 @@ print(f'a = {a}\nc = {c}\nw = {w}')
 
 Despite the ugliness of the iterative implementation, merge sort is typically faster than insertion sort. Given a list of $n$ elements, insertion sort has a worst-case computational complexity of $O(n^2)$ and merge sort of $O(n log_2 n)$. This is because merge sort makes $O(log_2 n)$ splits and this same number of merges, and each merge step requires $O(n)$ work. On sorting a large list, this complexity difference is significant.
 
-But it's beginning to appear that to run faster, we must pay for this speed boost with a more complex implementation. Just eyeball `insertion_sort` versus `merge_sort`, and recall what we saw in comparing `bf_strmatch` against `rk_strmatch`. Despite these two examples, we'll see it's not always true that increased speed begets an ugly implementation. Sometimes we just need to use the right tool, and for divide-and-conquer algorithms, that tool is *recursion*.
+But it's beginning to appear that to run faster, we must pay for this speed boost with a more complex implementation. Just eyeball `insertion_sort` versus `merge_sort` and recall what we saw in comparing `bf_strmatch` against `rk_strmatch`. Despite these two examples, we'll see it's not always true that increased speed begets an ugly implementation. Sometimes we just need to use the right tool, and for divide-and-conquer algorithms, that tool is *recursion*.
 
 Recursion is a fancy way of saying that a function repeatedly calls itself. While having a function call itself in this manner may sound like a recipe for an infinite loop, we avoid this outcome by:
 
@@ -511,7 +511,7 @@ def factorial(n):
 This function matches our earlier description, but what happens when we call `factorial(4)`?
 
 ```{admonition} You Try It
-While you can write yourself a short script containing the previous code block and a call of `factorial(4)`, it is more informative to watch each step of the function's execution using [the Python Tutor](https://pythontutor.com/visualize.html#code=def%20factorial%28n%29%3A%0A%20%20%20%20return%20n%20*%20factorial%28n%20-%201%29%0A%20%20%20%20%0Afactorial%284%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false).
+While you can write yourself a short script containing the previous code block and a call of `factorial(4)`, it is more informative to watch each step of the function's execution using the Python Tutor: https://bit.ly/ctps-factorial4
 ```
 
 What's missing, of course, are the base cases. To add the base cases to our function, we need to know for what values of `n` do we know `factorial(n)` without having to compute it. Or equivalently, for what values of $n$ is it trivial to compute $n!$?
@@ -561,13 +561,13 @@ Try writing the function `factorial` using either a for- or while-loop. You can 
 
 ```
 
-Notice that both of these iterative solutions require us to create a named temporary, which I called `result` in both solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of [our complete recursive factorial function on Python Tutor](https://pythontutor.com/visualize.html#code=def%20factorial(n):%0A%20%20%20%20if%20n%20%3C%200:%0A%20%20%20%20%20%20%20%20raise%20ValueError(%22factorial%20is%20not%20defined%20for%20negative%20integers%22)%0A%20%20%20%20elif%20n%20%3C%202:%0A%20%20%20%20%20%20%20%20return%201%0A%20%20%20%20else:%0A%20%20%20%20%20%20%20%20return%20n%20*%20factorial(n%20-%201)%0A%20%20%20%20%0Afactorial(4)&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false).
+Notice that both of these iterative solutions require us to create a named temporary, which I called `result` in both solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of our complete recursive factorial function on Python Tutor.[^fn11]
 
 ## Recursive merge sort
 
 You might prefer the simplicity of the code in `factorial` over the other two implementations. And if you are inclined to think mathematically, this implementation clearly reflects the problem's mathematical formulation, which might make this code easier for you to read and understand.
 
-This simplicity of expression is a characteristic of recursive code, and it is why there are quite a few people who speak with a religious fervor about recursion. But it is true that this simplicity-of-expression quality becomes more evident as the divide-and-conquer problems we're trying to solve become more complex. Let's keep this in mind as we look at the recursive solution to merge sort.[^fn11]
+This simplicity of expression is a characteristic of recursive code, and it is why there are quite a few people who speak with a religious fervor about recursion. But it is true that this simplicity-of-expression quality becomes more evident as the divide-and-conquer problems we're trying to solve become more complex. Let's keep this in mind as we look at the recursive solution to merge sort.[^fn12]
 
 ```{code-block} python
 ---
@@ -613,14 +613,14 @@ What do you think now about recursion as a way of expressing a problem's impleme
 
 As promised, this chapter ends by solving a problem that doesn't seem like it is amenable to a divide-and-conquer approach. Now, I don't expect you to see the solution before it's presented. I don't even expect you to feel comfortable with the solution after you've played with its recursive implementation. It takes time and repeated practice to think in this way, and you're probably still striving to be comfortable building iterative solutions. I simply ask you to work through this final problem and appreciate the power of the approach and the simplicity of the solution. And then remember this technique when you're solving your own problems.
 
-Since this book has a theatrical theme, we're going to investigate a problem posed by [the playwright Samuel Beckett](https://en.wikipedia.org/wiki/Samuel_Beckett). One of his plays, named *Quad*, has the actors enter and exit the stage so that *the same subset of actors never appear together more than once*.[^fn12]
+Since this book has a theatrical theme, we're going to investigate a problem posed by the playwright Samuel Beckett.[^fn13] One of his plays, named *Quad*, has the actors enter and exit the stage so that *the same subset of actors never appears together more than once*.[^fn14]
 
 What does this mean? Let's imagine a play with three actors, named `A`, `B`, and `C`. As the play begins, the curtain rises on an empty stage. We'll represent an empty stage by placing a `0` under each of the actors' names. Then, when actor enters the stage, we'll change their `0` to a `1`. When they exit, their `1` becomes a `0`. Only one actor will enter or exit the stage at any instance in time.
 
-Under these constraints and with these encodings, {numref}`Figure %s<c12_table1_ref>` illustrates a solution to Beckett's challenge for our three actors `A`, `B`, and `C`.
+Under these constraints and with these encodings, {numref}`Figure %s<c12_fig1_ref>` illustrates a solution to Beckett's challenge for our three actors `A`, `B`, and `C`.
 
-```{figure} images/c12_table1.png
-:name: c12_table1_ref
+```{figure} images/Smith_fig_12-01.png
+:name: c12_fig1_ref
 
 A solution to Beckett's challenge with three actors.
 ```
@@ -649,9 +649,9 @@ def beckett(n):
 
 ## The play with a single actor
 
-Beckett's challenge with a single actor should print the first two lines in  {numref}`Figure %s<c12_table1_ref>`. The first line is a unique stage direction, and we want it printed even in the challenge with no actors. But we don't want `"empty stage"` printed in the base case of the recursion; it should be printed only at the start of a challenge. This reasoning leads us to put this print-statement in the function that calls `beckett` and starts the recursion.
+Beckett's challenge with a single actor should print the first two lines in {numref}`Figure %s<c12_fig1_ref>`. The first line is a unique stage direction, and we want it printed even in the challenge with no actors. But we don't want `"empty stage"` printed in the base case of the recursion; it should be printed only at the start of a challenge. This reasoning leads us to put this print-statement in the function that calls `beckett` and starts the recursion.
 
-Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example.[^fn13] A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
+Inside our current `beckett` function, we have the base case, and we need to add a recursive call and the print-statement that outputs `"enter 1"` for our current example.[^fn15] A base case, a recursive call, and some problem-specific work is what constitutes the normal structure of a recursive function. But where does the recursive call go? Before or after our print-statement? You can see for yourself that either case correctly prints what we want for challenges with 0 or 1 actors.
 
 ```{code-block} python
 ---
@@ -678,19 +678,19 @@ beckett(num_actors)
 
 ## Looking for the pattern
 
-To design an algorithm that generates stage directions of the form "enter B" and "exit C" for the play in {numref}`Figure %s<c12_table1_ref>`, we must identify and understand the repeating patterns in the table's sequence of binary encodings. In general, coding with recursion involves finding the pattern that repeats, each time on a smaller scale. Let's focus on the solution table for the challenge with two actors.
+To design an algorithm that generates stage directions of the form "enter B" and "exit C" for the play in {numref}`Figure %s<c12_fig1_ref>`, we must identify and understand the repeating patterns in the table's sequence of binary encodings. In general, coding with recursion involves finding the pattern that repeats, each time on a smaller scale. Let's focus on the solution table for the challenge with two actors.
 
-```{figure} images/c12_table2.png
-:name: c12_table2_ref
+```{figure} images/Smith_fig_12-02.png
+:name: c12_fig2_ref
 
 A solution to Beckett's challenge with two actors.
 ```
 
-In {numref}`Figure %s<c12_table2_ref>`, what do you notice about the sequencing of the bits for actor `B`? Compare the first two boxed values against the last boxed two. Yes! The sequence reverses itself.
+In {numref}`Figure %s<c12_fig2_ref>`, what do you notice about the sequencing of the bits for actor `B`? Compare the first two boxed values against the last boxed two. Yes! The sequence reverses itself.
 
 Now look at actor `A`. They act like an actor in the one-actor challenge: Halfway through the play they enter and never exit. But this halfway point is far enough into the play that actor `B` has time to go through a `0-1` dance. And once `A` enters, they wait patiently as actor `B` reverses their dance from the first half.
 
-With that pattern in mind, look back at {numref}`Figure %s<c12_table1_ref>`. Actor `A` enters halfway through the play. When they enter, actors `B` and `C` had enough time to go through a dance, which these two actors reverse once `A` enters. And the dance that B and C do in the first four rows is the same dance they did in the 2-actor challenge. We've found a pattern to exploit\![^fn14]
+With that pattern in mind, look back at {numref}`Figure %s<c12_fig1_ref>`. Actor `A` enters halfway through the play. When they enter, actors `B` and `C` had enough time to go through a dance, which these two actors reverse once `A` enters. And the dance that `B` and `C` do in the first four rows is the same dance they did in the 2-actor challenge. We've found a pattern to exploit\![^fn16]
 
 ## A polished, full solution
 
@@ -748,13 +748,11 @@ This final `beckett` function is disturbingly simple, and that's what happens wh
 
 I hope you understand how the recursive `beckett` function works. I hope you've also begun to realize that learning to write a recursive function from a recursive specification, like we did with factorial and merge sort, is hard but worthwhile. Designing a recursive solution to a problem like Beckett's challenge is even harder, but you can do it if you take it a step at a time, as we just did.
 
-\[Version 20240925\]
-
 [^fn1]: Divide and conquer is sometimes called *divide and combine*, a name that highlights the two pieces of this problem-solving process.
 
-[^fn2]: I've borrowed this definition from an earlier edition of *Introduction to Algorithms* by Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest (The MIT Press; Cambridge, MA; 1995), p. 2.
+[^fn2]: I've borrowed this definition from Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest, *Introduction to Algorithms* (Cambridge, MA: MIT Press, 1995), 2.
 
-[^fn3]: To learn more about sorting in Python, please see the helpful page titled ["Sorting Techniques"](https://docs.python.org/3/howto/sorting.html) by Andrew Dalke and Raymond Hettinger.
+[^fn3]: To learn more about sorting in Python, please see the helpful page titled "Sorting Techniques" by Andrew Dalke and Raymond Hettinger. https://docs.python.org/3/howto/sorting.html
 
 [^fn4]: Letters are sorted from a-z, except that capital letters are "smaller in value" than little letters. Letters that represent positive numbers are sorted in numerical order. Unicode characters are sorted by their numerical values. In fact, sorting letters and numbers are also explained by the realization that we're just sorting unicode values! Look up the unicode values of the characters A, B, a, b, 0, and 1.
 
@@ -762,18 +760,22 @@ I hope you understand how the recursive `beckett` function works. I hope you've 
 
 [^fn6]: A simple internet search for "sorting algorithms" will list many of the most popular sorting techniques.
 
-[^fn7]: As another example of binary search in action, [watch Professor David Malan of CS50 fame](https://www.youtube.com/watch?v=DSffdCT5Cx4) use binary search to find this book's author in an old-fashioned phone book.
+[^fn7]: As another example of binary search in action, watch Professor David Malan of CS50 fame use binary search to find this book's author in an old-fashioned phone book. https://www.youtube.com/watch?v=DSffdCT5Cx4
 
-[^fn8]: It might help to have an image of the [Russian Matryoshka Dolls](https://en.wikipedia.org/wiki/Matryoshka_doll) in your mind. Each inner doll is smaller than its outer doll, and if you open them all, you'll find that the innermost doll doesn't open. That innermost doll is the base case.
+[^fn8]: It might help to have an image of the Russian Matryoshka Dolls (https://en.wikipedia.org/wiki/Matryoshka\_doll) in your mind. Each inner doll is smaller than its outer doll, and if you open them all, you'll find that the innermost doll doesn't open. That innermost doll is the base case.
 
 [^fn9]: Factorial is defined only for non-negative integers.
 
 [^fn10]: As expected, when compared to the for-loop solution, the while-loop solution requires us to manage the loop's index variable. My while-loop solution reuses the input parameter as the while-loop's index variable to save one initialization. Nothing new here.
 
-[^fn11]: The recursive solution will use the same \`merge\` function that we used in the iterative solution, but I will slightly change its interface. While the iterative solution sorted the input list in place, it is more natural for the recursive solution to return the sorted list. This has to do with the lack of an explicit temporary, which we noticed in looking at the several factorial implementations.
+[^fn11]: https://bit.ly/ctps-factorial4correct
 
-[^fn12]: I learned about this challenge from Robert Sedgewick and Kevin Wayne's book, *Computer Science: An Interdisciplinary Approach* (Addison-Wesley, 2017). It appears as Program 2.3.3.
+[^fn12]: The recursive solution will use the same \`merge\` function that we used in the iterative solution, but I will slightly change its interface. While the iterative solution sorted the input list in place, it is more natural for the recursive solution to return the sorted list. This has to do with the lack of an explicit temporary, which we noticed in looking at the several factorial implementations.
 
-[^fn13]: Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
+[^fn13]: https://en.wikipedia.org/wiki/Samuel\_Beckett
 
-[^fn14]: The binary sequence produced by the function \`beckett\` is called a [Gray code](https://en.wikipedia.org/wiki/Gray_code), which has found many uses in our world, from electronic devices to experimental design. Now that you know about this code, read about it and look for it in your world!
+[^fn14]: I learned about this challenge from Robert Sedgewick and Kevin Wayne, *Computer Science: An Interdisciplinary Approach* (Boston, MA: Addison-Wesley, 2017), 275. It appears as Program 2.3.3.
+
+[^fn15]: Let's not worry about printing the actor's names, which is a detail we'll fix when we have a correctly working recursive function.
+
+[^fn16]: The binary sequence produced by the function \`beckett\` is called a Gray code (https://en.wikipedia.org/wiki/Gray\_code), which has found many uses in our world, from electronic devices to experimental design. Now that you know about this code, read about it and look for it in your world!

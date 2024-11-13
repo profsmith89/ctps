@@ -17,7 +17,7 @@ Learn what it takes to find runtime bugs prior to running your scripts and why i
 
 ## Divide-by-zero bugs
 
-Think back to the time when you were learning to divide, and you might remember that you were told to never divide a number by zero. Division by zero is mathematically undefined because allowing it would lead to [absurd results](https://en.wikipedia.org/wiki/Division_by_zero). And yet, you can write the following Python script:
+Think back to the time when you were learning to divide, and you might remember that you were told to never divide a number by zero. Division by zero is mathematically undefined because allowing it would lead to absurd results.[^fn2] And yet, you can write the following Python script:
 
 ```{code-block} python
 ---
@@ -30,11 +30,11 @@ q = x / 0
 print(q)
 ```
 
-While my IDE editor will flag many types of syntax errors by placing a red squiggly line under the offending syntax, it doesn't indicate that there's anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a `ZeroDivisionError` exception on line 4. This is a runtime error, but why did I have to run the script to discover it?[^fn2]
+While my IDE editor will flag many types of syntax errors by placing a red squiggly line under the offending syntax, it doesn't indicate that there's anything wrong in this script. However, when I ask the Python interpreter to run it, it raises a `ZeroDivisionError` exception on line 4. This is a runtime error, but why did I have to run the script to discover it?[^fn3]
 
-You might think that it would be fairly straightforward to perform a string search over the script looking for instances of `'/0'`, or something like it with some flexibility in the whitespace between the characters. And with this thought, you've started to design a static analysis for finding divide-by-zero errors.
+You might think that it would be straightforward to perform a string search over the script looking for instances of `'/0'`, or something like it with some flexibility in the whitespace between the characters. And with this thought, you've started to design a static analysis for finding divide-by-zero errors.
 
-Division by the constant `0` is a fairly obvious, but how might you catch, without running it, the divide-by-zero error in the next code block?
+Division by the constant `0` is obvious, but how might you catch, without running it, the divide-by-zero error in the next code block?
 
 ```{code-block} python
 ---
@@ -48,9 +48,9 @@ q = x / y
 print(q)
 ```
 
-After a bit of reasoning, you probably figured out that the value of `y` on line 5 must be `0` because there's only one assignment of `y` that reaches that line and it's the one on line 3. Like our last example, we don't need to run `dbzero1.py` to know that it has a divide-by-zero bug. Great! You just made your static analysis a bit smarter; it's now capable of catching more variants of this particular runtime error.
+After a bit of reasoning, you probably figured out that the value of `y` on line 5 must be `0` because there's only one assignment of `y` that reaches that line and it's the one on line 3. Like our last example, we don't need to run `dbzero1.py` to know that it has a divide-by-zero bug. Great! You just made your static analysis a bit smarter; it's now capable of catching more variants of this runtime error.
 
-Let's consider one more example with a divide-by-zero bug, which I've listed in the next code block. It's different than the previous two examples in that it doesn't raise a `ZeroDivisionError` on every execution, but it will if the user responses with a zero.[^fn3] 
+Let's consider one more example with a divide-by-zero bug, which I've listed in the next code block. It's different than the previous two examples in that it doesn't raise a `ZeroDivisionError` on every execution, but it will if the user responses with a zero.[^fn4] 
 
 ```{code-block} python
 ---
@@ -79,7 +79,7 @@ Let's summarize what we've learned from these three simple examples about the ba
 
 ## A silly coding error
 
-Now that you're warmed up, you're ready to see if you can act like a static analysis tool and find a bug in a bigger script. The `main` function of the script `emdash.py` takes a paragraph of text and allows the user to indicate that they'd like to replace the commas around [a parenthetical phrase](https://grammarist.com/grammar/parenthetical-phrases/) with em dashes. 
+Now that you're warmed up, you're ready to see if you can act like a static analysis tool and find a bug in a bigger script. The `main` function of the script `emdash.py` takes a paragraph of text and allows the user to indicate that they'd like to replace the commas around a parenthetical phrase[^fn5] with em dashes. 
 
 It would, for example, take the sentence:
 
@@ -214,11 +214,11 @@ int main(void) {
 }
 ```
 
-The following transcript shows how to compile and execute `fun.c`:[^fn4]
+The following transcript shows how to compile and execute `fun.c`:[^fn6]
 
 ```{code-block} none
 ---
-emphasize-lines: 2,3
+emphasize-lines: 1,2
 ---
 chap16$ make -s fun
 chap16$ ./fun
@@ -241,25 +241,25 @@ We learned that compiled languages naturally have a place for static program ana
 
 Luckily, no. Most IDEs editors are extensible, which means that you can load and run static analyses while you edit. These act like the spell check and grammar hints that run constantly in modern word processing applications. In an IDE editor, the syntax highlighting, pop-up help, and error and warning reporting (often indicated with squiggly underlining) that you've been using in your IDE's editor are all types of static analyses. So let's extend our IDE with a static analysis that will uncover the bug in `emdash.py`.
 
-As an example of an extension, I loaded and used [mypy](https://mypy-lang.org/) in the Microsoft Visual Studio Code IDE. Mypy is a *static type checker* for Python. In a moment, we'll discuss what this means and why it helps find an important category of runtime bugs, but first, {numref}`Figure %s <c16_fig1_ref>` illustrates what we can learn from mypy.
+As an example of an extension, I loaded and used mypy[^fn7] in the Microsoft Visual Studio Code IDE. Mypy is a *static type checker* for Python. In a moment, we'll discuss what this means and why it helps find an important category of runtime bugs, but first, {numref}`Figure %s <c16_fig1_ref>` illustrates what we can learn from mypy.
 
-```{figure} images/c16_fig1.png
+```{figure} images/Smith_fig_16-01.png
 :name: c16_fig1_ref
 
-Screenshot of an editor tab in Microsoft Visual Studio Code with the mypy Type Checker extension loaded (v2024.0.0). I've opened the error message associated with the red squiggle on line 72.
+Screenshot of an editor tab in Microsoft Visual Studio Code with the mypy Type Checker extension loaded (v2024.0.0). I've opened the error message associated with the squiggle on line 72.
 ```
 
-This tool placed a red squiggle under a part of line 72. This line builds a new sentence in which we place em dashes around the parenthetical phrase named `phrases[a]`. As you can read in the comment on lines 70-71, the code should have removed the whitespace around this phrase and the text that came after it, which is what the specification for `emdash.py` said it should do. However, I mistakenly typed `split()` where I meant to `strip()`---twice in fact. I had invoked the `split` method several times earlier in the script, and my fingers mindlessly typed it again rather than the similar-looking `strip`.
+This tool placed a squiggle under a part of line 72. This line builds a new sentence in which we place em dashes around the parenthetical phrase named `phrases[a]`. As you can read in the comment on lines 70-71, the code should have removed the whitespace around this phrase and the text that came after it, which is what the specification for `emdash.py` said it should do. However, I mistakenly typed `split()` where I meant to `strip()`---twice in fact. I had invoked the `split` method several times earlier in the script, and my fingers mindlessly typed it again rather than the similar-looking `strip`.
 
 ## To squiggle or not
 
-Knowing that I typed the wrong method name explains my error, but how did the mypy analysis know to place a red squiggle on line 72? To figure out the answer to this question, we must understand what the mypy error message is telling us. It says that the `+` operator was attempting to act upon a string object and a list object holding string objects.[^fn5] On line 72, the literal `'--'` is clearly of type `str`, but how did mypy know the type of the object produced by `phrase[a].split()`?
+Knowing that I typed the wrong method name explains my error, but how did the mypy analysis know to place a squiggle on line 72? To figure out the answer to this question, we must understand what the mypy error message is telling us. It says that the `+` operator was attempting to act upon a string object and a list object holding string objects.[^fn8] On line 72, the literal `'--'` is clearly of type `str`, but how did mypy know the type of the object produced by `phrase[a].split()`?
 
 You might say that it's obvious, but if you did, you assumed that this expression was calling `str.split`. This is true only if `phrases[a]` produces a string object, and while it is true in this script, it didn't have to be true if we were reasoning about line 72 in isolation.
 
-Python is a *dynamically-typed, object-oriented language*. As we learned in Chapter 11, we can build objects of any structure we'd like using Python's `class` syntax. So here's another perfectly rational way to decide the type of the object between the two + operators on line 72: `phrase` names an object whose class defines the indexing operator (i.e., the `[]` operator, which you can define using the `__getitem__` magic method).[^fn6] The object returned by `__getitem__` is one that defines a `split` method, and this method returns a string. This isn't what mypy determined, but my point is that this alternate reasoning follows a perfectly valid set of assumptions given what we know about Python and what we see on line 72.
+Python is a *dynamically-typed, object-oriented language*. As we learned in Chapter 11, we can build objects of any structure we'd like using Python's `class` syntax. So here's another perfectly rational way to decide the type of the object between the two + operators on line 72: `phrase` names an object whose class defines the indexing operator (i.e., the `[]` operator, which you can define using the `__getitem__` magic method).[^fn9] The object returned by `__getitem__` is one that defines a `split` method, and this method returns a string. This isn't what mypy determined, but my point is that this alternate reasoning follows a perfectly valid set of assumptions given what we know about Python and what we see on line 72.
 
-In summary, whether mypy decides to place a red squiggle under `phrases[a].split()` depends entirely on whether its reasoning determines that the returned object is of type `str` or `list[str]`. And what makes such reasoning hard is not the object-oriented nature of the language, but its dynamic typing.
+In summary, whether mypy decides to place a squiggle under `phrases[a].split()` depends entirely on whether its reasoning determines that the returned object is of type `str` or `list[str]`. And what makes such reasoning hard is not the object-oriented nature of the language, but its dynamic typing.
 
 ## Dynamic typing
 
@@ -284,7 +284,7 @@ print(my_variable, 'is of type', type(my_variable))
 
 The type of the object named `my_variable` on line 9 is not definitively known until we run the script and learn the value of `choice`. Without this runtime information, the best a static analysis can determine is that it could be of type `str`, `int`, or `list`.
 
-The process of statically determining the possible types of a variable in a dynamically typed language is quite similar to the process we performed to determine the possible values of the variable `y` in `bdzero2.py`. While previously we were interested in the possible values and here in the possible types, this difference didn't change the structure of the analysis we performed. In both cases, we identified the statements that defined our variable of interest and then asked which of these definitions reached a particular program point. When multiple definitions reached a point, we combined the possibilities. In general, this combination work is more complicated than I've described, but understanding it as a set-union operation is fine for our work in this chapter.
+The process of statically determining the possible types of a variable in a dynamically typed language is quite like the process we performed to determine the possible values of the variable `y` in `bdzero2.py`. While previously we were interested in the possible values and here in the possible types, this difference didn't change the structure of the analysis we performed. In both cases, we identified the statements that defined our variable of interest and then asked which of these definitions reached a particular program point. When multiple definitions reached a point, we combined the possibilities. In general, this combination work is more complicated than I've described, but understanding it as a set-union operation is fine for our work in this chapter.
 
 ## Why types are interesting
 
@@ -295,13 +295,14 @@ Type checking, therefore, asks if there is ever a place in our script where we'r
 1. explicitly forbidden (e.g., something equivalent to division by zero); or
 2. not defined (e.g., we've never told the Python interpreter what it means to "add" a string literal to a list of strings).
 
-```{admonition} Key Idea
-A *type* or more specifically a *data type* is *an attribute of a piece of data*, and this attribute tells the compiler or interpreter how it should interpret and how it can legally manipulate the datum.
+```{admonition} Terminology
+:class: tip
+A *type*, or more specifically a *data type*, is *an attribute of a piece of data*, and this attribute tells the compiler or interpreter how it should interpret and how it can legally manipulate the datum.
 ```
 
 ## Types versus values
 
-Let's make this attribute idea concrete. In Chapter 6, we learned that computers encode everything as numbers, which our computers store as bit patterns. In the following code block, we name the string `'A'` and the integer `65`, and then ask the Python interpreter to show us the bit representations of these two objects. It responds that both values are encoded with the bit pattern  `0b1000001`. That's interesting, since we know that the Python interpreter has treated them differently in our scripts. We can verify this by asking the interpreter whether these two objects are equal (i.e., the same). It responds `False`, which means that they're not.
+Let's make this attribute idea concrete. In Chapter 6, we learned that computers encode everything as numbers, which our computers store as bit patterns. In the following code block, we name the string `'A'` and the integer `65`, and then ask the Python interpreter to show us the bit representations of these two objects. It responds that both values are encoded with the bit pattern `0b1000001`. That's interesting, since we know that the Python interpreter has treated them differently in our scripts. We can verify this by asking the interpreter whether these two objects are equal (i.e., the same). It responds `False`, which means that they're not.
 
 ```{code-block} python
 ---
@@ -320,7 +321,7 @@ print(a_in_bits, i_in_bits)
 print(f'Does Python think these two objects are equal? {a_letter == an_int}')
 ```
 
-Despite the fact that the bit patterns for the values of the objects named `a_letter` and `an_int` are exactly the same, the interpreter says that these objects are not equal. The reason that they're not considered equal is because their types differ.
+Even though the bit patterns for the values of the objects named `a_letter` and `an_int` are exactly the same, the interpreter says that these objects are not equal. The reason that they're not considered equal is because their types differ.
 
 ```{code-block} python
 ---
@@ -346,12 +347,12 @@ So where are we? We've learned that types are important, but because of dynamic 
 The solution to this dilemma is that Python includes type information with every object it creates. We learned through `equal.py` that this information (i.e., this attribute) is kept separate from the value of each object. It is additional overhead (i.e., it causes an object to take up additional space in our computer's memory), but because of this overhead, the interpreter can perform *dynamic type checking* (i.e., type checking at runtime). Now you understand how the interpreter is able to raise a `TypeError` when executing line 72 in `emdash.py`.
 
 ```{admonition} You Try It
-Try running `emdash.py` by typing `python3 emdash.py txts/debugging.txt` at the shell prompt; this command assumes you have this chapter's code distribution. The contents of the file `debugging.txt` are a paragraph that contains the example I mentioned earlier. The script identifies sentences in the paragraph that have multiple commas, and for each of these sentences, it will ask if you want to change a comma-surrounded phrase into a em-dash-surrounded one. Answer `0` if you don't want to make any changes to a particular sentence. When you ask the script to perform the change on a comma-surrounded phrase, it will die with a `TypeError` on line 72, as expected.
+Try running `emdash.py` by typing `python3 emdash.py txts/debugging.txt` at the shell prompt; this command assumes you have this chapter's code distribution from the book's GitHub repository. The contents of the file `debugging.txt` are a paragraph that contains the example I mentioned earlier. The script identifies sentences in the paragraph that have multiple commas, and for each of these sentences, it will ask if you want to change a comma-surrounded phrase into an em-dash-surrounded one. Answer `0` if you don't want to make any changes to a particular sentence. When you ask the script to perform the change on a comma-surrounded phrase, it will die with a `TypeError` on line 72, as expected.
 ```
 
 ## Static type checking
 
-And yet, we want to build *static* analyses that discover the `TypeError` on line 72 in `emdash.py` without having to run it. One way to provide a static analysis with the type information it needs is to attach the type information not to a program's objects but to its variable names. This is, in fact, what happens in the C programming language. Here is `equal.py` rewritten as a C program:[^fn7]
+And yet, we want to build *static* analyses that discover the `TypeError` on line 72 in `emdash.py` without having to run it. One way to provide a static analysis with the type information it needs is to attach the type information not to a program's objects but to its variable names. This is, in fact, what happens in the C programming language. Here is `equal.py` rewritten as a C program:[^fn10]
 
 ```{code-block} c
 ---
@@ -406,13 +407,13 @@ Are you surprised at the answer? To resolve this surprise:
 
 *   Think about the bit patterns and the fact that that's all that is compared in C at runtime. The type information is used at compile time and then discarded. The print-statement in these two programs really should say, "Does C think these two *values* are equal?"
 
-*   Think about what this tells you about the two types, `char` and `int`, if the C compiler's static type check succeeded for the expression `a_string == an_int`).[^fn8]
+*   Think about what this tells you about the two types, `char` and `int`, if the C compiler's static type check succeeded for the expression `a_string == an_int`).[^fn11]
 
 ```
 
 ## Type hints
 
-We are finally ready to understand how mypy operates and what we (as programmers) need to add into our scripts to enable it to do static type checking. As I mentioned earlier, dynamic typing is what makes static type checking hard. We need to know object types in order to do type checking, and that means we have to jettison Python's dynamic-typing nature.
+We are finally ready to understand how mypy operates and what we (as programmers) need to add into our scripts to enable it to do static type checking. As I mentioned earlier, dynamic typing is what makes static type checking hard. We need to know object types to do type checking, and that means we have to jettison Python's dynamic-typing nature.
 
 Perhaps you were a careful reader and noticed that the file open in {numref}`Figure %s <c16_fig1_ref>` is not `emdash.py`, but `emdash-anno.py`. Furthermore, line 72 starts with:
 
@@ -482,30 +483,34 @@ if __name__ == '__main__':
     main()
 ```
 
-What type annotations should we use for the formal parameters of `my_replace`? We can't use either `str` or `list` because this routine is supposed to work with any sequence that defines the length, slicing, and concatenation operators (i.e., the magic methods `__len__`, `__getitem__`, and `__add__`). Well, perhaps we might declare these parameters to be of type `Sequence`, whose definition you can import from the `typing` module, as I illustrate in `bookshelf1-anno.py`.[^fn9] Unfortunately, this doesn't work. Mypy will mark expressions like `new_s + new` as an error because not all sequence types in Python support concatenation. That was a design choice in the Python language, and it means that we're left with no type that's right for the data abstraction we built in `my_replace`. We either have to: (1) eliminate this abstraction from our code base (and consider every error message from mypy a true error); or (2) keep `my_replace` and decide that we're going to ignore some of the "errors" flagged by mypy.
+What type annotations should we use for the formal parameters of `my_replace`? We can't use either `str` or `list` because this routine is supposed to work with any sequence that defines the length, slicing, and concatenation operators (i.e., the magic methods `__len__`, `__getitem__`, and `__add__`). Well, perhaps we might declare these parameters to be of type `Sequence`, whose definition you can import from the `typing` module, as I illustrate in `bookshelf1-anno.py`.[^fn12] Unfortunately, this doesn't work. Mypy will mark expressions like `new_s + new` as an error because not all sequence types in Python support concatenation. That was a design choice in the Python language, and it means that we're left with no type that's right for the data abstraction we built in `my_replace`. We either must: (1) eliminate this abstraction from our code base (and consider every error message from mypy a true error); or (2) keep `my_replace` and decide that we're going to ignore some of the "errors" flagged by mypy.
 
 While things do get complicated, the main point is that tools exist that can help you to find the bugs that creep into your scripts, and static tools have the amazing power to look for errors in all the possible runs of your script without the need for test inputs. Unfortunately, while powerful and useful, all such tools do have their limitations. Take the time to learn the capabilities of each individual tool and be cognizant of their limitations (or how they put limitations on your coding). If you do, you'll be able to more easily wring the bugs out of your scripts and more quickly solve the problems that matter to you.
 
 ```{tip}
-As a Python programmer working in a dynamically-typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you'll want to know how that language's features can also be a vehicle for common runtime errors. For example, C is often described as a language that allows programmers to operate close to the machine's hardware. It allows you to manipulate your computer's memory in ways you cannot in Python, but it also requires you to manage your program's dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn't ever use such a tool since memory management is handled completely by the language runtime.
+As a Python programmer working in a dynamically typed language, you can benefit from a tool that performs static type checking. When writing in other programming languages, you'll want to know how that language's features can also be a vehicle for common runtime errors. For example, C is often described as a language that allows programmers to operate close to the machine's hardware. It allows you to manipulate your computer's memory in ways you cannot in Python, but it also requires you to manage your program's dynamically allocated memory. C programmers, therefore, would want to invest in a tool that detects memory leaks and memory addressing errors. Python programmers wouldn't ever use such a tool since memory management is handled completely by the language runtime.
 ```
-
-\[Version 20241009\]
 
 [^fn1]: This term "static" refers to any analysis performed on a program's code when that program isn't running.
 
-[^fn2]: Many IDEs incorporate generative artificial intelligence (AI), which can also reason about your code. When I ask the AI built into Replit to explain lines 3-4, it tells me that "... dividing a number by 0 is undefined in mathematics, and in programming, it will typically cause an error or exception because the operation is invalid. This would result in a runtime error, potentially crashing the program or causing it to stop executing." We'll talk more about generative AI in Chapter 18.
+[^fn2]: https://en.wikipedia.org/wiki/Division\_by\_zero
 
-[^fn3]: Unlike the last two examples, this code block illustrates a divide-by-zero bug that too often occurs in real programs.
+[^fn3]: Many IDEs incorporate generative artificial intelligence (AI), which can also reason about your code. When I ask the AI built into Replit to explain lines 3-4, it tells me that "... dividing a number by 0 is undefined in mathematics, and in programming, it will typically cause an error or exception because the operation is invalid. This would result in a runtime error, potentially crashing the program or causing it to stop executing." We'll talk more about generative AI in Chapter 18.
 
-[^fn4]: These commands work in a C-language project on Replit. To run this commands elsewhere, you need to have a C compiler installed on your machine or in your cloud-based IDE and a properly configured makefile. Such details are beyond the topic of this book.
+[^fn4]: Unlike the last two examples, this code block illustrates a divide-by-zero bug that too often occurs in real programs.
 
-[^fn5]: A list object holding string objects is how you read \`list\[str\]\`.
+[^fn5]: https://grammarist.com/grammar/parenthetical-phrases/
 
-[^fn6]: Recall the magic of Python's magic methods. We defined the \`\_\_contains\_\_\` magic method in Chapter 11 so that objects of \`class CitySqGrid\` could use Python's \`in\` operator as if they were built into the language. We could do the similar thing here.
+[^fn6]: These commands work in a C-language project on Replit. To run them elsewhere, you need to have a C compiler installed on your machine or in your cloud-based IDE and a properly configured makefile. Such details are beyond the topic of this book.
 
-[^fn7]: In Python, a newline character marks the end of a statement. In C, you must use a semicolon to mark the end of a statement, i.e., newlines are treated as meaningless whitespace in C.
+[^fn7]: https://mypy-lang.org/
 
-[^fn8]: Both programs print \`1\`, which means that the type check succeeds. This experiment demonstrates that, in the C programming language, values of type \`char\` are also values of type \`int\`. In fact, if you go on to study C, you'll learn that characters are just 8-bit integers.
+[^fn8]: A list object holding string objects is how you read \`list\[str\]\`.
 
-[^fn9]: You can find \`bookshelf1-anno.py\` in \`chap16\` of the book's code repository.
+[^fn9]: Recall the magic of Python's magic methods. We defined the \`\_\_contains\_\_\` magic method in Chapter 11 so that objects of \`class CitySqGrid\` could use Python's \`in\` operator as if they were built into the language. We could do the similar thing here.
+
+[^fn10]: In Python, a newline character marks the end of a statement. In C, you must use a semicolon to mark the end of a statement, i.e., newlines are treated as meaningless whitespace in C.
+
+[^fn11]: Both programs print \`1\`, which means that the type check succeeds. This experiment demonstrates that, in the C programming language, values of type \`char\` are also values of type \`int\`. In fact, if you go on to study C, you'll learn that characters are just 8-bit integers.
+
+[^fn12]: You can find \`bookshelf1-anno.py\` in \`chap16\` of the book's code repository.

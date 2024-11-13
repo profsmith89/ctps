@@ -6,7 +6,7 @@ Computational tools help us to automate away the drudgery involved in our work, 
 
 However, unlike earlier chapters, this time we won't have to identify the patterns we wish to exploit. Because data scientists often work with data sets that are too large for humans to analyze, they need tools that can help to identify and exploit the patterns in these data sets. The design of these tools exist in a branch of artificial intelligence called *machine learning (ML)*, and we'll look at one popular library for it called scikit-learn. With such a library, it is very easy to mine a data set for patterns and create a model that uses the patterns it learned to make predictions about new data. In effect, we're asking the computer to analyze a data set and build an algorithm that we would find too difficult to build for ourselves.
 
-We'll explore two real-world problems in this space: (1) the predicting of housing prices based on a home's characteristics (e.g., its number of bedrooms and bathrooms); and (2) the labeling of online comments as toxic. The first is a classic and fairly straightforward ML application. We'll use it as an introduction to ML tools and techniques. The second is a more difficult problem, and it will open our eyes to the dangers of bias in the ML models we build. I'll mention two of the many ways in which bias can creep into a model so that you can begin checking your own. Unfortunately, eliminating bias remains a hard problem, and sometimes, when the harms a model creates are greater than its benefits, you simply shouldn't deploy it.
+We'll explore two real-world problems in this space: (1) the predicting of housing prices based on a home's characteristics (e.g., its number of bedrooms and bathrooms); and (2) the labeling of online comments as toxic. The first is a classic and straightforward ML application. We'll use it as an introduction to ML tools and techniques. The second is a more difficult problem, and it will open our eyes to the dangers of bias in the ML models we build. I'll mention two of the many ways in which bias can creep into a model so that you can begin checking your own. Unfortunately, eliminating bias remains a hard problem, and sometimes, when the harms a model creates are greater than its benefits, you simply shouldn't deploy it.
 
 ```{admonition} Learning Outcomes
 Learn to use machine learning (ML) as a tool for discovering and exploiting real-world correlations. You will perform supervised learning to build a decision-tree model that that predicts home prices. You'll practice with Pandas and data frames, i.e., table data structures. In addition to a focus on predictive accuracy, you'll grapple with questions of bias in ML. After completing this chapter, you will be able to:
@@ -33,7 +33,7 @@ We'll focus on the first two pieces, and your sister will use our tuned model in
 
 ## Your sister's data
 
-Let's assume that your sister lives in Ames, Iowa. In 2011, Dean De Cock published a data set describing the housing sales in this area from 2006 to 2010.[^fn1] He published it for use in undergraduate regression courses, and it has since become a popular data set for learning about ML. We'll grab a copy of this data set from the online platform [kaggle.com](https://www.kaggle.com), where you can join a community of ML enthusiasts and peruse a repository of community-published data sets and ML models.
+Let's assume that your sister lives in Ames, Iowa. In 2011, Dean De Cock published a data set describing the housing sales in this area from 2006 to 2010.[^fn1] He published it for use in undergraduate regression courses, and it has since become a popular data set for learning about ML. We'll grab a copy of this data set from the online platform kaggle.com, where you can join a community of ML enthusiasts and peruse a repository of community-published data sets and ML models.[^fn2]
 
 The Ames-Iowa-Housing data is one large CSV file. Recall that a CSV is a text file that contains row after row of comma-separated values. It is tabular data that you could read into a spreadsheet application, but let's practice our Python and write a small script (`head.py`) to look at the first five rows of this data set.
 
@@ -64,7 +64,8 @@ if __name__ == '__main__':
 This script uses the `csv` library and its `DictReader` function, which takes a table's column headings and uses them as dictionary keys. When you run `head.py` on your copy of the Ames-Iowa-Housing CSV file, you should see the first five data rows printed as dictionaries. Each row is a home sale, which lists a lot of information. My copy of the data set contained 82 different pieces of information about each home sale, including `'Year Built'` and `'SalePrice'`. We now know why your sister asked for help.
 
 ```{admonition} You Try It
-Download the Ames-Iowa-Housing data (e.g., from Marco Palermo's Kaggle site) and run `head.py` on the complete CSV file.
+
+Download the Ames-Iowa-Housing data (e.g., from Marco Palermo's Kaggle site[^fn3]) and run `head.py` on the complete CSV file.
 ```
 
 ## Solving this problem ourselves
@@ -162,13 +163,19 @@ lineno-start: 1
 #         print('Predicted price:', A_SMALLER_NUMBER)
 ```
 
-What we're building is called a *decision tree*. For each characteristic we think is important in determining the predicted price, we include a node in the tree (i.e., an if-statement) that directs us toward a subtree (i.e., subsequent if-statements) where that characteristic is true. When we get to the leaves of the tree (i.e., when we run out of conditions to check), we print the predicted price for a house with those characteristics. In our pseudocode, for instance, `A_SMALL_NUMBER` is the predicted price for a home with two or fewer bedrooms on a lot of more than 12,000 square feet.
+```{figure} images/Smith_fig_17-01.png
+:name: c17_fig1_ref
+
+Decision tree for predicting the price of a home based on its number of bedrooms and lot area. A home with many bedrooms and a large lot is expected to sell for a large amount.
+```
+
+What we're building is called a *decision tree*, which I've illustrated in {numref}`Figure %s <c17_fig1_ref>`. For each characteristic we think is important in determining the predicted price, we include a node in the tree (i.e., an if-statement) that directs us toward a subtree (i.e., subsequent if-statements) where that characteristic is true. When we get to the leaves of the tree (i.e., when we run out of conditions to check), we print the predicted price for a house with those characteristics. In our pseudocode, for instance, `A_SMALL_NUMBER` is the predicted price for a home with two or fewer bedrooms on a lot of more than 12,000 square feet.
 
 Unfortunately, even if we were patient enough to figure out what buckets of lot sizes to use, we'd still find that this decision tree doesn't use enough of the data to create a good predictor. We need to a smarter approach. We need *machine learning*.
 
 ## Machine learning
 
-We've been trying to suss out a pattern in the Ames-Iowa-Housing data that we could use as the foundation for a good predictor, and we were using your sister's experience in real estate as a starting point in this search. This wasn't a bad idea since evolution has made humans into good pattern recognizers---as we discussed in Chapter 1, the accumulation of experience turns good programmers into great ones, who seem to quickly jump to the "right" structure for a script to solve a new problem. But we don't have your sister's experience and the patterns in the Ames-Iowa-Housing data might be quite subtle. ML is a computational approach that enables computers, through the use of *statistical techniques* and *a large training data set*, to build *models* that perform like an experienced human. They allow all of us to become instant experts in a new domain.
+We've been trying to suss out a pattern in the Ames-Iowa-Housing data that we could use as the foundation for a good predictor, and we were using your sister's experience in real estate as a starting point in this search. This wasn't a bad idea since evolution has made humans into good pattern recognizers---as we discussed in Chapter 1, the accumulation of experience turns good programmers into great ones, who seem to quickly jump to the "right" structure for a script to solve a new problem. But we don't have your sister's experience and the patterns in the Ames-Iowa-Housing data might be quite subtle. ML is a computational approach that enables computers, using *statistical techniques* and *a large training data set*, to build *models* that perform like an experienced human. They allow all of us to become instant experts in a new domain.
 
 The statistical technique we used a moment ago was a decision tree. Statisticians recommend this approach when the relationship between the *features* (e.g., the characteristics of a home such as its number of bedrooms and lot size) and the *target variable* (e.g., the home's selling price) is complex. For those of you that know a bit about statistical analysis, this often means that the relationship is non-linear or includes important outliers.
 
@@ -204,7 +211,7 @@ In using this model, your sister probably would find that it didn't do an outsta
 
 A good ML library automates much of steps 2 and 3 for you. We'll use the `pandas` and scikit-learn libraries, and with their help, this process turns into the following:
 
-1. Review and analyze our data set---we'll use the `pandas` library for this work---and pick one or more features we think might correlate well with the target variable.[^fn2]
+1. Review and analyze our data set---we'll use the `pandas` library for this work---and pick one or more features we think might correlate well with the target variable.[^fn4]
 2. Select a type of statistical analysis that'll lie at the heart of our model. We'll use the `DecisionTreeRegressor` class in scikit-learn. Besides decision trees, this library supports many other statistical techniques, and we'll employ a different one when we later consider a predictor for the toxicity of online comments.
 3. Create an instance of the `DecisionTreeRegressor` class and call the resulting object's `fit` method, giving it the set of features and the target variable we want it to use from our training data.
 4. Test this object, which is a model fit to our training data via supervised learning, against some previously unseen data, and evaluate whether this model is a good one. If it is not, we'll return to an earlier step, changing perhaps the features included or the type of statistical analysis performed. 
@@ -214,7 +221,7 @@ Notice that we no longer need to write the code that implements a statistical an
 
 ## Getting a feel for the data
 
-With this foundation, you are ready to start using the tools of a data scientist. We'll begin with the `pandas` library, which "is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language."[^fn3] It provides data structures and functions that allow us to quickly explore a data set.
+With this foundation, you are ready to start using the tools of a data scientist. We'll begin with the `pandas` library, which "is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language."[^fn5] It provides data structures and functions that allow us to quickly explore a data set.
 
 ```{tip}
 Many data scientists work in interactive Python notebooks (`ipynb` files) when doing ML, and we'll do the same in the rest of this chapter. They also commonly refer to the `pandas` library with the abbreviation `pd`.
@@ -251,15 +258,15 @@ df.describe()
 ```
 
 ``` {admonition} You Try It
-Set the variable `csv_file` to the location of where you placed the Ames-Iowa-Housing data set. Execute the referenced code blocks in `ames.ipynb` as you read through this chapter. Remember that the interactive Python interpreter will print the result of the last statement in a code block when you execute it in a `ipynb` file. You'll need to see the returned result for `df.describe()` to follow the explanation that comes next.
+Set the variable `csv_file` to the location of where you placed the Ames-Iowa-Housing data set. Execute the referenced code blocks in `ames.ipynb` as you read through this chapter. Remember that the interactive Python interpreter will print the result of the last statement in a code block when you execute it in an `ipynb` file. You'll need to see the returned result for `df.describe()` to follow the explanation that comes next.
 ```
 
 The results of our call to `df.describe()` list eight numbers for many but not all of our data set's columns. The `pandas` library decided that each of these columns is a *numeric* series, and the numbers under the series name tell you some statistical facts about each of these columns. Here's a short summary of the meaning of each row in the table returned by `describe`:
 
-* `count` reports the number of rows (in the indicated column from the data set) with *non-missing values*. As we discussed in Chapter 8, there are many reasons why a data set may contain missing values. In our data set, for example, two of the home sales don't report any value for `'Bsmt Full Bath'`, which might have occurred because the person filling out the data did't think that they needed to fill out this column for a house without a basement.
+* `count` reports the number of rows (in the indicated column from the data set) with *non-missing values*. As we discussed in Chapter 8, there are many reasons why a data set may contain missing values. In our data set, for example, two of the home sales don't report any value for `'Bsmt Full Bath'`, which might have occurred because the person filling out the data didn't think that they needed to fill out this column for a house without a basement.
 * `mean` is the arithmetic average of the non-missing values.
 * `std` is the standard deviation of the non-missing values, and it provides a measure of the values' numerical spread.
-* `min`, `25%`, `50%`, `75%` and `max` are best considered together. If you were to sort the non-missing values in the column from the smallest number to the largest, the first is `min` and the last `max`. Then imagine drawing three lines that split the sorted list into four equal-sized buckets. The number at these three split points are the values at the 25th percentile (25%), the 50th percentile (50%), and the 75th percentile (75%). Intuitively, the 25th percentile is the number that is bigger than a quarter of the column's values and smaller than the other three-quarters.
+* `min`, `25%`, `50%`, `75%` and `max` are best considered together. If you were to sort the non-missing values in the column from the smallest number to the largest, the first is `min` and the last `max`. Then imagine drawing three lines that split the sorted list into four equal-sized buckets. The number at these three split points are the values at the 25th percentile (`25%`), the 50th percentile (`50%`), and the 75th percentile (`75%`). Intuitively, the 25th percentile is the number that is bigger than a quarter of the column's values and smaller than the other three-quarters.
 
 Knowing this, I can see that my copy of the Ames-Iowa-Housing data contains 2930 entries and the average home sale price between 2006 and 2010 was approximately 180,800 dollars, with the cheapest home selling for just under 80,000 dollars and the most expensive one for 755,000 dollars.
 
@@ -280,7 +287,7 @@ From this result, we can see that 2- and 3-bedroom houses are common, and that w
 
 We're now ready to define the setup we'll use in configuring our prediction model. Let's start with the model's output, which is the variable we want to predict. The series labeled `'SalePrice'` is this target variable, and by convention, data scientists call it `y`.
 
-To set what `y` names, we can grab that series from our `DataFrame` using one of two notations: (1) square brackets to slice it out, as we've done with other sequences; or (2) what's called *dot notation* in `pandas`. The former always works, while the latter is a nice shorthand when the series name doesn't contain spaces or conflict with another attribute name in the `pandas` library. The following code block illustrates both methods while using the latter since this label mets the requirements for using the shorthand.
+To set what `y` names, we can grab that series from our `DataFrame` using one of two notations: (1) square brackets to slice it out, as we've done with other sequences; or (2) what's called *dot notation* in `pandas`. The former always works, while the latter is a nice shorthand when the series name doesn't contain spaces or conflict with another attribute name in the `pandas` library. The following code block illustrates both methods while using the latter since this label meets the requirements for using the shorthand.
 
 ```{code-block} python
 ---
@@ -336,7 +343,7 @@ As we've learned, frequent checks of our script's state help us to find mistakes
 
 ## Fit the model to our data
 
-We chose to use a decision tree, which the scikit-learn library[^fn4] provides through the `DecisionTreeRegressor` class. Instantiating an instance of this class is the first step in creating a model that uses decision trees.
+We chose to use a decision tree, which the scikit-learn library[^fn6] provides through the `DecisionTreeRegressor` class. Instantiating an instance of this class is the first step in creating a model that uses decision trees.
 
 Hidden in this creation step, however, is a bit of randomness, which many ML libraries use as a best practice for creating robust models. Since we want to compare the models we build against each other, we want to eliminate this randomness as a potential cause of any difference in the performance of our models. We can accomplish this by specifying the random seed that the model should use each time it creates a new instance for us. This is the purpose of the `random_state` assignment in the constructor call in the following code block. You can choose any number you'd like as long as you consistently use it in all your constructor calls.
 
@@ -368,7 +375,7 @@ The code block below retrains our model using the `train_X` and `train_y` data s
 
 ```{tip}
 
-Don't test with your training data. A model's utility is defined by its ability to make accurate predictions on data it hasn't previously seen, which are called the *validation data*. It's not hard to get good predictions from a model's training data.[^fn5]
+Don't test with your training data. A model's utility is defined by its ability to make accurate predictions on data it hasn't previously seen, which are called the *validation data*. It's not hard to get good predictions from a model's training data.[^fn7]
 
 ```
 
@@ -406,7 +413,7 @@ Run the code above. Are you happy with the resulting predictions? Did we build a
 
 *Predictive accuracy* is the first measure that data scientists consider when deciding whether a model is good. If a model correctly predicts the target variable a sizable percentage of the time, they say it has good predictive accuracy. If it doesn't, they throw the model away and try again.
 
-You're probably thinking: How often does the model need to be correct, i.e., what percentage classifies as "sizable"? The answer depends on how you'll use the model. For your sister's use case, her reputation will be damaged if the sale prices she suggests to her clients are far from what other experienced realtors suggest. But being slightly off the actual sales price isn't a big deal; no one expects a home to sell for exactly its listing price. This means that we want a reasonably high predictive accuracy, e.g., 70-90 percent of the time the model predicts the selling price within a couple of thousand dollars.[^fn6] On the other hand, you probably wouldn't be happy with a predictive accuracy of 9 in 10 if your doctor was using the model to decide whether your X-ray showed a tumor.
+You're probably thinking: How often does the model need to be correct, i.e., what percentage classifies as "sizable"? The answer depends on how you'll use the model. For your sister's use case, her reputation will be damaged if the sale prices she suggests to her clients are far from what other experienced realtors suggest. But being slightly off the actual sales price isn't a big deal; no one expects a home to sell for exactly its listing price. This means that we want a reasonably high predictive accuracy, e.g., 70-90 percent of the time the model predicts the selling price within a couple of thousand dollars.[^fn8] On the other hand, you probably wouldn't be happy with a predictive accuracy of 9 in 10 if your doctor was using the model to decide whether your X-ray showed a tumor.
 
 Ok, but how do we check if the model we built meets this 7-to-9-in-ten target? When I ran the previous code block, which compared the first five predicted home prices against the actual prices these homes sold for, it printed the following:
 
@@ -445,7 +452,7 @@ Our first attempt at building a model for your sister produced one with a MAE th
 
 ## Making the fit just right
 
-As we discussed earlier, we don't want to send the first model we get working to your sister. We want to vary how we build the model and send her the best one. If you continue in data science, you'll quickly learn that there are many choices you make in building a model and changing these choices affects the model's quality. Some of these choices are absolutes, like "I'm going to build a decision tree model." Others are like knobs or sliders, and you can use a little of that thing to a lot of it. In this latter category of choices, what's important is that you're looking for an amount of the thing that is just right. Technically speaking, the just-right amount creates a model that is neither *overfitted* or *underfitted*.
+As we discussed earlier, we don't want to send the first model we get working to your sister. We want to vary how we build the model and send her the best one. If you continue in data science, you'll quickly learn that there are many choices you make in building a model and changing these choices affects the model's quality. Some of these choices are absolutes, like "I'm going to build a decision tree model." Others are like knobs or sliders, and you can use a little of that thing to a lot of it. In this latter category of choices, what's important is that you're looking for an amount of the thing that is just right. Technically speaking, the just-right amount creates a model that is neither *overfitted* nor *underfitted*.
 
 Let's explore this idea with the `max_leaf_nodes` parameter to the `DecisionTreeRegressor` class, which is slider-like. This parameter limits the number of leaves the scikit-learn library can create in our decision tree, which you can think of as limiting the number of distinct house types in the decision tree. Your first thought might be, "Why would I want to limit the number of distinct house types? Wouldn't more be better?" Well, let's see!
 
@@ -484,7 +491,7 @@ Before you run the code block above, guess which of the bounds (i.e., 4, 16, 64,
 
 The experiment illustrates a common phenomenon: 
 
-* Too little of a thing, like leaves in a decision tree, produces a poor model. This probably makes sense to you because too few categories throws very different houses together in the same average. We saw this earlier when we tried to predict a price based on only a home's number of bedrooms. Technically, the model underfits the training data; it doesn't capture the patterns in the data set important to predicting the target variable. 
+* Too little of a thing, like leaves in a decision tree, produces a poor model. This probably makes sense to you because too few categories will throw very different houses together in the same average. We saw this earlier when we tried to predict a price based on only a home's number of bedrooms. Technically, the model underfits the training data; it doesn't capture the patterns in the data set important to predicting the target variable. 
 * Too much of a thing, perhaps paradoxically, also produces a poor model. The problem this time isn't that the model didn't capture the important patterns. It did. The problem is that it captured too many patterns, and in particular, the model is paying attention to patterns that exist only in the training data and not in the larger world. Technically, the model overfits the training data.
 
 Your best model will sit in the sweet spot between underfitting and overfitting. Starting with little of a thing, the MAE will decrease as you add more of that thing. At some point, however, as you continue to add more, the MAE will start to increase. With the split I created in my version of the Ames-Iowa-Housing data, the MAE was over 37,000 dollars with 4 leaves and decreased as I increased `max_leaf_nodes`. However, it started increasing again at 128 leaves. My experiment's best outcome for `max_leaf_nodes` was 64, producing a MAE that was 14 percent of the test set's average home price. Your sister will be happier with this model than our first!
@@ -497,19 +504,19 @@ We lowered the MAE, but we haven't necessarily found the best model. The last co
 
 In terms of predictive accuracy, we've essentially solved your sister's problem, but this metric isn't the only one that matters. What do you think would happen if I called your sister and asked her to use the ML model you built to predict the selling price of my home in Boston? In other words, should a Boston homeowner trust the model's output? And if not, why not?
 
-Being a good real estate agent, your sister would know that she can't help me. When I ask her my question, she'd almost certainly say, "My knowledge of home prices is specific to Ames, Iowa. Two identical houses, one in Ames and the other in Boston, will sell for different prices.[^fn7] I can't help you." And neither can your model, which like your sister, was trained exclusively on data specific to Ames, Iowa.
+Being a good real estate agent, your sister would know that she can't help me. When I ask her my question, she'd almost certainly say, "My knowledge of home prices is specific to Ames, Iowa. Two identical houses, one in Ames and the other in Boston, will sell for different prices.[^fn9] I can't help you." And neither can your model, which like your sister, was trained exclusively on data specific to Ames, Iowa.
 
-Data scientists would say that our model exhibits *representation bias*, which means that the data set we used to train it did not represent the area in which I live. This is only one kind of bias that can creep into our ML work, and [Harini Suresh and John Guttag published an excellent paper in late 2021](https://arxiv.org/abs/1901.10002) that details six types of ML biases, including this one. Because ML is increasingly influencing important decisions in our lives, like the selling cost of our homes, we need to understand these different kinds of biases and evaluate our ML models for them.
+Data scientists would say that our model exhibits *representation bias*, which means that the data set we used to train it did not represent the area in which I live. This is only one kind of bias that can creep into our ML work, and Harini Suresh and John Guttag published an excellent paper in late 2021[^fn10] that details six types of ML biases, including this one. Because ML is increasingly influencing important decisions in our lives, like the selling cost of our homes, we need to understand these different kinds of biases and evaluate our ML models for them.
 
-Even though the model we built exhibits representation bias, it's still a good model as long as we understand when we should and shouldn't use it, as we just discussed. On the other hand, a model may contain biases that make it useless for its intended purpose, and if you're solely focused on your model's predictive accuracy, you may completely miss this and ship a model that does real harm to individuals and society. Let's look at an instance of this with the help of Alexis Cook, who has written [a tutorial on kaggle titled "Identifying Bias in AI."](https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai/tutorial)
+Even though the model we built exhibits representation bias, it's still a good model if we understand when we should and shouldn't use it, as we just discussed. On the other hand, a model may contain biases that make it useless for its intended purpose, and if you're solely focused on your model's predictive accuracy, you may completely miss this and ship a model that does real harm to individuals and society. Let's look at an instance of this with the help of Alexis Cook, who has written a tutorial on kaggle titled "Identifying Bias in AI."[^fn11]
 
 The type of bias that she explores in the exercise at the end of her tutorial is called *historical bias*. The problem here is not that a training data set doesn't represent the world in which we want to make predictions (i.e., representation bias), but that that world exhibits patterns we don't want to use as the basis for future predictions.
 
 ## Classifying comments as toxic
 
-Cook's exercise uses part of a data set containing approximately 2 million public comments collected from a range of online news sites that used a civility plugin produced by [a now-defunct company called Civil Comments](https://medium.com/@aja_15265/saying-goodbye-to-civil-comments-41859d3a2b1d). When the company shut down, it released this data set, which was picked up by Alphabet's Conversation AI team and turned into [a 2019 kaggle competition](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/overview). The goal of the competition was to build a ML model that could identify which comments in this data set were toxic and do so without discriminating against individuals because of their age, race, gender, religion, or other legally protected characteristics. This problem is hard because discrimination exists in our world, and it is reflected in many of the data sets we collect. We want a model that identifies toxic comments without also learning our society's patterns of historical discrimination against particular individuals.
+Cook's exercise uses part of a data set containing approximately 2 million public comments collected from a range of online news sites that used a civility plugin produced by a now-defunct company called Civil Comments.[^fn12] When the company shut down, it released this data set, which was picked up by Alphabet's Conversation AI team and turned into a 2019 kaggle competition.[^fn13] The goal of the competition was to build a ML model that could identify which comments in this data set were toxic and do so without discriminating against individuals because of their age, race, gender, religion, or other legally protected characteristics. This problem is hard because discrimination exists in our world, and it is reflected in many of the data sets we collect. We want a model that identifies toxic comments without also learning our society's patterns of historical discrimination against particular individuals.
 
-Cook steps you through the building of a `LogisticRegression` model, which takes a comment as a string and classifies it as toxic or not. You can check out the ML code in [Cook's tutorial](https://www.kaggle.com/code/alexisbcook/exercise-identifying-bias-in-ai/notebook); my goal with you here is to focus on what makes identifying historical bias hard so that you aren't caught unaware when you build your own ML models.
+Cook steps you through the building of a `LogisticRegression` model, which takes a comment as a string and classifies it as toxic or not. You can check out the ML code in Cook's tutorial.[^fn14] My goal with you here is to focus on what makes identifying historical bias hard so that you aren't caught unaware when you build your own ML models.
 
 From her snapshot of the entire data set, Cook's code pulls two example comments that illustrate toxic and not-toxic comments. I repeat below these two labeled comments:
 
@@ -550,18 +557,30 @@ In this chapter, we built fairly good predictors using relatively simple statist
 
 Finally, a data scientist's work is not complete until they attach a story to their models and associated discoveries. These stories require creativity, an adherence to the truth of what has been learned, and a thoughtfulness about how this information might be used for good and evil. May you use the knowledge you've gained to make the world a better place for all.
 
-\[Version 20241015\]
+[^fn1]: Dean De Cock, "Ames, Iowa: Alternative to the Boston Housing Data as an End of Semester Regression Project," *Journal of Statistics Education*, Volume 19, Number 3 (2011, https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from Marco Palermo's Kaggle site: https://www.kaggle.com/datasets/marcopale/housing. As we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
 
-[^fn1]: You can read De Cock's original paper in the [Journal of Statistics Education, Volume 19, Number 3 (2011)](https://jse.amstat.org/v19n3/decock.pdf). The copy of the Ames, Iowa Housing Data I use in this chapter is from [Marco Palermo's Kaggle site](https://www.kaggle.com/datasets/marcopale/housing). Normally, as we discussed in Chapter 8, we'd want to inspect and clean a data set before we use it to build a prediction model, but De Cock has already cleaned the data.
+[^fn2]: https://www.kaggle.com/
 
-[^fn2]: Even the task of choosing the features (step 1) can be partially automated. If you take a ML course, you'll learn about statistical techniques that can automatically prioritize the features in your data set.
+[^fn3]: https://www.kaggle.com/datasets/marcopale/housing
 
-[^fn3]: "pandas --- Python Data Analysis Library." Accessed August 9, 2024. https://pandas.pydata.org/
+[^fn4]: Even the task of choosing the features (step 1) can be partially automated. If you take a ML course, you'll learn about statistical techniques that can automatically prioritize the features in your data set.
 
-[^fn4]: The Python module you want to import to use the scikit-learn library is called \`sklearn\`.
+[^fn5]: "pandas --- Python Data Analysis Library." Accessed August 9, 2024. https://pandas.pydata.org/
 
-[^fn5]: You can try this by changing the code in 13th code block. Call \`predict\` with \`train\_X\` instead of \`test\_X\`; and set \`actuals\` to be \`train\_y.to\_list()\`.
+[^fn6]: The Python module you want to import to use the scikit-learn library is called \`sklearn\`.
 
-[^fn6]: This dollar amount reflects our knowledge that the average selling price in the Ames-Iowa-Housing data set is approximately 180,000 dollars.
+[^fn7]: You can try this by changing the code in 13th code block. Call \`predict\` with \`train\_X\` instead of \`test\_X\`; and set \`actuals\` to be \`train\_y.to\_list()\`.
 
-[^fn7]: Real estate apps like Zillow.com often allow you to compare home values in different regions of the United States. I used this feature on Zillow to compare the September 2024 "Zillow Home Value Index" for Ames (262,085 dollars) and Boston (748,710 dollars).
+[^fn8]: This dollar amount reflects our knowledge that the average selling price in the Ames-Iowa-Housing data set is approximately 180,000 dollars.
+
+[^fn9]: Real estate apps like Zillow.com often allow you to compare home values in different regions of the United States. I used this feature on Zillow to compare the September 2024 "Zillow Home Value Index" for Ames (262,085 dollars) and Boston (748,710 dollars).
+
+[^fn10]: Hariri Suresh and John V. Guttag, "A Framework for Understanding Sources of Harm throughout the Machine Learning Life Cycle," Computing Research Repository (CoRR), abs/1901.10002 (2019). https://arxiv.org/abs/1901.10002
+
+[^fn11]: https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai/tutorial
+
+[^fn12]: https://medium.com/@aja\_15265/saying-goodbye-to-civil-comments-41859d3a2b1d
+
+[^fn13]: https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/overview
+
+[^fn14]: https://www.kaggle.com/code/alexisbcook/exercise-identifying-bias-in-ai/notebook

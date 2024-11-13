@@ -11,7 +11,7 @@ Given the enormous size of the Google search problem, this sort of an approach i
 Fortunately, Rabin-Karp provides us with a potential answer. It introduces us to the technique of *hashing*, which allows us to build offline an index (like a book index) of the webpages that contain words of interest. But when we split the work we do to solve the problem into online and offline components, we have created for ourselves a new challenge: how do we know what to search for before the user asks us a question? Obviously, we don't, but we can turn the preprocessing into work not just for one query, but (effectively) for all possible queries. This is what Google means when it talks about building an index. So our problem-to-be-solved becomes: *how do we build a book index?* A book index is simpler than Google's web index, but the online performance of an index is what we need to solve our simplified Google search problem!
 
 ```{admonition} Learning Outcomes
-In this chapter, you will learn a new approach to problem solving that splits work into online and offline components. You will build a book index, which is a simplified version of Google's search index, using hash functions and hash tables, and distinguish common and exceptional situations though a discussion of hash collisions. By the end of the chapter, you will be able to:
+In this chapter, you will learn a new approach to problem solving that splits work into online and offline components. You will build a book index, which is a simplified version of Google's search index, using hash functions and hash tables, and distinguish common and exceptional situations though a discussion of hash collisions. By the chapter's end, you will be able to:
 
 *   Understand how hashing is the key to solving the Google search problem [design and CS concepts];
 *   Design a simple hash function [design and programming skills];
@@ -57,7 +57,7 @@ What question is this equality comparison between two integers answering? It tri
 
 We call these integers *hashes* of their corresponding strings, and the specification for computing a hash looks something like the following: *Given a string of arbitrary length, use the string's encoding to compute an integer.* This specification, illustrated in {numref}`Figure %s<c10_fig1_ref>`, is a bit simpler than what we'll discover we need, but it is enough to get us started.
 
-```{figure} images/c10_fig1.png
+```{figure} images/Smith_fig_10-01.png
 :name: c10_fig1_ref
 
 To create a hash, which is just an integer value, we'll write a function that takes a string of any length as input and returns an integer.
@@ -105,7 +105,7 @@ To understand this pattern, first recognize that the matching loop begins with t
 
 Then comes the repeating pattern: Given a text substring of $m$ characters, the next substring to consider removes the leftmost character in the substring and adds a new character to the righthand side of the substring. This action corresponds to the sliding of the pattern-string template one character to the right for each matching loop iteration, as shown in {numref}`Figure %s<c10_fig2_ref>`.
 
-```{figure} images/c10_fig2.png
+```{figure} images/Smith_fig_10-02.png
 :name: c10_fig2_ref
 
 To update a hash, our script must do three things: (1) remove the most significant digit; (2) shift up by one digit the significance of the remaining digits; and (3) add in a new least significant digit.
@@ -266,7 +266,7 @@ In the preprocessing work for `rk_strmatch`, we set the variable `q` to the prim
 
 Let's update our specification (see {numref}`Figure %s<c10_fig3_ref>`) with what we've done.
 
-```{figure} images/c10_fig3.png
+```{figure} images/Smith_fig_10-03.png
 :name: c10_fig3_ref
 
 An updated specification for hashing that limits the range of integers produced. When two strings to map to the same integer, it's called a hash collision (not shown).
@@ -274,7 +274,7 @@ An updated specification for hashing that limits the range of integers produced.
 
 Notice that it is entirely possible, although we hope infrequent, that two (or more) input strings will hash to the same number. This is called a *hash collision*. Hope, of course, is not a problem-solving strategy, and any code that uses hashes as a shorthand for arbitrary-length strings must check when two hashes match. In particular, we must check that the two strings from which these hashes originated are in fact the same. If they aren't, we simply found a *collision* in the hash space.
 
-Handling collisions is the purpose of the if-statement on line 42 in the code block above. Notice that, when the algorithm encounters a lot of hash collisions, its behavior reverts back to the worst-case computational complexity of `bf_strmatch`.
+Handling collisions is the purpose of the if-statement on line 42 in the code block above. Notice that, when the algorithm encounters a lot of hash collisions, its behavior reverts to the worst-case computational complexity of `bf_strmatch`.
 
 You might wonder why the code only does something extra when it finds two hashes that match. What about the case when the two hashes don't match? Will we ever have a problem? Absolutely not. When two hashes are different, then the strings from which they were generated must have been different.
 
@@ -284,17 +284,17 @@ In summary, using a hash function that does a good job of mapping arbitrary-leng
 
 We talked about hashing in the domain of string matching, and in particular as a way of creating a *fingerprint* or small summary of a large amount of data. Creating such fingerprints has been found to be broadly useful beyond string matching. For example, we might use hashing to create a fingerprint of a large block of data we wish to send across a computer network, and on which we know there is a non-zero probability that some bits might not be transmitted properly. While similar in concept to the string-matching problem we just discussed, this problem domain has different requirements.
 
-In particular, in this problem domain we don't need a function that produces hashes which we can incrementally update as we scan across the data. In a typical scenario, a sender scans the data once and produces a hash. This sender then sends both the data and its hash across the network to a receiver. When the receiver has all the data, it computes the hash of the data it received and compares this hash against the one sent by the sender. If the two match, it is highly probable that the data and the hash were transmitted without any errors. However, if the two hashes don't match, the receiver knows that either the data or its hash was corrupted in transit, and it will request the sender to resend the data. Because we can't rule out a transmission error, it is even more important in this problem domain than in string matching to reduce the probability of a collision. This is just one example of how different problem domains can influence the prioritization of the properties and metrics of your solution.
+In this problem domain we don't need a function that produces hashes which we can incrementally update as we scan across the data. In a typical scenario, a sender scans the data once and produces a hash. This sender then sends both the data and its hash across the network to a receiver. When the receiver has all the data, it computes the hash of the data it received and compares this hash against the one sent by the sender. If the two match, it is highly probable that the data and the hash were transmitted without any errors. However, if the two hashes don't match, the receiver knows that either the data or its hash was corrupted in transit, and it will request the sender to resend the data. Because we can't rule out a transmission error, it is even more important in this problem domain than in string matching to reduce the probability of a collision. This is just one example of how different problem domains can influence the prioritization of the properties and metrics of your solution.
 
-Although we know a lot about string matching now, we still haven't found a solution to our simplified Google search problem that executes with a delay that a human would find acceptable. To actually solve this problem, we need to discuss yet another application of hashing.
+Although we know a lot about string matching now, we still haven't found a solution to our simplified Google search problem that executes with a delay that a human would find acceptable. To solve this problem, we need to discuss yet another application of hashing.
 
 ## Indices for fast data retrieval
 
-You know how a book index works: Given a keyword, you use the index to find a listing of the pages in the book that contain the keyword. We humans still have to search the book index for the keyword, but once we have found the entry, we are directly rewarded with the pages on which we can find the keyword. This is how you should think of Google's search index. Google pulls from the string we type into its search box a set of keywords, and then it uses these keywords to quickly look up in its index the webpages that contain them.
+You know how a book index works: Given a keyword, you use the index to find a listing of the pages in the book that contain the keyword. We humans still must search the book index for the keyword, but once we have found the entry, we are directly rewarded with the pages on which we can find the keyword. This is how you should think of Google's search index. Google pulls from the string we type into its search box a set of keywords, and then it uses these keywords to quickly look up in its index the webpages that contain them.
 
 Of course, Google's search index is going to contain a huge number of keywords as it indexes a huge number of webpages. How does Google quickly find the entry for our keywords among all the keywords in its index? You guessed it---through the power of hashing, as illustrated in {numref}`Figure %s<c10_fig4_ref>`.
 
-```{figure} images/c10_fig4.png
+```{figure} images/Smith_fig_10-04.png
 :name: c10_fig4_ref
 
 A simplified diagram of how Google goes from a string in its search box to a listing of webpages containing one or more keywords from the string.
@@ -332,7 +332,7 @@ The Python interpreter then multiplies the index by the size of a character and 
 byte_address = index * size_of(character) + starting_byte_address
 ```
 
-To implement a hash table with insertion, deletion, and search operations that execute in constant time, we create an array (let's call it `hash_table`) as large as the hash space we need. Each location in this array will be a fixed number of bytes (let's call it `sz`), which are large enough to hold the largest value we want associated with the hash table keys. Then when a script asks for `hash_table[5]`, for example, the hash table code computes the memory address of the value we want by adding the address of `hash_table[0]` and 5 times `sz`. With this address, it directly accesses the memory location containing the value. Constant-time lookup. Insertion and deletion involve a similar set of operations.
+To implement a hash table with insertion, deletion, and search operations that execute in constant time, we create an array (let's call it `hash_table`) as large as the hash space we need. Each location in this array will be a fixed number of bytes (let's call it `sz`), which are large enough to hold the largest value we want associated with the hash table keys. Then when a script asks for `hash_table[5]`, for example, the hash table code computes the memory address of the value we want by adding the address of `hash_table[0]` and `5` times `sz`. With this address, it directly accesses the memory location containing the value. Constant-time lookup. Insertion and deletion involve a similar set of operations.
 
 ## With high probability
 
@@ -340,17 +340,17 @@ A good hash table does two things: (1) computes hashes quickly and (2) minimizes
 
 But this is where things get tricky. Let's assume that our hash table uses strings as keys. How long does it take to do string matching to verify that the stored value is associated with the input key? Aargh! We know this. In the best case, it is proportional to the length of the string. If we do brute-force string matching during our hash table lookup, the computational complexity of the operation is not $O(1)$, but $O(sizeOfTheInputString)$.
 
-This annoying wrinkle is why most hash table implementations, including [dictionaries in Python](https://docs.python.org/3/tutorial/datastructures.html#dictionaries), require you to use immutable types for the hash table keys. Briefly, an object of an immutable type allows the Python interpreter to use the starting address of that object in memory as a small hash of the object. The cases we would need to enumerate to convince ourselves that this comparison suffices to identify a hash collision would make this description even more tedious than it has already become. And luckily, we're not here to build a working hash-table data type. We just want to use one and understand when we'll get good performance from it.
+This annoying wrinkle is why most hash table implementations, including dictionaries in Python, require you to use immutable types for the hash table keys.[^fn6] Briefly, an object of an immutable type allows the Python interpreter to use the starting address of that object in memory as a small hash of the object. The cases we would need to enumerate to convince ourselves that this comparison suffices to identify a hash collision would make this description even more tedious than it has already become. And luckily, we're not here to build a working hash-table data type. We just want to use one and understand when we'll get good performance from it.
 
 ## Collision resolution
 
-As much as I'd like to end at this point and complete the design of our book index, I have to highlight one more detail that I glossed over in the preceding discussion: *What happens when we want to store two key-value pairs in our hash table where both keys hash to the same location in the hash table array?*
+As much as I'd like to end at this point and complete the design of our book index, I must highlight one more detail that I glossed over in the preceding discussion: *What happens when we want to store two key-value pairs in our hash table where both keys hash to the same location in the hash table array?*
 
 Not allowing such a thing to happen would break the desired behavior of the hash table as an associative array. Silently throwing away the previously stored key-value pair in that location is equally unacceptable. We must find two locations to store these two different key-value pairs that map to the same hash, and we need to have a process for searching all the possible locations when our first array lookup fails (i.e., the lookup key doesn't match the stored key).
 
-There are a number of competing methods with different tradeoffs for solving what's called *collision resolution* in hash tables. Two popular techniques are *separate chaining*, which uses extra storage outside the hash table array to hold the key-value pairs involved in collisions, and *open addressing*, which forces collisions into the currently unoccupied array locations (i.e., it uses no extra storage). Neither technique is superior over the other in all problem contexts. If you dive deeper into algorithms and data structures, you'll learn how to implement these schemes and learn the conditions under which one outperforms than the other.
+There are several competing methods with different tradeoffs for solving what's called *collision resolution* in hash tables. Two popular techniques are *separate chaining*, which uses extra storage outside the hash table array to hold the key-value pairs involved in collisions, and *open addressing*, which forces collisions into the currently unoccupied array locations (i.e., it uses no extra storage). Neither technique is superior over the other in all problem contexts. If you dive deeper into algorithms and data structures, you'll learn how to implement these schemes and learn the conditions under which one outperforms than the other.
 
-To be clear, none of these techniques overcome the worst-case computational complexity of a hash table lookup. It is always possible, although unlikely with a good hash function, that all of your keys produce the same hash. In the worst-case behavior, a table lookup has $O(n)$ work to do to find the key-value pair you desire, assuming you put $n$ key-value pairs into the hash table before this lookup.
+To be clear, none of these techniques overcome the worst-case computational complexity of a hash table lookup. It is always possible, although unlikely with a good hash function, that all your keys produce the same hash. In the worst-case behavior, a table lookup has $O(n)$ work to do to find the key-value pair you desire, assuming you put $n$ key-value pairs into the hash table before this lookup.
 
 ## Specification for creating a book index
 
@@ -360,15 +360,15 @@ Our script will implement the following specification: *Given a simple text file
 
 ## Building top-down
 
-Let's begin our design by deciding that we'll build the book index by processing our book a single line at a time, which is what we did to read a book in Chapter 1. It's often good to start with a script structure around which we have some experience. We can always change our mind and adjust the design once we gain further insights into the work we have to do.
+Let's begin our design by deciding that we'll build the book index by processing our book a single line at a time, which is what we did to read a book in Chapter 1. It's often good to start with a script structure around which we have some experience. We can always change our mind and adjust the design once we gain further insights into the work we must do.
 
 Let's also decide that we'll use a Python dictionary to store the word-references pairs as we process each line in the input text. But what exactly is a word-references pair?
 
-Starting with the first part of this pair, our brains recognize words in a line of text, but what code should we write to extract words from a line of text? Unfortunately, this is not an easy question to answer as some characters, like an apostrophe, are not only punctuation marks (i.e., single quotes) but also parts of a word (e.g., in the contraction "isn't"). We'll "solve" this challenge by using a piece of code that we don't yet understand to create a word list from a line of text.[^fn6] We'll call this function `get_wordlist`, and it will take a line of text and return a Python list, where each element in the list is a word.
+Starting with the first part of this pair, our brains recognize words in a line of text, but what code should we write to extract words from a line of text? Unfortunately, this is not an easy question to answer as some characters, like an apostrophe, are not only punctuation marks (i.e., single quotes) but also parts of a word (e.g., in the contraction "isn't"). We'll "solve" this challenge by using a piece of code that we don't yet understand to create a word list from a line of text.[^fn7] We'll call this function `get_wordlist`, and it will take a line of text and return a Python list, where each element in the list is a word.
 
 What about this "references" thing in the other half of the word-references pair? Let's agree that this is a Python list of the book's unit numbers in which you can find one or more instances of the word in the word-references pair. If the books units we want referenced in the book index are page numbers, this list would contain the list of pages on which you can find one or more instances of the word. If the books units are chapter numbers, this list would contain the list of chapters in which you can find one or more instances of the word. And so forth.
 
-Great! With these decisions made, we can start writing pseudocode.[^fn7]
+Great! With these decisions made, we can start writing pseudocode.[^fn8]
 
 ```{code-block} python
 ---
@@ -470,7 +470,7 @@ The only other piece of code worth highlighting is that which implements the fun
 
 ```{admonition} You Try It
 
-Can you figure out what value is produced by the equality test on line 31 in `found_new_unit` when `UNIT_PAT` is the empty string and `line` is `'This is NOT a blank line'`? When you do, you'll understand why we need the test on line 28.[^fn8]
+Can you figure out what value is produced by the equality test on line 31 in `found_new_unit` when `UNIT_PAT` is the empty string and `line` is `'This is NOT a blank line'`? When you do, you'll understand why we need the test on line 28.[^fn9]
 
 ```
 
@@ -545,20 +545,11 @@ def update_index(d, wordlist, unitno):
     return d
 ```
 
-Let's try again.
-
-```{code-block} python
----
-lineno-start: 1
----
-txt = '''"Now! Now! Have no fear.
-Have no fear!" said the cat.
-"My tricks are not bad,"
-Said the Cat in the Hat.'''
-build_index(txt)
+```{admonition} You Try It
+Make sure you rerun the previous test `txt` to ensure that we fixed the problem and didn't introduce any new ones.
 ```
 
-This looks much better, except ... do we really want both `'said'` and `'Said'` separately in our dictionary? Probably not. We will use the `lower` method on strings to make sure it doesn't matter how a word was capitalized.
+That looks much better, except ... do we really want both `'said'` and `'Said'` separately in our dictionary? Probably not. We will use the `lower` method on strings to make sure it doesn't matter how a word was capitalized.
 
 ```{code-block} python
 ---
@@ -612,7 +603,7 @@ This looks quite good, but notice that you cannot predict the order of the keys 
 
 ## Sort and strip
 
-Ok, but we have to print the index so that it looks like a book index. This isn't that hard, since Python dictionaries allow you to iterate through the keys in a dictionary and even use Python's built-in `sorted` function to sort the keys.
+Ok, but we should print the index so that it looks like a book index. This isn't that hard, since Python dictionaries allow you to iterate through the keys in a dictionary and even use Python's built-in `sorted` function to sort the keys.
 
 The only other thing we'll want to do is strip away the square brackets when we convert the list of references to a string. Here's the final version of `build_index` and a rerun of the last test.
 
@@ -648,27 +639,27 @@ build_index(txt)
 ```
 
 ```{admonition} You Try It
-Run `index32.py` with `JustDavid-chaps.txt`, which you can find in the `chap10` code distribution. In `index32.py`, you'll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the `UNIT_PAT` and `UNIT_CNT_INIT` definitions that are appropriate for `CatInTheHat.txt` and enable those for `JustDavid-chaps.txt`. Now run `python3 index32.py JustDavid-chaps.txt` at your shell prompt.
+Run `index32.py` with `JustDavid-chaps.txt`, which you can find in the book's GitHub repository for `chap10`. In `index32.py`, you'll want to remove the triple quotes on line 17 and insert a triple quotes between lines 11 and 12. This will disable the `UNIT_PAT` and `UNIT_CNT_INIT` definitions that are appropriate for `CatInTheHat.txt` and enable those for `JustDavid-chaps.txt`. Now run `python3 index32.py JustDavid-chaps.txt` at your shell prompt.
 ```
 
 You now have a general idea how Google takes a search string and quickly returns a list of pages containing the keywords in our search. It simply looks up the search string's keywords in a big hash table, and each lookup takes constant time. None of this online work takes time proportional to the size of all the pages in the indexed web.
 
 Of course, Google does more than just web search, as we'll discuss in the following chapters, but this is a great start. Congratulations!
 
-\[Version 20240829\]
+[^fn1]: I've said we care about loops, and since this statement isn't a loop, computer scientists say that it takes *constant time*, which is expressed as *O*(1). What they're really saying is that the operation doesn't depend upon the length of the input; it is constant time work no matter what the input.
 
-[^fn1]: I've said we care about loops, and since this statement isn't a loop, computer scientists say that it takes *constant time*, which is expressed as *O(1)*. What they're really saying is that the operation doesn't depend upon the length of the input; it is constant time work no matter what the input.
+[^fn2]: We use Unicode (https://home.unicode.org) to give us an encoding space big enough to capture many of the different characters used in human communication. Without loss of generality and to simplify my examples, I'll won't use Unicode and instead use the older ASCII encoding, which encodes characters in 8 bits or 1 byte.
 
-[^fn2]: We use [Unicode](https://home.unicode.org/) to give us an encoding space big enough to capture many of the different characters used in human communication. Without loss of generality and to simplify my examples, I'll won't use Unicode and instead use the older ASCII encoding, which encodes characters in 8 bits or 1 byte.
-
-[^fn3]: If you need a refresher on the rules in modular arithmetic, I recommend the [tutorial in Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic).
+[^fn3]: If you need a refresher on the rules in modular arithmetic, I recommend the tutorial in Khan Academy. https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic
 
 [^fn4]: I've left out the debugging code you'll find in \`rk\_strmatch.py\`, which won't aid during the explanation but will help you in visualizing what the function does as it runs.
 
 [^fn5]: Human languages are, of course, not random in their distribution of letters and letter sequences. However, we do the best we can to not make the problem worse.
 
-[^fn6]: The cryptic code in \`get\_wordlist\` uses regular expressions and lookahead, which we'll cover in Chapter 13.
+[^fn6]: https://docs.python.org/3/tutorial/datastructures.html\#dictionaries
 
-[^fn7]: Recall that our specification requires the user to specify how we'll recognize that we're moving from one book unit to the next and what number to use as the initialization of that count of units. You'll see this in the pseudocode.
+[^fn7]: The cryptic code in \`get\_wordlist\` uses regular expressions and lookahead, which we'll cover in Chapter 13.
 
-[^fn8]: The expression \`len(UNIT\_PAT)\` is 0 when \`UNIT\_PAT\` is the empty string, which makes the slice in \`line\[0:len(UNIT\_PAT)\]\` a slice of nothing, which is the empty string. That's not what we want, and we need to handle the case when \`UNIT\_PAT\` is the empty string with different logic.
+[^fn8]: Recall that our specification requires the user to specify how we'll recognize that we're moving from one book unit to the next and what number to use as the initialization of that count of units. You'll see this in the pseudocode.
+
+[^fn9]: The expression \`len(UNIT\_PAT)\` is 0 when \`UNIT\_PAT\` is the empty string, which makes the slice in \`line\[0:len(UNIT\_PAT)\]\` a slice of nothing, which is the empty string. That's not what we want, and we need to handle the case when \`UNIT\_PAT\` is the empty string with different logic.

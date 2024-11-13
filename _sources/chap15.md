@@ -1,8 +1,8 @@
 # Chapter 15: Embrace Runtime Debugging #
 
-Does this quote by Brian Kernighan and P.J. Plauger[^fn1] resonate with you?
+Does this quote by Brian Kernighan and P.J. Plauger resonate with you?
 
-*"Everyone knows that debugging is twice as hard as writing a program in the first place."*
+*"Everyone knows that debugging is twice as hard as writing a program in the first place."*[^fn1]
 
 Or based on your experience, perhaps you think this underestimates the difficulty of debugging. It does when I consider how I typically spend my time. Nonetheless, Kernighan and Plauger follow up this general truth with a biting insight:
 
@@ -38,7 +38,7 @@ Learn about the duality of code and data in modern computing machines, which all
 
 The first problem we solved in this book had us write a Python script that we eventually called `read32.py` and with which we read the data file `CatInTheHat.txt`. {numref}`Figure %s <c15_fig1_ref>` is a screenshot of both these files. Besides their contents, what's the difference between them? Take a moment to ponder this question, and then read on.
 
-```{figure} images/c15_fig1.png
+```{figure} images/Smith_fig_15-01.png
 :name: c15_fig1_ref
 
 Screenshot of an editor with the open files `read32.py` and `CatInTheHat.txt`.
@@ -50,7 +50,7 @@ In plain English, code is a set of instructions we expect the computer to follow
 
 This highlights the key insight to understanding debuggers: Because code and data are both just sequences of bits, *the same sequence of bits can sometimes be treated as code and other times as data*. This is called the *duality of code and data* in modern computing systems.
 
-For example, sometimes we use a Python script as a set of instructions to direct our computer to complete some task. Other times, we tell a program (e.g., the editor in our IDE) to read and write our Python script as data. A debugger plays both these roles.
+For example, sometimes we use a Python script as a set of instructions to direct our computer to complete a task. Other times, we tell a program (e.g., the editor in our IDE) to read and write our Python script as data. A debugger plays both these roles.
 
 ## Breakpoints and runtime state
 
@@ -62,7 +62,7 @@ The following is a typical way to use a debugger:
 4. Interact with your executing script as you normally would. Your computer is treating your script as code.
 5. Upon encountering a runtime error, exception, or breakpoint in your script, the debugger's prompt returns. Importantly, your script's execution has not terminated, but *paused* at the point of the error, exception, or breakpoint. At this point, the debugger has access to your script and its *runtime state*, which includes the call stack and any variables (including their current values) *in scope* at that point. "In scope" is a technical term in computer science: a variable is in scope if it's valid to use it at that point in the program. Pulling back from the details, the debugger is again treating your script as data, but it also has access to your script's runtime state as data.
 6. Tell the debugger to do something. This might have you asking the debugger to print the value of some variable or to add a new breakpoint. Some debuggers even allow you to change portions of the script's runtime state. Eventually, you'll decide to either continue the script's execution (returning to step 4) or terminate it.
-7. When your script's execution terminates, the debugger is still running and it continues to have access to your script's source code (as data). You can set new breakpoints and restart your script's execution, which allows you to test new theories about what's wrong with it.
+7. When your script's execution terminates, the debugger is still running. It continues to have access to your script's source code (as data). You can set new breakpoints and restart your script's execution, which allows you to test new theories about what's wrong with it.
 
 ## Inserting a breakpoint
 
@@ -85,7 +85,7 @@ lineno-start: 1
 
 Notice that our script's pseudocode separates the prompting of the user for the script-to-be-debugged from the function that will implement the debugger's functionality. The indented pseudocode statements represent the tasks done by the debugging function, and instead of running the modified script with the inserted breakpoint, we'll write it out so that we can examine it.
 
-We can steal from prior scripts the work described in all but line 7, which adds the breakpoint to the script we want debugged. The next code block implements all the pseudocode except this line. Notice that the code encapsulates a number of our pseudocode tasks in functions and provides an ability to print the edited script as well as write it to a file.
+We can steal from prior scripts the work described in all but line 7, which adds the breakpoint to the script we want debugged. The next code block implements all the pseudocode except this line. Notice that the code encapsulates a few of our pseudocode tasks in functions and provides an ability to print the edited script as well as write it to a file.
 
 ```{code-block} python
 ---
@@ -170,20 +170,20 @@ A breakpoint is nothing more than the raising of a Python exception, which will 
 
 `raise Exception("My breakpoint")`
 
-Let's assume our script-to-be-debugged is `guess32.py` from Chapter 5[^fn3] and we'd like to put a breakpoint before line 24. This line compares the user's guess against the secret. Notice that I said "before line 24." I don't mean any point before line 24, but the point immediately before this line. In other words, line 23 (and everything before it at runtime) should have executed, but line 24 (and everything after it at runtime) should not have.
+Let's assume our script-to-be-debugged is `guess32.py` from Chapter 5[^fn3] and we'd like to put a breakpoint before line 24. This line compares the user's guess against the secret. Notice that I said, "before line 24." I don't mean any point before line 24, but the point immediately before this line. In other words, line 23 (and everything before it at runtime) should have executed, but line 24 (and everything after it at runtime) should not have.
 
-How we insert the raise-statement into `guess32.py` between lines 23 and 24 depends on whether we are able to *stretch the script without breaking it*. In other words, is the script that we give the debugger more like:
+How we insert the raise-statement into `guess32.py` between lines 23 and 24 depends on whether we can *stretch the script without breaking it*. In other words, is the script that we give the debugger more like:
 
 * a Python list, which is a data structure that makes it easy to stretch and then insert a new element; or
 * an image file, which is a data structure in which we can change some of the image bits, but not add or remove bits?
 
-Neither case is hard, but you have to know which kind of data structure is holding the script's statements (or more generally instructions). In `my_pdb`, where we're reading the script from a text file using `readlines`, inserting a new statement is easy, as I'll illustrate in a moment.
+Neither case is hard, but you must know which kind of data structure is holding the script's statements (or more generally instructions). In `my_pdb`, where we're reading the script from a text file using `readlines`, inserting a new statement is easy, as I'll illustrate in a moment.
 
 In contrast, some debuggers work with the script's instructions in a data structure that resembles an image file. Since we cannot easily stretch the bit array in an image file, the debugger instead saves a copy of the statement that will execute after the breakpoint (i.e., line 24 in our example) and then overwrites this statement in the image file with the breakpoint statement.[^fn4] If the user wants to continue the script's execution, the debugger will first replace the breakpoint statement with the saved statement and then continue execution.
 
 ## Indenting that statement
 
-Using `list.insert`, it's pretty easy to insert our breakpoint statement. We simply have to remember that indexing starts at `0` while the user's counting of the lines in the script-to-be-debugged starts at `1`. We took care of this conversion immediately after grabbing the line number from the user (line 19 in `pdb1.py`). No off-by-one errors in our script, please!
+Using `list.insert`, it's pretty easy to insert our breakpoint statement. We simply must remember that indexing starts at `0` while the user's counting of the lines in the script-to-be-debugged starts at `1`. We took care of this conversion immediately after grabbing the line number from the user (line 19 in `pdb1.py`). No off-by-one errors in our script, please!
 
 The following inserts a breakpoint statement into `edited_script` at the correct index (e.g., between the original lines 23 and 24 in `guess32.py`):
 
@@ -191,7 +191,7 @@ The following inserts a breakpoint statement into `edited_script` at the correct
 
 But there's a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?
 
-If you think about this, you'll realize that it is the indentation of the line we're replacing (e.g., line 24 in our example). We need to grab the whitespace at the start of this line and add it to the start of our new statement. We could do this using a regular expression, but this work is simple enough that we'll just build a loop with an if-else-statement. The next code block is an updated version of  the function `my_pdb` that calculates the whitespace we need and then inserts the correctly-indented breakpoint statement.
+If you think about this, you'll realize that it is the indentation of the line we're replacing (e.g., line 24 in our example). We need to grab the whitespace at the start of this line and add it to the start of our new statement. We could do this using a regular expression, but this work is simple enough that we'll just build a loop with an if-else-statement. The next code block is an updated version of the function `my_pdb` that calculates the whitespace we need and then inserts the correctly indented breakpoint statement.
 
 ```{code-block} python
 ---
@@ -241,7 +241,7 @@ def my_pdb(script_fname):
 You may have noticed that I added an additional argument to the `Exception` object created on line 32, which we'll use in a moment. The first argument is our name for the exception and the second is the line number where we placed the breakpoint. You can add as many arguments as you like when you create an `Exception` object. We could also create our own exception class that derives from `Exception`, but the current approach is good enough for learning about debugging.
 
 ```{admonition} You Try It
-Run `pdb2.py` on `guess32.py` adding a breakpoint at line 24. Take a look at the output file (`guess32-db.py`) and make sure that it inserted the breakpoint statement correctly. Go ahead and run `guess32-db.py`.
+Run `pdb2.py` on `guess32.py` adding a breakpoint at line 24. Look at the output file (`guess32-db.py`) and make sure that it inserted the breakpoint statement correctly. Go ahead and run `guess32-db.py`.
 
 You might even try commenting out lines 25-29 in `pdb2.py`, which calculate the correct amount of whitespace needed at the start of the breakpoint statement. Then rebuild `guess32-db.py` using this new version of `pdb2.py`, and run the `guess32-db.py` it produces to see how the error message changes.
 
@@ -252,7 +252,7 @@ Don't forget to restore lines 25-29 in `pdb2.py` before reading on!
 
 We have edited our script-to-be-debugged, and we've seen its behavior has changed (i.e., it now raises our breakpoint exception). Our next task is to launch this edited script under the control of our debugger and have it catch the breakpoint exception. We know how to catch exceptions using a try-except-statement, but how do we start the execution of the edited script from within our debugger?
 
-It's actually quite simple. Python includes a built-in function that allows you to execute a string as if it were a Python script. It's called `exec`, and we can experiment with it using the function strings from Chapter 14.
+It's quite simple. Python includes a built-in function that allows you to execute a string as if it were a Python script. It's called `exec`, and we can experiment with it using the function strings from Chapter 14.
 
 ```{code-block} python
 ---
@@ -367,7 +367,7 @@ Since we don't want to reimplement what we already have in the Python debugger `
 1. Where to put print-statements in a script; and
 2. What we want those print-statements to say.
 
-We've been doing this by hand and messing up our scripts along the way. An instrumentation tool could be a much cleaner approach. And it is trivial to do now that we have `pdb3.py`. We simply have to:
+We've been doing this by hand and messing up our scripts along the way. An instrumentation tool could be a much cleaner approach. And it is trivial to do now that we have `pdb3.py`. We simply:
 
 1. Replace our breakpoint statement with a print-statement; and
 2. Have the user specify what they'd like printed.
@@ -453,9 +453,8 @@ If you look at the function `insert_print` in `pin32.py`, you'll see that I no l
 
 ```{code-block} none
 ---
-emphasize-lines: 2
+emphasize-lines: 1
 ---
-### Run the highlighted command in the shell
 chap15$ python3 pin32.py guess32.py
 Line number in script? 24
 What is print's argument? The secret is {secret}
@@ -532,11 +531,9 @@ Run `python3 repl32.py guess32.py` and answer `24` to the line-number question. 
 
 We've built ourselves a powerful and flexible tool with which we can investigate the state of a running program. We've also built ourselves an interpreter than uses a script's interrupted execution context as its environment. Including the real Python debugger `pdb`, you now have several tools with which you can slow down a program's execution so that you can better understand its behavior and more quickly fix the bugs within it. Happy bug squashing!
 
-\[Version 20241004\]
+[^fn1]: Brian W. Kernighan and P.J. Plauger, *The Elements of Programming Style* (New York, NY: McGraw-Hill, 1978, 2nd edition), 10.
 
-[^fn1]: It's from Brian W. Kernighan and P.J. Plauger \[1978\]. *The Elements of Programming Style (2nd edition)*, McGraw-Hill, page 10.
-
-[^fn2]: The [Microsoft Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging) and [Replit](https://docs.replit.com/programming-ide/debugging) IDEs have built-in support for debugging. Python ships with a standalone interactive debugging tool called [pdb](https://docs.python.org/3/library/pdb.html). [Google Colab](https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/01.06-Errors-and-Debugging.ipynb) uses an IPython-enhanced version of pdb, although the interface is not very user-friendly, in my humble opinion.
+[^fn2]: Microsoft Visual Studio Code (https://code.visualstudio.com/docs/editor/debugging) and Replit (https://docs.replit.com/replit-workspace/workspace-features/debugging) have built-in support for debugging. Python ships with a standalone interactive debugging tool called pdb (https://docs.python.org/3/library/pdb.html). Google Colab uses an IPython-enhanced version of pdb (https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/01.06-Errors-and-Debugging.ipynb), although the interface is not very user-friendly, in my humble opinion.
 
 [^fn3]: If you compare the script from Chapter 5 with the one in the \`chap15\` directory, you'll see that they're not exactly the same. In this chapter's version, I created a function \`grab\_guess\` that encapsulates the work we need to do to grab and validate the user's input. This allows you to place a breakpoint in \`grab\_guess\` and learn about how you can move up and down the call stack in an actual debugger.
 

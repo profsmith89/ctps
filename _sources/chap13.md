@@ -2,7 +2,7 @@
 
 The last act began with the recognition that our world is wondrously complex, and we ended it with the realization that this complexity is sometimes disturbingly simple to overcome with the right tool. For example, a divide-and-conquer approach was exactly what we needed in Chapter 12 to tackle Beckett's Challenge and recursion was the right technique for coding a short solution. Finding the right computational tool for your task is the theme of this final act. With the right tool, solving your problems becomes straightforward.
 
-Well, almost. Even if you pick the right tool, you still need to get it to do what you want. In the previous two acts, you became proficient at problem solving by writing scripts, and that's half the battle when using computational tools. The other half is knowing what to do when your script fails to direct a tool in the way you'd like. My goal for you in this act is to have you become more skilled at understanding how your script can fail and more proficient at fixing these failures. And the best way I've learned to achieve this is to collect together the types of mistakes we make in our scripts and then categorize how these mistakes manifest themselves in our computational tools. In a moment, I'll present such a categorization, and then we'll explore its implications in this and the next few chapters.
+Well, almost. Even if you pick the right tool, you still need to get it to do what you want. In the previous two acts, you became proficient at problem solving by writing scripts, and that's half the battle when using computational tools. The other half is knowing what to do when your script fails to direct a tool in the way you'd like. My goal for you in this act is to have you become more skilled at understanding how your script can fail and more proficient at fixing these failures. And the best way I've learned to achieve this is to collect the types of mistakes we make in our scripts and then categorize how these mistakes manifest themselves in our computational tools. In a moment, I'll present such a categorization, and then we'll explore its implications in this and the next few chapters.
 
 Beyond our own human propensity for errors, we also need to understand the limitations of our tools. Just like you, computational tools are good at some things and not so good at others. You can often force a computational tool to do an unnatural task (e.g., use a for- or while-loop to solve a problem that's more elegantly solved with recursion), but the work required and the errors that arise are often daunting. Sometimes it is not even possible to force a tool to do what you want, as we'll see in the next chapter.
 
@@ -12,7 +12,7 @@ I wish that the challenges ended here, but they don't. Even when a tool works, w
 
 ## The mistakes we make in problem solving
 
-It's been quite some time since we looked at the list of steps in our problem solving process. Let's return to that list, but reframe the last three steps to reflect the knowledge we've gained over the past two acts.
+It's been quite some time since we looked at the list of steps in our problem-solving process. Let's return to that list but reframe the last three steps to reflect the knowledge we've gained over the past two acts.
 
 Recall that the process begins with us precisely specifying our problem (step 1) and imagining a few specific instances of it (step 2). We next decompose it into its different tasks (step 3), decide which tasks are computational in nature (step 4), and identify existing algorithms, libraries, and our own previously written code that might help (step 5). This brings us to the last three steps, which we previously described as sketch, translate, and execute. We now know that these steps require us to:
 
@@ -53,10 +53,10 @@ NameError: name 'undef_name' is not defined. Did you mean: 'f_undef_name'?
 ```
 
 ```{admonition} You Try It
-The script `broken.py` is in the `chap13` files in this book's code repository. We'll talk in a moment how you interpret `"/home/runner/chap13/broken.py"`; you might see a different substring before `broken.py`. Make sure that you run the highlighted command for yourself. There are a lot of shell commands to try throughout this chapter.
+The script `broken.py` is in the `chap13` files in this book's GitHub repository. We'll talk in a moment how you interpret `"/home/runner/chap13/broken.py"`; you might see a different substring before `broken.py`. Make sure that you run the highlighted command for yourself. There are a lot of shell commands to try throughout this chapter.
 ```
 
-A `NameError` is a mistake we learned about in Chapter 1. It occurs when we ask the interpreter to grab a value from a name that wasn't previously defined. In this particular message, the interpreter tries to help us correct our mistake by suggesting a defined name that is close to what we typed. We'll need to look at the line in `broken.py` to see if its suggestion is the fix we need. Quick, what line contains the error?
+A `NameError` is a mistake we learned about in Chapter 1. It occurs when we ask the interpreter to grab a value from a name that wasn't previously defined. In this error message, the interpreter tries to help us correct our mistake by suggesting a defined name that is close to what we typed. We'll need to look at the line in `broken.py` to see if its suggestion is the fix we need. Quick, what line contains the error?
 
 ```{admonition} You Try It
 
@@ -102,7 +102,7 @@ Changing the Python interpreter's error message in this way will be our problem-
 Notice that we want only to insert ourselves where we want different work to occur.[^fn3] We don't want to figure out how to do all the work that the Python interpreter does to run the script and identify its errors. And as much as possible, we'd like to make it match what we do when running the Python interpreter. Did you notice that the command I ran in the last code block wasn't the Python interpreter? If you didn't, that's good. You'll learn exactly how the command I used works and how to build it by the end of this chapter.
 
 ```{admonition} Learning Outcomes
-Learn how pattern matching can be the right tool for your problem. Working with regular expressions, a language to match patterns in strings, you'll write a script to capture the essence of the Python interpreter's error messages and rewrite them. To have it look like the interpreter outputs your rewritten message, you'll learn about the shell, common shell commands, and ways to write a Python script that automates your interactions with the shell. In particular, after completing this chapter, you will be able to:
+Learn how pattern matching can be the right tool for your problem. Working with regular expressions, a language to match patterns in strings, you'll write a script to capture the essence of the Python interpreter's error messages and rewrite them. To have it look like the interpreter outputs your rewritten message, you'll learn about the shell, common shell commands, and ways to write a Python script that automates your interactions with the shell. After completing this chapter, you will be able to:
 
 *   Understand the categories of mistakes we make in problem solving: syntax errors, runtime errors, design errors, and missed constraints [design and CS concepts];
 *   Describe the difference between a graphical user interface (GUI) and a command line interface (CLI) [CS concepts];
@@ -130,7 +130,7 @@ As another example, if I wanted to see a list of the files and directories in a 
 The `ls` stands for "list directory contents" and it is a program that someone wrote. You can learn what it does by typing `man ls` at the shell prompt or in a browser search bar. `man` stands for "format and display the on-line manual pages."[^fn5] 
 
 ```{admonition} You Try It
-Don't just read about these programs and shell commands. Bring up a terminal window on your machine, and try the commands for yourself.
+Don't just read about these programs and shell commands. Bring up a terminal window on your machine and try the commands for yourself.
 ```
 
 ## Understanding paths
@@ -139,11 +139,11 @@ In the GUI, you can only double-click a folder if the folder in which it sits is
 
 You can see the name (technically *path*) for your working directory by typing `pwd`, which stands for "return working directory name" or "print working directory" in colloquial terms. Your working directory in a GUI is the one that you have open and active.
 
-When I ran `python3 broken.py` in the earlier code block, I was in the working directory `/home/runner/chap13` in a terminal window on [Replit.com](http://Replit.com), and this string is what computer scientists call an *absolute path*.[^fn6] Such paths start at the *root of the file system*, which is represented by a single slash (`/`) with nothing before it. In Replit's filesystem, `home` is the name of a folder in the root directory, and `runner` is a folder inside `home`. Finally, `chap13` is a folder inside `runner`.
+When I ran `python3 broken.py` in the earlier code block, I was in the working directory `/home/runner/chap13` in a terminal window on Replit.com, and this string is what computer scientists call an *absolute path*.[^fn6] Such paths start at the *root of the file system*, which is represented by a single slash (`/`) with nothing before it. In Replit's filesystem, `home` is the name of a folder in the root directory, and `runner` is a folder inside `home`. Finally, `chap13` is a folder inside `runner`.
 
 Because there are absolute paths, we must also be able to specify *relative paths*. Using a relative path tells the shell that we want the path interpreted from our working directory, not the filesystem root. For example, if our working directory is `/home/runner` and within the folder `chap13` is the folder `data`, then we could type `ls chap13/data` to list the contents of the `data` folder. The string `chap13/data` is an example of a relative path that specifies where I want `ls` to do its work.
 
-So far I've talked about how to go deeper into folders with a relative path, but we may also want to navigate to the parent or grandparent folders of our working directory. We could, of course, specify a folder's *parent directory* (i.e., the folder containing our working directory) by typing out its absolute path from the root, but that might be a lot to type. So we have a way to say that in a relative fashion: two period characters together (`..`) in a path means that we want the parent of the current working directory. The following are a few example commands that use this way of specifying a parent directory:
+So far, I've talked about how to go deeper into folders with a relative path, but we may also want to navigate to the parent or grandparent folders of our working directory. We could, of course, specify a folder's *parent directory* (i.e., the folder containing our working directory) by typing out its absolute path from the root, but that might be a lot to type. So we have a way to say that in a relative fashion: two period characters together (`..`) in a path means that we want the parent of the current working directory. The following are a few example commands that use this way of specifying a parent directory:
 
 * To list the contents of the parent of the working directory, type:
 
@@ -162,7 +162,7 @@ A single period (`.`) in a relative path is another shorthand; it's another name
 1. `./chap13/data`
 2. `chap13/data`
 
-You might be wondering when using this shorthand is useful because the example shows that I have to type more to do the same thing. I'm glad you asked!
+You might be wondering when using this shorthand is useful because the example shows that I must type more to do the same thing. I'm glad you asked!
 
 ## From paths to programs
 
@@ -241,7 +241,7 @@ Run `python3 broken.py > data/out.txt`. What was printed to the terminal and wha
 
 ```
 
-You just learned that the Python interpreter does not print its execution output and its error messages using same mechanism. If we want to capture a program's error output, we have to use a different redirect symbol: `2>` where the `2` stands for *file descriptor 2*. On a Unix-like system,
+You just learned that the Python interpreter does not print its execution output and its error messages using same mechanism. If we want to capture a program's error output, we must use a different redirect symbol: `2>` where the `2` stands for *file descriptor 2*. On a Unix-like system,
 
 * *file descriptor 0* is called *stdin* and, by default, it is wired to the terminal;
 * *file descriptor 1* is called *stdout* and, by default, it is wired to the terminal;
@@ -334,7 +334,7 @@ So, to match a word containing the letters `a-z`, you'd write the RE pattern `'[
 
 ```{admonition} You Try It
 
-Take a moment and run the script `play.py`, which you can find in this chapter's code distribution. When you start running it (i.e., type `python3 play.py` at the shell prompt), it asks you for a RE, which you type without any surrounding quotes. Try it with the REs we've discussed: `word`; `[cfw]ord`; `[a-z]`; `[a-zA-Z]`; and `[a-z]+`. Once you've specified a RE, `play.py` repeatedly prompts you for a string, and given one, the script tells you whether that string is in the language of the RE (i.e., whether that string satisfies the pattern specified by the RE). For example, `ford` satisfies the pattern `[cfw]ord` but `lord` doesn't. `m` satisfies the pattern `[a-z]` but `me` doesn't. `word` satisfies the pattern `[a-z]+` but `this word` doesn't. Do you see why `this word` doesn't?[^fn16] Try your own REs and strings. When you want to stop playing with the RE you specified, type `quit` at the `String:` prompt. Rerun the script to try another RE.
+Take a moment and run the script `play.py`, which you can find in this chapter's GitHub repository. When you start running it (i.e., type `python3 play.py` at the shell prompt), it asks you for a RE, which you type without any surrounding quotes. Try it with the REs we've discussed: `word`; `[cfw]ord`; `[a-z]`; `[a-zA-Z]`; and `[a-z]+`. Once you've specified a RE, `play.py` repeatedly prompts you for a string, and given one, the script tells you whether that string is in the language of the RE (i.e., whether that string satisfies the pattern specified by the RE). For example, `ford` satisfies the pattern `[cfw]ord` but `lord` doesn't. `m` satisfies the pattern `[a-z]` but `me` doesn't. `word` satisfies the pattern `[a-z]+` but `this word` doesn't. Do you see why `this word` doesn't?[^fn16] Try your own REs and strings. When you want to stop playing with the RE you specified, type `quit` at the `String:` prompt. Rerun the script to try another RE.
 ```
 
 ## Matching metacharacters
@@ -352,7 +352,7 @@ Interacting with the script `play.py` makes it look straightforward to write a R
  
 
 ```{admonition} You Try It
-The backslash character is a RE metacharacter, and so feed the RE `\\` to `play.py` and verify that it matches the string `\` and no other strings. Then try feeding `\` as an RE to `play.py` and notice that the script fails with an error message. It says that a a single backslash character is effectively an incomplete sentence; it needs at least one more character to be a valid RE.
+The backslash character is a RE metacharacter, and so feed the RE `\\` to `play.py` and verify that it matches the string `\` and no other strings. Then try feeding `\` as an RE to `play.py` and notice that the script fails with an error message. It says that a single backslash character is effectively an incomplete sentence; it needs at least one more character to be a valid RE.
 ```
 
 Let's now take this knowledge into Python itself. Start the interactive Python interpreter as I've done below, and run the three statements. The first loads the RE library. The second creates our pattern as a string literal named `p`. It correctly escapes the backslash. The third statement tries to compile the pattern named `p` (i.e., it tries to turn this pattern into code that we can use to check strings).
@@ -503,7 +503,7 @@ Because all the scripts we write appear in our working directory, the working di
 
 Let's write a function called `get_fname` that does this. It will contain something like the RE we just used to capture words containing both capital and small letters, i.e., `r'[a-zA-Z]+'`. But because our filenames often also include digits and the underscore (`_`) character, we'll use a new metacharacter `\w`, which is a shorthand for `[a-zA-Z0-9_]`.
 
-Our RE is now `r'\w+'`, which can match filenames without any file extension. The filenames in the interpreter's error message are all Python scripts, and we want to include in the match the extension `.py`. The only tricky bit here is that the period character is a metacharacter equivalent to the shell wildcard `?`: In REs, the period character matches any single character except a newline. Since we want to match an actual period, we'll escape it.
+Our RE is now `r'\w+'`, which can match filenames without any file extension. The filenames in the interpreter's error message are all Python scripts, and we want to include in the match the extension `.py`. The only tricky bit here is that the period character is a metacharacter equivalent to the shell wildcard `?`; it matches any single character except a newline. Since we want to match an actual period, we'll escape it.
 
 Our RE has become `r'\w+\.py'`. So far so good, but what if a directory name in the absolute path matches this pattern? We don't want that.[^fn22] We want only the last component of a file's absolute path, which is its filename. We can specify this in our RE by using yet another metacharacter: the dollar sign (`$`). This metacharacter introduces us to a new idea and that's the matching of *a point in a string*. A dollar sign in a RE means that we want to match the end of a string or the point just before the next newline character, which is where we'll find the filename.
 
@@ -535,93 +535,9 @@ To access the match inside a set of parentheses, you use the `group` method on t
 
 Don't worry if line 13 looks like a bunch of gibberish to you right now. It will get easier to read with practice. And then time will pass and you'll forget the details, but again, that's ok. You will remember them with a refreshing read of the documentation.
 
-## A promise fulfilled
-
-In Chapter 10, we built a book index that used a function called `get_wordlist` to turn a string into a list of words, and I promised to explain how this function worked. Since it uses the `re` library, we're now ready to understand how to turn a line like `'And Mrs. Smith said, "I\'m the best!"'` into the wordlist `['And', 'Mrs', 'Smith', 'said', "I'm", 'the', 'best']`. This task is not easy. Take a moment to consider how you'd mechanically remove apostrophes and dashes except when they're part of a contraction or a hyphenated word. As you can see below, `get_wordlist` accomplishes this challenge in very few statements. This is the power of the `re` library.
-
-```{code-block} python
----
-lineno-start: 16
----
-### chap10/index32.py
-import re
-import string
-
-def get_wordlist(line):
-    line = line.replace('--', ' ')
-    return [re.sub('^[{0}]+|[{0}]+$'.format(string.punctuation), '', w)
-            for w in line.split()]
-```
-
-We'll begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. You should understand it from our earlier work with `str.replace`.
-
-Line 22, which continues on line 23, is where the interesting stuff happens. To understand this statement, first recognize that the outermost square brackets define a *Python list comprehension*, which is a shorthand for creating a new list from the values in an existing list. The "existing list" comes from a straightforward `str.split` of the input line, which removes whitespace but leaves "words" like `'best!"'`, which you'll see if you run the next code block.
-
-```{admonition} You Try It
-Run the next several code blocks with the interactive Python interpreter. This work will strengthen your understanding. Feel free to change them and see what happens.
-```
-
-```{code-block} python
----
-lineno-start: 1
----
-line = 'And Mrs. Smith said, "I\'m the best!"'
-[w.lower() for w in line.split()]
-```
-
-In `get_wordlist`, each `w` isn't lowered, but fed to another function in the `re` library. The `re.sub` function uses the RE (its first parameter) to identify substrings of the input string (its third parameter) and then replaces these identified substrings with a replacement string (its second parameter). Here's a simple example of `re.sub` in action:
-
-```{code-block} python
----
-lineno-start: 1
----
-[re.sub(r'[a-zA-Z]+', 'WORD', w) for w in line.split()]
-```
-
-Now all we have left to understand is the RE in `get_wordlist`, but even this is complicated because it uses a method on strings to reduce what we have to write in the RE string! Let's replace the `{0}` syntax and the `str.format` method with a familiar character set so that we can focus on the two new RE metacharacters: `^` and `|`.
-
-* \^ : This metacharacter is like `$`, but it matches *the point at the start of the string*.
-* \| : This metacharacter represents *a logical OR*. If the pattern before the vertical bar matches, the pattern after it isn't tested. If the first doesn't match, the second is tried.
-
-```{code-block} python
----
-lineno-start: 1
----
-[re.sub(r'^[a-zA-Z]+|[a-zA-Z]+$', 'WORD', w) for w in line.split()]
-```
-
-If you look carefully at the result of this code block, you'll see that the only difference between this and the previous list comprehension is the fifth element in the returned lists. The previous code block produced `'"WORD\'WORD'` while this one produced `'"I\'WORD'`, and in both cases the input `w` was `'"I\'m'`. The `'I'` remains in the second case because neither of the two REs, before or after the vertical bar (`|`), matches this letter; it isn't a word at the start of the string `w` (the double-quote character starts the string) nor at its end (obviously).
-
-But replacing words is not what we want to do in `get_wordlist`. This function is supposed to delete punctuation that isn't the apostrophe in a contraction or the hyphen in a hyphenated word. And this is where the `str.format` method and the `{0}` syntax comes in. While messy, this is just another way to write a formatted string literal in Python, which we've repeatedly done by placing an `f` character before our string literals. The following are equivalent:
-
-```{code-block} python
----
-lineno-start: 1
----
-num = 42
-print(f'answer = {num}')
-print('answer = {0}'.format(num))
-```
-
-As you can see, we're just replacing every `{0}` in the string with the first parameter to `format`. The parameter we use in `get_wordlist` is `string.punctuation`, which the `string` library nicely defines as a string containing every punctuation symbol.[^fn24] Now think about what our RE would look like if we replace both instances of `{0}` with the value of `string.punctuation`. Yes, the RE would be even harder to read!
-
-With the details explained, I'll say in English what this complicated statement does: It replaces sequences of one or more punctuation characters at the start or end of a "word," as produced by `str.split`, with an empty string. That's it. I hope you now appreciate the incredible power of the `re` library.
-
-```{admonition} You Try It
-Feed your own test strings to `get_wordlist`, by changing the definition of `line` in the following code block. There are still a few English grammatical structures that `get_wordlist` doesn't handle, but it handles a lot.
-```
-
-```{code-block} python
----
-lineno-start: 1
----
-line = 'And Mrs. Smith said, "I\'m the best!"'
-get_wordlist(line)
-```
-
 ## Python RE extensions
 
-We have all the pieces we need to complete Task 3: We can recognize patterns in the Python interpreter's error message, grab the data we want, and use these data to compose our own, more readable error message. The script `rewrite.py`, which you can find in the book's Github repo, contains a function named `rewrite_emsg` that takes the Python interpreter's error message as its input parameter and prints on `sys.stderr` our own rewritten error message.[^fn25]
+We have all the pieces we need to complete Task 3: We can recognize patterns in the Python interpreter's error message, grab the data we want, and use these data to compose our own, more readable error message. The script `rewrite.py`, which you can find in the book's GitHub repository, contains a function named `rewrite_emsg` that takes the Python interpreter's error message as its input parameter and prints on `sys.stderr` our own rewritten error message.[^fn24]
 
 Behind the interface of `rewrite_emsg` is a lot of interesting work. Because I wanted information that currently exists at the end of the Python interpreter's error message at the start of my error message, this function splits the processing of the input error message `e` into two pieces: (1) grab and process the "Traceback" lines, which is done in `process_traceback`; and (2) take some of what was learned from `process_traceback` and process and print the error followed by my rewritten traceback, which is done in `print_error` and aided by `print_stack`.
 
@@ -677,7 +593,7 @@ Try this shell command line and its sequence of tasks. Try your own command line
 
 While this command line with its sequence of tasks solves our problem, it is a lot to type. But we don't have to type all this. We can have the shell and the Python interpreter do more of this work for us! For example, we can get rid of the file `out2.txt` (and thus the need for the `rm` command above) by sending the Python interpreter's error output directly to `rewrite.py`. The shell doesn't only support redirection of a program's output to a file, but it also allows us to "wire" the output of one program directly to the input of another. You accomplish this with the shell's pipe operator (`|`).
 
-As a simple example of piping, imagine that I wanted to see the Python scripts in my working directory sorted by size, and I wanted the smallest scripts listed first. The `ls` command has an option `-l` that prints a lot of information for each item it lists, and most Unix-like systems come with a `sort` program. The `sort` program on my system has an option `-k` that allows me to indicate which column `sort` should use for ordering the input lines.[^fn26] Terrific! I just need to wire the output of `ls` into the input of `sort`, and my job is done.
+As a simple example of piping, imagine that I wanted to see the Python scripts in my working directory sorted by size, and I wanted the smallest scripts listed first. The `ls` command has an option `-l` that prints a lot of information for each item it lists, and most Unix-like systems come with a `sort` program. The `sort` program on my system has an option `-k` that allows me to indicate which column `sort` should use for ordering the input lines.[^fn25] Terrific! I just need to wire the output of `ls` into the input of `sort`, and my job is done.
 
 ```{code-block} none
 ---
@@ -690,7 +606,7 @@ chap13$ ls -l *.py | sort -k 5
 -rw-r--r--@ 1 profsmith  staff  4775 Sep 26 13:10 rewrite.py
 ```
 
-Unfortunately, it's possible but not as straightforward to wire the `stderr` of one program into the `stdin` of another, which is what we want to do. The following is the syntax to do it.[^fn27] It's definitely shorter than our previous solution, but it is still not the elegant solution we want.
+Unfortunately, it's possible but not as straightforward to wire the `stderr` of one program into the `stdin` of another, which is what we want to do. The following is the syntax to do it.[^fn26] It's definitely shorter than our previous solution, but it is still not the elegant solution we want.
 
 `python3 broken.py 2> >(python3 rewrite.py)`
 
@@ -702,12 +618,12 @@ Let's call this new script `python32.py`, and it will take as input the script w
 
 `python3 python32.py broken.py`
 
-{numref}`Figure %s<c13_fig1_ref>`  illustrates how we want `python32.py` to operate. The first thing it will do is launch another process that runs the Python interpreter on its input parameter. The `sys.stdout` of this launched process will be left untouched (i.e., it will default to the terminal). However, the launched process's `sys.stderr` will be configured to be a pipe back to `python32.py`. These three things are possible using Python's `subprocess` library. We'll then have `python32.py` grab the bytes transferred through the pipe, convert them into a string, and send this string to `rewrite_emsg`, which `python32.py` will import from `rewrite.py`. As we already know, `rewrite_emsg` prints its rewritten error message to `sys.stderr`, but this is `python32.py`'s `sys.stderr`, which is wired by default to the terminal. Tada!
+{numref}`Figure %s<c13_fig1_ref>` illustrates how we want `python32.py` to operate. The first thing it will do is launch another process that runs the Python interpreter on its input parameter. The `sys.stdout` of this launched process will be left untouched (i.e., it will default to the terminal). However, the launched process's `sys.stderr` will be configured to be a pipe back to `python32.py`. These three things are possible using Python's `subprocess` library. We'll then have `python32.py` grab the bytes transferred through the pipe, convert them into a string, and send this string to `rewrite_emsg`, which `python32.py` will import from `rewrite.py`. As we already know, `rewrite_emsg` prints its rewritten error message to `sys.stderr`, but this is `python32.py`'s `sys.stderr`, which is wired by default to the terminal. Tada!
 
-```{figure} images/c13_fig1.png
+```{figure} images/Smith_fig_13-01.png
 :name: c13_fig1_ref
 
-A sketch of how we want our `python32.py` script to operate.
+A sketch of how we want our `python32.py` script to operate when it is fed to the `python3` interpreter and given `broken.py` as its command line input.
 ```
 
 ## Concurrency
@@ -716,21 +632,21 @@ Did you notice that there are two instances of the Python interpreter running in
 
 The emphasis in our networking discussion was in *the communication between two processes*. In this chapter's problem, we're still interested in two processes communicating, but we're using a different mechanism (i.e., pipes rather than the network). Both examples illustrate the concept of *concurrency* and some of its fascinating aspects.
 
-We've spent a lot of time in this chapter talking about the shell, and there's a concurrency tie to it too. When you ask the shell to run a program by typing a command at the shell prompt, it does something very much like we just did in launching a subprocess in `python32.py`. Not only do you now know more shell commands, but you also understand a bit about how it works!
+We've spent a lot of time in this chapter talking about the shell, and there's a concurrency tie in. When you ask the shell to run a program by typing a command at the shell prompt, it does something very much like we just did in launching a subprocess in `python32.py`. Not only do you now know more shell commands, but you also understand a bit about how it works!
 
 ## Making python32 look like python3
 
-The astute reader will point out that invoking the Python interpreter on `python32.py` is not the command I showed at the start of this chapter. It was `./python32 broken.py`. So I owe you one more explanation of shell functionality: how to turn `python3 python32` into `./python32`.
+The astute reader will point out that invoking the Python interpreter on `python32.py` is not the command I showed at the start of this chapter. It was `./python32 broken.py`. So I owe you one more explanation of shell functionality: how to turn `python3 python32.py` into `./python32`.
 
 You can do this with any Python script you write that runs on a Unix-like system. It involves three small steps:
 
 1. Tell the filesystem that your Python script is an executable.
 2. Create a symbolic link to your Python script to lose the `.py` extension.
-3. Add a line to the start of your script that tells the shell how to execute your file, since it can no longer even use the extension as a hint about the file's contents.
+3. Add a line to the start of your script that tells the shell how to execute your file, since it can no longer use the extension as a hint about the file's contents.
 
-Step 1 modifies the metadata that the filesystem keeps about each file. We saw some of this metadata when we did `ls -l` earlier. The first 10 characters of a long listing are what are called *file mode bits*, and 9 of them indicate whether the file is *readable (r)*, *writable (w)*, or *executable (x)*. By default, data files are readable and writable by their owner[^fn28] but aren't executable.
+Step 1 modifies the metadata that the filesystem keeps about each file. We saw some of this metadata when we did `ls -l` earlier. The first 10 characters of a long listing are what are called *file mode bits*, and 9 of them indicate whether the file is *readable (r)*, *writable (w)*, or *executable (x)*. By default, data files are readable and writable by their owner[^fn27] but aren't executable.
 
-To make a file executable, you have to change its mode. The shell command we use to do this is `chmod`, which stands for "change file mode bits." The following transcript shows how to use this command, and it illustrates the file mode bits before and after.[^fn29]
+To make a file executable, you must change its mode. The shell command we use to do this is `chmod`, which stands for "change file mode bits." The following transcript shows how to use this command, and it illustrates the file mode bits before and after.[^fn28]
 
 ```{code-block} none
 ---
@@ -751,15 +667,13 @@ There is a better solution: Create an alias, which in Unix terminology is a *sym
 
 Now we can edit `python32.py` in our IDE with full color syntax highlighting while running scripts with `python32`. We have two names for the same file.
 
-Step 3 requires us to tell the shell how to run our script in a manner that doesn't have us invoke the Python interpreter on the shell's command line. Note that all we did by setting the executable file permission bit was tell the shell that it's ok to run this file as a command; the shell also needs to know what it should do to execute the file. By convention, the shell expects this information at the start of an executable file.[^fn30] This means that we need to put some directions for the shell at the start of `python32`. The format of these directions on Unix-like systems is as follows: 
+Step 3 requires us to tell the shell how to run our script in a manner that doesn't have us invoke the Python interpreter on the shell's command line. Note that all we did by setting the executable file permission bit was tell the shell that it's ok to run this file as a command; the shell also needs to know what it should do to execute the file. By convention, the shell expects this information at the start of an executable file.[^fn29] This means that we need to put some directions for the shell at the start of `python32`. The format of these directions on Unix-like systems is as follows: 
 
 `#!/usr/bin/env python3`
 
-This line starts with [a "shebang" sequence](https://en.wikipedia.org/wiki/Shebang_(Unix)) (i.e., `#!`), and the rest of it is the way the shell invokes the interpreter program. With this information, the shell turns `./python32` back into `python3 python32.py`. We now have a way to type one command (`./python32`) and the shell will launch the Python intepreter on a script (`python32.py`) that does all the work we had to previously write out on the shell's command line. We've shimmed the Python interpreter and made it look like it's producing our rewritten error message!
+This line starts with a "shebang" sequence[^fn30] (i.e., `#!`), and the rest of it is the way the shell invokes the interpreter program. With this information, the shell turns `./python32` back into `python3 python32.py`. We now have a way to type one command (`./python32`) and the shell will launch the Python intepreter on a script (`python32.py`) that does all the work we had to previously write out on the shell's command line. We've shimmed the Python interpreter and made it look like it's producing our rewritten error message!
 
-We began this chapter saying that the right tool will make our problems easy. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter's error messages, and the programming aspects of the shell were the right tool automating all we wanted done behind one simple command, which we built. We saw several ways to execute `rewrite.py`, and one of them turned out to be an elegant solution to our problem.
-
-\[Version 20240926\]
+We began this chapter saying that the right tool will make our problems easy to solve. Regular expressions were the right tool for grabbing the data we wanted out of the Python interpreter's error messages, and the programming aspects of the shell were the right tool for automating all we wanted done behind one simple command, which we built. We saw several ways to execute `rewrite.py`, and one of them turned out to be an elegant solution to our problem.
 
 [^fn1]: The undefined name is on line 5 of \`broken.py\`.
 
@@ -773,7 +687,7 @@ We began this chapter saying that the right tool will make our problems easy. Re
 
 [^fn6]: In an absolute path, I've used forward slashes (\`/\`) to indicate where one folder's name ends and the next begins. This is the convention for the operating system (OS) on which I'm running. Some OSes (e.g., Windows) use backward slashes (\`\\\\\`) rather than forward slashes.
 
-[^fn7]: You won't find \`python32\` in the distribution for \`chap13\`. You'll create it later in the chapter. But when it is eventually there, \`./python32\` says you want \`python32\` in the working directory!
+[^fn7]: You won't find \`python32\` in the GitHub repository for \`chap13\`. You'll create it later in the chapter. But when it is eventually there, \`./python32\` says you want \`python32\` in the working directory!
 
 [^fn8]: When I say built-in, I mean that the shell knows what to do based solely on the command name (e.g., when we type the command \`echo\`). It doesn't search the filesystem looking for an executable file with this name.
 
@@ -789,7 +703,7 @@ We began this chapter saying that the right tool will make our problems easy. Re
 
 [^fn14]: It lists any file that ends in a two-character extension.
 
-[^fn15]: Most RE libraries, including Python's, have been extended so that the patterns they match comprise more than the set of regular languages. For an excellent (and more comprehensive) introduction to Python's \`re\` library, please read [A.M. Kuchling's "Regular Expression HOWTO" document](https://docs.python.org/3/howto/regex.html).
+[^fn15]: Most RE libraries, including Python's, have been extended so that the patterns they match comprise more than the set of regular languages. For an excellent (and more comprehensive) introduction to Python's \`re\` library, please read A.M. Kuchling's "Regular Expression HOWTO" document: https://docs.python.org/3/howto/regex.html
 
 [^fn16]: The RE \`\[a-z\]+\` matches one word, but the string \`this word\` contains two words. The space character causes the RE to fail to match.
 
@@ -801,22 +715,22 @@ We began this chapter saying that the right tool will make our problems easy. Re
 
 [^fn20]: You still type \`\\\*\` as the input to \`play.py\` since the \`input\` statement in its code effectively treats what you type like a raw string literal.
 
-[^fn21]: To see a full listing of the \`re\` library's flags, see [the description of the module contents](https://docs.python.org/3/library/re.html#contents-of-module-re).
+[^fn21]: To see a full listing of the \`re\` library's flags, see the description of the module contents: https://docs.python.org/3/library/re.html\#contents-of-module-re
 
 [^fn22]: I'm taking you step-by-step through the development of a working RE, but it didn't go this way when I did this work. I created what I thought might work, and then tried it on some examples. When it failed, I rethought the RE and tried again. Such is design work, as you know.
 
 [^fn23]: In many file systems, file and directory names can include other characters (e.g., a hyphen or a period). It's possible to extend \`get\_fname\` to handle names with these and other allowable characters, but I leave this as an exercise to the reader.
 
-[^fn24]: Take a moment to print \`string.punctuation\` and then consider which of these symbols you'd have to escape to put them in the RE. Thank goodness for formatted strings.
+[^fn24]: In Python, you specify that you want to print to stderr by setting the optional parameter \`file\` to \`sys.stderr\`. In other words, the \`sys\` module is where you find the definitions for \`sys.stdin\`, \`sys.stdout\`, and \`sys.stderr\`.
 
-[^fn25]: In Python, you specify that you want to print to stderr by setting the optional parameter \`file\` to \`sys.stderr\`. In other words, the \`sys\` module is where you find the definitions for \`sys.stdin\`, \`sys.stdout\`, and \`sys.stderr\`.
+[^fn25]: Where is the file size in the \`ls\` listing? It's the fifth column. For example, \`broken.py\` is 431 bytes.
 
-[^fn26]: Where is the file size in the \`ls\` listing? It's the fifth column. For example, \`broken.py\` is 431 bytes.
+[^fn26]: Feel free to ask a generative AI system like ChatGPT to explain this cryptic syntax.
 
-[^fn27]: Feel free to ask a generative AI system like ChatGPT to explain this cryptic syntax.
+[^fn27]: There are three groups of rwx bits with each file. Starting from the left, the second through fourth bits state the permissions of the file's owner, which is typically the computer account under which the file was created. There's a lot encoded in these file permission bits, which you can start reading about in the Wikipedia article on file-system permissions (https://en.wikipedia.org/wiki/File-system\_permissions).
 
-[^fn28]: There are three groups of rwx bits with each file. Starting from the left, the second through fourth bits state the permissions of the file's owner, which is typically the computer account under which the file was created. There's a lot encoded in these file permission bits, which you can start reading about in the Wikipedia article on [file-system permissions](https://en.wikipedia.org/wiki/File-system_permissions).
+[^fn28]: To no longer allow a file to be executed, you'd type \`chmod -x the\_file\`.
 
-[^fn29]: To no longer allow a file to be executed, you'd type \`chmod -x the\_file\`.
+[^fn29]: If the shell doesn't recognize the start of an executable file as information on how to execute the file, you'll probably get a cryptic error as it tries to interpret your file in an incorrect manner.
 
-[^fn30]: If the shell doesn't recognize the start of an executable file as information on how to execute the file, you'll probably get a cryptic error as it tries to interpret your file in an incorrect manner.
+[^fn30]: https://en.wikipedia.org/wiki/Shebang\_(Unix)

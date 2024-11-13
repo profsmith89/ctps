@@ -21,7 +21,7 @@ But have no fear (said the Cat in the Hat), you already have the tools you need 
 By the end of this chapter, you will have gained the ability to create recipes and ingredients, which will allow you to solve an unbelievably wide range of complex, real-world problems. Computer scientists think of this pairing as *algorithms and data structures*. There are many elegant ideas in this space, and through the rest of this act, you'll get a taste of the rich world of classical algorithms and data structures.[^fn2]
 
 ```{admonition} Learning Outcomes
-Learn to write a script for goal-directed search and to simulate what you cannot analytically solve. You will understand the difference between procedural and object-oriented programming, and you'll build algorithms and data structures relevant to finding driving directions from a map. In particular, you will be able to:
+Learn to write a script for goal-directed search and to simulate what you cannot analytically solve. You will understand the difference between procedural and object-oriented programming, and you'll build algorithms and data structures relevant to finding driving directions from a map. By the chapter's end, you will be able to:
 *   Describe the components of a formal specification for a goal-directed search problem [design and CS concepts];
 *   Discuss the parallel nature of goal-directed search and finite state machines [design and CS concepts];
 *   Code a random walk across a graph-like data structure with notes and edges [programming skills];
@@ -60,15 +60,15 @@ In goal-directed search, the sequence of steps is not being driven by some exter
 
 This fundamental difference in purpose is one of the reasons why we talk about the set of all states in a FSM and yet say that we're not often concerned with the full enumeration of states in a goal-directed search problem. In a FSM, when the input veers off a known path toward a goal state, our script can raise an error. In goal-directed search, we don't know what sequences of steps lead us to the goal state until we find one, and when we find one, we may be uninterested in finding another. 
 
-## Solutions with particular characteristics
+## Solutions with specific characteristics
 
 In goal-directed search, there is a lot we don't know. First, we don't know, given a particular set of nodes and edges, if it is possible to get from the start state to the goal state. And when there is a solution, we don't know if there is more than one.
 
-Sometimes, all we care about is finding a solution (or reporting that there isn't one), and any one will do just fine. For example, any road that gets me home is a good road. Other times, we may decide to put some constraints on the search problem so that it yields solutions with particular characteristics. For instance, we may not feel that all roads are equally desirable: If we can get home without taking a toll road, that's what we'd like. A solution with the desired characteristics might not exist, but if one does, our script should return it.
+Sometimes, all we care about is finding a solution (or reporting that there isn't one), and any will do just fine. For example, any road that gets me home is a good road. Other times, we may decide to put some constraints on the search problem so that it yields solutions with specific characteristics. For instance, we may not feel that all roads are equally desirable: If we can get home without taking a toll road, that's what we'd like. A solution with the desired characteristics might not exist, but if one does, our script should return it.
 
 ## Let's walk before we drive
 
-Let's stop talking about what a script that implements goal-directed search should do and start building one. The first thing we need for our problem-to-be-solved is a city map. We can build a nice regular one with the abstract data type `CitySqGrid`.[^fn3] We simply have to tell it how big we would like our square grid of city blocks to be.[^fn4]
+Let's stop talking about what a script that implements goal-directed search should do and start building one. The first thing we need for our problem-to-be-solved is a city map. We can build a nice regular one with the abstract data type `CitySqGrid`.[^fn3] We simply tell it how big we would like our square grid of city blocks to be.[^fn4]
 
 ```{code-block} python
 ---
@@ -80,9 +80,9 @@ not_Boston = CitySqGrid(4)
 print(not_Boston)
 ```
 
-You'll notice that the constructed `CitySqGrid` object places an `s` at the city center, which is the starting point for our journey. As for the goal state, let's imagine that this city is surrounded by a countryside of open fields, and we'd like to spend our day relaxing in one of these fields and playing with my dog. We don't care which field, we simply want out of the city for the day.
+You'll notice that the constructed `CitySqGrid` object places an `s` at the city center, which is the starting point for our journey. As for the goal state, let's imagine that this city is surrounded by a countryside of open fields, and we'd like to spend our day relaxing in one of these fields and playing with my dog. We don't care which field; we simply want out of the city for the day.
 
-The abstract data type `CitySqGrid` has an attribute that we can use to grab the coordinates of the starting location (`CitySqGrid.start`), which will be the initial value of this search problem's current state. Starting there, the loop on lines 13-16 in the code block below allows us to walk Cosmo around the city until we hit our goal state (i.e., until the current state `loc` is outside the city). `CitySqGrid` has a method called `move` that makes it easy to step `'north'`, `'south'`, `'east'`, or `'west'`.[^fn5] The method takes our current location (i.e., the current state) and a direction, and it returns a location that becomes our new current state. By the way, in the code block below, we tell `CitySqGrid` that we want our location on the map to look like my dog Cosmo rather than the boring `'s'` character.[^fn6]
+The abstract data type `CitySqGrid` has an attribute that we can use to grab the coordinates of the starting location (`CitySqGrid.start`), which will be the initial value of this search problem's current state. Starting there, the loop on lines 13-16 in the code block below allows us to walk Cosmo around the city until we hit our goal state (i.e., until the current state `loc` is outside the city). `CitySqGrid` has a method called `move` that makes it easy to step `'north'`, `'south'`, `'east'`, or `'west'`.[^fn5] The method takes our current location (i.e., the current state) and a direction, and it returns a location that becomes our new current state. By the way, in the code block below, we tell `CitySqGrid` that we want our location on the map to look like my dog Cosmo rather than the boring `s` character.[^fn6]
 
 ```{code-block} python
 ---
@@ -114,7 +114,7 @@ When we walk Cosmo around this virtual city, `move` won't let us walk into a bui
 
 Notice that the script `walk.py` handles a piece of this chapter's problem: it alerts us when we have reached the goal state (i.e., our walk took us out of the city). What it doesn't do, without our active help, is search the city for a route to this goal state.
 
-How might we think about a procedure that would get us from the city center to the fields on the outskirts of the city? And for this question, let's assume that we don't know anything about the layout of the city except what we see immediately around us. If you've spent any time solving mazes as a kid, you probably can think up a number of different techniques that might work. I'm going to suggest we have the script do the easiest thing possible: for each step the script takes, it randomly chooses a direction.
+How might we think about a procedure that would get us from the city center to the fields on the outskirts of the city? And for this question, let's assume that we don't know anything about the layout of the city except what we see immediately around us. If you've spent any time solving mazes as a kid, you probably can think up several different techniques that might work. I'm going to suggest we have the script do the easiest thing possible: for each step the script takes, it randomly chooses a direction.
 
 This is easy to code, as we'll do in a moment, but first let's ask: Will a random walk reliably get us out of a city? The answer to this question should be yes. In fact, for any of the techniques you were just imagining, we want the answer to be yes. If not, then there are some maps on which the technique won't work, and that's bad if we assured someone that we had a script that always finds a route when one exists.
 
@@ -126,7 +126,7 @@ To argue that a random walk will get from the start state to the goal state if a
 
 So instead, good theoreticians and problem solvers transform these hard questions into their equivalent inverse. For us, this means we need to answer the question: *What would need to be true to not allow a random walk to find the goal?* If we can rigorously argue that there is nothing keeping us from finding a solution, then we can confidently state that a random walk will reliably get us out of any city.
 
-The argument is fairly simple. We begin by eliminating the case where there is no path from the start to the goal state. Clearly a random walk would fail in this case; however, no procedure would find a path that doesn't exist. As such, the real question is: Is it possible for a random walk to never find a solution path when one exists? The answer to this question is no. If a solution path exists and our algorithm is capable of generating that path, there is some probability that it will randomly generate this sequence of steps and achieve our goal.
+The argument is fairly simple. We begin by eliminating the case where there is no path from the start to the goal state. Clearly a random walk would fail in this case; however, no procedure would find a path that doesn't exist. As such, the real question is: Is it possible for a random walk to never find a solution path when one exists? The answer to this question is no. If a solution path exists and our algorithm can generate that path, there is some probability that it will randomly generate this sequence of steps and achieve our goal.
 
 ## A short walk, please
 
@@ -140,11 +140,17 @@ In reality, we don't even need a loop in the roads to have a situation where our
 
 We can eliminate solutions that take a really large amount of time (and space) to generate by eliminating loops from our search space. 
 
-For example, a solution that heads straight east in our city with a square grid is a solution to our problem. One that heads straight east, but loops around the first block one time before continuing to proceed east, is another solution. However, the first 8 steps of the sequence `'eennwwsseeee'` put us directly where the sequence `'eeee'` also starts (i.e., the start state). If an algorithm has already explored a path that starts at the current state and returns to that state, repeating this path clearly won't advance us toward a solution. This means that we can eliminate loops in our maps and not worry that we will miss finding a solution.
+```{figure} images/Smith_fig_11-01.png
+:name: c11_fig1_ref
+
+Starting in the center of the city and then following the 8-step path `'eennwwss'` puts us exactly back where we started. We can remove any such loops from the space of paths we should search because they don't advance us toward our goal. 
+```
+
+For example, a solution that heads straight east in our city with a square grid is a solution to our problem. One that heads straight east, but loops around the first block one time before continuing to proceed east, is another solution. However, the first 8 steps of the sequence `'eennwwsseeee'` put us directly where the sequence `'eeee'` also starts (i.e., the start state, as illustrated in {numref}`Figure %s<c11_fig1_ref>`). If an algorithm has already explored a path that starts at the current state and returns to that state, repeating this path clearly won't advance us toward a solution. This means that we can eliminate loops in our maps and not worry that we will miss finding a solution.
 
 ## Only visit new spots
 
-A necessary condition of looping is that we have to visit the same location more than once. If we create a random walk algorithm that is not allowed to visit a location more than once, we can guarantee that the algorithm will either find a (loop-free) solution or get caught in a "dead-end." A walk ends in a dead-end if the algorithm cannot find a new location to visit from its current location. For example, in our previous example, the first 8 steps of the sequence (i.e., `'eennwwss'`) leaves us without a valid location to visit next that hasn't already been visited.
+A necessary condition of looping is that we must visit the same location more than once. If we create a random walk algorithm that is not allowed to visit a location more than once, we can guarantee that the algorithm will either find a (loop-free) solution or get caught in a "dead-end." A walk ends in a dead-end if the algorithm cannot find a new location to visit from its current location. For example, in our previous example, the first 8 steps of the sequence (i.e., `'eennwwss'`) leaves us without a valid location to visit next that hasn't already been visited.
 
 If you think about it, no run of this algorithm will take more steps than there are locations in the map. It may still take many random walks to find a solution, but no single random walk will take infinite time.
 
@@ -275,7 +281,7 @@ def sim(blocks, trials, verbose):
 Our conclusion: In a small city, we should look for Cosmo in the fields; in a big city, he's probably still somewhere inside it. This simulation taught us a fact about our world.
 ```
 
-[A self-avoiding random walk](https://en.wikipedia.org/wiki/Self-avoiding_walk) is used to simulate an aspect of the world that no one knows how to model analytically. It is an important simulation technique in numerous areas of math, science, and engineering. It helps, for example, biologists learn about the topological behavior of proteins, which is an important challenge without an analytical solution. 
+A self-avoiding random walk is used to simulate an aspect of the world that no one knows how to model analytically. It is an important simulation technique in numerous areas of math, science, and engineering. It helps, for example, biologists learn about the topological behavior of proteins, which is an important challenge without an analytical solution. 
 
 ## To maps through OO programming
 
@@ -287,7 +293,7 @@ This is power of *object-oriented (OO) programming*, which uses data abstraction
 
 ```{tip}
 
-At first, OO programming may feel overwhelming as it comes with a boatload of syntax and jargon. Even I find the OO terminology to be intimidating and confusing. But there's definitely nothing to fear here as you have been using the OO approach from this book's start. Everything you manipulate in Python is an object, even what feels primitive and simple, like integers and strings. I'll introduce you to the basics of OO programming, and if you'd like to learn more, you might next read Chapter 10 in John Guttag's book titled an *Introduction to Computation and Programming Using Python*.[^fn10]
+At first, OO programming may feel overwhelming as it comes with a boatload of syntax and jargon. Even I find the OO terminology to be intimidating and confusing. But there's nothing to fear here as you have been using the OO approach from this book's start. Everything you manipulate in Python is an object, even what feels primitive and simple, like integers and strings. I'll introduce you to the basics of OO programming, and if you'd like to learn more, you might next read Chapter 10 in John Guttag's book titled an *Introduction to Computation and Programming Using Python*.[^fn10]
 
 ```
 
@@ -311,7 +317,7 @@ Like a function definition, a class definition defines a data type's interface a
 I have described the interface for `CitySqGrid` (i.e., its abstraction as seen through its _data attributes_ and _methods_) in a docstring at the top of its class definition. I further adopt the convention of following the docstring with a comment that is meant not to help users of the data type but those who want to modify its implementation. Follow this convention or imagine your own---just give those who will use your data type some clear way to understand what's in its interface and what are implementation details.
 ```
 
-While I'll continue to make reference to the `CitySqGrid` class, it is too complicated to use as an understandable first example. Instead, I'll teach you how to build your own class by creating a new data type, called `Pin`, that allows us to add [Google-Maps-like pins](https://en.wikipedia.org/wiki/Google_Maps_pin) to the `CitySqGrid` maps we used in `walk.py`.
+While I'll continue to make reference to the `CitySqGrid` class, it is too complicated to use as an understandable first example. Instead, I'll teach you how to build your own class by creating a new data type, called `Pin`, that allows us to add Google-Maps-like pins[^fn12] to the `CitySqGrid` maps we used in `walk.py`.
 
 ```{code-block} python
 ---
@@ -336,7 +342,7 @@ class Pin(object):
 ```
 
 ```{admonition} You Try It
-In the chapter's code distribution, you'll find the script `wander.py`, which adds pins to the functionality of `walk.py`. Run `python3 wander.py` and it will print a 6x6 square city with pins and Cosmo ready for his walk. The pins are the green hearts and red x-marks on buildings. Walk Cosmo around the city as you did in `walk.py`, or type a `c` to teleport him to the nearest green heart (i.e., one of his highly-rated places). If you type a `q` or step outside the city, your wanderings come to an end.
+In the chapter's GitHub repository, you'll find the script `wander.py`, which adds pins to the functionality of `walk.py`. Run `python3 wander.py` and it will print a 6x6 square city with pins and Cosmo ready for his walk. The pins are the green hearts and red x-marks on buildings. Walk Cosmo around the city as you did in `walk.py`, or type a `c` to teleport him to the nearest green heart (i.e., one of his highly-rated places). If you type a `q` or step outside the city, your wanderings come to an end.
 ```
 
 ## Building an instance
@@ -383,7 +389,7 @@ an_empty_list = []
 print(an_int, an_empty_string, an_empty_list)
 ```
 
-But we can also build instances of these built-in data types by directly invoking their *constructors*. The form of a constructor is the class name  (i.e., its type) followed by a pair of parentheses. The result of a call to a constructor is an newly minted object of that type.
+But we can also build instances of these built-in data types by directly invoking their *constructors*. The form of a constructor is the class name (i.e., its type) followed by a pair of parentheses. The result of a call to a constructor is a newly minted object of that type.
 
 ```{code-block} python
 ---
@@ -410,9 +416,9 @@ a_list = list(a_string)
 print(an_int, a_string, a_list)
 ```
 
-This constructor syntax is how I created, in `wander.py` on line 65, a 6x6 instance of `CitySqGrid` with a `dog-face` character at its center (named `nyc`). It is also how I created a `Pin` object on line 69.
+This constructor syntax is how I created, in `wander.py` on line 65, a 6x6 instance of `CitySqGrid` with a dog-face character at its center (named `nyc`). It is also how I created a `Pin` object on line 69.
 
-This creation takes two steps. First, the interpreter grabs a raw piece of our computer's memory that's large enough to hold all the instance's attributes (i.e., all the data specific to this object). By raw, I mean that none of this memory is initialized in such a manner that object acts like an instance of `CitySqGrid` or `Pin`. Initialization, the second step, is the job of a class's `__init__` method.[^fn12]
+This creation takes two steps. First, the interpreter grabs a raw piece of our computer's memory that's large enough to hold all the instance's attributes (i.e., all the data specific to this object). By raw, I mean that none of this memory is initialized in such a manner that object acts like an instance of `CitySqGrid` or `Pin`. Initialization, the second step, is the job of a class's `__init__` method.[^fn13]
 
 ```{code-block} python
 ---
@@ -433,15 +439,13 @@ lineno-start: 22
             self.icon = red_x
 ```
 
-An `__init__` constructor is just a function defined in a class's namespace[^fn13] (i.e., you indent it under the class definition). Comparing line 23 above with lines 69-72 in `wander.py` at the start of this section, the `Pin` constructor's last four formal parameters match the four actual parameters provided in the constructor call. Unexpectedly, the interface definition also includes the name `self` as the function's first formal parameter. 
+An `__init__` constructor is just a function defined in a class's namespace[^fn14] (i.e., you indent it under the class definition). Comparing line 23 above with lines 69-72 in `wander.py` at the start of this section, the `Pin` constructor's last four formal parameters match the four actual parameters provided in the constructor call. Unexpectedly, the interface definition also includes the name `self` as the function's first formal parameter. 
 
 ## Self and instance attributes
 
-Every method definition must contain this additional formal parameter called `self`[^fn14] (and it must be listed first). The `self` parameter gives you a way to distinguish data attributes belonging to an instance (called *instance attributes*) from those shared across all instances (called *class attributes*). When we call the `Pin` constructor on line 69, it returns a `Pin` object with location `(3,11)`, name `"Park"`, and so forth. The constructor stores the first two parameter values in the two instance attributes `self.loc` and `self.name` (on lines 24 and 25 of `pin.py`). These values[^fn15] take up memory space in the `Pin` object that is the first element of the `pins` list. The `Pin` object in the list's second element has different values for its instance attributes, as shown in Figure YY.
+Every method definition must contain this additional formal parameter called `self`[^fn15] (and it must be listed first). The `self` parameter gives you a way to distinguish data attributes belonging to an instance (called *instance attributes*) from those shared across all instances (called *class attributes*). When we call the `Pin` constructor on line 69, it returns a `Pin` object with location `(3,11)`, name `"Park"`, and so forth. The constructor stores the first two parameter values in the two instance attributes `self.loc` and `self.name` (on lines 24 and 25 of `pin.py`). These values[^fn16] take up memory space in the `Pin` object that is the first element of the `pins` list. The `Pin` object in the list's second element has different values for its instance attributes.
 
-\[FIXME: Insert figure showing what I describe above\]
-
-Although we won't use them in this book, you can also create class attributes (also called *class variables*). With a class variable, you don't have that variable for each instance, but a single variable that is shared by every instance of the class. If, for example, the name `note` was a class variable, you'd write `Pin.note` rather than `self.note` in a class method (i.e., you replace `self` with the class name as the namespace).[^fn16]
+Although we won't use them in this book, you can also create class attributes (also called *class variables*). With a class variable, you don't have that variable for each instance, but a single variable that is shared by every instance of the class. If, for example, the name `note` was a class variable, you'd write `Pin.note` rather than `self.note` in a class method (i.e., you replace `self` with the class name as the namespace).[^fn17]
 
 Finally, be careful not to confuse instance variables with local variables. The name `loc` in `Pin.__init__` is a local variable. If you look at the implementation of `CitySqGrid.__init__`, you'll see that I create the local variable `row1` to name an intermediate computation. These local names exist only while the method is running. Instance variables, on the other hand, are names with values that we want to persist between method executions.
 
@@ -453,7 +457,7 @@ As you can see in the function body of `Pin.__init__` (lines 24-34), instance va
 
 ## Methods
 
-In addition to `__init__`, the class definition in `pin.py` defines two other methods. The `distance` method computes the as-the-crow-flies distance between the instance variable `self.loc` and the method's formal parameter `loc`. I use this method in `wander.py` (line 41) to have Cosmo jump from his current location in `my_city` to the closest, highly-rated pin. 
+In addition to `__init__`, the class definition in `pin.py` defines two other methods. The `distance` method computes the as-the-crow-flies distance between the instance variable `self.loc` and the method's formal parameter `loc`. I use this method in `wander.py` (line 41) to have Cosmo jump from his current location in `my_city` to the closest, highly rated pin. 
 
 ```{code-block} python
 ---
@@ -502,11 +506,11 @@ As we model the world in our scripts, we're not just manipulating data but tryin
 
 While the `__init__` method establishes the representation invariant, the other class methods are expected to maintain it. The `Pin.distance` method does because it doesn't change any of the instance variables. A more interesting example is `CitySqGrid.reset`, which makes sure when we reset a `CitySqGrid` object back to its initial state that we put the character (e.g., the Cosmo dog emoji) back at the grid's center (see line 67 in `city.py`).
 
-Ensuring that your class's methods never break the representation invariant is one goal, but you should also design your class so that its users aren't able to break it. My `Pin` class does not fully protect its representation invariant because a user could write a value to `a_pin_object.stars` outside the expected range. We could fix this problem by following the *setters and getters pattern* in OO programming, which gives the class designer control of a user's access to the class's attributes.[^fn17]
+Ensuring that your class's methods never break the representation invariant is one goal, but you should also design your class so that its users aren't able to break it. My `Pin` class does not fully protect its representation invariant because a user could write a value to `a_pin_object.stars` outside the expected range. We could fix this problem by following the *setters and getters pattern* in OO programming, which gives the class designer control of a user's access to the class's attributes.[^fn18]
 
 ## Magic methods
 
-The last undiscussed method in the `Pin` class is `__str__`. Like `__init__` and unlike `distance`, this method's name starts and ends with two underscore characters. Methods that start and end with two underscores are called *magic methods* in Python, and they are what allow you to treat an instance of your class just like Python's own built-in types.[^fn18]
+The last undiscussed method in the `Pin` class is `__str__`. Like `__init__` and unlike `distance`, this method's name starts and ends with two underscore characters. Methods that start and end with two underscores are called *magic methods* in Python, and they are what allow you to treat an instance of your class just like Python's own built-in types.[^fn19]
 
 ```{code-block} python
 ---
@@ -517,7 +521,7 @@ lineno-start: 35
         return f"{self.name} at {self.loc} rated {self.stars}" + '\u2605'
 ```
 
-The method `__str__` should always return a string. As the data type's designer, I can return any string I like, and I've chosen to return a simple description of the `Pin` object using a few of its attributes. This is a magic method because the interpreter looks for it when a `Pin` object is used where the interpreter expects a string object. For example, the input parameters to `print` are expected to be strings, and when we pass a `Pin` object as a parameter to print, the Python interpreter looks for this specific magic method and, if it finds it, it uses it. The `main` function in `pin.py` runs a few tests on the `Pin` class and uses `CitySqGrid` along the way; it demonstrates how easy a `__str__` method makes printing the instances of classes we define.
+The method `__str__` should always return a string. As the data type's designer, I can return any string I like, and I've chosen to return a simple description of the `Pin` object using a few of its attributes. This is a magic method because the interpreter looks for it when a `Pin` object is used where the interpreter expects a string object. For example, the input parameters to `print` are expected to be strings, and when we pass a `Pin` object as a parameter to `print`, the Python interpreter looks for this specific magic method and, if it finds it, it uses it. The `main` function in `pin.py` runs a few tests on the `Pin` class and uses `CitySqGrid` along the way; it demonstrates how easy a `__str__` method makes printing the instances of classes we define.
 
 ```{code-block} python
 ---
@@ -583,7 +587,7 @@ It's good that a subclass inherits the attributes of its superclass because, if 
 
 The `maze` class is quite long, and I don't expect you to read through it in detail. But you should understand what it means when you see some methods (e.g., `__str__`) in the superclass (e.g., `Maze`) but not the subclass (e.g., `CitySqGrid`). It means that objects the subclass act just like objects of the superclass for the purposes of these methods. For example, converting a `CitySqGrid` object into a string follows the same procedure as converting a `Maze` object into one.
 
-There are only two methods in `CitySqGrid` that *override* the similarly-named methods in `Maze`. These `CitySqGrid` methods exist because they need to do something different for `CitySqGrid` objects than what their namesakes in `Maze` do. Take `CitySqGrid.reset`; it wants to do everything in `Maze.reset` (as seen on line 64) plus the positioning of the `character` at the `start` location (line 67).
+There are only two methods in `CitySqGrid` that *override* the similarly named methods in `Maze`. These `CitySqGrid` methods exist because they need to do something different for `CitySqGrid` objects than what their namesakes in `Maze` do. Take `CitySqGrid.reset`; it wants to do everything in `Maze.reset` (as seen on line 64) plus the positioning of the `character` at the `start` location (line 67).
 
 ```{code-block} python
 ---
@@ -600,17 +604,17 @@ lineno-start: 61
 
 In general, it's fine for a superclass method to operate on instances of a subclass if the methods maintain the subclass's representation invariant. If they don't, then you should *override* them by redefining those methods in the subclass.
 
-```{admonition} Terminology and Conventions
+```{admonition} Terminology
 :class: tip
-You will find methods in the `Maze` class with names that start with a double underscore but do not end with them. By convention, these are _helper functions_. OO programming not only encapsulates the attributes and methods of a data type in a `class` statement, but it allows you to use all of the helpful aspects of procedural programming within this statement. For example, turning a `Maze` object into its ASCII image involves a row-by-row generation of ASCII characters. It is easier to implement this procedure by factoring out the work done for each row into a method called `__str_row` and then having `__str__` repeatedly call this helper function. However, this is an implementation detail, and I want it hidden from those using the data type. In Python, this hiding is done with a naming convention; other programming languages have keyword mechanisms for making certain attributes of a class _private_ to the implementation of the class. If a piece of Python code outside the class definition calls a double-underscore-leading method at runtime, the Python3 interpreter will raise an `AttributeError`.
+You will find methods in the `Maze` class with names that start with a double underscore but do not end with them. By convention, these are _helper functions_. OO programming not only encapsulates the attributes and methods of a data type in a `class` statement, but it allows you to use all the helpful aspects of procedural programming within this statement. For example, turning a `Maze` object into its ASCII image involves a row-by-row generation of ASCII characters. It is easier to implement this procedure by factoring out the work done for each row into a method called `__str_row` and then having `__str__` repeatedly call this helper function. However, this is an implementation detail, and I want it hidden from those using the data type. In Python, this hiding is done with a naming convention; other programming languages have keyword mechanisms for making certain attributes of a class _private_ to the implementation of the class. If a piece of Python code outside the class definition calls a double-underscore-leading method at runtime, the Python3 interpreter will raise an `AttributeError`.
 ```
 
 ## General maps
 
-The `Maze` class is the abstract data type we need to build a general map and on which we'll design a goal-directed search algorithm that produces driving directions. We're familiar with its interface from working with `CitySqGrid` objects. The map I'll use in my examples is specified by the two configuration strings: `MAZE_map` and `MAZE_map_endpts`, which are defined in `maze.py`. When printed, these strings produce the map in {numref}`Figure %s<c11_fig1_ref>`.[^fn19]
+The `Maze` class is the abstract data type we need to build a general map and on which we'll design a goal-directed search algorithm that produces driving directions. We're familiar with its interface from working with `CitySqGrid` objects. The map I'll use in my examples is specified by the two configuration strings: `MAZE_map` and `MAZE_map_endpts`, which are defined in `maze.py`. When printed, these strings produce the map in {numref}`Figure %s<c11_fig2_ref>`.[^fn20]
 
-```{figure} images/c11_fig1.png
-:name: c11_fig1_ref
+```{figure} images/Smith_fig_11-02.png
+:name: c11_fig2_ref
 
 The map produced by the configuration strings `MAZE_map` and `MAZE_map_endpts` in `maze.py`. We'll start at the location marked with an `s` and follow the roads which are the empty squares. Our goal is the square with the `g`.
 ```
@@ -675,10 +679,10 @@ def search(my_map):
 
 The new bit is the addition of a `frontier` list (line 14), which keeps track of the possible moves not yet chosen (line 24). Remember that the function `dogwalk` threw these other possibilities away. We now keep them so that the function ends when there truly are no other possible paths to explore (line 33).
 
-There is one tricky aspect to the maintenance of the frontier list: we might get to a location along multiple paths from the start location (see {numref}`Figure %s<c11_fig2_ref>` for such an example). We should add such locations to our frontier list only once. Line 23 in `directions0.py` ensures that the algorithm abides by this condition.
+There is one tricky aspect to the maintenance of the frontier list: we might get to a location along multiple paths from the start location (see {numref}`Figure %s<c11_fig3_ref>` for such an example). We should add such locations to our frontier list only once. Line 23 in `directions0.py` ensures that the algorithm abides by this condition.
 
-```{figure} images/c11_fig2.png
-:name: c11_fig2_ref
+```{figure} images/Smith_fig_11-03.png
+:name: c11_fig3_ref
 
 Two paths from start that reach location (1,8). Our script should add this location to the frontier list only once.
 ```
@@ -686,31 +690,31 @@ Two paths from start that reach location (1,8). Our script should add this locat
 You might also notice that we `pop` an unexplored location off the frontier list (line 38) instead of using `random.choice` as we did in `dogwalk`. You can think of this pop as making a random choice because we aren't paying attention to what's at the end of list. Later in this chapter, I'll explain how a different choice affects the running of the search.
 
 ```{admonition} You Try It
-Uncomment lines 28-31 and then run `python3 directions0.py`. In each loop iteration, it pauses and prints the map so that you can watch the algorithm explore the map and manage the frontier. Type enter when you want the algorithm to continue. When you're done, re-comment these lines and re-run the script.
+Uncomment lines 28-31 and then run `python3 directions0.py`. In each loop iteration, it pauses and prints the map so that you can watch the algorithm explore the map and manage the frontier. Hit enter when you want the algorithm to continue. When you're done, re-comment these lines and re-run the script.
 ```
 
 ## Remembering how we got there
 
-Our function search finds a path in `my_map` from the start location to the goal location, but this path is lost in the sea of paths that ended in dead ends. We need to add functionality to our algorithm that lets it pull this desired path out from the others. The challenge in this is that we won't know which steps are in the desired path until `search` encounters the goal. Until that point, we must have it must record the actions from all its explorations. Visually, `search` needs to record the actions it took along the five orange paths in {numref}`Figure %s<c11_fig3_ref>`, which didn't reach the goal, as well as the single blue path, which did.
+Our function search finds a path in `my_map` from the start location to the goal location, but this path is lost in the sea of paths that ended in dead ends. We need to add functionality to our algorithm that lets it pull this desired path out from the others. The challenge in this is that we won't know which steps are in the desired path until `search` encounters the goal. Until that point, we must have it must record the actions from all its explorations. Visually, `search` needs to record the actions it took along the six gray paths in {numref}`Figure %s<c11_fig4_ref>`, which didn't reach the goal, as well as the single black path, which did.
 
-```{figure} images/c11_fig3.png
-:name: c11_fig3_ref
+```{figure} images/Smith_fig_11-04.png
+:name: c11_fig4_ref
 
-The six paths explored during the execution of `search` on our example map.
+The seven paths explored during the execution of `search` on our example map.
 ```
 
 ```{tip}
 Recording paths like these (i.e., moving from one state to another by taking some action) is a pattern that you'll see in many computational problems. 
 ```
 
-We record these paths by building a data structure that mimics the tree-like structure you see in {numref}`Figure %s<c11_fig3_ref>`. In this figure, all paths take the same first five actions (i.e., go east three steps then north two). At location `(4,3)`, two of the orange paths head west and the rest of the paths, including our desired blue one, head east. These first five actions represent the trunk of an imagined tree, and location `(4,3)` represents the first branching of the tree.
+We record these paths by building a data structure that mimics the tree-like structure you see in {numref}`Figure %s<c11_fig4_ref>`. In this figure, all paths take the same first five actions (i.e., go east three steps then north two). At location `(4,3)`, two of the gray paths head west and the rest of the paths, including our desired black one, head east. These first five actions represent the trunk of an imagined tree, and location `(4,3)` represents the first branching of the tree.
 
 We can digitally represent this tree by connecting together a series of notes to ourselves, each of which we'll call a `TreeNote`. In these notes, the `search` function will record (at least):
 
 1. a state (in our problem this is a map location); and
 2. the action (i.e., a driving direction) taken by our `search` function that is connected to the recorded state.
 
-I cryptically described the noted action because we have a choice: Do we want to record the action `search` took *from* the state in the note, or would it be better to record the action `search` took *to get to* that state? Well, which do we need to solve the problem in front of us? Which will help distinguish the blue path from the orange ones in {numref}`Figure %s<c11_fig3_ref>`? To answer this question, think about what you want to know when `search` finds the goal.
+I cryptically described the noted action because we have a choice: Do we want to record the action `search` took *from* the state in the note, or would it be better to record the action `search` took *to get to* that state? Well, which do we need to solve the problem in front of us? Which will help distinguish the black path from the gray ones in {numref}`Figure %s<c11_fig4_ref>`? To answer this question, think about what you want to know when `search` finds the goal.
 
 There's nowhere to go from the goal, since `search` has found where we wanted to go, but it needs to know how it got there. So it needs to record the previous action that got it to the current location. And to walk all the way back from goal to start, it will want a chain of notes it can follow. Using Python classes, the data structure I'm describing would look as follows:
 
@@ -728,11 +732,15 @@ class TreeNote():
 
 As an example of this chaining, the `search` function would start by creating a note for the start location, which it creates by calling the `TreeNote` constructor with parameters that say there is no parent note and no action that got us to start, i.e., `TreeNote((1,1), None, None)`. From start, the only move to make in our example map is east, and the constructor call for the next location is: `TreeNote((2,1), ???, 'east')`, where I've left the `parent` parameter unspecified. What is it supposed to be? Right! The note (i.e., the name of the `TreeNote`) created at start. With the proceeding note in our current note, we'll be able to find the location that preceded the goal. And from it the location before it, all the way back to the start.
 
-Interestingly, branching points present no difficulties when proceeding in a tree from a leaf (i.e., the arrow heads in {numref}`Figure %s<c11_fig3_ref>` ) to the root (i.e., the start location). A branching location is the parent to all paths that emanate from this point. This means, if we start at the end of the blue path (i.e., the goal), `search` can easily follow the notes it created directly back to start, and to produce driving directions, it simply reverses the list of actions it encounters as it visits each `parent` from goal to start.
+Interestingly, branching points present no difficulties when proceeding in a tree from a leaf (i.e., the arrow heads in {numref}`Figure %s<c11_fig4_ref>`) to the root (i.e., the start location). A branching location is the parent to all paths that emanate from this point. This means, if we start at the end of the black path (i.e., the goal), `search` can easily follow the notes it created directly back to start, and to produce driving directions, it simply reverses the list of actions it encounters as it visits each `parent` from goal to start.
+
+```{admonition} You Try It
+Don't just read about the data structure the next script (`directions-dfs.py`) builds with instances of `TreeNote`, uncomment the debugging statements on lines 37-41, watch each step of the search, and draw your own picture of the `TreeNote` objects that are created and how they are linked together.
+```
 
 ## The solution
 
-We have all the components needed to solve our problem, and we just have to implement them. Once we've defined our `TreeNote` class, we use it where needed. For example, in `directions0.py`, we stored unexplored map locations in the `frontier` list, but now when we pop from this list, we are going to want to have access to the `TreeNote` that goes with it. It is needed to build the notes for the unexplored locations reachable from that `TreeNote`'s location. If you think about this for a bit, you'll realize that we'll want to store `TreeNote`s on the `frontier` list. A complete solution for `search` is shown below. 
+We have all the components needed to solve our problem, and we just have to implement them. Once we've defined our `TreeNote` class, we use it where needed. For example, in `directions0.py`, we stored unexplored map locations in the `frontier` list, but now when we pop from this list, we are going to want to have access to the `TreeNote` that goes with it. It is needed to build the notes for the unexplored locations reachable from that `TreeNote`'s location. If you think about this for a bit, you'll realize that we'll want to store `TreeNote` objects on the `frontier` list. A complete solution for `search` is shown below. 
 
 ```{code-block} python
 ---
@@ -822,7 +830,7 @@ Run `python3 directions-dfs.py`. It prints the driving directions we desire!
 The search algorithm in `directions-dfs.py` is a *depth-first search*.
 
 ```{admonition} You Try It
-Uncomment lines 37-40 in `directions-dfs.py` and run `python3 directions-dfs.py`. It prints a sequence of maps corresponding to each step the function `search` makes. When you review these maps in order, you'll notice that search goes down a road as far as it can before backing up and trying a different road. When it encounters an intersection, it chooses a direction through that intersection and keeps going.
+Again uncomment lines 37-40 in `directions-dfs.py` and run `python3 directions-dfs.py`. It prints a sequence of maps corresponding to each step the function `search` makes. When you review these maps in order, you'll notice that search goes down a road as far as it can before backing up and trying a different road. When it encounters an intersection, it chooses a direction through that intersection and keeps going.
 ```
 
 This behavior is clearly not the only thing our search algorithm could have done, and if we want to do something different, we need to understand what caused this behavior. The answer is amazingly simple: the way in which we add elements to and remove them from the `frontier` list. The current code does the following:
@@ -862,13 +870,11 @@ In general, prioritizing our possible search moves is the job of a *heuristic fu
 
 There are many heuristics in the domain of search. I asked you to imagine a common one (called *greedy*), which always takes the move from the frontier list with the best heuristic score. Another called *A\* search*, which often provides more consistently good results, combines the cost of the path to the current point (e.g., the number of steps taken to get there) with the value of that point's heuristic. Overall, there is a rich literature associated with search, and you are now prepared to dive into it to solve your own goal-directed search problems.
 
-\[Version 20240831\]
-
-[^fn1]: It didn't take many years of Google's existence before it realized that maps and mapping should an important part of its web services. As a fun look at the history of Google Maps and how middle-aged entrepreneurs working civilized hours launched what has become Maps, you might read [this short Medium article](https://medium.com/@lewgus/the-untold-story-about-the-founding-of-google-maps-e4a5430aec92).
+[^fn1]: It didn't take many years of Google's existence before it realized that maps and mapping should an important part of its web services. As a fun look at the history of Google Maps and how middle-aged entrepreneurs working civilized hours launched what has become Maps, you might read this short Medium article: https://medium.com/@lewgus/the-untold-story-about-the-founding-of-google-maps-e4a5430aec92.
 
 [^fn2]: The challenge in designing algorithms and data structures is in discovering functional and data abstractions that are simultaneously: (1) easily understood by humans; (2) easily coded in an existing programming language; (3) easily executed by existing computers; and (4) easily mapped to real-world problems. Achieving all four isn't easy, and an important reason to be familiar with classical algorithms and data structures is because they have been shown to exhibit all these features. Most of the time, problem solving with computation is about selecting which classical algorithms and data structures are problem-appropriate than it is about discovering entirely new algorithms and data structures.
 
-[^fn3]: To run the code blocks in this chapter, you'll need to upload \`maze.py\` and \`city.py\` from the \`chap11\` directory in book's GitHub repo into your IDE or interactive Python notebook session.
+[^fn3]: To run the code blocks in this chapter, you'll need to upload \`maze.py\` and \`city.py\` from the book's GitHub repository into your IDE or interactive Python notebook session.
 
 [^fn4]: Yes, I'm having some fun with the name of our square-grid city. If you've tried to drive around Boston, you'll know what I mean.
 
@@ -878,26 +884,28 @@ There are many heuristics in the domain of search. I asked you to imagine a comm
 
 [^fn7]: The asterisk characters are printed to the terminal in blue because of the use of the escape codes you see in the definition of \`EXPLORED\` in \`dogwalk.py\`. You can learn more about these codes through an ALE in Chapter 6.
 
-[^fn8]: The \`sim.py\` and \`dogwalk.py\` were inspired by Program 1.4.4 in *Computer Science: An Interdisciplinary Approach* by Robert Sedgewick and Kevin Wayne (2017, p. 113).
+[^fn8]: The \`sim.py\` and \`dogwalk.py\` were inspired by Program 1.4.4 in Robert Sedgewick and Kevin Wayne, *Computer Science: An Interdisciplinary Approach* (Boston, MA: Addison-Wesley, 2017), 113.
 
 [^fn9]: You might notice that the for-loop inside the \`sim\` function (line 16) names the loop variable \`\_\`. This is another Python convention you'll often see employed when we need a loop body to iterate a known number of times, but we don't need the iteration count during the loop's execution. The programmer is saying that the loop variable is intentionally unused.
 
-[^fn10]: John V. Guttag (2021). *Introduction to Computation and Programming Using Python: With Application to Understanding Data*, third edition. The MIT Press.
+[^fn10]: Guttag, *Introduction to Computation and Programming Using Python: With Application to Understanding Data*, 177.
 
 [^fn11]: I don't fault the designers of Python for not clearly separating interface from implementation. I've programmed in other languages that require a rigid interface specification, and I personally don't think it helps. The syntax of a programming language simply is not a good place to try to explain a data type's abstraction. Python's approach is saying, in effect, that the interface is in the code that follows, but you probably want to read something in English to best understand it.
 
-[^fn12]: I show only \`Pin.\_\_init\_\_\`, which is spelled with two leading and two trailing underscore characters. In \`city.py\`, \`CitySqGrid.\_\_init\_\_\` does work appropriate for one of its instances. For instance, it makes sure that the city is between 2 and 20 buildings on a side and that this number is an even (so that there is a single central location).
+[^fn12]: https://en.wikipedia.org/wiki/Google\_Maps\_pin
 
-[^fn13]: A function within a class namespace is what is called a method.
+[^fn13]: I show only \`Pin.\_\_init\_\_\`, which is spelled with two leading and two trailing underscore characters. In \`city.py\`, \`CitySqGrid.\_\_init\_\_\` does work appropriate for one of its instances. For instance, it makes sure that the city is between 2 and 20 buildings on a side and that this number is an even (so that there is a single central location).
 
-[^fn14]: While Python doesn't require the name \`self\`, it is highly recommended that you follow this common practice. If you do, other Python programmers will immediately know what you're doing.
+[^fn14]: A function within a class namespace is what is called a method.
 
-[^fn15]: As well as the values in \`self.note\`, \`self.stars\`, and \`self.icon\`.
+[^fn15]: While Python doesn't require the name \`self\`, it is highly recommended that you follow this common practice. If you do, other Python programmers will immediately know what you're doing.
 
-[^fn16]: Programming with class variables is tricky. If you'd like to learn more about them, I encourage you to read a book focused on the object-oriented properties of Python.
+[^fn16]: As well as the values in \`self.note\`, \`self.stars\`, and \`self.icon\`.
 
-[^fn17]: Nishant Gupta's short Medium article titled "[Understanding Python Property Decorators: Getters, Setters](https://medium.com/nishkoder/understanding-python-property-decorators-getters-setters-57d6b535e5d2)" describes the basics of how Python supports this pattern.
+[^fn17]: Programming with class variables is tricky. If you'd like to learn more about them, I encourage you to read a book focused on the object-oriented properties of Python.
 
-[^fn18]: There's nothing in Python stopping you from using, for example, the name \`\_\_distance\_\_\` except convention in the Python programming community. By following the convention, experienced Python programmers know what you're doing.
+[^fn18]: Nishant Gupta's short Medium article titled "Understanding Python Property Decorators: Getters, Setters" describes the basics of how Python supports this pattern. https://medium.com/nishkoder/understanding-python-property-decorators-getters-setters-57d6b535e5d2
 
-[^fn19]: This map closely resembles the one used in Week 0 (Search) of [CS50's Introduction to Artificial Intelligence with Python](https://cs50.harvard.edu/ai). I thank David Malan and his team for the use of it.
+[^fn19]: There's nothing in Python stopping you from using, for example, the name \`\_\_distance\_\_\` except convention in the Python programming community. By following the convention, experienced Python programmers know what you're doing.
+
+[^fn20]: This map closely resembles the one used in Week 0 (Search) of CS50's Introduction to Artificial Intelligence with Python (https://cs50.harvard.edu/ai). I thank David Malan and his team for the use of it.
