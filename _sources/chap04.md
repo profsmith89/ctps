@@ -172,7 +172,7 @@ The first piece of a URL indicates the protocol we are using, which in our case 
 Whenever possible, you should use HTTPS rather than HTTP to thwart someone snooping on your network traffic.
 ```
 
-The next major piece of a URL is the *hostname* specified as an Internet Domain Name. If we want to communicate with a process on another machine, we have to be able to name that machine, and Internet Domain Names are a standardized way of doing just that. There's a whole interesting question of, given a valid hostname, how do you actually route messages through computer networks to the computer with that hostname, especially when that computer might be a mobile device that connects to different parts of a computer network at different times. We don't have to concern ourselves with this problem because it is hidden from us below the abstraction barrier, but you should realize that this is more complicated than putting a home address on an envelope, since most houses aren't mobile homes.
+The next major piece of a URL is the *hostname* specified as an Internet Domain Name. If we want to communicate with a process on another machine, we must be able to name that machine, and Internet Domain Names are a standardized way of doing just that. There's a whole interesting question of, given a valid hostname, how do you route messages through computer networks to the computer with that hostname, especially when that computer might be a mobile device that connects to different parts of a computer network at different times. We don't have to concern ourselves with this problem because it is hidden from us below the abstraction barrier, but you should realize that this is more complicated than putting a home address on an envelope, since most houses aren't mobile homes.
 
 The third piece of a URL for the HTTP protocol is the path to the specific resource on the host computer that we'd like. This path is specified in a form very similar to the filesystem paths we'll discuss in detail in Chapter 13. This is not surprising since we are, in fact, specifying a file in the host's filesystem.
 
@@ -184,7 +184,7 @@ You might wonder, how did I know to create this specific URL? If we point our br
 
 To learn what Internet-based APIs exist, I visited the ProgrammableWeb, which maintained a directory of these things until it shut down in early 2023.[^fn7] That site pointed me to MediaWiki's API, on which Wikipedia's API is built.[^fn8] There I learned that the API endpoint for Wikipedia in English is `https://en.wikipedia.org/w/api.php`.
 
-To converse with the server at this endpoint, we have to craft a *query string*. In this string, the MediaWiki site explained that we should set the parameter named `action` to the value `query` when we want to fetch data. If then we set the `list` parameter to `search`, we can perform a full text search. Since we're doing a search, we set the parameter `srsearch` with the value of our search string and the parameter `srlimt` to the number of page matches that we'd like returned. Finally, we set the parameter `format` to `json` so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we'll discuss in a moment.
+To converse with the server at this endpoint, we must craft a *query string*. In this string, the MediaWiki site explained that we should set the parameter named `action` to the value `query` when we want to fetch data. If then we set the `list` parameter to `search`, we can perform a full text search. Since we're doing a search, we set the parameter `srsearch` with the value of our search string and the parameter `srlimt` to the number of page matches that we'd like returned. Finally, we set the parameter `format` to `json` so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we'll discuss in a moment.
 
 ## Python dictionaries
 
@@ -353,7 +353,7 @@ What if we mistype the hostname of the server?[^fn12]
 Restore the good assignment to `path`. Now change the assignment to `hostname` from `'en.wikipedia.org'` to `'en.wikipediaasdfghjasdfghj.org'`. Run this version of `qweb4.py`.
 ```
 
-Our modified script dies with a large number of error messages. In this mess, you'll find "Failed to establish a new connection" meaning that the `requests` library tried several times to connect to the server but failed each time. Ideally, we would write our script so that it caught this error condition and handled it gracefully. Obviously, we cannot check the status code of a response if we never make a connection in the first place!
+Our modified script dies with many error messages. In this mess, you'll find "Failed to establish a new connection" meaning that the `requests` library tried several times to connect to the server but failed each time. Ideally, we would write our script so that it caught this error condition and handled it gracefully. Obviously, we cannot check the status code of a response if we never make a connection in the first place!
 
 As a last experiment, what do you think the status code will be if we use a good hostname, a valid path, but ask to search for a term that doesn't exist in Wikipedia?
 
@@ -642,7 +642,7 @@ This is your first taste of *concurrency* (also called *parallelism*), and it is
 
 [^fn5]: https://requests.readthedocs.io/en/latest/
 
-[^fn6]: Line 9 uses Python's *formatted string literals*, which are called *f-strings* for short. By placing the letter \`f\` (or \`F\` if you prefer) before your string literal, you can embed one or more Python expressions in the string literal by surrounding them with curly braces (i.e., \`\{ \}\`). The string literal is built with the value of the expression at that location. See Formatted String Literals in the Python documentation for additional information (https://docs.python.org/3/tutorial/inputoutput.html\#tut-f-strings).
+[^fn6]: Line 9 uses Python's *formatted string literals*, which are called *f-strings* for short. By placing the letter \`f\` (or \`F\` if you prefer) before your string literal, you can embed one or more Python expressions in the string literal by surrounding them with curly braces (i.e., \`\{ \}\`). The string literal is built with the value of the expression at that location. See Formatted String Literals in the Python documentation for additional information: https://docs.python.org/3/tutorial/inputoutput.html\#tut-f-strings
 
 [^fn7]: You can read about the ProgrammableWeb on wikipedia (https://en.wikipedia.org/wiki/ProgrammableWeb). Some current online API directories include: Rapid API Hub (https://rapidapi.com/hub); API list (https://apilist.fun/); and Public APIs (https://github.com/public-apis/public-apis).
 

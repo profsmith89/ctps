@@ -80,7 +80,7 @@ If you're interested, you can begin an exploration of the checkered history of e
 
 The Unicode standard maps each language character to a unique *code point* in a *codespace*. This approach attempts to take every character in every language in the world and maps them into a rigorously defined space of values. For example, the code point for the capital letter "A" is `U+0041`, while the code point for the division sign "÷" is `U+00F7`. The four digits at the end of each of these two code points represent a hexadecimal number, which we will learn more about in a later chapter. For now, we simply need to know the code point number for each character we want to specify.
 
-You should notice a couple of things here. First, code points simply tell you the character. A code point does not tell you what font to use for that character. Nor does it tell you whether the character should be displayed in bold or italics, or even in what color. What sounds simple---display a capital "A" please---is actually a complex system of standards and interacting systems, each with their own special purpose and function. While we will discuss some of this, let's stick for the time being with the goal of how to specify different characters.
+You should notice a couple of things here. First, code points simply tell you the character. A code point does not tell you what font to use for that character. Nor does it tell you whether the character should be displayed in bold or italics, or even in what color. What sounds simple---display a capital "A" please---is a complex system of standards and interacting systems, each with their own special purpose and function. While we will discuss some of this, let's stick for the time being with the goal of how to specify different characters.
 
 ## A new problem
 
@@ -191,7 +191,7 @@ s.replace('me', 'you')
 
 On to the second step, which has us substitute the string `'Gato'` with the Unicode code point for the cat-with-wry-smile emoji. You've already done something like this when we talked about how to express a carriage return. We used the special character sequence `'\n'` where the `'\'` told the Python interpreter that the next character wasn't a simple `'n'` but an encoding of something we couldn't express in a single printable character. We will do the same thing here.
 
-Python provides two ways to specify Unicode code points: We can use '`\u`' followed by four hexadecimal characters if the character we want is at the start of the Unicode code space, like the letter 'G'.
+Python provides two ways to specify Unicode code points: We can use `'\u'` followed by four hexadecimal characters if the character we want is at the start of the Unicode code space, like the letter 'G'.
 
 ```{code-block} python
 ---
@@ -200,7 +200,7 @@ lineno-start: 1
 print('G', '\u0047')
 ```
 
-For Unicode code points with encodings requiring more than four hexadecimal digits, like the cat-with-wry-smile emoji, which is codepoint `U+1F63C`, we must use the '`\U`' escape. It tells the Python interpreter to expect eight hexadecimal characters. 
+For Unicode code points with encodings requiring more than four hexadecimal digits, like the cat-with-wry-smile emoji, which is codepoint `U+1F63C`, we must use the `'\U'` escape. It tells the Python interpreter to expect eight hexadecimal characters. 
 
 ```{code-block} python
 ---
@@ -814,7 +814,7 @@ In this chapter, you've learned a lot about how to organize the code in your scr
 
 [^fn13]: https://emojipedia.org/cat-with-wry-smile
 
-[^fn14]: The process of matching actuals with formals is called *the binding mechanism*. Python supports several binding mechanisms, but we'll stick with this simple one for now. If you really want to know the details at this point, please read this section in the Python tutorial (https://docs.python.org/3/tutorial/controlflow.html\#more-on-defining-functions).
+[^fn14]: The process of matching actuals with formals is called *the binding mechanism*. Python supports several binding mechanisms, but we'll stick with this simple one for now. If you really want to know the details at this point, please read this section in the Python tutorial: https://docs.python.org/3/tutorial/controlflow.html\#more-on-defining-functions
 
 [^fn15]: Unlike in the excerpt code earlier, I used three double quote characters here. You can use either three single or three double quotes in docstrings.
 

@@ -92,7 +92,7 @@ We can see that this isn't a normal text file, since most of the ASCII interpret
 
 ```{admonition} You Try It
 
-{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called _metadata_) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn7]
+{numref}`Figure %s<c06_fig2_ref>` illustrates that some pieces of our image file are actual ASCII strings. For example, you can see the string `'Apple iPhone'` starting at offset `000000a4`. Many file formats are structured like the messages we passed between processes in one of Chapter 5's exercises: they include a header with extra information (called _metadata_) about the main content. In the JPEG file format, this header can include information like the type of device that took the image. As another piece of metadata, can you find the offset where the date and time on which the picture was taken is stored in the header?[^fn7]
 
 ```
 
@@ -104,9 +104,9 @@ Look at the top row of the hexdump in {numref}`Figure %s<c06_fig2_ref>`. The fir
 
 You should have counted to 16. A *hexadecimal number system* is one that contains 16 symbols, which correspond to the 16 symbols in the righthand digit of these 16 pairs.
 
-You'll notice that the first ten of these symbols are the same ones we use everyday in the *decimal* number system: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. The ordering here is significant in computer science for two reasons. First, you'll often hear that computer scientists start counting from 0 (called *zero-based numbering*) because they often think in terms of an index in a sequence. We learned that we access the first element of a Python sequence with the index 0, and this zero-based numbering hints at the representation of the actual sequence in the computer's memory. In sequences (e.g., a Python string), the first element is stored at the start of the string's storage (i.e., at offset 0 of the storage that holds the string). Similarly, the first hexadecimal pair in our hexdump is at offset 0. 
+You'll notice that the first ten of these symbols are the same ones we use every day in the *decimal* number system: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. The ordering here is significant in computer science for two reasons. First, you'll often hear that computer scientists start counting from 0 (called *zero-based numbering*) because they often think in terms of an index in a sequence. We learned that we access the first element of a Python sequence with the index 0, and this zero-based numbering hints at the representation of the actual sequence in the computer's memory. In sequences (e.g., a Python string), the first element is stored at the start of the string's storage (i.e., at offset 0 of the storage that holds the string). Similarly, the first hexadecimal pair in our hexdump is at offset 0. 
 
-The second reason is simpler: Zero is a great place to start in counting if you realize that what comes before one of something is none of that thing! When we want to count something in code, we'll want to initialize our counting variable to 0. If you don't you'll be adding 1 to an unknown value in your counting variable!
+The second reason is simpler: Zero is a great place to start in counting if you realize that what comes before one of something is none of that thing! When we want to count something in code, we'll want to initialize our counting variable to 0. If you don't, you'll be adding 1 to an unknown value in your counting variable!
 
 Back to hexadecimal. "Hexa-" is a combining form that means six, and so you can think of hexadecimal as a number system with "six more things than ten." What symbols are used for these six extra things? Well, we have run out of single digits, and so convention has us use the first six letters of the English alphabet: A, B, C, D, E, F.[^fn8]
 
@@ -222,7 +222,7 @@ Great, but you might be wondering why computers use binary numbering. You might 
 
 To understand this design decision, answer the following question: For which of the following pairs of numbers is it easier for you, a human, to tell that the two values in the pair are not the same: `11011000` and `11011100`, or `D8` and `DA`? I'll guess that you'll say the latter, and this difference in ability only increases as the number of digits you're scanning increases. 
 
-Hexdump uses base-16 because it is easier to read hex numbers and a straightforward process to convert back and forth between base-2 and base-16. Starting from the righthand end of a base-2 number, you group together the rightmost four bits and convert them into a single hexadecimal digit. You then grab the next four bits and repeat until you run out of bits. For example, `11011000` becomes `1101 1000`, which becomes `D 8`, which we can push back together as `D8`. (Feel free to run the process in reverse, when needed.) When you understand this, I hope you realize that hexdump is actually showing us the bits in the JPEG file.[^fn14]
+Hexdump uses base-16 because it is easier to read hex numbers and a straightforward process to convert back and forth between base-2 and base-16. Starting from the righthand end of a base-2 number, you group together the rightmost four bits and convert them into a single hexadecimal digit. You then grab the next four bits and repeat until you run out of bits. For example, `11011000` becomes `1101 1000`, which becomes `D 8`, which we can push back together as `D8`. (Feel free to run the process in reverse, when needed.) When you understand this, I hope you realize that hexdump is showing us the bits in the JPEG file.[^fn14]
 
 ## One finger, no thumb
 
@@ -418,7 +418,7 @@ You have now done all that the `ImageFilter` library did when our code in `edges
 
 [^fn3]: Ibid.
 
-[^fn4]: Quoted from Allen Downey in multiple of his online talks and writing. I originally found it in an early edition of *Elements Of Data Science* (Online edition). https://allendowney.github.io/ElementsOfDataScience/README.html
+[^fn4]: Quoted from Allen Downey in multiple of his online talks and writing. I originally found it in an early edition of *Elements of Data Science* (Online edition). https://allendowney.github.io/ElementsOfDataScience/README.html
 
 [^fn5]: https://docs.fileformat.com/image/jpeg/
 

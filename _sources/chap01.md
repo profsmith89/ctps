@@ -268,7 +268,7 @@ In the directions that got you started with your selected IDE, I include a secti
 
 ```{admonition} Terminology
 :class: tip
-You'll learn a lot more about the shell in Chapter 13, but briefly, the shell is a mechanism for you to run programs on your computer and manipulate your computer's files and folders.
+You'll learn a lot more about the _shell_ in Chapter 13, but briefly, the shell is a mechanism for you to run programs on your computer and manipulate your computer's files and folders.
 ```
 
 The block below illustrates this, where `shell_prompt$` is the shell prompt (your IDE's shell prompt will look different). The next lines are information about the version of the Python interpreter you're running and a few commands you can send to it; the interpreter prints these lines as it starts running (your lines will look slightly different). The final line, starting with `>>>`, is the interactive Python interpreter's prompt (yours will look exactly like this).
@@ -320,10 +320,10 @@ The interpreter responded with something interesting. It doesn't read like the e
 
 ## The interpreter as a calculator
 
-What happens if you type `2 + 3` at the interactive Python interpreter's prompt?[^fn6] Before you hit enter, take a moment and think about what we are asking the interpreter to do.
+What happens if you type `2+3` at the interactive Python interpreter's prompt?[^fn6] Before you hit enter, take a moment and think about what we are asking the interpreter to do.
 
 ```{code-block} python
-2 + 3
+>>> 2 + 3
 ```
 
 Press the enter key. Cool, we can use the interpreter like a calculator to evaluate an arithmetic expression. Given an expression, the interpreter prints what it calculates.
@@ -348,7 +348,7 @@ Returning to the question about the value the interpreter printed, it was crypti
 
 ```{admonition} Terminology
 :class: tip
-I'll talk more about objects later in this chapter. For now, think of a Python object as the physical representation of an idea. Python records something when it computes the answer to the expression `2 + 3`. Similarly, it records some information when it opens `CatInTheHat.txt` and puts it virtual finger at the first character in that file.
+I'll talk more about objects later in this chapter. For now, think of a Python object as the physical representation of an idea. Python records something when it computes the answer to the expression `2+3`. Similarly, it records some information when it opens `CatInTheHat.txt` and puts it virtual finger at the first character in that file.
 ```
 
 ## Revisiting our first error
@@ -557,7 +557,7 @@ When we ask the interactive interpreter for the type of `'CatInTheHat.txt'` and 
 You create a particular string value in Python, called a *literal string value*, by enclosing your desired characters in either single or double quotes. I used single quotes in `'CatInTheHat.txt'`, but I could also have used double quotes. We need these delimiting characters so that we can include spaces in our strings. Because Python allows both a matching pair of single or double quote characters as the delimiter, I can easily create the string `"Mike's dog"`.
 
 ```{admonition} You Try It
-Feed `type("Mike's dog")` to the interactive interpreter. Try replacing `" Mike's dog"` with other strings. What happens if you leave off the starting or ending delimiter? What happens if the delimiter you use is a character in your string? What happens if your starting quote character doesn't match the ending one?
+Feed `type("Mike's dog")` to the interactive interpreter. Try replacing `"Mike's dog"` with other strings. What happens if you leave off the starting or ending delimiter? What happens if the delimiter you use is a character in your string? What happens if your starting quote character doesn't match the ending one?
 ```
 
 Both `'CatInTheHat.txt'` and `"Mike's dog"` are string *literals* because they represent a single, specific value. Their value is literally what you type within the quotes.
@@ -694,7 +694,7 @@ In this script, the virtual finger moved along in the book no matter which name 
 I raise this point for two reasons: (1) You should have the right mental model for what's happening in the Python interpreter; and (2) you will probably be surprised by aliasing at some point in your writing of Python scripts.
 
 ```{tip}
-It is easy to forget whether an assignment in Python (or any programming language for that matter) makes a copy of an object or gives that object a new name. I often forget in languages in which I've programmed for years. If you ever don't remember, don't guess. Look it up or try a simple experiment like we just did. Guessing is the fastest way to creating a hard to find error in your script.
+It is easy to forget whether an assignment in Python (or any programming language for that matter) makes a copy of an object or gives that object a new name. I often forget in languages in which I've programmed for years. If you ever don't remember, don't guess. Look it up or try a simple experiment like we just did. Guessing is the fastest way to creating a hard-to-find error in your script.
 ```
 
 ## Reading two lines
