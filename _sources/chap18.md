@@ -196,7 +196,7 @@ Neural networks were first proposed in the 1940s, and today's computational neur
 ```{figure} images/Smith_fig_18-03.png
 :name: c18_fig3_ref
 
-.
+(a) The rough structure of a neural network. It is a directed graph where values flow along the edges (arrows) from the network inputs and through each layer of computational neurons (rounded squares). (b) Each neuron performs a simple numerical computation..
 ```
 
 Inside each individual neuron, the work done is:

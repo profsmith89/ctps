@@ -487,7 +487,7 @@ Other programming languages, including Python, don't force your array data into 
 
 You have come to the end of the first act, and it's worth recognizing what you've learned and the skills you've developed. Both are significant.
 
-You can turn ideas into Python expressions and statements, using a variety of arithmetic (e.g., `+`), comparative (e.g., `>`), and Boolean operations (e.g., `and`). You can name the results of these statements using the assignment operator (`=`), and use them in subsequent computations. More importantly, you know how to use Python's documentation, its built-in functions like `help` and `type`, and even community resources like stackoverflow.com to aid you in this work. 
+You can turn ideas into Python expressions and statements, using a variety of arithmetic (e.g., `+`), comparative (e.g., `>`), and Boolean operations (e.g., `and`). You can name the results of these statements using the assignment operator (`=`) and use them in subsequent computations. More importantly, you know how to use Python's documentation, its built-in functions like `help` and `type`, and even community resources like stackoverflow.com to aid you in this work. 
 
 You learned to string multiple statements together to perform complex calculations and solve non-trivial tasks. You can take a sequence of statements written for a specific purpose and make it the body of a function. Through careful thoughts about abstraction, your functions can operate on different kinds of objects that adhere to same abstraction. Of course, you know not only how to build your own functions, but to write scripts using functions built by others.
 

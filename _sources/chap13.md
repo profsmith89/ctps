@@ -541,7 +541,7 @@ We have all the pieces we need to complete Task 3: We can recognize patterns in 
 
 Behind the interface of `rewrite_emsg` is a lot of interesting work. Because I wanted information that currently exists at the end of the Python interpreter's error message at the start of my error message, this function splits the processing of the input error message `e` into two pieces: (1) grab and process the "Traceback" lines, which is done in `process_traceback`; and (2) take some of what was learned from `process_traceback` and process and print the error followed by my rewritten traceback, which is done in `print_error` and aided by `print_stack`.
 
-Understanding the code in `rewrite.py` is useful if you want to modify my error message, but even if you don't, there is one aspect of how `process_traceback` works that's worth highlighting. It deals with parentheses in REs, which I mentioned earlier but didn't show you why they were really useful. I'll do that now.
+Understanding the code in `rewrite.py` is useful if you want to modify my error message, but even if you don't, there is one aspect of how `process_traceback` works that's worth highlighting. It deals with parentheses in REs, which I mentioned earlier but didn't show you why they were useful. I'll do that now.
 
 The following code block extracts the RE defined on line 32 of `rewrite.py` and uses it in a `re.match` call similar to those that take place in `process_traceback`.
 
@@ -606,7 +606,7 @@ chap13$ ls -l *.py | sort -k 5
 -rw-r--r--@ 1 profsmith  staff  4775 Sep 26 13:10 rewrite.py
 ```
 
-Unfortunately, it's possible but not as straightforward to wire the `stderr` of one program into the `stdin` of another, which is what we want to do. The following is the syntax to do it.[^fn26] It's definitely shorter than our previous solution, but it is still not the elegant solution we want.
+Unfortunately, it's possible but not as straightforward to wire the `stderr` of one program into the `stdin` of another, which is what we want to do. The following is the syntax to do it.[^fn26] It's shorter than our previous solution, but it is still not the elegant solution we want.
 
 `python3 broken.py 2> >(python3 rewrite.py)`
 
@@ -650,7 +650,7 @@ To make a file executable, you must change its mode. The shell command we use to
 
 ```{code-block} none
 ---
-emphasize-lines: 1,3,5
+emphasize-lines: 1,3,4
 ---
 chap13$ ls -l python32.py
 -rw-r--r--@ 1 profsmith  staff   587 Nov  3 19:10 python32.py
@@ -727,7 +727,7 @@ We began this chapter saying that the right tool will make our problems easy to 
 
 [^fn26]: Feel free to ask a generative AI system like ChatGPT to explain this cryptic syntax.
 
-[^fn27]: There are three groups of rwx bits with each file. Starting from the left, the second through fourth bits state the permissions of the file's owner, which is typically the computer account under which the file was created. There's a lot encoded in these file permission bits, which you can start reading about in the Wikipedia article on file-system permissions (https://en.wikipedia.org/wiki/File-system\_permissions).
+[^fn27]: There are three groups of rwx bits with each file. Starting from the left, the second through fourth bits state the permissions of the file's owner, which is typically the computer account under which the file was created. There's a lot encoded in these file permission bits, which you can start reading about in the Wikipedia article on file-system permissions: https://en.wikipedia.org/wiki/File-system\_permissions
 
 [^fn28]: To no longer allow a file to be executed, you'd type \`chmod -x the\_file\`.
 

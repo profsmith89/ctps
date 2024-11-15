@@ -561,7 +561,7 @@ Try writing the function `factorial` using either a for- or while-loop. You can 
 
 ```
 
-Notice that both of these iterative solutions require us to create a named temporary, which I called `result` in both solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of our complete recursive factorial function on Python Tutor.[^fn11]
+Notice that both these iterative solutions require us to create a named temporary, which I called `result` in both solutions. This temporary exists in the recursive version of the code as the returned result from each recursive call. You can see this by watching the execution of our complete recursive factorial function on Python Tutor.[^fn11]
 
 ## Recursive merge sort
 
@@ -607,7 +607,7 @@ ww = merge_sort(w)
 print(f'a = {aa}\nc = {cc}\nw = {ww}')
 ```
 
-What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, a large number of problems in math and nature are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
+What do you think now about recursion as a way of expressing a problem's implementation? As you can see, it works extremely well for problems that are amenable to divide-and-conquer solutions. Interestingly, many problems in math and nature are neatly expressed in recursive formulations because we can solve them with *induction*, which is what we saw in our recursive solution to factorial.
 
 ## Beckett's challenge
 
