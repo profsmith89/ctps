@@ -2,8 +2,8 @@
 <br/>
 
 <h1 style="text-align: center;">
-Computational Thinking and<br/>
-Problem Solving
+Problem Solving in Python:<br/>
+Using Computational Thinking in Everyday Life
 </h1>
 
 <h4 style="text-align: center;">
@@ -22,5 +22,5 @@ Michael D. Smith
 </p>
 
 <p style="text-align: center;">
-Version 20241118
+Version 20241213
 </p>
