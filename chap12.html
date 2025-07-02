@@ -395,15 +395,16 @@ document.write(`
 <li><p>The built-in function <code class="docutils literal notranslate"><span class="pre">sorted</span></code> takes an object of an iterable type (e.g., a sequence or a dictionary) and <em>returns a new sorted list</em>. The original object is left unchanged.</p></li>
 </ul>
 <p>Let’s build ourselves a few unsorted lists so that we can play with these functions. We’ll use the lists <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, and <code class="docutils literal notranslate"><span class="pre">w</span></code> throughout the rest of this chapter.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap12/unsort.py</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="c1"># Some unsorted lists to use as examples and tests</span>
-<span class="linenos">4</span><span class="k">def</span> <span class="nf">unsort</span><span class="p">():</span>
-<span class="linenos">5</span>    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="linenos">6</span>    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;6</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;3</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;2</span><span class="se">\u2660</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;2</span><span class="se">\u2661</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;4</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;6</span><span class="se">\u2662</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;5</span><span class="se">\u2660</span><span class="s1">&#39;</span><span class="p">]</span>
-<span class="linenos">7</span>    <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;The&#39;</span><span class="p">,</span> <span class="s1">&#39;sun&#39;</span><span class="p">,</span> <span class="s1">&#39;did&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;shine&#39;</span><span class="p">,</span>
-<span class="linenos">8</span>        <span class="s1">&#39;It&#39;</span><span class="p">,</span> <span class="s1">&#39;was&#39;</span><span class="p">,</span> <span class="s1">&#39;too&#39;</span><span class="p">,</span> <span class="s1">&#39;wet&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;play&#39;</span><span class="p">]</span>
-<span class="linenos">9</span>    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">w</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap12/unsort.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># Some unsorted lists to use as examples and tests</span>
+<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">unsort</span><span class="p">():</span>
+<span class="linenos"> 5</span>    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="linenos"> 6</span>    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;6</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;3</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;2</span><span class="se">\u2660</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;2</span><span class="se">\u2661</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;4</span><span class="se">\u2663</span><span class="s1">&#39;</span><span class="p">,</span> 
+<span class="linenos"> 7</span>        <span class="s1">&#39;6</span><span class="se">\u2662</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;5</span><span class="se">\u2660</span><span class="s1">&#39;</span><span class="p">]</span>
+<span class="linenos"> 8</span>    <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;The&#39;</span><span class="p">,</span> <span class="s1">&#39;sun&#39;</span><span class="p">,</span> <span class="s1">&#39;did&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;shine&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>        <span class="s1">&#39;It&#39;</span><span class="p">,</span> <span class="s1">&#39;was&#39;</span><span class="p">,</span> <span class="s1">&#39;too&#39;</span><span class="p">,</span> <span class="s1">&#39;wet&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;play&#39;</span><span class="p">]</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">w</span>
 </pre></div>
 </div>
 <p>Often you can use Python’s two sorting functions without any parameters, as illustrated in the next two code blocks.</p>
@@ -419,7 +420,7 @@ document.write(`
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 9</span><span class="c1">### chap12/sorting.py</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The `sorted` built-in function leaves the input object unchanged&#39;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The `sorted` function leaves the input object unchanged&#39;</span><span class="p">)</span>
 <span class="linenos">12</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">unsort</span><span class="p">()</span>
 <span class="linenos">13</span><span class="n">aa</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="linenos">14</span><span class="n">cc</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -530,7 +531,7 @@ document.write(`
 <span class="linenos">17</span>                <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="linenos">18</span>                <span class="c1"># observe_swap(s, i, j)</span>
 <span class="linenos">19</span>            <span class="k">else</span><span class="p">:</span>
-<span class="linenos">20</span>                <span class="c1"># When swaps are done, the ith element is where it belongs</span>
+<span class="linenos">20</span>                <span class="c1"># ith element is where it belongs</span>
 <span class="linenos">21</span>                <span class="k">break</span>
 <span class="linenos">22</span>
 <span class="linenos">23</span>        <span class="c1"># observe_done(s, i)</span>
@@ -671,7 +672,7 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Iterative merge sort: s sorted in place&quot;&quot;&quot;</span>
 <span class="linenos"> 7</span>    
-<span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists that are guaranteed to be sorted)</span>
+<span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists guaranteed to be sorted)</span>
 <span class="linenos"> 9</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">10</span>        <span class="k">return</span>
 <span class="linenos">11</span>    
@@ -798,7 +799,7 @@ document.write(`
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursive merge sort: returns a sorted list&quot;&quot;&quot;</span>
 <span class="linenos"> 7</span>    
-<span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists that are sorted by definition)</span>
+<span class="linenos"> 8</span>    <span class="c1"># Catch trivial cases (i.e., lists sorted by definition)</span>
 <span class="linenos"> 9</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
 <span class="linenos">10</span>        <span class="k">return</span> <span class="n">s</span>
 <span class="linenos">11</span>    

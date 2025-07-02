@@ -60,7 +60,8 @@ lineno-start: 1
 # Some unsorted lists to use as examples and tests
 def unsort():
     a = [5, 2, 1, 4, 7, 3, 6]
-    c = ['6\u2663', '3\u2663', '2\u2660', '2\u2661', '4\u2663', '6\u2662', '5\u2660']
+    c = ['6\u2663', '3\u2663', '2\u2660', '2\u2661', '4\u2663', 
+        '6\u2662', '5\u2660']
     w = ['The', 'sun', 'did', 'not', 'shine',
         'It', 'was', 'too', 'wet', 'to', 'play']
     return a, c, w
@@ -88,7 +89,7 @@ lineno-start: 9
 ---
 ### chap12/sorting.py
 
-print('The `sorted` built-in function leaves the input object unchanged')
+print('The `sorted` function leaves the input object unchanged')
 a, c, w = unsort()
 aa = sorted(a)
 cc = sorted(c)
@@ -234,7 +235,7 @@ def insertion_sort(s):
                 s[j-1], s[j] = s[j], s[j-1]
                 # observe_swap(s, i, j)
             else:
-                # When swaps are done, the ith element is where it belongs
+                # ith element is where it belongs
                 break
 
         # observe_done(s, i)
@@ -409,7 +410,7 @@ lineno-start: 3
 def merge_sort(s):
     """Iterative merge sort: s sorted in place"""
     
-    # Catch trivial cases (i.e., lists that are guaranteed to be sorted)
+    # Catch trivial cases (i.e., lists guaranteed to be sorted)
     if len(s) < 2:
         return
     
@@ -578,7 +579,7 @@ lineno-start: 3
 def merge_sort(s):
     """Recursive merge sort: returns a sorted list"""
     
-    # Catch trivial cases (i.e., lists that are sorted by definition)
+    # Catch trivial cases (i.e., lists sorted by definition)
     if len(s) < 2:
         return s
     

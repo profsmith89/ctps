@@ -309,7 +309,7 @@ def increment(d, key):
     '''Increment the count for key `key` in dictionary `d`'''
     if key in d:
         if d[key] > 1:
-            print(f'Actor "{red}{key}{reset}" occurs too many times')
+            print(f'Actor "{red}{key}{reset}" occurs too often')
             sys.exit()
         else:
             d[key] += 1
@@ -465,7 +465,7 @@ Now that we've conservatively decided the complete problem-to-be-solved from my 
 # Grab the filename and read in its lines
 # Strip off the lines up to and including 'degrees of separation'
 # Grab the names out of each line and insert them in a dictionary
-# If the value associated with a name exceeds 2, we have a problem
+# If a name occurs more than twice, we have a problem
 ```
 
 The hardest task in this decomposition is grabbing the names from each line. So let's ask ChatGPT to help with that:

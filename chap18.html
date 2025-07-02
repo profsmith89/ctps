@@ -606,7 +606,7 @@ Intended Person ID: Name: Running a dfs search
 <span class="linenos">11</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Increment the count for key `key` in dictionary `d`&#39;&#39;&#39;</span>
 <span class="linenos">12</span>    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
 <span class="linenos">13</span>        <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="linenos">14</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actor &quot;</span><span class="si">{</span><span class="n">red</span><span class="si">}{</span><span class="n">key</span><span class="si">}{</span><span class="n">reset</span><span class="si">}</span><span class="s1">&quot; occurs too many times&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actor &quot;</span><span class="si">{</span><span class="n">red</span><span class="si">}{</span><span class="n">key</span><span class="si">}{</span><span class="n">reset</span><span class="si">}</span><span class="s1">&quot; occurs too often&#39;</span><span class="p">)</span>
 <span class="linenos">15</span>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 <span class="linenos">16</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">17</span>            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -738,7 +738,7 @@ Intended Person ID: Name: Running a dfs search
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grab the filename and read in its lines</span>
 <span class="c1"># Strip off the lines up to and including &#39;degrees of separation&#39;</span>
 <span class="c1"># Grab the names out of each line and insert them in a dictionary</span>
-<span class="c1"># If the value associated with a name exceeds 2, we have a problem</span>
+<span class="c1"># If a name occurs more than twice, we have a problem</span>
 </pre></div>
 </div>
 <p>The hardest task in this decomposition is grabbing the names from each line. So let’s ask ChatGPT to help with that:</p>
