@@ -466,13 +466,13 @@ document.write(`
 <span class="linenos">17</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">bits</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-<span class="linenos">20</span>    <span class="c1"># Our new estimate always adds a least-significant one bit to the end</span>
-<span class="linenos">21</span>    <span class="c1"># of our current lower bound, i.e., move up the value below the</span>
-<span class="linenos">22</span>    <span class="c1"># target number.</span>
+<span class="linenos">20</span>    <span class="c1"># Our new estimate always adds a least-significant one bit to</span>
+<span class="linenos">21</span>    <span class="c1"># the end of our current lower bound, i.e., move up the value</span>
+<span class="linenos">22</span>    <span class="c1"># below the target number.</span>
 <span class="linenos">23</span>    <span class="n">new_guess</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">**</span> <span class="o">-</span><span class="n">i</span><span class="p">)</span>
 <span class="linenos">24</span>    
-<span class="linenos">25</span>    <span class="c1"># Update the correct bound, depending upon whether the new estimate</span>
-<span class="linenos">26</span>    <span class="c1"># overshot the target or not.</span>
+<span class="linenos">25</span>    <span class="c1"># Update the correct bound, depending upon whether the new</span>
+<span class="linenos">26</span>    <span class="c1"># estimate overshot the target or not.</span>
 <span class="linenos">27</span>    <span class="k">if</span> <span class="n">new_guess</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
 <span class="linenos">28</span>        <span class="n">lower</span> <span class="o">=</span> <span class="n">new_guess</span>
 <span class="linenos">29</span>        <span class="n">encoding</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>

@@ -170,13 +170,13 @@ best = lower  # with 0 bits used, our best estimate is 0
 encoding = ''
 
 for i in range(1, bits+1):
-    # Our new estimate always adds a least-significant one bit to the end
-    # of our current lower bound, i.e., move up the value below the
-    # target number.
+    # Our new estimate always adds a least-significant one bit to
+    # the end of our current lower bound, i.e., move up the value
+    # below the target number.
     new_guess = lower + (2.0 ** -i)
     
-    # Update the correct bound, depending upon whether the new estimate
-    # overshot the target or not.
+    # Update the correct bound, depending upon whether the new
+    # estimate overshot the target or not.
     if new_guess <= n:
         lower = new_guess
         encoding += '1'
