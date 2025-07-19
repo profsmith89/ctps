@@ -478,7 +478,7 @@ lineno-start: 1
 ### chap03/replace32.py
 
 def my_replace(s, old, new):
-    """Returns a string replacing all occurrences of old with new."""
+    """Returns a string replacing all instances of old with new."""
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
@@ -496,7 +496,7 @@ def my_replace(s, old, new):
 
 def main():
     my_book = input('What book would you like to read? ')
-    print()   # print a blank line between question and script's output
+    print()   # print a blank line
     
     with open('txts/' + my_book) as my_open_book:
         while True:
@@ -581,7 +581,7 @@ lineno-start: 1
 ### chap03/bookshelf1.py
 
 def my_replace(s, old, new):
-    """Returns a string replacing all occurrences of old with new."""
+    """Returns a string replacing all instances of old with new."""
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building
@@ -642,7 +642,7 @@ The Cat in the 🎩!
 ['🦁', 'kids.jpg', '📖', 'BornToRun.mp3', 'CatInTheHat.txt']
 ```
 
-It worked! Our docstring and comments are misleading. We should replace the word "string" in them with the word "sequence."
+It worked! Our docstring and comments for the function `my_replace` are misleading. We should replace the word "string" in them with the word "sequence."
 
 ## Abstraction barriers
 

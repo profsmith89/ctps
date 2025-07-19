@@ -711,7 +711,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/replace32.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all instances of old with new.&quot;&quot;&quot;</span>
 <span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
@@ -729,7 +729,7 @@ document.write(`
 <span class="linenos">19</span>
 <span class="linenos">20</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="linenos">21</span>    <span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
-<span class="linenos">22</span>    <span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line between question and script&#39;s output</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">()</span>   <span class="c1"># print a blank line</span>
 <span class="linenos">23</span>    
 <span class="linenos">24</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;txts/&#39;</span> <span class="o">+</span> <span class="n">my_book</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_open_book</span><span class="p">:</span>
 <span class="linenos">25</span>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -792,7 +792,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap03/bookshelf1.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">def</span> <span class="nf">my_replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all occurrences of old with new.&quot;&quot;&quot;</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string replacing all instances of old with new.&quot;&quot;&quot;</span>
 <span class="linenos"> 5</span>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># tracks where we are in the input string</span>
 <span class="linenos"> 6</span>    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>    <span class="c1"># skip-ahead amount for index calculations</span>
 <span class="linenos"> 7</span>    <span class="n">new_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># the new string we&#39;re building</span>
@@ -845,7 +845,7 @@ The Cat in the 🎩!
 [&#39;🦁&#39;, &#39;kids.jpg&#39;, &#39;📖&#39;, &#39;BornToRun.mp3&#39;, &#39;CatInTheHat.txt&#39;]
 </pre></div>
 </div>
-<p>It worked! Our docstring and comments are misleading. We should replace the word “string” in them with the word “sequence.”</p>
+<p>It worked! Our docstring and comments for the function <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> are misleading. We should replace the word “string” in them with the word “sequence.”</p>
 </section>
 <section id="abstraction-barriers">
 <p><strong>Abstraction barriers.</strong> We’ll expand our discussion of abstraction, its beauty, and its power in Act II, but before leaving this topic, I want to give a word of warning about building abstractions. Of all the statements in <code class="docutils literal notranslate"><span class="pre">my_replace</span></code>, the one that’s easiest to get “wrong” is <code class="docutils literal notranslate"><span class="pre">new_s</span> <span class="pre">=</span> <span class="pre">s[0:0]</span></code>.</p>

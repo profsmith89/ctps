@@ -19,7 +19,7 @@ In this chapter, you will learn how to query networked resources through their a
 
 ## Packages and libraries
 
-To access information out on the Internet, we will use the `requests` package. A *package* is simply a set of modules that a Python programmer distributes all together. The `requests` package is one of many available through the Python Package Index (`https://pypi.org/`), which is an online repository of software for the Python programming language.
+To access information out on the Internet, we will use the `requests` package. A *package* is simply a set of modules that a Python programmer distributes all together. The `requests` package is one of many available through the Python Package Index (https://pypi.org/), which is an online repository of software for the Python programming language.
 
 Another name you'll often hear programmers use for a collection of modules is *library*. Programming languages like Python are typically distributed with what is called a *standard library*, which you can think of as the modules and packages available by default wherever the programming language is installed. The Python standard library[^fn1] includes built-in constants (e.g., `True`), data types (e.g., `str`), and functions (e.g., the file I/O facilities) that we have repeatedly used in our scripts. 
 
@@ -69,11 +69,11 @@ import requests
 def main():
     print('Searching wikipedia for "The Cat in the Hat"')
     
-    # Craft a request wikipedia will understand about The Cat in the Hat
+    # Craft a request wikipedia will understand
     s = 'The Cat in the Hat'.replace(' ', '+')
     url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={s}&srlimit=1&format=json"
     
-    # Send that request from our computer to the one running wikipedia
+    # Send request from our computer to the one running wikipedia
     # Read the response from the wikipedia computer
     response = requests.get(url)
     
@@ -180,9 +180,9 @@ Finally, HTTP allows us to specify an optional query at the end of our URL. The 
 
 ## The Programmable Web
 
-You might wonder, how did I know to create this specific URL? If we point our browser to en.wikipedia.org and type "The Cat in the Hat" in the search box there, the URL to which we're directed is `https://en.wikipedia.org/wiki/The_Cat_in_the_Hat` and not the one in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we need to access the parts of the Web with published APIs.
+You might wonder, how did I know to create this specific URL? If we point our browser to en.wikipedia.org and type "The Cat in the Hat" in the search box there, the URL to which we're directed is https://en.wikipedia.org/wiki/The\_Cat\_in\_the\_Hat and not the one in `qweb2.py`. That's because we want to use the Web as a programmable platform, and to do that, we need to access the parts of the Web with published APIs.
 
-To learn what Internet-based APIs exist, I visited the ProgrammableWeb, which maintained a directory of these things until it shut down in early 2023.[^fn7] That site pointed me to MediaWiki's API, on which Wikipedia's API is built.[^fn8] There I learned that the API endpoint for Wikipedia in English is `https://en.wikipedia.org/w/api.php`.
+To learn what Internet-based APIs exist, I visited the ProgrammableWeb, which maintained a directory of these things until it shut down in early 2023.[^fn7] That site pointed me to MediaWiki's API, on which Wikipedia's API is built.[^fn8] There I learned that the API endpoint for Wikipedia in English is https://en.wikipedia.org/w/api.php.
 
 To converse with the server at this endpoint, we must craft a *query string*. In this string, the MediaWiki site explained that we should set the parameter named `action` to the value `query` when we want to fetch data. If we then set the `list` parameter to `search`, we can perform a full text search. Since we're doing a search, we set the parameter `srsearch` with the value of our search string and the parameter `srlimit` to the number of page matches that we'd like returned. Finally, we set the parameter `format` to `json` so that the Wikipedia API knew that we want our response in JSON format, a text-based format that we'll discuss in a moment.
 

@@ -577,7 +577,7 @@ lineno-start: 1
 import random
 from socket32 import create_new_socket
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '127.0.0.1'  # Standard loopback interface address
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 with create_new_socket() as s:
@@ -619,7 +619,7 @@ lineno-start: 1
 import random
 from socket32 import create_new_socket
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '127.0.0.1'  # Standard loopback interface address
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 def main():
@@ -672,7 +672,7 @@ lineno-start: 1
 import random
 from socket32 import create_new_socket
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '127.0.0.1'  # Standard loopback interface address
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 def main():
@@ -730,6 +730,7 @@ Are you ready to try running our client and server scripts? It's a bit more comp
 ```{code-block} none
 ---
 lineno-start: 1
+emphasize-lines: 1,5
 ---
 chap05$ python3 guess-server.py &
 [1] 10440

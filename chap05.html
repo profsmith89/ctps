@@ -805,7 +805,7 @@ document.write(`
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address (localhost)</span>
+<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address</span>
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">with</span> <span class="n">create_new_socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
@@ -841,7 +841,7 @@ document.write(`
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address (localhost)</span>
+<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address</span>
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -882,7 +882,7 @@ document.write(`
 <span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
 <span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address (localhost)</span>
+<span class="linenos"> 5</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># Standard loopback interface address</span>
 <span class="linenos"> 6</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>  <span class="c1"># Port to listen on (non-privileged ports are &gt; 1023)</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -933,12 +933,12 @@ document.write(`
 <li><p>IDE option 1: The simplest (and my recommended) approach is to run the Python interpreter on the server and client scripts using two different shell windows. Start the server script in one shell <em>before</em> the client script in the other. When the client script terminates, the server script should automatically terminate, too.</p></li>
 <li><p>IDE option 2: If you are comfortable with a Unix-like command line interface, you can use one shell window and start the server script as a background process (i.e., by appending an ampersand to the command). Then run the client script. It would look something like the following transcript. Line 2 is the <em>job number</em> and <em>process ID</em> given to the running <code class="docutils literal notranslate"><span class="pre">guess-server</span></code> by the shell; yours will be different. Line 3 is the shell giving us the next prompt mashed together with the status print that I included in the server script; the shell and the server are both writing to the terminal. You could type <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">guess-client.py</span></code> right on line 4, but I hit return to get an unobscured shell prompt and then started the client. The client is now running, but so is the server, and both these processes can write to the terminal.<a class="footnote-reference brackets" href="#fn16" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a> Since our code to grab a player’s guess is resilient, I again hit return to get a clean prompt from the client. You can now see why I recommend option 1, which gives the server and client their own terminal windows in which they output text.</p></li>
 </ul>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>chap05$ python3 guess-server.py &amp;
-<span class="linenos"> 2</span>[1] 10440
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span>chap05$ python3 guess-server.py &amp;
+</span><span class="linenos"> 2</span>[1] 10440
 <span class="linenos"> 3</span>chap05$ GUESS-THE-NUMBER server started. Listening on (&#39;127.0.0.1&#39;, 65432)
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>chap05$ python3 guess-client.py 
-<span class="linenos"> 6</span>## Welcome to GUESS THE NUMBER! ##
+<span class="hll"><span class="linenos"> 5</span>chap05$ python3 guess-client.py 
+</span><span class="linenos"> 6</span>## Welcome to GUESS THE NUMBER! ##
 <span class="linenos"> 7</span>Please input your guess: Connected by (&#39;127.0.0.1&#39;, 51049)
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span>Guesses must be an integer. Try again...
