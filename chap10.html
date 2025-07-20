@@ -476,14 +476,14 @@ document.write(`
 <span class="linenos"> 7</span>    <span class="c1"># Constants in Rabin-Karp string-matching problem</span>
 <span class="linenos"> 8</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
 <span class="linenos"> 9</span>    
-<span class="linenos">10</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
-<span class="linenos">11</span>    <span class="c1"># m-1th position), where digits have radix d</span>
+<span class="linenos">10</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position</span>
+<span class="linenos">11</span>    <span class="c1"># (i.e., m-1th position), where digits have radix d</span>
 <span class="linenos">12</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">13</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">14</span>        <span class="n">hh</span> <span class="o">=</span> <span class="n">hh</span> <span class="o">*</span> <span class="n">d</span>
 <span class="linenos">15</span>    
-<span class="linenos">16</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the matching</span>
-<span class="linenos">17</span>    <span class="c1"># loop needs these values as it starts</span>
+<span class="linenos">16</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the</span>
+<span class="linenos">17</span>    <span class="c1"># matching loop needs these values as it starts</span>
 <span class="linenos">18</span>    <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">19</span>    <span class="n">ht</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">20</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -523,14 +523,14 @@ document.write(`
 <span class="linenos">21</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
 <span class="linenos">22</span>    <span class="n">q</span> <span class="o">=</span> <span class="mi">65537</span>  <span class="c1"># a prime number</span>
 <span class="linenos">23</span>    
-<span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
-<span class="linenos">25</span>    <span class="c1"># m-1th position), where digits have radix d</span>
+<span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position</span>
+<span class="linenos">25</span>    <span class="c1"># (i.e., m-1th position), where digits have radix d</span>
 <span class="linenos">26</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">27</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">28</span>        <span class="n">hh</span> <span class="o">=</span> <span class="p">(</span><span class="n">hh</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
 <span class="linenos">29</span>    
-<span class="linenos">30</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the matching</span>
-<span class="linenos">31</span>    <span class="c1"># loop needs these values as it starts</span>
+<span class="linenos">30</span>    <span class="c1"># Calculate the hash values for p and t[0:m], since the</span>
+<span class="linenos">31</span>    <span class="c1"># matching loop needs these values as it starts</span>
 <span class="linenos">32</span>    <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">33</span>    <span class="n">ht</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">34</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -588,7 +588,7 @@ document.write(`
 </section>
 <section id="the-speed-of-array-index-operations">
 <p><strong>The speed of array-index operations.</strong> You might be saying, “Wait? What’s going on in the hash table implementation that guarantees this performance?”</p>
-<p>Let’s step back and recognize that the search-index data structure we drew in <a class="reference internal" href="#c10-fig4-ref"><span class="std std-numref">Figure 29</span></a> looks a lot like the sequences and arrays we drew in Act I (e.g., <code class="xref std std-numref docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">%s&lt;c02_fig3_ref&gt;).</span> <span class="pre">They</span> <span class="pre">were</span> <span class="pre">just</span> <span class="pre">a</span> <span class="pre">bunch</span> <span class="pre">of</span> <span class="pre">boxes</span> <span class="pre">placed</span> <span class="pre">one</span> <span class="pre">after</span> <span class="pre">another,</span> <span class="pre">and</span> <span class="pre">we</span> <span class="pre">used</span> <span class="pre">the</span> <span class="pre">square-bracket</span> <span class="pre">syntax</span> <span class="pre">(</span></code>[]<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">to</span> <span class="pre">indicate</span> <span class="pre">which</span> <span class="pre">box</span> <span class="pre">contained</span> <span class="pre">the</span> <span class="pre">content</span> <span class="pre">we</span> <span class="pre">wanted.</span> <span class="pre">For</span> <span class="pre">example,</span> <span class="pre">if</span> <span class="pre">we</span> <span class="pre">wanted</span> <span class="pre">the</span> <span class="pre">fifth</span> <span class="pre">character</span> <span class="pre">in</span> </code>the_line<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">we</span> <span class="pre">just</span> <span class="pre">read</span> <span class="pre">from</span> </code>CatInTheHat.txt<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">we</span> <span class="pre">got</span> <span class="pre">it</span> <span class="pre">by</span> <span class="pre">typing</span> </code>the_line[4]`.</p>
+<p>Let’s step back and recognize that the search-index data structure we drew in <a class="reference internal" href="#c10-fig4-ref"><span class="std std-numref">Figure 29</span></a> looks a lot like the sequences and arrays we drew in Act I (e.g., <a class="reference internal" href="chap02.html#c02-fig3-ref"><span class="std std-numref">Figure 7</span></a>). They were just a bunch of boxes placed one after another, and we used the square-bracket syntax (<code class="docutils literal notranslate"><span class="pre">[]</span></code>) to indicate which box contained the content we wanted. For example, if we wanted the fifth character in <code class="docutils literal notranslate"><span class="pre">the_line</span></code>, we just read from <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>, we got it by typing <code class="docutils literal notranslate"><span class="pre">the_line[4]</span></code>.</p>
 <p>To this point, you probably haven’t thought about how long it takes your machine to grab the fifth character in a string like <code class="docutils literal notranslate"><span class="pre">the_line</span></code>. Does the machine start from the beginning of the string (i.e., <code class="docutils literal notranslate"><span class="pre">the_line[0]</span></code>) in the computer’s memory, count five characters forward, and then return the character at that fifth location? If it did, then every index into a string would take time proportional to its location in the string.</p>
 <p>It clearly doesn’t, otherwise I wouldn’t be raising this point. The beauty of our computers’ memories, where our scripts execute, are that they are <em>random-access memories (RAM) indexed by byte addresses</em>. In a random-access memory, if you present the memory with a byte address (i.e., an index measured in bytes from the start of the memory), it will proceed immediately to read that location and give you back what’s stored there (assuming that the address doesn’t exceed the memory’s size). There is no search involved; it is <em>direct access</em>.</p>
 <p>Returning to our string example, to directly access a character in a string, the Python interpreter simply needs to know:</p>
@@ -644,11 +644,11 @@ document.write(`
 <span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">re</span>
 <span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">string</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="c1"># Instead of bothering to ask the user for this information on each run of the</span>
-<span class="linenos"> 7</span><span class="c1"># program, we&#39;ll just make them global constants.  In production code, we&#39;d</span>
-<span class="linenos"> 8</span><span class="c1"># define this information in a configuration file, which would be a better way</span>
-<span class="linenos"> 9</span><span class="c1"># to have our user infrequently change what are relatively stable constants than</span>
-<span class="linenos">10</span><span class="c1"># asking this user to edit our scripts.</span>
+<span class="linenos"> 6</span><span class="c1"># Instead of asking the user for this information on each run of</span>
+<span class="linenos"> 7</span><span class="c1"># the program, we&#39;ll make them global constants. In production</span>
+<span class="linenos"> 8</span><span class="c1"># code, we&#39;d define this information in a configuration file,</span>
+<span class="linenos"> 9</span><span class="c1"># which is a better way to have our user infrequently change what</span>
+<span class="linenos">10</span><span class="c1"># are relatively stable constants.</span>
 <span class="linenos">11</span><span class="n">MIN_LEN</span> <span class="o">=</span> <span class="mi">4</span>           <span class="c1"># don&#39;t index any words shorter than 4 chars</span>
 <span class="linenos">12</span><span class="n">UNIT_PAT</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>         <span class="c1"># for pages in CatInTheHat.txt</span>
 <span class="linenos">13</span><span class="n">UNIT_CNT_INIT</span> <span class="o">=</span> <span class="mi">1</span>
@@ -660,8 +660,8 @@ document.write(`
 <span class="linenos">19</span><span class="c1"># The magic function that turns a line into a wordlist</span>
 <span class="linenos">20</span><span class="k">def</span> <span class="nf">get_wordlist</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
 <span class="linenos">21</span>    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="linenos">22</span>    <span class="k">return</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;^[</span><span class="si">{0}</span><span class="s1">]+|[</span><span class="si">{0}</span><span class="s1">]+$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-<span class="linenos">23</span>            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+<span class="linenos">22</span>    <span class="k">return</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;^[</span><span class="si">{0}</span><span class="s1">]+|[</span><span class="si">{0}</span><span class="s1">]+$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">),</span>
+<span class="linenos">23</span>                   <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
 <span class="linenos">24</span>
 <span class="linenos">25</span><span class="c1"># An unfortunately difficult check because of empty lines as</span>
 <span class="linenos">26</span><span class="c1"># a unit break in CatInTheHat.txt</span>
@@ -679,7 +679,7 @@ document.write(`
 <span class="linenos">38</span>    <span class="c1"># Start with an empty dictionary</span>
 <span class="linenos">39</span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="linenos">40</span>    
-<span class="linenos">41</span>    <span class="c1"># Iterate through each line in book watching for book-unit boundaries</span>
+<span class="linenos">41</span>    <span class="c1"># Iterate through each line watching for book-unit boundaries</span>
 <span class="linenos">42</span>    <span class="n">unitno</span> <span class="o">=</span> <span class="n">UNIT_CNT_INIT</span>
 <span class="linenos">43</span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
 <span class="linenos">44</span>        <span class="k">if</span> <span class="n">found_new_unit</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
@@ -824,7 +824,7 @@ document.write(`
 <span class="linenos">52</span>    <span class="c1"># Start with an empty dictionary</span>
 <span class="linenos">53</span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="linenos">54</span>    
-<span class="linenos">55</span>    <span class="c1"># Iterate through each line in book watching for book unit boundaries</span>
+<span class="linenos">55</span>    <span class="c1"># Iterate through each line watching for book-unit boundaries</span>
 <span class="linenos">56</span>    <span class="n">unitno</span> <span class="o">=</span> <span class="n">UNIT_CNT_INIT</span>
 <span class="linenos">57</span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
 <span class="linenos">58</span>        <span class="k">if</span> <span class="n">found_new_unit</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>

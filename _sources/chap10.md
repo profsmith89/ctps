@@ -173,14 +173,14 @@ def rk_strmatch_partial(t, p):
     # Constants in Rabin-Karp string-matching problem
     d = 256    # number of character encodings in ASCII
     
-    # Compute the hash value of a 1 in the high-order position (i.e.,
-    # m-1th position), where digits have radix d
+    # Compute the hash value of a 1 in the high-order position
+    # (i.e., m-1th position), where digits have radix d
     hh = 1
     for i in range(m - 1):
         hh = hh * d
     
-    # Calculate the hash values for p and t[0:m], since the matching
-    # loop needs these values as it starts
+    # Calculate the hash values for p and t[0:m], since the
+    # matching loop needs these values as it starts
     hp = 0
     ht = 0
     for i in range(m):
@@ -233,14 +233,14 @@ def rk_strmatch(t, p):
     d = 256    # number of character encodings in ASCII
     q = 65537  # a prime number
     
-    # Compute the hash value of a 1 in the high-order position (i.e.,
-    # m-1th position), where digits have radix d
+    # Compute the hash value of a 1 in the high-order position
+    # (i.e., m-1th position), where digits have radix d
     hh = 1
     for i in range(m - 1):
         hh = (hh * d) % q
     
-    # Calculate the hash values for p and t[0:m], since the matching
-    # loop needs these values as it starts
+    # Calculate the hash values for p and t[0:m], since the
+    # matching loop needs these values as it starts
     hp = 0
     ht = 0
     for i in range(m):
@@ -314,7 +314,7 @@ In Python, the dictionary data type (`dict`) is a hash table data structure buil
 
 You might be saying, "Wait? What's going on in the hash table implementation that guarantees this performance?"
 
-Let's step back and recognize that the search-index data structure we drew in {numref}`Figure %s<c10_fig4_ref>` looks a lot like the sequences and arrays we drew in Act I (e.g., {numref}`Figure %s<c02_fig3_ref>). They were just a bunch of boxes placed one after another, and we used the square-bracket syntax (`[]`) to indicate which box contained the content we wanted. For example, if we wanted the fifth character in `the_line`, we just read from `CatInTheHat.txt`, we got it by typing `the_line[4]`.
+Let's step back and recognize that the search-index data structure we drew in {numref}`Figure %s<c10_fig4_ref>` looks a lot like the sequences and arrays we drew in Act I (e.g., {numref}`Figure %s<c02_fig3_ref>`). They were just a bunch of boxes placed one after another, and we used the square-bracket syntax (`[]`) to indicate which box contained the content we wanted. For example, if we wanted the fifth character in `the_line`, we just read from `CatInTheHat.txt`, we got it by typing `the_line[4]`.
 
 To this point, you probably haven't thought about how long it takes your machine to grab the fifth character in a string like `the_line`. Does the machine start from the beginning of the string (i.e., `the_line[0]`) in the computer's memory, count five characters forward, and then return the character at that fifth location? If it did, then every index into a string would take time proportional to its location in the string.
 
@@ -400,11 +400,11 @@ import sys
 import re
 import string
 
-# Instead of bothering to ask the user for this information on each run of the
-# program, we'll just make them global constants.  In production code, we'd
-# define this information in a configuration file, which would be a better way
-# to have our user infrequently change what are relatively stable constants than
-# asking this user to edit our scripts.
+# Instead of asking the user for this information on each run of
+# the program, we'll make them global constants. In production
+# code, we'd define this information in a configuration file,
+# which is a better way to have our user infrequently change what
+# are relatively stable constants.
 MIN_LEN = 4           # don't index any words shorter than 4 chars
 UNIT_PAT = ''         # for pages in CatInTheHat.txt
 UNIT_CNT_INIT = 1
@@ -416,8 +416,8 @@ UNIT_CNT_INIT = 0
 # The magic function that turns a line into a wordlist
 def get_wordlist(line):
     line = line.replace('--', ' ')
-    return [re.sub('^[{0}]+|[{0}]+$'.format(string.punctuation), '', w)
-            for w in line.split()]
+    return [re.sub('^[{0}]+|[{0}]+$'.format(string.punctuation),
+                   '', w) for w in line.split()]
 
 # An unfortunately difficult check because of empty lines as
 # a unit break in CatInTheHat.txt
@@ -435,7 +435,7 @@ def build_index(txt):
     # Start with an empty dictionary
     d = {}
     
-    # Iterate through each line in book watching for book-unit boundaries
+    # Iterate through each line watching for book-unit boundaries
     unitno = UNIT_CNT_INIT
     for line in txt.split('\n'):
         if found_new_unit(line):
@@ -616,7 +616,7 @@ def build_index(txt):
     # Start with an empty dictionary
     d = {}
     
-    # Iterate through each line in book watching for book unit boundaries
+    # Iterate through each line watching for book-unit boundaries
     unitno = UNIT_CNT_INIT
     for line in txt.split('\n'):
         if found_new_unit(line):

@@ -579,8 +579,8 @@ Pattern occurs with shift 22
 <span class="linenos">21</span>    <span class="n">d</span> <span class="o">=</span> <span class="mi">256</span>    <span class="c1"># number of character encodings in ASCII</span>
 <span class="linenos">22</span>    <span class="n">q</span> <span class="o">=</span> <span class="mi">65537</span>  <span class="c1"># a prime number</span>
 <span class="linenos">23</span>    
-<span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position (i.e.,</span>
-<span class="linenos">25</span>    <span class="c1"># m-1th position), where digits have radix d</span>
+<span class="linenos">24</span>    <span class="c1"># Compute the hash value of a 1 in the high-order position</span>
+<span class="linenos">25</span>    <span class="c1"># (i.e., m-1th position), where digits have radix d</span>
 <span class="linenos">26</span>    <span class="n">hh</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="linenos">27</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
 <span class="linenos">28</span>        <span class="n">hh</span> <span class="o">=</span> <span class="p">(</span><span class="n">hh</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>

@@ -247,7 +247,7 @@ lineno-start: 14
 ---
 ### chap08/zero.py
 def zero_image_lowest_bits(src, dest):
-    '''Zeroing lowest 4 bits in all color channels of input image'''
+    '''Zeroing lowest 4 bits in all color channels of src'''
     for x in range(src.size[0]):
         for y in range(src.size[1]):
             r, g, b = src.getpixel((x,y))
