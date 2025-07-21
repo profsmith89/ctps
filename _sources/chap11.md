@@ -325,12 +325,12 @@ lineno-start: 8
 ---
 ### chap11/pin.py
 class Pin(object):
-    """Abstraction: A Pin object is a mark at a map location `loc`
-       with a `name`, descriptive `note`, and a ranking of 0-5 `stars`.
+    """Abstraction: A Pin object is a mark at a map location loc
+       with a name, descriptive note, and a ranking of 0-5 stars.
        These names are all instance attributes.
 
        instance.icon: The pins displayed icon, which depends upon
-       the pin's number of `stars`.
+       the pin's number of stars.
 
        distance(location): Given a (x,y) location, this method
        computes and returns the as-the-crow-flies distance from
@@ -381,8 +381,8 @@ Line 69 creates an object (also called an *instance*) of type `Pin`. If you thin
 ---
 lineno-start: 1
 ---
-# Examples of creating an instance of a built-in object. We get to use special
-# syntax in each of these cases.
+# Examples of creating an instance of a built-in object. We get to
+# use special syntax in each of these cases.
 an_int = 0
 an_empty_string = ''
 an_empty_list = []
@@ -395,9 +395,9 @@ But we can also build instances of these built-in data types by directly invokin
 ---
 lineno-start: 1
 ---
-# The same examples as the last code block, except now we're creating
+# The same examples as the last code block, except we're creating
 # instance of built-in object using the type's constructor.
-an_int = int()           # constructor defaults to an object of value 0
+an_int = int()           # constructor default is the value 0
 an_empty_string = str()  # constructor default is an empty string
 an_empty_list = list()   # constructor default is an empty list
 print(an_int, an_empty_string, an_empty_list)
@@ -478,7 +478,7 @@ lineno-start: 34
 ### chap11/wander.py
         elif cmd == 'c':
             best_loc = NO_LOC            # not a valid location
-            best_distance = MAX_DISTANCE # bigger than any allowable map
+            best_distance = MAX_DISTANCE
             
             # Find the closest highly-rated pin
             for pin in pins:

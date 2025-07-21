@@ -247,9 +247,9 @@ import inspect
 
 def grab_f(fun_name):
     '''A utility function that returns a string containing the
-    source code for `fun_name`. Its implementation assumes that
-    the function `fun_name` is in a Python script of the same
-    name (i.e., `fun_name.py`).'''
+    source code for fun_name. Its implementation assumes that
+    the function fun_name is in a Python script of the same
+    name (i.e., fun_name.py).'''
     try:
         fun_module = importlib.import_module(fun_name)
         fun_object = getattr(fun_module, fun_name)
@@ -272,13 +272,13 @@ import importlib
 import our_tools
 
 def analyze(analysis_name, fun_name, s=None):
-    # Grab the analysis function from its module. This code assumes that the
-    # `analysis_name` is in `analysis_name.py`.
+    # Grab the analysis function from its module. This code assumes
+    # that the analysis_name is in analysis_name.py.
     analysis_mod = importlib.import_module(analysis_name)
     analysis_fun = getattr(analysis_mod, analysis_name)
     
     # Grab function to analyze. The utility used assumes that
-    # the function `fun_name` is in `fun_name.py`.
+    # the function fun_name is in fun_name.py.
     f = our_tools.grab_f(fun_name)
     
     # Do the analysis
@@ -447,7 +447,7 @@ Work through each of the following examples. Don't take my word for what will be
                                       +-- analysis function
                                       |
                                       V
-**Example 1:** `python3 analyze.py yes_on_s hellu world` 
+**Example 1:** python3 analyze.py yes_on_s hellu world
                                              ^     ^
                                              |     |
                                              +- f  +- s 
@@ -514,7 +514,7 @@ When you're comfortable reasoning about the behavior of `yes_on_self`, think abo
                                       +-- analysis function
                                       |
                                       V
-**Example 9**: `python3 analyze.py yes_on_self yes_on_self`
+**Example 9**: python3 analyze.py yes_on_self yes_on_self
                                                    ^
                                                    |
                                                    +- f
@@ -561,7 +561,7 @@ The implication in this new function's name arises when we ask it to analyze its
                                       +-- analysis function
                                       |
                                       V
-**Example 11:** `python3 analyze.py trouble trouble`
+**Example 11:** python3 analyze.py trouble trouble
                                               ^
                                               |
                                               +- f

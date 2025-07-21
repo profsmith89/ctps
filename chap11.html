@@ -606,12 +606,12 @@ document.write(`
 <p>While I’ll continue to make reference to the <code class="docutils literal notranslate"><span class="pre">CitySqGrid</span></code> class, it is too complicated to use as an understandable first example. Instead, I’ll teach you how to build your own class by creating a new data type, called <code class="docutils literal notranslate"><span class="pre">Pin</span></code>, that allows us to add Google-Maps-like pins<a class="footnote-reference brackets" href="#fn12" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> to the <code class="docutils literal notranslate"><span class="pre">CitySqGrid</span></code> maps we used in <code class="docutils literal notranslate"><span class="pre">walk.py</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 8</span><span class="c1">### chap11/pin.py</span>
 <span class="linenos"> 9</span><span class="k">class</span> <span class="nc">Pin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="linenos">10</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstraction: A Pin object is a mark at a map location `loc`</span>
-<span class="linenos">11</span><span class="sd">       with a `name`, descriptive `note`, and a ranking of 0-5 `stars`.</span>
+<span class="linenos">10</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstraction: A Pin object is a mark at a map location loc</span>
+<span class="linenos">11</span><span class="sd">       with a name, descriptive note, and a ranking of 0-5 stars.</span>
 <span class="linenos">12</span><span class="sd">       These names are all instance attributes.</span>
 <span class="linenos">13</span>
 <span class="linenos">14</span><span class="sd">       instance.icon: The pins displayed icon, which depends upon</span>
-<span class="linenos">15</span><span class="sd">       the pin&#39;s number of `stars`.</span>
+<span class="linenos">15</span><span class="sd">       the pin&#39;s number of stars.</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span><span class="sd">       distance(location): Given a (x,y) location, this method</span>
 <span class="linenos">18</span><span class="sd">       computes and returns the as-the-crow-flies distance from</span>
@@ -652,8 +652,8 @@ document.write(`
 </pre></div>
 </div>
 <p>Line 69 creates an object (also called an <em>instance</em>) of type <code class="docutils literal notranslate"><span class="pre">Pin</span></code>. If you think about Python’s built-in data types, like integers, strings, and lists, there is special syntax in the language to handle the creation of objects of these types. For example, when we type a number without a decimal point, the Python interpreter knows we want to create an integer object with that number as its value. For strings, we put the value in a matching pair of quote characters. For lists, we use square brackets.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Examples of creating an instance of a built-in object. We get to use special</span>
-<span class="linenos">2</span><span class="c1"># syntax in each of these cases.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Examples of creating an instance of a built-in object. We get to</span>
+<span class="linenos">2</span><span class="c1"># use special syntax in each of these cases.</span>
 <span class="linenos">3</span><span class="n">an_int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">4</span><span class="n">an_empty_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="linenos">5</span><span class="n">an_empty_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -661,9 +661,9 @@ document.write(`
 </pre></div>
 </div>
 <p>But we can also build instances of these built-in data types by directly invoking their <em>constructors</em>. The form of a constructor is the class name (i.e., its type) followed by a pair of parentheses. The result of a call to a constructor is a newly minted object of that type.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># The same examples as the last code block, except now we&#39;re creating</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># The same examples as the last code block, except we&#39;re creating</span>
 <span class="linenos">2</span><span class="c1"># instance of built-in object using the type&#39;s constructor.</span>
-<span class="linenos">3</span><span class="n">an_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">()</span>           <span class="c1"># constructor defaults to an object of value 0</span>
+<span class="linenos">3</span><span class="n">an_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">()</span>           <span class="c1"># constructor default is the value 0</span>
 <span class="linenos">4</span><span class="n">an_empty_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>  <span class="c1"># constructor default is an empty string</span>
 <span class="linenos">5</span><span class="n">an_empty_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>   <span class="c1"># constructor default is an empty list</span>
 <span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">an_int</span><span class="p">,</span> <span class="n">an_empty_string</span><span class="p">,</span> <span class="n">an_empty_list</span><span class="p">)</span>
@@ -719,7 +719,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">34</span><span class="c1">### chap11/wander.py</span>
 <span class="linenos">35</span>        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
 <span class="linenos">36</span>            <span class="n">best_loc</span> <span class="o">=</span> <span class="n">NO_LOC</span>            <span class="c1"># not a valid location</span>
-<span class="linenos">37</span>            <span class="n">best_distance</span> <span class="o">=</span> <span class="n">MAX_DISTANCE</span> <span class="c1"># bigger than any allowable map</span>
+<span class="linenos">37</span>            <span class="n">best_distance</span> <span class="o">=</span> <span class="n">MAX_DISTANCE</span>
 <span class="linenos">38</span>            
 <span class="linenos">39</span>            <span class="c1"># Find the closest highly-rated pin</span>
 <span class="linenos">40</span>            <span class="k">for</span> <span class="n">pin</span> <span class="ow">in</span> <span class="n">pins</span><span class="p">:</span>

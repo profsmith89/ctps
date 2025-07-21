@@ -520,9 +520,9 @@ document.write(`
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="k">def</span> <span class="nf">grab_f</span><span class="p">(</span><span class="n">fun_name</span><span class="p">):</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;A utility function that returns a string containing the</span>
-<span class="linenos"> 7</span><span class="sd">    source code for `fun_name`. Its implementation assumes that</span>
-<span class="linenos"> 8</span><span class="sd">    the function `fun_name` is in a Python script of the same</span>
-<span class="linenos"> 9</span><span class="sd">    name (i.e., `fun_name.py`).&#39;&#39;&#39;</span>
+<span class="linenos"> 7</span><span class="sd">    source code for fun_name. Its implementation assumes that</span>
+<span class="linenos"> 8</span><span class="sd">    the function fun_name is in a Python script of the same</span>
+<span class="linenos"> 9</span><span class="sd">    name (i.e., fun_name.py).&#39;&#39;&#39;</span>
 <span class="linenos">10</span>    <span class="k">try</span><span class="p">:</span>
 <span class="linenos">11</span>        <span class="n">fun_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">fun_name</span><span class="p">)</span>
 <span class="linenos">12</span>        <span class="n">fun_object</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fun_module</span><span class="p">,</span> <span class="n">fun_name</span><span class="p">)</span>
@@ -540,13 +540,13 @@ document.write(`
 <span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">our_tools</span>
 <span class="linenos"> 5</span>
 <span class="linenos"> 6</span><span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="n">fun_name</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="linenos"> 7</span>    <span class="c1"># Grab the analysis function from its module. This code assumes that the</span>
-<span class="linenos"> 8</span>    <span class="c1"># `analysis_name` is in `analysis_name.py`.</span>
+<span class="linenos"> 7</span>    <span class="c1"># Grab the analysis function from its module. This code assumes</span>
+<span class="linenos"> 8</span>    <span class="c1"># that the analysis_name is in analysis_name.py.</span>
 <span class="linenos"> 9</span>    <span class="n">analysis_mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
 <span class="linenos">10</span>    <span class="n">analysis_fun</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">analysis_mod</span><span class="p">,</span> <span class="n">analysis_name</span><span class="p">)</span>
 <span class="linenos">11</span>    
 <span class="linenos">12</span>    <span class="c1"># Grab function to analyze. The utility used assumes that</span>
-<span class="linenos">13</span>    <span class="c1"># the function `fun_name` is in `fun_name.py`.</span>
+<span class="linenos">13</span>    <span class="c1"># the function fun_name is in fun_name.py.</span>
 <span class="linenos">14</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">our_tools</span><span class="o">.</span><span class="n">grab_f</span><span class="p">(</span><span class="n">fun_name</span><span class="p">)</span>
 <span class="linenos">15</span>    
 <span class="linenos">16</span>    <span class="c1"># Do the analysis</span>
@@ -680,7 +680,7 @@ document.write(`
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>                                      +-- analysis function
                                       |
                                       V
-<span class="gs">**Example 1:**</span> <span class="sb">`python3 analyze.py yes_on_s hellu world`</span> 
+<span class="gs">**Example 1:**</span> python3 analyze.py yes_on_s hellu world
                                              ^     ^
                                              |     |
                                              +- f  +- s 
@@ -722,7 +722,7 @@ document.write(`
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>                                      +-- analysis function
                                       |
                                       V
-<span class="gs">**Example 9**</span>: <span class="sb">`python3 analyze.py yes_on_self yes_on_self`</span>
+<span class="gs">**Example 9**</span>: python3 analyze.py yes_on_self yes_on_self
                                                    ^
                                                    |
                                                    +- f
@@ -754,7 +754,7 @@ document.write(`
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>                                      +-- analysis function
                                       |
                                       V
-<span class="gs">**Example 11:**</span> <span class="sb">`python3 analyze.py trouble trouble`</span>
+<span class="gs">**Example 11:**</span> python3 analyze.py trouble trouble
                                               ^
                                               |
                                               +- f
