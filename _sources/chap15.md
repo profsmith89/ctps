@@ -121,7 +121,7 @@ def get_lineno(lines):
         try:
             lineno = int(input('Line number in script? '))
             if lineno < 0 or lineno >= lines:
-                print(f'The number must be in the interval [1,{lines}]')
+                print(f'The number must be between [1,{lines}]')
                 continue
             return lineno
         except ValueError:
@@ -141,7 +141,7 @@ def write_it(edited_script, orig_fname):
     print(f'Wrote {output_fname}')
 
 def main():
-    # Ask for the name of the script to be debugged, unless already provided
+    # Ask for script name, unless already provided
     if len(sys.argv) == 1:
         fname = input('What script would you like to debug? ')
     elif len(sys.argv) == 2:
@@ -183,7 +183,9 @@ Using `list.insert`, it's pretty easy to insert our breakpoint statement. We sim
 
 The following inserts a breakpoint statement into `edited_script` at the correct index (e.g., between the original lines 23 and 24 in `guess32.py`):
 
-`edited_script.insert(breakpt_index, 'raise Exception("My breakpoint")\n')`
+`edited_script.insert(breakpt_index,`
+
+                     `'raise Exception("My breakpoint")\n')`
 
 But there's a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?
 
@@ -300,7 +302,7 @@ import sys
 # my_pdb is unchanged from pdb2.py
 
 def main():
-    # Ask for the name of the script to be debugged, unless already provided
+    # Ask for script name, unless already provided
     if len(sys.argv) == 1:
         fname = input('What script would you like to debug? ')
     elif len(sys.argv) == 2:
@@ -418,7 +420,7 @@ def my_pin(script_fname, insert_code):
 # get_lineno, print_it, and write_it are unchanged from pdb3.py
 
 def main():
-    # Ask for the name of the script to be debugged, unless already provided
+    # Ask for script name, unless already provided
     if len(sys.argv) == 1:
         fname = input('What script would you like to instrument? ')
     elif len(sys.argv) == 2:

@@ -442,7 +442,7 @@ document.write(`
 <span class="linenos">32</span>        <span class="k">try</span><span class="p">:</span>
 <span class="linenos">33</span>            <span class="n">lineno</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Line number in script? &#39;</span><span class="p">))</span>
 <span class="linenos">34</span>            <span class="k">if</span> <span class="n">lineno</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">lineno</span> <span class="o">&gt;=</span> <span class="n">lines</span><span class="p">:</span>
-<span class="linenos">35</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be in the interval [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="linenos">35</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The number must be between [1,</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
 <span class="linenos">36</span>                <span class="k">continue</span>
 <span class="linenos">37</span>            <span class="k">return</span> <span class="n">lineno</span>
 <span class="linenos">38</span>        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -462,7 +462,7 @@ document.write(`
 <span class="linenos">52</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrote </span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="linenos">53</span>
 <span class="linenos">54</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">55</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">55</span>    <span class="c1"># Ask for script name, unless already provided</span>
 <span class="linenos">56</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos">57</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
 <span class="linenos">58</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -496,7 +496,10 @@ document.write(`
 <section id="indenting-that-statement">
 <p><strong>Indenting that statement.</strong> Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply must remember that indexing starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 19 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
 <p>The following inserts a breakpoint statement into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> at the correct index (e.g., between the original lines 23 and 24 in <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code>):</p>
-<p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt_index,</span> <span class="pre">'raise</span> <span class="pre">Exception(&quot;My</span> <span class="pre">breakpoint&quot;)\n')</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt_index,</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                 `&#39;raise Exception(&quot;My breakpoint&quot;)\n&#39;)`
+</pre></div>
+</div>
 <p>But there’s a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?</p>
 <p>If you think about this, you’ll realize that it is the indentation of the line we’re replacing (e.g., line 24 in our example). We need to grab the whitespace at the start of this line and add it to the start of our new statement. We could do this using a regular expression, but this work is simple enough that we’ll just build a loop with an if-else-statement. The next code block is an updated version of the function <code class="docutils literal notranslate"><span class="pre">my_pdb</span></code> that calculates the whitespace we need and then inserts the correctly indented breakpoint statement.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap15/pdb2.py</span>
@@ -588,7 +591,7 @@ document.write(`
 <span class="linenos">65</span><span class="c1"># my_pdb is unchanged from pdb2.py</span>
 <span class="linenos">66</span>
 <span class="linenos">67</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">68</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">68</span>    <span class="c1"># Ask for script name, unless already provided</span>
 <span class="linenos">69</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos">70</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to debug? &#39;</span><span class="p">)</span>
 <span class="linenos">71</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -699,7 +702,7 @@ document.write(`
 <span class="linenos">48</span><span class="c1"># get_lineno, print_it, and write_it are unchanged from pdb3.py</span>
 <span class="linenos">49</span>
 <span class="linenos">50</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos">51</span>    <span class="c1"># Ask for the name of the script to be debugged, unless already provided</span>
+<span class="linenos">51</span>    <span class="c1"># Ask for script name, unless already provided</span>
 <span class="linenos">52</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="linenos">53</span>        <span class="n">fname</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What script would you like to instrument? &#39;</span><span class="p">)</span>
 <span class="linenos">54</span>    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
