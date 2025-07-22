@@ -496,8 +496,8 @@ document.write(`
 <section id="indenting-that-statement">
 <p><strong>Indenting that statement.</strong> Using <code class="docutils literal notranslate"><span class="pre">list.insert</span></code>, it’s pretty easy to insert our breakpoint statement. We simply must remember that indexing starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> while the user’s counting of the lines in the script-to-be-debugged starts at <code class="docutils literal notranslate"><span class="pre">1</span></code>. We took care of this conversion immediately after grabbing the line number from the user (line 19 in <code class="docutils literal notranslate"><span class="pre">pdb1.py</span></code>). No off-by-one errors in our script, please!</p>
 <p>The following inserts a breakpoint statement into <code class="docutils literal notranslate"><span class="pre">edited_script</span></code> at the correct index (e.g., between the original lines 23 and 24 in <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code>):</p>
-<p><code class="docutils literal notranslate"><span class="pre">edited_script.insert(breakpt_index,</span></code></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                 `&#39;raise Exception(&quot;My breakpoint&quot;)\n&#39;)`
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">edited_script</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">breakpt_index</span><span class="p">,</span>
+                     <span class="s1">&#39;raise Exception(&quot;My breakpoint&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>But there’s a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?</p>

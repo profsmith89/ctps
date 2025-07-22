@@ -183,9 +183,10 @@ Using `list.insert`, it's pretty easy to insert our breakpoint statement. We sim
 
 The following inserts a breakpoint statement into `edited_script` at the correct index (e.g., between the original lines 23 and 24 in `guess32.py`):
 
-`edited_script.insert(breakpt_index,`
-
-                     `'raise Exception("My breakpoint")\n')`
+```{code-block} python
+edited_script.insert(breakpt_index,
+                     'raise Exception("My breakpoint")\n')
+```
 
 But there's a problem with our new breakpoint statement. Do you see it? What indentation did we give this new statement? Remember that indentation in a Python script holds meaning. What indentation do we want for this new statement?
 
