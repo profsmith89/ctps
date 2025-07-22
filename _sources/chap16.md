@@ -442,7 +442,7 @@ lineno-start: 1
 ### chap03/bookshelf1.py
 
 def my_replace(s, old, new):
-    """Returns a string replacing all occurrences of old with new."""
+    """Returns a string replacing all instances of old with new."""
     i = 0           # tracks where we are in the input string
     j = len(old)    # skip-ahead amount for index calculations
     new_s = s[0:0]  # the new string we're building

@@ -49,7 +49,7 @@ def main():
         sys.exit('Usage: head.py input.csv')
     
     with open(sys.argv[1], encoding='utf-8') as fin:
-        reader = csv.DictReader(fin)  # assumes file contains a header row
+        reader = csv.DictReader(fin)  # file has a header row
         for i, row in enumerate(reader):
             # Just print the first 5 rows
             if i < 5:
@@ -386,7 +386,7 @@ lineno-start: 1
 ### chap17/ames.ipynb, 13th code block
 from sklearn.model_selection import train_test_split
 
-# Split both features and target data into training and validation sets
+# Split features and target data into training and validation sets
 train_X, test_X, train_y, test_y = train_test_split(X, y, random_state=42)
 
 # Fit the model using the training data

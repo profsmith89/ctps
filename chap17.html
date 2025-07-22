@@ -389,7 +389,7 @@ document.write(`
 <span class="linenos"> 6</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Usage: head.py input.csv&#39;</span><span class="p">)</span>
 <span class="linenos"> 7</span>    
 <span class="linenos"> 8</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-<span class="linenos"> 9</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>  <span class="c1"># assumes file contains a header row</span>
+<span class="linenos"> 9</span>        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>  <span class="c1"># file has a header row</span>
 <span class="linenos">10</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
 <span class="linenos">11</span>            <span class="c1"># Just print the first 5 rows</span>
 <span class="linenos">12</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
@@ -641,7 +641,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap17/ames.ipynb, 13th code block</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="c1"># Split both features and target data into training and validation sets</span>
+<span class="linenos"> 4</span><span class="c1"># Split features and target data into training and validation sets</span>
 <span class="linenos"> 5</span><span class="n">train_X</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span><span class="c1"># Fit the model using the training data</span>
